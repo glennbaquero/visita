@@ -1,0 +1,1 @@
+<meta name="system-type" content="website">

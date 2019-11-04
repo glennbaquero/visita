@@ -1,0 +1,167 @@
+/*
+* Body
+*/
+body {
+    overflow-x: hidden;
+    margin: 0;
+}
+
+*:focus {
+	outline: none;
+}
+
+#app {
+	min-height: 100vh;
+}
+
+/*
+* Colors for Fonts and Backgrounds
+* clr : uses for text colors
+*/
+$orange: #E0AF3C;
+$green: #657008;
+$navy-blue: #2C4043;
+$maroon: #A74424;
+$gray: #434244;
+$light-gray: #A9A9A9;
+$black: #000000;
+$white: #FFFFFF;
+
+.clr--orange { color: $orange; }
+.clr--green { color: $green; }
+.clr--navy-blue { color: $navy-blue; }
+.clr--maroon { color: $maroon; }
+.clr--gray { color: $gray; }
+.clr--light-gray { color: $light-gray; }
+.clr--black { color: $black; }
+.clr--white { color: $white; }
+
+/*
+* Typography
+* frm : frame
+*/
+
+$font-family-d-din-regular: 'D-Din-Regular';
+$font-family-d-din-bold: 'D-Din-Bold';
+$font-family-work-sans-regular: 'WorkSans-Regular';
+$font-family-work-sans-bold: 'WorkSans-Bold';
+
+.frm-title {
+	font-size: 2.6em;
+	line-height: 1em;
+	font-family: $font-family-d-din-bold;
+}
+
+.frm-header {
+	font-family: $font-family-d-din-regular;
+	font-size: 1.2em;
+	line-height: 1.5em;
+
+	&.bold {
+		font-family: $font-family-d-din-bold;	
+	}
+}
+
+.frm-description {
+
+	* {
+		font-family: $font-family-work-sans-regular;
+		font-size: 1.1em;
+		line-height: 1.5em;
+	}
+
+	strong {
+		font-family: $font-family-work-sans-bold;
+		font-size: 1.08em;
+	}
+}
+
+p {
+	font-family: $font-family-work-sans-regular;
+	line-height: 1.5em;
+	font-size: 1.1em;
+}
+
+/*
+* Frame Container
+* frm-cntnr : frame contianer
+*/
+.frm-cntnr {
+    position: relative;
+    margin: auto;
+    height: 100%;
+    box-sizing: border-box;
+
+    &.align-r {
+        margin: 0;
+        margin-left: auto;
+    }
+
+    &.align-l {
+        margin: 0;
+        margin-right: auto;
+    }
+}
+
+/** 
+ * Button
+ * frm-btn : frame button
+ */
+.frm-btn {
+	text-align: center;
+    display: inline-block;
+    min-width: 150px;
+    padding: 15px 15px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    line-height: 1em;
+    font-family: $font-family-d-din-regular;
+    border: none;
+    text-decoration: none !important;
+    transition: all 300ms ease;
+
+    &.green {
+    	background: $green;
+    	color: $white;
+
+    	&:hover {
+    		background: #474E09;
+    	}
+    }
+
+    &.orange {
+    	background: $orange;
+    	color: $white;
+
+    	&:hover {
+    		background: #B58B2A;
+    	}
+    }
+}
+
+/** 
+ * Input, Textarea, Select
+ * frm-inpt : frame input
+ */
+ .frm-inpt {
+    position: relative;
+
+ 	input,select,textarea {
+		font-size: 1.2em;
+		line-height: 1.5em;
+		padding: 10px;
+		min-height: 45px;
+	    min-width: 280px;	
+		border-radius: 5px;
+		border: none;
+		color: $gray;
+		background: $white;
+	    box-sizing: border-box;	
+	    box-shadow: 0px 0px 2px 0px #717171;	
+	    font-family: $font-family-d-din-regular;
+
+	    &:focus {
+        	outline: none;
+    	}
+ 	}
+ }
