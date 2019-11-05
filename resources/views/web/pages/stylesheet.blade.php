@@ -83,7 +83,7 @@
 					</select>
 				</div>
 				<div class="frm-inpt m-margin-b">
-					<textarea rows="5"></textarea>
+					<textarea rows="4"></textarea>
 				</div>
 			</div>
 

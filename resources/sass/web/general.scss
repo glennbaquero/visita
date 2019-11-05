@@ -22,8 +22,8 @@ $orange: #E0AF3C;
 $green: #657008;
 $navy-blue: #2C4043;
 $maroon: #A74424;
-$gray: #434244;
-$light-gray: #A9A9A9;
+$gray: #2C4043;
+$light-gray: #BFBFBF;
 $black: #000000;
 $white: #FFFFFF;
 
@@ -46,7 +46,7 @@ $font-family-work-sans-regular: 'WorkSans-Regular';
 $font-family-work-sans-bold: 'WorkSans-Bold';
 
 .frm-title {
-	font-size: 2.6em;
+	font-size: 3.6em;
 	line-height: 1em;
 	font-family: $font-family-d-din-bold;
 }
@@ -89,6 +89,7 @@ p,a {
     position: relative;
     margin: auto;
     height: 100%;
+    max-width: 1400px;
     box-sizing: border-box;
 
     &.align-r {
@@ -103,13 +104,57 @@ p,a {
 }
 
 /** 
+ * Frame Background
+ * frm-bckgrnd : frame background
+ */
+$frame-bg--pos__t: top center;
+$frame-bg--pos__c: center center;
+$frame-bg--pos__b: bottom center;
+
+.frm-bckgrnd {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: $frame-bg--pos__c;
+
+    &.bring-front {
+        z-index: -1;
+    }
+    &.bring-back {
+        z-index: -2;
+    }
+    &.size-cover {
+        background-size: cover;
+    }
+    &.size-contain{
+        background-size: contain;
+    }
+    &.align-r {
+        right: 0;
+    }
+    &.align-l {
+        left: 0;
+    }
+    &.align-c {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &.align-t {
+    	background-position: $frame-bg--pos__t;
+    }
+}
+
+/** 
  * Button
  * frm-btn : frame button
  */
 .frm-btn {
 	text-align: center;
     display: inline-block;
-    min-width: 150px;
+    min-width: 200px;
     padding: 15px 15px;
     border-radius: 5px;
     font-size: 1.2em;
@@ -149,18 +194,22 @@ p,a {
 		font-size: 1.2em;
 		line-height: 1.5em;
 		padding: 10px;
-		min-height: 45px;
+		min-height: 50px;
 	    min-width: 280px;	
 		border-radius: 5px;
 		border: none;
-		color: $gray;
+		color: $black;
 		background: $white;
 	    box-sizing: border-box;	
-	    box-shadow: 0px 0px 2px 0px #717171;	
+	    box-shadow: 0px 0px 2px 0px #B3B3B3;	
 	    font-family: $font-family-d-din-regular;
 
 	    &:focus {
         	outline: none;
+    	}
+
+    	&::placeholder {
+    		color: $black;
     	}
  	}
  }
@@ -175,6 +224,7 @@ p,a {
 	left: 0px;
 	width: 100%;
 	z-index: 999;
+	transition: all 300ms ease;
 
 	.hdr-frm__nav-col {
 		width: 14.2%;
@@ -185,6 +235,7 @@ p,a {
 			text-transform: uppercase;
 			text-decoration: none;
 			color: $white;
+			cursor: pointer;
 			font-size: 1.1em;
 			transition: all 300ms ease;
 			text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.65);
@@ -193,10 +244,12 @@ p,a {
 				content: "";
 				position: absolute;
 				left: 0px;
-				bottom: -5px;
+				right: 0px;
+				bottom: -7px;
 				width: 100%;
-				height: 2px;
+				height: 4px;
 				opacity: 0;
+				border-radius: 5px;
 				background: $green;
 				transition: all 300ms ease;
 			}
@@ -215,7 +268,22 @@ p,a {
 		.hdr-frm__nav-logo {
 			width: auto;
 			height: 60px;
+			transition: all 300ms ease;
 		}
+	}
+
+	&.scroll {
+	    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.3686274509803922);
+	    background: $white;
+
+	    .hdr-frm__nav-logo {
+	    	height: 45px;
+	    }
+
+	    .hdr-frm__nav-link {
+	    	color: $black;
+	    	text-shadow: none;
+	    }
 	}
 }
 
@@ -250,4 +318,243 @@ p,a {
 			color: $green
 		}
 	}
+}
+
+/*
+* General Slider
+* gnrl-frm--sldr : general frame slider
+*/
+.gnrl-frm--sldr__container {
+
+	.gnrl-frm--sldr {
+		margin-bottom: 0px;
+
+		.slick-next, .slick-prev {
+		    position: absolute;	
+		    z-index: 2;
+
+		    &:before {
+		    	display: none;
+		    }
+		}
+
+		.slick-next {
+  			top: 0px;
+		    bottom: 0px;
+		    right: 5%;
+		    margin: auto;
+
+			img {
+			    position: absolute;
+			    right: -5px;
+			    top: 0px;
+			    bottom: 0px;
+			    margin: auto;
+				width: auto;
+				height: 40px;
+				transition: all 300ms ease;
+
+				&:hover {
+				    opacity: 0.5;	
+				}
+			}
+		}
+
+		.slick-prev {
+  			top: 0px;
+		    bottom: 0px;
+		    left: 5%;
+		    margin: auto;
+
+			img {
+			    position: absolute;
+			    left: -5px;
+			    top: 0px;
+			    bottom: 0px;
+			    margin: auto;
+				width: auto;
+				height: 40px;
+				transition: all 300ms ease;
+
+				&:hover {
+				    opacity: 0.5;	
+				}
+			}
+		}
+
+	    .slick-dots {
+	        bottom: 20%;
+	        z-index: 2;
+	    }
+
+	    & li {
+	        margin: 2px 4px;    
+	    }
+
+	    & li:before {
+	        visibility: hidden; 
+	    }
+
+	    & li.slick-active button:before {
+	        color: $green;
+	        background: $green;
+	        opacity: 1;
+	    }
+
+	    & li button:before {
+	        position: absolute;
+	        top: 3px;
+	        left: 2px;
+	        content: "•";
+	        width: 10px;
+	        height: 10px;
+	        font-family: "slick";
+	        font-size: 0px;
+	        line-height: 20px;
+	        text-align: center;
+	        color: transparent;
+	        background: $white;
+	        border-radius: 50%;
+	        opacity: 1;
+	        -webkit-font-smoothing: antialiased;
+	    }
+
+	    & li:only-child {
+	        display: none;
+	    }
+
+	}
+
+	.gnrl-frm--sldr__item {
+		position: relative;
+		width: 100%;
+		height: 100vh;
+
+		.frm-title {
+		    max-width: 350px;
+		    margin: auto;
+		    margin-bottom: 40px;
+		    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.60);	
+		}
+
+		&:before {
+			position: absolute;
+			content: "";
+			left: 0px;
+			top: 0px;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.20);
+		}
+	}
+
+}
+
+/*
+* General Remodal
+* gnrl-rmdl : general remodal
+*/
+#gnrl-rmdl {
+
+	.frm-description {
+		height: 300px;
+		padding-right: 10px;
+		overflow-y: auto;
+
+		&.custom-description {
+			height: 400px;
+		    margin-top: 14%;	
+			padding-left: 5%;
+		}
+
+	    ul {
+	        width: 100%;
+	        padding-left: 15px;
+	    } 
+
+	    li {
+	        display: list-item;
+	        padding-bottom: 5px;
+	        list-style-position: inside;
+	    }
+
+	}
+
+	.gnrl-rmdl__close-btn {
+		position: absolute;
+		top: 8%;
+		right: 5%;
+		border: none;
+		padding: 0px;
+		z-index: 2;
+		background: transparent;
+
+		.gnrl-rmdl__close-btn-img {
+			width: auto;
+			height: 40px;
+			padding: 10px;
+			cursor: pointer;
+			transition: all 300ms ease;
+
+			&:hover {
+				opacity: 0.5;
+			}
+		}
+	}
+
+	.gnrl-rmdl__btn-holder {
+		height: 400px;
+		padding-right: 10px;
+		overflow-y: auto;
+		border-right: 1px solid $light-gray;
+
+		.gnrl-rmdl__btn {
+			font-family: $font-family-d-din-bold;
+			font-size: 1.2em;
+			margin-bottom: 20px;
+			line-height: 1.5em;
+			color: $light-gray;
+			cursor: pointer;
+			transition: all 300ms ease;
+
+			&:hover {
+				color: $gray;
+			}
+
+			&.active {
+				color: $green
+			}
+		}
+	}
+}
+.remodal {
+
+	&.custom-width {
+		max-width: 1000px !important;
+	}
+
+}
+
+/*
+* General Scroll
+* gnrl-scrll : general scroll
+*/
+.gnrl-scrll {
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 0px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    /* Handle */
+	&::-webkit-scrollbar-thumb {
+        background: $orange;
+    }
+
 }
