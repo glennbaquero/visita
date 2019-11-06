@@ -26,11 +26,26 @@ var app = {
 		        }
 		    });
 
+
+			$('.mbl-hdr-frm__nav-holder').on('click', function() {
+
+				$('.mbl-hdr-frm__nav-links-holder').addClass('show');
+
+			});		
+
+			$('.mbl-hdr-frm__link-holder-btn').on('click', function() {
+
+				$('.mbl-hdr-frm__nav-links-holder').removeClass('show');
+
+			});		
+
 			var section_btn = $('.js-trigger');
 
 			section_btn.on('click', function() {
 
 				var id = $(this).data('section');
+
+				$('.mbl-hdr-frm__nav-links-holder').removeClass('show');
 
             	TweenMax.to(window, 1, {scrollTo: {y: '#'+id, offsetY: 0, autoKill:false}});
 
@@ -184,6 +199,15 @@ var app = {
 		},
 
 		home: function() {
+
+			$(window).resize(function() {
+			  var width = $(this).width();
+			  if(width < 1025) {
+			    $.scrollify.disable();
+			  } else {
+			    $.scrollify.enable();
+			  }
+			});
 
 			$(function() {
 		        $.scrollify({
