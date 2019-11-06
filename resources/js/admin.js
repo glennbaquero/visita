@@ -21,3 +21,9 @@ Vue.component('permission-list', require('./views/admin/permissions/PermissionLi
 
 Vue.component('article-table', require('./views/admin/articles/ArticleTable.vue').default);
 Vue.component('article-view', require('./views/admin/articles/ArticleView.vue').default);
+
+Vue.component('home-banners-table', require('./views/admin/home-banners/HomeBannersTable.vue').default);
+Vue.component('home-banners-view', require('./views/admin/home-banners/HomeBannersView.vue').default);
+
+Vue.component('about-infos-table', require('./views/admin/about-infos/AboutInfosTable.vue').default);
+Vue.component('about-infos-view', require('./views/admin/about-infos/AboutInfosView.vue').default);

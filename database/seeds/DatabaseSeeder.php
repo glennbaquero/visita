@@ -2,10 +2,6 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Seeders\AdminsTableSeeder;
-use App\Seeders\PermissionsTableSeeder;
-use App\Seeders\RolesTableSeeder;
-
 class DatabaseSeeder extends Seeder
 {
     /**
