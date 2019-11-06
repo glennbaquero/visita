@@ -152,6 +152,46 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
         });
 
         /**
+         * Carousels
+         */
+        Route::namespace('Carousels')->group(function() {
+
+            Route::get('home-banners', 'HomeBannerController@index')->name('home-banners.index');
+            Route::get('home-banners/create', 'HomeBannerController@create')->name('home-banners.create');
+            Route::post('home-banners/store', 'HomeBannerController@store')->name('home-banners.store');
+            Route::get('home-banners/show/{id}', 'HomeBannerController@show')->name('home-banners.show');
+            Route::post('home-banners/update/{id}', 'HomeBannerController@update')->name('home-banners.update');
+            Route::post('home-banners/{id}/archive', 'HomeBannerController@archive')->name('home-banners.archive');
+            Route::post('home-banners/{id}/restore', 'HomeBannerController@restore')->name('home-banners.restore');
+            Route::post('home-banners/{id}/remove-image', 'HomeBannerController@removeImage')->name('home-banners.remove-image');
+
+            Route::post('home-banners/fetch', 'HomeBannerFetchController@fetch')->name('home-banners.fetch');
+            Route::post('home-banners/fetch?archived=1', 'HomeBannerFetchController@fetch')->name('home-banners.fetch-archive');
+            Route::post('home-banners/fetch-item/{id?}', 'HomeBannerFetchController@fetchView')->name('home-banners.fetch-item');
+            Route::post('home-banners/fetch-pagination/{id}', 'HomeBannerFetchController@fetchPagePagination')->name('home-banners.fetch-pagination');
+        });
+
+        /**
+         * Tabbings
+         */
+        Route::namespace('Tabbings')->group(function() {
+
+            Route::get('about-infos', 'AboutInfoController@index')->name('about-infos.index');
+            Route::get('about-infos/create', 'AboutInfoController@create')->name('about-infos.create');
+            Route::post('about-infos/store', 'AboutInfoController@store')->name('about-infos.store');
+            Route::get('about-infos/show/{id}', 'AboutInfoController@show')->name('about-infos.show');
+            Route::post('about-infos/update/{id}', 'AboutInfoController@update')->name('about-infos.update');
+            Route::post('about-infos/{id}/archive', 'AboutInfoController@archive')->name('about-infos.archive');
+            Route::post('about-infos/{id}/restore', 'AboutInfoController@restore')->name('about-infos.restore');
+            Route::post('about-infos/{id}/remove-image', 'AboutInfoController@removeImage')->name('about-infos.remove-image');
+
+            Route::post('about-infos/fetch', 'AboutInfoFetchController@fetch')->name('about-infos.fetch');
+            Route::post('about-infos/fetch?archived=1', 'AboutInfoFetchController@fetch')->name('about-infos.fetch-archive');
+            Route::post('about-infos/fetch-item/{id?}', 'AboutInfoFetchController@fetchView')->name('about-infos.fetch-item');
+            Route::post('about-infos/fetch-pagination/{id}', 'AboutInfoFetchController@fetchPagePagination')->name('about-infos.fetch-pagination');
+        });
+
+        /**
          * @Roles
          */
         Route::namespace('Roles')->group(function() {
@@ -213,6 +253,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('activity-logs/fetch?id={id?}&pageitems=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.page-items');
 
             Route::post('activity-logs/fetch?id={id?}&articles=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.articles');
+
+            Route::post('activity-logs/fetch?id={id?}&home-banners=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.home-banners');
+
+            Route::post('activity-logs/fetch?id={id?}&about-infos=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.about-infos');
             
         });
 

@@ -7,7 +7,7 @@
 				</a>
 			</div
 			><div class="frm-cntnr__nav-col width--33 align-c frm-description clr--white">
-				<p>2019 &copy; {{ config('app.name') }}</p>
+				<p>{{ now()->year }} &copy; {{ config('app.name') }}</p>
 			</div
 			><div class="frm-cntnr__nav-col width--33 align-r">
 				<a href="privacy-policy" class="frm-cntnr__nav-link bold">Privacy Policy</a>

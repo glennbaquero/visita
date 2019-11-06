@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 
-                @if ($self->hasAnyPermission(['admin.sample-items.crud']))
+             {{--    @if ($self->hasAnyPermission(['admin.sample-items.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
                             'admin.sample-items.index','admin.sample-items.create','admin.sample-items.show',
                         ]) }}">
@@ -61,7 +61,7 @@
                             </li>
                         </ul>
                     </li>
-                @endif
+                @endif --}}
                 
                 @if ($self->hasAnyPermission(['admin.pages.crud', 'admin.page-items.crud', 'admin.articles.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
@@ -115,6 +115,70 @@
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             Articles
+                                        </p>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </li>
+                @endif
+
+                @if ($self->hasAnyPermission(['admin.home-banners.crud']))
+                    <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
+                            'admin.home-banners.index','admin.home-banners.create','admin.home-banners.show',
+                        ]) }}">
+                        <a href="javascript:void(0)" class="nav-link {{ $checker->route->areOnRoutes([
+                            'admin.home-banners.index','admin.home-banners.create','admin.home-banners.show',
+                        ]) }}">
+                            <i class="nav-icon far fa-images"></i>
+                            <p>
+                                Carousels
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @if ($self->hasAnyPermission(['admin.home-banners.crud']))
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.home-banners.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                        'admin.home-banners.index','admin.home-banners.create','admin.home-banners.show',
+                                    ]) }}">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+
+                                            Home Banners
+
+                                        </p>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </li>
+                @endif
+
+                @if ($self->hasAnyPermission(['admin.home-banners.crud']))
+                    <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
+                            'admin.about-infos.index','admin.about-infos.create','admin.about-infos.show',
+                        ]) }}">
+                        <a href="javascript:void(0)" class="nav-link {{ $checker->route->areOnRoutes([
+                            'admin.about-infos.index','admin.about-infos.create','admin.about-infos.show',
+                        ]) }}">
+                            <i class="nav-icon far fa-bookmark"></i>
+                            <p>
+                                Tabbings
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @if ($self->hasAnyPermission(['admin.about-infos.crud']))
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.about-infos.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                        'admin.about-infos.index','admin.about-infos.create','admin.about-infos.show',
+                                    ]) }}">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+
+                                            About Info
+
                                         </p>
                                     </a>
                                 </li>

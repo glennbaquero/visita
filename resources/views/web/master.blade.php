@@ -7,7 +7,7 @@
     @include('web.partials.styles')
 
 </head>
-<body>
+<body class="overflow-hidden">
 
     <div id="app">
 

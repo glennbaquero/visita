@@ -46,6 +46,28 @@ class PermissionsTableSeeder extends Seeder
                 ],
             ],
             [
+                'name' => 'Carousels',
+                'description' => 'Manage Page Carousels',
+                'icon' => 'fa fa-feather',
+                'items' => [
+                    [
+                        'name' => 'admin.home-banners.crud',
+                        'description' => 'Manage Carousels',
+                    ],
+                ],
+            ],
+            [
+                'name' => 'Tabbings',
+                'description' => 'Manage Tabbings',
+                'icon' => 'fa fa-feather',
+                'items' => [
+                    [
+                        'name' => 'admin.about-infos.crud',
+                        'description' => 'Manage About Tabbings',
+                    ],
+                ],
+            ],
+            [
                 'name' => 'Admin Management',
                 'description' => 'Manage Administrators',
                 'icon' => 'fa fa-user-shield',
