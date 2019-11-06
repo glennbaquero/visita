@@ -1,4 +1,5 @@
-.mbl-hdr-frm__nav-holder {
+.mbl-hdr-frm__nav-holder,
+.mbl-hdr-frm__nav-links-holder {
 	display: none;
 }
 
@@ -20,7 +21,7 @@
 	}
 
 	.hdr-frm__nav-logo {
-	    height: 35px !important;	
+	    height: 45px !important;	
 	}
 
 
@@ -71,6 +72,7 @@
 	}
 
 	.mbl-hdr-frm__nav-links-holder {
+		display: block;
 		position: fixed;
 		left: 0px;
 		top: 0px;
@@ -131,5 +133,113 @@
 		.frm-cntnr__nav-logo {
 			margin-bottom: 20px;
 		}
+	}
+
+	/*
+	* Typography
+	* frm : frame
+	*/
+	.frm-title {
+		font-size: 2.5em;
+	}
+	 
+	.frm-header,
+	.frm-description {
+
+		* {
+			font-size: 1em !important;
+		}
+	}
+
+	/*
+	* Frame Button
+	* frm-btn : frame button
+	*/
+	.frm-btn {
+		font-size: 1em;
+		min-width: 170px;
+	}
+
+	/*
+	* Home Frame
+	* hm-frm : home frame
+	*/
+	.hm-frm2,
+	.hm-frm3,
+	.hm-frm4 {
+	    height: auto !important;
+	    padding: 10vh 0vh;
+	}
+
+	.hm-frm2__tabbing-btn {
+		font-size: 1em !important;
+	}
+
+	.hm-frm3,
+	.hm-frm4 {
+
+		.width--50 {
+			width: 100%;
+		}
+
+		.align-l {
+			text-align: center !important;
+		}
+
+		.hm-frm3__col-holder {
+		    display: flex;
+		    flex-direction: column-reverse;
+		}
+	}
+
+	.hm-frm3__img,
+	.hm-frm4__img {
+		height: 200px !important;
+		margin-bottom: 40px;
+	}
+
+	.hm-frm6 {
+		.width--50,
+		.width--95 {
+			width: 100% !important
+		}
+
+		.frm-inpt {
+			&:nth-child(3n) {
+				margin-bottom: 0px;
+			}
+		}
+	}
+
+	/*
+	* General Remodal
+	* gnrl-rmdl : general remodal
+	*/
+	#gnrl-rmdl {
+		&.custom-width {
+
+			.gnrl-rmdl__close-btn {
+			    top: 3%;	
+			}
+
+			.gnrl-rmdl__col {
+				width: 100% !important;
+			}
+
+			.gnrl-rmdl__btn-holder {
+				border-right: none !important;
+				height: auto !important;
+			}
+
+			.custom-description {
+				margin-top: 20px !important;
+				height: 300px !important;
+				padding-left: 0px !important
+			}
+		}
+	}
+
+	.remodal {
+		padding: 25px;
 	}
 }

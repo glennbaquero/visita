@@ -6,10 +6,12 @@
 	<div class="gnrl-frm--sldr fade-up__trigger">
 		@foreach ($home_banners as $home_banner)
 		<div class="gnrl-frm--sldr__item">
-			<div class="vertical-parent">
-				<div class="vertical-align align-c">
-					<h5 class="frm-title l-margin-b clr--white hm-frm1-fade-up__item">{{ $home_banner->name }}</h5>
-					<a href="{{ $home_banner->link }}" class="frm-btn green js-trigger" data-section="frame-6">{{ $home_banner->link_label }}</a>
+			<div class="frm-cntnr align-c width--85">
+				<div class="vertical-parent">
+					<div class="vertical-align align-c">
+						<h5 class="frm-title l-margin-b clr--white hm-frm1-fade-up__item">{{ $home_banner->name }}</h5>
+						<a href="{{ $home_banner->link }}" class="frm-btn green js-trigger" data-section="frame-6">{{ $home_banner->link_label }}</a>
+					</div>
 				</div>
 			</div>
 			<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('{{ $home_banner->renderImagePath() }}');"></div>
@@ -49,7 +51,7 @@
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
-				<div class="inlineBlock-parent">
+				<div class="inlineBlock-parent hm-frm3__col-holder">
 					<div class="width--50 align-l">
 						<h5 class="frm-title l-margin-b clr--white">{{ $data['pageItems']['frame_3_title'] }}</h5>
 						<p class="frm-header m-margin-b clr--white bold hm-frm3-fade-up__item">{{ $data['pageItems']['frame_3_header'] }}</p>
@@ -127,11 +129,13 @@
 	<div class="gnrl-frm--sldr">
 		{{-- Loop --}}
 		<div class="gnrl-frm--sldr__item">
-			<div class="vertical-parent">
-				<div class="vertical-align align-c">
-					<p class="frm-header m-margin-b clr--white">Destination Partner</p>
-					<h5 class="frm-title l-margin-b clr--white hm-frm5-fade-up__item">Mt. Pulag</h5>
-					<a href="#" class="frm-btn green" data-remodal-target="hm-frm5--modal-1">Explore Destination</a>
+			<div class="frm-cntnr align-c width--85">
+				<div class="vertical-parent">
+					<div class="vertical-align align-c">
+						<p class="frm-header m-margin-b clr--white">Destination Partner</p>
+						<h5 class="frm-title l-margin-b clr--white hm-frm5-fade-up__item">Mt. Pulag</h5>
+						<a href="#" class="frm-btn green" data-remodal-target="hm-frm5--modal-1">Explore Destination</a>
+					</div>
 				</div>
 			</div>
 			<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('http://www.trailadventours.com/dist/images/homepage-first.jpg');"></div>
@@ -145,7 +149,7 @@
 			<img src="{{ asset('images/close-button.png') }}" class="gnrl-rmdl__close-btn-img">
 		</button>
 		<div class="frm-cntnr align-c inlineBlock-parent">
-			<div class="width--25 align-l">
+			<div class="width--25 align-l gnrl-rmdl__col">
 				<h5 class="frm-title l-margin-b clr--green">Mt. Pulag</h5>
 				<div class="gnrl-rmdl__btn-holder">
 					<p class="gnrl-rmdl__btn">Icons</p>
@@ -155,7 +159,7 @@
 					<p class="gnrl-rmdl__btn">Terms & Condtions of Visit Request</p>
 				</div>
 			</div
-			><div class="width--70">
+			><div class="width--70 gnrl-rmdl__col">
 				<div class="frm-description custom-description m-margin-b clr--gray align-l gnrl-scrll">
 					<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
 					<ul>

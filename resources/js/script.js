@@ -63,7 +63,15 @@ var app = {
 		        autoplay: true,
 		        autoplaySpeed: 2000,
 		        arrows: true,
-		        dots: true
+		        dots: true,
+				responsive: [
+				    {
+				      breakpoint: 1025,
+				      settings: {
+				        arrows: false,
+				      }
+				    }
+				]
 		    });
 
 			$('.slick-prev').html('<img src="images/left-arrow.png">');
