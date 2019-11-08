@@ -300,6 +300,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
         Route::namespace('Destinations')->group(function() {
             Route::get('destinations', 'DestinationController@index')->name('destinations.index');
             Route::get('destinations/create', 'DestinationController@create')->name('destinations.create');
+            Route::post('destinations/store', 'DestinationController@store')->name('destinations.store');
+            Route::post('destinations/{id}/remove-image', 'DestinationController@removeImage')->name('destinations.remove-image');
 
             Route::post('destinations/fetch', 'DestinationFetchController@fetch')->name('destinations.fetch');
         });

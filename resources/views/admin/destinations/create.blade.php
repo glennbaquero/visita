@@ -23,7 +23,9 @@
 
     <!-- Main content -->
     <section class="content">
-        <destinations-view></destinations-view>
+        <destinations-view
+        submit-url="{{ route('admin.destinations.store') }}"
+        ></destinations-view>
     </section>
 </div>
 
