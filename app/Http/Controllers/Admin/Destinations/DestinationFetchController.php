@@ -70,6 +70,7 @@ class DestinationFetchController extends FetchController
 
         if ($id) {
         	$item = Destination::withTrashed()->findOrFail($id);
+	        $item->removeImageUrl = $item->renderRemoveImageUrl();
         	$item->name = $item->name;
             $item->archiveUrl = $item->renderArchiveUrl();
             $item->restoreUrl = $item->renderRestoreUrl();

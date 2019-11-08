@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Destinations;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Models\Destinations\Destination;
+
 class DestinationController extends Controller
 {
     /**
@@ -35,7 +37,15 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = Destination::store($request);
+
+        $message = "You have successfully created {$item->renderName()}";
+        $redirect = $item->renderShowUrl();
+
+        return response()->json([
+            'message' => $message,
+            'redirect' => $redirect,
+        ]);
     }
 
     /**
@@ -81,5 +91,17 @@ class DestinationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function removeImage(Request $request, $id)
+    {
+        $item = Article::withTrashed()->findOrFail($id);
+        $message = "You have successfully remove the image in {$item->renderName()}";
+
+        $result = $item->removeImage($request);
+
+        return response()->json([
+            'message' => $message,
+        ]);
     }
 }
