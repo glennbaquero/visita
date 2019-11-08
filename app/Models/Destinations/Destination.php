@@ -65,6 +65,10 @@ class Destination extends Model
         return route($prefix . '.destinations.archive', $this->id);
     }
 
+    public function renderRestoreUrl($prefix = 'admin') {
+        return route($prefix . '.destinations.restore', $this->id);
+    }
+
     public function renderRemoveImageUrl($prefix = 'admin') {
         return route($prefix . '.destinations.remove-image', $this->id);
     }
