@@ -88,11 +88,154 @@ class DashboardAnalyticsController extends Controller
             ],
         ];
 
+        $revenue = [
+            [
+                "backgroundColor" => "#007bff",
+                "data" => 80.00,
+                "label" => "January"
+            ],
+            [
+                "backgroundColor" => "red",
+                "data" => 99.00,
+                "label" => "February"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => 100.00,
+                "label" => "March"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => 100.00,
+                "label" => "April"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => 200.00,
+                "label" => "May"
+            ]
+        ];
+
+        $visitor_types = [
+            [
+                "backgroundColor" => "#007bff",
+                "data" => 80.00,
+                "label" => "Non-Filipino"
+            ],
+            [
+                "backgroundColor" => "red",
+                "data" => 99.00,
+                "label" => "Filipino"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => 100.00,
+                "label" => "Resident"
+            ],
+        ];
+
+        $ages = [
+            [
+                "backgroundColor" => "#007bff",
+                "data" => 80.00,
+                "label" => "18-25"
+            ],
+            [
+                "backgroundColor" => "red",
+                "data" => 99.00,
+                "label" => "26-35"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => 20,
+                "label" => "35-40"
+            ],
+        ];
+
+        $nationalities = [
+            [
+                "backgroundColor" => "#007bff",
+                "data" => 80.00,
+                "label" => "Filipino"
+            ],
+            [
+                "backgroundColor" => "red",
+                "data" => 99.00,
+                "label" => "Japanese"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => 20,
+                "label" => "Korean"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => 20,
+                "label" => "Korean"
+            ],
+        ];
+
+        $gender = [
+            [
+                "backgroundColor" => "#007bff",
+                "data" => 80.00,
+                "label" => "Male"
+            ],
+            [
+                "backgroundColor" => "red",
+                "data" => 99.00,
+                "label" => "Female"
+            ],
+        ];
+
+        $source = [
+            [
+                "backgroundColor" => "#007bff",
+                "data" => 80.00,
+                "label" => "Walk In"
+            ],
+            [
+                "backgroundColor" => "red",
+                "data" => 99.00,
+                "label" => "Online"
+            ],
+            [
+                "backgroundColor" => "yellow",
+                "data" => 20,
+                "label" => "Agency"
+            ],
+        ];
+
+        $special_fees = [
+            [
+                "backgroundColor" => "#007bff",
+                "data" => 80.00,
+                "label" => "Students"
+            ],
+            [
+                "backgroundColor" => "red",
+                "data" => 30,
+                "label" => "PWD"
+            ],
+            [
+                "backgroundColor" => "yellow",
+                "data" => 20,
+                "label" => "Senior"
+            ],
+        ];
+
         return [
             'count' => $item_count,
             'login' => $item_login,
             'usage' => $item_usage . ' %',
             'usage_chart' => $item_usage_chart,
+            'revenue' => $revenue,
+            'visitor_types' => $visitor_types,
+            'ages' => $ages,
+            'nationalities' => $nationalities,
+            'gender' => $gender,
+            'source' => $source,
+            'special_fees' => $special_fees,
         ];
     }
 }
