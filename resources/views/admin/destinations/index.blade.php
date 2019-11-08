@@ -23,6 +23,13 @@
     <!-- Main content -->
     <section class="content">
 
+        <div class="mb-4">
+            <a href="{{ route('admin.destinations.create') }}" class="btn btn-primary text-white">
+                <i class="fa fa-plus"></i>
+                Create
+            </a>
+        </div>
+
         <div class="col-xs-12">
             <div class="card">
                 <div class="card-header p-2">
