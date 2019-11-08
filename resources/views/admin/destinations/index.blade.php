@@ -33,7 +33,12 @@
                 </div><!-- /.card-header -->
                 <div class="card-body">
                     <div class="tab-content">
-                       
+                        <div class="tab-pane show active" id="tab1">
+                            <destinations-table 
+                            ref="table-1"
+                            fetch-url="{{ route('admin.destinations.fetch') }}"
+                            ></destinations-table>
+                        </div>
                     </div>
                 </div>
             </div>

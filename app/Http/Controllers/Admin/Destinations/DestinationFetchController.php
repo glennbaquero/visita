@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Destinations;
 
-use App\Http\Controllers\FetchController;
+use App\Extenders\Controllers\FetchController;
 
 use App\Models\Destinations\Destination;
 
@@ -58,25 +58,11 @@ class DestinationFetchController extends FetchController
         return [
             'id' => $item->id,
             'name' => $item->name,
-            'account_number' => $item->account_number,
-            'branch' => $item->branch,
-            'showUrl' => $item->renderShowUrl(),
-            'archiveUrl' => $item->renderArchiveUrl(),
-            'restoreUrl' => $item->renderRestoreUrl(),
-            'deleted_at' => $item->deleted_at,
-            'created_at' => $item->renderCreatedAt(),
+            'code' => $item->code,
+            'operating_hours' => $item->operating_hours,
+            'capacity_per_day' => $item->capacity_per_day,
+            'created_at' => $item->renderDate(),
         ];
-    }
-
-    protected function sortQuery($query) {
-
-        switch ($this->sort) {
-            default:
-                    $query = $query->orderBy($this->sort, $this->order);
-                break;
-        }
-
-        return $query;
     }
 
     public function fetchView($id = null) {
