@@ -301,9 +301,14 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::get('destinations', 'DestinationController@index')->name('destinations.index');
             Route::get('destinations/create', 'DestinationController@create')->name('destinations.create');
             Route::post('destinations/store', 'DestinationController@store')->name('destinations.store');
+            Route::get('destinations/show/{id}', 'DestinationController@show')->name('destinations.show');
+            Route::post('destinations/update/{id}', 'DestinationController@update')->name('destinations.update');
+            
             Route::post('destinations/{id}/remove-image', 'DestinationController@removeImage')->name('destinations.remove-image');
 
             Route::post('destinations/fetch', 'DestinationFetchController@fetch')->name('destinations.fetch');
+            Route::post('destinations/fetch-item/{id?}', 'DestinationFetchController@fetchView')->name('destinations.fetch-item');
+            Route::post('destinations/fetch-pagination/{id}', 'DestinationFetchController@fetchPagePagination')->name('destinations.fetch-pagination');
         });
     });
 });

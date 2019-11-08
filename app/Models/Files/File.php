@@ -2,7 +2,7 @@
 
 namespace App\Models\Files;
 
-use App\Extendables\BaseModel as Model;
+use App\Extenders\Models\BaseModel as Model;
 
 class File extends Model
 {
