@@ -259,6 +259,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('activity-logs/fetch?id={id?}&about-infos=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.about-infos');
 
             Route::post('activity-logs/fetch?id={id?}&destinations=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.destinations');
+
+            Route::post('activity-logs/fetch?id={id?}&inquiries=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.inquiries');
             
         });
 
@@ -313,6 +315,18 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('destinations/fetch?archived=1', 'DestinationFetchController@fetch')->name('destinations.fetch-archive');
             Route::post('destinations/fetch-item/{id?}', 'DestinationFetchController@fetchView')->name('destinations.fetch-item');
             Route::post('destinations/fetch-pagination/{id}', 'DestinationFetchController@fetchPagePagination')->name('destinations.fetch-pagination');
+        });
+
+        Route::namespace('Inquiries')->group(function() {
+            Route::get('inquiries', 'InquiryController@index')->name('inquiries.index');
+            Route::get('inquiries/show/{id}', 'InquiryController@show')->name('inquiries.show');
+            Route::post('inquiries/{id}/archive', 'InquiryController@archive')->name('inquiries.archive');
+            Route::post('inquiries/{id}/restore', 'InquiryController@restore')->name('inquiries.restore');
+
+            Route::post('inquiries/fetch', 'InquiryFetchController@fetch')->name('inquiries.fetch');
+            Route::post('inquiries/fetch?archived=1', 'InquiryFetchController@fetch')->name('inquiries.fetch-archive');
+            Route::post('inquiries/fetch-item/{id?}', 'InquiryFetchController@fetchView')->name('inquiries.fetch-item');
+            Route::post('inquiries/fetch-pagination/{id}', 'InquiryFetchController@fetchPagePagination')->name('inquiries.fetch-pagination');
         });
     });
 });
