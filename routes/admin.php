@@ -305,6 +305,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('destinations/store', 'DestinationController@store')->name('destinations.store');
             Route::get('destinations/show/{id}', 'DestinationController@show')->name('destinations.show');
             Route::post('destinations/update/{id}', 'DestinationController@update')->name('destinations.update');
+            Route::post('destinations/{id}/archive', 'DestinationController@archive')->name('destinations.archive');
 
             Route::post('destinations/{id}/remove-image', 'DestinationController@removeImage')->name('destinations.remove-image');
 

@@ -63,6 +63,7 @@ class DestinationFetchController extends FetchController
             'capacity_per_day' => $item->capacity_per_day,
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),
+            'archiveUrl' => $item->renderArchiveUrl()
         ];
     }
 
@@ -74,7 +75,7 @@ class DestinationFetchController extends FetchController
 	        $item->removeImageUrl = $item->renderRemoveImageUrl();
         	$item->name = $item->name;
         	$images = $item->getImages();
-            // $item->archiveUrl = $item->renderArchiveUrl();
+            $item->archiveUrl = $item->renderArchiveUrl();
             // $item->restoreUrl = $item->renderRestoreUrl();
         }
 
