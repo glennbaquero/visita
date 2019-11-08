@@ -95,7 +95,7 @@ class DestinationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Article  $sampleItem
+     * @param  \App\Destination  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function archive($id)
@@ -105,6 +105,22 @@ class DestinationController extends Controller
 
         return response()->json([
             'message' => "You have successfully archived {$item->renderName()}",
+        ]);
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     *
+     * @param  \App\Destination  $sampleItem
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $item = Destination::withTrashed()->findOrFail($id);
+        $item->unarchive();
+
+        return response()->json([
+            'message' => "You have successfully restored {$item->renderName()}",
         ]);
     }
 
