@@ -82,7 +82,14 @@ class DestinationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = Destination::withTrashed()->findOrFail($id);
+        $message = "You have successfully updated {$item->renderName()}";
+
+        $item = Destination::store($request, $item);
+
+        return response()->json([
+            'message' => $message,
+        ]);
     }
 
     /**
@@ -98,7 +105,7 @@ class DestinationController extends Controller
 
     public function removeImage(Request $request, $id)
     {
-        $item = Article::withTrashed()->findOrFail($id);
+        $item = Destination::withTrashed()->findOrFail($id);
         $message = "You have successfully remove the image in {$item->renderName()}";
 
         $result = $item->removeImage($request);

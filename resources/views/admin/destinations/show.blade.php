@@ -40,7 +40,14 @@
                         sort-url="{{ route('admin.sort.image') }}"
                         ></destinations-view>
                     </div>
-             
+                    <div class="tab-pane" id="tab2">
+                        <activity-log-table 
+                        ref="table-1"
+                        disabled
+                        no-action
+                        fetch-url="{{ route('admin.activity-logs.fetch.destinations', $item->id) }}"
+                        ></activity-log-table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -257,6 +257,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('activity-logs/fetch?id={id?}&home-banners=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.home-banners');
 
             Route::post('activity-logs/fetch?id={id?}&about-infos=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.about-infos');
+
+            Route::post('activity-logs/fetch?id={id?}&destinations=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.destinations');
             
         });
 
@@ -303,7 +305,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('destinations/store', 'DestinationController@store')->name('destinations.store');
             Route::get('destinations/show/{id}', 'DestinationController@show')->name('destinations.show');
             Route::post('destinations/update/{id}', 'DestinationController@update')->name('destinations.update');
-            
+
             Route::post('destinations/{id}/remove-image', 'DestinationController@removeImage')->name('destinations.remove-image');
 
             Route::post('destinations/fetch', 'DestinationFetchController@fetch')->name('destinations.fetch');
