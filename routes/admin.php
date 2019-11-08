@@ -299,6 +299,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
         Route::namespace('Destinations')->group(function() {
             Route::get('destinations', 'DestinationController@index')->name('destinations.index');
+            Route::get('destinations/create', 'DestinationController@create')->name('destinations.create');
 
             Route::post('destinations/fetch', 'DestinationFetchController@fetch')->name('destinations.fetch');
         });
