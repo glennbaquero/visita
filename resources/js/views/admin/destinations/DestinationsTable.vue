@@ -1,44 +1,37 @@
- <template>
-	<div>
-        <filter-box>
+<template>
+    <div>
+        <filter-box @refresh="fetch">
             <template v-slot:left>
-
-                <refresh-button @click="fetch"></refresh-button>
-
             </template>
             <template v-slot:right>
 
-                <search-box
+                <search-form
                 @search="filter($event, 'search')">
-                </search-box>
+                </search-form>
 
             </template>
         </filter-box>
 
         <!-- DATATABLE -->
-        <datatable ref="datatable"
-        :autofetch="autoFetch"
+        <data-table
+        ref="data-table"
         :headers="headers"
-        :columns="columns"
         :filters="filters"
-        
-        :defaultsort="'created_at'"
-        :defaultorder="false"
+        :fetch-url="fetchUrl"
+        :no-action="noAction"
+        :disabled="disabled"
+        order-by="id"
+        @load="load"
+        >
 
-        :fetchUrl="fetchUrl"
-        :actionable="true"
-        :selectable="false"
-
-        @loaded="init"
-        @loading="load">
-
-            <template v-slot:body>
+            <template v-slot:body="{ items }">
                 <tr v-for="item in items">
                     <td>{{ item.id }}</td>
+                    <td>{{ item.code }}</td>
                     <td>{{ item.name }}</td>
-                    <td>{{ item.operating_hours }}</td>
                     <td>{{ item.capacity_per_day }}</td>
-                    <td>{{ item.status }}</td>
+                    <td>{{ item.operating_hours }}</td>
+                    <td>{{ item.created_at }}</td>
                     <td>
                         <view-button :href="item.showUrl"></view-button>
                         
@@ -56,8 +49,8 @@
                         :disabled="loading"
                         title="Archive Item"
                         alt-title="Restore Item"
-                        :message="'Are you sure you want to archive bank detail ' + item.account_number + '?'"
-                        :alt-message="'Are you sure you want to restore bank detail ' + item.account_number + '?'"
+                        :message="'Are you sure you want to archive Page Item #' + item.id + '?'"
+                        :alt-message="'Are you sure you want to restore Page Item #' + item.id + '?'"
                         @load="load"
                         @success="sync"
                         ></action-button>
@@ -65,33 +58,34 @@
                 </tr>
             </template>
 
-        </datatable>
+        </data-table>
 
         <loader :loading="loading"></loader>
-	</div>
+    </div>
 </template>
 
 <script type="text/javascript">
-import ListMixin from 'Mixins/list.js';
+import ListMixin from '../../../mixins/list.js';
 
-import SearchBox from 'Components/datatables/SearchBox.vue';
-import ActionButton from 'Components/buttons/ActionButton.vue';
-import ViewButton from 'Components/buttons/ViewButton.vue';
+import SearchForm from '../../../components/forms/SearchForm.vue';
+import ActionButton from '../../../components/buttons/ActionButton.vue';
+import ViewButton from '../../../components/buttons/ViewButton.vue';
 
 export default {
     computed: {
         headers() {
-            let array = ['#', 'Name', 'Account number', 'Branch'];
+            let array = [
+                { text: '#', value: 'id' },
+                { text: 'Code', value: 'code' },
+                { text: 'Name', value: 'name' },
+                { text: 'Capacity Per Day', value: 'capacity_per_day' },
+                { text: 'Operating Hours', value: 'operating_hours' },
+            ];
 
-            array = array.concat(['Created Date']);
 
-            return array;
-        },
-
-        columns() {
-            let array = ['id', 'name', 'account_numer', 'branch', 'created_at'];
-
-            array = array.concat(['created_at']);
+            array = array.concat([
+                { text: 'Created Date', value: 'created_at' },
+            ]);
 
             return array;
         },
@@ -112,7 +106,7 @@ export default {
     mixins: [ ListMixin ],
 
     components: {
-        'search-box': SearchBox,
+        'search-form': SearchForm,
         'view-button': ViewButton,
         'action-button': ActionButton,
     },

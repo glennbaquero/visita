@@ -27,3 +27,5 @@ Vue.component('home-banners-view', require('./views/admin/home-banners/HomeBanne
 
 Vue.component('about-infos-table', require('./views/admin/about-infos/AboutInfosTable.vue').default);
 Vue.component('about-infos-view', require('./views/admin/about-infos/AboutInfosView.vue').default);
+
+Vue.component('destinations-table', require('./views/admin/destinations/DestinationsTable.vue').default);
