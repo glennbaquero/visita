@@ -296,5 +296,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('sample-items/fetch-item/{id?}', 'SampleItemFetchController@fetchView')->name('sample-items.fetch-item');
             Route::post('sample-items/fetch-pagination/{id}', 'SampleItemFetchController@fetchPagePagination')->name('sample-items.fetch-pagination');
         });
+
+        Route::namespace('Destinations')->group(function() {
+            Route::get('destinations', 'DestinationController@index')->name('destinations.index');
+        });
     });
 });
