@@ -95,12 +95,17 @@ class DestinationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Article  $sampleItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function archive($id)
     {
-        //
+        $item = Destination::withTrashed()->findOrFail($id);
+        $item->archive();
+
+        return response()->json([
+            'message' => "You have successfully archived {$item->renderName()}",
+        ]);
     }
 
     public function removeImage(Request $request, $id)
