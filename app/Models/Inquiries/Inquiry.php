@@ -26,4 +26,25 @@ class Inquiry extends Model
     public function renderRestoreUrl($prefix = 'admin') {
         return route($prefix . '.inquiries.restore', $this->id);
     }
+
+
+    public function renderWebHome() {
+        return route('web.home');
+    }
+
+    /**
+     * @Setters
+     */
+    public static function store($request, $item = null, $columns = ['fullname', 'contact_number', 'email', 'purpose', 'message'])
+    {
+        $vars = $request->only($columns);
+        
+        if (!$item) {
+            $item = static::create($vars);
+        } else {
+            $item->update($vars);
+        }
+
+        return $item;
+    }
 }
