@@ -34,7 +34,7 @@
                     <a href="{{ route('admin.destinations.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.destinations.*',
                     ]) }}">
-                        <i class="nav-icon fa fa-th"></i>
+                        <i class="nav-icon fas fa-map-marked-alt"></i>
                         <p>
                             Destination
                         </p>
@@ -45,7 +45,7 @@
                     <a href="{{ route('admin.inquiries.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.inquiries.*',
                     ]) }}">
-                        <i class="nav-icon fa fa-th"></i>
+                        <i class="nav-icon fas fa-at"></i>
                         <p>
                             Inquiries
                         </p>
