@@ -46,6 +46,13 @@
                             fetch-url="{{ route('admin.destinations.fetch') }}"
                             ></destinations-table>
                         </div>
+                        <div class="tab-pane" id="tab2">
+                            <destinations-table
+                            ref="table-2"
+                            disabled
+                            fetch-url="{{ route('admin.destinations.fetch-archive') }}"
+                            ></destinations-table>
+                        </div>
                     </div>
                 </div>
             </div>

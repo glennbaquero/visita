@@ -310,6 +310,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('destinations/{id}/remove-image', 'DestinationController@removeImage')->name('destinations.remove-image');
 
             Route::post('destinations/fetch', 'DestinationFetchController@fetch')->name('destinations.fetch');
+            Route::post('destinations/fetch?archived=1', 'DestinationFetchController@fetch')->name('destinations.fetch-archive');
             Route::post('destinations/fetch-item/{id?}', 'DestinationFetchController@fetchView')->name('destinations.fetch-item');
             Route::post('destinations/fetch-pagination/{id}', 'DestinationFetchController@fetchPagePagination')->name('destinations.fetch-pagination');
         });
