@@ -29,6 +29,17 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.destinations.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.destinations.*',
+                    ]) }}">
+                        <i class="nav-icon fa fa-th"></i>
+                        <p>
+                            Destination
+                        </p>
+                    </a>
+                </li>
                 
              {{--    @if ($self->hasAnyPermission(['admin.sample-items.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
