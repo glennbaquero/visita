@@ -56,7 +56,10 @@ class DestinationController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Destination::withTrashed()->findOrFail($id);
+        return view('admin.destinations.show', [
+            'item' => $item,
+        ]);
     }
 
     /**

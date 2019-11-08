@@ -4,9 +4,10 @@ namespace App\Models\Destinations;
 
 use App\Extenders\Models\BaseModel as Model;
 use App\Traits\FileTrait;
+use App\Traits\ManyImagesTrait;
 
 use App\Models\Files\File;
-use App\Traits\ManyImagesTrait;
+use App\Models\Picture;
 
 class Destination extends Model
 {
@@ -20,6 +21,11 @@ class Destination extends Model
 	public function files()
 	{
 	    return $this->morphMany(File::class, 'fileable');
+	}
+
+	public function pictures()
+	{
+	    return $this->morphMany(Picture::class, 'parent');
 	}
 
     /**
@@ -45,7 +51,15 @@ class Destination extends Model
     /**
      * @Render
      */
-    
+    public function renderShowUrl($prefix = 'admin') {
+        $route = $this->id;
+
+        if ($prefix == 'web') {
+            $route = [$this->id, $this->slug];
+        }
+
+        return route($prefix . '.destinations.show', $route);
+    }
     public function renderRemoveImageUrl($prefix = 'admin') {
         return route($prefix . '.destinations.remove-image', $this->id);
     }

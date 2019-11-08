@@ -62,6 +62,7 @@ class DestinationFetchController extends FetchController
             'operating_hours' => $item->operating_hours,
             'capacity_per_day' => $item->capacity_per_day,
             'created_at' => $item->renderDate(),
+            'showUrl' => $item->renderShowUrl(),
         ];
     }
 
@@ -72,12 +73,14 @@ class DestinationFetchController extends FetchController
         	$item = Destination::withTrashed()->findOrFail($id);
 	        $item->removeImageUrl = $item->renderRemoveImageUrl();
         	$item->name = $item->name;
-            $item->archiveUrl = $item->renderArchiveUrl();
-            $item->restoreUrl = $item->renderRestoreUrl();
+        	$images = $item->getImages();
+            // $item->archiveUrl = $item->renderArchiveUrl();
+            // $item->restoreUrl = $item->renderRestoreUrl();
         }
 
     	return response()->json([
     		'item' => $item,
+    		'images' => $images
     	]);
     }
 }
