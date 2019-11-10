@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilesTable extends Migration
+class CreateCapacitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('capacities', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('fileable_id')->index()->unsigned();
-            $table->string('fileable_type');
-            $table->string('path');
+            $table->integer('allocation_id')->unsigned()->index();
+            $table->integer('online');
+            $table->integer('walk_in');
+            $table->integer('mgt_lgu');
+            $table->integer('agency');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +32,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('capacities');
     }
 }
