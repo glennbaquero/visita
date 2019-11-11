@@ -1,7 +1,5 @@
 <template>
-    <form-request :submit-url="submitUrl" @load="load" @success="fetch" sync-on-success>
-
-
+    <form-request :submit-url="submitUrl" @load="load" @success="fetch" class="inlineBlock-parent" sync-on-success>
         <div class="width--50 align-t m-margin-b">
             <div class="width--95 frm-cntnr align-l">
                 <div class="frm-inpt m-margin-b">
@@ -26,33 +24,8 @@
             </div>
         </div>
         <div class="width--100 align-c">
-           <!--  <button type="submit" class="frm-btn green">Submit</button> -->
-            <action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
+            <action-button type="submit" :disabled="loading" class="frm-btn green">Submit</action-button>
         </div>
-
-        <!-- <card>
-            <template v-slot:header>Basic Information</template>
-            <div class="row">
-                <div class="form-group col col-sm-12 col-md-12">
-                    <label>Name</label>
-                    <input v-model="item.name" name="name" type="text" class="form-control input-sm">
-                </div>
-
-                <image-picker
-                class="form-group col-sm-12 col-md-12 mt-2"
-                :value="item.image_path"
-                label="Image"
-                name="image_path"
-                placeholder="Choose a File"
-                ></image-picker>
-
-            </div>
-
-            <template v-slot:footer>
-                <action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
-                
-            </template> 
-        </card> -->
 
         <loader :loading="loading"></loader>
         
@@ -70,12 +43,6 @@ export default {
     methods: {
         fetchSuccess(data) {
             this.item = data.item ? data.item : this.item;
-        }
-    },
-
-    data() {
-        return {
-            page_items: [],
         }
     },
 

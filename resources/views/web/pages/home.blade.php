@@ -178,40 +178,8 @@
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
-				{{-- <form id="contactForm" action="{{ route('web.user.inquiry') }}"  class="inlineBlock-parent" method="POST">
-					{{ csrf_field() }}
-
-					<div class="width--50 align-t m-margin-b">
-						<div class="width--95 frm-cntnr align-l">
-							<div class="frm-inpt m-margin-b">
-								<input type="text" name="fullname" placeholder="Full Name">
-							</div>
-							<div class="frm-inpt m-margin-b">
-								<input type="number" name="contact_number" placeholder="Contact Number">
-							</div>
-							<div class="frm-inpt m-margin-b">
-								<input type="email" name="email" placeholder="Email Address">
-							</div>
-						</div>
-					</div
-					><div class="width--50 align-t m-margin-b">
-						<div class="width--95 frm-cntnr align-r">
-							<div class="frm-inpt m-margin-b">
-								<input type="text" name="purpose" placeholder="Purpose">
-							</div>
-							<div class="frm-inpt m-margin-b">
-								<textarea name="message" rows="4" placeholder="Message"></textarea>
-							</div>
-						</div>
-					</div>
-					<div class="width--100 align-c">
-						<button type="submit" class="frm-btn green">Submit</button>
-					</div>
-				</form> --}}
-
-				 <user-inquiry
-		      {{--   fetch-url="{{ route('admin.admin-users.fetch-item') }}" --}}
-		        submit-url="{{ route('web.user.inquiry') }}"
+				<user-inquiry
+		        	submit-url="{{ route('web.user.inquiry') }}"
 		        ></user-inquiry>
 
 			</div>

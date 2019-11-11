@@ -17,13 +17,9 @@ class InquiryController extends Controller
     public function inquiryPost(InquiryRequest $request)
    {
 
-       // Inquiry::create($request->all());
-
-       // Alert::info('Thanks for contacting us!', 'Success');
-       
-       // return redirect()->back();
-
        $item = Inquiry::store($request);
+
+       $item->sendInquiryNotification($item);
 
         $message = "Thanks for contacting us!";
         $action = 1;
