@@ -264,6 +264,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&experiences=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.experiences');
 
+            Route::post('activity-logs/fetch?id={id?}&annual_incomes=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.annual_incomes');
             
         });
 
@@ -346,6 +347,22 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('experiences/fetch?archived=1', 'ExperienceFetchController@fetch')->name('experiences.fetch-archive');
             Route::post('experiences/fetch-item/{id?}', 'ExperienceFetchController@fetchView')->name('experiences.fetch-item');
             Route::post('experiences/fetch-pagination/{id}', 'ExperienceFetchController@fetchPagePagination')->name('experiences.fetch-pagination');
+        });
+
+         Route::namespace('AnnualIncomes')->group(function() {
+            Route::get('annual_incomes', 'AnnualIncomeController@index')->name('annual_incomes.index');
+            Route::get('annual_incomes/create', 'AnnualIncomeController@create')->name('annual_incomes.create');
+            Route::post('annual_incomes/store', 'AnnualIncomeController@store')->name('annual_incomes.store');
+            Route::get('annual_incomes/show/{id}', 'AnnualIncomeController@show')->name('annual_incomes.show');
+            Route::post('annual_incomes/update/{id}', 'AnnualIncomeController@update')->name('annual_incomes.update');
+            Route::post('annual_incomes/{id}/archive', 'AnnualIncomeController@archive')->name('annual_incomes.archive');
+            Route::post('annual_incomes/{id}/restore', 'AnnualIncomeController@restore')->name('annual_incomes.restore');
+            Route::post('annual_incomes/reorder', 'AnnualIncomeController@reOrder')->name('annual_incomes.reorder');
+        
+            Route::post('annual_incomes/fetch', 'AnnualIncomeFetchController@fetch')->name('annual_incomes.fetch');
+            Route::post('annual_incomes/fetch?archived=1', 'AnnualIncomeFetchController@fetch')->name('annual_incomes.fetch-archive');
+            Route::post('annual_incomes/fetch-item/{id?}', 'AnnualIncomeFetchController@fetchView')->name('annual_incomes.fetch-item');
+            Route::post('annual_incomes/fetch-pagination/{id}', 'AnnualIncomeFetchController@fetchPagePagination')->name('annual_incomes.fetch-pagination');
         });
 
 
