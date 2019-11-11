@@ -59,6 +59,7 @@ class DestinationFetchController extends FetchController
             'id' => $item->id,
             'name' => $item->name,
             'code' => $item->code,
+            'icon' => $item->icon,
             'operating_hours' => $item->operating_hours,
             'capacity_per_day' => $item->capacity_per_day,
             'created_at' => $item->renderDate(),

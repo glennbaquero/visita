@@ -31,6 +31,14 @@
 			<div class="row">
 
 				<text-editor
+				v-model="item.icon"
+				class="col-sm-12"
+				label="Icon"
+				name="icon"
+				row="5"
+				></text-editor>
+
+				<text-editor
 				v-model="item.orientation_module"
 				class="col-sm-12"
 				label="Orientation Module"
