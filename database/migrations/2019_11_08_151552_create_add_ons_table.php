@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilesTable extends Migration
+class CreateAddOnsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('add_ons', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('fileable_id')->index()->unsigned();
-            $table->string('fileable_type');
-            $table->string('path');
-            $table->softDeletes();
+            $table->integer('book_id')->unsigned()->index();
+            $table->string('name');
+            $table->decimal('amount', 9, 2);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('add_ons');
     }
 }

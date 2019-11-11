@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilesTable extends Migration
+class CreateAgencyAllocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('agency_allocations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('fileable_id')->index()->unsigned();
-            $table->string('fileable_type');
-            $table->string('path');
+            $table->integer('allocation_id')->unsigned()->index();
+            $table->integer('agency_id')->unsigned()->index();
+            $table->string('agency_code');
+            $table->string('slot');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('agency_allocations');
     }
 }

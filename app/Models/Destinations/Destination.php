@@ -8,6 +8,10 @@ use App\Traits\ManyImagesTrait;
 
 use App\Models\Files\File;
 use App\Models\Picture;
+use App\Models\Allocations\Allocation;
+use App\Models\Experiences\Experience;
+use App\Models\TrainingModules\TrainingModule;
+use App\Models\Managements\Management;
 
 class Destination extends Model
 {
@@ -27,6 +31,26 @@ class Destination extends Model
 	{
 	    return $this->morphMany(Picture::class, 'parent');
 	}
+
+    public function allocations()
+    {
+        return $this->hasMany(Allocation::class);
+    }
+
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class);
+    }
+
+    public function trainingModules()
+    {
+        return $this->hasMany(TrainingModule::class);
+    }
+
+    public function managements()
+    {
+        return $this->hasMany(Management::class);
+    }
 
     /**
      * @Setters
