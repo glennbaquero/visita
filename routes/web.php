@@ -13,6 +13,7 @@
 
 Route::get('sandbox', 'SandboxController@index')->name('sandbox.index');
 
+
 Route::namespace('Web')->name('web.')->group(function() {
 
 	Route::namespace('Auth')->group(function() {
@@ -51,6 +52,13 @@ Route::namespace('Web')->name('web.')->group(function() {
 
 		Route::get('', 'PageController@showHome')->name('home');
 		Route::get('stylesheet', 'PageController@showStylesheet')->name('stylesheet');
+
+	});
+
+	/* Inquiries Routes */
+	Route::namespace('Inquiries')->group(function() {
+
+		Route::post('inquiry', 'InquiryController@inquiryPost')->name('user.inquiry');
 
 	});
 

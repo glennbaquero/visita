@@ -4,6 +4,12 @@ namespace App\Models\Inquiries;
 
 use App\Extenders\Models\BaseModel as Model;
 
+use App\Models\Users\Admin;
+
+use App\Notifications\Admin\UserInquiry;
+
+use Notification;
+
 class Inquiry extends Model
 {
     /**
@@ -26,4 +32,47 @@ class Inquiry extends Model
     public function renderRestoreUrl($prefix = 'admin') {
         return route($prefix . '.inquiries.restore', $this->id);
     }
+
+
+    public function renderWebHome() {
+        return route('web.home');
+    }
+
+    /**
+     * @Setters
+     */
+    public static function store($request, $item = null, $columns = ['fullname', 'contact_number', 'email', 'purpose', 'message'])
+    {
+        $vars = $request->only($columns);
+        
+        if (!$item) {
+            $item = static::create($vars);
+        } else {
+            $item->update($vars);
+        }
+
+        return $item;
+    }
+
+
+    /**
+     * @Notifications
+     */
+    public function sendInquiryNotification($item) {
+        // $ids = Permission::getUsersByPermission(['admin.inquiry.crud']);
+        // $admins = Admin::whereIn('id', $ids)->get();
+
+        // if (count($admins)) {
+        //     Notification::send($admins, new UserInquiry($this, 'admin'));
+        // }
+
+        $admins = Admin::all();
+
+        foreach($admins as $admin) {
+            $admin->notify(new UserInquiry($item));
+        }
+
+
+    }
+
 }
