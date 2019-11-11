@@ -41,6 +41,17 @@
                     </a>
                 </li>
 
+                 <li class="nav-item">
+                    <a href="{{ route('admin.experiences.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.experiences.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-hiking"></i>
+                        <p>
+                            Experience
+                        </p>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('admin.inquiries.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.inquiries.*',

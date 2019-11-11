@@ -261,6 +261,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('activity-logs/fetch?id={id?}&destinations=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.destinations');
 
             Route::post('activity-logs/fetch?id={id?}&inquiries=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.inquiries');
+
+            Route::post('activity-logs/fetch?id={id?}&experiences=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.experiences');
+
             
         });
 
@@ -328,5 +331,23 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('inquiries/fetch-item/{id?}', 'InquiryFetchController@fetchView')->name('inquiries.fetch-item');
             Route::post('inquiries/fetch-pagination/{id}', 'InquiryFetchController@fetchPagePagination')->name('inquiries.fetch-pagination');
         });
+
+
+         Route::namespace('Experiences')->group(function() {
+            Route::get('experiences', 'ExperienceController@index')->name('experiences.index');
+            Route::get('experiences/create', 'ExperienceController@create')->name('experiences.create');
+            Route::post('experiences/store', 'ExperienceController@store')->name('experiences.store');
+            Route::get('experiences/show/{id}', 'ExperienceController@show')->name('experiences.show');
+            Route::post('experiences/update/{id}', 'ExperienceController@update')->name('experiences.update');
+            Route::post('experiences/{id}/archive', 'ExperienceController@archive')->name('experiences.archive');
+            Route::post('experiences/{id}/restore', 'ExperienceController@restore')->name('experiences.restore');
+        
+            Route::post('experiences/fetch', 'ExperienceFetchController@fetch')->name('experiences.fetch');
+            Route::post('experiences/fetch?archived=1', 'ExperienceFetchController@fetch')->name('experiences.fetch-archive');
+            Route::post('experiences/fetch-item/{id?}', 'ExperienceFetchController@fetchView')->name('experiences.fetch-item');
+            Route::post('experiences/fetch-pagination/{id}', 'ExperienceFetchController@fetchPagePagination')->name('experiences.fetch-pagination');
+        });
+
+
     });
 });

@@ -33,3 +33,6 @@ Vue.component('destinations-view', require('./views/admin/destinations/Destinati
 
 Vue.component('inquiries-table', require('./views/admin/inquiries/InquiriesTable.vue').default);
 Vue.component('inquiries-view', require('./views/admin/inquiries/InquiriesView.vue').default);
+
+Vue.component('experiences-table', require('./views/admin/experiences/ExperiencesTable.vue').default);
+Vue.component('experiences-view', require('./views/admin/experiences/ExperiencesView.vue').default);
