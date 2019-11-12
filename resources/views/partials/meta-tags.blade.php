@@ -28,7 +28,7 @@
 <meta name="msapplication-navbutton-color" content="#1A1A18">
 <meta name="apple-mobile-web-app-status-bar-style" content="#1A1A18">
 
-<meta property="og:image" content="@yield('og:image', url('/') . '/images/logo.png')">
+<meta property="og:image" content="@yield('og:image', url('/') . '/images/favicon.png')">
 <meta property="og:title" content="@yield('og:title', config('app.name'))">
 <meta property="og:description" content="@yield('og:description', 'In Information Technology, a boilerplate is a unit of writing that can be reused over and over without change. By extension, the idea is sometimes applied to reusable programming, as in boilerplate code.')">
 
