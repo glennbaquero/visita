@@ -51,6 +51,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 	Route::namespace('Pages')->group(function() {
 
 		Route::get('', 'PageController@showHome')->name('home');
+		// Route::get('/fetch/destination', 'PageController@fetchDestination')->name('fetch.destination');
 		Route::get('stylesheet', 'PageController@showStylesheet')->name('stylesheet');
 
 	});
@@ -72,6 +73,15 @@ Route::namespace('Web')->name('web.')->group(function() {
 		Route::post('articles/fetch-item/{id?}', 'ArticleFetchController@fetchView')->name('articles.fetch-item');
 		Route::post('articles/fetch-pagination/{id}', 'ArticleFetchController@fetchPagePagination')->name('articles.fetch-pagination');
 	});
+
+
+	/* Destination Routes */
+	Route::namespace('Destinations')->group(function() {
+
+		Route::get('/fetch/destination', 'DestinationFetchController@fetchDestination')->name('fetch.destination');
+
+	});
+
 
 	/* User Dashboard Routes */
 	Route::prefix('dashboard')->middleware('auth:web')->group(function() {
@@ -150,6 +160,8 @@ Route::namespace('Web')->name('web.')->group(function() {
 				Route::post('sample-items/fetch-pagination/{id}', 'SampleItemFetchController@fetchPagePagination')->name('sample-items.fetch-pagination');
 
 			});
+
+
 
 		});
 

@@ -61,7 +61,7 @@ class Destination extends Model
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['name', 'code', 'terms_conditions', 'visitor_policies', 'operating_hours', 'orientation_module', 'capacity_per_day'])
+    public static function store($request, $item = null, $columns = ['name', 'code', 'icon', 'terms_conditions', 'visitor_policies', 'operating_hours', 'orientation_module', 'capacity_per_day'])
     {
         $vars = $request->only($columns);
 

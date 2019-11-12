@@ -23,6 +23,7 @@ class CreateDestinationsTable extends Migration
             $table->text('orientation_module');
             $table->text('terms_conditions');
             $table->text('visitor_policies');
+            $table->longText('icon');
 
             $table->softDeletes();
             $table->timestamps();
