@@ -174,6 +174,18 @@ class PermissionsTableSeeder extends Seeder
                     ],
                 ],
             ],
+
+            [
+                'name' => 'Special Fees',
+                'description' => 'Manage Special Fees',
+                'icon' => 'fas fa-comment-dollar',
+                'items' => [
+                    [
+                        'name' => 'admin.special_fees.crud',
+                        'description' => 'Manage Special Fees',
+                    ],
+                ],
+            ],
         ];
 
     	foreach ($categories as $category) {

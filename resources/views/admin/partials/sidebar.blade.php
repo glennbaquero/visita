@@ -131,6 +131,19 @@
                     </a>
                 </li>
 
+                {{-- @if ($self->hasAnyPermission(['admin.special_fees.crud'])) --}}
+                <li class="nav-item">
+                    <a href="{{ route('admin.visitor-types.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.visitor-types.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-comment-dollar"></i>
+                        <p>
+                            Special Fees
+                        </p>
+                    </a>
+                </li>
+                {{-- @endif --}}
+
                 
              {{--    @if ($self->hasAnyPermission(['admin.sample-items.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
