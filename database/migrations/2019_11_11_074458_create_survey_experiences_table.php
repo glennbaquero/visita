@@ -15,8 +15,8 @@ class CreateSurveyExperiencesTable extends Migration
     {
         Schema::create('survey_experiences', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('survey_id')->unsigned()->index();
             $table->text('question');
+            $table->integer('order');
             $table->boolean('answerable')->default(false);
             $table->string('others_placeholder')->nullable();
             $table->boolean('show_other')->default(false);
