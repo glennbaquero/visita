@@ -16,9 +16,9 @@ class CreateVisitorTypesTable extends Migration
         Schema::create('visitor_types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->decimal('fee', 9, 2)->default(0);
-            // $table->decimal('weekend_fee', 9, 2)->default(0);
-            // $table->decimal('weekday_fee', 9, 2)->default(0);
+            // $table->decimal('fee', 9, 2)->default(0);
+            $table->decimal('weekend_fee', 9, 2)->default(0);
+            $table->decimal('weekday_fee', 9, 2)->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

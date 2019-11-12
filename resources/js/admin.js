@@ -45,3 +45,6 @@ Vue.component('survey-experiences-view', require('./views/admin/survey-experienc
 
 Vue.component('add-ons-table', require('./views/admin/add-ons/AddOnsTable.vue').default);
 Vue.component('add-ons-view', require('./views/admin/add-ons/AddOnsView.vue').default);
+
+Vue.component('visitor-types-table', require('./views/admin/visitor-types/VisitorTypesTable.vue').default);
+Vue.component('visitor-types-view', require('./views/admin/visitor-types/VisitorTypesView.vue').default);
