@@ -269,6 +269,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('activity-logs/fetch?id={id?}&survey-experiences=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.survey-experiences');
 
             Route::post('activity-logs/fetch?id={id?}&add-ons=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.add-ons');
+
+            Route::post('activity-logs/fetch?id={id?}&add-onsvisitor-types=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.visitor-types');
             
         });
 
@@ -398,6 +400,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('add-ons/fetch?archived=1', 'AddOnFetchController@fetch')->name('add-ons.fetch-archive');
             Route::post('add-ons/fetch-item/{id?}', 'AddOnFetchController@fetchView')->name('add-ons.fetch-item');
             Route::post('add-ons/fetch-pagination/{id}', 'AddOnFetchController@fetchPagePagination')->name('add-ons.fetch-pagination');
+        });
+
+        Route::namespace('VisitorTypes')->group(function() {
+            Route::get('visitor-types', 'VisitorTypeController@index')->name('visitor-types.index');
+            Route::get('visitor-types/create', 'VisitorTypeController@create')->name('visitor-types.create');
+            Route::post('visitor-types/store', 'VisitorTypeController@store')->name('visitor-types.store');
+            Route::get('visitor-types/show/{id}', 'VisitorTypeController@show')->name('visitor-types.show');
+            Route::post('visitor-types/update/{id}', 'VisitorTypeController@update')->name('visitor-types.update');
+            Route::post('visitor-types/{id}/archive', 'VisitorTypeController@archive')->name('visitor-types.archive');
+            Route::post('visitor-types/{id}/restore', 'VisitorTypeController@restore')->name('visitor-types.restore');
+        
+            Route::post('visitor-types/fetch', 'VisitorTypeFetchController@fetch')->name('visitor-types.fetch');
+            Route::post('visitor-types/fetch?archived=1', 'VisitorTypeFetchController@fetch')->name('visitor-types.fetch-archive');
+            Route::post('visitor-types/fetch-item/{id?}', 'VisitorTypeFetchController@fetchView')->name('visitor-types.fetch-item');
+            Route::post('visitor-types/fetch-pagination/{id}', 'VisitorTypeFetchController@fetchPagePagination')->name('visitor-types.fetch-pagination');
         });
     });
 });
