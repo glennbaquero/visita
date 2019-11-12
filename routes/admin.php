@@ -267,6 +267,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('activity-logs/fetch?id={id?}&annual_incomes=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.annual_incomes');
 
             Route::post('activity-logs/fetch?id={id?}&survey-experiences=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.survey-experiences');
+
+            Route::post('activity-logs/fetch?id={id?}&add-ons=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.add-ons');
+
+            Route::post('activity-logs/fetch?id={id?}&add-onsvisitor-types=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.visitor-types');
             
             Route::post('activity-logs/fetch?id={id?}&allocations=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.allocations');
 
@@ -338,7 +342,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
         });
 
 
-         Route::namespace('Experiences')->group(function() {
+        Route::namespace('Experiences')->group(function() {
             Route::get('experiences', 'ExperienceController@index')->name('experiences.index');
             Route::get('experiences/create', 'ExperienceController@create')->name('experiences.create');
             Route::post('experiences/store', 'ExperienceController@store')->name('experiences.store');
@@ -400,6 +404,34 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('allocations/fetch-pagination/{id}', 'AllocationFetchController@fetchPagePagination')->name('allocations.fetch-pagination');
         });
 
+        Route::namespace('AddOns')->group(function() {
+            Route::get('add-ons', 'AddOnController@index')->name('add-ons.index');
+            Route::get('add-ons/create', 'AddOnController@create')->name('add-ons.create');
+            Route::post('add-ons/store', 'AddOnController@store')->name('add-ons.store');
+            Route::get('add-ons/show/{id}', 'AddOnController@show')->name('add-ons.show');
+            Route::post('add-ons/update/{id}', 'AddOnController@update')->name('add-ons.update');
+            Route::post('add-ons/{id}/archive', 'AddOnController@archive')->name('add-ons.archive');
+            Route::post('add-ons/{id}/restore', 'AddOnController@restore')->name('add-ons.restore');
+        
+            Route::post('add-ons/fetch', 'AddOnFetchController@fetch')->name('add-ons.fetch');
+            Route::post('add-ons/fetch?archived=1', 'AddOnFetchController@fetch')->name('add-ons.fetch-archive');
+            Route::post('add-ons/fetch-item/{id?}', 'AddOnFetchController@fetchView')->name('add-ons.fetch-item');
+            Route::post('add-ons/fetch-pagination/{id}', 'AddOnFetchController@fetchPagePagination')->name('add-ons.fetch-pagination');
+        });
 
+        Route::namespace('VisitorTypes')->group(function() {
+            Route::get('visitor-types', 'VisitorTypeController@index')->name('visitor-types.index');
+            Route::get('visitor-types/create', 'VisitorTypeController@create')->name('visitor-types.create');
+            Route::post('visitor-types/store', 'VisitorTypeController@store')->name('visitor-types.store');
+            Route::get('visitor-types/show/{id}', 'VisitorTypeController@show')->name('visitor-types.show');
+            Route::post('visitor-types/update/{id}', 'VisitorTypeController@update')->name('visitor-types.update');
+            Route::post('visitor-types/{id}/archive', 'VisitorTypeController@archive')->name('visitor-types.archive');
+            Route::post('visitor-types/{id}/restore', 'VisitorTypeController@restore')->name('visitor-types.restore');
+        
+            Route::post('visitor-types/fetch', 'VisitorTypeFetchController@fetch')->name('visitor-types.fetch');
+            Route::post('visitor-types/fetch?archived=1', 'VisitorTypeFetchController@fetch')->name('visitor-types.fetch-archive');
+            Route::post('visitor-types/fetch-item/{id?}', 'VisitorTypeFetchController@fetchView')->name('visitor-types.fetch-item');
+            Route::post('visitor-types/fetch-pagination/{id}', 'VisitorTypeFetchController@fetchPagePagination')->name('visitor-types.fetch-pagination');
+        });
     });
 });

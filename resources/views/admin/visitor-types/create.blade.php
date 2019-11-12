@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('pageTitle', 'Create Destination')
+@section('pageTitle', 'Create Visitor Type')
 
 @section('content')
 
@@ -10,11 +10,11 @@
     <section class="content-header">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Create Destination</h1>
+                <h1>Create Visitor Type</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.destinations.index') }}">Destinations</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.visitor-types.index') }}">Visitor Types</a></li>
                     <li class="breadcrumb-item active"><a href="javascript:void(0)">Create</a></li>
                 </ol>
             </div>
@@ -23,10 +23,9 @@
 
     <!-- Main content -->
     <section class="content">
-        <destinations-view
-        fetch-url="{{ route('admin.destinations.fetch-item') }}"
-        submit-url="{{ route('admin.destinations.store') }}"
-        ></destinations-view>
+        <visitor-types-view
+        submit-url="{{ route('admin.visitor-types.store') }}"
+        ></visitor-types-view>
     </section>
 </div>
 

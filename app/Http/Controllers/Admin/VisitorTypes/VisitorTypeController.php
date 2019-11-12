@@ -1,24 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Destinations;
+namespace App\Http\Controllers\Admin\VisitorTypes;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\Destinations\Destination;
+use App\Models\Types\VisitorType;
 
-use App\Http\Requests\Admin\Destinations\DestinationStoreRequest;
-
-use DB;
-
-class DestinationController extends Controller
+class VisitorTypeController extends Controller
 {
-
-    public function __construct() {
-        $this->middleware('App\Http\Middleware\Admin\Destinations\DestinationMiddleware', 
-            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore', 'removeImage']]
-        );
-    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +16,7 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        return view('admin.destinations.index');
+        return view('admin.visitor-types.index');
     }
 
     /**
@@ -36,7 +26,7 @@ class DestinationController extends Controller
      */
     public function create()
     {
-        return view('admin.destinations.create');
+        return view('admin.visitor-types.create');
     }
 
     /**
@@ -45,12 +35,10 @@ class DestinationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DestinationStoreRequest $request)
+    public function store(Request $request)
     {
-        DB::beginTransaction();
-            $item = Destination::store($request);
-            $item->addOns()->attach($request->add_ons);
-        DB::commit();
+        $item = VisitorType::store($request);
+
         $message = "You have successfully created {$item->renderName()}";
         $redirect = $item->renderShowUrl();
 
@@ -68,8 +56,8 @@ class DestinationController extends Controller
      */
     public function show($id)
     {
-        $item = Destination::withTrashed()->findOrFail($id);
-        return view('admin.destinations.show', [
+        $item = VisitorType::withTrashed()->findOrFail($id);
+        return view('admin.visitor-types.show', [
             'item' => $item,
         ]);
     }
@@ -92,16 +80,12 @@ class DestinationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DestinationStoreRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $item = Destination::withTrashed()->findOrFail($id);
-        DB::beginTransaction();
-            $item = Destination::store($request, $item);
-            $item->addOns()->sync($request->add_ons);
-        DB::commit();
-
+        $item = VisitorType::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->renderName()}";
 
+        $item = VisitorType::store($request, $item);
 
         return response()->json([
             'message' => $message,
@@ -111,12 +95,12 @@ class DestinationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Destination  $sampleItem
+     * @param  \App\VisitorType  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function archive($id)
     {
-        $item = Destination::withTrashed()->findOrFail($id);
+        $item = VisitorType::withTrashed()->findOrFail($id);
         $item->archive();
 
         return response()->json([
@@ -127,28 +111,16 @@ class DestinationController extends Controller
     /**
      * Restore the specified resource from storage.
      *
-     * @param  \App\Destination  $sampleItem
+     * @param  \App\VisitorType  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        $item = Destination::withTrashed()->findOrFail($id);
+        $item = VisitorType::withTrashed()->findOrFail($id);
         $item->unarchive();
 
         return response()->json([
             'message' => "You have successfully restored {$item->renderName()}",
-        ]);
-    }
-
-    public function removeImage(Request $request, $id)
-    {
-        $item = Destination::withTrashed()->findOrFail($id);
-        $message = "You have successfully remove the image in {$item->renderName()}";
-
-        $result = $item->removeImage($request);
-
-        return response()->json([
-            'message' => $message,
         ]);
     }
 }

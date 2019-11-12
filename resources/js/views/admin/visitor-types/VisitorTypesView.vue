@@ -5,94 +5,19 @@
 			<template v-slot:header>About Tabbing Information</template>
 
 			<div class="row">
-				<div class="form-group col-sm-12 col-md-4">
+				<div class="form-group col-sm-12 col-md-12">
 					<label>Name</label>
 					<input v-model="item.name" name="name" type="text" class="form-control">
 				</div>
-				
-				<div class="form-group col-sm-12 col-md-4">
-					<label>Code</label>
-					<input v-model="item.code" name="code" type="text" class="form-control">
-				</div>
-
-				<selector class="col-sm-4"
-				v-model="item.add_ons"
-				name="add_ons[]"
-				label="Add Ons"
-				:items="add_ons"
-				item-value="id"
-				item-text="name"
-				multiple
-				placeholder="Please select an item"
-				></selector>
-
 				<div class="form-group col-sm-12 col-md-6">
-					<label>Capacity Per Day</label>
-					<input v-model="item.capacity_per_day" name="capacity_per_day" type="number" min="1" class="form-control">
+					<label>Weekday Fee</label>
+					<input v-model="item.weekday_fee" name="weekday_fee" type="number" min="1" class="form-control">
+				</div>
+				<div class="form-group col-sm-12 col-md-6">
+					<label>Weekend Fee</label>
+					<input v-model="item.weekend_fee" name="weekend_fee" type="number" min="1" class="form-control">
 				</div>
 				
-				<time-picker
-				v-model="item.operating_hours"
-				class="form-group col-sm-12 col-md-6 time"
-				label="Operating Hours"
-				name="operating_hours"
-				placeholder="Choose time slot"
-				></time-picker>
-				
-			</div>
-			
-			<div class="row">
-
-				<text-editor
-				v-model="item.icon"
-				class="col-sm-12"
-				label="Icon"
-				name="icon"
-				row="5"
-				></text-editor>
-
-				<text-editor
-				v-model="item.orientation_module"
-				class="col-sm-12"
-				label="Orientation Module"
-				name="orientation_module"
-				row="5"
-				></text-editor>
-
-				<text-editor
-				v-model="item.terms_conditions"
-				class="col-sm-12"
-				label="Terms and conditions"
-				name="terms_conditions"
-				row="5"
-				></text-editor>
-
-
-				<text-editor
-				v-model="item.visitor_policies"
-				class="col-sm-12"
-				label="Visitor Policies"
-				name="visitor_policies"
-				row="5"
-				></text-editor>
-
-	
-			</div>
-
-			<div class="row">
-				<image-picker
-				:value="images"
-				class="form-group col-sm-12 col-md-12 mt-2"
-	            label="Images"
-	            name="images[]"
-	            placeholder="Choose Files"
-	            multiple
-	            :sort-url="sortUrl"
-	            :remove-url="item.removeImageUrl"
-	            @remove="fetch"
-	            max="3"
-	            min="1"
-				></image-picker>
 			</div>
 
 			<template v-slot:footer>
@@ -110,8 +35,8 @@
                 confirm-dialog
                 title="Archive Item"
                 alt-title="Restore Item"
-                :message="'Are you sure you want to archive Destination #' + item.id + '?'"
-                :alt-message="'Are you sure you want to restore Destination #' + item.id + '?'"
+                :message="'Are you sure you want to archive Visitor Type #' + item.id + '?'"
+                :alt-message="'Are you sure you want to restore Visitor Type #' + item.id + '?'"
                 :disabled="loading"
                 @load="load"
                 @success="fetch"
@@ -140,16 +65,12 @@ export default {
 	methods: {
 		fetchSuccess(data) {
 			this.item = data.item ? data.item : this.item;
-			this.images = data.images ? data.images : this.images;
-			this.add_ons = data.add_ons ? data.add_ons : this.add_ons;
 		},
 	},
 
 	data() {
 		return {
 			item: [],
-			images: [],
-			add_ons: []
 		}
 	},
 
