@@ -73,6 +73,17 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.survey-experiences.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.survey-experiences.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-at"></i>
+                        <p>
+                            Survey Experience
+                        </p>
+                    </a>
+                </li>
                 
              {{--    @if ($self->hasAnyPermission(['admin.sample-items.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
