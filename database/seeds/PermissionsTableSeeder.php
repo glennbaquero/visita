@@ -104,6 +104,76 @@ class PermissionsTableSeeder extends Seeder
                     ],
                 ],
             ],
+
+            [
+                'name' => 'Allocations',
+                'description' => 'Manage Allocations',
+                'icon' => 'fas fa-hiking',
+                'items' => [
+                    [
+                        'name' => 'admin.allocations.crud',
+                        'description' => 'Manage Allocations',
+                    ],
+                ],
+            ],
+            [
+                'name' => 'Destinations',
+                'description' => 'Manage Destinations',
+                'icon' => 'fas fa-map-marked-alt',
+                'items' => [
+                    [
+                        'name' => 'admin.destinations.crud',
+                        'description' => 'Manage Destinations',
+                    ],
+                ],
+            ],
+            [
+                'name' => 'Experiences',
+                'description' => 'Manage Experiences',
+                'icon' => 'fas fa-hiking',
+                'items' => [
+                    [
+                        'name' => 'admin.experiences.crud',
+                        'description' => 'Manage Experiences',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Inquiries',
+                'description' => 'View Inquiries',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.inquiries.crud',
+                        'description' => 'View Inquiries',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Annual Incomes',
+                'description' => 'Manage Annual Income',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.annual_incomes.crud',
+                        'description' => 'Manage Annual Income',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Survey Experiences',
+                'description' => 'Manage Survey Experience',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.survey_experiences.crud',
+                        'description' => 'Manage Survey Experience',
+                    ],
+                ],
+            ],
         ];
 
     	foreach ($categories as $category) {

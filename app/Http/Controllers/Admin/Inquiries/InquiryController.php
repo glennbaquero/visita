@@ -9,6 +9,11 @@ use App\Models\Inquiries\Inquiry;
 
 class InquiryController extends Controller
 {
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Inquiries\InquiryMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *

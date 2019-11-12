@@ -12,6 +12,7 @@ class AnnualIncome extends Model
     public static function store($request, $item = null, $columns = ['name'])
     {
         $vars = $request->only($columns);
+        $vars['order'] = 0;
 
         if (!$item) {
             $item = static::create($vars);

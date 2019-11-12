@@ -272,6 +272,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&add-onsvisitor-types=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.visitor-types');
             
+            Route::post('activity-logs/fetch?id={id?}&allocations=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.allocations');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -385,6 +387,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('survey-experiences/fetch?archived=1', 'SurveyExperienceFetchController@fetch')->name('survey-experiences.fetch-archive');
             Route::post('survey-experiences/fetch-item/{id?}', 'SurveyExperienceFetchController@fetchView')->name('survey-experiences.fetch-item');
             Route::post('survey-experiences/fetch-pagination/{id}', 'SurveyExperienceFetchController@fetchPagePagination')->name('survey-experiences.fetch-pagination');
+        });
+
+        Route::namespace('Allocations')->group(function() {
+            Route::get('allocations', 'AllocationController@index')->name('allocations.index');
+            Route::get('allocations/create', 'AllocationController@create')->name('allocations.create');
+            Route::post('allocations/store', 'AllocationController@store')->name('allocations.store');
+            Route::get('allocations/show/{id}', 'AllocationController@show')->name('allocations.show');
+            Route::post('allocations/update/{id}', 'AllocationController@update')->name('allocations.update');
+            Route::post('allocations/{id}/archive', 'AllocationController@archive')->name('allocations.archive');
+            Route::post('allocations/{id}/restore', 'AllocationController@restore')->name('allocations.restore');
+        
+            Route::post('allocations/fetch', 'AllocationFetchController@fetch')->name('allocations.fetch');
+            Route::post('allocations/fetch?archived=1', 'AllocationFetchController@fetch')->name('allocations.fetch-archive');
+            Route::post('allocations/fetch-item/{id?}', 'AllocationFetchController@fetchView')->name('allocations.fetch-item');
+            Route::post('allocations/fetch-pagination/{id}', 'AllocationFetchController@fetchPagePagination')->name('allocations.fetch-pagination');
         });
 
         Route::namespace('AddOns')->group(function() {
