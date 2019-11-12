@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAddOnsTable extends Migration
+class DestinationAddOnsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateAddOnsTable extends Migration
      */
     public function up()
     {
-        Schema::create('add_ons', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->decimal('amount', 9, 2);
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::create('destination_add_ons', function (Blueprint $table) {
+            $table->integer('destination_id')->unsigned()->index();
+            $table->integer('add_on_id')->unsigned()->index();
+            $table->primary(['destination_id', 'add_on_id']);
         });
     }
 
@@ -29,6 +27,6 @@ class CreateAddOnsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('add_ons');
+        Schema::dropIfExists('destination_add_ons');
     }
 }
