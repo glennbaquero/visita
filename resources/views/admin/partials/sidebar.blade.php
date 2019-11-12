@@ -30,6 +30,7 @@
                     </a>
                 </li>
 
+                @if ($self->hasAnyPermission(['admin.destinations.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.destinations.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.destinations.*',
@@ -40,7 +41,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
+                @if ($self->hasAnyPermission(['admin.experiences.crud']))
                  <li class="nav-item">
                     <a href="{{ route('admin.experiences.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.experiences.*',
@@ -51,7 +54,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
+                @if ($self->hasAnyPermission(['admin.inquiries.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.inquiries.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.inquiries.*',
@@ -62,7 +67,10 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
+
+                @if ($self->hasAnyPermission(['admin.annual_incomes.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.annual_incomes.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.annual_incomes.*',
@@ -73,7 +81,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
+                @if ($self->hasAnyPermission(['admin.survey_experiences.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.survey-experiences.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.survey-experiences.*',
@@ -84,6 +94,20 @@
                         </p>
                     </a>
                 </li>
+                @endif
+
+                @if ($self->hasAnyPermission(['admin.allocations.crud']))
+                <li class="nav-item">
+                    <a href="{{ route('admin.allocations.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.allocations.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-hiking"></i>
+                        <p>
+                            Allocation
+                        </p>
+                    </a>
+                </li>
+                @endif
 
                 <li class="nav-item">
                     <a href="{{ route('admin.add-ons.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
@@ -95,6 +119,18 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.visitor-types.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.visitor-types.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-at"></i>
+                        <p>
+                            Visitor Types
+                        </p>
+                    </a>
+                </li>
+
                 
              {{--    @if ($self->hasAnyPermission(['admin.sample-items.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([

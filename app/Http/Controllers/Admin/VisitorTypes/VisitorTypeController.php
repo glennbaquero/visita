@@ -1,22 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin\AnnualIncomes;
+namespace App\Http\Controllers\Admin\VisitorTypes;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\AnnualIncomes\AnnualIncome;
+use App\Models\Types\VisitorType;
 
-use App\Http\Requests\Admin\AnnualIncomes\AnnualIncomeStoreRequest;
-
-class AnnualIncomeController extends Controller
+class VisitorTypeController extends Controller
 {
-
-    public function __construct() {
-        $this->middleware('App\Http\Middleware\Admin\AnnualIncomes\AnnualIncomeMiddleware', 
-            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore', 'reOrder']]
-        );
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +16,7 @@ class AnnualIncomeController extends Controller
      */
     public function index()
     {
-        return view('admin.annual_incomes.index');
+        return view('admin.visitor-types.index');
     }
 
     /**
@@ -34,7 +26,7 @@ class AnnualIncomeController extends Controller
      */
     public function create()
     {
-        return view('admin.annual_incomes.create');
+        return view('admin.visitor-types.create');
     }
 
     /**
@@ -43,9 +35,9 @@ class AnnualIncomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AnnualIncomeStoreRequest $request)
+    public function store(Request $request)
     {
-        $item = AnnualIncome::store($request);
+        $item = VisitorType::store($request);
 
         $message = "You have successfully created {$item->renderName()}";
         $redirect = $item->renderShowUrl();
@@ -64,8 +56,8 @@ class AnnualIncomeController extends Controller
      */
     public function show($id)
     {
-        $item = AnnualIncome::withTrashed()->findOrFail($id);
-        return view('admin.annual_incomes.show', [
+        $item = VisitorType::withTrashed()->findOrFail($id);
+        return view('admin.visitor-types.show', [
             'item' => $item,
         ]);
     }
@@ -88,12 +80,12 @@ class AnnualIncomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AnnualIncomeStoreRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $item = AnnualIncome::withTrashed()->findOrFail($id);
+        $item = VisitorType::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->renderName()}";
 
-        $item = AnnualIncome::store($request, $item);
+        $item = VisitorType::store($request, $item);
 
         return response()->json([
             'message' => $message,
@@ -103,12 +95,12 @@ class AnnualIncomeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\AnnualIncome  $sampleItem
+     * @param  \App\VisitorType  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function archive($id)
     {
-        $item = AnnualIncome::withTrashed()->findOrFail($id);
+        $item = VisitorType::withTrashed()->findOrFail($id);
         $item->archive();
 
         return response()->json([
@@ -119,36 +111,16 @@ class AnnualIncomeController extends Controller
     /**
      * Restore the specified resource from storage.
      *
-     * @param  \App\AnnualIncome  $sampleItem
+     * @param  \App\VisitorType  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        $item = AnnualIncome::withTrashed()->findOrFail($id);
+        $item = VisitorType::withTrashed()->findOrFail($id);
         $item->unarchive();
 
         return response()->json([
             'message' => "You have successfully restored {$item->renderName()}",
-        ]);
-    }
-
-    /*
-     * Reorder the position of annual income 
-     */
-    public function reOrder(Request $request)
-    {
-        foreach ($request->items as $key => $item) {
-
-            $incomePos = AnnualIncome::find($item['id']);
-
-            if($incomePos) {
-                $incomePos->update(['order' => $key ]);
-            }
-
-        }
-
-        return response()->json([
-            'message' => 'Successfully updated the order of annual income',
         ]);
     }
 }
