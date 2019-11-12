@@ -11,7 +11,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('http://www.trailadventours.com/dist/images/homepage-first.jpg');"></div>
+		<div class="frm-bckgrnd size-cover bring-back" :style="{'background-image': 'url('+destination.picture+')'}"></div>
 	</div>
 
 	<div id="gnrl-rmdl" class="remodal custom-width" data-remodal-id="hm-frm5--modal-1">
@@ -22,11 +22,11 @@
 			<div class="width--25 align-l gnrl-rmdl__col">
 				<h5 class="frm-title l-margin-b clr--green">{{ destination.name }}</h5>
 				<div class="gnrl-rmdl__btn-holder">
-					<p class="gnrl-rmdl__btn" @click="icon = true" :class="icon ? 'active' : ''">Icons</p>
-					<p class="gnrl-rmdl__btn" @click="experience_description = true" :class="experience_description ? 'active' : ''">Experiences</p>
-					<p class="gnrl-rmdl__btn" @click="experience_fee = true" :class="experience_description ? 'active' : ''">Fees</p>
-					<p class="gnrl-rmdl__btn">Visitor Policies</p>
-					<p class="gnrl-rmdl__btn">Terms & Condtions of Visit Request</p>
+					<p class="gnrl-rmdl__btn" @click="showIcon()" :class="icon ? 'active' : ''">Icons</p>
+					<p class="gnrl-rmdl__btn" @click="showExperience()" :class="experience_description ? 'active' : ''">Experiences</p>
+					<p class="gnrl-rmdl__btn" @click="showFees()" :class="experience_fee ? 'active' : ''">Fees</p>
+					<p class="gnrl-rmdl__btn" @click="showPolicies()" :class="policy ? 'active' : ''">Visitor Policies</p>
+					<p class="gnrl-rmdl__btn" @click="showTerms()" :class="terms ? 'active' : ''">Terms & Condtions of Visit Request</p>
 				</div>
 			</div
 			><div class="width--70 gnrl-rmdl__col" v-show="icon">
@@ -39,13 +39,23 @@
 					</div>
 				</template>
 					
-			</div>
+			</div
 
 			><div class="width--70 gnrl-rmdl__col" v-show="experience_fee">
 				<template v-for="experience in destination.experiences">
 					<div class="frm-description custom-description m-margin-b clr--gray align-l gnrl-scrll" v-html="experience.fee">
 					</div>
 				</template>
+					
+			</div
+			><div class="width--70 gnrl-rmdl__col" v-show="policy">
+				<div class="frm-description custom-description m-margin-b clr--gray align-l gnrl-scrll" v-html="destination.visitor_policies">
+					</div>
+					
+			</div
+			><div class="width--70 gnrl-rmdl__col" v-show="terms">
+				<div class="frm-description custom-description m-margin-b clr--gray align-l gnrl-scrll" v-html="destination.terms_conditions">
+					</div>
 					
 			</div>
 
@@ -72,6 +82,46 @@ export default {
 				.then(response => {
 					this.destination = response.data.destination
 				})
+		},
+
+		showIcon() {
+			this.icon = true
+			this.experience_description = false
+			this.experience_fee = false
+			this.policy = false
+			this.terms = false
+		},
+
+		showExperience() {
+			this.icon = false
+			this.experience_description = true
+			this.experience_fee = false
+			this.policy = false
+			this.terms = false
+		},
+
+		showFees() {
+			this.icon = false
+			this.experience_description = false
+			this.experience_fee = true
+			this.policy = false
+			this.terms = false
+		},
+
+		showPolicies() {
+			this.icon = false
+			this.experience_description = false
+			this.experience_fee = false
+			this.policy = true
+			this.terms = false
+		},
+
+		showTerms() {
+			this.icon = false
+			this.experience_description = false
+			this.experience_fee = false
+			this.policy = false
+			this.terms = true
 		}
 	},
 
@@ -79,9 +129,11 @@ export default {
 		return {
 			item: [],
 			destination: [],
-			icon: false,
+			icon: true,
 			experience_description: false,
 			experience_fee: false,
+			policy: false,
+			terms: false
 		}
 	},
 
