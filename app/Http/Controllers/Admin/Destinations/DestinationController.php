@@ -7,8 +7,16 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Destinations\Destination;
 
+use App\Http\Requests\Admin\Destinations\DestinationStoreRequest;
+
 class DestinationController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Destinations\DestinationMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore', 'removeImage']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +43,7 @@ class DestinationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DestinationStoreRequest $request)
     {
         $item = Destination::store($request);
 
@@ -80,7 +88,7 @@ class DestinationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DestinationStoreRequest $request, $id)
     {
         $item = Destination::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->renderName()}";

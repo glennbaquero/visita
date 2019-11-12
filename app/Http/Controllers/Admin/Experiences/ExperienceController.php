@@ -7,8 +7,16 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Experiences\Experience;
 
+use App\Http\Requests\Admin\Experiences\ExperienceStoreRequest;
+
 class ExperienceController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Experiences\ExperienceMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +43,7 @@ class ExperienceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ExperienceStoreRequest $request)
     {
         $item = Experience::store($request);
 
@@ -80,7 +88,7 @@ class ExperienceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ExperienceStoreRequest $request, $id)
     {
         $item = Experience::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->renderName()}";
