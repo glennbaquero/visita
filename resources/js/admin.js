@@ -36,3 +36,9 @@ Vue.component('inquiries-view', require('./views/admin/inquiries/InquiriesView.v
 
 Vue.component('experiences-table', require('./views/admin/experiences/ExperiencesTable.vue').default);
 Vue.component('experiences-view', require('./views/admin/experiences/ExperiencesView.vue').default);
+
+Vue.component('annual-incomes-table', require('./views/admin/annual-incomes/AnnualIncomesTable.vue').default);
+Vue.component('annual-incomes-view', require('./views/admin/annual-incomes/AnnualIncomesView.vue').default);
+
+Vue.component('survey-experiences-table', require('./views/admin/survey-experiences/SurveyExperiencesTable.vue').default);
+Vue.component('survey-experiences-view', require('./views/admin/survey-experiences/SurveyExperiencesView.vue').default);

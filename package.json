@@ -34,5 +34,7 @@
         "vue2-selectize": "^1.1.7",
         "vuejs-dialog": "^1.4.1"
     },
-    "dependencies": {}
+    "dependencies": {
+        "vuedraggable": "^2.23.2"
+    }
 }

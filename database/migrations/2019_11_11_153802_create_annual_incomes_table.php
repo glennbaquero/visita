@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSurveyExperiencesTable extends Migration
+class CreateAnnualIncomesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateSurveyExperiencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('survey_experiences', function (Blueprint $table) {
+        Schema::create('annual_incomes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('question');
+            $table->string('name');
             $table->integer('order');
-            $table->boolean('answerable')->default(false);
-            $table->string('others_placeholder')->nullable();
-            $table->boolean('show_other')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +29,6 @@ class CreateSurveyExperiencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('survey_experiences');
+        Schema::dropIfExists('annual_incomes');
     }
 }
