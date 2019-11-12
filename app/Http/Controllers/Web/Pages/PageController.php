@@ -11,6 +11,8 @@ use App\Models\Pages\Page;
 use App\Models\Carousels\HomeBanner;
 use App\Models\Tabbings\AboutInfo;
 
+use App\Models\Destinations\Destination;
+
 class PageController extends Controller
 {
 
@@ -28,13 +30,21 @@ class PageController extends Controller
 		$about_infos = AboutInfo::all();
 
         $data = $page->getData();
+        // $destinations = Destination::all();
+
         return view('web.pages.home', [ 
         	'data' => $data, 
         	'home_banners' => $home_banners, 
         	'about_infos' => $about_infos, 
         ]);
 	}
+	public function fetchDestination() {
 
+        $destinations = Destination::all();
+        return response()->json([
+        	'destinations' => $destinations
+        ]);
+	}
 	/* Get Page Data */
 	protected function getPageData($slug) {
 		$item = Page::where('slug', $slug)->firstOrFail();
