@@ -11,10 +11,10 @@ class DestinationFetchController extends Controller
 {
     public function fetchDestination() {
 
-        $destinations = Destination::all();
+        $destination = Destination::with('experiences')->first();
 
         return response()->json([
-        	'destinations' => $destinations
+        	'destination' => $destination
         ]);
         
 	}

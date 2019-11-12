@@ -1,8 +1,7 @@
 <template>
 	
-<div>
-	
-	<div class="gnrl-frm--sldr__item" v-for="destination in destinations">
+<div>	
+	<div class="gnrl-frm--sldr__item">
 		<div class="frm-cntnr align-c width--85">
 			<div class="vertical-parent">
 				<div class="vertical-align align-c">
@@ -21,20 +20,35 @@
 		</button>
 		<div class="frm-cntnr align-c inlineBlock-parent">
 			<div class="width--25 align-l gnrl-rmdl__col">
-				<h5 class="frm-title l-margin-b clr--green">Mt. Pulag</h5>
+				<h5 class="frm-title l-margin-b clr--green">{{ destination.name }}</h5>
 				<div class="gnrl-rmdl__btn-holder">
-					<p class="gnrl-rmdl__btn">Icons</p>
-					<p class="gnrl-rmdl__btn active">Experiences</p>
-					<p class="gnrl-rmdl__btn">Fees</p>
+					<p class="gnrl-rmdl__btn" @click="icon = true" :class="icon ? 'active' : ''">Icons</p>
+					<p class="gnrl-rmdl__btn" @click="experience_description = true" :class="experience_description ? 'active' : ''">Experiences</p>
+					<p class="gnrl-rmdl__btn" @click="experience_fee = true" :class="experience_description ? 'active' : ''">Fees</p>
 					<p class="gnrl-rmdl__btn">Visitor Policies</p>
 					<p class="gnrl-rmdl__btn">Terms & Condtions of Visit Request</p>
 				</div>
 			</div
-			><div class="width--70 gnrl-rmdl__col">
-				<div class="frm-description custom-description m-margin-b clr--gray align-l gnrl-scrll">
+			><div class="width--70 gnrl-rmdl__col" v-show="icon">
+					<div class="frm-description custom-description m-margin-b clr--gray align-l gnrl-scrll" v-html="destination.icon">
+					</div>
+			</div
+			><div class="width--70 gnrl-rmdl__col" v-show="experience_description">
+				<template v-for="experience in destination.experiences">
+					<div class="frm-description custom-description m-margin-b clr--gray align-l gnrl-scrll" v-html="experience.description">
+					</div>
+				</template>
 					
-				</div>
 			</div>
+
+			><div class="width--70 gnrl-rmdl__col" v-show="experience_fee">
+				<template v-for="experience in destination.experiences">
+					<div class="frm-description custom-description m-margin-b clr--gray align-l gnrl-scrll" v-html="experience.fee">
+					</div>
+				</template>
+					
+			</div>
+
 		</div>
 	</div>
 
@@ -56,7 +70,7 @@ export default {
 		init() {
 			axios.get(this.fetchUrl)
 				.then(response => {
-					this.destinations = response.data.destinations
+					this.destination = response.data.destination
 				})
 		}
 	},
@@ -64,7 +78,10 @@ export default {
 	data() {
 		return {
 			item: [],
-			destinations: [],
+			destination: [],
+			icon: false,
+			experience_description: false,
+			experience_fee: false,
 		}
 	},
 
