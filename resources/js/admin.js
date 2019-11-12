@@ -42,3 +42,6 @@ Vue.component('annual-incomes-view', require('./views/admin/annual-incomes/Annua
 
 Vue.component('survey-experiences-table', require('./views/admin/survey-experiences/SurveyExperiencesTable.vue').default);
 Vue.component('survey-experiences-view', require('./views/admin/survey-experiences/SurveyExperiencesView.vue').default);
+
+Vue.component('add-ons-table', require('./views/admin/add-ons/AddOnsTable.vue').default);
+Vue.component('add-ons-view', require('./views/admin/add-ons/AddOnsView.vue').default);

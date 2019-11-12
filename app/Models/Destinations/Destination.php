@@ -12,6 +12,7 @@ use App\Models\Allocations\Allocation;
 use App\Models\Experiences\Experience;
 use App\Models\TrainingModules\TrainingModule;
 use App\Models\Managements\Management;
+use App\Models\AddOns\AddOn;
 
 class Destination extends Model
 {
@@ -50,6 +51,11 @@ class Destination extends Model
     public function managements()
     {
         return $this->hasMany(Management::class);
+    }
+
+    public function addOns()
+    {
+        return $this->belongsToMany(AddOn::class, 'destination_add_ons', 'add_on_id', 'destination_id');
     }
 
     /**

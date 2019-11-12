@@ -84,6 +84,17 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.add-ons.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.add-ons.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-at"></i>
+                        <p>
+                            Add Ons
+                        </p>
+                    </a>
+                </li>
                 
              {{--    @if ($self->hasAnyPermission(['admin.sample-items.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
