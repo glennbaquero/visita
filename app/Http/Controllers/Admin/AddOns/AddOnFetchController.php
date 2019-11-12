@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Destinations;
+namespace App\Http\Controllers\Admin\AddOns;
 
 use App\Extenders\Controllers\FetchController;
 
-use App\Models\Destinations\Destination;
 use App\Models\AddOns\AddOn;
 
-class DestinationFetchController extends FetchController
+class AddOnFetchController extends FetchController
 {
     /**
      * Set object class of fetched data
@@ -16,7 +15,7 @@ class DestinationFetchController extends FetchController
      */
     public function setObjectClass()
     {
-        $this->class = new Destination;
+        $this->class = new AddOn;
     }
 
     /**
@@ -59,9 +58,7 @@ class DestinationFetchController extends FetchController
         return [
             'id' => $item->id,
             'name' => $item->name,
-            'code' => $item->code,
-            'operating_hours' => $item->operating_hours,
-            'capacity_per_day' => $item->capacity_per_day,
+            'amount' => $item->amount,
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),
             'archiveUrl' => $item->renderArchiveUrl(),
@@ -72,24 +69,15 @@ class DestinationFetchController extends FetchController
 
     public function fetchView($id = null) {
         $item = null;
-        $images = null;
 
         if ($id) {
-        	$item = Destination::withTrashed()->findOrFail($id);
-	        $item->removeImageUrl = $item->renderRemoveImageUrl();
-        	$item->name = $item->name;
-            $item->add_ons = $item->addOns()->allRelatedIds();
-        	$images = $item->getImages();
+        	$item = AddOn::withTrashed()->findOrFail($id);
             $item->archiveUrl = $item->renderArchiveUrl();
             $item->restoreUrl = $item->renderRestoreUrl();
         }
 
-        $add_ons = AddOn::all();
-
     	return response()->json([
     		'item' => $item,
-    		'images' => $images,
-            'add_ons' => $add_ons
     	]);
     }
 }
