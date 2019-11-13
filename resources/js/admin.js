@@ -54,3 +54,6 @@ Vue.component('visitor-types-view', require('./views/admin/visitor-types/Visitor
 
 Vue.component('fees-table', require('./views/admin/fees/FeesTable.vue').default);
 Vue.component('fees-view', require('./views/admin/fees/FeesView.vue').default);
+
+Vue.component('feedbacks-table', require('./views/admin/feedbacks/FeedbacksTable.vue').default);
+Vue.component('feedbacks-view', require('./views/admin/feedbacks/FeedbacksView.vue').default);

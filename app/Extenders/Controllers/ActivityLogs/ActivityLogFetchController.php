@@ -49,6 +49,8 @@ class ActivityLogFetchController extends Controller
         $query = $this->filterSubject($query, 'add-ons', 'App\Models\AddOns\AddOn');
         $query = $this->filterSubject($query, 'visitor-types', 'App\Models\Types\VisitorType');
         $query = $this->filterSubject($query, 'fees', 'App\Models\Fees\Fee');
+        $query = $this->filterSubject($query, 'feedbacks', 'App\Models\Feedbacks\Feedback');
+
 
 
         /* Get page and related page item logs */

@@ -276,6 +276,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&fees=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.fees');
 
+            Route::post('activity-logs/fetch?id={id?}&feedbacks=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.feedbacks');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -449,6 +451,23 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('fees/fetch?archived=1', 'FeesFetchController@fetch')->name('fees.fetch-archive');
             Route::post('fees/fetch-item/{id?}', 'FeesFetchController@fetchView')->name('fees.fetch-item');
             Route::post('fees/fetch-pagination/{id}', 'FeesFetchController@fetchPagePagination')->name('fees.fetch-pagination');
+        });
+
+
+        Route::namespace('Feedbacks')->group(function() {
+            Route::get('feedbacks', 'FeedbackController@index')->name('feedbacks.index');
+            Route::get('feedbacks/create', 'FeedbackController@create')->name('feedbacks.create');
+            Route::post('feedbacks/store', 'FeedbackController@store')->name('feedbacks.store');
+            Route::get('feedbacks/show/{id}', 'FeedbackController@show')->name('feedbacks.show');
+            Route::post('feedbacks/update/{id}', 'FeedbackController@update')->name('feedbacks.update');
+            Route::post('feedbacks/{id}/archive', 'FeedbackController@archive')->name('feedbacks.archive');
+            Route::post('feedbacks/{id}/restore', 'FeedbackController@restore')->name('feedbacks.restore');
+             Route::post('feedbacks/reorder', 'FeedbackController@reOrder')->name('feedbacks.reorder');
+        
+            Route::post('feedbacks/fetch', 'FeedbackFetchController@fetch')->name('feedbacks.fetch');
+            Route::post('feedbacks/fetch?archived=1', 'FeedbackFetchController@fetch')->name('feedbacks.fetch-archive');
+            Route::post('feedbacks/fetch-item/{id?}', 'FeedbackFetchController@fetchView')->name('feedbacks.fetch-item');
+            Route::post('feedbacks/fetch-pagination/{id}', 'FeedbackFetchController@fetchPagePagination')->name('feedbacks.fetch-pagination');
         });
 
 
