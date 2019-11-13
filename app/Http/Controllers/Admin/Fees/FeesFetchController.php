@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin\VisitorTypes;
+namespace App\Http\Controllers\Admin\Fees;
 
+use Illuminate\Http\Request;
 use App\Extenders\Controllers\FetchController;
 
-use App\Models\Types\VisitorType;
+use App\Models\Fees\Fee;
+use App\Models\Allocations\Allocation;
 
-class VisitorTypeFetchController extends FetchController
+class FeesFetchController extends FetchController
 {
     /**
      * Set object class of fetched data
@@ -15,8 +17,9 @@ class VisitorTypeFetchController extends FetchController
      */
     public function setObjectClass()
     {
-        $this->class = new VisitorType;
+        $this->class = new Fee;
     }
+
 
     /**
      * Custom filtering of query
@@ -47,6 +50,7 @@ class VisitorTypeFetchController extends FetchController
         return $result;
     }
 
+
     /**
      * Build array data
      * 
@@ -57,11 +61,12 @@ class VisitorTypeFetchController extends FetchController
     {
         return [
             'id' => $item->id,
+            'allocation' => $item->allocation_id,
             'name' => $item->name,
-            'weekday_fee' => $item->weekday_fee,
-            'weekend_fee' => $item->weekend_fee,
-            'daytour_fee' => $item->daytour_fee,
-            'overnight_fee' => $item->overnight_fee,
+            'weekend' => $item->weekend,
+            'weekday' => $item->weekday,
+            'daytour' => $item->daytour,
+            'overnight' => $item->overnight,
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),
             'archiveUrl' => $item->renderArchiveUrl(),
@@ -72,15 +77,18 @@ class VisitorTypeFetchController extends FetchController
 
     public function fetchView($id = null) {
         $item = null;
+        $allocations = Allocation::all();
 
         if ($id) {
-        	$item = VisitorType::withTrashed()->findOrFail($id);
+        	$item = Fee::withTrashed()->findOrFail($id);
+        	$item->name = $item->name;
             $item->archiveUrl = $item->renderArchiveUrl();
             $item->restoreUrl = $item->renderRestoreUrl();
         }
 
     	return response()->json([
     		'item' => $item,
+    		'allocations' => $allocations,
     	]);
     }
 }

@@ -30,6 +30,8 @@
                     <td>{{ item.name }}</td>
                     <td>{{ item.weekday_fee }}</td>
                     <td>{{ item.weekend_fee }}</td>
+                    <td>{{ item.daytour_fee }}</td>
+                    <td>{{ item.overnight_fee }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>
                         <view-button :href="item.showUrl"></view-button>
@@ -78,6 +80,8 @@ export default {
                 { text: 'Name', value: 'name' },
                 { text: 'Weekday Fee', value: 'weekday_fee' },
                 { text: 'Weekend Fee', value: 'weekend_fee' },
+                { text: 'Daytour Fee', value: 'daytour_fee' },
+                { text: 'Overnight Fee', value: 'overnight_fee' },
             ];
 
 

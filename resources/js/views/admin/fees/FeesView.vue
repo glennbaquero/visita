@@ -1,42 +1,52 @@
 <template>
-	<div >
+	<form-request :submit-url="submitUrl" @load="load" @success="fetch" confirm-dialog sync-on-success>
 	
 		<card>
-			<template v-slot:header>About Tabbing Information</template>
+			<template v-slot:header>Fees Information</template>
 
 			<div class="row">
 				<div class="form-group col-sm-12 col-md-6">
-					<label>Fullname</label>
-					<input v-model="item.fullname" name="name" type="text" class="form-control">
+					<label>Name</label>
+					<input v-model="item.name" name="name" type="text" class="form-control">
 				</div>
+
+				<selector class="col-sm-12 col-md-6"
+				v-model="item.allocation_id"
+				name="allocation_id"
+				label="Allocation"
+				:items="allocations"
+				item-value="id"
+				item-text="name"
+				empty-text="None"
+				placeholder="Please select an Allocation"
+				></selector>
+
 				<div class="form-group col-sm-12 col-md-6">
-					<label>Email</label>
-					<input v-model="item.email" name="name" type="text" class="form-control">
+					<label>Weekday</label>
+					<input v-model="item.weekday" name="weekday" type="number" min="1" class="form-control">
 				</div>
+
 				<div class="form-group col-sm-12 col-md-6">
-					<label>Contact #</label>
-					<input v-model="item.contact_number" name="name" type="text" class="form-control">
+					<label>Weekend</label>
+					<input v-model="item.weekend" name="weekend" type="number" min="1" class="form-control">
 				</div>
+
 				<div class="form-group col-sm-12 col-md-6">
-					<label>Purpose</label>
-					<input v-model="item.purpose" name="name" type="text" class="form-control">
+					<label>Day Tour</label>
+					<input v-model="item.daytour" name="daytour" type="number" min="1" class="form-control">
 				</div>
-				
+
+				<div class="form-group col-sm-12 col-md-6">
+					<label>Overnight</label>
+					<input v-model="item.overnight" name="overnight" type="number" min="1" class="form-control">
+				</div>
+							
 			</div>
 			
-			<div class="row">
-
-				<text-editor
-				v-model="item.message"
-				class="col-sm-12"
-				label="Message"
-				name="message"
-				row="5"
-				></text-editor>
-	
-			</div>
 
 			<template v-slot:footer>
+				<action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
+            
                 <action-button
                 v-if="item.archiveUrl && item.restoreUrl"
                 color="btn-danger"
@@ -49,8 +59,8 @@
                 confirm-dialog
                 title="Archive Item"
                 alt-title="Restore Item"
-                :message="'Are you sure you want to archive Inquiry #' + item.id + '?'"
-                :alt-message="'Are you sure you want to restore Inquiry #' + item.id + '?'"
+                :message="'Are you sure you want to archive Fee #' + item.id + '?'"
+                :alt-message="'Are you sure you want to restore Fee #' + item.id + '?'"
                 :disabled="loading"
                 @load="load"
                 @success="fetch"
@@ -61,7 +71,7 @@
 
 		<loader :loading="loading"></loader>
 		
-	</div>
+	</form-request>
 </template>
 
 <script type="text/javascript">
@@ -70,33 +80,25 @@ import CrudMixin from '../../../mixins/crud.js';
 
 import ActionButton from '../../../components/buttons/ActionButton.vue';
 import Select from '../../../components/inputs/Select.vue';
-import ImagePicker from '../../../components/inputs/ImagePicker.vue';
-import TextEditor from '../../../components/inputs/TextEditor.vue';
-import Datepicker from '../../../components/datepickers/Datepicker.vue';
-import TimePicker from '../../../components/timepickers/Timepicker.vue';
 
 export default {
 	methods: {
 		fetchSuccess(data) {
 			this.item = data.item ? data.item : this.item;
-			this.images = data.images ? data.images : this.images;
+			this.allocations = data.allocations ? data.allocations : this.allocations;
 		},
 	},
 
 	data() {
 		return {
 			item: [],
-			images: [],
+			allocations: [],
 		}
 	},
 
 	components: {
 		'action-button': ActionButton,
 		'selector': Select,
-		'image-picker': ImagePicker,
-		'text-editor': TextEditor,
-		'date-picker': Datepicker,
-		'time-picker': TimePicker,
 	},
 
 	mixins: [ CrudMixin ],

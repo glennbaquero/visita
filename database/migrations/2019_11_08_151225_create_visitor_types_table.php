@@ -19,6 +19,8 @@ class CreateVisitorTypesTable extends Migration
             // $table->decimal('fee', 9, 2)->default(0);
             $table->decimal('weekend_fee', 9, 2)->default(0);
             $table->decimal('weekday_fee', 9, 2)->default(0);
+            $table->decimal('daytour_fee', 9, 2)->default(0);
+            $table->decimal('overnight_fee', 9, 2)->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -32,6 +32,8 @@ class DestinationStoreRequest extends FormRequest
             'operating_hours' => 'required',
             'orientation_module' => 'required',
             'capacity_per_day' => 'required',
+            'description' => 'required',
+            'contact_us' => 'required',
         ];
     }
 }

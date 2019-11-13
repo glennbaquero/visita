@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin\VisitorTypes;
+namespace App\Http\Controllers\Admin\Fees;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\Types\VisitorType;
+use App\Models\Fees\Fee;
 
-use App\Http\Requests\Admin\Types\VisitorTypeStoreRequest;
+use App\Http\Requests\Admin\Fees\FeeStoreRequest;
 
-class VisitorTypeController extends Controller
+class FeesController extends Controller
 {
 
-     public function __construct() {
-        $this->middleware('App\Http\Middleware\Admin\Types\VisitorTypeMiddleware', 
+
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Fees\FeesMiddleware', 
             ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
         );
     }
@@ -24,7 +25,7 @@ class VisitorTypeController extends Controller
      */
     public function index()
     {
-        return view('admin.visitor-types.index');
+        return view('admin.fees.index');
     }
 
     /**
@@ -34,7 +35,7 @@ class VisitorTypeController extends Controller
      */
     public function create()
     {
-        return view('admin.visitor-types.create');
+        return view('admin.fees.create');
     }
 
     /**
@@ -43,9 +44,9 @@ class VisitorTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(VisitorTypeStoreRequest $request)
+    public function store(FeeStoreRequest $request)
     {
-        $item = VisitorType::store($request);
+        $item = Fee::store($request);
 
         $message = "You have successfully created {$item->renderName()}";
         $redirect = $item->renderShowUrl();
@@ -56,6 +57,7 @@ class VisitorTypeController extends Controller
         ]);
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -64,8 +66,8 @@ class VisitorTypeController extends Controller
      */
     public function show($id)
     {
-        $item = VisitorType::withTrashed()->findOrFail($id);
-        return view('admin.visitor-types.show', [
+        $item = Fee::withTrashed()->findOrFail($id);
+        return view('admin.fees.show', [
             'item' => $item,
         ]);
     }
@@ -88,12 +90,12 @@ class VisitorTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(VisitorTypeStoreRequest $request, $id)
+    public function update(FeeStoreRequest $request, $id)
     {
-        $item = VisitorType::withTrashed()->findOrFail($id);
+        $item = Fee::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->renderName()}";
 
-        $item = VisitorType::store($request, $item);
+        $item = Fee::store($request, $item);
 
         return response()->json([
             'message' => $message,
@@ -103,12 +105,12 @@ class VisitorTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\VisitorType  $sampleItem
+     * @param  \App\Destination  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function archive($id)
     {
-        $item = VisitorType::withTrashed()->findOrFail($id);
+        $item = Fee::withTrashed()->findOrFail($id);
         $item->archive();
 
         return response()->json([
@@ -119,16 +121,17 @@ class VisitorTypeController extends Controller
     /**
      * Restore the specified resource from storage.
      *
-     * @param  \App\VisitorType  $sampleItem
+     * @param  \App\Destination  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        $item = VisitorType::withTrashed()->findOrFail($id);
+        $item = Fee::withTrashed()->findOrFail($id);
         $item->unarchive();
 
         return response()->json([
             'message' => "You have successfully restored {$item->renderName()}",
         ]);
     }
+
 }
