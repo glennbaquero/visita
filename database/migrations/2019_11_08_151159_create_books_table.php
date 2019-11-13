@@ -16,14 +16,17 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('allocation_id')->unsigned()->index();
-            $table->integer('bookable_id');
-            $table->string('bookable_type');
-            $table->datetime('scheduled_at');
-            $table->datetime('checked_in_at');
-            $table->datetime('re_scheduled_at');
+            $table->integer('destination_id')->unsigned()->index();
+            // $table->integer('bookable_id');
+            // $table->string('bookable_type');
+            $table->dateTime('scheduled_at');
+            $table->dateTime('checked_in_at')->nullable();
+            $table->dateTime('re_scheduled_at');
             $table->integer('status');
             $table->string('agency_code')->nullable();
             $table->integer('total_guest')->default(0);
+            $table->integer('payment_type');
+            $table->integer('payment_status')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

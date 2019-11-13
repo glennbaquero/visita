@@ -48,3 +48,8 @@ Vue.component('add-ons-view', require('./views/admin/add-ons/AddOnsView.vue').de
 
 Vue.component('visitor-types-table', require('./views/admin/visitor-types/VisitorTypesTable.vue').default);
 Vue.component('visitor-types-view', require('./views/admin/visitor-types/VisitorTypesView.vue').default);
+
+Vue.component('calendar-view', require('./views/admin/calendars/CalendarView.vue').default);
+
+Vue.component('bookings-table', require('./views/admin/bookings/BookingsTable.vue').default);
+Vue.component('bookings-view', require('./views/admin/bookings/BookingsView.vue').default);

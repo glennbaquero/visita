@@ -12,4 +12,9 @@ class Guest extends Model
    	{
    		return $this->belongsTo(VisitorType::class);
    	}
+
+   	public function book()
+   	{
+   		return $this->belongsTo(Book::class);
+   	}
 }
