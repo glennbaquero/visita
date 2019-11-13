@@ -52,20 +52,36 @@
 				></text-editor>
 
 				<text-editor
-				v-model="item.description"
+				v-model="item.overview"
 				class="col-sm-12"
 				label="Overview"
-				name="description"
+				name="overview"
 				row="5"
 				></text-editor>
 
 				<text-editor
-				v-model="item.orientation_module"
+				v-model="item.fees"
 				class="col-sm-12"
-				label="Orientation Module"
-				name="orientation_module"
+				label="Fees"
+				name="fees"
 				row="5"
 				></text-editor>
+
+				<text-editor
+				v-model="item.how_to_get_here"
+				class="col-sm-12"
+				label="How To Get Here"
+				name="how_to_get_here"
+				row="5"
+				></text-editor>
+
+			<!-- 	<text-editor
+				v-model="item.orientation_module"
+				class="col-sm-12"
+				label="Orientation Module for Mobile"
+				name="orientation_module"
+				row="5"
+				></text-editor> -->
 
 				<text-editor
 				v-model="item.terms_conditions"

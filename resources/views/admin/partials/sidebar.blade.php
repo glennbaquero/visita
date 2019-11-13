@@ -69,7 +69,9 @@
                 </li>
                 @endif
 
-
+{{-- ======
+Hide for now just for Phase 1
+======
                 @if ($self->hasAnyPermission(['admin.annual_incomes.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.annual_incomes.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
@@ -147,7 +149,10 @@
                     </a>
                 </li>
                 @endif
-
+======
+Hide for now just for Phase 1
+======
+ --}}
                 
              {{--    @if ($self->hasAnyPermission(['admin.sample-items.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
