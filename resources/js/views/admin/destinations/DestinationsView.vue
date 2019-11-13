@@ -52,6 +52,14 @@
 				></text-editor>
 
 				<text-editor
+				v-model="item.description"
+				class="col-sm-12"
+				label="Overview"
+				name="description"
+				row="5"
+				></text-editor>
+
+				<text-editor
 				v-model="item.orientation_module"
 				class="col-sm-12"
 				label="Orientation Module"
@@ -73,6 +81,14 @@
 				class="col-sm-12"
 				label="Visitor Policies"
 				name="visitor_policies"
+				row="5"
+				></text-editor>
+
+				<text-editor
+				v-model="item.contact_us"
+				class="col-sm-12"
+				label="Contact Us"
+				name="contact_us"
 				row="5"
 				></text-editor>
 

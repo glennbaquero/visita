@@ -16,6 +16,7 @@ class CreateDestinationsTable extends Migration
         Schema::create('destinations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->text('description');
             $table->string('code')->nullable();
             $table->integer('capacity_per_day');
             $table->time('operating_hours');
@@ -24,6 +25,7 @@ class CreateDestinationsTable extends Migration
             $table->text('terms_conditions');
             $table->text('visitor_policies');
             $table->longText('icon');
+            $table->text('contact_us');
 
             $table->softDeletes();
             $table->timestamps();

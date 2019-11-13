@@ -27,9 +27,12 @@
             <template v-slot:body="{ items }">
                 <tr v-for="item in items">
                     <td>{{ item.id }}</td>
-                    <td>{{ item.destination }}</td>
+                    <td>{{ item.allocation }}</td>
                     <td>{{ item.name }}</td>
-                    <td>{{ item.fee }}</td>
+                    <td>{{ item.weekday }}</td>
+                    <td>{{ item.weekend }}</td>
+                    <td>{{ item.daytour }}</td>
+                    <td>{{ item.overnight }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>
                         <view-button :href="item.showUrl"></view-button>
@@ -48,8 +51,8 @@
                         :disabled="loading"
                         title="Archive Item"
                         alt-title="Restore Item"
-                        :message="'Are you sure you want to archive Experience #' + item.id + '?'"
-                        :alt-message="'Are you sure you want to restore Experience #' + item.id + '?'"
+                        :message="'Are you sure you want to archive Fee #' + item.id + '?'"
+                        :alt-message="'Are you sure you want to restore Fee #' + item.id + '?'"
                         @load="load"
                         @success="sync"
                         ></action-button>
@@ -75,9 +78,13 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Destination', value: 'destination_id' },
+                { text: 'Allocation', value: 'allocation_id' },
                 { text: 'Name', value: 'name' },
-                { text: 'Fee', value: 'fee' },
+                { text: 'Weekday', value: 'weekday' },
+                { text: 'Weekend', value: 'weekend' },
+                { text: 'Daytour', value: 'daytour' },
+                { text: 'Overnight', value: 'overnight' },
+
             ];
 
 

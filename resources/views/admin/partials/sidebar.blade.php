@@ -109,27 +109,44 @@
                 </li>
                 @endif
 
+                @if ($self->hasAnyPermission(['admin.add_ons.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.add-ons.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.add-ons.*',
                     ]) }}">
-                        <i class="nav-icon fas fa-at"></i>
+                        <i class="nav-icon fas fa-plus-square"></i>
                         <p>
                             Add Ons
                         </p>
                     </a>
                 </li>
+                @endif
 
+                @if ($self->hasAnyPermission(['admin.visitor_types.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.visitor-types.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.visitor-types.*',
                     ]) }}">
-                        <i class="nav-icon fas fa-at"></i>
+                        <i class="nav-icon fas fa-user-friends"></i>
                         <p>
                             Visitor Types
                         </p>
                     </a>
                 </li>
+                @endif
+
+                @if ($self->hasAnyPermission(['admin.special_fees.crud']))
+                <li class="nav-item">
+                    <a href="{{ route('admin.fees.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.fees.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-comment-dollar"></i>
+                        <p>
+                            Special Fees
+                        </p>
+                    </a>
+                </li>
+                @endif
 
                 
              {{--    @if ($self->hasAnyPermission(['admin.sample-items.crud']))

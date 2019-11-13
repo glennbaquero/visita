@@ -19,6 +19,9 @@ class CreateFeesTable extends Migration
             $table->string('name');
             $table->decimal('weekend', 9, 2)->default(0);
             $table->decimal('weekday', 9, 2)->default(0);
+            $table->decimal('daytour', 9, 2)->default(0);
+            $table->decimal('overnight', 9, 2)->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
