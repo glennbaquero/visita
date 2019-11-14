@@ -210,6 +210,18 @@ class PermissionsTableSeeder extends Seeder
                     ],
                 ],
             ],
+
+            [
+                'name' => 'Feedbacks',
+                'description' => 'Manage Feedback',
+                'icon' => 'fas fa-comment-dots',
+                'items' => [
+                    [
+                        'name' => 'admin.feedbacks.crud',
+                        'description' => 'Manage Feedbacks',
+                    ],
+                ],
+            ],
         ];
 
     	foreach ($categories as $category) {

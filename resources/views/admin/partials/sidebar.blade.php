@@ -96,6 +96,19 @@
                 </li>
                 @endif
 
+                 @if ($self->hasAnyPermission(['admin.feedbacks.crud']))
+                <li class="nav-item">
+                    <a href="{{ route('admin.feedbacks.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.feedbacks.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-comment-dots"></i>
+                        <p>
+                            Feedback
+                        </p>
+                    </a>
+                </li>
+                @endif
+
                 @if ($self->hasAnyPermission(['admin.allocations.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.allocations.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
