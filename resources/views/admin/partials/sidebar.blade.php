@@ -70,7 +70,7 @@
                 @endif
 
 
-                @if ($self->hasAnyPermission(['admin.annual_incomes.crud']))
+                {{-- @if ($self->hasAnyPermission(['admin.annual_incomes.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.annual_incomes.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.annual_incomes.*',
@@ -168,7 +168,7 @@
                             Blocked Dates
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 
                 @if ($self->hasAnyPermission(['admin.pages.crud', 'admin.page-items.crud', 'admin.articles.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
