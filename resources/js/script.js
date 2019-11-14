@@ -221,21 +221,29 @@ var app = {
 				});
 			});
 
-			
+			$(function() {
 
-			$(window).resize(function() {
-				var width = $(this).width();
+				var $window = $(window);
+				var width = $window.width();
 
-				if(width < 1025) {
-			    	$(function() {
-		  				$.scrollify.disable();
-		  			});
-			  	} else {
-			    	$(function() {
-		  				$.scrollify.enable();
-		  			});
-			  	}
-			});
+				setInterval(function () {
+
+					if (width < 1025) {
+			        
+			           $(function() {
+			  				$.scrollify.disable();
+			  			});
+
+			        } else {
+
+			           $(function() {
+			  				$.scrollify.enable();
+			  			})
+			        }
+
+				}, 300);	
+
+			})
 
 		    $('.hm-frm2__tabbing-content').first().css('display', 'inline-block');
 		    $('.hm-frm2__tabbing-btn').first().addClass('active');
