@@ -270,8 +270,12 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&add-ons=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.add-ons');
 
-            Route::post('activity-logs/fetch?id={id?}&add-onsvisitor-types=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.visitor-types');
+            Route::post('activity-logs/fetch?id={id?}&visitor-types=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.visitor-types');
             
+            Route::post('activity-logs/fetch?id={id?}&allocations=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.allocations');
+
+            Route::post('activity-logs/fetch?id={id?}&fees=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.fees');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -387,6 +391,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('survey-experiences/fetch-pagination/{id}', 'SurveyExperienceFetchController@fetchPagePagination')->name('survey-experiences.fetch-pagination');
         });
 
+        Route::namespace('Allocations')->group(function() {
+            Route::get('allocations', 'AllocationController@index')->name('allocations.index');
+            Route::get('allocations/create', 'AllocationController@create')->name('allocations.create');
+            Route::post('allocations/store', 'AllocationController@store')->name('allocations.store');
+            Route::get('allocations/show/{id}', 'AllocationController@show')->name('allocations.show');
+            Route::post('allocations/update/{id}', 'AllocationController@update')->name('allocations.update');
+            Route::post('allocations/{id}/archive', 'AllocationController@archive')->name('allocations.archive');
+            Route::post('allocations/{id}/restore', 'AllocationController@restore')->name('allocations.restore');
+        
+            Route::post('allocations/fetch', 'AllocationFetchController@fetch')->name('allocations.fetch');
+            Route::post('allocations/fetch?archived=1', 'AllocationFetchController@fetch')->name('allocations.fetch-archive');
+            Route::post('allocations/fetch-item/{id?}', 'AllocationFetchController@fetchView')->name('allocations.fetch-item');
+            Route::post('allocations/fetch-pagination/{id}', 'AllocationFetchController@fetchPagePagination')->name('allocations.fetch-pagination');
+        });
+
         Route::namespace('AddOns')->group(function() {
             Route::get('add-ons', 'AddOnController@index')->name('add-ons.index');
             Route::get('add-ons/create', 'AddOnController@create')->name('add-ons.create');
@@ -435,8 +454,23 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
         
             Route::post('bookings/fetch/{selectedDate?}/{destination?}/{experience?}', 'BookFetchController@fetch')->name('bookings.fetch');
             Route::post('bookings/fetch?archived=1', 'BookFetchController@fetch')->name('bookings.fetch-archive');
-            Route::post('bookings/fetch-item/{id?}/{destination?}', 'BookFetchController@fetchView')->name('bookings.fetch-item');
+            Route::post('bookings/fetch-item/{id?}/{destination?}/{experience?}', 'BookFetchController@fetchView')->name('bookings.fetch-item');
             Route::post('bookings/fetch-pagination/{id}', 'BookFetchController@fetchPagePagination')->name('bookings.fetch-pagination');
+        });
+
+        Route::namespace('Fees')->group(function() {
+            Route::get('fees', 'FeesController@index')->name('fees.index');
+            Route::get('fees/create', 'FeesController@create')->name('fees.create');
+            Route::post('fees/store', 'FeesController@store')->name('fees.store');
+            Route::get('fees/show/{id}', 'FeesController@show')->name('fees.show');
+            Route::post('fees/update/{id}', 'FeesController@update')->name('fees.update');
+            Route::post('fees/{id}/archive', 'FeesController@archive')->name('fees.archive');
+            Route::post('fees/{id}/restore', 'FeesController@restore')->name('fees.restore');
+        
+            Route::post('fees/fetch', 'FeesFetchController@fetch')->name('fees.fetch');
+            Route::post('fees/fetch?archived=1', 'FeesFetchController@fetch')->name('fees.fetch-archive');
+            Route::post('fees/fetch-item/{id?}', 'FeesFetchController@fetchView')->name('fees.fetch-item');
+            Route::post('fees/fetch-pagination/{id}', 'FeesFetchController@fetchPagePagination')->name('fees.fetch-pagination');
         });
     });
 });

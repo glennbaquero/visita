@@ -17,6 +17,16 @@
 					<label>Weekend Fee</label>
 					<input v-model="item.weekend_fee" name="weekend_fee" type="number" min="1" class="form-control">
 				</div>
+				<div class="form-group col-sm-12 col-md-6">
+					<label>Daytour Fee</label>
+					<input v-model="item.daytour_fee" name="daytour_fee" type="number" min="1" class="form-control">
+				</div>
+				<div class="form-group col-sm-12 col-md-6">
+					<label>Overnight Fee</label>
+					<input v-model="item.overnight_fee" name="overnight_fee" type="number" min="1" class="form-control">
+				</div>
+				
+
 				
 			</div>
 

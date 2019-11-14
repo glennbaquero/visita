@@ -6,7 +6,7 @@
 					<b>
 						Guest #{{ index }} 
 
-						<button type="button" class="btn btn-danger" @click="removeGuest(index)"><i class="fas fa-minus"></i></button> 
+						<button type="button" class="btn btn-danger" @click="$emit('removeGuest')"><i class="fas fa-minus"></i></button> 
 					</b>
 				</h3> 
 			</div>
@@ -52,19 +52,50 @@
 			item-text="name"
 			placeholder="Select Gender"
 			></selector>
+
+			<selector class="col-sm-4"
+			v-model="guest.special_fee_id"
+			name="guest_special_fee_id[]"
+			label="Special Fees"
+			:items="specialFees"
+			item-value="id"
+			item-text="name"
+			placeholder="Select Special Fee"
+			></selector>
+
+			<selector class="col-sm-4"
+			v-model="guest.visitor_type_id"
+			name="guest_visitor_type[]"
+			label="Visitor Type"
+			:items="visitorTypes"
+			item-value="id"
+			item-text="name"
+			placeholder="Select Type of Visitor"
+			></selector>
+
+			<image-picker
+			:value="guest.special_fees_path"
+			class="form-group col-sm-12 col-md-12"
+            label="Image"
+            name="guest_image_path[]"
+            placeholder="Choose a File"
+			></image-picker>
 		</div>
 	</div>
 </template>
 <script>
 	import Datepicker from '../../../components/datepickers/Datepicker.vue';
 	import Select from '../../../components/inputs/Select.vue';
+	import ImagePicker from '../../../components/inputs/ImagePicker.vue';
 
 	export default {
 		props: {
 			guest: Object,
 			nationalities: Array,
 			index: Number,
-			genders: Array
+			genders: Array,
+			specialFees: Array,
+			visitorTypes: Array
 		},
 
 		data() {
@@ -77,6 +108,7 @@
 		components: {
 			'selector': Select,
 			'date-picker': Datepicker,
+			'image-picker': ImagePicker,
 		},
 	}
 </script>

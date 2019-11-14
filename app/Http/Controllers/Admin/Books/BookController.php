@@ -52,29 +52,34 @@ class BookController extends Controller
      */
     public function store(Request $request, $selectedDate, $destination, $experience, $destination_name)
     {
-        $item = Book::store($request, null, null, $destination);
+        DB::beginTransaction();
+            $item = Book::store($request, null, null, $destination);
 
-        $item->guests()->create([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'birthdate' => $request->birthdate,
-                'gender' => $request->gender,
-                'nationality' => $request->nationality,
-                'contact_number' => $request->contact_number,
-                'email' => $request->email,
-                'main' => true
-            ]);
-
-        foreach($request->guest_first_name as $key => $guest) {
             $item->guests()->create([
-                'first_name' => $request->guest_first_name[$key],
-                'last_name' => $request->guest_last_name[$key],
-                'birthdate' => $request->guest_birthdate[$key],
-                'email' => $request->guest_email[$key],
-                'gender' => $request->guest_gender[$key],
-                'nationality' => $request->guest_nationality[$key],
-            ]);   
-        }
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'birthdate' => $request->birthdate,
+                    'gender' => $request->gender,
+                    'nationality' => $request->nationality,
+                    'contact_number' => $request->contact_number,
+                    'email' => $request->email,
+                    'visitor_type_id' => $request->visitor_type_id,
+                    'main' => true
+                ]);
+
+            foreach($request->guest_first_name as $key => $guest) {
+                $item->guests()->create([
+                    'first_name' => $request->guest_first_name[$key],
+                    'last_name' => $request->guest_last_name[$key],
+                    'birthdate' => $request->guest_birthdate[$key],
+                    'email' => $request->guest_email[$key],
+                    'gender' => $request->guest_gender[$key],
+                    'nationality' => $request->guest_nationality[$key],
+                    'visitor_type_id' => $request->guest_visitor_type[$key],
+                    'special_fee_id' => $request->guest_special_fee_id[$key],
+                ]);   
+            }
+        DB::commit();
 
         $message = "You have successfully created a new reservation";
         $redirect = $item->renderShowUrl();
@@ -126,33 +131,39 @@ class BookController extends Controller
     {
         $item = Book::withTrashed()->findOrFail($id);
 
-        $item = Book::store($request, $item, null, $destination);
+        DB::beginTransaction();
+            $item = Book::store($request, $item, null, $destination);
 
-        if($request->id) {
-            $main = Guest::find($request->id);
-            $main->update([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'birthdate' => $request->birthdate,
-                'gender' => $request->gender,
-                'nationality' => $request->nationality,
-                'contact_number' => $request->contact_number,
-                'email' => $request->email,
-            ]);     
+            if($request->id) {
+                $main = Guest::find($request->id);
+                $main->update([
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'birthdate' => $request->birthdate,
+                    'gender' => $request->gender,
+                    'nationality' => $request->nationality,
+                    'contact_number' => $request->contact_number,
+                    'emergency_contact_number' => $request->emergency_contact_number,
+                    'email' => $request->email,
+                    'visitor_type_id' => $request->visitor_type_id,
+                ]);     
+            }
+            
+            foreach($request->guest_first_name as $key => $guest) {
+                $guest = Guest::find($request->guest_id[$key]);
+                $guest->update([
+                    'first_name' => $request->guest_first_name[$key],
+                    'last_name' => $request->guest_last_name[$key],
+                    'birthdate' => $request->guest_birthdate[$key],
+                    'email' => $request->guest_email[$key],
+                    'gender' => $request->guest_gender[$key],
+                    'nationality' => $request->guest_nationality[$key],
+                    'visitor_type_id' => $request->guest_visitor_type[$key],
+                    'special_fee_id' => $request->guest_special_fee_id[$key],
+                ]);   
+            }
 
-        }
-        
-        foreach($request->guest_first_name as $key => $guest) {
-            $guest = Guest::find($request->guest_id[$key]);
-            $guest->update([
-                'first_name' => $request->guest_first_name[$key],
-                'last_name' => $request->guest_last_name[$key],
-                'birthdate' => $request->guest_birthdate[$key],
-                'email' => $request->guest_email[$key],
-                'gender' => $request->guest_gender[$key],
-                'nationality' => $request->guest_nationality[$key],
-            ]);   
-        }
+        DB::commit();
 
         $message = "You have successfully updated the reservation";
 

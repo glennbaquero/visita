@@ -35,7 +35,7 @@
                 <div class="tab-content">
                     <div class="tab-pane show active" id="tab1">
                         <bookings-view
-                        fetch-url="{{ route('admin.bookings.fetch-item',[ $item->id, $destination]) }}"
+                        fetch-url="{{ route('admin.bookings.fetch-item',[ $item->id, $destination, $experience]) }}"
                         submit-url="{{ route('admin.bookings.update', [$item->id, $selectedDate, $destination, $experience, $destination_name]) }}"
                         ></bookings-view>
                     </div>

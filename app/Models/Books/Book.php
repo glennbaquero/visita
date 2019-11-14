@@ -53,14 +53,16 @@ class Book extends Model
     {
         // $vars = $request->only($columns);
         $vars['allocation_id'] = $request->allocation_id;
-        $vars['total_guest'] = $request->total_guest;
         $vars['scheduled_at'] = $request->scheduled_at;
         $vars['re_scheduled_at'] = $request->scheduled_at;
         $vars['destination_id'] = $destination_id;
+        $vars['total_guest'] = $request->total_guest;
         if (!$item) {
             $item = static::create($vars);
         } else {
             $item->update($vars);
+            $item->total_guest += $request->total_guest;
+            $item->save();
         }
 
         return $item;

@@ -44,6 +44,10 @@
                             <bookings-table 
                             ref="table-1"
                             fetch-url="{{ route('admin.bookings.fetch', [$selectedDate, $destination, $experience]) }}"
+                            selected-date="{{ $selectedDate }}"
+                            destination="{{ $destination }}"
+                            experience="{{ $experience }}"
+                            destination-name="{{ $destination_name }}"
                             ></bookings-table>
                         </div>
                         <div class="tab-pane" id="tab2">

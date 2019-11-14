@@ -83,17 +83,17 @@
 				item-value="name"
 				item-text="name"
 				placeholder="Select Gender"
-				></selector><!-- 
+				></selector>
 
 				<selector class="col-sm-4"
-				v-model="item.payment_type"
-				name="payment_type"
-				label="Payment"
-				:items="payments"
+				v-model="item.visitor_type_id"
+				name="visitor_type_id"
+				label="Visitor Type"
+				:items="visitor_types"
 				item-value="id"
 				item-text="name"
-				placeholder="Select Payment"
-				></selector> -->
+				placeholder="Select Type of Visitor"
+				></selector>
 
 			</div>
 		</card>
@@ -104,7 +104,16 @@
 			<br>
 			
 			<template v-for="(guest, index) in total_guest">
-				<guest-details :key="'guest-' + index" :guest="guest" :nationalities="nationalities" :genders="genders" :index="index <= 0 ? parseInt(index)+1 : parseInt(index)"></guest-details>
+				<guest-details 
+					:key="'guest-' + index" 
+					:guest="guest" 
+					:special-fees="special_fees" 
+					:visitor-types="visitor_types" 
+					:nationalities="nationalities" 
+					:genders="genders" 
+					:index="parseInt(index)+1" 
+					@removeGuest="removeGuest(index)">
+				</guest-details>
 			</template>
 
 			<template v-slot:footer>
@@ -162,6 +171,8 @@ export default {
 			this.total_guest = data.item ? data.item.total_guests : this.total_guest;
 			this.experiences = data.experiences ? data.experiences : this.experiences;
 			this.nationalities = data.nationalities ? data.nationalities : this.nationalities;
+			this.special_fees = data.special_fees ? data.special_fees : this.special_fees;
+			this.visitor_types = data.visitor_types ? data.visitor_types : this.visitor_types;
 		},
 
 		addGuest() {
@@ -186,6 +197,8 @@ export default {
 		return {
 			item: [],
 			nationalities: [],
+			special_fees: [],
+			visitor_types: [],
 			experiences: [],
 			guest: 1,
 			genders: [

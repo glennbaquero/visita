@@ -47,12 +47,13 @@ class CalendarFetchController extends FetchController
 	    });
 
 
+
         foreach($res as $key => $item) {
     		foreach($res[$key] as $parsedKey => $parsedData) {
     			if(!collect($result)->contains('start', $key)) {
     				array_push($result, [
 				        'start' => $key,
-				        'title' => $res[$key]->count().'/'.$parsedData->destination->capacity_per_day,
+				        'title' => $parsedData->whereDate('scheduled_at', $key)->sum('total_guest').'/'.$parsedData->destination->capacity_per_day,
 				        'color' => 'transparent',
 				        'textColor' => 'black',
 				        'fontSize' => '2em'

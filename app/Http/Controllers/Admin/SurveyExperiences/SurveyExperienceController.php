@@ -9,8 +9,16 @@ use App\Models\Surveys\SurveyExperience;
 
 use DB;
 
+use App\Http\Requests\Admin\SurveyExperiences\SurveyExperienceStoreRequest;
+
 class SurveyExperienceController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\SurveyExperiences\SurveyExperienceMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore', 'reOrder']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +45,7 @@ class SurveyExperienceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SurveyExperienceStoreRequest $request)
     {
         DB::beginTransaction();
 
@@ -94,7 +102,7 @@ class SurveyExperienceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SurveyExperienceStoreRequest $request, $id)
     {
         $item = SurveyExperience::withTrashed()->findOrFail($id);
 

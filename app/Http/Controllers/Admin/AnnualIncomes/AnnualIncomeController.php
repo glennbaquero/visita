@@ -7,8 +7,16 @@ use App\Http\Controllers\Controller;
 
 use App\Models\AnnualIncomes\AnnualIncome;
 
+use App\Http\Requests\Admin\AnnualIncomes\AnnualIncomeStoreRequest;
+
 class AnnualIncomeController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\AnnualIncomes\AnnualIncomeMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore', 'reOrder']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +43,7 @@ class AnnualIncomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AnnualIncomeStoreRequest $request)
     {
         $item = AnnualIncome::store($request);
 
@@ -80,7 +88,7 @@ class AnnualIncomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AnnualIncomeStoreRequest $request, $id)
     {
         $item = AnnualIncome::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->renderName()}";

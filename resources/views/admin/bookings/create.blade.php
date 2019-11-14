@@ -25,7 +25,7 @@
     <section class="content">
         <bookings-view
         submit-url="{{ route('admin.bookings.store', [$selectedDate, $destination, $experience, $destination_name]) }}"
-        fetch-url="{{ route('admin.bookings.fetch-item', [0,  $destination]) }}"
+        fetch-url="{{ route('admin.bookings.fetch-item', [0,  $destination, $experience]) }}"
         ></bookings-view>
     </section>
 </div>

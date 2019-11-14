@@ -35,7 +35,7 @@
                     <td>{{ item.status }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>
-                        <view-button :href="item.showUrl"></view-button>
+                        <view-button :href="item.showUrl+'/'+selectedDate+'/'+destination+'/'+experience+'/'+destinationName"></view-button>
                         
                         <action-button
                         v-if="!hideButtons"
@@ -105,6 +105,11 @@ export default {
             default: false,
             type: Boolean,
         },
+
+        selectedDate: String,
+        destination: String,
+        experience: String,
+        destinationName: String,
     },
 
     mixins: [ ListMixin ],

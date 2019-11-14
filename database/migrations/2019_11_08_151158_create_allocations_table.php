@@ -17,6 +17,7 @@ class CreateAllocationsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('destination_id')->unsigned()->index();
             $table->string('name');
+            $table->text('description');
             $table->softDeletes();
             $table->timestamps();
         });

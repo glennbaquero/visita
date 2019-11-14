@@ -8,6 +8,9 @@ use App\Models\Books\Book;
 use App\Models\Users\Management;
 use App\Models\Destinations\Destination;
 use Webpatser\Countries\Countries;
+use App\Models\Fees\Fee;
+use App\Models\Allocations\Allocation;
+use App\Models\Types\VisitorType;
 
 use Carbon\Carbon;
 
@@ -93,9 +96,8 @@ class BookFetchController extends FetchController
         return $result;
     }
 
-    public function fetchView($id = 0, $destination = null) {
+    public function fetchView($id = 0, $destination = null, $experience = null) {
         $item = null;
-        // $url = Carbon::parse(request()->segments());
 
         if ($id != 0) {
         	$item = Book::withTrashed()->findOrFail($id);
@@ -109,6 +111,7 @@ class BookFetchController extends FetchController
             $item->nationality = $main->nationality;
             $item->contact_number = $main->contact_number;
             $item->email = $main->email;
+            $item->visitor_type_id = $main->visitor_type_id;
             $item->emergency_contact_number = $main->emergency_contact_number;
             $item->archiveUrl = $item->renderArchiveUrl();
             $item->restoreUrl = $item->renderRestoreUrl();
@@ -116,12 +119,16 @@ class BookFetchController extends FetchController
 
         $experiences = Destination::find($destination)->allocations;
         $nationalities = Countries::all();
+        $special_fees = Allocation::find($experience)->fees;
+        $visitor_types = VisitorType::all();
 
     	return response()->json([
     		'item' => $item,
             'managements' => Management::all(),
             'experiences' => $experiences,
-            'nationalities' => $nationalities
+            'nationalities' => $nationalities,
+            'special_fees' => $special_fees,
+            'visitor_types' => $visitor_types
     	]);
     }
 }
