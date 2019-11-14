@@ -73,13 +73,9 @@ $font-family-work-sans-bold: 'WorkSans-Bold';
 		line-height: 1.5em;
 	}
 
-	b, strong {
+	strong {
 		font-family: $font-family-work-sans-bold;
 		font-size: 1.08em;
-	}
-
-	a {
-		font-size: 0.9em;
 	}
 }
 
@@ -469,16 +465,13 @@ $frame-bg--pos__b: bottom center;
 	    ul {
 	        width: 100%;
 	        padding-left: 15px;
-	        font-size: 0.9em;    
 	    } 
 
 	    li {
-	    	font-size: 1.1em;
 	        display: list-item;
 	        padding-bottom: 5px;
 	        list-style-position: inside;
 	    }
-
 
 	}
 
