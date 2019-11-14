@@ -69,7 +69,9 @@
                 </li>
                 @endif
 
-
+{{-- ======
+Hide for now just for Phase 1
+======
                 @if ($self->hasAnyPermission(['admin.annual_incomes.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.annual_incomes.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
@@ -147,6 +149,44 @@
                     </a>
                 </li>
                 @endif
+<<<<<<< HEAD
+======
+Hide for now just for Phase 1
+======
+ --}}
+                
+             {{--    @if ($self->hasAnyPermission(['admin.sample-items.crud']))
+                    <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
+                            'admin.sample-items.index','admin.sample-items.create','admin.sample-items.show',
+                        ]) }}">
+                        <a href="javascript:void(0)" class="nav-link {{ $checker->route->areOnRoutes([
+                            'admin.sample-items.index','admin.sample-items.create','admin.sample-items.show',
+                        ]) }}">
+                            <i class="nav-icon fa fa-cubes"></i>
+                            <p>
+                                Sample
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.sample-items.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.sample-items.index','admin.sample-items.create','admin.sample-items.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        Sample Items
+                                         <count-listener
+                                        class="right badge-danger"
+                                        fetch-url="{{ route('admin.counts.fetch.sample-items.pending') }}"
+                                        event="update-sample-item-count"
+                                        ></count-listener>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif --}}
 
                 <li class="nav-item">
                     <a href="{{ route('admin.calendar.index') }}" class="nav-link {{ $checker->route->areOnRoutes([

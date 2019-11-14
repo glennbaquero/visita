@@ -11,8 +11,8 @@ class DestinationFetchController extends Controller
 {
     public function fetchDestination() {
 
-        $destination = Destination::with('experiences')->first();
-        $destination->picture = $destination->pictures()->first()->renderImagePath();
+        $destination = Destination::with('experiences')->get();
+        // $destination->picture = $destination->pictures()->first()->renderImagePath();
 
         return response()->json([
         	'destination' => $destination

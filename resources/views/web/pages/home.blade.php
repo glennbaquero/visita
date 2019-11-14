@@ -126,11 +126,10 @@
 
 </section>
 <section class="hm-frm5 gnrl-frm--sldr__container scrllfy-frame" id="frame-5">
-	<div class="gnrl-frm--sldr">
-		<user-destination
-			fetch-url="{{ route('web.fetch.destination') }}"
-		></user-destination>
-	</div>
+	<user-destination
+		{{-- fetch-url="{{ route('web.fetch.destination') }}" --}}
+		:destination="{{ $destination }}"
+	></user-destination>
 </section>
 <section class="hm-frm6 scrllfy-frame" id="frame-6">
 	<div class="frm-cntnr align-c width--85">
