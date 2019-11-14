@@ -290,6 +290,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&agencies=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.agencies');
 
+            Route::post('activity-logs/fetch?id={id?}&religions=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.religions');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -592,6 +594,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('agencies/fetch?archived=1', 'AgencyFetchController@fetch')->name('agencies.fetch-archive');
             Route::post('agencies/fetch-item/{id?}', 'AgencyFetchController@fetchView')->name('agencies.fetch-item');
             Route::post('agencies/fetch-pagination/{id}', 'AgencyFetchController@fetchPagePagination')->name('agencies.fetch-pagination');
+        });
+
+        Route::namespace('Religions')->group(function() {
+            Route::get('religions', 'ReligionController@index')->name('religions.index');
+            Route::get('religions/create', 'ReligionController@create')->name('religions.create');
+            Route::post('religions/store', 'ReligionController@store')->name('religions.store');
+            Route::get('religions/show/{id}', 'ReligionController@show')->name('religions.show');
+            Route::post('religions/update/{id}', 'ReligionController@update')->name('religions.update');
+            Route::post('religions/{id}/archive', 'ReligionController@archive')->name('religions.archive');
+            Route::post('religions/{id}/restore', 'ReligionController@restore')->name('religions.restore');
+        
+            Route::post('religions/fetch', 'ReligionFetchController@fetch')->name('religions.fetch');
+            Route::post('religions/fetch?archived=1', 'ReligionFetchController@fetch')->name('religions.fetch-archive');
+            Route::post('religions/fetch-item/{id?}', 'ReligionFetchController@fetchView')->name('religions.fetch-item');
+            Route::post('religions/fetch-pagination/{id}', 'ReligionFetchController@fetchPagePagination')->name('religions.fetch-pagination');
         });
 
     });

@@ -80,3 +80,6 @@ Vue.component('capacities-view', require('./views/admin/capacities/CapacitiesVie
 
 Vue.component('agencies-table', require('./views/admin/agencies/AgenciesTable.vue').default);
 Vue.component('agencies-view', require('./views/admin/agencies/AgenciesView.vue').default);
+
+Vue.component('religions-table', require('./views/admin/religions/ReligionsTable.vue').default);
+Vue.component('religions-view', require('./views/admin/religions/ReligionsView.vue').default);
