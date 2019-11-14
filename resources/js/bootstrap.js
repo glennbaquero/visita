@@ -23,6 +23,9 @@ window.moment = moment;
 import Swiper from 'swiper';
 window.Swiper = Swiper;
 
+// import flatpickr from 'flatpickr';
+// window.flatpickr = flatpickr;
+// import 'flatpickr/dist/flatpickr.css';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

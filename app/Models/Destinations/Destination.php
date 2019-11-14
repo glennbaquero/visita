@@ -13,6 +13,7 @@ use App\Models\Experiences\Experience;
 use App\Models\TrainingModules\TrainingModule;
 use App\Models\Managements\Management;
 use App\Models\AddOns\AddOn;
+use App\Models\Books\Book;
 
 class Destination extends Model
 {
@@ -56,6 +57,11 @@ class Destination extends Model
     public function addOns()
     {
         return $this->belongsToMany(AddOn::class, 'destination_add_ons', 'add_on_id', 'destination_id');
+    }
+
+    public function books()
+    {
+        return $this->hasMany(Book::class);
     }
 
     /**

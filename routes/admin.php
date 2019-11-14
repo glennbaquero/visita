@@ -436,6 +436,28 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('visitor-types/fetch-pagination/{id}', 'VisitorTypeFetchController@fetchPagePagination')->name('visitor-types.fetch-pagination');
         });
 
+        Route::namespace('Calendars')->group(function() {
+            Route::get('calendar', 'CalendarController@index')->name('calendar.index');
+            Route::post('calendar/bookings', 'CalendarController@getBookings')->name('calendar.getBookings');
+            
+            Route::post('calendar/fetch', 'CalendarFetchController@fetch')->name('calendar.fetch');
+        });
+
+        Route::namespace('Books')->group(function() {
+            Route::get('bookings/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@index')->name('bookings.index');
+            Route::get('bookings/create/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@create')->name('bookings.create');
+            Route::post('bookings/store/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@store')->name('bookings.store');
+            Route::get('bookings/show/{id}/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@show')->name('bookings.show');
+            Route::post('bookings/update/{id}/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@update')->name('bookings.update');
+            Route::post('bookings/{id}/archive', 'BookController@archive')->name('bookings.archive');
+            Route::post('bookings/{id}/restore', 'BookController@restore')->name('bookings.restore');
+        
+            Route::post('bookings/fetch/{selectedDate?}/{destination?}/{experience?}', 'BookFetchController@fetch')->name('bookings.fetch');
+            Route::post('bookings/fetch?archived=1', 'BookFetchController@fetch')->name('bookings.fetch-archive');
+            Route::post('bookings/fetch-item/{id?}/{destination?}/{experience?}', 'BookFetchController@fetchView')->name('bookings.fetch-item');
+            Route::post('bookings/fetch-pagination/{id}', 'BookFetchController@fetchPagePagination')->name('bookings.fetch-pagination');
+        });
+
         Route::namespace('Fees')->group(function() {
             Route::get('fees', 'FeesController@index')->name('fees.index');
             Route::get('fees/create', 'FeesController@create')->name('fees.create');
@@ -450,7 +472,5 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('fees/fetch-item/{id?}', 'FeesFetchController@fetchView')->name('fees.fetch-item');
             Route::post('fees/fetch-pagination/{id}', 'FeesFetchController@fetchPagePagination')->name('fees.fetch-pagination');
         });
-
-
     });
 });
