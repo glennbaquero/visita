@@ -184,7 +184,9 @@ return [
         /**
         * Sweet Alert
         */
-         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+
+        'Webpatser\Countries\CountriesServiceProvider',
 
     ],
 
@@ -235,6 +237,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+        'Countries' => 'Webpatser\Countries\CountriesFacade',
 
     ],
 

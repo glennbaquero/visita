@@ -18,6 +18,7 @@ class SampleDatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
 
         $this->call(PagesTableSeeder::class);
+        $this->call(CountriesSeeder::class);
 
         $this->call(SampleItemsTableSeeder::class);
         $this->call(SampleItemRelationshipsTableSeeder::class);
