@@ -282,6 +282,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&training-modules=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.training-modules');
 
+            Route::post('activity-logs/fetch?id={id?}&faqs=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.faqs');
         });
 
         Route::namespace('Articles')->group(function() {
@@ -522,6 +523,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('training-modules/fetch?archived=1', 'TrainingModuleFetchController@fetch')->name('training-modules.fetch-archive');
             Route::post('training-modules/fetch-item/{id?}', 'TrainingModuleFetchController@fetchView')->name('training-modules.fetch-item');
             Route::post('training-modules/fetch-pagination/{id}', 'TrainingModuleFetchController@fetchPagePagination')->name('training-modules.fetch-pagination');
+        });
+
+        Route::namespace('Faqs')->group(function() {
+            Route::get('faqs', 'FaqController@index')->name('faqs.index');
+            Route::get('faqs/create', 'FaqController@create')->name('faqs.create');
+            Route::post('faqs/store', 'FaqController@store')->name('faqs.store');
+            Route::get('faqs/show/{id}', 'FaqController@show')->name('faqs.show');
+            Route::post('faqs/update/{id}', 'FaqController@update')->name('faqs.update');
+            Route::post('faqs/{id}/archive', 'FaqController@archive')->name('faqs.archive');
+            Route::post('faqs/{id}/restore', 'FaqController@restore')->name('faqs.restore');
+        
+            Route::post('faqs/fetch', 'FaqFetchController@fetch')->name('faqs.fetch');
+            Route::post('faqs/fetch?archived=1', 'FaqFetchController@fetch')->name('faqs.fetch-archive');
+            Route::post('faqs/fetch-item/{id?}', 'FaqFetchController@fetchView')->name('faqs.fetch-item');
+            Route::post('faqs/fetch-pagination/{id}', 'FaqFetchController@fetchPagePagination')->name('faqs.fetch-pagination');
         });
     });
 });
