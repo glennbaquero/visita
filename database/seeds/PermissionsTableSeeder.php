@@ -174,6 +174,42 @@ class PermissionsTableSeeder extends Seeder
                     ],
                 ],
             ],
+
+            [
+                'name' => 'Special Fees',
+                'description' => 'Manage Special Fees',
+                'icon' => 'fas fa-comment-dollar',
+                'items' => [
+                    [
+                        'name' => 'admin.special_fees.crud',
+                        'description' => 'Manage Special Fees',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Add Ons',
+                'description' => 'Manage Add Ons',
+                'icon' => 'fas fa-plus-square',
+                'items' => [
+                    [
+                        'name' => 'admin.add_ons.crud',
+                        'description' => 'Manage Add Ons',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Visitor Types',
+                'description' => 'Manage Visitor Type',
+                'icon' => 'fas fa-user-friends',
+                'items' => [
+                    [
+                        'name' => 'admin.visitor_types.crud',
+                        'description' => 'Manage Visitor Type',
+                    ],
+                ],
+            ],
         ];
 
     	foreach ($categories as $category) {

@@ -19,7 +19,7 @@ class VisitorType extends Model
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['name', 'weekend_fee', 'weekday_fee'])
+    public static function store($request, $item = null, $columns = ['name', 'weekend_fee', 'weekday_fee', 'daytour_fee', 'overnight_fee'])
     {
         $vars = $request->only($columns);
 

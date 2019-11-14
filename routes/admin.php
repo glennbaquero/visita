@@ -270,9 +270,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&add-ons=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.add-ons');
 
-            Route::post('activity-logs/fetch?id={id?}&add-onsvisitor-types=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.visitor-types');
+            Route::post('activity-logs/fetch?id={id?}&visitor-types=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.visitor-types');
             
             Route::post('activity-logs/fetch?id={id?}&allocations=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.allocations');
+
+            Route::post('activity-logs/fetch?id={id?}&fees=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.fees');
 
         });
 
@@ -432,6 +434,43 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('visitor-types/fetch?archived=1', 'VisitorTypeFetchController@fetch')->name('visitor-types.fetch-archive');
             Route::post('visitor-types/fetch-item/{id?}', 'VisitorTypeFetchController@fetchView')->name('visitor-types.fetch-item');
             Route::post('visitor-types/fetch-pagination/{id}', 'VisitorTypeFetchController@fetchPagePagination')->name('visitor-types.fetch-pagination');
+        });
+
+        Route::namespace('Calendars')->group(function() {
+            Route::get('calendar', 'CalendarController@index')->name('calendar.index');
+            Route::post('calendar/bookings', 'CalendarController@getBookings')->name('calendar.getBookings');
+            
+            Route::post('calendar/fetch', 'CalendarFetchController@fetch')->name('calendar.fetch');
+        });
+
+        Route::namespace('Books')->group(function() {
+            Route::get('bookings/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@index')->name('bookings.index');
+            Route::get('bookings/create/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@create')->name('bookings.create');
+            Route::post('bookings/store/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@store')->name('bookings.store');
+            Route::get('bookings/show/{id}/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@show')->name('bookings.show');
+            Route::post('bookings/update/{id}/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@update')->name('bookings.update');
+            Route::post('bookings/{id}/archive', 'BookController@archive')->name('bookings.archive');
+            Route::post('bookings/{id}/restore', 'BookController@restore')->name('bookings.restore');
+        
+            Route::post('bookings/fetch/{selectedDate?}/{destination?}/{experience?}', 'BookFetchController@fetch')->name('bookings.fetch');
+            Route::post('bookings/fetch?archived=1', 'BookFetchController@fetch')->name('bookings.fetch-archive');
+            Route::post('bookings/fetch-item/{id?}/{destination?}/{experience?}', 'BookFetchController@fetchView')->name('bookings.fetch-item');
+            Route::post('bookings/fetch-pagination/{id}', 'BookFetchController@fetchPagePagination')->name('bookings.fetch-pagination');
+        });
+
+        Route::namespace('Fees')->group(function() {
+            Route::get('fees', 'FeesController@index')->name('fees.index');
+            Route::get('fees/create', 'FeesController@create')->name('fees.create');
+            Route::post('fees/store', 'FeesController@store')->name('fees.store');
+            Route::get('fees/show/{id}', 'FeesController@show')->name('fees.show');
+            Route::post('fees/update/{id}', 'FeesController@update')->name('fees.update');
+            Route::post('fees/{id}/archive', 'FeesController@archive')->name('fees.archive');
+            Route::post('fees/{id}/restore', 'FeesController@restore')->name('fees.restore');
+        
+            Route::post('fees/fetch', 'FeesFetchController@fetch')->name('fees.fetch');
+            Route::post('fees/fetch?archived=1', 'FeesFetchController@fetch')->name('fees.fetch-archive');
+            Route::post('fees/fetch-item/{id?}', 'FeesFetchController@fetchView')->name('fees.fetch-item');
+            Route::post('fees/fetch-pagination/{id}', 'FeesFetchController@fetchPagePagination')->name('fees.fetch-pagination');
         });
     });
 });

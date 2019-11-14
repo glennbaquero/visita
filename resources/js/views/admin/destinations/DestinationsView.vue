@@ -52,12 +52,36 @@
 				></text-editor>
 
 				<text-editor
-				v-model="item.orientation_module"
+				v-model="item.overview"
 				class="col-sm-12"
-				label="Orientation Module"
-				name="orientation_module"
+				label="Overview"
+				name="overview"
 				row="5"
 				></text-editor>
+
+				<text-editor
+				v-model="item.fees"
+				class="col-sm-12"
+				label="Fees"
+				name="fees"
+				row="5"
+				></text-editor>
+
+				<text-editor
+				v-model="item.how_to_get_here"
+				class="col-sm-12"
+				label="How To Get Here"
+				name="how_to_get_here"
+				row="5"
+				></text-editor>
+
+			<!-- 	<text-editor
+				v-model="item.orientation_module"
+				class="col-sm-12"
+				label="Orientation Module for Mobile"
+				name="orientation_module"
+				row="5"
+				></text-editor> -->
 
 				<text-editor
 				v-model="item.terms_conditions"
@@ -73,6 +97,14 @@
 				class="col-sm-12"
 				label="Visitor Policies"
 				name="visitor_policies"
+				row="5"
+				></text-editor>
+
+				<text-editor
+				v-model="item.contact_us"
+				class="col-sm-12"
+				label="Contact Us"
+				name="contact_us"
 				row="5"
 				></text-editor>
 

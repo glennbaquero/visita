@@ -14,6 +14,7 @@
 <script type="text/javascript">
 /* Flatpickr Documentation: https://flatpickr.js.org/options/ */
 import flatpickr from 'flatpickr';
+// window.flatpickr = flatpickr;
 import 'flatpickr/dist/flatpickr.css';
 
 import ArrayHelpers from '../../mixins/array.js';
@@ -39,7 +40,7 @@ export default {
 				options.defaultDate = this.defaultDate;
 			}
 
-			this.elem = $(this.$refs.elem).flatpickr(options);
+			this.elem = flatpickr(this.$refs.elem, options);
 		},
 
 		getOptions() {
@@ -84,6 +85,10 @@ export default {
 				options.minDate = this.minDate;
 			}
 
+			if (this.maxDate) {
+				options.maxDate = this.maxDate;
+			}
+
 			return options;
 		},
 	},
@@ -126,6 +131,7 @@ export default {
 		defaultDate: {},
 
 		minDate: {},
+		maxDate: {},
 
 		disabledDays: {},
 		disabledDates: {},

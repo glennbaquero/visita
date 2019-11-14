@@ -60,6 +60,8 @@ class VisitorTypeFetchController extends FetchController
             'name' => $item->name,
             'weekday_fee' => $item->weekday_fee,
             'weekend_fee' => $item->weekend_fee,
+            'daytour_fee' => $item->daytour_fee,
+            'overnight_fee' => $item->overnight_fee,
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),
             'archiveUrl' => $item->renderArchiveUrl(),

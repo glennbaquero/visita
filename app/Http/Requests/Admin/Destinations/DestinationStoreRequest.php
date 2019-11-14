@@ -25,13 +25,17 @@ class DestinationStoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'code' => 'required',
+            // 'code' => 'required',
             'icon' => 'required',
             'terms_conditions' => 'required',
             'visitor_policies' => 'required',
             'operating_hours' => 'required',
-            'orientation_module' => 'required',
+            // 'orientation_module' => 'required',
             'capacity_per_day' => 'required',
+            'overview' => 'required',
+            'contact_us' => 'required',
+            'fees' => 'required',
+            'how_to_get_here' => 'required',
         ];
     }
 }

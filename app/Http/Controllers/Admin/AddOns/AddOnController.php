@@ -7,8 +7,16 @@ use App\Http\Controllers\Controller;
 
 use App\Models\AddOns\AddOn;
 
+use App\Http\Requests\Admin\AddOns\AddOnStoreRequest;
+
 class AddOnController extends Controller
 {
+
+     public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\AddOns\AddOnMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +43,7 @@ class AddOnController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddOnStoreRequest $request)
     {
         $item = AddOn::store($request);
 
@@ -80,7 +88,7 @@ class AddOnController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AddOnStoreRequest $request, $id)
     {
         $item = AddOn::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->renderName()}";
