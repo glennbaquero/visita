@@ -288,6 +288,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&capacities=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.capacities');
 
+            Route::post('activity-logs/fetch?id={id?}&agencies=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.agencies');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -576,5 +578,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('capacities/fetch-item/{id?}', 'CapacityFetchController@fetchView')->name('capacities.fetch-item');
             Route::post('capacities/fetch-pagination/{id}', 'CapacityFetchController@fetchPagePagination')->name('capacities.fetch-pagination');
         });
+
+        Route::namespace('Agencies')->group(function() {
+            Route::get('agencies', 'AgencyController@index')->name('agencies.index');
+            Route::get('agencies/create', 'AgencyController@create')->name('agencies.create');
+            Route::post('agencies/store', 'AgencyController@store')->name('agencies.store');
+            Route::get('agencies/show/{id}', 'AgencyController@show')->name('agencies.show');
+            Route::post('agencies/update/{id}', 'AgencyController@update')->name('agencies.update');
+            Route::post('agencies/{id}/archive', 'AgencyController@archive')->name('agencies.archive');
+            Route::post('agencies/{id}/restore', 'AgencyController@restore')->name('agencies.restore');
+        
+            Route::post('agencies/fetch', 'AgencyFetchController@fetch')->name('agencies.fetch');
+            Route::post('agencies/fetch?archived=1', 'AgencyFetchController@fetch')->name('agencies.fetch-archive');
+            Route::post('agencies/fetch-item/{id?}', 'AgencyFetchController@fetchView')->name('agencies.fetch-item');
+            Route::post('agencies/fetch-pagination/{id}', 'AgencyFetchController@fetchPagePagination')->name('agencies.fetch-pagination');
+        });
+
     });
 });

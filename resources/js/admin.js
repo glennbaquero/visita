@@ -78,3 +78,5 @@ Vue.component('faqs-view', require('./views/admin/faqs/FaqsView.vue').default);
 Vue.component('capacities-table', require('./views/admin/capacities/CapacitiesTable.vue').default);
 Vue.component('capacities-view', require('./views/admin/capacities/CapacitiesView.vue').default);
 
+Vue.component('agencies-table', require('./views/admin/agencies/AgenciesTable.vue').default);
+Vue.component('agencies-view', require('./views/admin/agencies/AgenciesView.vue').default);

@@ -222,6 +222,18 @@ class PermissionsTableSeeder extends Seeder
                     ],
                 ],
             ],
+
+            [
+                'name' => 'Agencies',
+                'description' => 'Manage Agencies',
+                'icon' => 'fas fa-user-friends',
+                'items' => [
+                    [
+                        'name' => 'admin.agencies.crud',
+                        'description' => 'Manage Agencies',
+                    ],
+                ],
+            ],
         ];
 
     	foreach ($categories as $category) {
