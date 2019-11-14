@@ -71,3 +71,6 @@ Vue.component('training-modules-view', require('./views/admin/training-modules/T
 
 Vue.component('faqs-table', require('./views/admin/faqs/FaqsTable.vue').default);
 Vue.component('faqs-view', require('./views/admin/faqs/FaqsView.vue').default);
+
+Vue.component('capacities-table', require('./views/admin/capacities/CapacitiesTable.vue').default);
+Vue.component('capacities-view', require('./views/admin/capacities/CapacitiesView.vue').default);

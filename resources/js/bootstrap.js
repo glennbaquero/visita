@@ -9,6 +9,8 @@ window.Vue = require('vue');
 import jquery from 'jquery';
 window.$ = window.jQuery = jquery;
 
+window._ = require('lodash');
+
 import 'bootstrap';
 
 try {
