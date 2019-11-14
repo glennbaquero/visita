@@ -68,3 +68,6 @@ Vue.component('managements-view', require('./views/admin/managements/ManagementV
 
 Vue.component('training-modules-table', require('./views/admin/training-modules/TrainingModulesTable.vue').default);
 Vue.component('training-modules-view', require('./views/admin/training-modules/TrainingModulesView.vue').default);
+
+Vue.component('faqs-table', require('./views/admin/faqs/FaqsTable.vue').default);
+Vue.component('faqs-view', require('./views/admin/faqs/FaqsView.vue').default);
