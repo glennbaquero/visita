@@ -215,6 +215,19 @@
                         </p>
                     </a>
                 </li>
+
+                @if ($self->hasAnyPermission(['admin.agencies.crud']))
+                <li class="nav-item">
+                    <a href="{{ route('admin.agencies.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.agencies.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-user-friends"></i>
+                        <p>
+                            Agencies
+                        </p>
+                    </a>
+                </li>
+                @endif
                 
                 @if ($self->hasAnyPermission(['admin.pages.crud', 'admin.page-items.crud', 'admin.articles.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
