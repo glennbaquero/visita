@@ -184,7 +184,12 @@ return [
         /**
         * Sweet Alert
         */
-         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+
+        'Webpatser\Countries\CountriesServiceProvider',
+
+        Jenssegers\Agent\AgentServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
 
     ],
 
@@ -234,6 +239,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+        'Countries' => 'Webpatser\Countries\CountriesFacade',
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
 
     ],

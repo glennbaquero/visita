@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Http\Controllers\Admin\Calendars;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+use App\Models\Books\Book;
+use App\Models\Destinations\Destination;
+use Carbon\Carbon;
+
+class CalendarController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('admin.calendar.index', [
+            'destinations' => Destination::with('allocations')->get()
+        ]);
+    }
+
+    /**
+     * Show the bookings for selected day
+     *
+     * @return \Illuminate\Http\Response
+     */
+    
+    public function getBookings(Request $request) 
+    {
+        $selectedDate = Carbon::parse($request->selectedDate)->toDateString();
+        $bookings = Book::where('scheduled_at', $selectedDate)->get();
+
+        return response()->json([
+            'selectedDate' => $selectedDate,
+            'bookings' => $bookings,
+            'showBookingsUrl' => route('admin.bookings.index')
+        ]);
+    }
+}

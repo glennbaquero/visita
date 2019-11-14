@@ -217,7 +217,7 @@ class PermissionsTableSeeder extends Seeder
                 'icon' => 'fas fa-comment-dots',
                 'items' => [
                     [
-                        'name' => 'admin.visitor_types.crud',
+                        'name' => 'admin.feedbacks.crud',
                         'description' => 'Manage Feedbacks',
                     ],
                 ],

@@ -52,8 +52,29 @@ Vue.component('add-ons-view', require('./views/admin/add-ons/AddOnsView.vue').de
 Vue.component('visitor-types-table', require('./views/admin/visitor-types/VisitorTypesTable.vue').default);
 Vue.component('visitor-types-view', require('./views/admin/visitor-types/VisitorTypesView.vue').default);
 
+Vue.component('calendar-view', require('./views/admin/calendars/CalendarView.vue').default);
+
+Vue.component('bookings-table', require('./views/admin/bookings/BookingsTable.vue').default);
+Vue.component('bookings-view', require('./views/admin/bookings/BookingsView.vue').default);
+
 Vue.component('fees-table', require('./views/admin/fees/FeesTable.vue').default);
 Vue.component('fees-view', require('./views/admin/fees/FeesView.vue').default);
 
 Vue.component('feedbacks-table', require('./views/admin/feedbacks/FeedbacksTable.vue').default);
 Vue.component('feedbacks-view', require('./views/admin/feedbacks/FeedbacksView.vue').default);
+
+Vue.component('blocked-dates-table', require('./views/admin/blocked-dates/BlockedDatesTable.vue').default);
+Vue.component('blocked-dates-view', require('./views/admin/blocked-dates/BlockedDatesView.vue').default);
+
+Vue.component('managements-table', require('./views/admin/managements/ManagementsTable.vue').default);
+Vue.component('managements-view', require('./views/admin/managements/ManagementView.vue').default);
+
+Vue.component('training-modules-table', require('./views/admin/training-modules/TrainingModulesTable.vue').default);
+Vue.component('training-modules-view', require('./views/admin/training-modules/TrainingModulesView.vue').default);
+
+Vue.component('faqs-table', require('./views/admin/faqs/FaqsTable.vue').default);
+Vue.component('faqs-view', require('./views/admin/faqs/FaqsView.vue').default);
+
+Vue.component('capacities-table', require('./views/admin/capacities/CapacitiesTable.vue').default);
+Vue.component('capacities-view', require('./views/admin/capacities/CapacitiesView.vue').default);
+

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin\Feedbacks;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FeebackStoreRequest extends FormRequest
+class FeedbackStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

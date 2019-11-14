@@ -278,6 +278,16 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&feedbacks=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.feedbacks');
 
+            Route::post('activity-logs/fetch?id={id?}&blocked-dates=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.blocked-dates');
+
+            Route::post('activity-logs/fetch?id={id?}&managements=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.managements');
+
+            Route::post('activity-logs/fetch?id={id?}&training-modules=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.training-modules');
+
+            Route::post('activity-logs/fetch?id={id?}&faqs=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.faqs');
+
+            Route::post('activity-logs/fetch?id={id?}&capacities=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.capacities');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -438,6 +448,28 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('visitor-types/fetch-pagination/{id}', 'VisitorTypeFetchController@fetchPagePagination')->name('visitor-types.fetch-pagination');
         });
 
+        Route::namespace('Calendars')->group(function() {
+            Route::get('calendar', 'CalendarController@index')->name('calendar.index');
+            Route::post('calendar/bookings', 'CalendarController@getBookings')->name('calendar.getBookings');
+            
+            Route::post('calendar/fetch', 'CalendarFetchController@fetch')->name('calendar.fetch');
+        });
+
+        Route::namespace('Books')->group(function() {
+            Route::get('bookings/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@index')->name('bookings.index');
+            Route::get('bookings/create/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@create')->name('bookings.create');
+            Route::post('bookings/store/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@store')->name('bookings.store');
+            Route::get('bookings/show/{id}/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@show')->name('bookings.show');
+            Route::post('bookings/update/{id}/{selectedDate?}/{destination?}/{experience?}/{destination_name?}', 'BookController@update')->name('bookings.update');
+            Route::post('bookings/{id}/archive', 'BookController@archive')->name('bookings.archive');
+            Route::post('bookings/{id}/restore', 'BookController@restore')->name('bookings.restore');
+        
+            Route::post('bookings/fetch/{selectedDate?}/{destination?}/{experience?}', 'BookFetchController@fetch')->name('bookings.fetch');
+            Route::post('bookings/fetch?archived=1', 'BookFetchController@fetch')->name('bookings.fetch-archive');
+            Route::post('bookings/fetch-item/{id?}/{destination?}/{experience?}', 'BookFetchController@fetchView')->name('bookings.fetch-item');
+            Route::post('bookings/fetch-pagination/{id}', 'BookFetchController@fetchPagePagination')->name('bookings.fetch-pagination');
+        });
+
         Route::namespace('Fees')->group(function() {
             Route::get('fees', 'FeesController@index')->name('fees.index');
             Route::get('fees/create', 'FeesController@create')->name('fees.create');
@@ -451,6 +483,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('fees/fetch?archived=1', 'FeesFetchController@fetch')->name('fees.fetch-archive');
             Route::post('fees/fetch-item/{id?}', 'FeesFetchController@fetchView')->name('fees.fetch-item');
             Route::post('fees/fetch-pagination/{id}', 'FeesFetchController@fetchPagePagination')->name('fees.fetch-pagination');
+        });
+
+        Route::namespace('BlockedDates')->group(function() {
+            Route::get('blocked-dates', 'BlockedDateController@index')->name('blocked-dates.index');
+            Route::get('blocked-dates/create', 'BlockedDateController@create')->name('blocked-dates.create');
+            Route::post('blocked-dates/store', 'BlockedDateController@store')->name('blocked-dates.store');
+            Route::get('blocked-dates/show/{id}', 'BlockedDateController@show')->name('blocked-dates.show');
+            Route::post('blocked-dates/update/{id}', 'BlockedDateController@update')->name('blocked-dates.update');
+            Route::post('blocked-dates/{id}/archive', 'BlockedDateController@archive')->name('blocked-dates.archive');
+            Route::post('blocked-dates/{id}/restore', 'BlockedDateController@restore')->name('blocked-dates.restore');
+        
+            Route::post('blocked-dates/fetch', 'BlockedDateFetchController@fetch')->name('blocked-dates.fetch');
+            Route::post('blocked-dates/fetch?archived=1', 'BlockedDateFetchController@fetch')->name('blocked-dates.fetch-archive');
+            Route::post('blocked-dates/fetch-item/{id?}', 'BlockedDateFetchController@fetchView')->name('blocked-dates.fetch-item');
+            Route::post('blocked-dates/fetch-pagination/{id}', 'BlockedDateFetchController@fetchPagePagination')->name('blocked-dates.fetch-pagination');
         });
 
 
@@ -470,6 +517,64 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('feedbacks/fetch-pagination/{id}', 'FeedbackFetchController@fetchPagePagination')->name('feedbacks.fetch-pagination');
         });
 
+        Route::namespace('Managements')->group(function() {
+            Route::get('managements', 'ManagementController@index')->name('managements.index');
+            Route::get('managements/create', 'ManagementController@create')->name('managements.create');
+            Route::post('managements/store', 'ManagementController@store')->name('managements.store');
+            Route::get('managements/show/{id}', 'ManagementController@show')->name('managements.show');
+            Route::post('managements/update/{id}', 'ManagementController@update')->name('managements.update');
+            Route::post('managements/{id}/archive', 'ManagementController@archive')->name('managements.archive');
+            Route::post('managements/{id}/restore', 'ManagementController@restore')->name('managements.restore');
+        
+            Route::post('managements/fetch', 'ManagementFetchController@fetch')->name('managements.fetch');
+            Route::post('managements/fetch?archived=1', 'ManagementFetchController@fetch')->name('managements.fetch-archive');
+            Route::post('managements/fetch-item/{id?}', 'ManagementFetchController@fetchView')->name('managements.fetch-item');
+            Route::post('managements/fetch-pagination/{id}', 'ManagementFetchController@fetchPagePagination')->name('managements.fetch-pagination');
+        });
 
+        Route::namespace('TrainingModules')->group(function() {
+            Route::get('training-modules', 'TrainingModuleController@index')->name('training-modules.index');
+            Route::get('training-modules/create', 'TrainingModuleController@create')->name('training-modules.create');
+            Route::post('training-modules/store', 'TrainingModuleController@store')->name('training-modules.store');
+            Route::get('training-modules/show/{id}', 'TrainingModuleController@show')->name('training-modules.show');
+            Route::post('training-modules/update/{id}', 'TrainingModuleController@update')->name('training-modules.update');
+            Route::post('training-modules/{id}/archive', 'TrainingModuleController@archive')->name('training-modules.archive');
+            Route::post('training-modules/{id}/restore', 'TrainingModuleController@restore')->name('training-modules.restore');
+        
+            Route::post('training-modules/fetch', 'TrainingModuleFetchController@fetch')->name('training-modules.fetch');
+            Route::post('training-modules/fetch?archived=1', 'TrainingModuleFetchController@fetch')->name('training-modules.fetch-archive');
+            Route::post('training-modules/fetch-item/{id?}', 'TrainingModuleFetchController@fetchView')->name('training-modules.fetch-item');
+            Route::post('training-modules/fetch-pagination/{id}', 'TrainingModuleFetchController@fetchPagePagination')->name('training-modules.fetch-pagination');
+        });
+
+        Route::namespace('Faqs')->group(function() {
+            Route::get('faqs', 'FaqController@index')->name('faqs.index');
+            Route::get('faqs/create', 'FaqController@create')->name('faqs.create');
+            Route::post('faqs/store', 'FaqController@store')->name('faqs.store');
+            Route::get('faqs/show/{id}', 'FaqController@show')->name('faqs.show');
+            Route::post('faqs/update/{id}', 'FaqController@update')->name('faqs.update');
+            Route::post('faqs/{id}/archive', 'FaqController@archive')->name('faqs.archive');
+            Route::post('faqs/{id}/restore', 'FaqController@restore')->name('faqs.restore');
+        
+            Route::post('faqs/fetch', 'FaqFetchController@fetch')->name('faqs.fetch');
+            Route::post('faqs/fetch?archived=1', 'FaqFetchController@fetch')->name('faqs.fetch-archive');
+            Route::post('faqs/fetch-item/{id?}', 'FaqFetchController@fetchView')->name('faqs.fetch-item');
+            Route::post('faqs/fetch-pagination/{id}', 'FaqFetchController@fetchPagePagination')->name('faqs.fetch-pagination');
+        });
+
+        Route::namespace('Capacities')->group(function() {
+            Route::get('capacities', 'CapacityController@index')->name('capacities.index');
+            Route::get('capacities/create', 'CapacityController@create')->name('capacities.create');
+            Route::post('capacities/store', 'CapacityController@store')->name('capacities.store');
+            Route::get('capacities/show/{id}', 'CapacityController@show')->name('capacities.show');
+            Route::post('capacities/update/{id}', 'CapacityController@update')->name('capacities.update');
+            Route::post('capacities/{id}/archive', 'CapacityController@archive')->name('capacities.archive');
+            Route::post('capacities/{id}/restore', 'CapacityController@restore')->name('capacities.restore');
+        
+            Route::post('capacities/fetch', 'CapacityFetchController@fetch')->name('capacities.fetch');
+            Route::post('capacities/fetch?archived=1', 'CapacityFetchController@fetch')->name('capacities.fetch-archive');
+            Route::post('capacities/fetch-item/{id?}', 'CapacityFetchController@fetchView')->name('capacities.fetch-item');
+            Route::post('capacities/fetch-pagination/{id}', 'CapacityFetchController@fetchPagePagination')->name('capacities.fetch-pagination');
+        });
     });
 });

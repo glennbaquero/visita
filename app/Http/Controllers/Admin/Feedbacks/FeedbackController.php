@@ -7,15 +7,17 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Feedbacks\Feedback;
 
+use App\Http\Requests\Admin\Feedbacks\FeedbackStoreRequest;
+
 use DB;
 
 class FeedbackController extends Controller
 {
-    // public function __construct() {
-    //     $this->middleware('App\Http\Middleware\Admin\SurveyExperiences\SurveyExperienceMiddleware', 
-    //         ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore', 'reOrder']]
-    //     );
-    // }
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Feedbacks\FeedbackMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore', 'reOrder']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +44,7 @@ class FeedbackController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FeedbackStoreRequest $request)
     {
         DB::beginTransaction();
 
@@ -99,7 +101,7 @@ class FeedbackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FeedbackStoreRequest $request, $id)
     {
         $item = Feedback::withTrashed()->findOrFail($id);
 

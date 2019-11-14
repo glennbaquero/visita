@@ -16,16 +16,18 @@ class CreateDestinationsTable extends Migration
         Schema::create('destinations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->text('description');
+            $table->longText('overview');
             $table->string('code')->nullable();
             $table->integer('capacity_per_day');
             $table->time('operating_hours');
             $table->boolean('status')->default(true);
-            $table->text('orientation_module');
+            $table->text('orientation_module')->nullable();
             $table->text('terms_conditions');
             $table->text('visitor_policies');
             $table->longText('icon');
             $table->text('contact_us');
+            $table->text('fees');
+            $table->text('how_to_get_here');
 
             $table->softDeletes();
             $table->timestamps();

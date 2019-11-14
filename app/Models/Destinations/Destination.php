@@ -13,6 +13,7 @@ use App\Models\Experiences\Experience;
 use App\Models\TrainingModules\TrainingModule;
 use App\Models\Managements\Management;
 use App\Models\AddOns\AddOn;
+use App\Models\Books\Book;
 
 class Destination extends Model
 {
@@ -58,10 +59,15 @@ class Destination extends Model
         return $this->belongsToMany(AddOn::class, 'destination_add_ons', 'add_on_id', 'destination_id');
     }
 
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
+
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['name', 'code', 'icon', 'terms_conditions', 'visitor_policies', 'operating_hours', 'orientation_module', 'capacity_per_day', 'description', 'contact_us'])
+    public static function store($request, $item = null, $columns = ['name', 'code', 'icon', 'terms_conditions', 'visitor_policies', 'operating_hours', 'orientation_module', 'capacity_per_day', 'overview', 'contact_us', 'fees', 'how_to_get_here'])
     {
         $vars = $request->only($columns);
 

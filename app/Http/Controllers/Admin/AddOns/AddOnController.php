@@ -17,6 +17,7 @@ class AddOnController extends Controller
             ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
         );
     }
+   
     /**
      * Display a listing of the resource.
      *
