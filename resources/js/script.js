@@ -208,15 +208,6 @@ var app = {
 
 		home: function() {
 
-			$(window).resize(function() {
-			  var width = $(this).width();
-			  if(width < 1025) {
-			    $.scrollify.disable();
-			  } else {
-			    $.scrollify.enable();
-			  }
-			});
-
 			$(function() {
 		        $.scrollify({
 		        	section : ".scrllfy-frame",
@@ -228,6 +219,22 @@ var app = {
 				    updateHash: true,
 				    touchScroll: true,
 				});
+			});
+
+			
+
+			$(window).resize(function() {
+				var width = $(this).width();
+
+				if(width < 1025) {
+			    	$(function() {
+		  				$.scrollify.disable();
+		  			});
+			  	} else {
+			    	$(function() {
+		  				$.scrollify.enable();
+		  			});
+			  	}
 			});
 
 		    $('.hm-frm2__tabbing-content').first().css('display', 'inline-block');

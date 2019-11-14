@@ -18,7 +18,7 @@
 
 	<div id="gnrl-rmdl" class="remodal custom-width" data-remodal-id="hm-frm5--modal-1">
 		<button data-remodal-action="close" class="gnrl-rmdl__close-btn">
-			<img src="" class="gnrl-rmdl__close-btn-img">
+			<img :src="close_btn" class="gnrl-rmdl__close-btn-img">
 		</button>
 		<div class="frm-cntnr align-c inlineBlock-parent">
 			<div class="width--25 align-l gnrl-rmdl__col">
@@ -189,7 +189,8 @@ export default {
 			terms: false,
 			get_here: false,
 			contact_us: false,
-			dest: {}
+			dest: {},
+			close_btn: 'images/close-button.png' 
 		}
 	},
 
