@@ -41,6 +41,12 @@ Route::namespace('Web')->name('web.')->group(function() {
 			Route::get('socialite/facebook/login', 'SocialiteLoginController@login')->name('facebook.login');
 			Route::get('socialite/facebook/callback', 'SocialiteLoginController@callback')->name('facebook.callback');
 
+
+			Route::middleware(['guest:management', 'cors'])->group(function() {
+
+				Route::get('reset-password/frontliner/{token}/{email}', 'Frontliner\ResetPasswordController@showResetForm')->name('frontliner.password.reset');
+		        Route::post('reset-password/frontliner/change', 'Frontliner\ResetPasswordController@reset')->name('frontliner.password.change');
+			});
 		});
 
         Route::get('email/verify/{id}', 'VerificationController@verify')->name('verification.verify');
@@ -53,6 +59,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 		Route::get('', 'PageController@showHome')->name('home');
 		// Route::get('/fetch/destination', 'PageController@fetchDestination')->name('fetch.destination');
 		Route::get('stylesheet', 'PageController@showStylesheet')->name('stylesheet');
+		Route::get('/reset-password/success', 'PageController@frontlinerSuccessPage')->name('management.reset.password.success');
 
 	});
 

@@ -50,6 +50,11 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'management' => [
+            'driver' => 'jwt',
+            'provider' => 'managements',
+        ],
     ],
 
     /*
@@ -80,6 +85,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Users\Admin::class,
         ],
+
+        'managements' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Users\Management::class,
+        ],
     ],
 
     /*
@@ -108,6 +118,12 @@ return [
         'admins' => [
             'provider' => 'admins',
             'table' => 'admin_password_resets',
+            'expire' => 60,
+        ],
+
+        'managements' => [
+            'provider' => 'managements',
+            'table' => 'password_resets',
             'expire' => 60,
         ],
 
