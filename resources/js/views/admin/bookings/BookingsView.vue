@@ -10,6 +10,7 @@
 				name="scheduled_at"
 				placeholder="Choose dates"
 				minDate="today"
+				:disabledDates="blocked_dates"
 				></date-picker>
 
 				<selector class="col-sm-4"
@@ -173,6 +174,7 @@ export default {
 			this.nationalities = data.nationalities ? data.nationalities : this.nationalities;
 			this.special_fees = data.special_fees ? data.special_fees : this.special_fees;
 			this.visitor_types = data.visitor_types ? data.visitor_types : this.visitor_types;
+			this.blocked_dates = data.blocked_dates ? data.blocked_dates : this.blocked_dates;
 		},
 
 		addGuest() {
@@ -199,6 +201,7 @@ export default {
 			nationalities: [],
 			special_fees: [],
 			visitor_types: [],
+			blocked_dates: [],
 			experiences: [],
 			guest: 1,
 			genders: [
