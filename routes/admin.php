@@ -276,6 +276,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&fees=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.fees');
 
+            Route::post('activity-logs/fetch?id={id?}&blocked-dates=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.blocked-dates');
+
+            Route::post('activity-logs/fetch?id={id?}&managements=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.managements');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -471,6 +475,36 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('fees/fetch?archived=1', 'FeesFetchController@fetch')->name('fees.fetch-archive');
             Route::post('fees/fetch-item/{id?}', 'FeesFetchController@fetchView')->name('fees.fetch-item');
             Route::post('fees/fetch-pagination/{id}', 'FeesFetchController@fetchPagePagination')->name('fees.fetch-pagination');
+        });
+
+        Route::namespace('BlockedDates')->group(function() {
+            Route::get('blocked-dates', 'BlockedDateController@index')->name('blocked-dates.index');
+            Route::get('blocked-dates/create', 'BlockedDateController@create')->name('blocked-dates.create');
+            Route::post('blocked-dates/store', 'BlockedDateController@store')->name('blocked-dates.store');
+            Route::get('blocked-dates/show/{id}', 'BlockedDateController@show')->name('blocked-dates.show');
+            Route::post('blocked-dates/update/{id}', 'BlockedDateController@update')->name('blocked-dates.update');
+            Route::post('blocked-dates/{id}/archive', 'BlockedDateController@archive')->name('blocked-dates.archive');
+            Route::post('blocked-dates/{id}/restore', 'BlockedDateController@restore')->name('blocked-dates.restore');
+        
+            Route::post('blocked-dates/fetch', 'BlockedDateFetchController@fetch')->name('blocked-dates.fetch');
+            Route::post('blocked-dates/fetch?archived=1', 'BlockedDateFetchController@fetch')->name('blocked-dates.fetch-archive');
+            Route::post('blocked-dates/fetch-item/{id?}', 'BlockedDateFetchController@fetchView')->name('blocked-dates.fetch-item');
+            Route::post('blocked-dates/fetch-pagination/{id}', 'BlockedDateFetchController@fetchPagePagination')->name('blocked-dates.fetch-pagination');
+        });
+
+         Route::namespace('Managements')->group(function() {
+            Route::get('managements', 'ManagementController@index')->name('managements.index');
+            Route::get('managements/create', 'ManagementController@create')->name('managements.create');
+            Route::post('managements/store', 'ManagementController@store')->name('managements.store');
+            Route::get('managements/show/{id}', 'ManagementController@show')->name('managements.show');
+            Route::post('managements/update/{id}', 'ManagementController@update')->name('managements.update');
+            Route::post('managements/{id}/archive', 'ManagementController@archive')->name('managements.archive');
+            Route::post('managements/{id}/restore', 'ManagementController@restore')->name('managements.restore');
+        
+            Route::post('managements/fetch', 'ManagementFetchController@fetch')->name('managements.fetch');
+            Route::post('managements/fetch?archived=1', 'ManagementFetchController@fetch')->name('managements.fetch-archive');
+            Route::post('managements/fetch-item/{id?}', 'ManagementFetchController@fetchView')->name('managements.fetch-item');
+            Route::post('managements/fetch-pagination/{id}', 'ManagementFetchController@fetchPagePagination')->name('managements.fetch-pagination');
         });
     });
 });

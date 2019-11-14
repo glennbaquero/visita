@@ -70,4 +70,8 @@ class PageController extends Controller
 		$item = Page::where('slug', $slug)->firstOrFail();
 		return $item->getData();
 	}
+
+	public function frontlinerSuccessPage() {
+		return view('web.pages.management.password-reset-success');
+	}
 }

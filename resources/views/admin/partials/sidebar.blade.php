@@ -69,9 +69,7 @@
                 </li>
                 @endif
 
-{{-- ======
-Hide for now just for Phase 1
-======
+
                 @if ($self->hasAnyPermission(['admin.annual_incomes.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.annual_incomes.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
@@ -149,45 +147,7 @@ Hide for now just for Phase 1
                     </a>
                 </li>
                 @endif
-<<<<<<< HEAD
-======
-Hide for now just for Phase 1
-======
- --}}
-                
-             {{--    @if ($self->hasAnyPermission(['admin.sample-items.crud']))
-                    <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
-                            'admin.sample-items.index','admin.sample-items.create','admin.sample-items.show',
-                        ]) }}">
-                        <a href="javascript:void(0)" class="nav-link {{ $checker->route->areOnRoutes([
-                            'admin.sample-items.index','admin.sample-items.create','admin.sample-items.show',
-                        ]) }}">
-                            <i class="nav-icon fa fa-cubes"></i>
-                            <p>
-                                Sample
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.sample-items.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
-                                    'admin.sample-items.index','admin.sample-items.create','admin.sample-items.show',
-                                ]) }}">
-                                    <i class="nav-icon far fa-circle"></i>
-                                    <p>
-                                        Sample Items
-                                         <count-listener
-                                        class="right badge-danger"
-                                        fetch-url="{{ route('admin.counts.fetch.sample-items.pending') }}"
-                                        event="update-sample-item-count"
-                                        ></count-listener>
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @endif --}}
-{{-- 
+
                 <li class="nav-item">
                     <a href="{{ route('admin.calendar.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.calendar.*',
@@ -197,7 +157,18 @@ Hide for now just for Phase 1
                             Calendar
                         </p>
                     </a>
-                </li> --}}
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.blocked-dates.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.blocked-dates.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-at"></i>
+                        <p>
+                            Blocked Dates
+                        </p>
+                    </a>
+                </li>
                 
                 @if ($self->hasAnyPermission(['admin.pages.crud', 'admin.page-items.crud', 'admin.articles.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
@@ -396,6 +367,17 @@ Hide for now just for Phase 1
                                     </a>
                                 </li>
                             @endif
+
+                            <li class="nav-item">
+                                <a href="{{ route('admin.managements.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.managements.index','admin.managements.create','admin.managements.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        Frontliners
+                                    </p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 @endif

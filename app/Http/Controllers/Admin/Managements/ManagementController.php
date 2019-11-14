@@ -1,23 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin\AddOns;
+namespace App\Http\Controllers\Admin\Managements;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\AddOns\AddOn;
+use App\Models\Users\Management;
 
-use App\Http\Requests\Admin\AddOns\AddOnStoreRequest;
+use DB;
 
-class AddOnController extends Controller
+class ManagementController extends Controller
 {
-
-     public function __construct() {
-        $this->middleware('App\Http\Middleware\Admin\AddOns\AddOnMiddleware', 
-            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
-        );
-    }
-   
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +18,7 @@ class AddOnController extends Controller
      */
     public function index()
     {
-        return view('admin.add-ons.index');
+        return view('admin.managements.index');
     }
 
     /**
@@ -35,7 +28,7 @@ class AddOnController extends Controller
      */
     public function create()
     {
-        return view('admin.add-ons.create');
+        return view('admin.managements.create');
     }
 
     /**
@@ -44,9 +37,11 @@ class AddOnController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddOnStoreRequest $request)
+    public function store(Request $request)
     {
-        $item = AddOn::store($request);
+        DB::beginTransaction();
+            $item = Management::store($request);
+        DB::commit();
 
         $message = "You have successfully created {$item->renderName()}";
         $redirect = $item->renderShowUrl();
@@ -65,8 +60,8 @@ class AddOnController extends Controller
      */
     public function show($id)
     {
-        $item = AddOn::withTrashed()->findOrFail($id);
-        return view('admin.add-ons.show', [
+        $item = Management::withTrashed()->findOrFail($id);
+        return view('admin.managements.show', [
             'item' => $item,
         ]);
     }
@@ -89,12 +84,15 @@ class AddOnController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AddOnStoreRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $item = AddOn::withTrashed()->findOrFail($id);
+        $item = Management::withTrashed()->findOrFail($id);
+        DB::beginTransaction();
+            $item = Management::store($request, $item);
+        DB::commit();
+
         $message = "You have successfully updated {$item->renderName()}";
 
-        $item = AddOn::store($request, $item);
 
         return response()->json([
             'message' => $message,
@@ -104,12 +102,12 @@ class AddOnController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\AddOn  $sampleItem
+     * @param  \App\Management  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function archive($id)
     {
-        $item = AddOn::withTrashed()->findOrFail($id);
+        $item = Management::withTrashed()->findOrFail($id);
         $item->archive();
 
         return response()->json([
@@ -120,12 +118,12 @@ class AddOnController extends Controller
     /**
      * Restore the specified resource from storage.
      *
-     * @param  \App\AddOn  $sampleItem
+     * @param  \App\Management  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        $item = AddOn::withTrashed()->findOrFail($id);
+        $item = Management::withTrashed()->findOrFail($id);
         $item->unarchive();
 
         return response()->json([

@@ -65,7 +65,24 @@ export default {
 				"disable": [
 			        (date) => {
 			        	if (this.disabledDates) {
-			        		if (this.inArray(date.getDay(), this.disabledDates)) {
+			        		var day = date.getDate();
+
+			        		var month = date.getMonth()+1; 
+			        		var year = date.getFullYear();
+
+			        		if(day < 10) 
+			        		{
+			        		    day = '0'+day;
+			        		} 
+
+			        		if(month < 10) 
+			        		{
+			        		    month = '0'+month;
+			        		} 
+
+			        		var date = year+'-'+month+'-'+day;
+
+			        		if (this.inArray(date, this.disabledDates)) {
 				        		return true;
 				        	}	
 			        	}
