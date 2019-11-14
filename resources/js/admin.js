@@ -59,3 +59,6 @@ Vue.component('bookings-view', require('./views/admin/bookings/BookingsView.vue'
 
 Vue.component('fees-table', require('./views/admin/fees/FeesTable.vue').default);
 Vue.component('fees-view', require('./views/admin/fees/FeesView.vue').default);
+
+Vue.component('blocked-dates-table', require('./views/admin/blocked-dates/BlockedDatesTable.vue').default);
+Vue.component('blocked-dates-view', require('./views/admin/blocked-dates/BlockedDatesView.vue').default);

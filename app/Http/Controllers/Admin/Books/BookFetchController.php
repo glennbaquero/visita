@@ -11,6 +11,7 @@ use Webpatser\Countries\Countries;
 use App\Models\Fees\Fee;
 use App\Models\Allocations\Allocation;
 use App\Models\Types\VisitorType;
+use App\Models\BlockedDates\BlockedDate;
 
 use Carbon\Carbon;
 
@@ -121,6 +122,7 @@ class BookFetchController extends FetchController
         $nationalities = Countries::all();
         $special_fees = Allocation::find($experience)->fees;
         $visitor_types = VisitorType::all();
+        $blocked_dates = $this->blockedDates();
 
     	return response()->json([
     		'item' => $item,
@@ -128,7 +130,22 @@ class BookFetchController extends FetchController
             'experiences' => $experiences,
             'nationalities' => $nationalities,
             'special_fees' => $special_fees,
-            'visitor_types' => $visitor_types
+            'visitor_types' => $visitor_types,
+            'blocked_dates' => $blocked_dates
     	]);
+    }
+
+    public function blockedDates() {
+        $items = BlockedDate::all();
+
+        $result = [];
+
+        foreach($items as $item) {
+            array_push($result, [
+                Carbon::parse($item->date)->toDateString()
+            ]);
+        }
+
+        return $result;
     }
 }
