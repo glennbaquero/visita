@@ -226,7 +226,6 @@ var app = {
 				var $window = $(window);
 				var width = $window.width();
 
-				setInterval(function () {
 
 					if (width < 1025) {
 			        
@@ -241,7 +240,6 @@ var app = {
 			  			})
 			        }
 
-				}, 300);	
 
 			})
 
