@@ -28,10 +28,10 @@ class VerifyEmail extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($message = null)
     {
         $this->title = Lang::getFromJson('Verify Email Address');
-        $this->message = 'Email verification has been sent';
+        $this->message = $message ?? 'Email verification has been sent';
     }
 
     /**
@@ -57,15 +57,27 @@ class VerifyEmail extends Notification implements ShouldQueue
             return call_user_func(static::$toMailCallback, $notifiable);
         }
 
-        return (new MailMessage)
-            ->subject(config('app.name') . ': ' . $this->title)
-            ->line($this->message)
-            ->line(Lang::getFromJson('Please click the button below to verify your email address.'))
-            ->action(
-                Lang::getFromJson('Verify Email Address'),
-                $this->verificationUrl($notifiable)
-            )
-            ->line(Lang::getFromJson('If you did not create an account, no further action is required.'));
+        $frontlinerVerification = (new MailMessage)
+                            ->subject(config('app.name') . ': ' . $this->title)
+                            ->line($this->message)
+                            ->line(Lang::getFromJson('Please click the button below to verify your email address.'))
+                            ->action(
+                                Lang::getFromJson('Verify Email Address'),
+                                $this->verificationUrl($notifiable)
+                            )
+                            ->line(Lang::getFromJson('If you did not create an account, no further action is required.'));
+
+        $userVerification = (new MailMessage)
+                            ->subject(config('app.name') . ': ' . $this->title)
+                            ->line($this->message)
+                            ->line(Lang::getFromJson('Please click the button below to verify your email address.'))
+                            ->action(
+                                Lang::getFromJson('Verify Email Address'),
+                                $this->verificationUrl($notifiable)
+                            )
+                            ->line(Lang::getFromJson('If you did not create an account, no further action is required.'));
+
+        return $this->message ? $userVerification : $frontlinerVerification;
     }
 
     /**

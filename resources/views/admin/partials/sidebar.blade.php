@@ -367,6 +367,17 @@
                                     </a>
                                 </li>
                             @endif
+
+                            <li class="nav-item">
+                                <a href="{{ route('admin.managements.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.managements.index','admin.managements.create','admin.managements.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        Frontliners
+                                    </p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 @endif

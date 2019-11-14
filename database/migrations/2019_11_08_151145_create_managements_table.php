@@ -20,10 +20,13 @@ class CreateManagementsTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->string('username')->unique()->nullable();
+            $table->string('username')->unique();
             $table->string('password')->nullable();
             $table->string('contact_number');
             $table->boolean('status')->default(0);
+            $table->string('image_path')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });

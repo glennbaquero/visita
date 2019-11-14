@@ -188,6 +188,9 @@ return [
 
         'Webpatser\Countries\CountriesServiceProvider',
 
+        Jenssegers\Agent\AgentServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+
     ],
 
     /*
@@ -238,6 +241,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Countries' => 'Webpatser\Countries\CountriesFacade',
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
 
     ],
 

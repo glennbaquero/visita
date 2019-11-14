@@ -278,6 +278,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&blocked-dates=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.blocked-dates');
 
+            Route::post('activity-logs/fetch?id={id?}&managements=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.managements');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -488,6 +490,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('blocked-dates/fetch?archived=1', 'BlockedDateFetchController@fetch')->name('blocked-dates.fetch-archive');
             Route::post('blocked-dates/fetch-item/{id?}', 'BlockedDateFetchController@fetchView')->name('blocked-dates.fetch-item');
             Route::post('blocked-dates/fetch-pagination/{id}', 'BlockedDateFetchController@fetchPagePagination')->name('blocked-dates.fetch-pagination');
+        });
+
+         Route::namespace('Managements')->group(function() {
+            Route::get('managements', 'ManagementController@index')->name('managements.index');
+            Route::get('managements/create', 'ManagementController@create')->name('managements.create');
+            Route::post('managements/store', 'ManagementController@store')->name('managements.store');
+            Route::get('managements/show/{id}', 'ManagementController@show')->name('managements.show');
+            Route::post('managements/update/{id}', 'ManagementController@update')->name('managements.update');
+            Route::post('managements/{id}/archive', 'ManagementController@archive')->name('managements.archive');
+            Route::post('managements/{id}/restore', 'ManagementController@restore')->name('managements.restore');
+        
+            Route::post('managements/fetch', 'ManagementFetchController@fetch')->name('managements.fetch');
+            Route::post('managements/fetch?archived=1', 'ManagementFetchController@fetch')->name('managements.fetch-archive');
+            Route::post('managements/fetch-item/{id?}', 'ManagementFetchController@fetchView')->name('managements.fetch-item');
+            Route::post('managements/fetch-pagination/{id}', 'ManagementFetchController@fetchPagePagination')->name('managements.fetch-pagination');
         });
     });
 });
