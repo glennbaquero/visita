@@ -65,3 +65,6 @@ Vue.component('blocked-dates-view', require('./views/admin/blocked-dates/Blocked
 
 Vue.component('managements-table', require('./views/admin/managements/ManagementsTable.vue').default);
 Vue.component('managements-view', require('./views/admin/managements/ManagementView.vue').default);
+
+Vue.component('training-modules-table', require('./views/admin/training-modules/TrainingModulesTable.vue').default);
+Vue.component('training-modules-view', require('./views/admin/training-modules/TrainingModulesView.vue').default);

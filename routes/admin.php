@@ -280,6 +280,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&managements=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.managements');
 
+            Route::post('activity-logs/fetch?id={id?}&training-modules=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.training-modules');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -492,7 +494,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('blocked-dates/fetch-pagination/{id}', 'BlockedDateFetchController@fetchPagePagination')->name('blocked-dates.fetch-pagination');
         });
 
-         Route::namespace('Managements')->group(function() {
+        Route::namespace('Managements')->group(function() {
             Route::get('managements', 'ManagementController@index')->name('managements.index');
             Route::get('managements/create', 'ManagementController@create')->name('managements.create');
             Route::post('managements/store', 'ManagementController@store')->name('managements.store');
@@ -505,6 +507,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('managements/fetch?archived=1', 'ManagementFetchController@fetch')->name('managements.fetch-archive');
             Route::post('managements/fetch-item/{id?}', 'ManagementFetchController@fetchView')->name('managements.fetch-item');
             Route::post('managements/fetch-pagination/{id}', 'ManagementFetchController@fetchPagePagination')->name('managements.fetch-pagination');
+        });
+
+        Route::namespace('TrainingModules')->group(function() {
+            Route::get('training-modules', 'TrainingModuleController@index')->name('training-modules.index');
+            Route::get('training-modules/create', 'TrainingModuleController@create')->name('training-modules.create');
+            Route::post('training-modules/store', 'TrainingModuleController@store')->name('training-modules.store');
+            Route::get('training-modules/show/{id}', 'TrainingModuleController@show')->name('training-modules.show');
+            Route::post('training-modules/update/{id}', 'TrainingModuleController@update')->name('training-modules.update');
+            Route::post('training-modules/{id}/archive', 'TrainingModuleController@archive')->name('training-modules.archive');
+            Route::post('training-modules/{id}/restore', 'TrainingModuleController@restore')->name('training-modules.restore');
+        
+            Route::post('training-modules/fetch', 'TrainingModuleFetchController@fetch')->name('training-modules.fetch');
+            Route::post('training-modules/fetch?archived=1', 'TrainingModuleFetchController@fetch')->name('training-modules.fetch-archive');
+            Route::post('training-modules/fetch-item/{id?}', 'TrainingModuleFetchController@fetchView')->name('training-modules.fetch-item');
+            Route::post('training-modules/fetch-pagination/{id}', 'TrainingModuleFetchController@fetchPagePagination')->name('training-modules.fetch-pagination');
         });
     });
 });

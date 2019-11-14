@@ -169,6 +169,17 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.training-modules.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.training-modules.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-at"></i>
+                        <p>
+                            Training Modules
+                        </p>
+                    </a>
+                </li>
                 
                 @if ($self->hasAnyPermission(['admin.pages.crud', 'admin.page-items.crud', 'admin.articles.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
