@@ -283,6 +283,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('activity-logs/fetch?id={id?}&training-modules=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.training-modules');
 
             Route::post('activity-logs/fetch?id={id?}&faqs=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.faqs');
+
+            Route::post('activity-logs/fetch?id={id?}&capacities=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.capacities');
         });
 
         Route::namespace('Articles')->group(function() {
@@ -538,6 +540,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('faqs/fetch?archived=1', 'FaqFetchController@fetch')->name('faqs.fetch-archive');
             Route::post('faqs/fetch-item/{id?}', 'FaqFetchController@fetchView')->name('faqs.fetch-item');
             Route::post('faqs/fetch-pagination/{id}', 'FaqFetchController@fetchPagePagination')->name('faqs.fetch-pagination');
+        });
+
+        Route::namespace('Capacities')->group(function() {
+            Route::get('capacities', 'CapacityController@index')->name('capacities.index');
+            Route::get('capacities/create', 'CapacityController@create')->name('capacities.create');
+            Route::post('capacities/store', 'CapacityController@store')->name('capacities.store');
+            Route::get('capacities/show/{id}', 'CapacityController@show')->name('capacities.show');
+            Route::post('capacities/update/{id}', 'CapacityController@update')->name('capacities.update');
+            Route::post('capacities/{id}/archive', 'CapacityController@archive')->name('capacities.archive');
+            Route::post('capacities/{id}/restore', 'CapacityController@restore')->name('capacities.restore');
+        
+            Route::post('capacities/fetch', 'CapacityFetchController@fetch')->name('capacities.fetch');
+            Route::post('capacities/fetch?archived=1', 'CapacityFetchController@fetch')->name('capacities.fetch-archive');
+            Route::post('capacities/fetch-item/{id?}', 'CapacityFetchController@fetchView')->name('capacities.fetch-item');
+            Route::post('capacities/fetch-pagination/{id}', 'CapacityFetchController@fetchPagePagination')->name('capacities.fetch-pagination');
         });
     });
 });
