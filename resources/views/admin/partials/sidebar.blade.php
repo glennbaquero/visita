@@ -187,7 +187,7 @@ Hide for now just for Phase 1
                         </ul>
                     </li>
                 @endif --}}
-
+{{-- 
                 <li class="nav-item">
                     <a href="{{ route('admin.calendar.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.calendar.*',
@@ -197,7 +197,7 @@ Hide for now just for Phase 1
                             Calendar
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 
                 @if ($self->hasAnyPermission(['admin.pages.crud', 'admin.page-items.crud', 'admin.articles.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
