@@ -33,6 +33,7 @@ class ConfigFetchController extends Controller
             // 'api.device-token.store' => route('api.device-token.store'),
 
             'api.login' => route('api.login'),
+            'api.logout' => route('api.logout'),
             // 'api.register' => route('api.register'),
             // 'api.verification.resend' => route('api.verification.resend'),
         ];
