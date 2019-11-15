@@ -32,6 +32,7 @@
                     <td>{{ item.time }}</td>
                     <td>{{ item.allocation }}</td>
                     <td>{{ item.main_contact.type }}</td>
+                    <td>{{ item.is_walkin }}</td>
                     <td>{{ item.status }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>
@@ -83,6 +84,7 @@ export default {
                 { text: 'Time', value: 'time' },
                 { text: 'Experience', value: 'allocation' },
                 { text: 'Type', value: 'type' },
+                { text: 'Walk In', value: 'is_walkin' },
                 { text: 'Status', value: 'status' },
             ];
 

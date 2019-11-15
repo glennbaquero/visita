@@ -75,14 +75,6 @@
 				row="5"
 				></text-editor>
 
-			<!-- 	<text-editor
-				v-model="item.orientation_module"
-				class="col-sm-12"
-				label="Orientation Module for Mobile"
-				name="orientation_module"
-				row="5"
-				></text-editor> -->
-
 				<text-editor
 				v-model="item.terms_conditions"
 				class="col-sm-12"
@@ -108,6 +100,13 @@
 				row="5"
 				></text-editor>
 
+				<text-editor
+				v-model="item.orientation_module"
+				class="col-sm-12"
+				label="Orientation Module for Mobile"
+				name="orientation_module"
+				row="5"
+				></text-editor>
 	
 			</div>
 

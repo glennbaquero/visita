@@ -7,10 +7,17 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Users\Management;
 
+use App\Http\Requests\Admin\Managements\ManagementStoreRequest;
+
 use DB;
 
 class ManagementController extends Controller
 {
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Managements\ManagementMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +44,7 @@ class ManagementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ManagementStoreRequest $request)
     {
         DB::beginTransaction();
             $item = Management::store($request);
@@ -84,7 +91,7 @@ class ManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ManagementStoreRequest $request, $id)
     {
         $item = Management::withTrashed()->findOrFail($id);
         DB::beginTransaction();

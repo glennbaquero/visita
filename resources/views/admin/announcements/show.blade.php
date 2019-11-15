@@ -37,7 +37,7 @@
                         <announcements-view
                         fetch-url="{{ route('admin.announcements.fetch-item', $item->id) }}"
                         submit-url="{{ route('admin.announcements.update', $item->id) }}"
-                        :disabled="true"
+                        :show="false"
                         ></announcements-view>
                     </div>
                     <div class="tab-pane" id="tab2">

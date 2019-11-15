@@ -7,8 +7,16 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Capacities\Capacity;
 
+use App\Http\Requests\Admin\Capacities\CapacityStoreRequest;
+
 class CapacityController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Capacities\CapacityMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +43,7 @@ class CapacityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CapacityStoreRequest $request)
     {
         $item = Capacity::store($request);
 
@@ -80,7 +88,7 @@ class CapacityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CapacityStoreRequest $request, $id)
     {
         $item = Capacity::withTrashed()->findOrFail($id);
         $item = Capacity::store($request, $item);

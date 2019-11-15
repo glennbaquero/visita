@@ -9,7 +9,22 @@
 					<label>Title</label>
 					<input v-model="item.title" name="title" type="text" class="form-control">
 				</div>
+
+				<selector class="col-sm-12 col-md-6"
+				v-model="item.destination_id"
+				name="destination_id"
+				label="Destination"
+				:items="destinations"
+				item-value="id"
+				item-text="name"
+				empty-text="None"
+				placeholder="Please select a Destination"
+				></selector>
+				
 			</div>
+
+			
+
 
 			<div class="row">
 				<text-editor
@@ -84,12 +99,14 @@ export default {
 	methods: {
 		fetchSuccess(data) {
 			this.item = data.item ? data.item : this.item;
+			this.destinations = data.destinations ? data.destinations : this.destinations;
 		},
 	},
 
 	data() {
 		return {
 			item: [],
+			destinations: [],
 		}
 	},
 

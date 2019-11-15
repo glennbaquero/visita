@@ -57,6 +57,7 @@ class Book extends Model
         $vars['re_scheduled_at'] = $request->scheduled_at;
         $vars['destination_id'] = $destination_id;
         $vars['total_guest'] = $request->total_guest;
+        $vars['is_walkin'] = true;
         if (!$item) {
             $item = static::create($vars);
         } else {

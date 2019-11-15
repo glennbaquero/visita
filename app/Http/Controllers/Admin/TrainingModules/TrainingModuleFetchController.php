@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\TrainingModules;
 use App\Extenders\Controllers\FetchController;
 
 use App\Models\TrainingModules\TrainingModule;
+use App\Models\Destinations\Destination;
 
 class TrainingModuleFetchController extends FetchController
 {
@@ -69,6 +70,7 @@ class TrainingModuleFetchController extends FetchController
 
     public function fetchView($id = null) {
         $item = null;
+        $destinations = Destination::all();
 
         if ($id) {
         	$item = TrainingModule::withTrashed()->findOrFail($id);
@@ -79,6 +81,7 @@ class TrainingModuleFetchController extends FetchController
 
     	return response()->json([
     		'item' => $item,
+            'destinations' => $destinations,
     	]);
     }
 }

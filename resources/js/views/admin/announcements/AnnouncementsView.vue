@@ -5,7 +5,7 @@
 			<template v-slot:header>Announcement Information</template>
 
 			<div class="row">
-				<selector class="col-sm-6"
+				<selector class="col-sm-12"
 				v-model="item.destination_ids"
 				name="destination_ids[]"
 				label="Select Destination (Not selecting destination will be sent to all)"
@@ -16,7 +16,11 @@
 				placeholder="Select Destination (Not selecting destination will be sent to all)"
 				></selector>
 
-				<div class="form-group col-sm-12 col-md-6">
+				
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-12 col-md-12">
 					<label>Title</label>
 					<input v-model="item.title" name="title" type="text" class="form-control">
 				</div>
@@ -32,7 +36,7 @@
 				></text-editor>
 			</div>
 			<template v-slot:footer>
-				<action-button type="submit" :disabled="loading" class="btn-primary" :disabled="disabled">Save Changes</action-button>
+				<action-button type="submit" :disabled="loading" class="btn-primary" v-if="show">Save Changes</action-button>
             
                 <action-button
                 v-if="item.archiveUrl && item.restoreUrl"
@@ -81,8 +85,8 @@ export default {
 	},
 
 	props: {
-		disabled: {
-			default: false,
+		show: {
+			default: true,
 			type: Boolean
 		}
 	},

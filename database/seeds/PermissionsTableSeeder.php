@@ -234,6 +234,102 @@ class PermissionsTableSeeder extends Seeder
                     ],
                 ],
             ],
+
+            [
+                'name' => 'Calendar',
+                'description' => 'Manage Calendar',
+                'icon' => 'fas fa-user-friends',
+                'items' => [
+                    [
+                        'name' => 'admin.calendar.crud',
+                        'description' => 'Manage Calendar',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Blocked Dates',
+                'description' => 'Manage Blocked Dates',
+                'icon' => 'fas fa-user-friends',
+                'items' => [
+                    [
+                        'name' => 'admin.blocked-dates.crud',
+                        'description' => 'Manage Blocked Dates',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Training Modules',
+                'description' => 'Manage Training Modules',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.training-modules.crud',
+                        'description' => 'Manage Training Modules',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Faqs',
+                'description' => 'Manage Faqs',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.faqs.crud',
+                        'description' => 'Manage Faqs',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Capacities',
+                'description' => 'Manage Capacities',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.capacities.crud',
+                        'description' => 'Manage Capacities',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Religions',
+                'description' => 'Manage Religions',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.religions.crud',
+                        'description' => 'Manage Religions',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Announcements',
+                'description' => 'Manage Announcements',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.announcements.crud',
+                        'description' => 'Manage Announcements',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Frontliners',
+                'description' => 'Manage Frontliners',
+                'icon' => 'fas fa-user-friends',
+                'items' => [
+                    [
+                        'name' => 'admin.managements.crud',
+                        'description' => 'Manage Frontliners',
+                    ],
+                ],
+            ],
         ];
 
     	foreach ($categories as $category) {

@@ -69,6 +69,7 @@ class BookFetchController extends FetchController
         return [
             'id' => $item->id,
             'main_contact' => $this->getGuests($item->guests),
+            'is_walkin' => $item->is_walkin === true ? 'Walk-In' : 'Online',
             'total_guest' => $item->total_guest,
             'allocation' => $item->allocation->name,
             'time' => Carbon::parse($item->scheduled_at)->toTimeString(),
