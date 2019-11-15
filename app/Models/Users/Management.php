@@ -42,6 +42,10 @@ class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
     	return $this->belongsTo(Destination::class);
     }
 
+    public function deviceTokens() {
+        return $this->morphMany(DeviceToken::class, 'user');
+    }
+
     /*
 	|--------------------------------------------------------------------------
 	| Methods

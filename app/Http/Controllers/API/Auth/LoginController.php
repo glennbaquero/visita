@@ -28,16 +28,16 @@ class LoginController extends Controller
     {
         $token = null;
         $action = false;
-        $email = $request->input('email');
+        $username = $request->input('username');
 
-        $user = User::where('email', $email)->first();
+        $user = User::where('username', $username)->first();
 
-        /* Short circuit if no user found with requested email */
+        /* Short circuit if no user found with requested username */
         if (!$user) {
             $appName = config('app.name');
 
             throw ValidationException::withMessages([
-                'email' => "{$email} is not associated with any {$appName} account.",
+                'username' => "{$username} is not associated with any {$appName} account.",
             ]);
         }
 
@@ -70,6 +70,21 @@ class LoginController extends Controller
      * @return string username
      */
     public function username() {
-        return 'email';
+        return 'username';
+    }
+
+    /**
+     * Logout Frontliner
+     * 
+     * @param Illuminate\Http\Request
+     */
+    
+    public function logout(Request $request)
+    {
+        auth()->guard('management')->logout();
+
+        return response()->json([
+            'message' => 'Logout successful',
+        ]);
     }
 }
