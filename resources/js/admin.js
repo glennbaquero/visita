@@ -83,3 +83,7 @@ Vue.component('agencies-view', require('./views/admin/agencies/AgenciesView.vue'
 
 Vue.component('religions-table', require('./views/admin/religions/ReligionsTable.vue').default);
 Vue.component('religions-view', require('./views/admin/religions/ReligionsView.vue').default);
+
+
+Vue.component('announcements-table', require('./views/admin/announcements/AnnouncementsTable.vue').default);
+Vue.component('announcements-view', require('./views/admin/announcements/AnnouncementsView.vue').default);

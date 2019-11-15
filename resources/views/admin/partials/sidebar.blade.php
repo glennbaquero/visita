@@ -227,6 +227,17 @@
                     </a>
                 </li>
 
+                 <li class="nav-item">
+                    <a href="{{ route('admin.announcements.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.announcements.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-at"></i>
+                        <p>
+                            Announcements
+                        </p>
+                    </a>
+                </li>
+
                 @if ($self->hasAnyPermission(['admin.agencies.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.agencies.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
