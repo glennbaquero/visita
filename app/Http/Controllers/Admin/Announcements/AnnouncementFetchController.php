@@ -58,7 +58,7 @@ class AnnouncementFetchController extends FetchController
     {
         return [
             'id' => $item->id,
-            'destination' => $item->destination->name,
+            'destination' => count($item->destinations) > 0 ? $item->destinations->pluck('name') : 'Sent to all',
             'title' => str_limit($item->title, 15),
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),

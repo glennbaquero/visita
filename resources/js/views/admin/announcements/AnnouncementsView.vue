@@ -32,7 +32,7 @@
 				></text-editor>
 			</div>
 			<template v-slot:footer>
-				<action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
+				<action-button type="submit" :disabled="loading" class="btn-primary" :disabled="disabled">Save Changes</action-button>
             
                 <action-button
                 v-if="item.archiveUrl && item.restoreUrl"
@@ -78,6 +78,13 @@ export default {
 			this.item = data.item ? data.item : this.item;
 			this.destinations = data.destinations ? data.destinations : this.destinations;
 		},
+	},
+
+	props: {
+		disabled: {
+			default: false,
+			type: Boolean
+		}
 	},
 
 	data() {
