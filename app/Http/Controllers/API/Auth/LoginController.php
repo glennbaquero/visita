@@ -14,7 +14,7 @@ use JWTAuth;
 use Hash;
 use Auth;
 
-use App\Models\Users\User;
+use App\Models\Users\Management;
 
 class LoginController extends Controller
 {
@@ -30,7 +30,7 @@ class LoginController extends Controller
         $action = false;
         $username = $request->input('username');
 
-        $user = User::where('username', $username)->first();
+        $user = Management::where('username', $username)->first();
 
         /* Short circuit if no user found with requested username */
         if (!$user) {
@@ -57,7 +57,6 @@ class LoginController extends Controller
                 'password' => "The password you've entered is incorrect.",
             ]);
         }
-        
         $token = JWTAuth::fromSubject($user);
 
         return response()->json([

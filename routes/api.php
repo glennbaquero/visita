@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::name('api.')
-->middleware(['cors', 'api.device'])
+->middleware(['cors'])
 ->namespace('API')
 ->group(function() {
 
@@ -27,8 +27,7 @@ Route::name('api.')
         Route::post('email/reset', 'VerificationController@resend')->name('verification.resend');
 
     });
-
-    Route::group(['middleware' => ['assign.guard:management', 'jwt.auth', 'api.auth:management']], function() {
+    Route::group(['middleware' => ['assign.guard:api', 'jwt.auth']], function() {
         
         Route::namespace('Auth')->group(function() {
             Route::post('logout', 'LoginController@logout')->name('logout');
