@@ -62,7 +62,7 @@ class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
 		];
 	}
 
-	/**
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
