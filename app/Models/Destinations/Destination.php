@@ -11,9 +11,10 @@ use App\Models\Picture;
 use App\Models\Allocations\Allocation;
 use App\Models\Experiences\Experience;
 use App\Models\TrainingModules\TrainingModule;
-use App\Models\Managements\Management;
+use App\Models\Users\Management;
 use App\Models\AddOns\AddOn;
 use App\Models\Books\Book;
+use App\Models\Announcements\Announcement;
 
 class Destination extends Model
 {
@@ -62,6 +63,11 @@ class Destination extends Model
     public function books()
     {
         return $this->hasMany(Book::class);
+    }
+
+    public function announcements()
+    {
+        return $this->belongsToMany(Announcement::class, 'destination_announcements', 'announcement_id', 'destination_id');
     }
 
     /**

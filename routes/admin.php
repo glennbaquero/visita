@@ -292,6 +292,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&religions=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.religions');
 
+            Route::post('activity-logs/fetch?id={id?}&announcements=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.announcements');
         });
 
         Route::namespace('Articles')->group(function() {
@@ -609,6 +610,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('religions/fetch?archived=1', 'ReligionFetchController@fetch')->name('religions.fetch-archive');
             Route::post('religions/fetch-item/{id?}', 'ReligionFetchController@fetchView')->name('religions.fetch-item');
             Route::post('religions/fetch-pagination/{id}', 'ReligionFetchController@fetchPagePagination')->name('religions.fetch-pagination');
+        });
+
+        Route::namespace('Announcements')->group(function() {
+            Route::get('announcements', 'AnnouncementController@index')->name('announcements.index');
+            Route::get('announcements/create', 'AnnouncementController@create')->name('announcements.create');
+            Route::post('announcements/store', 'AnnouncementController@store')->name('announcements.store');
+            Route::get('announcements/show/{id}', 'AnnouncementController@show')->name('announcements.show');
+            Route::post('announcements/update/{id}', 'AnnouncementController@update')->name('announcements.update');
+            Route::post('announcements/{id}/archive', 'AnnouncementController@archive')->name('announcements.archive');
+            Route::post('announcements/{id}/restore', 'AnnouncementController@restore')->name('announcements.restore');
+        
+            Route::post('announcements/fetch', 'AnnouncementFetchController@fetch')->name('announcements.fetch');
+            Route::post('announcements/fetch?archived=1', 'AnnouncementFetchController@fetch')->name('announcements.fetch-archive');
+            Route::post('announcements/fetch-item/{id?}', 'AnnouncementFetchController@fetchView')->name('announcements.fetch-item');
+            Route::post('announcements/fetch-pagination/{id}', 'AnnouncementFetchController@fetchPagePagination')->name('announcements.fetch-pagination');
         });
 
     });
