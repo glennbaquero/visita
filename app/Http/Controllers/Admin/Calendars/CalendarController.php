@@ -11,6 +11,12 @@ use Carbon\Carbon;
 
 class CalendarController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Calendars\CalendarMiddleware', 
+            ['only' => ['index', 'getBookings']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *

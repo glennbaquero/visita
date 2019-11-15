@@ -7,8 +7,16 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Faqs\Faq;
 
+use App\Http\Requests\Admin\Faqs\FaqStoreRequest;
+
 class FaqController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Faqs\FaqMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +43,7 @@ class FaqController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FaqStoreRequest $request)
     {
         $item = Faq::store($request);
 
@@ -80,7 +88,7 @@ class FaqController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FaqStoreRequest $request, $id)
     {
         $item = Faq::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->question}";

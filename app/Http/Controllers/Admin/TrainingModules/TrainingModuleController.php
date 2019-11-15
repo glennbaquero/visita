@@ -6,11 +6,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\TrainingModules\TrainingModule;
+
+use App\Http\Requests\Admin\TrainingModules\TrainingModuleStoreRequest;
+
 use DB;
 
 
 class TrainingModuleController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\TrainingModules\TrainingModuleMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +46,7 @@ class TrainingModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TrainingModuleStoreRequest $request)
     {
         DB::beginTransaction();
             $item = TrainingModule::store($request);
@@ -83,7 +92,7 @@ class TrainingModuleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TrainingModuleStoreRequest $request, $id)
     {
         $item = TrainingModule::withTrashed()->findOrFail($id);
   

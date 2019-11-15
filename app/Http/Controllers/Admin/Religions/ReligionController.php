@@ -7,10 +7,18 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Religions\Religion;
 
+use App\Http\Requests\Admin\Religions\ReligionStoreRequest;
+
 use DB;
 
 class ReligionController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Religions\ReligionMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +45,7 @@ class ReligionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReligionStoreRequest $request)
     {
         $item = Religion::store($request);
 
@@ -82,7 +90,7 @@ class ReligionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ReligionStoreRequest $request, $id)
     {
         $item = Religion::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->renderName()}";

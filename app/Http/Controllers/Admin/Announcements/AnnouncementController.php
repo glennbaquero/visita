@@ -7,12 +7,19 @@ use App\Http\Controllers\Controller;
 
 use App\Notifications\Frontliner\AnnouncementNotification;
 
+use App\Http\Requests\Admin\Announcements\AnnouncementStoreRequest;
+
 use App\Models\Announcements\Announcement;
 use App\Models\Users\Management;
 use DB;
 
 class AnnouncementController extends Controller
 {
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Announcements\AnnouncementMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
      /**
      * Display a listing of the resource.
      *
@@ -39,7 +46,7 @@ class AnnouncementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AnnouncementStoreRequest $request)
     {
         DB::beginTransaction();
             $item = Announcement::store($request);
@@ -99,7 +106,7 @@ class AnnouncementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AnnouncementStoreRequest $request, $id)
     {
         $item = Announcement::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->title}";

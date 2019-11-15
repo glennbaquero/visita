@@ -7,10 +7,18 @@ use App\Http\Controllers\Controller;
 
 use App\Models\BlockedDates\BlockedDate;
 
+use App\Http\Requests\Admin\BlockedDates\BlockedDateStoreRequest;
+
 use DB;
 
 class BlockedDateController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\BlockedDates\BlockedDateMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +45,7 @@ class BlockedDateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BlockedDateStoreRequest $request)
     {
         $item = BlockedDate::store($request);
 
@@ -82,7 +90,7 @@ class BlockedDateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BlockedDateStoreRequest $request, $id)
     {
         $item = BlockedDate::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->renderName()}";
