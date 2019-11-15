@@ -42,6 +42,10 @@ class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
     	return $this->belongsTo(Destination::class);
     }
 
+    public function deviceTokens() {
+        return $this->morphMany(DeviceToken::class, 'user');
+    }
+
     /*
 	|--------------------------------------------------------------------------
 	| Methods
@@ -58,7 +62,7 @@ class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
 		];
 	}
 
-	/**
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed

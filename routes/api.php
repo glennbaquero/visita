@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::name('api.')
-->middleware(['cors', 'api.device'])
+->middleware(['cors'])
 ->namespace('API')
 ->group(function() {
 
@@ -24,19 +24,16 @@ Route::name('api.')
 
         Route::post('login', 'LoginController@login')->name('login');
         Route::post('register', 'RegisterController@register')->name('register');
+        Route::post('email/reset', 'VerificationController@resend')->name('verification.resend');
 
     });
-
-    Route::group(['middleware' => ['assign.guard:web', 'jwt.auth', 'api.auth:web']], function() {
-
-    	Route::namespace('Auth')->group(function() {
-            
-            Route::post('email/reset', 'VerificationController@resend')->name('verification.resend');
-
+    Route::group(['middleware' => ['assign.guard:api', 'jwt.auth']], function() {
+        
+        Route::namespace('Auth')->group(function() {
+            Route::post('logout', 'LoginController@logout')->name('logout');
         });
-
+        
         Route::post('fetch-resources', 'ResourceFetchController@fetch')->name('resources.fetch');
-
         Route::post('device-token/store','DeviceTokenController@store')->name('device-token.store');
           
     });
