@@ -34,6 +34,7 @@ class ConfigFetchController extends Controller
 
             'api.login' => route('api.login'),
             'api.logout' => route('api.logout'),
+            'api.resources.dashboard' => route('api.resources.dashboard'),
             // 'api.register' => route('api.register'),
             // 'api.verification.resend' => route('api.verification.resend'),
         ];
