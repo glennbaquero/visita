@@ -28,7 +28,7 @@ class CreateBooksTable extends Migration
             $table->integer('payment_type');
             $table->integer('payment_status')->default(0);
             $table->boolean('is_walkin')->default(0);
-            $table->integer('payment_status')->default(0);
+            // $table->integer('payment_status')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

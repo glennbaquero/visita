@@ -25,5 +25,12 @@ class SampleDatabaseSeeder extends Seeder
         $this->call(SampleArticlesTableSeeder::class);
         $this->call(SampleAdminsTableSeeder::class);
         $this->call(SampleUsersTableSeeder::class);
+
+        $this->call(DestinationsTableSeeder::class);
+        $this->call(ExperiencesTableSeeder::class);
+        $this->call(AllocationsTableSeeder::class);
+        $this->call(AnnualIncomesTableSeeder::class);
+        $this->call(FeedbackQuestionsTableSeeder::class);
+
     }
 }
