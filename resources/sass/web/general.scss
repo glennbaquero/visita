@@ -463,6 +463,7 @@ $frame-bg--pos__b: bottom center;
 		}
 
 	    ul {
+	    	font-size: 1em;
 	        width: 100%;
 	        padding-left: 15px;
 	    } 
@@ -474,8 +475,23 @@ $frame-bg--pos__b: bottom center;
 	    }
 
 	    p {
-	    	a {
-	    		font-size: 0.9em;
+	    	a { font-size: 0.9em; }
+			p {	font-size: 1em; }
+	    }
+
+	    ul li {
+	    	li { font-size: 1em; }
+	    }
+
+	    b {
+	    	font-family: $font-family-work-sans-bold;
+	    	font-size: 1em;
+	    }
+
+	    p {
+	    	strong {
+		    	font-family: $font-family-work-sans-bold;
+		    	font-size: 1em;
 	    	}
 	    }
 

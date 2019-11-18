@@ -42,7 +42,7 @@
 			><div class="width--70 gnrl-rmdl__col" v-show="experience_description">
 					<div class="frm-description custom-description m-margin-b clr--gray align-l gnrl-scrll" >
 						<template v-for="experience in dest.experiences">
-							<strong>{{ experience.name }}</strong>
+							<p><strong>{{ experience.name }}</strong></p>
 							<p v-html="experience.description"></p>
 						</template>
 					</div>

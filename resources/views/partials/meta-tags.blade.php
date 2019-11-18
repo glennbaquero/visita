@@ -4,8 +4,8 @@
 <title>{{ config('app.name') }} | @yield('meta:title', 'Home')</title>
 <meta name="author" content="{{ config('app.name') }}">
 
-<meta name="description" content="@yield('meta:description', 'Laravel - The PHP framework for web artisans.')">
-<meta name="keywords" content="@yield('meta:keywords', 'laravel, php, framework, web, artisans, boilerplate')">
+<meta name="description" content="@yield('meta:description', 'VISITA is a non-profit, sustainable tourism project working towards a responsible tourism industry through developing a range of tools on sustainable travel for both travelers and destination managers. In 2017, tourist arrivals reached a total of 1.326 billion globally.')">
+<meta name="keywords" content="@yield('meta:keywords', 'Nature, Tourism, Travel, Travelers')">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
@@ -28,9 +28,9 @@
 <meta name="msapplication-navbutton-color" content="#1A1A18">
 <meta name="apple-mobile-web-app-status-bar-style" content="#1A1A18">
 
-<meta property="og:image" content="@yield('og:image', url('/') . '/images/favicon.png')">
+<meta property="og:image" content="@yield('og:image', url('/') . '/images/visita-logo.png')">
 <meta property="og:title" content="@yield('og:title', config('app.name'))">
-<meta property="og:description" content="@yield('og:description', 'In Information Technology, a boilerplate is a unit of writing that can be reused over and over without change. By extension, the idea is sometimes applied to reusable programming, as in boilerplate code.')">
+<meta property="og:description" content="@yield('og:description', 'VISITA is a non-profit, sustainable tourism project working towards a responsible tourism industry through developing a range of tools on sustainable travel for both travelers and destination managers. In 2017, tourist arrivals reached a total of 1.326 billion globally.')">
 
 <meta property="og:url" content="{{ url()->current() }}">
 <meta property="og:site_name" content="{{ config('app.name') }}">
