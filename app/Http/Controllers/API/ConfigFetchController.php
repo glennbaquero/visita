@@ -37,6 +37,8 @@ class ConfigFetchController extends Controller
             'api.resources.dashboard' => route('api.resources.dashboard'),
             // 'api.register' => route('api.register'),
             // 'api.verification.resend' => route('api.verification.resend'),
+
+            'api.frontliner.details.update' => route('api.frontliner.details.update'),
         ];
     }
 

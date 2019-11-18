@@ -36,6 +36,8 @@ Route::name('api.')
         Route::post('fetch-resources', 'ResourceFetchController@fetch')->name('resources.fetch');
         Route::post('dashboard', 'ResourceFetchController@dashboard')->name('resources.dashboard');
         Route::post('device-token/store','DeviceTokenController@store')->name('device-token.store');
+
+        Route::post('fronliner/details/update', 'Frontliner\UserController@update')->name('frontliner.details.update');
           
     });
 });
