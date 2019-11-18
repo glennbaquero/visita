@@ -42,16 +42,19 @@ class ResourceFetchController extends Controller
     	$checked_in_walkin['groups'] = $bookings->where('is_walkin', true)->whereDate('checked_in_at', $today)->get()->count(); 
 
     	// get total checked in for online in guest
-    	$total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
+        $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
+        $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
+        $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->whereDate('checked_in_at', $today)->get()->count(); 
+    	$total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
 
     	// get the remaining capacity left for today 
     	$capacity_per_day = $user->destination->capacity_per_day;
     	$remaining = $capacity_per_day - $total['guest'];
-    	$percentage = ($remaining / $capacity_per_day) * 100;
+    	$percentage = ($remaining / $capacity_per_day) * 100 - 100;
 
     	return response()->json([
     		'total' => $total,
-    		'percentage' => round($percentage)."%",
+    		'percentage' => round($percentage),
     		'remaining' => $remaining,
     		'total_checked_in' => $total_checked_in
     	]);
