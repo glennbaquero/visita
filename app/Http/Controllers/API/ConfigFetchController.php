@@ -30,6 +30,7 @@ class ConfigFetchController extends Controller
     {
         return [
             'api.resources.fetch' => route('api.resources.fetch'),
+            'api.fetch.config' => route('api.fetch.config'),
             // 'api.device-token.store' => route('api.device-token.store'),
 
             'api.login' => route('api.login'),
