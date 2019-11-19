@@ -5,6 +5,12 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\API\FetchControllers\NationalityFetchController;
+use App\Http\Controllers\API\FetchControllers\ExperienceFetchController;
+use App\Http\Controllers\API\FetchControllers\VisitorTypeFetchController;
+use App\Http\Controllers\API\FetchControllers\ReligionFetchController;
+
+use App\Models\Fees\Fee;
 use App\Models\Books\Book;
 use Carbon\Carbon;
 
@@ -13,9 +19,23 @@ class ResourceFetchController extends Controller
     public function fetch(Request $request)
     {
         $user = $request->user();
-        
+
+        $fetch_nationalities = new NationalityFetchController($request);
+        $fetch_experiences = new ExperienceFetchController($request);
+        $fetch_types = new VisitorTypeFetchController($request);
+        $fetch_religions = new ReligionFetchController($request);
+
+        $nationalities = $fetch_nationalities->fetch($request);
+        $experiences = $fetch_experiences->fetch($request);
+        $visitor_types = $fetch_types->fetch($request);
+        $religions = $fetch_religions->fetch($request);
+
         return response()->json([
             'user' => $user,
+            'nationalities' => $nationalities->original['items'],
+            'experiences' => $experiences->original['items'],
+            'visitor_types' => $visitor_types->original['items'],
+            'religions' => $religions->original['items']
         ]);
     }
 
