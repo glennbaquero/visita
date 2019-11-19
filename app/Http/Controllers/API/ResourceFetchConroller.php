@@ -12,6 +12,7 @@ use App\Http\Controllers\API\FetchControllers\ReligionFetchController;
 
 use App\Models\Fees\Fee;
 use App\Models\Books\Book;
+use App\Models\Faqs\Faq;
 use Carbon\Carbon;
 
 class ResourceFetchController extends Controller
@@ -29,13 +30,15 @@ class ResourceFetchController extends Controller
         $experiences = $fetch_experiences->fetch($request);
         $visitor_types = $fetch_types->fetch($request);
         $religions = $fetch_religions->fetch($request);
+        $faqs = Faq::all();
 
         return response()->json([
             'user' => $user,
             'nationalities' => $nationalities->original['items'],
             'experiences' => $experiences->original['items'],
             'visitor_types' => $visitor_types->original['items'],
-            'religions' => $religions->original['items']
+            'religions' => $religions->original['items'],
+            'faqs' => $faqs
         ]);
     }
 
@@ -70,7 +73,7 @@ class ResourceFetchController extends Controller
     	// get the remaining capacity left for today 
     	$capacity_per_day = $user->destination->capacity_per_day;
     	$remaining = $capacity_per_day - $total['guest'];
-    	$percentage = ($remaining / $capacity_per_day) * 100 - 100;
+    	$percentage = ($remaining / $capacity_per_day) * 100;
 
     	return response()->json([
     		'total' => $total,
