@@ -41,7 +41,13 @@ Route::name('api.')
         Route::post('dashboard', 'ResourceFetchController@dashboard')->name('resources.dashboard');
         Route::post('device-token/store','DeviceTokenController@store')->name('device-token.store');
 
-        Route::post('fronliner/details/update', 'Frontliner\UserController@update')->name('frontliner.details.update');
+        Route::namespace('Frontliner')->group(function() {
+            Route::post('/fronliner/details/update', 'UserController@update')->name('frontliner.details.update');
+        });
+
+        Route::namespace('Books')->group(function() {
+            Route::post('/bookings', 'BookController@fetch')->name('bookings.fetch');
+        });
           
     });
 });
