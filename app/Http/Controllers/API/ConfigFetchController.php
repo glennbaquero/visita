@@ -36,11 +36,11 @@ class ConfigFetchController extends Controller
             'api.login' => route('api.login'),
             'api.logout' => route('api.logout'),
             'api.resources.dashboard' => route('api.resources.dashboard'),
-            'api.walkin.store' => route('api.walkin.store')
+            'api.walkin.store' => route('api.walkin.store'),
             // 'api.register' => route('api.register'),
             // 'api.verification.resend' => route('api.verification.resend'),
 
-            'api.frontliner.details.update' => route('api.frontliner.details.update'),
+            'api.frontliner.details.update' => route('api.frontliner.details.update')
         ];
     }
 
