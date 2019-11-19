@@ -32,9 +32,22 @@ Route::name('api.')
         Route::namespace('Auth')->group(function() {
             Route::post('logout', 'LoginController@logout')->name('logout');
         });
+
+        Route::namespace('Bookings')->group(function() {
+            Route::post('walkin/reservation', 'WalkinController@reservation')->name('walkin.store');
+        });
         
         Route::post('fetch-resources', 'ResourceFetchController@fetch')->name('resources.fetch');
+        Route::post('dashboard', 'ResourceFetchController@dashboard')->name('resources.dashboard');
         Route::post('device-token/store','DeviceTokenController@store')->name('device-token.store');
+
+        Route::namespace('Frontliner')->group(function() {
+            Route::post('/fronliner/details/update', 'UserController@update')->name('frontliner.details.update');
+        });
+
+        Route::namespace('Books')->group(function() {
+            Route::post('/bookings', 'BookController@fetch')->name('bookings.fetch');
+        });
           
     });
 });
