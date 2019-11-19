@@ -19,6 +19,7 @@ class FeedbackQuestionImport implements ToCollection, WithHeadingRow
     			'question' => $row['question'],
     		], [
 	            'answerable' => $row['answerable'],
+                'others_placeholder' => $row['others_placeholder'],
 	            'show_other' => $row['show_other'],
     		]);
     	}

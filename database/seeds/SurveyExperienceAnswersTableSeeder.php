@@ -5,11 +5,11 @@ use Illuminate\Database\Seeder;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 
-use App\Imports\Feedbacks\FeedbackQuestionImport;
+use App\Imports\SurveyExperiences\SurveyExperienceAnswerImport;
 
-class FeedbackQuestionsTableSeeder extends Seeder
+class SurveyExperienceAnswersTableSeeder extends Seeder
 {
-     /**
+      /**
      * Run the database seeds.
      *
      * @return void
@@ -18,7 +18,7 @@ class FeedbackQuestionsTableSeeder extends Seeder
     {
     	DB::beginTransaction();
 
-        Excel::import(new FeedbackQuestionImport, storage_path('imports/feedbacks_question.xls'));
+        Excel::import(new SurveyExperienceAnswerImport, storage_path('imports/survey_experience_answers.xls'));
 
         DB::commit();
     }
