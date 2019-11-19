@@ -9,6 +9,7 @@ use App\Http\Controllers\API\FetchControllers\NationalityFetchController;
 use App\Http\Controllers\API\FetchControllers\ExperienceFetchController;
 use App\Http\Controllers\API\FetchControllers\VisitorTypeFetchController;
 use App\Http\Controllers\API\FetchControllers\ReligionFetchController;
+use App\Http\Controllers\API\FetchControllers\TrainingModuleFetchController;
 
 use App\Models\Fees\Fee;
 use App\Models\Books\Book;
@@ -25,11 +26,13 @@ class ResourceFetchController extends Controller
         $fetch_experiences = new ExperienceFetchController($request);
         $fetch_types = new VisitorTypeFetchController($request);
         $fetch_religions = new ReligionFetchController($request);
+        $fetch_training_modules = new TrainingModuleFetchController($request);
 
         $nationalities = $fetch_nationalities->fetch($request);
         $experiences = $fetch_experiences->fetch($request);
         $visitor_types = $fetch_types->fetch($request);
         $religions = $fetch_religions->fetch($request);
+        $training_modules = $fetch_training_modules->fetch($request);
         $faqs = Faq::all();
 
         return response()->json([
@@ -38,6 +41,7 @@ class ResourceFetchController extends Controller
             'experiences' => $experiences->original['items'],
             'visitor_types' => $visitor_types->original['items'],
             'religions' => $religions->original['items'],
+            'training_modules' => $training_modules->original['items'],
             'faqs' => $faqs
         ]);
     }
