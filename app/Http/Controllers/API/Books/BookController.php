@@ -24,9 +24,10 @@ class BookController extends Controller
                 'is_walkin' => $item->is_walkin ? 'Walk-In' : 'Online',
                 'guests' => $item->guests,
                 'allocation' => $item->allocation,
-                'time' => Carbon::parse($item->scheduled_at)->format('h:i A'),
+                'schedule' => Carbon::parse($item->scheduled_at)->format('j M Y h:i A'),
+                'time' => Carbon::parse($item->scheduled_at)->toTimeString(),
                 'status' => $item->status ? 'Finished' : 'On-Queue',
-                'created_at' => $item->renderDate(),
+                'created_at' => $item->created_at->format('j M Y h:i A'),
                 'violations' => $item->groupViolations,
                 'remarks' => $item->groupRemarks,
             ];
