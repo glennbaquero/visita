@@ -24,16 +24,16 @@ class WalkinController extends Controller
     		$main_contact_vars['main_contact_person']['main'] = true;
     		$guests_vars = $request->only(['guests']);
 
-    		$book = Book::create($bookings_vars['booking_details']);
-    		
+         
             $bookings_vars = $request->only(['booking_details']);
     		$bookings_vars['booking_details']['destination_id'] = $request->user()->destination_id;
     		$bookings_vars['booking_details']['is_walkin'] = true;
 
-    		$book->guest->create($main_contact_vars['main_contact_person']);
+            $book = Book::create($bookings_vars['booking_details']);
+    		$book->guests()->create($main_contact_vars['main_contact_person']);
 
     		foreach ($guests_vars['guests'] as $guests) {
-    			$book->guest->create($guests);
+    			$book->guests()->create($guests);
     		}
     	DB::commit();
 
@@ -41,4 +41,22 @@ class WalkinController extends Controller
     		'success' => true
     	]);
     }
+
+
+    /**
+     * Add new guest to current selected book from app
+     * @return string
+     */
+    public function addNewGuest(Request $request) 
+    {
+        $book = Book::find($request->book_id);
+        $vars = $request->only(['guest']);
+        DB::beginTransaction();
+            $book->guests()->create($vars['guest']);
+        DB::commit();
+
+        return response()->json([
+            'success' => true
+        ]);
+    } 
 }
