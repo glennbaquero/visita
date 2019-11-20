@@ -25,6 +25,7 @@ class SampleDatabaseSeeder extends Seeder
         $this->call(SampleArticlesTableSeeder::class);
         $this->call(SampleAdminsTableSeeder::class);
         $this->call(SampleUsersTableSeeder::class);
+         $this->call(SampleTrainingModuleTableSeeder::class);
 
         $this->call(DestinationsTableSeeder::class);
         $this->call(ExperiencesTableSeeder::class);
@@ -34,6 +35,7 @@ class SampleDatabaseSeeder extends Seeder
         $this->call(FeedbackAnswersTableSeeder::class);
         $this->call(SurveyExperienceQuestionsTableSeeder::class);
         $this->call(SurveyExperienceAnswersTableSeeder::class);
+         $this->call(FaqsTableSeeder::class);
 
 
     }
