@@ -42,6 +42,10 @@ Route::name('api.')
             Route::post('survey-exp-answer/store', 'SurveyController@answer')->name('survey-experience.answer.store');
         });
 
+        Route::namespace('Remarks')->group(function() {
+            Route::post('remark/store', 'RemarkController@store')->name('remark.store');
+        });
+
         Route::namespace('FetchControllers')->group(function() {
             Route::post('guests', 'GuestFetchController@fetch')->name('guest.fetch');
         });

@@ -293,6 +293,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('activity-logs/fetch?id={id?}&religions=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.religions');
 
             Route::post('activity-logs/fetch?id={id?}&announcements=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.announcements');
+
+            Route::post('activity-logs/fetch?id={id?}&remarks=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.remarks');
         });
 
         Route::namespace('Articles')->group(function() {
@@ -625,6 +627,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('announcements/fetch?archived=1', 'AnnouncementFetchController@fetch')->name('announcements.fetch-archive');
             Route::post('announcements/fetch-item/{id?}', 'AnnouncementFetchController@fetchView')->name('announcements.fetch-item');
             Route::post('announcements/fetch-pagination/{id}', 'AnnouncementFetchController@fetchPagePagination')->name('announcements.fetch-pagination');
+        });
+
+        Route::namespace('Remarks')->group(function() {
+            Route::get('remarks', 'RemarkController@index')->name('remarks.index');
+            Route::get('remarks/create', 'RemarkController@create')->name('remarks.create');
+            Route::post('remarks/store', 'RemarkController@store')->name('remarks.store');
+            Route::get('remarks/show/{id}', 'RemarkController@show')->name('remarks.show');
+            Route::post('remarks/update/{id}', 'RemarkController@update')->name('remarks.update');
+            Route::post('remarks/{id}/archive', 'RemarkController@archive')->name('remarks.archive');
+            Route::post('remarks/{id}/restore', 'RemarkController@restore')->name('remarks.restore');
+        
+            Route::post('remarks/fetch', 'RemarkFetchController@fetch')->name('remarks.fetch');
+            Route::post('remarks/fetch?archived=1', 'RemarkFetchController@fetch')->name('remarks.fetch-archive');
+            Route::post('remarks/fetch-item/{id?}', 'RemarkFetchController@fetchView')->name('remarks.fetch-item');
+            Route::post('remarks/fetch-pagination/{id}', 'RemarkFetchController@fetchPagePagination')->name('remarks.fetch-pagination');
         });
 
     });
