@@ -37,6 +37,10 @@ class ConfigFetchController extends Controller
             'api.logout' => route('api.logout'),
             'api.resources.dashboard' => route('api.resources.dashboard'),
             'api.walkin.store' => route('api.walkin.store'),
+            'api.survey-experience.answer.store' => route('api.survey-experience.answer.store'),
+            'api.new.guest.store' => route('api.new.guest.store'),
+
+            'api.guest.fetch' => route('api.guest.fetch'),
             // 'api.register' => route('api.register'),
             // 'api.verification.resend' => route('api.verification.resend'),
 

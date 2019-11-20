@@ -35,6 +35,15 @@ Route::name('api.')
 
         Route::namespace('Bookings')->group(function() {
             Route::post('walkin/reservation', 'WalkinController@reservation')->name('walkin.store');
+            Route::post('add-new/guest', 'WalkinController@addNewGuest')->name('new.guest.store');
+        });
+
+        Route::namespace('Surveys')->group(function() {
+            Route::post('survey-exp-answer/store', 'SurveyController@answer')->name('survey-experience.answer.store');
+        });
+
+        Route::namespace('FetchControllers')->group(function() {
+            Route::post('guests', 'GuestFetchController@fetch')->name('guest.fetch');
         });
         
         Route::post('fetch-resources', 'ResourceFetchController@fetch')->name('resources.fetch');

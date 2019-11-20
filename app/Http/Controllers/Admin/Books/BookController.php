@@ -62,6 +62,7 @@ class BookController extends Controller
                     'gender' => $request->gender,
                     'nationality' => $request->nationality,
                     'contact_number' => $request->contact_number,
+                    'emergency_contact_number' => $request->emergency_contact_number,
                     'email' => $request->email,
                     'visitor_type_id' => $request->visitor_type_id,
                     'main' => true
