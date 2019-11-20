@@ -57,6 +57,7 @@ class FaqFetchController extends FetchController
     {
         return [
             'id' => $item->id,
+            'type' => $item->type,
             'question' => str_limit($item->question, 15),
             'answer' => str_limit($item->answer, 15),
             'created_at' => $item->renderDate(),
@@ -69,6 +70,7 @@ class FaqFetchController extends FetchController
 
     public function fetchView($id = null) {
         $item = null;
+        $types = Faq::getTypes();
 
         if ($id) {
         	$item = Faq::withTrashed()->findOrFail($id);
@@ -78,6 +80,7 @@ class FaqFetchController extends FetchController
 
     	return response()->json([
     		'item' => $item,
+            'types' => $types,
     	]);
     }
 }

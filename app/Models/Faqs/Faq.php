@@ -1,15 +1,23 @@
 <?php
 
 namespace App\Models\Faqs;
+use App\Helpers\StringHelpers;
 
 use App\Extenders\Models\BaseModel as Model;
 
 class Faq extends Model
 {
+
+
+    const TYPE_VISITOR = 'VISITOR';
+    const TYPE_DESTINATION_MANAGER = 'DESTINATION MANAGER';
+    const TYPE_FRONTLINER = 'FRONTLINER';
+
+
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['answer', 'question'])
+    public static function store($request, $item = null, $columns = ['answer', 'question', 'type'])
     {
         $vars = $request->only($columns);
 
@@ -20,6 +28,19 @@ class Faq extends Model
         }
 
         return $item;
+    }
+
+
+    /**
+     * @Getters
+     */
+    public static function getTypes() {
+        return [
+            ['value' => static::TYPE_VISITOR, 'label' => 'VISITOR', 'class' => 'bg-info'],
+            ['value' => static::TYPE_DESTINATION_MANAGER, 'label' => 'DESTINATION MANAGER', 'class' => 'bg-success'],
+            ['value' => static::TYPE_FRONTLINER, 'label' => 'FRONTLINER', 'class' => 'bg-warning'],
+
+        ];
     }
 
     /**

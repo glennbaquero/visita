@@ -26,6 +26,7 @@ class FaqStoreRequest extends FormRequest
         return [
             'answer' => 'required',
             'question' => 'required',
+            'type' => 'required',
         ];
     }
 }
