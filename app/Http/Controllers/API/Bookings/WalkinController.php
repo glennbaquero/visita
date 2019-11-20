@@ -52,6 +52,8 @@ class WalkinController extends Controller
         $book = Book::find($request->book_id);
         $vars = $request->only(['guest']);
         DB::beginTransaction();
+            $book->increment('total_guest');
+            $book->save();
             $book->guests()->create($vars['guest']);
         DB::commit();
 
