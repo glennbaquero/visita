@@ -16,6 +16,7 @@ use App\Http\Controllers\API\FetchControllers\AnnualIncomeFetchController;
 use App\Models\Fees\Fee;
 use App\Models\Books\Book;
 use App\Models\Faqs\Faq;
+use App\Models\Remarks\Remark;
 use Carbon\Carbon;
 
 class ResourceFetchController extends Controller
@@ -40,6 +41,7 @@ class ResourceFetchController extends Controller
         $surveys = $fetch_surveys->fetch($request);
         $incomes = $fetch_incomes->fetch($request);
         $faqs = Faq::all();
+        $remarks = Remark::all();
 
         return response()->json([
             'user' => $user,
@@ -50,7 +52,8 @@ class ResourceFetchController extends Controller
             'training_modules' => $training_modules->original['items'],
             'surveys' => $surveys->original['items'],
             'incomes' => $incomes->original['items'],
-            'faqs' => $faqs
+            'faqs' => $faqs,
+            'remarks' => $remarks,
         ]);
     }
 
