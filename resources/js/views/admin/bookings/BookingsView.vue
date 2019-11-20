@@ -60,11 +60,11 @@
 				</div>
 				<div class="form-group col-sm-12 col-md-4">
 					<label>Contact #</label>
-					<input v-model="item.contact_number" name="contact_number" type="text" class="form-control">
+					<input v-model="item.contact_number" name="contact_number" type="number" class="form-control">
 				</div>
 				<div class="form-group col-sm-12 col-md-4">
 					<label>Emergency Contact #</label>
-					<input v-model="item.emergency_contact_number" name="emergency_contact_number" type="text" class="form-control">
+					<input v-model="item.emergency_contact_number" name="emergency_contact_number" type="number" class="form-control">
 				</div>
 				<date-picker
 				v-model="item.birthdate"

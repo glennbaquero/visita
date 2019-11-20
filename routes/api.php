@@ -35,6 +35,7 @@ Route::name('api.')
 
         Route::namespace('Bookings')->group(function() {
             Route::post('walkin/reservation', 'WalkinController@reservation')->name('walkin.store');
+            Route::post('add-new/guest', 'WalkinController@addNewGuest')->name('new.guest.store');
         });
 
         Route::namespace('Surveys')->group(function() {
