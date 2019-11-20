@@ -41,7 +41,7 @@ class ConfigFetchController extends Controller
             // 'api.verification.resend' => route('api.verification.resend'),
 
             'api.frontliner.details.update' => route('api.frontliner.details.update'),
-
+            'api.frontliner.start.visit' => route('api.frontliner.start.visit'),
             'api.bookings.fetch' => route('api.bookings.fetch'),
         ];
     }
