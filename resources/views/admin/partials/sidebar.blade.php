@@ -20,7 +20,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 
-
+                @if ($self->hasAnyPermission(['admin.remarks.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.remarks.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.remarks.*',
@@ -31,6 +31,20 @@
                         </p>
                     </a>
                 </li>
+                @endif
+
+                @if ($self->hasAnyPermission(['admin.violations.crud']))
+                <li class="nav-item">
+                    <a href="{{ route('admin.violations.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.violations.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-at"></i>
+                        <p>
+                            Violations
+                        </p>
+                    </a>
+                </li>
+                @endif
                 
                 <li class="nav-item">
                     <a href="{{ route('admin.dashboard') }}" class="nav-link {{ $checker->route->areOnRoutes([

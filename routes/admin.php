@@ -295,6 +295,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('activity-logs/fetch?id={id?}&announcements=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.announcements');
 
             Route::post('activity-logs/fetch?id={id?}&remarks=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.remarks');
+
+            Route::post('activity-logs/fetch?id={id?}&violations=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.violations');
         });
 
         Route::namespace('Articles')->group(function() {
@@ -642,6 +644,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('remarks/fetch?archived=1', 'RemarkFetchController@fetch')->name('remarks.fetch-archive');
             Route::post('remarks/fetch-item/{id?}', 'RemarkFetchController@fetchView')->name('remarks.fetch-item');
             Route::post('remarks/fetch-pagination/{id}', 'RemarkFetchController@fetchPagePagination')->name('remarks.fetch-pagination');
+        });
+
+        Route::namespace('Violations')->group(function() {
+            Route::get('violations', 'ViolationController@index')->name('violations.index');
+            Route::get('violations/create', 'ViolationController@create')->name('violations.create');
+            Route::post('violations/store', 'ViolationController@store')->name('violations.store');
+            Route::get('violations/show/{id}', 'ViolationController@show')->name('violations.show');
+            Route::post('violations/update/{id}', 'ViolationController@update')->name('violations.update');
+            Route::post('violations/{id}/archive', 'ViolationController@archive')->name('violations.archive');
+            Route::post('violations/{id}/restore', 'ViolationController@restore')->name('violations.restore');
+        
+            Route::post('violations/fetch', 'ViolationFetchController@fetch')->name('violations.fetch');
+            Route::post('violations/fetch?archived=1', 'ViolationFetchController@fetch')->name('violations.fetch-archive');
+            Route::post('violations/fetch-item/{id?}', 'ViolationFetchController@fetchView')->name('violations.fetch-item');
+            Route::post('violations/fetch-pagination/{id}', 'ViolationFetchController@fetchPagePagination')->name('violations.fetch-pagination');
         });
 
     });
