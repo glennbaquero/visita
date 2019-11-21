@@ -39,4 +39,27 @@ class BookController extends Controller
             'bookings' => $items,
         ]);
     }
+
+    public function scan(Request $request) 
+    {
+        $qr = preg_replace('/\"/', '', $request->qr_id);
+        $book = Book::where('qr_id', $qr)->first();
+        $item['id'] = $book->id;
+        $item['main_contact'] = $book->guests()->where('main', 1)->first();
+        $item['is_walkin'] = $book->is_walkin ? 'Walk-In' : 'Online';
+        $item['guests'] = $book->guests;
+        $item['allocation'] = $book->allocation;
+        $item['schedule'] = Carbon::parse($book->scheduled_at)->format('j M Y h:i A');
+        $item['time'] = Carbon::parse($book->scheduled_at)->toTimeString();
+        $item['status'] = $book->status ? 'Finished' : 'On-Queue';
+        $item['created_at'] = $book->created_at->format('j M Y h:i A');
+        $item['violations'] = $book->groupViolations;
+        $item['remarks'] = $book->groupRemarks;
+        $item['ended_at'] = $book->ended_at;
+        $item['start_at'] = $book->started_at;
+
+        return response()->json([
+            'booking' => $item
+        ]);
+    }
 }

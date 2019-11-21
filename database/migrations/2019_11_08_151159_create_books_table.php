@@ -30,6 +30,8 @@ class CreateBooksTable extends Migration
             $table->integer('payment_type');
             $table->integer('payment_status')->default(0);
             $table->boolean('is_walkin')->default(0);
+            $table->string('qr_code_path');
+            $table->string('qr_id');
             $table->softDeletes();
             $table->timestamps();
         });
