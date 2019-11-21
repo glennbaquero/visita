@@ -20,18 +20,6 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.remarks.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
-                        'admin.remarks.*',
-                    ]) }}">
-                        <i class="nav-icon fas fa-at"></i>
-                        <p>
-                            Remarks
-                        </p>
-                    </a>
-                </li>
-                
                 <li class="nav-item">
                     <a href="{{ route('admin.dashboard') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.dashboard',
@@ -176,7 +164,7 @@
                 @endif 
 
                 
-                @if ($self->hasAnyPermission(['admin.pages.crud', 'admin.page-items.crud', 'admin.articles.crud', 'admin.annual_incomes.crud', 'admin.survey_experiences.crud', 'admin.feedbacks.crud', 'admin.add_ons.crud','admin.visitor_types.crud', 'admin.special_fees.crud', 'admin.blocked-dates.crud', 'admin.training-modules.crud', 'admin.faqs.crud', 'admin.religions.crud', 'admin.announcements.crud']))
+                @if ($self->hasAnyPermission(['admin.pages.crud', 'admin.page-items.crud', 'admin.articles.crud', 'admin.annual_incomes.crud', 'admin.survey_experiences.crud', 'admin.feedbacks.crud', 'admin.add_ons.crud','admin.visitor_types.crud', 'admin.special_fees.crud', 'admin.blocked-dates.crud', 'admin.training-modules.crud', 'admin.faqs.crud', 'admin.religions.crud', 'admin.announcements.crud', 'admin.remarks.crud','admin.violations.crud']))
                     <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([
                             'admin.pages.index','admin.pages.create','admin.pages.show',
                             'admin.page-items.index','admin.page-items.create','admin.page-items.show',
@@ -192,6 +180,8 @@
                             'admin.faqs.index','admin.faqs.create','admin.faqs.show',
                             'admin.religions.index','admin.religions.create','admin.religions.show',
                             'admin.announcements.index','admin.announcements.create','admin.announcements.show',
+                            'admin.remarks.index','admin.remarks.create','admin.remarks.show',
+                            'admin.violations.index','admin.violations.create','admin.violations.show',
                         ]) }}">
                         <a href="javascript:void(0)" class="nav-link {{ $checker->route->areOnRoutes([
                             'admin.pages.index','admin.pages.create','admin.pages.show',
@@ -208,6 +198,8 @@
                             'admin.faqs.index','admin.faqs.create','admin.faqs.show',
                             'admin.religions.index','admin.religions.create','admin.religions.show',
                             'admin.announcements.index','admin.announcements.create','admin.announcements.show',
+                            'admin.remarks.index','admin.remarks.create','admin.remarks.show',
+                            'admin.violations.index','admin.violations.create','admin.violations.show',
                         ]) }}">
                             <i class="nav-icon fas fa-feather"></i>
                             <p>
@@ -393,6 +385,32 @@
                                     <i class="nav-icon far fa-circle"></i>
                                     <p>
                                         Announcements
+                                    </p>
+                                </a>
+                            </li>
+                            @endif
+
+                            @if ($self->hasAnyPermission(['admin.remarks.crud']))
+                            <li class="nav-item">
+                                <a href="{{ route('admin.remarks.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.remarks.index','admin.remarks.create','admin.remarks.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        Remarks
+                                    </p>
+                                </a>
+                            </li>
+                            @endif
+
+                            @if ($self->hasAnyPermission(['admin.violations.crud']))
+                            <li class="nav-item">
+                                <a href="{{ route('admin.violations.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.violations.index','admin.violations.create','admin.violations.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        Violations
                                     </p>
                                 </a>
                             </li>

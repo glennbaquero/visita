@@ -18,6 +18,7 @@ use App\Models\Fees\Fee;
 use App\Models\Books\Book;
 use App\Models\Faqs\Faq;
 use App\Models\Remarks\Remark;
+use App\Models\Violations\Violation;
 use Carbon\Carbon;
 
 class ResourceFetchController extends Controller
@@ -45,6 +46,7 @@ class ResourceFetchController extends Controller
         $feedbacks = $fetch_feedbacks->fetch($request);
         $faqs = Faq::all();
         $remarks = Remark::all();
+        $violations = Violation::all();
 
         return response()->json([
             'user' => $user,
@@ -58,6 +60,7 @@ class ResourceFetchController extends Controller
             'feedbacks' => $feedbacks->original['items'],
             'faqs' => $faqs,
             'remarks' => $remarks,
+            'violations' => $violations,
         ]);
     }
 
