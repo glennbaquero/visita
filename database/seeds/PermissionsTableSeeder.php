@@ -330,6 +330,30 @@ class PermissionsTableSeeder extends Seeder
                     ],
                 ],
             ],
+
+            [
+                'name' => 'Violations',
+                'description' => 'Manage Violations',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.violations.crud',
+                        'description' => 'Manage Violations',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Remarks',
+                'description' => 'Manage Remarks',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.remarks.crud',
+                        'description' => 'Manage Remarks',
+                    ],
+                ],
+            ],
         ];
 
     	foreach ($categories as $category) {

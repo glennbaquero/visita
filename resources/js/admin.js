@@ -89,3 +89,6 @@ Vue.component('announcements-view', require('./views/admin/announcements/Announc
 
 Vue.component('remarks-table', require('./views/admin/remarks/RemarksTable.vue').default);
 Vue.component('remarks-view', require('./views/admin/remarks/RemarksView.vue').default);
+
+Vue.component('violations-table', require('./views/admin/violations/ViolationsTable.vue').default);
+Vue.component('violations-view', require('./views/admin/violations/ViolationsView.vue').default);

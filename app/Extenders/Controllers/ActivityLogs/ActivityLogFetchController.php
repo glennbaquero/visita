@@ -58,6 +58,8 @@ class ActivityLogFetchController extends Controller
         $query = $this->filterSubject($query, 'agencies', 'App\Models\Agencies\Agency');
         $query = $this->filterSubject($query, 'religions', 'App\Models\Religions\Religion');
         $query = $this->filterSubject($query, 'announcements', 'App\Models\Announcements\Announcement');
+        $query = $this->filterSubject($query, 'remarks', 'App\Models\Remarks\Remark');
+        $query = $this->filterSubject($query, 'violations', 'App\Models\Violations\Violation');
 
         /* Get page and related page item logs */
         if ($this->request->filled('pagecontents')) {

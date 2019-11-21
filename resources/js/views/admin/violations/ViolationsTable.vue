@@ -46,8 +46,8 @@
                         :disabled="loading"
                         title="Archive Item"
                         alt-title="Restore Item"
-                        :message="'Are you sure you want to archive Remarks #' + item.id + '?'"
-                        :alt-message="'Are you sure you want to restore Remarks #' + item.id + '?'"
+                        :message="'Are you sure you want to archive Violations #' + item.id + '?'"
+                        :alt-message="'Are you sure you want to restore Violations #' + item.id + '?'"
                         @load="load"
                         @success="sync"
                         ></action-button>
@@ -73,7 +73,7 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Remark', value: 'name' },
+                { text: 'Violation', value: 'name' },
             ];
 
 

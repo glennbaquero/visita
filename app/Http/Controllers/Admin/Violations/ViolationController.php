@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Remarks;
+namespace App\Http\Controllers\Admin\Violations;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\Remarks\Remark;
+use App\Models\Violations\Violation;
 
-use App\Http\Requests\Admin\Remarks\RemarkStoreRequest;
+use App\Http\Requests\Admin\Violations\ViolationStoreRequest;
 
-class RemarkController extends Controller
+class ViolationController extends Controller
 {
-    public function __construct() {
-        $this->middleware('App\Http\Middleware\Admin\Remarks\RemarkMiddleware', 
+
+	public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Violations\ViolationMiddleware', 
             ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
         );
     }
@@ -23,7 +24,7 @@ class RemarkController extends Controller
      */
     public function index()
     {
-        return view('admin.remarks.index');
+        return view('admin.violations.index');
     }
 
     /**
@@ -33,7 +34,7 @@ class RemarkController extends Controller
      */
     public function create()
     {
-        return view('admin.remarks.create');
+        return view('admin.violations.create');
     }
 
     /**
@@ -42,9 +43,9 @@ class RemarkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RemarkStoreRequest $request)
+    public function store(ViolationStoreRequest $request)
     {
-        $item = Remark::store($request);
+        $item = Violation::store($request);
 
         $message = "You have successfully created {$item->name}";
         $redirect = $item->renderShowUrl();
@@ -63,8 +64,8 @@ class RemarkController extends Controller
      */
     public function show($id)
     {
-        $item = Remark::withTrashed()->findOrFail($id);
-        return view('admin.remarks.show', [
+        $item = Violation::withTrashed()->findOrFail($id);
+        return view('admin.violations.show', [
             'item' => $item,
         ]);
     }
@@ -87,9 +88,9 @@ class RemarkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RemarkStoreRequest $request, $id)
+    public function update(ViolationStoreRequest $request, $id)
     {
-        $item = Remark::withTrashed()->findOrFail($id);
+        $item = Violation::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->name}";
 
         $item = Remark::store($request, $item);
@@ -107,7 +108,7 @@ class RemarkController extends Controller
      */
     public function archive($id)
     {
-        $item = Remark::withTrashed()->findOrFail($id);
+        $item = Violation::withTrashed()->findOrFail($id);
         $item->archive();
 
         return response()->json([
@@ -123,7 +124,7 @@ class RemarkController extends Controller
      */
     public function restore($id)
     {
-        $item = Remark::withTrashed()->findOrFail($id);
+        $item = Violation::withTrashed()->findOrFail($id);
         $item->unarchive();
 
         return response()->json([
