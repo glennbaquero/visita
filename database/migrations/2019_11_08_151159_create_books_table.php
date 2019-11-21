@@ -20,6 +20,8 @@ class CreateBooksTable extends Migration
             // $table->integer('bookable_id');
             // $table->string('bookable_type');
             $table->dateTime('scheduled_at');
+            $table->dateTime('started_at');
+            $table->dateTime('ended_at');
             $table->dateTime('checked_in_at')->nullable();
             $table->dateTime('re_scheduled_at');
             $table->integer('status');

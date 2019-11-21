@@ -56,6 +56,8 @@ Route::name('api.')
 
         Route::namespace('Frontliner')->group(function() {
             Route::post('/fronliner/details/update', 'UserController@update')->name('frontliner.details.update');
+
+            Route::post('/frontliner/start/visit', 'VisitController@start')->name('frontliner.start.visit');
         });
 
         Route::namespace('Books')->group(function() {
