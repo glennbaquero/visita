@@ -61,6 +61,10 @@ Route::name('api.')
         Route::namespace('Books')->group(function() {
             Route::post('/bookings', 'BookController@fetch')->name('bookings.fetch');
         });
+
+        Route::namespace('Violations')->group(function() {
+            Route::post('violation/store', 'ViolationController@store')->name('violation.store');
+        });
           
     });
 });
