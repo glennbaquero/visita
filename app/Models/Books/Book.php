@@ -12,8 +12,12 @@ use App\Models\Destinations\Destination;
 use App\Models\Guests\Guest;
 use App\Models\Feedbacks\GuestFeedback;
 
+use App\Traits\FileTrait;
+
 class Book extends Model
 {
+
+    use FileTrait;
 
     protected $dates = ['scheduled_at'];
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\Bookings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Notifications\Reservation\BookingNotification;
+
 use App\Models\Guests\Guest;
 use App\Models\Books\Book;
 
@@ -30,11 +32,13 @@ class WalkinController extends Controller
     		$bookings_vars['booking_details']['is_walkin'] = true;
 
             $book = Book::create($bookings_vars['booking_details']);
-    		$book->guests()->create($main_contact_vars['main_contact_person']);
+    		$main = $book->guests()->create($main_contact_vars['main_contact_person']);
 
     		foreach ($guests_vars['guests'] as $guests) {
     			$book->guests()->create($guests);
     		}
+
+            $main->notify(new BookingNotification($book));
     	DB::commit();
 
     	return response()->json([
