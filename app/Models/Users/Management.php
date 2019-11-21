@@ -3,6 +3,7 @@
 namespace App\Models\Users;
 
 use App\Extenders\Models\BaseUser as Authenticatable;
+use App\Models\Books\Book;
 use App\Notifications\Web\Auth\VerifyEmail;
 use Illuminate\Validation\ValidationException;
 use Password;
@@ -44,7 +45,12 @@ class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
 
     public function deviceTokens() {
         return $this->morphMany(DeviceToken::class, 'user');
-    }
+	}
+	
+	public function representative()
+	{
+		return $this->hasMany(Book::class, 'destination_representative_id');
+	}
 
     /*
 	|--------------------------------------------------------------------------
