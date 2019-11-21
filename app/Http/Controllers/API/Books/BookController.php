@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Books\Book;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\ValidationException;
 
 class BookController extends Controller
 {
@@ -42,8 +43,19 @@ class BookController extends Controller
 
     public function scan(Request $request) 
     {
+        if (!$request->qr_id) {
+            throw ValidationException::withMessages([
+                'qr_id' => ['Please enter a QR ID']
+            ]);
+        }
         $qr = preg_replace('/\"/', '', $request->qr_id);
         $book = Book::where('qr_id', $qr)->first();
+
+        if (!$book) {
+            throw ValidationException::withMessages([
+                'qr_id' => ['Reservation does not exist']
+            ]);
+        }
         $item['id'] = $book->id;
         $item['main_contact'] = $book->guests()->where('main', 1)->first();
         $item['is_walkin'] = $book->is_walkin ? 'Walk-In' : 'Online';
