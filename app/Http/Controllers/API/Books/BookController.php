@@ -30,6 +30,8 @@ class BookController extends Controller
                 'created_at' => $item->created_at->format('j M Y h:i A'),
                 'violations' => $item->groupViolations,
                 'remarks' => $item->groupRemarks,
+                'ended_at' => $item->ended_at,
+                'start_at' => $item->started_at
             ];
         });
 

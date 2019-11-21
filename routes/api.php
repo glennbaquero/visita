@@ -46,6 +46,10 @@ Route::name('api.')
             Route::post('remark/store', 'RemarkController@store')->name('remark.store');
         });
 
+        Route::namespace('Feedbacks')->group(function() {
+            Route::post('feedback/store', 'FeedbackController@store')->name('feedback.store');
+        });
+
         Route::namespace('FetchControllers')->group(function() {
             Route::post('guests', 'GuestFetchController@fetch')->name('guest.fetch');
         });
