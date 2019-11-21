@@ -17,7 +17,8 @@ class CreateGuestFeedbackTable extends Migration
             $table->bigIncrements('id');
             $table->integer('book_id')->unsigned()->index();
             $table->text('feedback_data'); // json data of Feedback
-            $table->text('answer');
+            $table->text('answer')->nullable();
+            $table->text('remarks')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

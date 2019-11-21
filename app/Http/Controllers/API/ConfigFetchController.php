@@ -40,6 +40,7 @@ class ConfigFetchController extends Controller
             'api.survey-experience.answer.store' => route('api.survey-experience.answer.store'),
             'api.new.guest.store' => route('api.new.guest.store'),
             'api.remark.store' => route('api.remark.store'),
+            'api.feedback.store' => route('api.feedback.store'),
 
             'api.guest.fetch' => route('api.guest.fetch'),
             // 'api.register' => route('api.register'),
