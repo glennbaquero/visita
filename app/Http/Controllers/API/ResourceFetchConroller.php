@@ -12,6 +12,7 @@ use App\Http\Controllers\API\FetchControllers\ReligionFetchController;
 use App\Http\Controllers\API\FetchControllers\TrainingModuleFetchController;
 use App\Http\Controllers\API\FetchControllers\SurveyFetchController;
 use App\Http\Controllers\API\FetchControllers\AnnualIncomeFetchController;
+use App\Http\Controllers\API\FetchControllers\FeedbackFetchController;
 
 use App\Models\Fees\Fee;
 use App\Models\Books\Book;
@@ -33,6 +34,7 @@ class ResourceFetchController extends Controller
         $fetch_training_modules = new TrainingModuleFetchController($request);
         $fetch_surveys = new SurveyFetchController($request);
         $fetch_incomes = new AnnualIncomeFetchController($request);
+        $fetch_feedbacks = new FeedbackFetchController($request);
 
         $nationalities = $fetch_nationalities->fetch($request);
         $experiences = $fetch_experiences->fetch($request);
@@ -41,6 +43,7 @@ class ResourceFetchController extends Controller
         $training_modules = $fetch_training_modules->fetch($request);
         $surveys = $fetch_surveys->fetch($request);
         $incomes = $fetch_incomes->fetch($request);
+        $feedbacks = $fetch_feedbacks->fetch($request);
         $faqs = Faq::all();
         $remarks = Remark::all();
         $violations = Violation::all();
@@ -54,6 +57,7 @@ class ResourceFetchController extends Controller
             'training_modules' => $training_modules->original['items'],
             'surveys' => $surveys->original['items'],
             'incomes' => $incomes->original['items'],
+            'feedbacks' => $feedbacks->original['items'],
             'faqs' => $faqs,
             'remarks' => $remarks,
             'violations' => $violations,

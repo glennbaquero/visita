@@ -29,6 +29,7 @@ class CreateGuestsTable extends Migration
             $table->string('contact_number')->nullable();
             $table->string('emergency_contact_number')->nullable();
             $table->string('remarks')->nullable();
+            $table->string('signature_path')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

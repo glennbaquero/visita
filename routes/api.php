@@ -46,6 +46,10 @@ Route::name('api.')
             Route::post('remark/store', 'RemarkController@store')->name('remark.store');
         });
 
+        Route::namespace('Feedbacks')->group(function() {
+            Route::post('feedback/store', 'FeedbackController@store')->name('feedback.store');
+        });
+
         Route::namespace('FetchControllers')->group(function() {
             Route::post('guests', 'GuestFetchController@fetch')->name('guest.fetch');
         });
@@ -56,6 +60,8 @@ Route::name('api.')
 
         Route::namespace('Frontliner')->group(function() {
             Route::post('/fronliner/details/update', 'UserController@update')->name('frontliner.details.update');
+
+            Route::post('/frontliner/start/visit', 'VisitController@start')->name('frontliner.start.visit');
         });
 
         Route::namespace('Books')->group(function() {
