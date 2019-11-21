@@ -17,6 +17,7 @@ use App\Models\Fees\Fee;
 use App\Models\Books\Book;
 use App\Models\Faqs\Faq;
 use App\Models\Remarks\Remark;
+use App\Models\Users\Management;
 use Carbon\Carbon;
 
 class ResourceFetchController extends Controller
@@ -42,6 +43,7 @@ class ResourceFetchController extends Controller
         $incomes = $fetch_incomes->fetch($request);
         $faqs = Faq::all();
         $remarks = Remark::all();
+        $management = Management::where('role_id', 5)->where('destination_id', $request->user()->destination_id)->get();
 
         return response()->json([
             'user' => $user,
@@ -54,6 +56,7 @@ class ResourceFetchController extends Controller
             'incomes' => $incomes->original['items'],
             'faqs' => $faqs,
             'remarks' => $remarks,
+            'management' => $management,
         ]);
     }
 

@@ -29,6 +29,7 @@ class BookController extends Controller
                 'status' => $item->status ? 'Finished' : 'On-Queue',
                 'created_at' => $item->created_at->format('j M Y h:i A'),
                 'violations' => $item->groupViolations,
+                'representative' => $item->representative ?? null,
                 'remarks' => $item->groupRemarks,
             ];
         });
@@ -36,5 +37,18 @@ class BookController extends Controller
         return response()->json([
             'bookings' => $items,
         ]);
+    }
+
+    /**
+     * Update Assigned Representative
+     * 
+     * @param Illuminate\Http\Request
+     * @return json $response
+     */
+    public function updateRepresentative(Request $request)
+    {
+        Book::find($request->book_id)->update(['destination_representative_id' => $request->representative_id]);
+
+        return response()->json(['message' => 'Success']);
     }
 }

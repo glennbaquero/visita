@@ -10,6 +10,7 @@ use App\Models\AddOns\AddOn;
 use App\Models\Allocations\Allocation;
 use App\Models\Destinations\Destination;
 use App\Models\Guests\Guest;
+use App\Models\Users\Management;
 
 class Book extends Model
 {
@@ -44,6 +45,11 @@ class Book extends Model
     public function guests()
     {
         return $this->hasMany(Guest::class);
+    }
+
+    public function representative()
+    {
+        return $this->belongsTo(Management::class, 'destination_representative_id');
     }
 
     /**
