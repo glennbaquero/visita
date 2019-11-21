@@ -13,6 +13,7 @@ use App\Models\Guests\Guest;
 use App\Models\Feedbacks\GuestFeedback;
 
 use App\Traits\FileTrait;
+use App\Models\Users\Management;
 
 class Book extends Model
 {
@@ -54,6 +55,11 @@ class Book extends Model
     public function guestFeedbacks() 
     {
         return $this->hasMany(GuestFeedback::class);
+    }
+    
+    public function representative()
+    {
+        return $this->belongsTo(Management::class, 'destination_representative_id');
     }
 
     /**
