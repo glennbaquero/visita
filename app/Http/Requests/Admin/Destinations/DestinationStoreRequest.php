@@ -26,7 +26,7 @@ class DestinationStoreRequest extends FormRequest
         return [
             'name' => 'required',
             // 'code' => 'required',
-            'icon' => 'required',
+            // 'icon' => 'required',
             'terms_conditions' => 'required',
             'visitor_policies' => 'required',
             'operating_hours' => 'required',

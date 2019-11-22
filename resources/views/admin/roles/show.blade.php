@@ -47,12 +47,12 @@
 
                     @if ($item->isPermissionEditable())
                         <div class="tab-pane" id="tab2">
-                            <permissions-list 
+                            <permission-list 
                             ref="table-1"
                             disabled
     						fetch-url="{{ route('admin.permissions.fetch', $item->id) }}"
     						submit-url="{{ route('admin.roles.update-permissions', $item->id) }}"
-    						></permissions-list>
+    						></permission-list>
                         </div>
                     @endif
 
