@@ -73,6 +73,11 @@ Route::name('api.')
         Route::namespace('Violations')->group(function() {
             Route::post('violation/store', 'ViolationController@store')->name('violation.store');
         });
+
+        Route::namespace('Notifications')->group(function() {
+            Route::get('/notifications', 'NotificationController@fetch')->name('notifications.fetch');
+            Route::post('/notifications/read', 'NotificationController@read')->name('notifications.read');
+        });
           
     });
 });
