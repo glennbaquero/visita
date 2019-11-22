@@ -28,6 +28,7 @@ class PageController extends Controller
 
 		$page = Page::where('slug', 'privacy_policy')->first();
 		$data = $page->getData();
+		
         return view('web.pages.privacy-policy', [
         	'data' => $data,
         ]);
@@ -41,13 +42,15 @@ class PageController extends Controller
 
         $data = $page->getData();
         $destination = $this->formatData();
+
         // $destinations = Destination::all();
 
         return view('web.pages.home', [ 
         	'data' => $data, 
         	'home_banners' => $home_banners, 
         	'about_infos' => $about_infos, 
-        	'destination' => json_encode($destination)
+        	'destination' => json_encode($destination),
+        	'page_scripts'=> 'home'
         ]);
 	}
 

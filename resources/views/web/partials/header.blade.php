@@ -1,4 +1,4 @@
-<header class="hdr-frm">
+<header class="hdr-frm {{ $checker->route->areOnRoutes(['web.privacy-policy']) }}">
 	<div class="frm-cntnr align-c width--90">
 		<div class="inlineBlock-parent">
 			<div class="hdr-frm__nav-col">
