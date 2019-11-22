@@ -3,6 +3,7 @@
 namespace App\Models\Users;
 
 use App\Extenders\Models\BaseUser as Authenticatable;
+use App\Models\Books\Book;
 use Spatie\Permission\Traits\HasRoles;
 use App\Notifications\Admin\Auth\ResetPassword;
 use Illuminate\Validation\ValidationException;
@@ -13,6 +14,14 @@ class Admin extends Authenticatable
     /* Roles & Permission: https://github.com/spatie/laravel-permission */
     use HasRoles;
 
+    /**
+	 * Admin can create many bookings
+	 */
+	public function books()
+	{
+		return $this->morphMany(Book::class, 'bookable');
+    }
+    
     /**
      * Overrides default reset password notification
      */

@@ -3,6 +3,7 @@
 namespace App\Models\Users;
 
 use App\Extenders\Models\BaseUser as Authenticatable;
+use App\Models\Books\Book;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Notifications\Web\Auth\ResetPassword;
@@ -30,6 +31,14 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     public function providers() {
         return $this->morphMany(SocialiteProvider::class, 'user');
     }
+
+    /**
+	 * Web Users can create many bookings
+	 */
+	public function books()
+	{
+		return $this->morphMany(Book::class, 'bookable');
+	}
 
     /* Overrides default forgot password */
     public function broker() {

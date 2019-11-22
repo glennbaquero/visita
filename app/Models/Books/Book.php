@@ -22,6 +22,14 @@ class Book extends Model
 
     protected $dates = ['scheduled_at'];
 
+    /**
+     * Morph relationship to Management and User Models
+     */
+    public function bookable()
+    {
+        return $this->morphTo();
+    }
+
 	public function addOns()
 	{
 		return $this->hasMany(AddOn::class);
@@ -75,7 +83,8 @@ class Book extends Model
         $vars['total_guest'] = $request->total_guest;
         $vars['is_walkin'] = true;
         if (!$item) {
-            $item = static::create($vars);
+            // $item = static::create($vars);
+            $item = auth()->user()->books()->create($vars);
         } else {
             $item->update($vars);
             $item->total_guest += $request->total_guest;
