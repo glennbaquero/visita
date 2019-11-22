@@ -289,6 +289,19 @@ $frame-bg--pos__b: bottom center;
 	    	text-shadow: none;
 	    }
 	}
+
+	&.active {
+	    background: $white !important;
+
+	    .hdr-frm__nav-logo {
+	    	height: 45px !important;
+	    }
+
+	    .hdr-frm__nav-link {
+	    	color: $gray !important;
+	    	text-shadow: none !important;
+	    }		
+	}
 }
 
 /*
