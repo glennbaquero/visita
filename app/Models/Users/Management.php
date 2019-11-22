@@ -33,6 +33,14 @@ class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
 
 	protected $appends = ['fullname'];
 
+	/**
+	 * Management can create many bookings
+	 */
+	public function books()
+	{
+		return $this->morphMany(Book::class, 'bookable');
+	}
+
     public function role()
     {
     	return $this->belongsTo(Role::class);

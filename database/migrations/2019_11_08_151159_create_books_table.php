@@ -17,8 +17,10 @@ class CreateBooksTable extends Migration
             $table->bigIncrements('id');
             $table->integer('allocation_id')->unsigned()->index();
             $table->integer('destination_id')->unsigned()->index();
-            // $table->integer('bookable_id');
-            // $table->string('bookable_type');
+            
+            $table->integer('bookable_id');
+            $table->string('bookable_type');
+
             $table->integer('destination_representative_id')->unsigned()->index()->nullable();
             $table->dateTime('scheduled_at');
             $table->dateTime('started_at');

@@ -31,7 +31,7 @@ class WalkinController extends Controller
     		$bookings_vars['booking_details']['destination_id'] = $request->user()->destination_id;
     		$bookings_vars['booking_details']['is_walkin'] = true;
 
-            $book = Book::create($bookings_vars['booking_details']);
+            $book = $request->user()->books()->create($bookings_vars['booking_details']);
     		$main = $book->guests()->create($main_contact_vars['main_contact_person']);
 
     		foreach ($guests_vars['guests'] as $guests) {
