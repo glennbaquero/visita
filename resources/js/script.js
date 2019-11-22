@@ -7,10 +7,18 @@ var app = {
 	init: function() {
 		var setup = this.setup;
 
+		let page_type = document.head.querySelector('meta[name="page-type"]');
+		page_type = page_type.content;
+
 		setup.menu();
 		setup.slickSliders();
 		setup.animations();
-		setup.home();
+
+		switch(page_type) {
+			case 'home':
+                setup.home();
+				break;
+		}
 	},
 
 	setup: {
@@ -215,6 +223,7 @@ var app = {
 				    easing: "easeInOutQuad",
 				    scrollSpeed: 1100,
 				    offset : 0,
+			        scrollbars: false,			    
 				    setHeights: true,
 				    updateHash: true,
 				    touchScroll: true,

@@ -23,6 +23,13 @@ class PageController extends Controller
         ]);
 	}
 
+	/* Show Privacy Policy */
+	public function showPrivacyPolicy() {
+        return view('web.pages.privacy-policy', [
+
+        ]);
+	}
+
 	/* Show Home */
 	public function showHome() {
 		$page = Page::where('slug', 'home')->first();
@@ -31,13 +38,15 @@ class PageController extends Controller
 
         $data = $page->getData();
         $destination = $this->formatData();
+
         // $destinations = Destination::all();
 
         return view('web.pages.home', [ 
         	'data' => $data, 
         	'home_banners' => $home_banners, 
         	'about_infos' => $about_infos, 
-        	'destination' => json_encode($destination)
+        	'destination' => json_encode($destination),
+        	'page_scripts'=> 'home'
         ]);
 	}
 
