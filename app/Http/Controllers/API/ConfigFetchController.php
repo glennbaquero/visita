@@ -53,6 +53,8 @@ class ConfigFetchController extends Controller
             'api.bookings.representative.update' => route('api.bookings.representative.update'),
 
             'api.violation.store' => route('api.violation.store'),
+
+            'api.notifications.fetch' => route('api.notifications.fetch'),
         ];
     }
 
