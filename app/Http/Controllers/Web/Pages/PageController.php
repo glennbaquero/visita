@@ -23,6 +23,16 @@ class PageController extends Controller
         ]);
 	}
 
+	/* Show Privacy Policy */
+	public function showPrivacyPolicy() {
+
+		$page = Page::where('slug', 'privacy_policy')->first();
+		$data = $page->getData();
+        return view('web.pages.privacy-policy', [
+        	'data' => $data,
+        ]);
+	}
+
 	/* Show Home */
 	public function showHome() {
 		$page = Page::where('slug', 'home')->first();
