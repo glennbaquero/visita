@@ -16,6 +16,7 @@ use App\Http\Controllers\API\FetchControllers\FeedbackFetchController;
 
 use App\Models\Fees\Fee;
 use App\Models\Books\Book;
+use App\Models\Guests\Guest;
 use App\Models\Faqs\Faq;
 use App\Models\Remarks\Remark;
 use App\Models\Violations\Violation;
@@ -49,6 +50,8 @@ class ResourceFetchController extends Controller
         $remarks = Remark::all();
         $violations = Violation::all();
         $management = Management::where('role_id', 5)->where('destination_id', $request->user()->destination_id)->get();
+        $bookings = $this->getBookings();
+        $guests = $this->getGuests();
 
         return response()->json([
             'user' => $user,
@@ -64,6 +67,8 @@ class ResourceFetchController extends Controller
             'remarks' => $remarks,
             'violations' => $violations,
             'management' => $management,
+            'bookings' => $bookings,
+            'guests' => $guests,
         ]);
     }
 
@@ -106,5 +111,67 @@ class ResourceFetchController extends Controller
     		'remaining' => $remaining,
     		'total_checked_in' => $total_checked_in
     	]);
+    }
+
+    public function getBookings() 
+    {
+        $items = Book::all();
+        $data = [];
+        foreach ($items as $item) {
+            array_push($data, [
+                'id' => $item->id,
+                'allocation_id' => $item->allocation_id,
+                'destination_id' => $item->destination_id,
+                'scheduled_at' => Carbon::parse($item->scheduled_at)->toDateString(),
+                'started_at' => $item->started_at,
+                'ended_at' => $item->ended_at,
+                'checked_in_at' => $item->checked_in_at,
+                're_scheduled_at' => Carbon::parse($item->re_scheduled_at)->toDateString(),
+                'status' => $item->status,
+                'agency_code' => $item->agency_code,
+                'total_guest' => $item->total_guest,
+                'payment_type' => $item->payment_type,
+                'payment_status' => $item->payment_status,
+                'is_walkin' => $item->is_walkin,
+                'qr_code_path' => $item->qr_code_path,
+                'qr_id' => $item->qr_id,
+                'group_remarks' => json_encode($item->groupRemarks),
+                'group_violations' => json_encode($item->groupViolations),
+                'guests' => json_encode($item->guests),
+                'main_contact' => json_encode($item->guests()->where('main', 1)->first()),
+                'allocation' => json_encode($item->allocation),
+                'created_at' => $item->created_at->format('j M Y h:i A'),
+                'is_walkin_label' => $item->is_walkin ? 'Walk-In' : 'Online',
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function getGuests()
+    {
+
+        $items = Guest::all();
+        $data = [];
+        foreach ($items as $item) {
+            array_push($data, [
+                'book_id' => $item->book_id,
+                'special_fee_id' => $item->special_fee_id,
+                'visitor_type_id' => $item->visitor_type_id,
+                'main' => $item->main,
+                'first_name' => $item->first_name,
+                'gender' => $item->gender,
+                'nationality' => $item->nationality,
+                'last_name' => $item->last_name,
+                'email' => $item->email,
+                'birthdate' => $item->birthdate,
+                'contact_number' => $item->contact_number,
+                'emergency_contact_number' => $item->emergency_contact_number,
+                'remarks' => $item->remarks,
+                'signature_path' => empty(url($item->renderImagePath('signature_path'))) ? base64_encode(file_get_contents(url($item->renderImagePath('signature_path'))->path())) : null,
+            ]);
+        }
+
+        return $data;
     }
 }
