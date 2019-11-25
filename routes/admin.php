@@ -644,6 +644,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('remarks/fetch?archived=1', 'RemarkFetchController@fetch')->name('remarks.fetch-archive');
             Route::post('remarks/fetch-item/{id?}', 'RemarkFetchController@fetchView')->name('remarks.fetch-item');
             Route::post('remarks/fetch-pagination/{id}', 'RemarkFetchController@fetchPagePagination')->name('remarks.fetch-pagination');
+
+            #Fetch Group Remarks
+            Route::post('remarks/fetch', 'GroupRemarksFetchController@fetch')->name('group-remarks.fetch');
+            Route::post('remarks/fetch?bookid={id?}', 'GroupRemarksFetchController@fetch')->name('group-remarks.fetch.bookid');
+
         });
 
         Route::namespace('Violations')->group(function() {

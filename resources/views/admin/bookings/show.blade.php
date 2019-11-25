@@ -27,19 +27,46 @@
         <div class="card">
             <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" data-target="#tab1" href="javascript:void(0)" data-toggle="tab">Information</a></li>
-                    <li class="nav-item"><a @click="initList('table-1')" class="nav-link" data-target="#tab2" href="javascript:void(0)" data-toggle="tab">Activity Logs</a></li>
+                    <li class="nav-item"><a @click="initList('table-1')" class="nav-link active" data-target="#tab1" href="javascript:void(0)" data-toggle="tab">Information</a></li>
+                    <li class="nav-item"><a @click="initList('table-2')" class="nav-link" href="#tab2" data-toggle="tab">Remarks</a></li>
+                    <li class="nav-item"><a @click="initList('table-3')" class="nav-link" href="#tab3" data-toggle="tab">Violations</a></li>
+                    <li class="nav-item"><a @click="initList('table-4')" class="nav-link" href="#tab4" data-toggle="tab">Feedback</a></li>
+                    <li class="nav-item"><a @click="initList('table-5')" class="nav-link" data-target="#tab5" href="javascript:void(0)" data-toggle="tab">Activity Logs</a></li>
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
                 <div class="tab-content">
                     <div class="tab-pane show active" id="tab1">
                         <bookings-view
+                        ref="table-1"
                         fetch-url="{{ route('admin.bookings.fetch-item',[ $item->id, $destination, $experience]) }}"
                         submit-url="{{ route('admin.bookings.update', [$item->id, $selectedDate, $destination, $experience, $destination_name]) }}"
                         ></bookings-view>
                     </div>
                     <div class="tab-pane" id="tab2">
+                        <group-remarks-table
+                        ref="table-2"
+                        disabled
+                        no-action
+                        fetch-url="{{ route('admin.group-remarks.fetch.bookid', $item->id) }}"
+                        ></group-remarks-table>
+                    </div>
+                    <div class="tab-pane" id="tab3">
+                        <bookings-table
+                       {{--  ref="table-2"
+                        disabled
+                        fetch-url="{{ route('admin.bookings.fetch-archive') }}" --}}
+                        ></bookings-table>
+                    </div>
+                    <div class="tab-pane" id="tab4">
+                        <bookings-table
+                       {{--  ref="table-2"
+                        disabled
+                        fetch-url="{{ route('admin.bookings.fetch-archive') }}" --}}
+                        ></bookings-table>
+                    </div>
+
+                    <div class="tab-pane" id="tab5">
                         {{-- <activity-log-table 
                         ref="table-1"
                         disabled
