@@ -99,7 +99,7 @@ class Article extends Model
         return route($prefix . '.articles.restore', $this->id);
     }
 
-        public function renderRemoveImageUrl($prefix = 'admin') {
+    public function renderRemoveImageUrl($prefix = 'admin') {
         return route($prefix . '.articles.remove-image', $this->id);
     }
 }

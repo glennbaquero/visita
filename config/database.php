@@ -52,7 +52,7 @@ return [
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'prefix_indexes' => true,
-            'strict' => true,
+            'strict' => false,
             'engine' => null,
             'options' => (env('MYSQL_SSL')) ? [
                 PDO::MYSQL_ATTR_SSL_KEY    => env('MYSQL_SSL_KEY'),  // /path/to/key.pem

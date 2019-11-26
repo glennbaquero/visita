@@ -8,3 +8,9 @@ html {
 body {
 	background-color: #F4F6F9;
 }
+
+tr:first-child > td > .fc-day-grid-event {
+  margin-top: 2px;
+  text-align: center;
+  font-size: 25px;
+  /* a little bit more space before the first event */ }

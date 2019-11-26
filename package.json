@@ -34,5 +34,9 @@
         "vue2-selectize": "^1.1.7",
         "vuejs-dialog": "^1.4.1"
     },
-    "dependencies": {}
+    "dependencies": {
+        "lodash": "^4.17.15",
+        "vue-full-calendar": "^2.7.0",
+        "vuedraggable": "^2.23.2"
+    }
 }

@@ -30,11 +30,33 @@ class ConfigFetchController extends Controller
     {
         return [
             'api.resources.fetch' => route('api.resources.fetch'),
+            'api.fetch.config' => route('api.fetch.config'),
             // 'api.device-token.store' => route('api.device-token.store'),
 
             'api.login' => route('api.login'),
+            'api.logout' => route('api.logout'),
+            'api.resources.dashboard' => route('api.resources.dashboard'),
+            'api.walkin.store' => route('api.walkin.store'),
+            'api.survey-experience.answer.store' => route('api.survey-experience.answer.store'),
+            'api.new.guest.store' => route('api.new.guest.store'),
+            'api.remark.store' => route('api.remark.store'),
+            'api.feedback.store' => route('api.feedback.store'),
+            'api.scan.qr' => route('api.scan.qr'),
+
+            'api.guest.fetch' => route('api.guest.fetch'),
+
+            'api.sync' => route('api.sync'),
             // 'api.register' => route('api.register'),
             // 'api.verification.resend' => route('api.verification.resend'),
+
+            'api.frontliner.details.update' => route('api.frontliner.details.update'),
+            'api.frontliner.start.visit' => route('api.frontliner.start.visit'),
+            'api.bookings.fetch' => route('api.bookings.fetch'),
+            'api.bookings.representative.update' => route('api.bookings.representative.update'),
+
+            'api.violation.store' => route('api.violation.store'),
+
+            'api.notifications.fetch' => route('api.notifications.fetch'),
         ];
     }
 

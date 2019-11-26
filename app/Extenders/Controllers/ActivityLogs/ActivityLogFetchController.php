@@ -40,6 +40,27 @@ class ActivityLogFetchController extends Controller
         $query = $this->filterSubject($query, 'articles', 'App\Models\Articles\Article');
         $query = $this->filterSubject($query, 'subject_type', $this->request->input('subject_type'));
 
+        $query = $this->filterSubject($query, 'experiences', 'App\Models\Experiences\Experience');
+        $query = $this->filterSubject($query, 'destinations', 'App\Models\Destinations\Destination');
+        $query = $this->filterSubject($query, 'inquiries', 'App\Models\Inquiries\Inquiry');
+        $query = $this->filterSubject($query, 'annual_incomes', 'App\Models\AnnualIncomes\AnnualIncome');
+        $query = $this->filterSubject($query, 'survey-experiences', 'App\Models\Surveys\SurveyExperience');
+        $query = $this->filterSubject($query, 'allocations', 'App\Models\Allocations\Allocation');
+        $query = $this->filterSubject($query, 'add-ons', 'App\Models\AddOns\AddOn');
+        $query = $this->filterSubject($query, 'visitor-types', 'App\Models\Types\VisitorType');
+        $query = $this->filterSubject($query, 'fees', 'App\Models\Fees\Fee');
+        $query = $this->filterSubject($query, 'feedbacks', 'App\Models\Feedbacks\Feedback');
+        $query = $this->filterSubject($query, 'blocked-dates', 'App\Models\BlockedDates\BlockedDate');
+        $query = $this->filterSubject($query, 'managements', 'App\Models\Users\Management');
+        $query = $this->filterSubject($query, 'training-modules', 'App\Models\TrainingModules\TrainingModule');
+        $query = $this->filterSubject($query, 'faqs', 'App\Models\Faqs\Faq');  
+        $query = $this->filterSubject($query, 'capacities', 'App\Models\Capacities\Capacity');      
+        $query = $this->filterSubject($query, 'agencies', 'App\Models\Agencies\Agency');
+        $query = $this->filterSubject($query, 'religions', 'App\Models\Religions\Religion');
+        $query = $this->filterSubject($query, 'announcements', 'App\Models\Announcements\Announcement');
+        $query = $this->filterSubject($query, 'remarks', 'App\Models\Remarks\Remark');
+        $query = $this->filterSubject($query, 'violations', 'App\Models\Violations\Violation');
+
         /* Get page and related page item logs */
         if ($this->request->filled('pagecontents')) {
             $subjects = ['App\Models\Pages\PageItem', 'App\Models\Pages\Page', ''];

@@ -14,6 +14,9 @@ use App\Helpers\AuthHelpers;
 use App\Helpers\EnvHelpers;
 use App\Helpers\GlobalChecker;
 
+use App\Models\Books\Book;
+use App\Observers\BookingObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -45,6 +48,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Book::observe(BookingObserver::class);
     }
 }

@@ -34,6 +34,15 @@ class Role extends SpatieRole
         ];
     }
 
+    /*
+     * Relationships
+     */
+    
+    public function managements()
+    {
+        return $this->hasMany(Management::class);
+    }
+
     /**
      * @Methods
      */

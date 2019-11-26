@@ -13,6 +13,7 @@
 
 Route::get('sandbox', 'SandboxController@index')->name('sandbox.index');
 
+
 Route::namespace('Web')->name('web.')->group(function() {
 
 	Route::namespace('Auth')->group(function() {
@@ -40,6 +41,12 @@ Route::namespace('Web')->name('web.')->group(function() {
 			Route::get('socialite/facebook/login', 'SocialiteLoginController@login')->name('facebook.login');
 			Route::get('socialite/facebook/callback', 'SocialiteLoginController@callback')->name('facebook.callback');
 
+
+			Route::middleware(['guest:management', 'cors'])->group(function() {
+
+				Route::get('reset-password/frontliner/{token}/{email}', 'Frontliner\ResetPasswordController@showResetForm')->name('frontliner.password.reset');
+		        Route::post('reset-password/frontliner/change', 'Frontliner\ResetPasswordController@reset')->name('frontliner.password.change');
+			});
 		});
 
         Route::get('email/verify/{id}', 'VerificationController@verify')->name('verification.verify');
@@ -50,7 +57,16 @@ Route::namespace('Web')->name('web.')->group(function() {
 	Route::namespace('Pages')->group(function() {
 
 		Route::get('', 'PageController@showHome')->name('home');
+		// Route::get('/fetch/destination', 'PageController@fetchDestination')->name('fetch.destination');
 		Route::get('stylesheet', 'PageController@showStylesheet')->name('stylesheet');
+		Route::get('/reset-password/success', 'PageController@frontlinerSuccessPage')->name('management.reset.password.success');
+
+	});
+
+	/* Inquiries Routes */
+	Route::namespace('Inquiries')->group(function() {
+
+		Route::post('inquiry', 'InquiryController@inquiryPost')->name('user.inquiry');
 
 	});
 
@@ -64,6 +80,15 @@ Route::namespace('Web')->name('web.')->group(function() {
 		Route::post('articles/fetch-item/{id?}', 'ArticleFetchController@fetchView')->name('articles.fetch-item');
 		Route::post('articles/fetch-pagination/{id}', 'ArticleFetchController@fetchPagePagination')->name('articles.fetch-pagination');
 	});
+
+
+	/* Destination Routes */
+	Route::namespace('Destinations')->group(function() {
+
+		Route::get('/fetch/destination', 'DestinationFetchController@fetchDestination')->name('fetch.destination');
+
+	});
+
 
 	/* User Dashboard Routes */
 	Route::prefix('dashboard')->middleware('auth:web')->group(function() {
@@ -142,6 +167,8 @@ Route::namespace('Web')->name('web.')->group(function() {
 				Route::post('sample-items/fetch-pagination/{id}', 'SampleItemFetchController@fetchPagePagination')->name('sample-items.fetch-pagination');
 
 			});
+
+
 
 		});
 

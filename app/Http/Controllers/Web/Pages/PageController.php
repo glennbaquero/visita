@@ -11,6 +11,8 @@ use App\Models\Pages\Page;
 use App\Models\Carousels\HomeBanner;
 use App\Models\Tabbings\AboutInfo;
 
+use App\Models\Destinations\Destination;
+
 class PageController extends Controller
 {
 
@@ -28,16 +30,48 @@ class PageController extends Controller
 		$about_infos = AboutInfo::all();
 
         $data = $page->getData();
+        $destination = $this->formatData();
+        // $destinations = Destination::all();
+
         return view('web.pages.home', [ 
         	'data' => $data, 
         	'home_banners' => $home_banners, 
         	'about_infos' => $about_infos, 
+        	'destination' => json_encode($destination)
         ]);
 	}
 
+	public function formatData() {
+		$result = [];
+
+
+		$destinations = Destination::all();
+
+		foreach ($destinations as $destination) {
+			array_push($result, [
+				'destination' => $destination,
+				'experiences' => $destination->experiences,
+				'picture' => $destination->pictures()->first()->renderImagePath()
+			]);
+		}
+
+		return $result;
+	}
+
+	public function fetchDestination() {
+
+        $destinations = Destination::all();
+        return response()->json([
+        	'destinations' => $destinations
+        ]);
+	}
 	/* Get Page Data */
 	protected function getPageData($slug) {
 		$item = Page::where('slug', $slug)->firstOrFail();
 		return $item->getData();
+	}
+
+	public function frontlinerSuccessPage() {
+		return view('web.pages.management.password-reset-success');
 	}
 }
