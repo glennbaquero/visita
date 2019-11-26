@@ -11,6 +11,8 @@ use App\Models\Users\Admin;
 use App\Models\Users\User;
 use App\Models\ActivityLogs\ActivityLog;
 
+use App\Models\Guests\Guest;
+
 class DashboardAnalyticsController extends Controller
 {
     protected $startDate;
@@ -33,7 +35,7 @@ class DashboardAnalyticsController extends Controller
         $activities = $this->getUserActivity($users);
         $usage = $this->getSystemUsageAnalytics($users, $subject);
 
-    	return response()->json(array_merge($usage, $activities));
+    	return response()->json($usage);
     }
 
     protected function getUserActivity($items) {
@@ -51,43 +53,31 @@ class DashboardAnalyticsController extends Controller
     }
 
     protected function getSystemUsageAnalytics($items, $subject) {
-        if ($this->startDate && $this->endDate) {
-            $items = $items->whereBetween('created_at', [$this->startDate, $this->endDate]);
-        }
-
-        $item_count = $items->count();
-
-        $filters = [
-            'description' => 'Account has been logged in.', 
+        $ranges = [ // the start of each age-range.
+            '18-24' => 18,
+            '25-35' => 25,
+            '36-45' => 36,
+            '46+' => 46
         ];
 
-        $logs = ActivityLog::where($filters);
+        $ages = Guest::get()->map(function($guest) use ($ranges) {
+            $age = Carbon::parse($guest->birthdate)->age;
 
-        if ($this->startDate && $this->endDate) {
-            $logs = $logs->whereBetween('created_at', [$this->startDate, $this->endDate]);
-        }
+            foreach ($ranges as $key => $breakpoint) {
+                if($breakpoint >= $age) {
+                    $guest->range = $key;
+                    $guest->age = $age;
+                    break;
+                }
+            }
 
-        $item_login = $logs->where('causer_type', $subject)->pluck('causer_id')->unique()->count();
-        
-        if ($item_count > 0) {
-            $item_usage = number_format(($item_login / ($item_count)) * 100, 2, '.', '');
-        } else {
-            $item_usage = 0;
-        }
-
-        $item_usage_chart = [
-            [
-                'label' => 'System Usage',
-                'data' => $item_usage,
-                'backgroundColor' => '#007bff',
-            ],
-            [
-                'label' => 'Unallocated Resources',
-                'data' => 100 - $item_usage,
-                'backgroundColor' => '#ccc',
-            ],
-        ];
-
+            return $guest;
+        })->mapToGroups(function($guest, $key) {
+            return [$guest->age => $guest];
+        })->map(function($group) {
+            return count($group);
+        });
+        dd($ages);
         $revenue = [
             [
                 "backgroundColor" => "#007bff",
@@ -225,10 +215,6 @@ class DashboardAnalyticsController extends Controller
         ];
 
         return [
-            'count' => $item_count,
-            'login' => $item_login,
-            'usage' => $item_usage . ' %',
-            'usage_chart' => $item_usage_chart,
             'revenue' => $revenue,
             'visitor_types' => $visitor_types,
             'ages' => $ages,
