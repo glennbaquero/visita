@@ -92,3 +92,9 @@ Vue.component('remarks-view', require('./views/admin/remarks/RemarksView.vue').d
 
 Vue.component('violations-table', require('./views/admin/violations/ViolationsTable.vue').default);
 Vue.component('violations-view', require('./views/admin/violations/ViolationsView.vue').default);
+
+Vue.component('group-remarks-table', require('./views/admin/group-remarks/GroupRemarksTable.vue').default);
+
+Vue.component('group-violation-table', require('./views/admin/group-violations/GroupViolationTable.vue').default);
+
+Vue.component('guest-feedback-table', require('./views/admin/guest-feedbacks/GuestFeedbackTable.vue').default);
