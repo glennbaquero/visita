@@ -678,5 +678,18 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
         });
 
+         Route::namespace('Surveys')->group(function() {
+            Route::get('surveys', 'SurveyController@index')->name('surveys.index');
+            Route::get('surveys/show/{id}', 'SurveyController@show')->name('surveys.show');
+            Route::post('surveys/{id}/archive', 'SurveyController@archive')->name('surveys.archive');
+            Route::post('surveys/{id}/restore', 'SurveyController@restore')->name('surveys.restore');
+
+            Route::post('surveys/fetch', 'SurveyFetchController@fetch')->name('surveys.fetch');
+            Route::post('surveys/fetch?archived=1', 'SurveyFetchController@fetch')->name('surveys.fetch-archive');
+            Route::post('surveys/fetch-item/{id?}', 'SurveyFetchController@fetchView')->name('surveys.fetch-item');
+            Route::post('surveys/fetch-pagination/{id}', 'SurveyFetchController@fetchPagePagination')->name('surveys.fetch-pagination');
+        });
+
+
     });
 });

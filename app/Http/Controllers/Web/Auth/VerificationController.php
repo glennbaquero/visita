@@ -10,6 +10,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Auth;
 
 use App\Models\Users\User;
+use App\Models\Users\Management;
 
 class VerificationController extends Controller
 {
@@ -31,7 +32,7 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -67,6 +68,22 @@ class VerificationController extends Controller
      */
     public function verify(Request $request)
     {
+
+        $management = $this->management()->findOrFail($request->route('id'));
+
+        if ($request->route('id') != $management->getKey()) {
+            throw new AuthorizationException;
+        }
+
+        if ($management->hasVerifiedEmail()) {
+            return redirect($this->redirectPath());
+        }
+
+        if ($management->markEmailAsVerified()) {
+            $this->guard()->login($management);
+            event(new Verified($management));
+        }
+        
         $user = $this->user()->findOrFail($request->route('id'));
 
         if ($request->route('id') != $user->getKey()) {
@@ -87,6 +104,10 @@ class VerificationController extends Controller
 
     protected function user() {
         return new User;
+    }
+
+    protected function management() {
+        return new Management;
     }
 
     protected function guard() {
