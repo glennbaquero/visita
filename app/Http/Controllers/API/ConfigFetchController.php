@@ -44,6 +44,8 @@ class ConfigFetchController extends Controller
             'api.scan.qr' => route('api.scan.qr'),
 
             'api.guest.fetch' => route('api.guest.fetch'),
+
+            'api.sync' => route('api.sync'),
             // 'api.register' => route('api.register'),
             // 'api.verification.resend' => route('api.verification.resend'),
 

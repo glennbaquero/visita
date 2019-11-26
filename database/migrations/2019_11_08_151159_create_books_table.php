@@ -22,11 +22,11 @@ class CreateBooksTable extends Migration
             $table->string('bookable_type');
 
             $table->integer('destination_representative_id')->unsigned()->index()->nullable();
-            $table->dateTime('scheduled_at');
-            $table->dateTime('started_at');
-            $table->dateTime('ended_at');
+            $table->dateTime('scheduled_at')->nullable();
+            $table->dateTime('started_at')->nullable();
+            $table->dateTime('ended_at')->nullable();
             $table->dateTime('checked_in_at')->nullable();
-            $table->dateTime('re_scheduled_at');
+            $table->dateTime('re_scheduled_at')->nullable();
             $table->integer('status');
             $table->string('agency_code')->nullable();
             $table->integer('total_guest')->default(0);
@@ -35,6 +35,7 @@ class CreateBooksTable extends Migration
             $table->boolean('is_walkin')->default(0);
             $table->string('qr_code_path');
             $table->string('qr_id');
+            $table->string('offline_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

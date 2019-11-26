@@ -8,6 +8,8 @@ use App\Models\Answers\Answer;
 
 class Feedback extends Model
 {
+    public $table = "feedbacks";
+
     public function answers()
     {
     	return $this->morphMany(Answer::class, 'answerable');

@@ -23,6 +23,7 @@ class BookController extends Controller
                 'id' => $item->id,
                 'main_contact' => $item->guests()->where('main', 1)->first(),
                 'is_walkin' => $item->is_walkin ? 'Walk-In' : 'Online',
+                'is_walkin_label' => $item->is_walkin ? 'Walk-In' : 'Online',
                 'guests' => $item->guests,
                 'allocation' => $item->allocation,
                 'schedule' => Carbon::parse($item->scheduled_at)->format('j M Y h:i A'),
@@ -31,9 +32,10 @@ class BookController extends Controller
                 'created_at' => $item->created_at->format('j M Y h:i A'),
                 'violations' => $item->groupViolations,
                 'representative' => $item->representative ?? null,
-                'remarks' => $item->groupRemarks,
+                'group_violations' => $item->groupViolations,
+                'group_remarks' => $item->groupRemarks,
                 'ended_at' => $item->ended_at,
-                'start_at' => $item->started_at
+                'started_at' => $item->started_at
             ];
         });
 
