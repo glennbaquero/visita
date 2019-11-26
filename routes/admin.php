@@ -297,6 +297,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('activity-logs/fetch?id={id?}&remarks=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.remarks');
 
             Route::post('activity-logs/fetch?id={id?}&violations=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.violations');
+
+             Route::post('activity-logs/fetch?id={id?}&bookings=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.bookings');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -524,6 +527,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('feedbacks/fetch?archived=1', 'FeedbackFetchController@fetch')->name('feedbacks.fetch-archive');
             Route::post('feedbacks/fetch-item/{id?}', 'FeedbackFetchController@fetchView')->name('feedbacks.fetch-item');
             Route::post('feedbacks/fetch-pagination/{id}', 'FeedbackFetchController@fetchPagePagination')->name('feedbacks.fetch-pagination');
+
+            #Fetch Guest Feedbacks
+            Route::post('feedbacks/fetch', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch');
+            Route::post('feedbacks/fetch?bookid={id?}', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch.bookid');
         });
 
         Route::namespace('Managements')->group(function() {
@@ -664,6 +671,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('violations/fetch?archived=1', 'ViolationFetchController@fetch')->name('violations.fetch-archive');
             Route::post('violations/fetch-item/{id?}', 'ViolationFetchController@fetchView')->name('violations.fetch-item');
             Route::post('violations/fetch-pagination/{id}', 'ViolationFetchController@fetchPagePagination')->name('violations.fetch-pagination');
+
+            #Fetch Group Violations
+            Route::post('violations/fetch', 'GroupViolationFetchController@fetch')->name('group-violations.fetch');
+            Route::post('violations/fetch?bookid={id?}', 'GroupViolationFetchController@fetch')->name('group-violations.fetch.bookid');
+
         });
 
     });

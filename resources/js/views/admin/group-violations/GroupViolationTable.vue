@@ -28,7 +28,7 @@
                 <tr v-for="item in items">
                     <td>{{ item.id }}</td>
                     <td>{{ item.book_id }}</td>
-                    <td>{{ item.remark }}</td>
+                    <td>{{ item.violation }}</td>
                     <td>{{ item.statement }}</td>
                     <td>{{ item.created_at }}</td>
                 </tr>
@@ -53,7 +53,7 @@ export default {
             let array = [
                 { text: '#', value: 'id' },
                 { text: 'Book Id', value: 'book_id' },
-                { text: 'Remark', value: 'remark' },
+                { text: 'Violation', value: 'violation' },
                 { text: 'Statement', value: 'statement' },
             ];
 

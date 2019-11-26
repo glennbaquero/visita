@@ -17,4 +17,5 @@ class GuestFeedback extends Model
     {
     	return $this->belongsTo(Book::class);
     }
+
 }

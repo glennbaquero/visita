@@ -14,14 +14,14 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    {{-- <li class="breadcrumb-item"><a href="{{ route('admin.bookings.index') }}">Add Ons</a></li> --}}
+                    <li class="breadcrumb-item"><a href="{{ route('admin.calendar.index') }}">Calendar</a></li>
                     <li class="breadcrumb-item active"><a href="javascript:void(0)">{{ $item->name }}</a></li>
                 </ol>
             </div>
         </div>
     </section>
     
-    <page-pagination fetch-url="{{ route('admin.bookings.fetch-pagination', $item->id) }}"></page-pagination>
+   {{--  <page-pagination fetch-url="{{ route('admin.bookings.fetch-pagination', $item->id) }}"></page-pagination> --}}
 
     <section class="content">
         <div class="card">
@@ -52,27 +52,29 @@
                         ></group-remarks-table>
                     </div>
                     <div class="tab-pane" id="tab3">
-                        <bookings-table
-                       {{--  ref="table-2"
+                        <group-violation-table
+                        ref="table-3"
                         disabled
-                        fetch-url="{{ route('admin.bookings.fetch-archive') }}" --}}
-                        ></bookings-table>
+                        no-action
+                        fetch-url="{{ route('admin.group-violations.fetch.bookid', $item->id) }}"
+                        ></group-violation-table>
                     </div>
                     <div class="tab-pane" id="tab4">
-                        <bookings-table
-                       {{--  ref="table-2"
+                        <guest-feedback-table
+                        ref="table-4"
                         disabled
-                        fetch-url="{{ route('admin.bookings.fetch-archive') }}" --}}
-                        ></bookings-table>
+                        no-action
+                        fetch-url="{{ route('admin.guest-feedbacks.fetch.bookid', $item->id) }}"
+                        ></guest-feedback-table>
                     </div>
 
                     <div class="tab-pane" id="tab5">
-                        {{-- <activity-log-table 
-                        ref="table-1"
+                        <activity-log-table 
+                        ref="table-5"
                         disabled
                         no-action
                         fetch-url="{{ route('admin.activity-logs.fetch.bookings', $item->id) }}"
-                        ></activity-log-table> --}}
+                        ></activity-log-table>
                     </div>
                 </div>
             </div>
