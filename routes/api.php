@@ -28,6 +28,8 @@ Route::name('api.')
 
     });
     Route::group(['middleware' => ['assign.guard:api', 'jwt.auth']], function() {
+
+        Route::post('sync', 'SyncController@sync')->name('sync');
         
         Route::namespace('Auth')->group(function() {
             Route::post('logout', 'LoginController@logout')->name('logout');

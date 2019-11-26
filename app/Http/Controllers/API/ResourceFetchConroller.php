@@ -123,8 +123,8 @@ class ResourceFetchController extends Controller
                 'allocation_id' => $item->allocation_id,
                 'destination_id' => $item->destination_id,
                 'scheduled_at' => Carbon::parse($item->scheduled_at)->toDateString(),
-                'started_at' => $item->started_at,
-                'ended_at' => $item->ended_at,
+                'started_at' => $item->started_at ?? null,
+                'ended_at' => $item->ended_at ?? null,
                 'checked_in_at' => $item->checked_in_at,
                 're_scheduled_at' => Carbon::parse($item->re_scheduled_at)->toDateString(),
                 'status' => $item->status,
@@ -155,6 +155,7 @@ class ResourceFetchController extends Controller
         $data = [];
         foreach ($items as $item) {
             array_push($data, [
+                'id' => $item->id,
                 'book_id' => $item->book_id,
                 'special_fee_id' => $item->special_fee_id,
                 'visitor_type_id' => $item->visitor_type_id,
