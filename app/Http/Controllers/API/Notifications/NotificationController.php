@@ -7,6 +7,9 @@ use Illuminate\Notifications\DatabaseNotification as Notification;
 
 use App\Http\Controllers\Controller;
 
+use DB;
+use Carbon\Carbon;
+
 class NotificationController extends Controller
 {
     /**
@@ -34,9 +37,11 @@ class NotificationController extends Controller
         DB::beginTransaction();
             Notification::find($request->id)->update(['read_at' => Carbon::now()]);
         DB::commit();
+        
+        $user = request()->user();
 
         return response()->json([
-            'message' => 'success',
+            'notifications' => $user->notifications()->paginate(10)
         ]);
     }
 }

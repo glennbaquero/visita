@@ -25,12 +25,12 @@ export default {
 			    data: {
 				    labels: this.array_pluck(array, this.itemLabel),
 			        datasets: [{
-			            // label: this.label,
+			            label: this.label,
 			            data: this.array_pluck(array, this.itemData),
 			            backgroundColor: this.array_pluck(array, this.itemBgColor),
-			            borderColor: this.itemBgColor,
-			            borderWidth: 2,
-			            pointBackgroundColor: this.itemBgColor,
+			            borderColor: 'black',
+			            borderWidth: 1,
+			            pointBackgroundColor: '#21a1e1',
 			            fill: false,
 			            borderCapStyle: 'square',
 			            pointBorderWidth: 3
@@ -38,26 +38,14 @@ export default {
 			    },
 			    options: {
 			        legend: {
-			        	display: false,
+			        	display: true,
 			        },
 			        title: {
 			        	display: true,
 			        	text: this.title,
 			        	position: this.titlePosition,
 			        	fontSize: this.fontSize,
-			        },
-			        scales: {
-		                yAxes: [{
-		                    ticks: {
-		                        beginAtZero: true
-		                    },
-		                }],
-		                xAxes: [{
-		                    ticks: {
-		                        beginAtZero: true
-		                    }
-		                }]
-		            }
+			        },	
 			    }
 			};
 
@@ -115,6 +103,11 @@ export default {
 			default: 'pie',
 			type: String,
 		},
+
+		beginAtZero: {
+			default: false,
+			type: Boolean
+		}
 	},
 
 	data() {

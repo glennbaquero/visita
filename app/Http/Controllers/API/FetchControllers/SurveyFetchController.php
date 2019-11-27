@@ -61,6 +61,8 @@ class SurveyFetchController extends FetchController
         	'others_placeholder' => $item->others_placeholder,
         	'show_other' => $item->show_other ?? false,
         	'answers' => $item->answerable ? $item->answers : null,
+            'selected' => null,
+            'remarks' => null
         ];
     }
 }
