@@ -9,6 +9,8 @@ use App\Notifications\Frontliner\AnnouncementNotification;
 
 use App\Http\Requests\Admin\Announcements\AnnouncementStoreRequest;
 
+use App\Services\PushService;
+
 use App\Models\Announcements\Announcement;
 use App\Models\Users\Management;
 use DB;
@@ -56,6 +58,9 @@ class AnnouncementController extends Controller
                     foreach($destination->managements as $receiver) {
                         $receiver->notify(new AnnouncementNotification($request->except(['destination_ids'])));
                     }
+                    $receiver = new PushService('Announcement', 'A new announcement has arrived!');
+                    $receiver->pushToMany($destination->managements);
+
                 }
             } else {
                 $managements = Management::all();
@@ -63,8 +68,6 @@ class AnnouncementController extends Controller
                     $receiver->notify(new AnnouncementNotification($request->except(['destination_ids'])));
                 }
 
-                $receiver = new PushService('Announcement', 'A new announcement has arrived!');
-                $receiver->pushToAll();
             }
         DB::commit();
 
