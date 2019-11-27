@@ -11,7 +11,9 @@ use App\Models\Types\VisitorType;
 class Guest extends Model
 {
    	use FileTrait, Notifiable;
-	
+	  
+      protected $dates = ['birthdate'];
+      
    	public function visitorType()
    	{
    		return $this->belongsTo(VisitorType::class);
