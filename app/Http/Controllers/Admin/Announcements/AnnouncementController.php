@@ -62,6 +62,9 @@ class AnnouncementController extends Controller
                 foreach ($managements as $receiver) {
                     $receiver->notify(new AnnouncementNotification($request->except(['destination_ids'])));
                 }
+
+                $receiver = new PushService('Announcement', 'A new announcement has arrived!');
+                $receiver->pushToAll();
             }
         DB::commit();
 

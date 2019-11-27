@@ -10,27 +10,25 @@ use App\Models\Users\DeviceToken;
 class DeviceTokenController extends Controller
 {
     public function store(Request $request) {
-
-        $filters = [
-            'user_type' => get_class($request->user()),
-            'token' => $request->input('token'),
-        ];
-
-        $params = [
-            'user_id' => $request->user()->id,
-            'platform' => $request->input('platform'),
-        ];
-
-        $token = DeviceToken::where($filters)->first();
-
-        if (!$token) {
-            $token = DeviceToken::create(array_merge($filters, $params));
-        } else {
-            if ($token->user_id != $request->user()->id) {
-                $token->update($params);
-            }
+        $token = DeviceToken::where('token',$request->token)->first();
+        $user = $request->user();
+        if(!$token) {
+            $user->deviceTokens()->create([
+                'token' => $request->token,
+                'platform' => $request->platform
+            ]);
         }
 
-        return response()->json(true);
+        return response()->json([
+            'token' => $request->token,
+        ]);
+    }
+
+    public function update(Request $request, $device_token) {
+        $token = DeviceToken::where('token',$device_token)->first();
+        $token->update($request->all());
+        return response()->json([
+            'token' => $request->token,
+        ]);
     }
 }

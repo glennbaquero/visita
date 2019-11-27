@@ -27,9 +27,9 @@ Route::name('api.')
         Route::post('email/reset', 'VerificationController@resend')->name('verification.resend');
 
     });
+    
     Route::group(['middleware' => ['assign.guard:api', 'jwt.auth']], function() {
-        Route::post('device-token/store', 'DeviceTokenController@store')->name('store.token');
-        
+
         Route::post('sync', 'SyncController@sync')->name('sync');
         
         Route::namespace('Auth')->group(function() {

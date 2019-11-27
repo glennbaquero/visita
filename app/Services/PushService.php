@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\DeviceToken;
+use App\Models\Users\DeviceToken;
 use GuzzleHttp\Client;
 
 use App\Models\Users\User;
