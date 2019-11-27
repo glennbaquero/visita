@@ -19,15 +19,17 @@ class SurveyController extends Controller
     		$survey = Survey::create($survey_vars['survey']);
     		foreach ($survey_experience['survey_answers']['data'] as $key => $data) {
 	    		$survey->surveyExperienceAnswers()->create([
-	    			'survey_experience_data' => $data['data'],
-	    			'answer' => $data['selected']
+	    			'survey_experience_data' => json_encode($data),
+                    'answer' => $data['selected'],
+	    			'remarks' => $data['remarks']
 	    		]);
     		}
+
 
     	DB::commit();
 
     	return response()->json([
-    		'message' => 'success'
+    		'message' => 200
     	]);
     }
 }

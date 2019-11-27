@@ -9,6 +9,8 @@ use App\Models\Books\Book;
 class GuestFeedback extends Model
 {
 
+	public $table = "guest_feedbacks";
+
 	protected $casts = [
     	'feedback_data' => 'array'
     ];

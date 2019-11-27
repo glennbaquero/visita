@@ -27,34 +27,11 @@
             <template v-slot:body="{ items }">
                 <tr v-for="item in items">
                     <td>{{ item.id }}</td>
-                    <td>{{ item.book_id }}</td>
-                    <td>{{ item.age }}</td>
-                    <td>{{ item.gender }}</td>
-                    <td>{{ item.nationality }}</td>
+                    <td>{{ item.survey_id }}</td>
+                    <td>{{ item.question }}</td>
+                    <td>{{ item.answer }}</td>
+                    <td>{{ item.remarks }}</td>
                     <td>{{ item.created_at }}</td>
-                    <td>
-                        <view-button :href="item.showUrl"></view-button>
-                        
-                        <action-button
-                        v-if="!hideButtons"
-                        small 
-                        color="btn-danger"
-                        alt-color="btn-warning"
-                        :show-alt="item.deleted_at"
-                        :action-url="item.archiveUrl"
-                        :alt-action-url="item.restoreUrl"
-                        icon="fas fa-trash"
-                        alt-icon="fas fa-trash-restore-alt"
-                        confirm-dialog
-                        :disabled="loading"
-                        title="Archive Item"
-                        alt-title="Restore Item"
-                        :message="'Are you sure you want to archive Survey #' + item.id + '?'"
-                        :alt-message="'Are you sure you want to restore Survey #' + item.id + '?'"
-                        @load="load"
-                        @success="sync"
-                        ></action-button>
-                    </td>
                 </tr>
             </template>
 
@@ -76,10 +53,10 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Book ID', value: 'book_id' },
-                { text: 'Age', value: 'age' },
-                { text: 'Gender', value: 'gender' },
-                { text: 'Nationality', value: 'nationality' },
+                { text: 'Survey ID', value: 'survey_id' },
+                { text: 'Question', value: 'question' },
+                { text: 'Answer', value: 'answer' },
+                { text: 'Remarks', value: 'remarks' },
             ];
 
 

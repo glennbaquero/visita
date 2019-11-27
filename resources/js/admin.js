@@ -98,3 +98,8 @@ Vue.component('group-remarks-table', require('./views/admin/group-remarks/GroupR
 Vue.component('group-violation-table', require('./views/admin/group-violations/GroupViolationTable.vue').default);
 
 Vue.component('guest-feedback-table', require('./views/admin/guest-feedbacks/GuestFeedbackTable.vue').default);
+
+Vue.component('surveys-table', require('./views/admin/surveys/SurveysTable.vue').default);
+Vue.component('surveys-view', require('./views/admin/surveys/SurveysView.vue').default);
+
+Vue.component('surveys-answer-table', require('./views/admin/surveys/SurveyAnswerTable.vue').default);

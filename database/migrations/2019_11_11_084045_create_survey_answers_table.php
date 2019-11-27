@@ -17,7 +17,8 @@ class CreateSurveyAnswersTable extends Migration
             $table->bigIncrements('id');
             $table->integer('survey_id')->unsigned()->index();
             $table->text('survey_experience_data'); //json data of SurveyExperience
-            $table->string('answer');
+            $table->string('answer')->nullable();
+            $table->string('remarks')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

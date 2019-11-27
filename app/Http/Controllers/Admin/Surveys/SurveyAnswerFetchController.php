@@ -7,17 +7,16 @@ use App\Extenders\Controllers\FetchController;
 use App\Models\Surveys\Survey;
 use App\Models\Surveys\SurveyAnswer;
 
-
-class SurveyFetchController extends FetchController
+class SurveyAnswerFetchController extends FetchController
 {
-     /**
+      /**
      * Set object class of fetched data
      * 
      * @return void
      */
     public function setObjectClass()
     {
-        $this->class = new Survey;
+        $this->class = new SurveyAnswer;
     }
 
     /**
@@ -27,6 +26,10 @@ class SurveyFetchController extends FetchController
      */
     public function filterQuery($query)
     {
+        if ($this->request->filled('surveyid')) {
+            $query = $query->where('survey_id', $this->request->input('surveyid'));
+        }
+
         return $query;
     }
 
@@ -58,10 +61,10 @@ class SurveyFetchController extends FetchController
     {
         return [
             'id' => $item->id,
-            'book_id' => $item->renderName(),
-            'age' => $item->age,
-            'gender' => $item->gender,
-            'nationality' => $item->nationality,
+            'survey_id' => $item->survey_id,
+            'question' =>json_decode($item->survey_experience_data)->question,
+            'answer' => $item->answer,
+            'remarks' => $item->remarks,
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),
             'archiveUrl' => $item->renderArchiveUrl(),
@@ -72,11 +75,9 @@ class SurveyFetchController extends FetchController
 
     public function fetchView($id = null) {
         $item = null;
-        $answers = [];
 
         if ($id) {
-        	$item = Survey::withTrashed()->findOrFail($id);
-            $answers = $item->answers;
+        	$item = SurveyAnswer::withTrashed()->findOrFail($id);
             $item->archiveUrl = $item->renderArchiveUrl();
             $item->restoreUrl = $item->renderRestoreUrl();
         }

@@ -34,17 +34,17 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="tab1">
-                          {{--   <inquiries-table 
+                            <surveys-table
                             ref="table-1"
-                            fetch-url="{{ route('admin.inquiries.fetch') }}"
-                            ></inquiries-table> --}}
+                            fetch-url="{{ route('admin.surveys.fetch') }}"
+                            ></surveys-table>
                         </div>
                         <div class="tab-pane" id="tab2">
-                           {{--  <inquiries-table
+                            <surveys-table
                             ref="table-2"
                             disabled
-                            fetch-url="{{ route('admin.inquiries.fetch-archive') }}"
-                            ></inquiries-table> --}}
+                            fetch-url="{{ route('admin.surveys.fetch-archive') }}"
+                            ></surveys-table>
                         </div>
                     </div>
                 </div>

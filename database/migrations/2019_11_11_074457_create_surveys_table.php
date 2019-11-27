@@ -24,6 +24,8 @@ class CreateSurveysTable extends Migration
             $table->string('annual_income');
             $table->string('education_attainment');
             $table->string('budget');
+            $table->string('memory');
+            $table->string('item');
             $table->softDeletes();
             $table->timestamps();
         });
