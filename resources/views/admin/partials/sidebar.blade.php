@@ -71,6 +71,19 @@
                 </li>
                 @endif
 
+                {{-- @if ($self->hasAnyPermission(['admin.surveys.crud'])) --}}
+                <li class="nav-item">
+                    <a href="{{ route('admin.surveys.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.surveys.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-poll-h"></i>
+                        <p>
+                            Surveys
+                        </p>
+                    </a>
+                </li>
+               {{--  @endif --}}
+
 
                 @if ($self->hasAnyPermission(['admin.destinations.crud', 'admin.experiences.crud', 'admin.allocations.crud', 'admin.capacities.crud', 'admin.managements.crud']))
                 <li class="nav-item has-treeview {{ $checker->route->areOnRoutes([

@@ -124,4 +124,8 @@ class Book extends Model
         
         return 'VST'.$randomString;
     }
+
+    public function renderName($first_column = 'first_name', $second_column = 'last_name') {
+        return $this->guests->first();
+    }
 }

@@ -354,6 +354,18 @@ class PermissionsTableSeeder extends Seeder
                     ],
                 ],
             ],
+
+            [
+                'name' => 'Surveys',
+                'description' => 'View Surveys',
+                'icon' => 'fas fa-poll-h',
+                'items' => [
+                    [
+                        'name' => 'admin.surveys.crud',
+                        'description' => 'View Surveys',
+                    ],
+                ],
+            ],
         ];
 
     	foreach ($categories as $category) {

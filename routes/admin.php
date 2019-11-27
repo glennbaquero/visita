@@ -298,7 +298,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&violations=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.violations');
 
-             Route::post('activity-logs/fetch?id={id?}&bookings=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.bookings');
+            Route::post('activity-logs/fetch?id={id?}&bookings=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.bookings');
+
+            Route::post('activity-logs/fetch?id={id?}&surveys=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.surveys');
 
         });
 
@@ -653,8 +655,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('remarks/fetch-pagination/{id}', 'RemarkFetchController@fetchPagePagination')->name('remarks.fetch-pagination');
 
             #Fetch Group Remarks
-            Route::post('remarks/fetch', 'GroupRemarksFetchController@fetch')->name('group-remarks.fetch');
-            Route::post('remarks/fetch?bookid={id?}', 'GroupRemarksFetchController@fetch')->name('group-remarks.fetch.bookid');
+            Route::post('group_remarks/fetch/', 'GroupRemarksFetchController@fetch')->name('group-remarks.fetch');
+            Route::post('group_remarks/fetch?bookid={id?}', 'GroupRemarksFetchController@fetch')->name('group-remarks.fetch.bookid');
 
         });
 
@@ -673,10 +675,28 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('violations/fetch-pagination/{id}', 'ViolationFetchController@fetchPagePagination')->name('violations.fetch-pagination');
 
             #Fetch Group Violations
-            Route::post('violations/fetch', 'GroupViolationFetchController@fetch')->name('group-violations.fetch');
-            Route::post('violations/fetch?bookid={id?}', 'GroupViolationFetchController@fetch')->name('group-violations.fetch.bookid');
+            Route::post('group_violations/fetch', 'GroupViolationFetchController@fetch')->name('group-violations.fetch');
+            Route::post('group_violations/fetch?bookid={id?}', 'GroupViolationFetchController@fetch')->name('group-violations.fetch.bookid');
 
         });
+
+         Route::namespace('Surveys')->group(function() {
+            Route::get('surveys', 'SurveyController@index')->name('surveys.index');
+            Route::get('surveys/show/{id}', 'SurveyController@show')->name('surveys.show');
+            Route::post('surveys/{id}/archive', 'SurveyController@archive')->name('surveys.archive');
+            Route::post('surveys/{id}/restore', 'SurveyController@restore')->name('surveys.restore');
+
+            Route::post('surveys/fetch', 'SurveyFetchController@fetch')->name('surveys.fetch');
+            Route::post('surveys/fetch?archived=1', 'SurveyFetchController@fetch')->name('surveys.fetch-archive');
+            Route::post('surveys/fetch-item/{id?}', 'SurveyFetchController@fetchView')->name('surveys.fetch-item');
+            Route::post('surveys/fetch-pagination/{id}', 'SurveyFetchController@fetchPagePagination')->name('surveys.fetch-pagination');
+
+            #Fetch Survey Answers
+            Route::post('survey_answers/fetch', 'SurveyAnswerFetchController@fetch')->name('survey_answers.fetch');
+            Route::post('survey_answers/fetch?surveyid={id?}', 'SurveyAnswerFetchController@fetch')->name('survey_answers.fetch.surveyid');
+
+        });
+
 
     });
 });
