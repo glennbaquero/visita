@@ -58,6 +58,7 @@ class ConfigFetchController extends Controller
 
             'api.notifications.fetch' => route('api.notifications.fetch'),
             'api.notifications.read' => route('api.notifications.read'),
+            'api.device-token.store' => route('api.device-token.store'),
         ];
     }
 
