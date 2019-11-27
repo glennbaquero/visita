@@ -21,6 +21,7 @@ use App\Models\Faqs\Faq;
 use App\Models\Remarks\Remark;
 use App\Models\Violations\Violation;
 use App\Models\Users\Management;
+use App\Models\BlockedDates\BlockedDate;
 use Carbon\Carbon;
 
 class ResourceFetchController extends Controller
@@ -49,9 +50,11 @@ class ResourceFetchController extends Controller
         $faqs = Faq::all();
         $remarks = Remark::all();
         $violations = Violation::all();
+        $blocked_dates = BlockedDate::all();
         $management = Management::where('role_id', 5)->where('destination_id', $request->user()->destination_id)->get();
         $bookings = $this->getBookings();
         $guests = $this->getGuests();
+        $destination = auth()->guard('api')->user()->destination;
 
         return response()->json([
             'user' => $user,
@@ -69,6 +72,8 @@ class ResourceFetchController extends Controller
             'management' => $management,
             'bookings' => $bookings,
             'guests' => $guests,
+            'blocked_dates' => $blocked_dates,
+            'destination' => $destination,
         ]);
     }
 

@@ -18,6 +18,10 @@ class BookController extends Controller
     {
         $items = Book::where('destination_id', $request->destination_id)->whereDate('scheduled_at', $request->selected_date)->get();
 
+        if($request->filled('started_at')) {
+            $items = Book::where('destination_id', auth()->guard('api')->user()->destination_id)->whereNotNull('started_at')->whereNull('ended_at')->get();
+        }
+
         $items = $items->map(function($item) {
             return [
                 'id' => $item->id,
@@ -35,7 +39,7 @@ class BookController extends Controller
                 'group_violations' => $item->groupViolations,
                 'group_remarks' => $item->groupRemarks,
                 'ended_at' => $item->ended_at,
-                'started_at' => $item->started_at
+                'started_at' => $item->started_at,
             ];
         });
 

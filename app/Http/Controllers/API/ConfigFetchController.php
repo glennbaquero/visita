@@ -57,6 +57,7 @@ class ConfigFetchController extends Controller
             'api.violation.store' => route('api.violation.store'),
 
             'api.notifications.fetch' => route('api.notifications.fetch'),
+            'api.notifications.read' => route('api.notifications.read'),
         ];
     }
 
