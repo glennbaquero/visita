@@ -20,6 +20,8 @@ class Book extends Model
 
     use FileTrait;
 
+    protected $dates = ['scheduled_at'];
+
     /**
      * Morph relationship to Management and User Models
      */
@@ -121,5 +123,9 @@ class Book extends Model
         $randomString .= $additionalString;
         
         return 'VST'.$randomString;
+    }
+
+    public function renderName($first_column = 'first_name', $second_column = 'last_name') {
+        return $this->guests->first();
     }
 }
