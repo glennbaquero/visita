@@ -9,6 +9,9 @@ use App\Models\TrainingModules\TrainingModule;
 
 use App\Http\Requests\Admin\TrainingModules\TrainingModuleStoreRequest;
 
+use App\Notifications\Frontliner\TrainingModuleNotification;
+
+use App\Models\Users\Management;
 use DB;
 
 
@@ -50,9 +53,24 @@ class TrainingModuleController extends Controller
     {
         DB::beginTransaction();
             $item = TrainingModule::store($request);
+            if($request->destination_ids) {
+                $item->destinations()->attach($request->destination_ids);
+                foreach($item->destinations as $destination) {
+                    foreach($destination->managements as $receiver) {
+                        $receiver->notify(new TrainingModuleNotification($request->except(['destination_ids'])));
+                    }
+                }
+            } else {
+                $managements = Management::all();
+                foreach ($managements as $receiver) {
+                    $receiver->notify(new TrainingModuleNotification($request->except(['destination_ids'])));
+                }
+            }
         DB::commit();
         $message = "You have successfully created {$item->title}";
         $redirect = $item->renderShowUrl();
+
+        // dd($request->renderFile());
 
         return response()->json([
             'message' => $message,
