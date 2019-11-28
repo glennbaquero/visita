@@ -68,4 +68,14 @@ class TrainingModule extends Model
 
 		return $type;
 	}
+
+	public function renderFile($column = 'path') {
+        $path = null;
+
+        if ($this[$column]) {
+            $path = url('/') . Storage::url($this[$column]);
+        }
+
+        return $path;
+    }
 }
