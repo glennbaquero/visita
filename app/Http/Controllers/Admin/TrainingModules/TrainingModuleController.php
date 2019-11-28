@@ -53,17 +53,15 @@ class TrainingModuleController extends Controller
     {
         DB::beginTransaction();
             $item = TrainingModule::store($request);
-            if($request->destination_ids) {
-                $item->destinations()->attach($request->destination_ids);
-                foreach($item->destinations as $destination) {
-                    foreach($destination->managements as $receiver) {
-                        $receiver->notify(new TrainingModuleNotification($request->except(['destination_ids'])));
+
+            if($request->destination_id) {     
+                    foreach($item->destination->managements as $receiver) {
+                        $receiver->notify(new TrainingModuleNotification($item->title, $item->description, $item->renderFilePath('path')));
                     }
-                }
             } else {
                 $managements = Management::all();
                 foreach ($managements as $receiver) {
-                    $receiver->notify(new TrainingModuleNotification($request->except(['destination_ids'])));
+                    $receiver->notify(new TrainingModuleNotification($item->title, $item->description, $item->renderFilePath('path')));
                 }
             }
         DB::commit();

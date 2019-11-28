@@ -7,23 +7,24 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class TrainingModuleNotification extends Notification
+class TrainingModuleNotification extends Notification 
 {
     use Queueable;
 
     public $title;
     public $description;
+    public $path;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($request)
+    public function __construct($title, $description, $path)
     {
-        $this->title = $request['title'];
-        $this->description = $request['description'];
-        $this->path = $request['path'];
+        $this->title = $title;
+        $this->description = $description;
+        $this->path = $path;
     }
 
     /**
@@ -48,10 +49,9 @@ class TrainingModuleNotification extends Notification
         return (new MailMessage)
             ->subject(config('app.name') . ': ' . $this->title)
             ->greeting('Hello ' . $notifiable->fullname . ',')
-            ->line('Title' . $this->title)
-            ->line('Description' . $this->description)
+            ->line('Title: ' . $this->title)
+            ->line('Description: ' . $this->description)
             ->line(url($this->path));
-
     }
 
     /**
