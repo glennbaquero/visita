@@ -12,8 +12,8 @@
 						card-title="ONLINE RESERVATION"
 						:show-visitors-capacity="true"
 						:show-groups-capacity="true"
-						:total-groups="10"
-						:total-visitors="20"
+						:total-groups="total_checked_in.online_group"
+						:total-visitors="total_checked_in.online_visitor"
 						:total-groups-capacity="20"
 						:total-visitors-capacity="200"
 						total-groups-label="Total Groups Check-In"
@@ -23,8 +23,8 @@
 				<div class="col-sm-6 col-md-4 mb-2">
 					<box-widget-two
 						card-title="WALK-INS"
-						:total-groups="5"
-						:total-visitors="50"
+						:total-groups="total_checked_in.walk_in"
+						:total-visitors="total_checked_in.walk_in_group"
 						total-groups-label="Total Groups Check-In"
 						total-visitors-label="Total Visitors Check-In"
 					></box-widget-two>
@@ -157,6 +157,9 @@ export default {
 			this.source = data.source;
 			this.special_fees = data.special_fees;
 			this.gender = data.gender;
+			this.total = data.total;
+			this.total_checked_in = data.total_checked_in;
+			this.checked_in_walkin = data.checked_in_walkin;
 		},
 	},
 
@@ -177,6 +180,9 @@ export default {
 			source: [],
 			special_fees: [],
 			gender: [],
+			total: [],
+			total_checked_in: [],
+			checked_in_walkin: [],
 		}
 	},
 

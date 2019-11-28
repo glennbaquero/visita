@@ -9,6 +9,7 @@ use Carbon\Carbon;
 
 use App\Models\Users\Admin;
 use App\Models\Users\User;
+use App\Models\Books\Book;
 use App\Models\ActivityLogs\ActivityLog;
 
 use App\Models\Guests\Guest;
@@ -53,31 +54,28 @@ class DashboardAnalyticsController extends Controller
     }
 
     protected function getSystemUsageAnalytics($items, $subject) {
-        $ranges = [ // the start of each age-range.
-            '18-24' => 18,
-            '25-35' => 25,
-            '36-45' => 36,
-            '46+' => 46
-        ];
+        
+        $today = Carbon::now();
+        // get all booking based on current destination assigned for logged-in user
+        $bookings = Book::whereDate('scheduled_at', $today);
+        
+        // total of guest today
+        $total['guest'] = $bookings->sum('total_guest');
 
-        $ages = Guest::get()->map(function($guest) use ($ranges) {
-            $age = Carbon::parse($guest->birthdate)->age;
+        // total of groups today
+        $total['groups'] = $bookings->get()->count();
+        
+        // get total checked in for walk in guest
+        $checked_in_walkin['visitors'] = $bookings->where('is_walkin', true)->whereDate('checked_in_at', $today)->get()->count(); 
+        $checked_in_walkin['groups'] = $bookings->where('is_walkin', true)->whereDate('checked_in_at', $today)->get()->count(); 
 
-            foreach ($ranges as $key => $breakpoint) {
-                if($breakpoint >= $age) {
-                    $guest->range = $key;
-                    $guest->age = $age;
-                    break;
-                }
-            }
+        // get total checked in for online in guest
+        $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
+        $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
+        $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->whereDate('checked_in_at', $today)->get()->count(); 
+        $total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
 
-            return $guest;
-        })->mapToGroups(function($guest, $key) {
-            return [$guest->age => $guest];
-        })->map(function($group) {
-            return count($group);
-        });
-        dd($ages);
+
         $revenue = [
             [
                 "backgroundColor" => "#007bff",
@@ -222,6 +220,9 @@ class DashboardAnalyticsController extends Controller
             'gender' => $gender,
             'source' => $source,
             'special_fees' => $special_fees,
+            'total' => $total,
+            'checked_in_walkin' => $checked_in_walkin,
+            'total_checked_in' => $total_checked_in
         ];
     }
 }
