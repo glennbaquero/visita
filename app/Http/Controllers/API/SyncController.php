@@ -95,7 +95,7 @@ class SyncController extends Controller
     						'signature_path' => $guest['signature_path'] ? $this->encodeBase64($guest['signature_path']) : null
     					]);
     				} else {
-                        if($book->guests) {
+                        if($book->guests()->exists()) {
                             $book->guests()->create([
                                 'special_fee_id' => $guest['special_fee_id'],
                                 'visitor_type_id' => $guest['visitor_type_id'],
@@ -134,7 +134,7 @@ class SyncController extends Controller
     		if($request->table === 'guest_feedbacks') {
     			foreach ($request->data as $key => $feedback) {
 					$book = Book::where('id', $feedback['book_id'])->orWhere('offline_id', $feedback['book_id'])->first();
-                    if($book->guestFeedbacks) {
+                    if($book->guestFeedbacks()->exists()) {
                         $book->guestFeedbacks()->create([
                             'feedback_data' => $feedback['feedback_data'],
                             'answer' => $feedback['answer'],
