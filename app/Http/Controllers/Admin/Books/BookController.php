@@ -5,8 +5,14 @@ namespace App\Http\Controllers\Admin\Books;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Notifications\Frontliner\NewBookingNotification;
+
 use App\Models\Books\Book;
 use App\Models\Guests\Guest;
+use App\Models\Users\Management;
+
+use App\Services\PushService;
+
 use Carbon\Carbon;
 use DB;
 
@@ -67,20 +73,30 @@ class BookController extends Controller
                     'visitor_type_id' => $request->visitor_type_id,
                     'main' => true
                 ]);
-
-            foreach($request->guest_first_name as $key => $guest) {
-                $item->guests()->create([
-                    'first_name' => $request->guest_first_name[$key],
-                    'last_name' => $request->guest_last_name[$key],
-                    'birthdate' => $request->guest_birthdate[$key],
-                    'email' => $request->guest_email[$key],
-                    'gender' => $request->guest_gender[$key],
-                    'nationality' => $request->guest_nationality[$key],
-                    'visitor_type_id' => $request->guest_visitor_type[$key],
-                    'special_fee_id' => $request->guest_special_fee_id[$key],
-                ]);   
+            if($request->guest_first_name) {
+                foreach($request->guest_first_name as $key => $guest) {
+                    $item->guests()->create([
+                        'first_name' => $request->guest_first_name[$key],
+                        'last_name' => $request->guest_last_name[$key],
+                        'birthdate' => $request->guest_birthdate[$key],
+                        'email' => $request->guest_email[$key],
+                        'gender' => $request->guest_gender[$key],
+                        'nationality' => $request->guest_nationality[$key],
+                        'visitor_type_id' => $request->guest_visitor_type[$key],
+                        'special_fee_id' => $request->guest_special_fee_id[$key],
+                    ]);   
+                }
             }
+
+            $frontliners = Management::where('destination_id', $destination)->get();
+            
+            foreach ($frontliners as $key => $frontliner) {
+                $frontliner->notify(new NewBookingNotification($request));
+            }
+            $receiver = new PushService('New Reservation', 'A new reservation of visitor for '.Carbon::parse($request->scheduled_at)->format('M d, Y'). '.');
+            $receiver->pushToMany($frontliners);
         DB::commit();
+
 
         $message = "You have successfully created a new reservation";
         $redirect = $item->renderShowUrl();
