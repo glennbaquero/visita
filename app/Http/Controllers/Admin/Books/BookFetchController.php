@@ -74,6 +74,8 @@ class BookFetchController extends FetchController
             'allocation' => $item->allocation->name,
             'time' => Carbon::parse($item->scheduled_at)->toTimeString(),
             'status' => $item->status,
+            'qr_path' => $item->renderImagePath('qr_code_path'),
+            'qr_id' => $item->qr_id,
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),
             'archiveUrl' => $item->renderArchiveUrl(),

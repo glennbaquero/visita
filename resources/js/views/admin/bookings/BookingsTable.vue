@@ -27,6 +27,12 @@
             <template v-slot:body="{ items }">
                 <tr v-for="item in items">
                     <td>{{ item.id }}</td>
+                    <td>
+                        <a :href="item.qr_path" target="_blank">
+                            <img :src="item.qr_path" width="100px" class="rounded img-fluid img-thumbnail">
+                            {{ item.qr_id }}
+                        </a>
+                    </td>
                     <td>{{ item.main_contact.fullname }}</td>
                     <td>{{ item.total_guest }}</td>
                     <td>{{ item.time }}</td>
@@ -79,6 +85,7 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
+                { text: 'QR', value: 'qr_id' },
                 { text: 'Point Person', value: 'fullname' },
                 { text: 'Total Guest', value: 'total_guest' },
                 { text: 'Time', value: 'time' },
