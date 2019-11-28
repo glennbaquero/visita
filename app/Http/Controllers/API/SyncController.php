@@ -87,7 +87,7 @@ class SyncController extends Controller
     		if($request->table === 'guests') {
     			foreach ($request->data as $key => $guest) {
     				$book = Book::where('id', $guest['book_id'])->orWhere('offline_id', $guest['book_id'])->first();
-
+                    dd($book);
     				// check if the book id is int
     				if(is_int($guest['book_id'])) {
     					$guestWithId = Guest::find($guest['id']);
