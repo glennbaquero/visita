@@ -117,20 +117,20 @@ class SyncController extends Controller
     		if($request->table === 'guest_feedbacks') {
     			foreach ($request->data as $key => $feedback) {
 					$book = Book::where('id', $feedback['book_id'])->orWhere('offline_id', $feedback['book_id'])->first();
-                    if($book->guestFeedbacks()->exists()) {
-                        $book->guestFeedbacks()->create([
-                            'feedback_data' => $feedback['feedback_data'],
-                            'answer' => $feedback['answer'],
-                            'remarks' => $feedback['remarks']
-                        ]);
-                    } else {
+                    // if($book->guestFeedbacks()->exists()) {
+                    //     $book->guestFeedbacks()->create([
+                    //         'feedback_data' => $feedback['feedback_data'],
+                    //         'answer' => $feedback['answer'],
+                    //         'remarks' => $feedback['remarks']
+                    //     ]);
+                    // } else {
                         GroupFeedback::create([
                             'book_id' => $book->id,
                             'feedback_data' => $feedback['feedback_data'],
                             'answer' => $feedback['answer'],
                             'remarks' => $feedback['remarks']
                         ]);
-                    }
+                    // }
 					
     			}
     		}
