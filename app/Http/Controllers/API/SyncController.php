@@ -95,38 +95,21 @@ class SyncController extends Controller
     						'signature_path' => $guest['signature_path'] ? $this->encodeBase64($guest['signature_path']) : null
     					]);
     				} else {
-                        if($book->guests()->exists()) {
-                            $book->guests()->create([
-                                'special_fee_id' => $guest['special_fee_id'],
-                                'visitor_type_id' => $guest['visitor_type_id'],
-                                'first_name' => $guest['first_name'],
-                                'last_name' => $guest['last_name'],
-                                'main' => $guest['main'] == 1 ? 1 : 0,
-                                'gender' => $guest['gender'],
-                                'nationality' => $guest['nationality'],
-                                'email' => $guest['email'],
-                                'birthdate' => $guest['birthdate'],
-                                'contact_number' => $guest['contact_number'],
-                                'emergency_contact_number' => $guest['emergency_contact_number'] ?? null ,
-                                'signature_path' => $guest['signature_path'] ? $this->encodeBase64($guest['signature_path']) : null
-                            ]);
-                        }  else {
-                            Guest::create([
-                                'book_id' => $book->id,
-                                'special_fee_id' => $guest['special_fee_id'],
-                                'visitor_type_id' => $guest['visitor_type_id'],
-                                'first_name' => $guest['first_name'],
-                                'last_name' => $guest['last_name'],
-                                'main' => $guest['main'] == 1 ? 1 : 0,
-                                'gender' => $guest['gender'],
-                                'nationality' => $guest['nationality'],
-                                'email' => $guest['email'],
-                                'birthdate' => $guest['birthdate'],
-                                'contact_number' => $guest['contact_number'],
-                                'emergency_contact_number' => $guest['emergency_contact_number'] ?? null ,
-                                'signature_path' => $guest['signature_path'] ? $this->encodeBase64($guest['signature_path']) : null
-                            ]);
-                        }
+                        Guest::create([
+                            'book_id' => $book->id,
+                            'special_fee_id' => $guest['special_fee_id'],
+                            'visitor_type_id' => $guest['visitor_type_id'],
+                            'first_name' => $guest['first_name'],
+                            'last_name' => $guest['last_name'],
+                            'main' => $guest['main'] == 1 ? 1 : 0,
+                            'gender' => $guest['gender'],
+                            'nationality' => $guest['nationality'],
+                            'email' => $guest['email'],
+                            'birthdate' => $guest['birthdate'],
+                            'contact_number' => $guest['contact_number'],
+                            'emergency_contact_number' => $guest['emergency_contact_number'] ?? null ,
+                            'signature_path' => $guest['signature_path'] ? $this->encodeBase64($guest['signature_path']) : null
+                        ]);
     				}
     			}
     		}
