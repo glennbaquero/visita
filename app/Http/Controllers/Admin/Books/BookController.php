@@ -88,19 +88,18 @@ class BookController extends Controller
                     ]);   
                 }
             }
-
-            $point_person = $item->guests()->where('main', true)->first();
-            $point_person->notify(new BookingNotification($item));
-
-            $frontliners = Management::where('destination_id', $destination)->get();
-            
-            foreach ($frontliners as $key => $frontliner) {
-                $frontliner->notify(new NewBookingNotification($request));
-            }
-            $receiver = new PushService('New Reservation', 'A new reservation of visitor for '.Carbon::parse($request->scheduled_at)->format('M d, Y'). '.');
-            $receiver->pushToMany($frontliners);
         DB::commit();
+        
+        $point_person = $item->guests()->where('main', true)->first();
+        $point_person->notify(new BookingNotification($item));
 
+        $frontliners = Management::where('destination_id', $destination)->get();
+        
+        foreach ($frontliners as $key => $frontliner) {
+            $frontliner->notify(new NewBookingNotification($request));
+        }
+        $receiver = new PushService('New Reservation', 'A new reservation of visitor for '.Carbon::parse($request->scheduled_at)->format('M d, Y'). '.');
+        $receiver->pushToMany($frontliners);
 
         $message = "You have successfully created a new reservation";
         $redirect = $item->renderShowUrl();

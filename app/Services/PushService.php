@@ -6,6 +6,7 @@ use App\Models\Users\DeviceToken;
 use GuzzleHttp\Client;
 
 use App\Models\Users\User;
+use App\Models\Users\Management;
 
 class PushService
 {
