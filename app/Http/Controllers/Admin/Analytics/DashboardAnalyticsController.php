@@ -99,7 +99,6 @@ class DashboardAnalyticsController extends Controller
 
         $gender = $this->renderGraphDigits($grouped);
 
-
         // get all the $source of the book/reservation
         $book = Book::all();
         $grouped = $book->groupBy(function($item, $key) {
@@ -115,6 +114,14 @@ class DashboardAnalyticsController extends Controller
 
         $special_fees = $this->renderGraphDigits($grouped);
 
+
+        $guests = Guest::agedBetween(22)->get();
+        // $now = Carbon::now();
+        // $start = $now->subYears(18);
+        // $end = $now->subYears(30)->addYear()->subDay(); // plus 1 year minus a day
+
+        // $guests = Guest::whereBetween('birthdate', [$start, $end])->get();
+        dd($guests);
         $revenue = [
             [
                 "backgroundColor" => "#007bff",

@@ -33,6 +33,8 @@ class ConfigFetchController extends Controller
             'api.fetch.config' => route('api.fetch.config'),
             // 'api.device-token.store' => route('api.device-token.store'),
 
+            'web.frontliner.password.email' => route('web.frontliner.password.email'),
+
             'api.login' => route('api.login'),
             'api.logout' => route('api.logout'),
             'api.resources.dashboard' => route('api.resources.dashboard'),
