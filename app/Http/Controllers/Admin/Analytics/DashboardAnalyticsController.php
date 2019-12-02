@@ -13,6 +13,7 @@ use App\Models\Books\Book;
 use App\Models\ActivityLogs\ActivityLog;
 
 use App\Models\Guests\Guest;
+use DB;
 
 class DashboardAnalyticsController extends Controller
 {
@@ -75,35 +76,44 @@ class DashboardAnalyticsController extends Controller
         $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->whereDate('checked_in_at', $today)->get()->count(); 
         $total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
 
-        $nationalities = [];
-        $guests = Guest::all();
+        // get all the nationality of all guests
 
-        foreach ($guests as $key => $guest) {
-            if(empty($nationalities)) {
-                array_push($nationalities, [
-                    "backgroundColor" => "#007bff",
-                    "data" => 1,
-                    "label" => $guest->nationality,
-                ]);    
-            } else {
-                $needle = $guest->nationality;
-                $index = array_search($needle, array_column($nationalities, 'label'));
+        $collection = Guest::with('visitorType', 'specialFee')->get();
+        $grouped = $collection->groupBy(function($item, $key) {
+            return $item['nationality'];
+        });
+        $nationalities = $this->renderGraphDigits($grouped);
 
-                foreach ($nationalities as $key => $nationality) {
-                    if($nationality['label'] === $needle) {
-                        $nationalities[$key]['data'] += 1;
-                    } 
+        // get all the type of visitor of the guests
 
-                    if($nationalities[$key]['label']) {
-                        array_push($nationalities, [
-                            "backgroundColor" => "#007bff",
-                            "data" => 1,
-                            "label" => $guest->nationality,
-                        ]);
-                    }
-                }
-            }
-        }
+        $grouped = $collection->groupBy(function($item, $key) {
+            return $item->visitorType ? $item->visitorType->name  : [];
+        });
+
+        $visitor_types = $this->renderGraphDigits($grouped);
+
+        // get all the gender of the guests
+        $grouped = $collection->groupBy(function($item, $key) {
+            return $item['gender'];
+        });
+
+        $gender = $this->renderGraphDigits($grouped);
+
+
+        // get all the $source of the book/reservation
+        $book = Book::all();
+        $grouped = $book->groupBy(function($item, $key) {
+            return $item['is_walkin'] == true ? 'Walk-In' : 'Online';
+        });
+
+        $source = $this->renderGraphDigits($grouped);
+        
+        // get all the special fee of the guests
+        $grouped = $collection->groupBy(function($item, $key) {
+            return $item->specialFee ? $item->specialFee->name : [];
+        });
+
+        $special_fees = $this->renderGraphDigits($grouped);
 
         $revenue = [
             [
@@ -133,24 +143,6 @@ class DashboardAnalyticsController extends Controller
             ]
         ];
 
-        $visitor_types = [
-            [
-                "backgroundColor" => "#007bff",
-                "data" => 80.00,
-                "label" => "Non-Filipino"
-            ],
-            [
-                "backgroundColor" => "red",
-                "data" => 99.00,
-                "label" => "Filipino"
-            ],
-            [
-                "backgroundColor" => "green",
-                "data" => 100.00,
-                "label" => "Resident"
-            ],
-        ];
-
         $ages = [
             [
                 "backgroundColor" => "#007bff",
@@ -169,78 +161,6 @@ class DashboardAnalyticsController extends Controller
             ],
         ];
 
-        // $nationalities = [
-        //     [
-        //         "backgroundColor" => "#007bff",
-        //         "data" => 80.00,
-        //         "label" => "Filipino"
-        //     ],
-        //     [
-        //         "backgroundColor" => "red",
-        //         "data" => 99.00,
-        //         "label" => "Japanese"
-        //     ],
-        //     [
-        //         "backgroundColor" => "green",
-        //         "data" => 20,
-        //         "label" => "Korean"
-        //     ],
-        //     [
-        //         "backgroundColor" => "green",
-        //         "data" => 20,
-        //         "label" => "Korean"
-        //     ],
-        // ];
-
-        $gender = [
-            [
-                "backgroundColor" => "#007bff",
-                "data" => 80.00,
-                "label" => "Male"
-            ],
-            [
-                "backgroundColor" => "red",
-                "data" => 99.00,
-                "label" => "Female"
-            ],
-        ];
-
-        $source = [
-            [
-                "backgroundColor" => "#007bff",
-                "data" => 80.00,
-                "label" => "Walk In"
-            ],
-            [
-                "backgroundColor" => "red",
-                "data" => 99.00,
-                "label" => "Online"
-            ],
-            [
-                "backgroundColor" => "yellow",
-                "data" => 20,
-                "label" => "Agency"
-            ],
-        ];
-
-        $special_fees = [
-            [
-                "backgroundColor" => "#007bff",
-                "data" => 80.00,
-                "label" => "Students"
-            ],
-            [
-                "backgroundColor" => "red",
-                "data" => 30,
-                "label" => "PWD"
-            ],
-            [
-                "backgroundColor" => "yellow",
-                "data" => 20,
-                "label" => "Senior"
-            ],
-        ];
-
         return [
             'revenue' => $revenue,
             'visitor_types' => $visitor_types,
@@ -253,5 +173,23 @@ class DashboardAnalyticsController extends Controller
             'checked_in_walkin' => $checked_in_walkin,
             'total_checked_in' => $total_checked_in
         ];
+    }
+
+    public function renderGraphDigits($grouped) 
+    {
+        $data = [];
+        $groupCount = $grouped->map(function ($item, $key) {
+            return collect($item)->count();
+        });
+
+        foreach ($groupCount as $key => $value) {
+            array_push($data, [
+                    "backgroundColor" => '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT),
+                    "data" => $value,
+                    "label" => $key,
+                ]);
+        }
+
+        return $data;
     }
 }

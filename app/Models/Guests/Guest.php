@@ -7,6 +7,8 @@ use App\Traits\FileTrait;
 
 use Illuminate\Notifications\Notifiable;
 use App\Models\Types\VisitorType;
+use App\Models\Books\Book;
+use App\Models\Fees\Fee;
 
 class Guest extends Model
 {
@@ -23,4 +25,8 @@ class Guest extends Model
    	{
    		return $this->belongsTo(Book::class);
    	}
+
+      public function specialFee() {
+         return $this->belongsTo(Fee::class);
+      }
 }
