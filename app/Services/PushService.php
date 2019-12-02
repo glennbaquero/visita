@@ -32,7 +32,7 @@ class PushService
     }
 
     public function pushToUsers() {
-        $this->push(DeviceToken::where('user_type', User::class)->get());
+        $this->push(DeviceToken::where('deviceable_type', Management::class)->get());
     }
 
     public function pushToMany($users) {

@@ -75,6 +75,35 @@ class DashboardAnalyticsController extends Controller
         $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->whereDate('checked_in_at', $today)->get()->count(); 
         $total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
 
+        $nationalities = [];
+        $guests = Guest::all();
+
+        foreach ($guests as $key => $guest) {
+            if(empty($nationalities)) {
+                array_push($nationalities, [
+                    "backgroundColor" => "#007bff",
+                    "data" => 1,
+                    "label" => $guest->nationality,
+                ]);    
+            } else {
+                $needle = $guest->nationality;
+                $index = array_search($needle, array_column($nationalities, 'label'));
+
+                foreach ($nationalities as $key => $nationality) {
+                    if($nationality['label'] === $needle) {
+                        $nationalities[$key]['data'] += 1;
+                    } 
+
+                    if($nationalities[$key]['label']) {
+                        array_push($nationalities, [
+                            "backgroundColor" => "#007bff",
+                            "data" => 1,
+                            "label" => $guest->nationality,
+                        ]);
+                    }
+                }
+            }
+        }
 
         $revenue = [
             [
@@ -140,28 +169,28 @@ class DashboardAnalyticsController extends Controller
             ],
         ];
 
-        $nationalities = [
-            [
-                "backgroundColor" => "#007bff",
-                "data" => 80.00,
-                "label" => "Filipino"
-            ],
-            [
-                "backgroundColor" => "red",
-                "data" => 99.00,
-                "label" => "Japanese"
-            ],
-            [
-                "backgroundColor" => "green",
-                "data" => 20,
-                "label" => "Korean"
-            ],
-            [
-                "backgroundColor" => "green",
-                "data" => 20,
-                "label" => "Korean"
-            ],
-        ];
+        // $nationalities = [
+        //     [
+        //         "backgroundColor" => "#007bff",
+        //         "data" => 80.00,
+        //         "label" => "Filipino"
+        //     ],
+        //     [
+        //         "backgroundColor" => "red",
+        //         "data" => 99.00,
+        //         "label" => "Japanese"
+        //     ],
+        //     [
+        //         "backgroundColor" => "green",
+        //         "data" => 20,
+        //         "label" => "Korean"
+        //     ],
+        //     [
+        //         "backgroundColor" => "green",
+        //         "data" => 20,
+        //         "label" => "Korean"
+        //     ],
+        // ];
 
         $gender = [
             [

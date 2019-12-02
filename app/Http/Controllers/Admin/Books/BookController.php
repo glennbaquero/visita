@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Notifications\Frontliner\NewBookingNotification;
+use App\Notifications\Reservation\BookingNotification;
 
 use App\Models\Books\Book;
 use App\Models\Guests\Guest;
@@ -87,6 +88,9 @@ class BookController extends Controller
                     ]);   
                 }
             }
+
+            $point_person = $item->guests()->where('main', true)->first();
+            $point_person->notify(new BookingNotification($item));
 
             $frontliners = Management::where('destination_id', $destination)->get();
             
