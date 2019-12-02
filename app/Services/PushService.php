@@ -40,7 +40,7 @@ class PushService
         $device_tokens = [];
 
         foreach ($users as $user) {
-            foreach ($user->device_tokens as $device_token) {
+            foreach ($user->deviceTokens as $device_token) {
                 array_push($device_tokens, $device_token);
             }
         }
@@ -52,7 +52,7 @@ class PushService
     public function pushToOne($user) {
         $device_tokens = [];
 
-        foreach ($user->device_tokens as $device_token) {
+        foreach ($user->deviceTokens as $device_token) {
             array_push($device_tokens, $device_token);
         }
 
