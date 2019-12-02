@@ -29,4 +29,17 @@ class Guest extends Model
       public function specialFee() {
          return $this->belongsTo(Fee::class);
       }
+
+      public function scopeAgedBetween($query, $start, $end = null)
+      {
+          if (is_null($end)) {
+              $end = $start;
+          }
+
+          $now = $this->freshTimestamp();
+          $start = $now->subYears($start);
+          $end = $now->subYears($end)->addYear()->subDay(); // plus 1 year minus a day
+
+          return $this->whereBetween('birthdate', [$start, $end]);
+      }
 }
