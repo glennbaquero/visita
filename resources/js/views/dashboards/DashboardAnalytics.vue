@@ -33,7 +33,7 @@
 					<box-widget-two
 						card-title="TOTAL CHECK-INS"
 						:total-groups="total.groups"
-						:total-visitors="parseInt(total.guests)"
+						:total-visitors="parseInt(total.guest)"
 						total-groups-label="Total Groups"
 						total-visitors-label="Total Visitors"
 					></box-widget-two>
