@@ -100,10 +100,10 @@ class ResourceFetchController extends Controller
     	$checked_in_walkin['groups'] = $bookings->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
 
     	// get total checked in for online in guest
-        $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereDate('started_at', $today)->get()->count(); 
-        $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->whereDate('started_at', $today)->get()->count(); 
-        $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
-    	$total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
+        $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+        $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+        $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+    	$total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
 
     	// get the remaining capacity left for today 
     	$capacity_per_day = $user->destination->capacity_per_day;
