@@ -27,7 +27,7 @@
 
 				<div class="form-group col-sm-12 col-md-4" v-if="item.answerable || with_answer" v-for="(answer, index) in answers">
 					<label>{{ index+1 }}) Answer</label>
-					<button type="button" class="btn btn-sm btn-danger" v-if="index > 0" @click="removeAnswer(index)">
+					<button type="button" class="btn btn-sm btn-danger" v-if="index > 0" @click="removeAnswer(index, answer)">
 						<span><i class="fas fa-minus"></i></span>
 					</button>
 					<input v-model="answers[index].answer" name="answers[]" type="text" class="form-control">
@@ -93,6 +93,13 @@ import TimePicker from '../../../components/timepickers/Timepicker.vue';
 
 export default {
 
+	props:{
+		removeAnswerUrl: {
+			default: null,
+			type: String
+		}
+	},
+
 	data() {
 		return {
 			item: [],
@@ -149,8 +156,9 @@ export default {
 			this.answers.push(obj)
 		},
 
-		removeAnswer(index) {
+		removeAnswer(index, answer) {
 			this.answers.splice(index, index);
+			axios.post(this.removeAnswerUrl, { id : answer.id })
 		}
 	},
 

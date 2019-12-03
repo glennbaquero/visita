@@ -37,6 +37,7 @@
                         <survey-experiences-view
                         fetch-url="{{ route('admin.survey-experiences.fetch-item', $item->id) }}"
                         submit-url="{{ route('admin.survey-experiences.update', $item->id) }}"
+                        remove-answer-url="{{ route('admin.survey-experiences.remove-answer') }}"
                         ></survey-experiences-view>
                     </div>
                     <div class="tab-pane" id="tab2">

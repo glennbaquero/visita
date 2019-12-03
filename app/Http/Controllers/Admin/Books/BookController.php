@@ -223,4 +223,5 @@ class BookController extends Controller
             'message' => "You have successfully restored the reservation",
         ]);
     }
+
 }

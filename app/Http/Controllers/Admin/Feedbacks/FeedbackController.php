@@ -9,6 +9,8 @@ use App\Models\Feedbacks\Feedback;
 
 use App\Http\Requests\Admin\Feedbacks\FeedbackStoreRequest;
 
+use App\Models\Answers\Answer;
+
 use DB;
 
 class FeedbackController extends Controller
@@ -110,7 +112,7 @@ class FeedbackController extends Controller
 
             if($request->answerable) {
                 foreach ($request->answers as $key => $value) {
-                    $item->answers()->create([
+                    $item->answers()->firstOrCreate([
                         'answer' => $value
                     ]);
                 }
@@ -174,6 +176,22 @@ class FeedbackController extends Controller
 
         return response()->json([
             'message' => 'Successfully updated the order of survey experience questions',
+        ]);
+    }
+
+    /*
+     * Remove specific answer from survey experience 
+     */
+
+    public function answerRemove(Request $request)
+    {
+        DB::beginTransaction();
+            $answer = Answer::withTrashed()->find($request->id);
+            $answer->forceDelete();
+        DB::commit();
+
+        return response()->json([
+            'message' => 200
         ]);
     }
 }

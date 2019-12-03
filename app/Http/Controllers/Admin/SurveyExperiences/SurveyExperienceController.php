@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Surveys\SurveyExperience;
 
+use App\Models\Answers\Answer;
+
 use DB;
 
 use App\Http\Requests\Admin\SurveyExperiences\SurveyExperienceStoreRequest;
@@ -16,7 +18,7 @@ class SurveyExperienceController extends Controller
 
     public function __construct() {
         $this->middleware('App\Http\Middleware\Admin\SurveyExperiences\SurveyExperienceMiddleware', 
-            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore', 'reOrder']]
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore', 'reOrder', 'answerRemove']]
         );
     }
     /**
@@ -111,11 +113,11 @@ class SurveyExperienceController extends Controller
 
             if($request->answerable) {
                 foreach ($request->answers as $key => $value) {
-                    $item->answers()->create([
+                    $item->answers()->firstOrCreate([
                         'answer' => $value
                     ]);
                 }
-            }
+            }                                                                                                                               
         DB::commit();
         
         $message = "You have successfully updated {$item->renderQuestion()}";
@@ -175,6 +177,22 @@ class SurveyExperienceController extends Controller
 
         return response()->json([
             'message' => 'Successfully updated the order of survey experience questions',
+        ]);
+    }
+
+    /*
+     * Remove specific answer from survey experience 
+     */
+
+    public function answerRemove(Request $request)
+    {
+        DB::beginTransaction();
+            $answer = Answer::withTrashed()->find($request->id);
+            $answer->forceDelete();
+        DB::commit();
+
+        return response()->json([
+            'message' => 200
         ]);
     }
 }

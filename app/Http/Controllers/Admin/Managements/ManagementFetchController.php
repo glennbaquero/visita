@@ -61,7 +61,7 @@ class ManagementFetchController extends FetchController
             'id' => $item->id,
             'fullname' => $item->fullname,
             'email' => $item->email,
-            'email_verified_at' => $item->email_verified_at,
+            'verified_at' => $item->renderDate('email_verified_at'),
             'destination' => $item->destination->name,
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),

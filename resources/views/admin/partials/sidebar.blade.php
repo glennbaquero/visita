@@ -71,7 +71,7 @@
                 </li>
                 @endif
 
-                {{-- @if ($self->hasAnyPermission(['admin.surveys.crud'])) --}}
+                @if ($self->hasAnyPermission(['admin.surveys.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.surveys.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.surveys.*',
@@ -82,7 +82,7 @@
                         </p>
                     </a>
                 </li>
-               {{--  @endif --}}
+                @endif
 
 
                 @if ($self->hasAnyPermission(['admin.destinations.crud', 'admin.experiences.crud', 'admin.allocations.crud', 'admin.capacities.crud', 'admin.managements.crud']))
@@ -247,7 +247,7 @@
                                 </li>
                             @endif
 
-                            @if ($self->hasAnyPermission(['admin.articles.crud']))
+                           {{--  @if ($self->hasAnyPermission(['admin.articles.crud']))
                                 <li class="nav-item">
                                     <a href="{{ route('admin.articles.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                                         'admin.articles.index','admin.articles.create','admin.articles.show',
@@ -258,7 +258,7 @@
                                         </p>
                                     </a>
                                 </li>
-                            @endif
+                            @endif --}}
 
                             @if ($self->hasAnyPermission(['admin.annual_incomes.crud']))
                             <li class="nav-item">
