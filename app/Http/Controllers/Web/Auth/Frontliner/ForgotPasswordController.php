@@ -34,7 +34,7 @@ class ForgotPasswordController extends Controller
      */
     protected function sendResetLinkResponse(Request $request, $response)
     {
-        $user = Doctor::where('email', $request->input('email'))->first();
+        $user = Management::where('email', $request->input('email'))->first();
 
         activity()
             ->causedBy($user)
@@ -53,7 +53,7 @@ class ForgotPasswordController extends Controller
      */
     protected function sendResetLinkFailedResponse(Request $request, $response)
     {
-        return response()->json(['email' => trans($response)]);
+        return response()->json(['code' => 411, 'email' => trans($response)]);
     }
 
     /**

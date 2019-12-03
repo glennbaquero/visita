@@ -195,11 +195,32 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Destination  $sampleItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function archive($id)
     {
-        //
+        $item = Book::withTrashed()->findOrFail($id);
+        $item->archive();
+
+        return response()->json([
+            'message' => "You have successfully archived the reservation",
+        ]);
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     *
+     * @param  \App\Destination  $sampleItem
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $item = Book::withTrashed()->findOrFail($id);
+        $item->unarchive();
+
+        return response()->json([
+            'message' => "You have successfully restored the reservation",
+        ]);
     }
 }

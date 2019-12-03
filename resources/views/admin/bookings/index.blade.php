@@ -54,7 +54,7 @@
                             <bookings-table
                             ref="table-2"
                             disabled
-                            fetch-url="{{ route('admin.bookings.fetch-archive') }}"
+                            fetch-url="{{ route('admin.bookings.fetch-archive', [$selectedDate, $destination, $experience]) }}"
                             ></bookings-table>
                         </div>
                     </div>

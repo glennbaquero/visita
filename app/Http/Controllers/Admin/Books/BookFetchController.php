@@ -94,6 +94,7 @@ class BookFetchController extends FetchController
             	$result['email'] = $guest->email;
             	$result['contact_number'] = $guest->contact_number;
             	$result['type'] = $guest->visitorType->name;
+                $result['deleted_at'] = $guest->deleted_at;
             }
         }
 

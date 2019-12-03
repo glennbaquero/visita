@@ -45,6 +45,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 			Route::middleware(['guest:management', 'cors'])->group(function() {
 
 				Route::get('reset-password/frontliner/{token}/{email}', 'Frontliner\ResetPasswordController@showResetForm')->name('frontliner.password.reset');
+				Route::post('forgot-password/frontliner/email', 'Frontliner\ForgotPasswordController@sendResetLinkEmail')->name('frontliner.password.email');
 		        Route::post('reset-password/frontliner/change', 'Frontliner\ResetPasswordController@reset')->name('frontliner.password.change');
 			});
 		});
