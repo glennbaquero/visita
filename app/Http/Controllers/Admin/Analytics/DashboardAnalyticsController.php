@@ -67,14 +67,14 @@ class DashboardAnalyticsController extends Controller
         $total['groups'] = $bookings->get()->count();
         
         // get total checked in for walk in guest
-        $checked_in_walkin['visitors'] = $bookings->where('is_walkin', true)->whereDate('checked_in_at', $today)->get()->count(); 
-        $checked_in_walkin['groups'] = $bookings->where('is_walkin', true)->whereDate('checked_in_at', $today)->get()->count(); 
+        $checked_in_walkin['visitors'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+        $checked_in_walkin['groups'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
 
         // get total checked in for online in guest
-        $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
-        $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
-        $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->whereDate('checked_in_at', $today)->get()->count(); 
-        $total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->where('is_walkin', false)->whereDate('checked_in_at', $today)->get()->count(); 
+        $total_checked_in['online_visitor'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', false)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+        $total_checked_in['online_group'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', false)->whereDate('started_at', $today)->get()->count(); 
+        $total_checked_in['walk_in'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+        $total_checked_in['walk_in_group'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
 
         // get all the nationality of all guests
 
@@ -114,13 +114,6 @@ class DashboardAnalyticsController extends Controller
 
         $special_fees = $this->renderGraphDigits($grouped);
 
-
-        // $guests = Guest::agedBetween(22)->get();
-        // $now = Carbon::now();
-        // $start = $now->subYears(18);
-        // $end = $now->subYears(30)->addYear()->subDay(); // plus 1 year minus a day
-
-        // $guests = Guest::whereBetween('birthdate', [$start, $end])->get();
         $revenue = [
             [
                 "backgroundColor" => "#007bff",
@@ -151,19 +144,29 @@ class DashboardAnalyticsController extends Controller
 
         $ages = [
             [
+                "backgroundColor" => "#673ab7",
+                "data" => Guest::whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [10, 18])->count(),
+                "label" => "10-18"
+            ],
+            [
                 "backgroundColor" => "#007bff",
-                "data" => 80.00,
+                "data" => Guest::whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [18, 25])->count(),
                 "label" => "18-25"
             ],
             [
                 "backgroundColor" => "red",
-                "data" => 99.00,
+                "data" => Guest::whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [26, 35])->count(),
                 "label" => "26-35"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => 20,
+                "data" => Guest::whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [35, 40])->count(),
                 "label" => "35-40"
+            ],
+            [
+                "backgroundColor" => "yellow",
+                "data" => Guest::whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [41, 300])->count(),
+                "label" => "41 +"
             ],
         ];
 

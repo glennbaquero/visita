@@ -10,6 +10,8 @@ use App\Models\Types\VisitorType;
 use App\Models\Books\Book;
 use App\Models\Fees\Fee;
 
+use DB;
+
 class Guest extends Model
 {
    	use FileTrait, Notifiable;
@@ -40,6 +42,6 @@ class Guest extends Model
           $start = $now->subYears($start);
           $end = $now->subYears($end)->addYear()->subDay(); // plus 1 year minus a day
 
-          return $this->whereBetween('birthdate', [$start, $end]);
+          return $this->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [$start, $end]);
       }
 }
