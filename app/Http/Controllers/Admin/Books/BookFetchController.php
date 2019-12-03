@@ -36,8 +36,10 @@ class BookFetchController extends FetchController
     public function filterQuery($query)
     {
         $date = request()->segments()[3]; 
+        $destination = request()->segments()[4];
+        $experience = request()->segments()[5];
     	$parsedDate = Carbon::parse($date)->toDateTimeString();
-        return $query->whereDate('scheduled_at', $parsedDate);
+        return $query->whereDate('scheduled_at', $parsedDate)->where(['destination_id' => $destination, 'allocation_id' => $experience]);
     }
 
     /**
