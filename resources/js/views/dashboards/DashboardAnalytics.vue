@@ -32,8 +32,8 @@
 				<div class="col-sm-6 col-md-4  mb-2">
 					<box-widget-two
 						card-title="TOTAL CHECK-INS"
-						:total-groups="15"
-						:total-visitors="150"
+						:total-groups="total.groups"
+						:total-visitors="total.guests"
 						total-groups-label="Total Groups"
 						total-visitors-label="Total Visitors"
 					></box-widget-two>
