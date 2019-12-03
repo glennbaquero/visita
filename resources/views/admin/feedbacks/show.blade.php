@@ -37,6 +37,7 @@
                         <feedbacks-view
                         fetch-url="{{ route('admin.feedbacks.fetch-item', $item->id) }}"
                         submit-url="{{ route('admin.feedbacks.update', $item->id) }}"
+                        remove-answer-url="{{ route('admin.feedbacks.remove-answer') }}"
                         ></feedbacks-view>
                     </div>
                     <div class="tab-pane" id="tab2">
