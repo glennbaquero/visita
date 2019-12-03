@@ -36,13 +36,15 @@ class TrainingModule extends Model
 	    if ($request->hasFile('path') && $item->type == 0) {
             $item->storeImage($request->file('path'), 'path', 'training_modules');
         } else {
-        	$file = $request->file('path');
-        	$filename = $file->getClientOriginalName();
-        	$path = 'public/galleries-video';
-        	$upload_path = Storage::putFileAs($path, $file, $filename);
-        	$vars['path'] = $upload_path;
-        	$item->path = $upload_path;
-        	$item->save();
+        	if($request->hasFile('path')) {
+        		$file = $request->file('path');
+        		$filename = $file->getClientOriginalName();
+        		$path = 'public/galleries-video';
+        		$upload_path = Storage::putFileAs($path, $file, $filename);
+        		$vars['path'] = $upload_path;
+        		$item->path = $upload_path;
+        		$item->save();
+        	}
         }
 
 	    return $item;
