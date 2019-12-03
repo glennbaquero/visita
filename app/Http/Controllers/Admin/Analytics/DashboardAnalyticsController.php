@@ -61,10 +61,10 @@ class DashboardAnalyticsController extends Controller
         $bookings = Book::whereDate('scheduled_at', $today);
         
         // total of guest today
-        $total['guest'] = $bookings->sum('total_guest');
+        $total['guest'] = $bookings->whereDate('started_at', $today)->sum('total_guest');
 
         // total of groups today
-        $total['groups'] = $bookings->get()->count();
+        $total['groups'] = $bookings->whereDate('started_at', $today)->get()->count();
         
         // get total checked in for walk in guest
         $checked_in_walkin['visitors'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
