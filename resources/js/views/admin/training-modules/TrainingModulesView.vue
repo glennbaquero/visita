@@ -53,6 +53,13 @@
                 name="path"
                 placeholder="Choose a File"
 				></image-picker>
+
+			    <vue-player v-if="item.type === 1"
+					:src="item.path"
+					:video-placeholder-src="item.path"
+					:poster="item.path"
+					playsinline
+				></vue-player>
 			</div>
 			<template v-slot:footer>
 				<action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
@@ -85,6 +92,7 @@
 </template>
 
 <script type="text/javascript">
+import vuePlayer  from  '@algoz098/vue-player'
 import { EventBus }from '../../../EventBus.js';
 import CrudMixin from '../../../mixins/crud.js';
 
@@ -117,6 +125,7 @@ export default {
 		'text-editor': TextEditor,
 		'date-picker': Datepicker,
 		'time-picker': TimePicker,
+		vuePlayer
 	},
 
 	mixins: [ CrudMixin ],

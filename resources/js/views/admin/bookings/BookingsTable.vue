@@ -58,8 +58,8 @@
                         :disabled="loading"
                         title="Archive Item"
                         alt-title="Restore Item"
-                        :message="'Are you sure you want to archive Destination #' + item.id + '?'"
-                        :alt-message="'Are you sure you want to restore Destination #' + item.id + '?'"
+                        :message="'Are you sure you want to archive this reservation?'"
+                        :alt-message="'Are you sure you want to restore this reservation?'"
                         @load="load"
                         @success="sync"
                         ></action-button>
