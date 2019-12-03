@@ -6,6 +6,7 @@ use App\Models\Users\DeviceToken;
 use GuzzleHttp\Client;
 
 use App\Models\Users\User;
+use App\Models\Users\Management;
 
 class PushService
 {
@@ -32,14 +33,14 @@ class PushService
     }
 
     public function pushToUsers() {
-        $this->push(DeviceToken::where('user_type', User::class)->get());
+        $this->push(DeviceToken::where('deviceable_type', Management::class)->get());
     }
 
     public function pushToMany($users) {
         $device_tokens = [];
 
         foreach ($users as $user) {
-            foreach ($user->device_tokens as $device_token) {
+            foreach ($user->deviceTokens as $device_token) {
                 array_push($device_tokens, $device_token);
             }
         }
@@ -51,7 +52,7 @@ class PushService
     public function pushToOne($user) {
         $device_tokens = [];
 
-        foreach ($user->device_tokens as $device_token) {
+        foreach ($user->deviceTokens as $device_token) {
             array_push($device_tokens, $device_token);
         }
 

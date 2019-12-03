@@ -484,7 +484,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('bookings/{id}/restore', 'BookController@restore')->name('bookings.restore');
         
             Route::post('bookings/fetch/{selectedDate?}/{destination?}/{experience?}', 'BookFetchController@fetch')->name('bookings.fetch');
-            Route::post('bookings/fetch?archived=1', 'BookFetchController@fetch')->name('bookings.fetch-archive');
+            Route::post('bookings/fetch/{selectedDate?}/{destination?}/{experience?}?archived=1', 'BookFetchController@fetch')->name('bookings.fetch-archive');
             Route::post('bookings/fetch-item/{id?}/{destination?}/{experience?}', 'BookFetchController@fetchView')->name('bookings.fetch-item');
             Route::post('bookings/fetch-pagination/{id}', 'BookFetchController@fetchPagePagination')->name('bookings.fetch-pagination');
         });
@@ -539,8 +539,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('feedbacks/fetch-pagination/{id}', 'FeedbackFetchController@fetchPagePagination')->name('feedbacks.fetch-pagination');
 
             #Fetch Guest Feedbacks
-            Route::post('guest_feedbacks/fetch', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch');
-            Route::post('guest_feedbacks/fetch?bookid={id?}', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch.bookid');
+            Route::post('feedbacks/fetch/guest', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch');
+            Route::post('feedbacks/fetch?bookid={id?}/guest', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch.bookid');
         });
 
         Route::namespace('Managements')->group(function() {

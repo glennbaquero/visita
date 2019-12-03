@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Notifications\Frontliner\NewBookingNotification;
+use App\Notifications\Reservation\BookingNotification;
 
 use App\Models\Books\Book;
 use App\Models\Guests\Guest;
@@ -87,16 +88,18 @@ class BookController extends Controller
                     ]);   
                 }
             }
-
-            $frontliners = Management::where('destination_id', $destination)->get();
-            
-            foreach ($frontliners as $key => $frontliner) {
-                $frontliner->notify(new NewBookingNotification($request));
-            }
-            $receiver = new PushService('New Reservation', 'A new reservation of visitor for '.Carbon::parse($request->scheduled_at)->format('M d, Y'). '.');
-            $receiver->pushToMany($frontliners);
         DB::commit();
+        
+        $point_person = $item->guests()->where('main', true)->first();
+        $point_person->notify(new BookingNotification($item));
 
+        $frontliners = Management::where('destination_id', $destination)->get();
+        
+        foreach ($frontliners as $key => $frontliner) {
+            $frontliner->notify(new NewBookingNotification($request));
+        }
+        $receiver = new PushService('New Reservation', 'A new reservation of visitor for '.Carbon::parse($request->scheduled_at)->format('M d, Y'). '.');
+        $receiver->pushToMany($frontliners);
 
         $message = "You have successfully created a new reservation";
         $redirect = $item->renderShowUrl();
@@ -192,43 +195,33 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Destination  $sampleItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function archive($id)
     {
-        //
+        $item = Book::withTrashed()->findOrFail($id);
+        $item->archive();
+
+        return response()->json([
+            'message' => "You have successfully archived the reservation",
+        ]);
     }
 
-    //  /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  \App\Destination  $sampleItem
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function archive($id)
-    // {
-    //     $item = Book::withTrashed()->findOrFail($id);
-    //     $item->archive();
+    /**
+     * Restore the specified resource from storage.
+     *
+     * @param  \App\Destination  $sampleItem
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $item = Book::withTrashed()->findOrFail($id);
+        $item->unarchive();
 
-    //     return response()->json([
-    //         'message' => "You have successfully archived {$item->renderName()}",
-    //     ]);
-    // }
+        return response()->json([
+            'message' => "You have successfully restored the reservation",
+        ]);
+    }
 
-    // /**
-    //  * Restore the specified resource from storage.
-    //  *
-    //  * @param  \App\Destination  $sampleItem
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function restore($id)
-    // {
-    //     $item = Book::withTrashed()->findOrFail($id);
-    //     $item->unarchive();
-
-    //     return response()->json([
-    //         'message' => "You have successfully restored {$item->renderName()}",
-    //     ]);
-    // }
 }
