@@ -1,4 +1,4 @@
-<footer class="main-footer bg-danger overflow-hidden">
+<footer class="main-footer primary__color overflow-hidden">
 	@if ($env->dev())
     	<developer-mode label="{{ config('web.version') }}" fetch-url="{{ route('developer.users.fetch') }}" submit-url="{{ route('developer.users.change-account') }}"></developer-mode>
 	@else

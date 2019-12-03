@@ -1,5 +1,5 @@
 <aside class="main-sidebar sidebar-dark-danger elevation-4">
-    <a href="{{ route('admin.dashboard') }}" class="brand-link bg-danger">
+    <a href="{{ route('admin.dashboard') }}" class="brand-link primary__color">
         @include('partials.brand')
     </a>
 
