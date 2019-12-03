@@ -24,7 +24,7 @@
                     <a href="{{ route('admin.dashboard') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.dashboard',
                     ]) }}">
-                        <i class="nav-icon fa fa-th"></i>
+                        <i class="nav-icon fas fa-chart-line"></i>
                         <p>
                             Dashboard
                         </p>
@@ -37,7 +37,7 @@
                     <a href="{{ route('admin.calendar.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.calendar.*',
                     ]) }}">
-                        <i class="nav-icon fas fa-at"></i>
+                        <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>
                             Calendar
                         </p>
@@ -63,7 +63,7 @@
                     <a href="{{ route('admin.inquiries.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                         'admin.inquiries.*',
                     ]) }}">
-                        <i class="nav-icon fas fa-at"></i>
+                        <i class="nav-icon fas fa-headset"></i>
                         <p>
                             Inquiries
                         </p>
