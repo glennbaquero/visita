@@ -120,7 +120,7 @@
                         </li>
                         @endif
 
-                        @if ($self->hasAnyPermission(['admin.experiences.crud']))
+                  {{--       @if ($self->hasAnyPermission(['admin.experiences.crud']))
                          <li class="nav-item">
                             <a href="{{ route('admin.experiences.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                                 'admin.experiences.index','admin.experiences.create','admin.experiences.show',
@@ -131,7 +131,7 @@
                                 </p>
                             </a>
                         </li>
-                        @endif
+                        @endif --}}
 
                         @if ($self->hasAnyPermission(['admin.allocations.crud']))
                         <li class="nav-item">
@@ -140,7 +140,7 @@
                             ]) }}">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>
-                                    Allocation
+                                    Experience
                                 </p>
                             </a>
                         </li>
