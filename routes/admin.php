@@ -409,6 +409,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('survey-experiences/update/{id}', 'SurveyExperienceController@update')->name('survey-experiences.update');
             Route::post('survey-experiences/{id}/archive', 'SurveyExperienceController@archive')->name('survey-experiences.archive');
             Route::post('survey-experiences/{id}/restore', 'SurveyExperienceController@restore')->name('survey-experiences.restore');
+
+            // remove answer
+            Route::post('survey-experiences/answer/remove', 'SurveyExperienceController@answerRemove')->name('survey-experiences.remove-answer');
+
+
             Route::post('survey-experiences/reorder', 'SurveyExperienceController@reOrder')->name('survey-experiences.reorder');
         
             Route::post('survey-experiences/fetch', 'SurveyExperienceFetchController@fetch')->name('survey-experiences.fetch');
@@ -523,7 +528,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('feedbacks/update/{id}', 'FeedbackController@update')->name('feedbacks.update');
             Route::post('feedbacks/{id}/archive', 'FeedbackController@archive')->name('feedbacks.archive');
             Route::post('feedbacks/{id}/restore', 'FeedbackController@restore')->name('feedbacks.restore');
-             Route::post('feedbacks/reorder', 'FeedbackController@reOrder')->name('feedbacks.reorder');
+            Route::post('feedbacks/reorder', 'FeedbackController@reOrder')->name('feedbacks.reorder');
+
+            // remove answer
+            Route::post('feedbacks/answer/remove', 'FeedbackController@answerRemove')->name('feedbacks.remove-answer');
         
             Route::post('feedbacks/fetch', 'FeedbackFetchController@fetch')->name('feedbacks.fetch');
             Route::post('feedbacks/fetch?archived=1', 'FeedbackFetchController@fetch')->name('feedbacks.fetch-archive');
