@@ -531,8 +531,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('feedbacks/fetch-pagination/{id}', 'FeedbackFetchController@fetchPagePagination')->name('feedbacks.fetch-pagination');
 
             #Fetch Guest Feedbacks
-            Route::post('feedbacks/fetch', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch');
-            Route::post('feedbacks/fetch?bookid={id?}', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch.bookid');
+            Route::post('feedbacks/fetch/guest', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch');
+            Route::post('feedbacks/fetch?bookid={id?}/guest', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch.bookid');
         });
 
         Route::namespace('Managements')->group(function() {
