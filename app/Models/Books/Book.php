@@ -20,7 +20,7 @@ class Book extends Model
 
     use FileTrait;
 
-    protected $dates = ['scheduled_at'];
+    protected $dates = ['scheduled_at', 'ended_at', 'started_at'];
 
     /**
      * Morph relationship to Management and User Models

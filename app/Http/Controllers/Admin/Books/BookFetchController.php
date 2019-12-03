@@ -71,11 +71,11 @@ class BookFetchController extends FetchController
         return [
             'id' => $item->id,
             'main_contact' => $this->getGuests($item->guests),
-            'is_walkin' => $item->is_walkin === true ? 'Walk-In' : 'Online',
+            'is_walkin' => $item->is_walkin === 1 ? 'Walk-In' : 'Online',
             'total_guest' => $item->total_guest,
             'allocation' => $item->allocation->name,
             'time' => Carbon::parse($item->scheduled_at)->toTimeString(),
-            'status' => $item->status,
+            'status' => $item->ended_at != null ? 'Visit End ( '.$item->renderDate('ended_at').' )' : ($item->started_at == null ? 'Not yet started' : 'Started ( '.$item->renderDate('started_at').' )'),
             'qr_path' => $item->renderImagePath('qr_code_path'),
             'qr_id' => $item->qr_id,
             'created_at' => $item->renderDate(),
