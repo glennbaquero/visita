@@ -4,7 +4,7 @@
 		<card>
 			<template v-slot:header>Frontliner Information</template>
 			<div class="row">
-				<selector class="col-sm-6"
+			<!-- 	<selector class="col-sm-6"
 				v-model="item.role_id"
 				name="role_id"
 				label="Role"
@@ -13,7 +13,7 @@
 				item-text="name"
 				placeholder="Select Role"
 				></selector>
-
+ -->
 				<selector class="col-sm-6"
 				v-model="item.destination_id"
 				name="destination_id"

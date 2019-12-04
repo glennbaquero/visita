@@ -15,6 +15,7 @@ use App\Models\Users\Management;
 use App\Models\AddOns\AddOn;
 use App\Models\Books\Book;
 use App\Models\Announcements\Announcement;
+use App\Models\Users\Admin;
 
 class Destination extends Model
 {
@@ -68,6 +69,11 @@ class Destination extends Model
     public function announcements()
     {
         return $this->belongsToMany(Announcement::class, 'destination_announcements', 'announcement_id', 'destination_id');
+    }
+
+    public function admin() 
+    {
+        return $this->belongsTo(Admin::class);
     }
 
     /**

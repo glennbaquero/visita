@@ -18,7 +18,7 @@
                     <input v-model="item.email" name="email" type="text" class="form-control input-sm">
                 </div>
 
-                <selector class="col col-sm-12" v-if="editable"
+                <selector class="col col-sm-6" v-if="editable"
                 v-model="roleIds"
                 name="role_ids[]"
                 label="Roles"
@@ -27,7 +27,17 @@
                 item-text="name"
                 empty-text="None"
                 placeholder="Please select a role"
-                multiple
+                ></selector>
+
+                <selector class="col col-sm-6" v-if="editable" :disabled="roleIds != 4"
+                v-model="item.destination_id"
+                name="destination_id"
+                label="Destination"
+                :items="destinations"
+                item-value="id"
+                item-text="name"
+                empty-text="None"
+                placeholder="Please select a destination"
                 ></selector>
 
                 <image-picker
@@ -81,6 +91,7 @@ export default {
             this.item = data.item ? data.item : this.item;
             this.roles = data.roles ? data.roles : this.roles;
             this.roleIds = data.roleIds ? data.roleIds : this.roleIds;
+            this.destinations = data.destinations ? data.destinations : this.destinations;
         },
     },
 
@@ -94,6 +105,7 @@ export default {
         return {
             roles: [],
             roleIds: [],
+            destinations: [],
         }
     },
 

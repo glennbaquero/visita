@@ -29,7 +29,7 @@ class ManagementStoreRequest extends FormRequest
         $id = $this->route('id');
 
         $rules = [
-            'role_id' => 'required',
+            // 'role_id' => 'required',
             'destination_id' => 'required',
             'first_name' => ['required', new Varchar],
             'last_name' => ['required', new Varchar],
@@ -57,7 +57,7 @@ class ManagementStoreRequest extends FormRequest
 
     public function messages() {
         return [
-            'role_id.required' => 'Please select a role',
+            // 'role_id.required' => 'Please select a role',
             'destination_id.required' => 'Please select a destination',
         ];
     }

@@ -3,11 +3,13 @@
 namespace App\Models\Users;
 
 use App\Extenders\Models\BaseUser as Authenticatable;
-use App\Models\Books\Book;
 use Spatie\Permission\Traits\HasRoles;
 use App\Notifications\Admin\Auth\ResetPassword;
 use Illuminate\Validation\ValidationException;
 use Password;
+
+use App\Models\Books\Book;
+use App\Models\Destinations\Destination;
 
 class Admin extends Authenticatable
 {
@@ -20,6 +22,15 @@ class Admin extends Authenticatable
 	public function books()
 	{
 		return $this->morphMany(Book::class, 'bookable');
+    }
+
+    /**
+     * Admin can assign to specific destination this is also called destination manager
+     */
+    
+    public function destination()
+    {
+        return $this->hasOne(Destination::class);
     }
     
     /**

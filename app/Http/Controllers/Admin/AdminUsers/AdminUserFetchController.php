@@ -6,6 +6,7 @@ use App\Extenders\Controllers\FetchController as Controller;
 
 use App\Models\Users\Admin;
 use App\Models\Roles\Role;
+use App\Models\Destinations\Destination;
 
 class AdminUserFetchController extends Controller
 {
@@ -94,10 +95,12 @@ class AdminUserFetchController extends Controller
         }
 
         $roles = Role::get();
+        $destinations = Destination::all();
 
         return response()->json([
             'item' => $item,
             'roles' => $roles,
+            'destinations' => $destinations,
             'roleIds' => $roleIds,
         ]);
     }

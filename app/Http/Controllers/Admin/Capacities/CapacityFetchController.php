@@ -40,9 +40,31 @@ class CapacityFetchController extends FetchController
     {
         $result = [];
 
+        $admin = auth()->guard('admin')->user();
+
         foreach($items as $item) {
-            $data = $this->formatItem($item);
-            array_push($result, $data);
+
+            if($admin->getRoleNames()[0] === 'Destination Manager') {
+                if($item->allocation->destination_id === $admin->destination_id) {
+                    array_push($result, [
+                        'id' => $item->id,
+                        'allocation' => $item->allocation->name,
+                        'online' => $item->online,
+                        'mgt_lgu' => $item->mgt_lgu,
+                        'walk_in' => $item->walk_in,
+                        'agency' => $item->agency,
+                        'total' => $item->agency + $item->walk_in + $item->mgt_lgu + $item->online,
+                        'created_at' => $item->renderDate(),
+                        'showUrl' => $item->renderShowUrl(),
+                        'archiveUrl' => $item->renderArchiveUrl(),
+                        'restoreUrl' => $item->renderRestoreUrl(),
+                        'deleted_at' => $item->deleted_at,
+                    ]);
+                }
+            } else {
+                $data = $this->formatItem($item);
+                array_push($result, $data);
+            }
         }
 
         return $result;
@@ -75,7 +97,13 @@ class CapacityFetchController extends FetchController
     public function fetchView($id = null) {
         $item = null;
         $ids = collect(Capacity::all())->pluck('allocation_id');
+        $admin = auth()->guard('admin')->user();
         $allocations = Allocation::with('destination')->whereNotIn('id', $ids)->get();
+        
+        if($admin->getRoleNames()[0] === 'Destination Manager') {
+            $allocations = Allocation::where('destination_id', $admin->destination_id)->with('destination')->whereNotIn('id', $ids)->get();
+        }
+
 
         if ($id) {
         	$item = Capacity::withTrashed()->findOrFail($id);

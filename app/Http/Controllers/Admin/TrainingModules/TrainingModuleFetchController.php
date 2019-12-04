@@ -27,6 +27,11 @@ class TrainingModuleFetchController extends FetchController
      */
     public function filterQuery($query)
     {
+        $admin = auth()->guard('admin')->user();
+        if($admin->getRoleNames()[0] === 'Destination Manager') {
+            $query = $query->where('destination_id', $admin->destination_id);
+        }
+
         return $query;
     }
 
@@ -72,6 +77,10 @@ class TrainingModuleFetchController extends FetchController
         $item = null;
         $destinations = Destination::all();
 
+        if($admin->getRoleNames()[0] === 'Destination Manager') {
+            $destinations = Destination::where('id', $admin->destination_id)->get();
+        }
+        
         if ($id) {
         	$item = TrainingModule::withTrashed()->findOrFail($id);
         	$item->path = $item->renderImagePath('path');

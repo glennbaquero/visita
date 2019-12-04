@@ -29,6 +29,11 @@ class AllocationFetchController extends FetchController
      */
     public function filterQuery($query)
     {
+        $admin = auth()->guard('admin')->user();
+        if($admin->getRoleNames()[0] === 'Destination Manager') {
+            $query = $query->where('destination_id', $admin->destination_id);
+        }
+
         return $query;
     }
 
@@ -74,7 +79,13 @@ class AllocationFetchController extends FetchController
 
     public function fetchView($id = null) {
         $item = null;
+
+        $admin = auth()->guard('admin')->user();
         $destinations = Destination::all();
+        
+        if($admin->getRoleNames()[0] === 'Destination Manager') {
+            $destinations = Destination::where('id', $admin->destination_id)->get();
+        }
 
         if ($id) {
         	$item = Allocation::withTrashed()->findOrFail($id);

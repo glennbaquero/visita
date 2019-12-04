@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
         <label>{{ label }} <small v-if="labelNote" :class="labelNoteClass">{{ labelNote }}</small></label>
-        <selectize v-model="selected" @change="change" :multiple="multiple" :name="name" :settings="settings">
+        <selectize v-model="selected" @change="change" :multiple="multiple" :name="name" :settings="settings" :disabled="disabled">
             <option v-for="item in items" :value="item[itemValue]">{{ item[itemText] }}</option>
         </selectize>
     </div>

@@ -24,8 +24,14 @@ class CalendarController extends Controller
      */
     public function index()
     {
+        $admin = auth()->guard('admin')->user();
+        $destinations = Destination::with('allocations')->get();
+        if($admin->getRoleNames()[0] === 'Destination Manager') {
+            $destinations = Destination::where('id', $admin->destination_id)->with('allocations')->get();
+        }
+
         return view('admin.calendar.index', [
-            'destinations' => Destination::with('allocations')->get()
+            'destinations' => $destinations
         ]);
     }
 

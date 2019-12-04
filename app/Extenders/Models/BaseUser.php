@@ -84,6 +84,10 @@ class BaseUser extends Authenticatable
 
         $vars = $request->only($columns);
 
+        if ($request->filled('destination_id')) {
+            $vars['destination_id'] = $request->input('destination_id');
+        }
+
         if (!$item) {
             $vars['password'] = uniqid();
             $vars['email_verified_at'] = Carbon::now();
