@@ -19,7 +19,7 @@
         <div class="card">
             <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" data-target="#tab1" href="javascript:void(0)" data-toggle="tab">User Analytics</a></li>
+                    <li class="nav-item"><a class="nav-link active" data-target="#tab1" href="javascript:void(0)" data-toggle="tab">Overall Analytics</a></li>
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
