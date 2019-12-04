@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('pageTitle', 'Frontliners')
+@section('meta:title', 'Frontliners')
 
 @section('content')
 

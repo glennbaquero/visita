@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('pageTitle', 'Blocked Dates')
+@section('meta:title', 'Blocked Dates')
 
 @section('content')
 

@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('pageTitle', 'Bookings')
+@section('meta:title', 'Bookings')
 
 @section('content')
 

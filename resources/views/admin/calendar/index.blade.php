@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('pageTitle', 'Calendar')
+@section('meta:title', 'Calendar')
 
 @section('content')
 

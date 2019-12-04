@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('pageTitle', 'Create Visitor Type')
+@section('meta:title', 'Create Visitor Type')
 
 @section('content')
 

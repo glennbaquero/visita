@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('pageTitle', 'Survey Experience Question & Answer')
+@section('meta:title', 'Survey Experience Question & Answer')
 
 @section('content')
 

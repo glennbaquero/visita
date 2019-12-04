@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('pageTitle', 'Create Announcement')
+@section('meta:title', 'Create Announcement')
 
 @section('content')
 

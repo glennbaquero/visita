@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('pageTitle', 'Create Reservation')
+@section('meta:title', 'Create Reservation')
 
 @section('content')
 

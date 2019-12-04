@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('pageTitle', 'Training Modules')
+@section('meta:title', 'Training Modules')
 
 @section('content')
 

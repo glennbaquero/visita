@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('pageTitle', 'Create Religion')
+@section('meta:title', 'Create Religion')
 
 @section('content')
 
