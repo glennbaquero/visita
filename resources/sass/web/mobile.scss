@@ -8,7 +8,7 @@
 
 	body {
 		overflow-y: auto !important;
-		
+
 		&.overflow-hidden {
 			overflow: auto !important;
 		}
@@ -179,7 +179,7 @@
 	}
 
 	.hm-frm2__tabbing-content {
-	    height: auto;	
+	    height: auto !important;	
 	}
 
 	.hm-frm3,
