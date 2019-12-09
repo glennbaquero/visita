@@ -6,7 +6,12 @@
     padding-top: 20vh;
     padding-bottom: 10vh;
 
-    .vertical-align {
-    	font-family: initial;
-    }	
+
+    .frm-description {
+    	text-align: initial;
+
+    	strong, b {
+    		color: #2C4043;
+    	}
+    }
 }

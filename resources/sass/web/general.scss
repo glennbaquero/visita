@@ -481,6 +481,16 @@ $frame-bg--pos__b: bottom center;
 	        padding-left: 15px;
 	    } 
 
+	    ol {
+	    	font-size: 1em;
+	        width: 100%;
+	        padding-left: 15px;
+
+	        strong {
+	        	font-size: 1em;
+	        }
+	    }
+
 	    li {
 	        display: list-item;
 	        padding-bottom: 5px;

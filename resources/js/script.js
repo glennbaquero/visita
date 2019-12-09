@@ -69,7 +69,7 @@ var app = {
 		        slidesToScroll: 1,
 		        speed: 1500,
 		        autoplay: true,
-		        autoplaySpeed: 2000,
+		        autoplaySpeed: 3000,
 		        arrows: true,
 		        dots: true,
 				responsive: [
@@ -234,7 +234,6 @@ var app = {
 
 				var $window = $(window);
 				var width = $window.width();
-
 
 					if (width < 1025) {
 			        
