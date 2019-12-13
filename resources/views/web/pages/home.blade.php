@@ -10,7 +10,7 @@
 				<div class="vertical-parent">
 					<div class="vertical-align align-c">
 						<h5 class="frm-title l-margin-b clr--white hm-frm1-fade-up__item">{{ $home_banner->name }}</h5>
-						<a href="{{ $home_banner->link }}" class="frm-btn green js-trigger" data-section="frame-6">{{ $home_banner->link_label }}</a>
+						<a href="#" class="frm-btn green js-trigger" data-section="{{ $home_banner->link }}">{{ $home_banner->link_label }}</a>
 					</div>
 				</div>
 			</div>
