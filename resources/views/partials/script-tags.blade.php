@@ -1,3 +1,13 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147160707-20"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-147160707-20');
+</script>
+
 {{-- Compiled JS --}}
 <script type="text/javascript" src="{{ mix('assets/manifest.js') }}"></script>
 <script type="text/javascript" src="{{ mix('assets/vendor.js') }}"></script>

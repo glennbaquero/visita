@@ -24,10 +24,10 @@ class CreateDestinationsTable extends Migration
             $table->text('orientation_module')->nullable();
             $table->text('terms_conditions');
             $table->text('visitor_policies');
-            $table->longText('icon');
+            $table->longText('icon')->nullable();
             $table->text('contact_us');
             $table->text('fees');
-            $table->text('how_to_get_here');
+            $table->longText('how_to_get_here');
 
             $table->softDeletes();
             $table->timestamps();
