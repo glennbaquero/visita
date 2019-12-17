@@ -61,6 +61,20 @@ class PageController extends Controller
         ]);
 	}
 
+	/* Show Destinations */
+	public function showDestinations() {
+        return view('web.pages.destination.destinations', [
+        	'page_scripts'=> 'destinations'
+        ]);
+	}
+
+	/* Show Destinations Info */
+	public function showDestinationsInfo() {
+        return view('web.pages.destination.destinations-info', [
+        	'page_scripts'=> 'destinations'
+        ]);
+	}
+
 	public function formatData() {
 		$result = [];
 

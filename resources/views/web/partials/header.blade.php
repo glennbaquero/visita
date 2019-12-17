@@ -3,25 +3,28 @@
 		<div class="inlineBlock-parent">
 			<div class="hdr-frm__nav-col">
 				<a href="#home">
-					<img src="{{ asset('images/visita-logo.png') }}" class="hdr-frm__nav-logo js-trigger" data-section="frame-1">
+					<img src="{{ asset('images/visita-logo.png') }}" class="hdr-frm__nav-logo">
 				</a>
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col">
 				<a href="about-us" class="hdr-frm__nav-link">About Us</a>
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col">
-				<a href="#alliance" class="hdr-frm__nav-link js-trigger" data-section="frame-3">Alliance</a>
+				<a href="destinations" class="hdr-frm__nav-link">Destinations</a>
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col">
-				<a href="#visita-app" class="hdr-frm__nav-link js-trigger" data-section="frame-4">Visita App</a>
+				<a href="faqs" class="hdr-frm__nav-link">FAQs</a>
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col">
-				<a href="#destinations" class="hdr-frm__nav-link js-trigger" data-section="frame-5">Destinations</a>
+				<a href="contact-us" class="hdr-frm__nav-link">Contact Us</a>
 			</div
-			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col">
-				<a href="#contact-us" class="hdr-frm__nav-link js-trigger" data-section="frame-6">Contact Us</a>
+			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col inlineBlock-parent">
+				<img class="hdr-frm__nav-link-img" src="{{ asset('images/user-icon.png') }}">
+				<a href="log-in" class="hdr-frm__nav-link">Log In</a>
 			</div
-			>
+			><div class="hdr-frm__nav-col">
+				<a href="" class="frm-btn green">REQUEST A VISIT</a>
+			</div>
 		</div>
 		<div class="mbl-hdr-frm__nav-holder">
 			<div class="vertical-parent">
