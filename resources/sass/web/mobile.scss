@@ -7,6 +7,8 @@
 @media screen and (max-width: 1024px) {
 
 	body {
+		overflow-y: auto !important;
+
 		&.overflow-hidden {
 			overflow: auto !important;
 		}
@@ -166,13 +168,18 @@
 	*/
 	.hm-frm2,
 	.hm-frm3,
-	.hm-frm4 {
+	.hm-frm4,
+	.hm-frm6 {
 	    height: auto !important;
 	    padding: 10vh 0vh;
 	}
 
 	.hm-frm2__tabbing-btn {
 		font-size: 1em !important;
+	}
+
+	.hm-frm2__tabbing-content {
+	    height: auto !important;	
 	}
 
 	.hm-frm3,

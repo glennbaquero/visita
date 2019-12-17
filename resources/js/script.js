@@ -7,10 +7,21 @@ var app = {
 	init: function() {
 		var setup = this.setup;
 
+		let page_type = document.head.querySelector('meta[name="page-type"]');
+		page_type = page_type.content;
+
 		setup.menu();
 		setup.slickSliders();
 		setup.animations();
-		setup.home();
+
+		switch(page_type) {
+			case 'home':
+                setup.home();
+                break;
+			case 'about':
+                setup.about();                
+				break;
+		}
 	},
 
 	setup: {
@@ -61,7 +72,7 @@ var app = {
 		        slidesToScroll: 1,
 		        speed: 1500,
 		        autoplay: true,
-		        autoplaySpeed: 2000,
+		        autoplaySpeed: 3000,
 		        arrows: true,
 		        dots: true,
 				responsive: [
@@ -76,6 +87,8 @@ var app = {
 
 			$('.slick-prev').html('<img src="images/left-arrow.png">');
 			$('.slick-next').html('<img src="images/right-arrow.png">');
+
+
 		},
 
 		animations: function() {
@@ -208,15 +221,6 @@ var app = {
 
 		home: function() {
 
-			$(window).resize(function() {
-			  var width = $(this).width();
-			  if(width < 1025) {
-			    $.scrollify.disable();
-			  } else {
-			    $.scrollify.enable();
-			  }
-			});
-
 			$(function() {
 		        $.scrollify({
 		        	section : ".scrllfy-frame",
@@ -224,11 +228,33 @@ var app = {
 				    easing: "easeInOutQuad",
 				    scrollSpeed: 1100,
 				    offset : 0,
+			        scrollbars: false,			    
 				    setHeights: true,
 				    updateHash: true,
 				    touchScroll: true,
 				});
 			});
+
+			$(function() {
+
+				var $window = $(window);
+				var width = $window.width();
+
+					if (width < 1025) {
+			        
+			           $(function() {
+			  				$.scrollify.disable();
+			  			});
+
+			        } else {
+
+			           $(function() {
+			  				$.scrollify.enable();
+			  			})
+			        }
+
+
+			})
 
 		    $('.hm-frm2__tabbing-content').first().css('display', 'inline-block');
 		    $('.hm-frm2__tabbing-btn').first().addClass('active');
@@ -243,6 +269,46 @@ var app = {
 
 			    $('#'+id).fadeIn(300);
 		    });
+
+		},
+
+		about: function() {
+		    $('.abt-frm2__tabbing-content').first().css('display', 'inline-block');
+		    $('.abt-frm2__tabbing-btn').first().addClass('active');
+
+			$('.abt-frm2__tabbing-btn').on('click', function(){
+				var id = $(this).data('frame2tab-id');
+				
+				setTimeout(function(){
+					$(window).trigger('resize');
+					$('.abt-frm2__tabbing-slider').slick("refresh");
+					
+					$('.slick-prev').html('<img src="images/left-arrow.png">');
+					$('.slick-next').html('<img src="images/right-arrow.png">');
+
+				}, 0.25);
+
+				$('.abt-frm2__tabbing-btn').removeClass('active');
+				$(this).addClass('active');
+				
+				$('.abt-frm2__tabbing-content').fadeOut(0);
+
+			    $('#'+id).fadeIn(300);
+		    });
+
+			$('.abt-frm2__tabbing-slider').slick({
+				infinite: true,
+		        slidesToShow: 3,
+		        slidesToScroll: 1,
+		        speed: 1500,
+		        autoplay: true,
+		        autoplaySpeed: 3000,
+		        arrows: true,
+		        dots: false,
+		    });
+
+			$('.slick-prev').html('<img src="images/left-arrow.png">');
+			$('.slick-next').html('<img src="images/right-arrow.png">');	
 
 		},
 
