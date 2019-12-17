@@ -59,6 +59,8 @@ Route::namespace('Web')->name('web.')->group(function() {
 
 		Route::get('', 'PageController@showHome')->name('home');
 		Route::get('/about-us', 'PageController@showAboutUs')->name('about-us');
+		Route::get('/destinations', 'PageController@showDestinations')->name('destinations');
+		Route::get('/destinations-info', 'PageController@showDestinationsInfo')->name('destinations-info');
 		// Route::get('/fetch/destination', 'PageController@fetchDestination')->name('fetch.destination');
 		Route::get('stylesheet', 'PageController@showStylesheet')->name('stylesheet');
 		Route::get('/privacy-policy', 'PageController@showPrivacyPolicy')->name('privacy-policy');
