@@ -82,6 +82,19 @@ class PageController extends Controller
         ]);
 	}
 
+	/* Show Contact Us */
+	public function showContactUs() {
+		$page = Page::where('slug', 'home')->first();
+
+        $data = $page->getData();
+        $destination = $this->formatData();
+
+        return view('web.pages.contact-us', [
+        	'data' => $data,
+        	'page_scripts'=> 'contact-us'
+        ]);
+	}
+
 	public function formatData() {
 		$result = [];
 
