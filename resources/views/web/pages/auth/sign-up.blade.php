@@ -27,32 +27,51 @@
 				<div class="vertical-align">
 					<div class="margin-a width--80">
 						<div class="l-margin-b align-c">
-							<p class="lgn-frm1__form-title frm-header bold clr--orange">Sign In</p>
+							<p class="lgn-frm1__form-title frm-header bold clr--orange">Sign Up</p>
+						</div>
+						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
+							<input type="" name="" placeholder="Full Name">
 						</div>
 						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
 							<input type="" name="" placeholder="Email Address">
 						</div>
+						<div class="inlineBlock-parent">
+							<div class="width--50">
+								<div class="width--95">
+									<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
+										<input type="" name="" placeholder="Username">
+									</div>
+								</div>
+							</div
+							><div class="width--50">
+								<div class="width--95 margin-l-a inlineBlock-parent">
+									<div class="width--30">
+										<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
+											<input type="text" name="" value="+63" disabled>
+										</div>
+									</div
+									><div class="width--70">
+										<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
+											<input type="number" name="" placeholder="Contact Number">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
 							<input type="password" name="" placeholder="Password">
 						</div>
-						<div class="width--100 m-margin-b">
-							<a href="" class="lgn-frm1__frgt-psswrd">Forgot Password?</a>
+						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
+							<input type="password" name="" placeholder="Re-type Password">
 						</div>
 						<div class="width--100 align-c">
-							<button class="frm-btn green m-margin-b">Sign In</button>
-						</div>
-						<div class="frm-description clr--light-gray align-c m-margin-b">
-							<p>or</p>
-						</div>
-						<div class="inlineBlock-parent align-c">
-							<button class="frm-btn lgn-frm1__login-scl-btn facebook m-margin-b"><img src="{{ asset('images/facebook-icon.png') }}">Facebook</button>
-							<button class="frm-btn lgn-frm1__login-scl-btn google m-margin-b"><img src="{{ asset('images/google-plus-icon.png') }}">Google</button>
+							<button class="frm-btn green m-margin-b">Sign Up</button>
 						</div>
 						<div class="lgn-frm1__sign-up-holder width--100 inlineBlock-parent">
 							<div class="frm-description clr--gray">
-								<p>Don't have account?</p>
+								<p>Already have an account?</p>
 							</div>
-							<a href="sign-up" class="lgn-frm1__sign-up bold">Sign Up</a>
+							<a href="login" class="lgn-frm1__sign-up bold">Sign In</a>
 						</div>
 					</div>
 				</div>

@@ -96,12 +96,19 @@ class PageController extends Controller
 	}
 
 	/* 
-	* Show Login 
+	* Show Login, Sign Up and Forgot Password
 	*/
 	public function showLogin() {
 
         return view('web.pages.auth.login', [
         	'page_scripts'=> 'login'
+        ]);
+	}
+
+	public function showSignUp() {
+
+        return view('web.pages.auth.sign-up', [
+        	'page_scripts'=> 'sign-up'
         ]);
 	}
 
