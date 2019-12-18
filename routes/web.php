@@ -65,6 +65,8 @@ Route::namespace('Web')->name('web.')->group(function() {
 		Route::get('/contact-us', 'PageController@showContactUs')->name('contact-us');
 		Route::get('/login', 'PageController@showLogin')->name('login');
 		Route::get('/sign-up', 'PageController@showSignUp')->name('sign-up');
+		Route::get('/forgot-password', 'PageController@showForgotPassword')->name('forgot-password');
+		Route::get('/reset-password', 'PageController@showResetPassword')->name('reset-password');
 		// Route::get('/fetch/destination', 'PageController@fetchDestination')->name('fetch.destination');
 		Route::get('stylesheet', 'PageController@showStylesheet')->name('stylesheet');
 		Route::get('/privacy-policy', 'PageController@showPrivacyPolicy')->name('privacy-policy');
