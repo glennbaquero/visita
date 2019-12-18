@@ -16,25 +16,18 @@ use App\Models\Destinations\Destination;
 class PageController extends Controller
 {
 
-	/* Show Stylesheet */
+	/* 
+	* Show Stylesheet 
+	*/
 	public function showStylesheet() {
         return view('web.pages.stylesheet', [
 
         ]);
 	}
 
-	/* Show Privacy Policy */
-	public function showPrivacyPolicy() {
-
-		$page = Page::where('slug', 'privacy_policy')->first();
-		$data = $page->getData();
-		
-        return view('web.pages.privacy-policy', [
-        	'data' => $data,
-        ]);
-	}
-
-	/* Show Home */
+	/* 
+	* Show Home 
+	*/
 	public function showHome() {
 		$page = Page::where('slug', 'home')->first();
 		$home_banners = HomeBanner::all();
@@ -54,35 +47,42 @@ class PageController extends Controller
         ]);
 	}
 
-	/* Show About Us */
+	/* 
+	* Show About Us 
+	*/
 	public function showAboutUs() {
         return view('web.pages.about-us', [
         	'page_scripts'=> 'about'
         ]);
 	}
 
-	/* Show Destinations */
+	/* 
+	* Show Destinations and Destinations Info 
+	*/
 	public function showDestinations() {
         return view('web.pages.destination.destinations', [
         	'page_scripts'=> 'destinations'
         ]);
 	}
 
-	/* Show Destinations Info */
 	public function showDestinationsInfo() {
         return view('web.pages.destination.destinations-info', [
         	'page_scripts'=> 'destinations'
         ]);
 	}
 
-	/* Show Faqs */
+	/* 
+	* Show Faqs 
+	*/
 	public function showFaqs() {
         return view('web.pages.faqs', [
         	'page_scripts'=> 'faqs'
         ]);
 	}
 
-	/* Show Contact Us */
+	/* 
+	* Show Contact Us 
+	*/
 	public function showContactUs() {
 		$page = Page::where('slug', 'home')->first();
 
@@ -92,6 +92,29 @@ class PageController extends Controller
         return view('web.pages.contact-us', [
         	'data' => $data,
         	'page_scripts'=> 'contact-us'
+        ]);
+	}
+
+	/* 
+	* Show Login 
+	*/
+	public function showLogin() {
+
+        return view('web.pages.auth.login', [
+        	'page_scripts'=> 'login'
+        ]);
+	}
+
+	/* 
+	* Show Privacy Policy 
+	*/
+	public function showPrivacyPolicy() {
+
+		$page = Page::where('slug', 'privacy_policy')->first();
+		$data = $page->getData();
+		
+        return view('web.pages.privacy-policy', [
+        	'data' => $data,
         ]);
 	}
 
