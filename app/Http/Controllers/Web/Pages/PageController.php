@@ -75,6 +75,13 @@ class PageController extends Controller
         ]);
 	}
 
+	/* Show Faqs */
+	public function showFaqs() {
+        return view('web.pages.faqs', [
+        	'page_scripts'=> 'faqs'
+        ]);
+	}
+
 	public function formatData() {
 		$result = [];
 
