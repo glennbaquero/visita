@@ -9,7 +9,7 @@
 
 @section('content')
 
-<section class="hm-frm6 scrllfy-frame">
+<section class="cntct-frm1 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
