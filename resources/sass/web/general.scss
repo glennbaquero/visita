@@ -265,7 +265,8 @@ $frame-bg--pos__b: bottom center;
 				transition: all 300ms ease;
 			}
 
-			&:hover {
+			&:hover,
+			&.active {
 				color: $orange;
 				text-shadow: none;
 

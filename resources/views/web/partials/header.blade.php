@@ -1,4 +1,6 @@
-<header class="hdr-frm {{ $checker->route->areOnRoutes(['web.privacy-policy']) }}">
+<header class="hdr-frm 
+	{{ $checker->route->areOnRoutes(['web.about-us','web.destinations','web.destinations-info','web.faqs']) }}
+">
 	<div class="frm-cntnr align-c width--90">
 		<div class="inlineBlock-parent">
 			<div class="hdr-frm__nav-col">
@@ -7,16 +9,16 @@
 				</a>
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col">
-				<a href="about-us" class="hdr-frm__nav-link">About Us</a>
+				<a href="about-us" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.about-us']) }}">About Us</a>
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col">
-				<a href="destinations" class="hdr-frm__nav-link">Destinations</a>
+				<a href="destinations" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.destinations','web.destinations-info']) }}">Destinations</a>
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col">
-				<a href="faqs" class="hdr-frm__nav-link">FAQs</a>
+				<a href="faqs" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.faqs']) }}">FAQs</a>
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col">
-				<a href="contact-us" class="hdr-frm__nav-link">Contact Us</a>
+				<a href="contact-us" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.contact-us']) }}">Contact Us</a>
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col inlineBlock-parent">
 				<img class="hdr-frm__nav-link-img" src="{{ asset('images/user-icon.png') }}">
