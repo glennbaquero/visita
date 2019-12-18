@@ -96,7 +96,7 @@ class PageController extends Controller
 	}
 
 	/* 
-	* Show Login, Sign Up and Forgot Password
+	* Show Login, Sign Up, Forgot Password and Reset Password
 	*/
 	public function showLogin() {
 
@@ -109,6 +109,20 @@ class PageController extends Controller
 
         return view('web.pages.auth.sign-up', [
         	'page_scripts'=> 'sign-up'
+        ]);
+	}
+
+	public function showForgotPassword() {
+
+        return view('web.pages.auth.forgot-password', [
+        	'page_scripts'=> 'forgot-password'
+        ]);
+	}
+
+	public function showResetPassword() {
+
+        return view('web.pages.auth.reset-password', [
+        	'page_scripts'=> 'reset-password'
         ]);
 	}
 

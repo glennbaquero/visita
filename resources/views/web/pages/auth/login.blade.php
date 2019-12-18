@@ -36,7 +36,7 @@
 							<input type="password" name="" placeholder="Password">
 						</div>
 						<div class="width--100 m-margin-b">
-							<a href="" class="lgn-frm1__frgt-psswrd">Forgot Password?</a>
+							<a href="forgot-password" class="lgn-frm1__frgt-psswrd">Forgot Password?</a>
 						</div>
 						<div class="width--100 align-c">
 							<button class="frm-btn green m-margin-b">Sign In</button>

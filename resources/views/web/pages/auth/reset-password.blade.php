@@ -27,51 +27,20 @@
 				<div class="vertical-align">
 					<div class="margin-a width--80">
 						<div class="l-margin-b align-c">
-							<p class="lgn-frm1__form-title frm-header bold clr--orange">Sign Up</p>
+							<p class="lgn-frm1__form-title frm-header bold clr--orange">Reset Password</p>
+						</div>
+						<div class="frm-description clr--gray m-margin-b">
+							<p>Enter your new password below.</p>
 						</div>
 						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-							<input type="" name="" placeholder="Full Name">
-						</div>
-						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-							<input type="" name="" placeholder="Email Address">
-						</div>
-						<div class="inlineBlock-parent">
-							<div class="width--50">
-								<div class="width--95">
-									<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-										<input type="" name="" placeholder="Username">
-									</div>
-								</div>
-							</div
-							><div class="width--50">
-								<div class="width--95 margin-l-a inlineBlock-parent">
-									<div class="width--30">
-										<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-											<input type="text" name="" value="+63" disabled>
-										</div>
-									</div
-									><div class="width--70">
-										<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-											<input type="number" name="" placeholder="">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-							<input type="password" name="" placeholder="Password">
+							<input type="" name="" placeholder="New Password">
 						</div>
 						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
 							<input type="password" name="" placeholder="Re-type Password">
 						</div>
+						
 						<div class="width--100 align-c">
-							<button class="frm-btn green m-margin-b">Sign Up</button>
-						</div>
-						<div class="lgn-frm1__sign-up-holder width--100 inlineBlock-parent">
-							<div class="frm-description clr--gray">
-								<p>Already have an account?</p>
-							</div>
-							<a href="login" class="lgn-frm1__sign-up bold">Sign In</a>
+							<button class="frm-btn green m-margin-b">Reset Password</button>
 						</div>
 					</div>
 				</div>
