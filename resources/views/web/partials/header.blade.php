@@ -1,5 +1,5 @@
 <header class="hdr-frm 
-	{{ $checker->route->areOnRoutes(['web.about-us','web.destinations','web.destinations-info','web.faqs','web.contact-us']) }}
+	{{ $checker->route->areOnRoutes(['web.about-us','web.destinations','web.destinations-info','web.faqs','web.contact-us','web.login']) }}
 ">
 	<div class="frm-cntnr align-c width--90">
 		<div class="inlineBlock-parent">
@@ -22,7 +22,7 @@
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col inlineBlock-parent">
 				<img class="hdr-frm__nav-link-img" src="{{ asset('images/user-icon.png') }}">
-				<a href="log-in" class="hdr-frm__nav-link">Log In</a>
+				<a href="login" class="hdr-frm__nav-link">Log In</a>
 			</div
 			><div class="hdr-frm__nav-col">
 				<a href="" class="frm-btn green">REQUEST A VISIT</a>
