@@ -9,7 +9,7 @@
 
 @section('content')
 
-<section class="hm-frm1 gnrl-frm--sldr__container scrllfy-frame" data-section-name="home" id="frame-1">
+<section class="hm-frm1 gnrl-frm--sldr__container scrllfy-frame">
 	<div class="gnrl-frm--sldr fade-up__trigger">
 		@foreach ($home_banners as $home_banner)
 		<div class="gnrl-frm--sldr__item">
@@ -26,7 +26,7 @@
 		@endforeach
 	</div>
 </section>
-<section class="hm-frm2 scrllfy-frame" data-section-name="about-us" id="frame-2">
+<section class="hm-frm2 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align align-c">
@@ -54,7 +54,7 @@
 		</div>
 	</div>
 </section>
-<section class="hm-frm3 scrllfy-frame hm-frm3-fade-up__trigger" data-section-name="alliance" id="frame-3">
+<section class="hm-frm3 scrllfy-frame hm-frm3-fade-up__trigger">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
@@ -93,7 +93,7 @@
 	{{--  --}}
 
 </section>
-<section class="hm-frm4 scrllfy-frame hm-frm4-fade-up__trigger" data-section-name="visita-app" id="frame-4">
+<section class="hm-frm4 scrllfy-frame hm-frm4-fade-up__trigger">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
@@ -132,13 +132,13 @@
 	{{--  --}}
 
 </section>
-<section class="hm-frm5 gnrl-frm--sldr__container scrllfy-frame" data-section-name="destinations" id="frame-5">
+<section class="hm-frm5 gnrl-frm--sldr__container scrllfy-frame">
 	<user-destination
 		{{-- fetch-url="{{ route('web.fetch.destination') }}" --}}
 		:destination="{{ $destination }}"
 	></user-destination>
 </section>
-<section class="hm-frm6 scrllfy-frame" data-section-name="contact-us" id="frame-6">
+<section class="hm-frm6 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
