@@ -112,7 +112,10 @@
 }
 
 .dstntns-inf-frm1 {
-
+	position: relative;
+	width: 100%;
+	margin-top: 40px;
+	
 	.gnrl-frm--sldr__item .frm-title {
 		margin-bottom: 10px !important;
 		text-shadow: none;
@@ -129,6 +132,7 @@
 		margin-right: 5px;
 		display: inline-block;
 		vertical-align: text-bottom;
+   		filter: brightness(0) invert(1);
 	}
 
 	.dstntns-inf-frm1__location-desc {
@@ -216,8 +220,17 @@
 		    	}
 		    }
 
+		    a {
+	    		color: $green;
+	    		text-decoration: underline;
+		    }
+
 		    ul li {
 		    	li { font-size: 1em; }
+		    }
+
+		    ul li {
+		    	strong { font-size: 1em; }
 		    }
 
 		    b {

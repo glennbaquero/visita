@@ -57,7 +57,7 @@ class PageController extends Controller
 	}
 
 	/* 
-	* Show Destinations and Destinations Info 
+	* Show Destinations, Destinations Info and Request A Visit 
 	*/
 	public function showDestinations() {
         return view('web.pages.destination.destinations', [
@@ -68,6 +68,12 @@ class PageController extends Controller
 	public function showDestinationsInfo() {
         return view('web.pages.destination.destinations-info', [
         	'page_scripts'=> 'destinations'
+        ]);
+	}
+
+	public function showRequestToVisit() {
+        return view('web.pages.destination.request-to-visit', [
+        	'page_scripts'=> 'requestToVisit'
         ]);
 	}
 

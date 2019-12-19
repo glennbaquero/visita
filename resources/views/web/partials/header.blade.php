@@ -1,5 +1,5 @@
 <header class="hdr-frm 
-	{{ $checker->route->areOnRoutes(['web.about-us','web.destinations','web.destinations-info','web.faqs','web.contact-us','web.login','web.sign-up','web.forgot-password','web.reset-password']) }}
+	{{ $checker->route->areOnRoutes(['web.about-us','web.destinations','web.destinations-info','web.faqs','web.contact-us','web.login','web.sign-up','web.forgot-password','web.reset-password','web.request-to-visit','web.privacy-policy']) }}
 ">
 	<div class="frm-cntnr align-c width--90">
 		<div class="inlineBlock-parent">
@@ -23,9 +23,11 @@
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col inlineBlock-parent">
 				<img class="hdr-frm__nav-link-img" src="{{ asset('images/user-icon.png') }}">
 				<a href="login" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.login','web.sign-up','web.forgot-password','web.reset-password']) }}">Log In</a>
+				{{-- Dashboard --}}
+				{{-- <a href="" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.login']) }}">Jethro</a> --}}
 			</div
 			><div class="hdr-frm__nav-col">
-				<a href="" class="frm-btn green">REQUEST A VISIT</a>
+				<a href="request-to-visit" class="frm-btn green">REQUEST A VISIT</a>
 			</div>
 		</div>
 		<div class="mbl-hdr-frm__nav-holder">

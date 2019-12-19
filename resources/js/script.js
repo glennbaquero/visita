@@ -24,6 +24,9 @@ var app = {
 			case 'destinations':
                 setup.destinations();                
 				break;
+			case 'requestToVisit':
+                setup.requestToVisit();                
+				break;	
 		}
 	},
 
@@ -338,6 +341,30 @@ var app = {
 		    });	
 
 		},
+
+		requestToVisit: function(){
+		    $('.rqst-frm1__step-4-content-checkbox-container').on('click', function(){
+		    	$('.rqst-frm1__step-4-content-checkbox-container').removeClass('active');
+		    	$(this).addClass('active');
+		    });	
+
+		    $('.rqst-frm1__step-4-content-select').on('click', function(){
+		    	$('.rqst-frm1__step-4-content-select-option').fadeToggle(200);
+		    });		
+
+			var information = $('.rqst-frm1__step-4-content-info-icon');
+
+ 			information.hover(function(e) {
+				$(this).next().fadeIn(200);
+			}, function(e) {
+				$(this).next().fadeOut(200);
+			});
+
+			$('*').not('.rqst-frm1__step-4-content-info-icon').on('touchstart', function(){ 
+	            $(this).next().fadeOut(200);
+ 			})
+
+		}
 
 	}
 
