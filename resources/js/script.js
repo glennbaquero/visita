@@ -224,7 +224,7 @@ var app = {
 				    offset : 0,
 			        scrollbars: false,			    
 				    setHeights: true,
-				    updateHash: true,
+				    updateHash: false,
 				    touchScroll: true,
 				});
 			});

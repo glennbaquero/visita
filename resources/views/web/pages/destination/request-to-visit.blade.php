@@ -1301,7 +1301,7 @@
 								</div
 								><div class="width--45">
 									<div class="width--95">
-										<button class="frm-btn green" data-remodal-target="confirmation-modal">Next</button>
+										<button class="frm-btn green" data-remodal-target="confirmation-modal">Pay Now</button>
 									</div>
 								</div>
 							</div>

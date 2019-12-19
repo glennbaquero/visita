@@ -133,6 +133,23 @@ class PageController extends Controller
 	}
 
 	/* 
+	* Show Dashboard, Profile
+	*/
+	public function showDashboard() {
+
+        return view('web.pages.user.dashboard', [
+        	'page_scripts'=> 'dashboard'
+        ]);
+	}
+
+	public function showProfile() {
+
+        return view('web.pages.user.profile', [
+        	'page_scripts'=> 'profile'
+        ]);
+	}
+
+	/* 
 	* Show Privacy Policy 
 	*/
 	public function showPrivacyPolicy() {
