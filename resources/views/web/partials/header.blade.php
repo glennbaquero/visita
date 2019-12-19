@@ -1,5 +1,5 @@
 <header class="hdr-frm 
-	{{ $checker->route->areOnRoutes(['web.about-us','web.destinations','web.destinations-info','web.faqs','web.contact-us','web.login','web.sign-up','web.forgot-password','web.reset-password','web.request-to-visit','web.privacy-policy']) }}
+	{{ $checker->route->areOnRoutes(['web.about-us','web.destinations','web.destinations-info','web.faqs','web.contact-us','web.login','web.sign-up','web.forgot-password','web.reset-password','web.request-to-visit','web.dashboard','web.profile','web.privacy-policy']) }}
 ">
 	<div class="frm-cntnr align-c width--90">
 		<div class="inlineBlock-parent">

@@ -314,6 +314,7 @@ $frame-bg--pos__b: bottom center;
 		.hdr-frm__nav-link-img {
 			max-width: 18px;
 			margin-right: 5px;
+			filter: brightness(0) invert(1);
 		}
 
 		.hdr-frm__nav-logo {
@@ -353,6 +354,10 @@ $frame-bg--pos__b: bottom center;
 	    		color: $green !important;	
 	    	}
 	    }		
+
+	    .hdr-frm__nav-link-img {
+	    	filter: brightness(1) invert(0);
+	    }
 	}
 }
 

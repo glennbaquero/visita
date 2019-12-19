@@ -59,16 +59,22 @@ Route::namespace('Web')->name('web.')->group(function() {
 
 		Route::get('', 'PageController@showHome')->name('home');
 		Route::get('/about-us', 'PageController@showAboutUs')->name('about-us');
+		
 		Route::get('/destinations', 'PageController@showDestinations')->name('destinations');
 		Route::get('/destinations-info', 'PageController@showDestinationsInfo')->name('destinations-info');
 		Route::get('/request-to-visit', 'PageController@showRequestToVisit')->name('request-to-visit');
+		
 		Route::get('/faqs', 'PageController@showFaqs')->name('faqs');
 		Route::get('/contact-us', 'PageController@showContactUs')->name('contact-us');
+		
 		Route::get('/login', 'PageController@showLogin')->name('login');
 		Route::get('/sign-up', 'PageController@showSignUp')->name('sign-up');
 		Route::get('/forgot-password', 'PageController@showForgotPassword')->name('forgot-password');
 		Route::get('/reset-password', 'PageController@showResetPassword')->name('reset-password');
-		// Route::get('/fetch/destination', 'PageController@fetchDestination')->name('fetch.destination');
+		
+		Route::get('/user/dashboard', 'PageController@showDashboard')->name('dashboard');
+		Route::get('/user/profile', 'PageController@showProfile')->name('profile');
+		
 		Route::get('stylesheet', 'PageController@showStylesheet')->name('stylesheet');
 		Route::get('/privacy-policy', 'PageController@showPrivacyPolicy')->name('privacy-policy');
 		Route::get('/reset-password/success', 'PageController@frontlinerSuccessPage')->name('management.reset.password.success');
