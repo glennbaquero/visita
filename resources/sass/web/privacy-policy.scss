@@ -3,15 +3,21 @@
 * prvcy-plcy-frm : privacy policy frame
 */
 .prvcy-plcy-frm {
-    padding-top: 20vh;
+	margin-top: 40px;
+    padding-top: 15vh;
     padding-bottom: 10vh;
 
 
     .frm-description {
     	text-align: initial;
 
+    	* {
+    		color: $gray;
+    	}
+
     	strong, b {
-    		color: #2C4043;
+    		font-size: 1em;
+    		color: $gray;
     	}
     }
 }

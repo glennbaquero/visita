@@ -26,7 +26,7 @@ $orange: #E0AF3C;
 $green: #657008;
 $navy-blue: #2C4043;
 $maroon: #A74424;
-$gray: #2C4043;
+$gray: #2d2d2d;
 $light-gray: #BFBFBF;
 $black: #000000;
 $white: #FFFFFF;
@@ -194,6 +194,21 @@ $frame-bg--pos__b: bottom center;
     	}
     }
 
+    &.disabled {
+    	cursor: auto;
+    	background: $light-gray;
+    	color: #888888;
+    }
+
+    &.gray {
+    	background: #777777;
+    	color: $white;
+    	
+    	&:hover {
+    		background: #4a4a4a;
+    	}
+    }
+
     &.facebook {
     	background: #44609d;
     	color: $white;
@@ -230,6 +245,7 @@ $frame-bg--pos__b: bottom center;
 		color: $black;
 		background: $white;
 	    box-sizing: border-box;	
+	    border-radius: 5px;
 	    box-shadow: 0px 0px 0px 1px #B3B3B3;	
 	    font-family: $font-family-d-din-regular;
 
@@ -313,7 +329,7 @@ $frame-bg--pos__b: bottom center;
 
 	&.scroll {
 	    background: $white;
-	    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.3686274509803922);
+	    box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.08);
 
 	    .hdr-frm__nav-logo {
 	    	height: 45px;
@@ -327,11 +343,15 @@ $frame-bg--pos__b: bottom center;
 
 	&.active {
 	    background: $white !important;
-	    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.3686274509803922);
+	    box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.08);
 
 	    .hdr-frm__nav-link {
 	    	color: $gray !important;
 	    	text-shadow: none !important;
+
+	    	&.active {
+	    		color: $green !important;	
+	    	}
 	    }		
 	}
 }
@@ -496,10 +516,21 @@ $frame-bg--pos__b: bottom center;
 */
 #gnrl-rmdl {
 
+	.gnrl-rmdl__img-icon {
+		max-width: 75px;
+		margin: auto;
+		margin-bottom: 20px;
+	}
+
 	.frm-description {
 		height: 300px;
 		padding-right: 10px;
 		overflow-y: auto;
+
+		&.no-height {
+			height: auto;
+			padding-right: 0px;
+		}
 
 		&.custom-description {
 			height: 400px;
@@ -534,8 +565,17 @@ $frame-bg--pos__b: bottom center;
 			p {	font-size: 1em; }
 	    }
 
+	    a {
+    		color: $green;
+    		text-decoration: underline;
+	    }
+
 	    ul li {
 	    	li { font-size: 1em; }
+	    }
+
+	    ul li {
+	    	strong { font-size: 1em; }
 	    }
 
 	    b {
@@ -608,6 +648,12 @@ $frame-bg--pos__b: bottom center;
 
 	&.custom-width {
 		max-width: 1000px !important;
+	}
+
+	&.custom-width__small {
+		max-width: 350px !important;
+		border-radius: 10px;
+		padding: 30px 0px;
 	}
 
 }

@@ -61,6 +61,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 		Route::get('/about-us', 'PageController@showAboutUs')->name('about-us');
 		Route::get('/destinations', 'PageController@showDestinations')->name('destinations');
 		Route::get('/destinations-info', 'PageController@showDestinationsInfo')->name('destinations-info');
+		Route::get('/request-to-visit', 'PageController@showRequestToVisit')->name('request-to-visit');
 		Route::get('/faqs', 'PageController@showFaqs')->name('faqs');
 		Route::get('/contact-us', 'PageController@showContactUs')->name('contact-us');
 		Route::get('/login', 'PageController@showLogin')->name('login');
