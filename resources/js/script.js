@@ -74,7 +74,6 @@ var app = {
 				      breakpoint: 1025,
 				      settings: {
 				        arrows: false,
-				        speed: 500
 				      }
 				    }
 				]
