@@ -18,7 +18,7 @@
 
 	<div id="gnrl-rmdl" class="remodal custom-width" data-remodal-id="hm-frm5--modal-1">
 		<button data-remodal-action="close" class="gnrl-rmdl__close-btn">
-			<img src="" class="gnrl-rmdl__close-btn-img">
+			<img :src="close_btn" class="gnrl-rmdl__close-btn-img">
 		</button>
 		<div class="frm-cntnr align-c inlineBlock-parent">
 			<div class="width--25 align-l gnrl-rmdl__col">
@@ -42,7 +42,7 @@
 			><div class="width--70 gnrl-rmdl__col" v-show="experience_description">
 					<div class="frm-description custom-description m-margin-b clr--gray align-l gnrl-scrll" >
 						<template v-for="experience in dest.experiences">
-							<h3><b>{{ experience.name }}</b></h3>
+							<p><strong>{{ experience.name }}</strong></p>
 							<p v-html="experience.description"></p>
 						</template>
 					</div>
@@ -189,7 +189,8 @@ export default {
 			terms: false,
 			get_here: false,
 			contact_us: false,
-			dest: {}
+			dest: {},
+			close_btn: 'images/close-button.png' 
 		}
 	},
 

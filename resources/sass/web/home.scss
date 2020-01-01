@@ -33,7 +33,7 @@
 				&:after {
 					position: absolute;
 					content: "";
-					width: 70px;
+					width: -webkit-fill-available;
 					height: 4px;
 					border-radius: 5px;
 					left: 0px;
@@ -91,7 +91,4 @@
 		}
 	}
 
-	.frm-bckgrnd {
-		opacity: 0.2;
-	}
 }

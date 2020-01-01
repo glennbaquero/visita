@@ -1,8 +1,15 @@
 @extends('web.master')
 
+{{-- @section('meta:title', $page->renderMeta('title'))
+@section('meta:description', $page->renderMeta('description'))
+@section('meta:keywords', $page->renderMeta('keywords'))
+@section('og:image', $page->renderMetaImage())
+@section('og:title', $page->renderMeta('og_title'))
+@section('og:description', $page->renderMeta('og_description')) --}}
+
 @section('content')
 
-<section class="hm-frm1 gnrl-frm--sldr__container scrllfy-frame" id="frame-1">
+<section class="hm-frm1 gnrl-frm--sldr__container scrllfy-frame">
 	<div class="gnrl-frm--sldr fade-up__trigger">
 		@foreach ($home_banners as $home_banner)
 		<div class="gnrl-frm--sldr__item">
@@ -10,7 +17,7 @@
 				<div class="vertical-parent">
 					<div class="vertical-align align-c">
 						<h5 class="frm-title l-margin-b clr--white hm-frm1-fade-up__item">{{ $home_banner->name }}</h5>
-						<a href="{{ $home_banner->link }}" class="frm-btn green js-trigger" data-section="frame-6">{{ $home_banner->link_label }}</a>
+						<a href="#" class="frm-btn green js-trigger" data-section="{{ $home_banner->link }}">{{ $home_banner->link_label }}</a>
 					</div>
 				</div>
 			</div>
@@ -19,7 +26,7 @@
 		@endforeach
 	</div>
 </section>
-<section class="hm-frm2 scrllfy-frame" id="frame-2">
+<section class="hm-frm2 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align align-c">
@@ -47,7 +54,7 @@
 		</div>
 	</div>
 </section>
-<section class="hm-frm3 scrllfy-frame hm-frm3-fade-up__trigger" id="frame-3">
+<section class="hm-frm3 scrllfy-frame hm-frm3-fade-up__trigger">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
@@ -86,7 +93,7 @@
 	{{--  --}}
 
 </section>
-<section class="hm-frm4 scrllfy-frame hm-frm4-fade-up__trigger" id="frame-4">
+<section class="hm-frm4 scrllfy-frame hm-frm4-fade-up__trigger">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
@@ -125,13 +132,13 @@
 	{{--  --}}
 
 </section>
-<section class="hm-frm5 gnrl-frm--sldr__container scrllfy-frame" id="frame-5">
+<section class="hm-frm5 gnrl-frm--sldr__container scrllfy-frame">
 	<user-destination
 		{{-- fetch-url="{{ route('web.fetch.destination') }}" --}}
 		:destination="{{ $destination }}"
 	></user-destination>
 </section>
-<section class="hm-frm6 scrllfy-frame" id="frame-6">
+<section class="hm-frm6 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
