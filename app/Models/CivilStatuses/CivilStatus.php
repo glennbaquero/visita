@@ -1,23 +1,15 @@
 <?php
 
-namespace App\Models\BlockedDates;
+namespace App\Models\CivilStatuses;
 
 use App\Extenders\Models\BaseModel as Model;
 
-class BlockedDate extends Model
+class CivilStatus extends Model
 {
-
-	protected $dates = ['date'];
-
-    public function dates() 
-    {
-        return $this->hasMany(Date::class);
-    }
-
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['name', 'mode', 'description'])
+    public static function store($request, $item = null, $columns = ['name'])
     {
         $vars = $request->only($columns);
 
@@ -34,14 +26,14 @@ class BlockedDate extends Model
      * @Render
      */
     public function renderShowUrl($prefix = 'admin') {
-        return route($prefix . '.blocked-dates.show', $this->id);
+        return route($prefix . '.civil_statuses.show', $this->id);
     }
 
     public function renderArchiveUrl($prefix = 'admin') {
-        return route($prefix . '.blocked-dates.archive', $this->id);
+        return route($prefix . '.civil_statuses.archive', $this->id);
     }
 
     public function renderRestoreUrl($prefix = 'admin') {
-        return route($prefix . '.blocked-dates.restore', $this->id);
+        return route($prefix . '.civil_statuses.restore', $this->id);
     }
 }

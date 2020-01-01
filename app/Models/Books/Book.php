@@ -78,6 +78,7 @@ class Book extends Model
         // $vars = $request->only($columns);
         $vars['allocation_id'] = $request->allocation_id;
         $vars['scheduled_at'] = $request->scheduled_at;
+        $vars['start_time'] = $request->scheduled_at;
         $vars['re_scheduled_at'] = $request->scheduled_at;
         $vars['destination_id'] = $destination_id;
         $vars['total_guest'] = $request->total_guest;

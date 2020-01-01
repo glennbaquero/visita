@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\BlockedDates;
+namespace App\Http\Requests\Admin\Genders;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BlockedDateStoreRequest extends FormRequest
+class GenderStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class BlockedDateStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            // 'date' => 'required',
+            'name' => 'required'
         ];
     }
 }

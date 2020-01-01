@@ -1,23 +1,17 @@
 <?php
 
-namespace App\Models\BlockedDates;
+namespace App\Models\Genders;
+
+use App\Helpers\StringHelpers;
 
 use App\Extenders\Models\BaseModel as Model;
 
-class BlockedDate extends Model
+class Gender extends Model
 {
-
-	protected $dates = ['date'];
-
-    public function dates() 
-    {
-        return $this->hasMany(Date::class);
-    }
-
-    /**
+     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['name', 'mode', 'description'])
+    public static function store($request, $item = null, $columns = ['name'])
     {
         $vars = $request->only($columns);
 
@@ -34,14 +28,14 @@ class BlockedDate extends Model
      * @Render
      */
     public function renderShowUrl($prefix = 'admin') {
-        return route($prefix . '.blocked-dates.show', $this->id);
+        return route($prefix . '.genders.show', $this->id);
     }
 
     public function renderArchiveUrl($prefix = 'admin') {
-        return route($prefix . '.blocked-dates.archive', $this->id);
+        return route($prefix . '.genders.archive', $this->id);
     }
 
     public function renderRestoreUrl($prefix = 'admin') {
-        return route($prefix . '.blocked-dates.restore', $this->id);
+        return route($prefix . '.genders.restore', $this->id);
     }
 }

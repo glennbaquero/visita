@@ -103,3 +103,9 @@ Vue.component('surveys-table', require('./views/admin/surveys/SurveysTable.vue')
 Vue.component('surveys-view', require('./views/admin/surveys/SurveysView.vue').default);
 
 Vue.component('surveys-answer-table', require('./views/admin/surveys/SurveyAnswerTable.vue').default);
+
+Vue.component('genders-table', require('./views/admin/genders/GendersTable.vue').default);
+Vue.component('genders-view', require('./views/admin/genders/GendersView.vue').default);
+
+Vue.component('civil_statuses-table', require('./views/admin/civil_statuses/CivilStatusesTable.vue').default);
+Vue.component('civil_statuses-view', require('./views/admin/civil_statuses/CivilStatusesView.vue').default);

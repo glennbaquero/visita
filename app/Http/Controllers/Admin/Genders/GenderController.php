@@ -1,24 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin\BlockedDates;
+namespace App\Http\Controllers\Admin\Genders;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Genders\GenderStoreRequest;
 use App\Http\Controllers\Controller;
 
-use App\Models\BlockedDates\BlockedDate;
+use App\Models\Genders\Gender;
 
-use App\Http\Requests\Admin\BlockedDates\BlockedDateStoreRequest;
-
-use DB;
-
-class BlockedDateController extends Controller
+class GenderController extends Controller
 {
-
-    public function __construct() {
-        $this->middleware('App\Http\Middleware\Admin\BlockedDates\BlockedDateMiddleware', 
-            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
-        );
-    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +16,7 @@ class BlockedDateController extends Controller
      */
     public function index()
     {
-        return view('admin.blocked-dates.index');
+        return view('admin.genders.index');
     }
 
     /**
@@ -36,7 +26,7 @@ class BlockedDateController extends Controller
      */
     public function create()
     {
-        return view('admin.blocked-dates.create');
+        return view('admin.genders.create');
     }
 
     /**
@@ -45,17 +35,11 @@ class BlockedDateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BlockedDateStoreRequest $request)
+    public function store(GenderStoreRequest $request)
     {
-        $item = BlockedDate::store($request);
+        $item = Gender::store($request);
 
-        foreach ($request->dates as $key => $date) {
-            if($date != null) {
-                $item->dates()->firstOrCreate([ 'date' => $date ]);
-            }
-        }
-
-        $message = "You have successfully created {$item->renderName()}";
+        $message = "You have successfully created {$item->name}";
         $redirect = $item->renderShowUrl();
 
         return response()->json([
@@ -72,8 +56,8 @@ class BlockedDateController extends Controller
      */
     public function show($id)
     {
-        $item = BlockedDate::withTrashed()->findOrFail($id);
-        return view('admin.blocked-dates.show', [
+        $item = Gender::withTrashed()->findOrFail($id);
+        return view('admin.genders.show', [
             'item' => $item,
         ]);
     }
@@ -96,12 +80,12 @@ class BlockedDateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BlockedDateStoreRequest $request, $id)
+    public function update(GenderStoreRequest $request, $id)
     {
-        $item = BlockedDate::withTrashed()->findOrFail($id);
-        $message = "You have successfully updated {$item->renderName()}";
+        $item = Gender::withTrashed()->findOrFail($id);
+        $message = "You have successfully updated {$item->question}";
 
-        $item = BlockedDate::store($request, $item);
+        $item = Gender::store($request, $item);
 
         return response()->json([
             'message' => $message,
@@ -111,32 +95,32 @@ class BlockedDateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\BlockedDate  $sampleItem
+     * @param  \App\Gender  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function archive($id)
     {
-        $item = BlockedDate::withTrashed()->findOrFail($id);
+        $item = Gender::withTrashed()->findOrFail($id);
         $item->archive();
 
         return response()->json([
-            'message' => "You have successfully archived {$item->renderName()}",
+            'message' => "You have successfully archived {$item->question}",
         ]);
     }
 
     /**
      * Restore the specified resource from storage.
      *
-     * @param  \App\BlockedDate  $sampleItem
+     * @param  \App\Gender  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        $item = BlockedDate::withTrashed()->findOrFail($id);
+        $item = Gender::withTrashed()->findOrFail($id);
         $item->unarchive();
 
         return response()->json([
-            'message' => "You have successfully restored {$item->renderName()}",
+            'message' => "You have successfully restored {$item->name}",
         ]);
     }
 }

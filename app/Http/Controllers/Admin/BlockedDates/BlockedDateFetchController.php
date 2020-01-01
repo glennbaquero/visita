@@ -6,6 +6,7 @@ use App\Extenders\Controllers\FetchController;
 
 use App\Models\BlockedDates\BlockedDate;
 
+use Carbon\Carbon;
 
 class BlockedDateFetchController extends FetchController
 {
@@ -41,8 +42,19 @@ class BlockedDateFetchController extends FetchController
         $result = [];
 
         foreach($items as $item) {
-            $data = $this->formatItem($item);
-            array_push($result, $data);
+            foreach ($item->dates as $key => $date) {
+                // $data = $this->formatItem($item);
+                array_push($result, [
+                    'id' => $item->id,
+                    'name' => $item->name,
+                    'date' => $date->date->format('F d, Y'),
+                    'created_at' => $item->renderDate(),
+                    'showUrl' => $item->renderShowUrl(),
+                    'archiveUrl' => $item->renderArchiveUrl(),
+                    'restoreUrl' => $item->renderRestoreUrl(),
+                    'deleted_at' => $item->deleted_at,
+                ]);
+            }
         }
 
         return $result;
@@ -70,15 +82,24 @@ class BlockedDateFetchController extends FetchController
 
     public function fetchView($id = null) {
         $item = null;
+        $dates = [];
 
         if ($id) {
         	$item = BlockedDate::withTrashed()->findOrFail($id);
+            
+            foreach ($item->dates as $key => $date) {
+                array_push($dates, [
+                    Carbon::parse($date->date)->toDateTimeString()
+                ]);
+            }
+
             $item->archiveUrl = $item->renderArchiveUrl();
             $item->restoreUrl = $item->renderRestoreUrl();
         }
 
     	return response()->json([
     		'item' => $item,
+            'dates' => collect($dates)->flatten()
     	]);
     }
 }

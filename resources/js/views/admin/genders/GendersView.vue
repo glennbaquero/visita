@@ -5,58 +5,13 @@
 			<template v-slot:header>About Tabbing Information</template>
 
 			<div class="row">
-				<div class="form-group col-sm-12 col-md-6">
+				<div class="form-group col-sm-12 col-md-12">
 					<label>Name</label>
 					<input v-model="item.name" name="name" type="text" class="form-control">
 				</div>
 			</div>
-			<div class="row">
-				<selector class="col-sm-12 col-md-6"
-				v-model="item.mode"
-				name="mode"
-				label="Select mode"
-				:items="modes"
-				item-value="name"
-				item-text="name"
-				empty-text="None"
-				placeholder="Please select mode"
-				></selector>
-				
-				<date-picker
-				v-show="item.mode == 'single'"
-				v-model="dates"
-				:enableTime="false"
-				class="form-group col-sm-12 col-md-6"
-				label="Date"
-				name="dates[]"
-				placeholder="Choose a date"
-				mode="single"
-				></date-picker>
 
-				<date-picker
-				v-show="item.mode == 'multiple'"
-				v-model="dates"
-				:enableTime="false"
-				class="form-group col-sm-12 col-md-6"
-				label="Date"
-				name="dates[]"
-				placeholder="Choose a date"
-				mode="multiple"
-				:default-date="dates"
-				></date-picker>
-
-				<date-picker
-				v-show="item.mode == 'range'"
-				v-model="dates"
-				:enableTime="false"
-				class="form-group col-sm-12 col-md-6"
-				label="Date"
-				name="dates[]"
-				placeholder="Choose a date"
-				mode="range"
-				></date-picker>
-			</div>
-
+			
 			<template v-slot:footer>
 				<action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
             
@@ -72,8 +27,8 @@
                 confirm-dialog
                 title="Archive Item"
                 alt-title="Restore Item"
-                :message="'Are you sure you want to archive Blocked Date #' + item.id + '?'"
-                :alt-message="'Are you sure you want to restore Blocked Date #' + item.id + '?'"
+                :message="'Are you sure you want to archive ' + item.name + '?'"
+                :alt-message="'Are you sure you want to restore ' + item.name + '?'"
                 :disabled="loading"
                 @load="load"
                 @success="fetch"
@@ -102,29 +57,14 @@ export default {
 	methods: {
 		fetchSuccess(data) {
 			this.item = data.item ? data.item : this.item;
-			this.dates = data.dates ? data.dates : this.dates;
+			this.types = data.types ? data.types : this.types;
 		},
 	},
 
 	data() {
 		return {
 			item: [],
-			dates: [],
-			modeSelected: 'single',
-			modes: [
-				{
-					id: 1,
-					name: 'single'
-				},
-				{
-					id: 2,
-					name: 'multiple'
-				},
-				{
-					id: 3,
-					name: 'range'
-				},
-			]
+			types: [],
 		}
 	},
 

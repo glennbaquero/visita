@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\API\FetchControllers;
+namespace App\Http\Controllers\Admin\CivilStatuses;
 
 use App\Extenders\Controllers\FetchController;
 
-use App\Models\Books\Book;
+use App\Models\CivilStatuses\CivilStatus;
 
-class GuestFetchController extends FetchController
+class CivilStatusFetchController extends FetchController
 {
     /**
      * Set object class of fetched data
@@ -15,7 +15,7 @@ class GuestFetchController extends FetchController
      */
     public function setObjectClass()
     {
-        $this->class = new Book;
+        $this->class = new CivilStatus;
     }
 
     /**
@@ -26,8 +26,6 @@ class GuestFetchController extends FetchController
      */
     public function filterQuery($query)
     {
-    	$destination = auth()->guard('api')->user()->destination;
-    	$query = $query->where('destination_id', $destination->id);
         return $query;
     }
 
@@ -42,9 +40,7 @@ class GuestFetchController extends FetchController
         $result = [];
 
         foreach($items as $item) {
-            if($item->guests->where('main', true)->first()) {
-                $data = $this->formatItem($item);
-            }
+            $data = $this->formatItem($item);
             array_push($result, $data);
         }
 
@@ -60,8 +56,27 @@ class GuestFetchController extends FetchController
     protected function formatItem($item)
     {
         return [
-        	'id' => $item->id,
-        	'main_contact' => $item->guests->where('main', true)->first()->first_name. ' ' .$item->guests->where('main', true)->first()->last_name."'s Group" ,
+            'id' => $item->id,
+            'name' => $item->name,
+            'created_at' => $item->renderDate(),
+            'showUrl' => $item->renderShowUrl(),
+            'archiveUrl' => $item->renderArchiveUrl(),
+            'restoreUrl' => $item->renderRestoreUrl(),
+            'deleted_at' => $item->deleted_at,
         ];
+    }
+
+    public function fetchView($id = null) {
+        $item = null;
+
+        if ($id) {
+        	$item = CivilStatus::withTrashed()->findOrFail($id);
+            $item->archiveUrl = $item->renderArchiveUrl();
+            $item->restoreUrl = $item->renderRestoreUrl();
+        }
+
+    	return response()->json([
+    		'item' => $item,
+    	]);
     }
 }

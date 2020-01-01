@@ -1,24 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin\BlockedDates;
+namespace App\Http\Controllers\Admin\CivilStatuses;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\CivilStatuses\CivilStatusStoreRequest;
 use App\Http\Controllers\Controller;
 
-use App\Models\BlockedDates\BlockedDate;
+use App\Models\CivilStatuses\CivilStatus;
 
-use App\Http\Requests\Admin\BlockedDates\BlockedDateStoreRequest;
-
-use DB;
-
-class BlockedDateController extends Controller
+class CivilStatusController extends Controller
 {
-
-    public function __construct() {
-        $this->middleware('App\Http\Middleware\Admin\BlockedDates\BlockedDateMiddleware', 
-            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
-        );
-    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +16,7 @@ class BlockedDateController extends Controller
      */
     public function index()
     {
-        return view('admin.blocked-dates.index');
+        return view('admin.civil_statuses.index');
     }
 
     /**
@@ -36,7 +26,7 @@ class BlockedDateController extends Controller
      */
     public function create()
     {
-        return view('admin.blocked-dates.create');
+        return view('admin.civil_statuses.create');
     }
 
     /**
@@ -45,17 +35,11 @@ class BlockedDateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BlockedDateStoreRequest $request)
+    public function store(CivilStatusStoreRequest $request)
     {
-        $item = BlockedDate::store($request);
+        $item = CivilStatus::store($request);
 
-        foreach ($request->dates as $key => $date) {
-            if($date != null) {
-                $item->dates()->firstOrCreate([ 'date' => $date ]);
-            }
-        }
-
-        $message = "You have successfully created {$item->renderName()}";
+        $message = "You have successfully created {$item->name}";
         $redirect = $item->renderShowUrl();
 
         return response()->json([
@@ -72,8 +56,8 @@ class BlockedDateController extends Controller
      */
     public function show($id)
     {
-        $item = BlockedDate::withTrashed()->findOrFail($id);
-        return view('admin.blocked-dates.show', [
+        $item = CivilStatus::withTrashed()->findOrFail($id);
+        return view('admin.civil_statuses.show', [
             'item' => $item,
         ]);
     }
@@ -96,12 +80,12 @@ class BlockedDateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BlockedDateStoreRequest $request, $id)
+    public function update(CivilStatusStoreRequest $request, $id)
     {
-        $item = BlockedDate::withTrashed()->findOrFail($id);
-        $message = "You have successfully updated {$item->renderName()}";
+        $item = CivilStatus::withTrashed()->findOrFail($id);
+        $message = "You have successfully updated {$item->question}";
 
-        $item = BlockedDate::store($request, $item);
+        $item = CivilStatus::store($request, $item);
 
         return response()->json([
             'message' => $message,
@@ -111,32 +95,32 @@ class BlockedDateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\BlockedDate  $sampleItem
+     * @param  \App\CivilStatus  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function archive($id)
     {
-        $item = BlockedDate::withTrashed()->findOrFail($id);
+        $item = CivilStatus::withTrashed()->findOrFail($id);
         $item->archive();
 
         return response()->json([
-            'message' => "You have successfully archived {$item->renderName()}",
+            'message' => "You have successfully archived {$item->question}",
         ]);
     }
 
     /**
      * Restore the specified resource from storage.
      *
-     * @param  \App\BlockedDate  $sampleItem
+     * @param  \App\CivilStatus  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        $item = BlockedDate::withTrashed()->findOrFail($id);
+        $item = CivilStatus::withTrashed()->findOrFail($id);
         $item->unarchive();
 
         return response()->json([
-            'message' => "You have successfully restored {$item->renderName()}",
+            'message' => "You have successfully restored {$item->name}",
         ]);
     }
 }

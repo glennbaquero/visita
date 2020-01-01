@@ -32,7 +32,8 @@ class SyncController extends Controller
     					$reservation->update([
     						'checked_in_at' => $book['checked_in_at'] ? $book['checked_in_at'] : null,
     						// 're_scheduled_at' => $book['re_scheduled_at'] ? $book['re_scheduled_at']->format('m-d-y H:i:s') : null,
-    						'started_at' => $book['started_at'] ? $book['started_at'] : null,
+                            'started_at' => $book['started_at'] ? $book['started_at'] : null,
+    						'start_time' => $book['start_time'] ? $book['start_time'] : null,
     						'ended_at' => $book['ended_at'] ? $book['ended_at'] : null,
     						'scheduled_at' => $book['scheduled_at'] ? $book['scheduled_at'] : null,
     					]);

@@ -26,7 +26,6 @@ class WalkinController extends Controller
     		$main_contact_vars['main_contact_person']['main'] = true;
     		$guests_vars = $request->only(['guests']);
 
-         
             $bookings_vars = $request->only(['booking_details']);
     		$bookings_vars['booking_details']['destination_id'] = $request->user()->destination_id;
     		$bookings_vars['booking_details']['is_walkin'] = true;
