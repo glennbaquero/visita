@@ -31,7 +31,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/request-to-visit';
 
     /**
      * Create a new controller instance.
@@ -55,7 +55,7 @@ class ResetPasswordController extends Controller
      */
     public function showResetForm(Request $request, $token = null)
     {
-        return view('web.auth.passwords.reset')->with(
+        return view('web.pages.auth.reset-password')->with(
             ['token' => $token, 'email' => $request->email]
         );
     }

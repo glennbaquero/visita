@@ -105,7 +105,6 @@ class PageController extends Controller
 	* Show Login, Sign Up, Forgot Password and Reset Password
 	*/
 	public function showLogin() {
-
         return view('web.pages.auth.login', [
         	'page_scripts'=> 'login'
         ]);

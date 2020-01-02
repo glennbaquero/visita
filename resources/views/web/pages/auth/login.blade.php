@@ -1,5 +1,6 @@
 @extends('web.master')
 
+@section('meta:title', 'Sign In')
 {{-- @section('meta:title', $page->renderMeta('title'))
 @section('meta:description', $page->renderMeta('description'))
 @section('meta:keywords', $page->renderMeta('keywords'))
@@ -29,18 +30,26 @@
 						<div class="l-margin-b align-c">
 							<p class="lgn-frm1__form-title frm-header bold clr--orange">Sign In</p>
 						</div>
-						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-							<input type="" name="" placeholder="Email Address">
-						</div>
-						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-							<input type="password" name="" placeholder="Password">
-						</div>
-						<div class="width--100 m-margin-b">
-							<a href="forgot-password" class="lgn-frm1__frgt-psswrd">Forgot Password?</a>
-						</div>
-						<div class="width--100 align-c">
-							<button class="frm-btn green m-margin-b">Sign In</button>
-						</div>
+						<ul>
+						@foreach($errors->all() as $error)
+						    <li><p class="">{{$error}}</p></li>
+						@endforeach
+						</ul>
+						<form action="{{ route('web.login') }}" method="POST">
+							@csrf
+							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
+								<input type="email" name="email" value="{{ old('email') }}" placeholder="Email Address">
+							</div>
+							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
+								<input type="password" name="password" placeholder="Password">
+							</div>
+							<div class="width--100 m-margin-b">
+								<a href="forgot-password" class="lgn-frm1__frgt-psswrd">Forgot Password?</a>
+							</div>
+							<div class="width--100 align-c">
+								<button class="frm-btn green m-margin-b">Sign In</button>
+							</div>
+						</form>
 						<div class="frm-description clr--light-gray align-c m-margin-b">
 							<p>or</p>
 						</div>

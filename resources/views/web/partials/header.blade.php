@@ -22,7 +22,11 @@
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col inlineBlock-parent">
 				<img class="hdr-frm__nav-link-img" src="{{ asset('images/user-icon.png') }}">
-				<a href="login" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.login','web.sign-up','web.forgot-password','web.reset-password']) }}">Log In</a>
+				@if(auth()->check()) 
+				<a href="sign-in" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.sign-in','web.sign-up','web.forgot-password','web.reset-password']) }}">{{ auth()->user()->renderName() }}</a>
+				@else
+				<a href="sign-in" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.sign-in','web.sign-up','web.forgot-password','web.reset-password']) }}">Log In {{ auth()->user() }}</a>
+				@endif
 				{{-- Dashboard --}}
 				{{-- <a href="" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.login']) }}">Jethro</a> --}}
 			</div

@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
                 'image_path' => SeederHelpers::randomFile(),
                 'email' => 'user@app.com',
                 'password' => 'password',
+                'username' => 'webapp'
             ],
         ];
 
