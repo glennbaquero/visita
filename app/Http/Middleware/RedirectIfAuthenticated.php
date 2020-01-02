@@ -19,7 +19,7 @@ class RedirectIfAuthenticated
     {
         switch ($guard) {
             case 'web':
-                    $route = '/dashboard';
+                    $route = '/request-to-visit';
                 break;
             
             case 'admin':

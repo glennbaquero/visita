@@ -32,16 +32,22 @@
 						<div class="frm-description clr--gray m-margin-b">
 							<p>Enter your new password below.</p>
 						</div>
-						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-							<input type="" name="" placeholder="New Password">
-						</div>
-						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-							<input type="password" name="" placeholder="Re-type Password">
-						</div>
-						
-						<div class="width--100 align-c">
-							<button class="frm-btn green m-margin-b">Reset Password</button>
-						</div>
+						<form method="POST" action="{{ route('web.password.change') }}">
+						    @csrf
+						    <input type="hidden" name="email" value="{{ $email ?? old('email') }}">
+						    <input type="hidden" name="token" value="{{ $token }}">
+							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
+								<input type="password" name="password" placeholder="New Password">
+								<p class="error-show">{{ $errors->has('password') ? $errors->first('password') : '' }}</p>
+							</div>
+							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
+								<input type="password" name="password_confirmation" placeholder="Re-type Password">
+							</div>
+							
+							<div class="width--100 align-c">
+								<button class="frm-btn green m-margin-b">Reset Password</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>

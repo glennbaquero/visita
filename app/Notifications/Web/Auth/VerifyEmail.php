@@ -22,14 +22,16 @@ class VerifyEmail extends Notification implements ShouldQueue
 
     protected $title;
     protected $message;
+    protected $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($message = null)
+    public function __construct($message = null, $user = false)
     {
+        $this->user = $user;
         $this->title = Lang::getFromJson('Verify Email Address');
         $this->message = $message ?? 'Email verification has been sent';
     }
@@ -69,7 +71,6 @@ class VerifyEmail extends Notification implements ShouldQueue
 
         $userVerification = (new MailMessage)
                             ->subject(config('app.name') . ': ' . $this->title)
-                            ->line($this->message)
                             ->line(Lang::getFromJson('Please click the button below to verify your email address.'))
                             ->action(
                                 Lang::getFromJson('Verify Email Address'),
@@ -77,7 +78,7 @@ class VerifyEmail extends Notification implements ShouldQueue
                             )
                             ->line(Lang::getFromJson('If you did not create an account, no further action is required.'));
 
-        return $this->message ? $userVerification : $frontlinerVerification;
+        return $this->user ? $userVerification : $frontlinerVerification;
     }
 
     /**
@@ -88,8 +89,9 @@ class VerifyEmail extends Notification implements ShouldQueue
      */
     protected function verificationUrl($notifiable)
     {
+        $user = get_class($notifiable) === 'App\Models\Users\User' ? true : false;
         return URL::temporarySignedRoute(
-            'web.verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
+            'web.verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey(), 'user' => $user]
         );
     }
 
