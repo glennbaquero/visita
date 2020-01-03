@@ -18,3 +18,8 @@ Vue.component('user-destination', require('./views/web/destinations/Destination.
 * User Booking
 */
 Vue.component('user-booking', require('./views/web/bookings/Booking.vue').default);
+
+/*
+* User Profile
+*/
+Vue.component('profile', require('./views/web/auth/Profile.vue').default);

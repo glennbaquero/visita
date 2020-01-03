@@ -10,6 +10,14 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+/* Directory shortcuts */
+mix.webpackConfig({
+	resolve: {
+		alias: {
+			assets: path.resolve(__dirname, 'public/'),
+		}
+	}
+});
 
 if (!mix.inProduction()) {
     mix.sourceMaps();
