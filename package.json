@@ -38,6 +38,7 @@
         "@algoz098/vue-player": "^0.4.3",
         "lodash": "^4.17.15",
         "vue-full-calendar": "^2.7.0",
+        "vue-loading-overlay": "^3.2.0",
         "vuedraggable": "^2.23.2"
     }
 }

@@ -88,6 +88,12 @@ Route::namespace('Web')->name('web.')->group(function() {
 		});
 	});
 
+	Route::namespace('Users')->group(function() {
+		Route::middleware('auth:web')->group(function() {
+			Route::post('/user/update/{id}', 'UserController@update')->name('user.update');
+		});
+	});
+
 	/* Inquiries Routes */
 	Route::namespace('Inquiries')->group(function() {
 		Route::post('inquiry', 'InquiryController@inquiryPost')->name('user.inquiry');
