@@ -79,15 +79,25 @@
 		cursor: pointer;
 		z-index: 2;
 
+		&:hover,
 		&.active {
 
 			.frm-bckgrnd {
-				opacity: 1 !important;
+				&:before {
+					height: 0%;
+				}
+			}
+		}
+
+		&.active {
+			.frm-header {
+				font-weight: bolder;
 			}
 		}
 
 		.frm-header {
 			margin-bottom: 0px !important;
+			transition: all 300ms ease-in;
 		}
 	}
 
@@ -96,11 +106,21 @@
 		width: 100%;
 		height: 45vh;
 		background: $white;
-		box-shadow: 3px 3px 7px 0px rgba(34, 34, 34, 0.45);
+		box-shadow: 0 11px 7px -7px rgba(0, 0, 0, 0.5);
+		transition: all 300ms ease-in;
 
 		.frm-bckgrnd {
-			opacity: 0.5;
-			transition: all 300ms ease-in;
+
+			&:before {
+				position: absolute;
+				content: " ";
+				width: 100%;
+				height: 100%;
+				bottom: 0;
+				left: 0;
+				background: rgba(255, 255, 255, 0.45);
+				transition: all 300ms ease-out;
+			}
 		}
 	}
 

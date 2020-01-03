@@ -4,7 +4,7 @@
 	<div class="frm-cntnr align-c width--90">
 		<div class="inlineBlock-parent">
 			<div class="hdr-frm__nav-col">
-				<a href="#home">
+				<a href="/">
 					<img src="{{ asset('images/visita-logo.png') }}" class="hdr-frm__nav-logo">
 				</a>
 			</div

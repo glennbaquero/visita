@@ -5,18 +5,18 @@
 <section class="dstntns-frm1">
 	<div class="inlineBlock-parent">
 		<div class="dstntns-frm1__col width--55">
-			<div class="dstntns-frm1__slider">
+			<div class="dstntns-frm1__slider dstntns-frm--sldr__animation">
 				
 				<div class="dstntns-frm1__slider-item">
 					<div class="dstntns-frm1__slider-item-info-holder margin-a width--85">
 						<div class="vertical-parent">
 							<div class="vertical-align align-b">
 								<div class="dstntns-frm1__slider-item-info">
-									<h5 class="frm-title l-margin-b clr--white">Mt.	Pulag</h5>
-									<div class="frm-description s-margin-b clr--white">
+									<h5 class="frm-title l-margin-b clr--white dstntns-frm--sldr__animation-title">Mt.Pulag</h5>
+									<div class="frm-description s-margin-b clr--white dstntns-frm--sldr__animation-description">
 										<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout...</p>
 									</div>
-									<div class="inlineBlock-parent width--100">
+									<div class="inlineBlock-parent width--100 dstntns-frm--sldr__animation-button">
 										<a href="destinations-info" class="frm-btn green s-margin-r">View Destination</a>
 										<button class="frm-btn orange">Request to Visit</button>
 									</div>
@@ -32,11 +32,11 @@
 						<div class="vertical-parent">
 							<div class="vertical-align align-b">
 								<div class="dstntns-frm1__slider-item-info">
-									<h5 class="frm-title l-margin-b clr--white">Kalanggaman</h5>
-									<div class="frm-description s-margin-b clr--white">
+									<h5 class="frm-title l-margin-b clr--white dstntns-frm--sldr__animation-title">Kalanggaman</h5>
+									<div class="frm-description s-margin-b clr--white dstntns-frm--sldr__animation-description">
 										<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout...</p>
 									</div>
-									<div class="inlineBlock-parent width--100">
+									<div class="inlineBlock-parent width--100 dstntns-frm--sldr__animation-button">
 										<a href="#" class="frm-btn green s-margin-r">View Destination</a>
 										<button class="frm-btn orange">Request to Visit</button>
 									</div>
@@ -52,11 +52,11 @@
 						<div class="vertical-parent">
 							<div class="vertical-align align-b">
 								<div class="dstntns-frm1__slider-item-info">
-									<h5 class="frm-title l-margin-b clr--white">Donsol</h5>
-									<div class="frm-description s-margin-b clr--white">
+									<h5 class="frm-title l-margin-b clr--white dstntns-frm--sldr__animation-title">Donsol</h5>
+									<div class="frm-description s-margin-b clr--white dstntns-frm--sldr__animation-description">
 										<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout...</p>
 									</div>
-									<div class="inlineBlock-parent width--100">
+									<div class="inlineBlock-parent width--100 dstntns-frm--sldr__animation-button">
 										<a href="#" class="frm-btn green s-margin-r">View Destination</a>
 										<button class="frm-btn orange">Request to Visit</button>
 									</div>

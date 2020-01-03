@@ -29,6 +29,7 @@ class PageController extends Controller
 	* Show Home 
 	*/
 	public function showHome() {
+		
 		$page = Page::where('slug', 'home')->first();
 		$home_banners = HomeBanner::all();
 		$about_infos = AboutInfo::all();
