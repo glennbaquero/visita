@@ -285,8 +285,19 @@
 	* Contact Us Frame
 	* cntct-frm : cntct frame
 	*/
-	.cntct-frm__animation-form {
+	.cntct-frm1 {
+	    height: auto;
+	    padding-top: 15vh;
+	    padding-bottom: 10vh;
+	}
+	.cntct-frm__animation-form,
+	.cntct-frm__animation-form .width--50,
+	.cntct-frm__animation-form .width--95 {
 		width: 100%;
+	}
+
+	.cntct-frm__animation-form .frm-inpt:nth-child(3n) {
+    	margin-bottom: 0px;
 	}
 
 	/*
