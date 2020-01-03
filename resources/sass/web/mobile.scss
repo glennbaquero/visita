@@ -320,7 +320,15 @@
 			height: auto;
 			padding: 5vh 0vh;
 		}
+		.frm-btn {
+			width: 100% !important;
+		}
+		.frm-btn img {
+			max-width: 15px;
+		}
+
 	}
+
 	.lgn-frm1__col {
 		.width--100 {
 			text-align: center;
