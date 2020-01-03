@@ -138,6 +138,10 @@
 		}
 	}
 
+	.ftr-frm .frm-cntnr__nav-link {
+		font-size: 1em;
+	}
+
 	/*
 	* Typography
 	* frm : frame
@@ -301,6 +305,46 @@
 	}
 
 	/*
+	* Login Frame
+	* lgn-frm : login frame
+	*/
+	.lgn-frm1 { margin-top: 70px; }
+
+	.lgn-frm1 .lgn-frm1__col {
+		width: 100%;
+
+		&.width--55 {
+			height: 50vh;
+		}
+		&.width--45 {
+			height: auto;
+			padding: 5vh 0vh;
+		}
+		.frm-btn {
+			width: 100% !important;
+		}
+		.frm-btn img {
+			max-width: 15px;
+		}
+
+	}
+
+	.lgn-frm1__col {
+		.width--100 {
+			text-align: center;
+		}
+	}
+	.lgn-frm1 .lgn-frm1__frgt-psswrd, .lgn-frm1 .lgn-frm1__sign-up {
+		font-size: 1em !important;
+	}
+	.lgn-frm1__col {
+		.width--50,
+		.width--95 {
+			width: 100% !important;
+		}
+	}
+
+	/*
 	* General Remodal
 	* gnrl-rmdl : general remodal
 	*/
@@ -338,7 +382,11 @@
 	 */
 	.frm-inpt {
 		input,select,textarea {
-			min-width: 100%;
+			min-width: 100% !important;
+		}
+		input,select {
+			min-height: 45px !important;
+			font-size: 1em !important;
 		}
 	}
 }

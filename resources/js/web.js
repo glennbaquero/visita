@@ -15,11 +15,6 @@ Vue.component('user-inquiry', require('./views/web/inquiries/Inquiry.vue').defau
 Vue.component('user-destination', require('./views/web/destinations/Destination.vue').default);
 
 /*
-* Faqs
-*/
-Vue.component('faqs', require('./views/web/faqs/Faqs.vue').default);
-
-/*
 * User Booking
 */
 Vue.component('user-booking', require('./views/web/bookings/Booking.vue').default);

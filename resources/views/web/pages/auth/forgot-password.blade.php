@@ -15,7 +15,7 @@
 			<div class="vertical-parent">
 				<div class="vertical-align align-b">
 					<div class="margin-a width--85">
-						<p class="lgn-frm1__col-header frm-header m-margin-b clr--white">Welcome</p>
+						<p class="lgn-frm1__col-header frm-header s-margin-b clr--white">Welcome</p>
 						<h5 class="lgn-frm1__col-label frm-title clr--white">Visita</h5>
 					</div>
 				</div>
@@ -47,7 +47,7 @@
 							<div class="frm-description clr--gray">
 								<p>Go back to login?</p>
 							</div>
-							<a href="login" class="lgn-frm1__sign-up bold">Click here.</a>
+							<a href="sign-in" class="lgn-frm1__sign-up bold">Click here.</a>
 						</div>
 					</div>
 				</div>
