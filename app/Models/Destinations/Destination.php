@@ -79,7 +79,7 @@ class Destination extends Model
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['name', 'code', 'icon', 'terms_conditions', 'visitor_policies', 'operating_hours', 'orientation_module', 'capacity_per_day', 'overview', 'contact_us', 'fees', 'how_to_get_here'])
+    public static function store($request, $item = null, $columns = ['name', 'code', 'icon', 'terms_conditions', 'visitor_policies', 'operating_hours', 'orientation_module', 'capacity_per_day', 'overview', 'contact_us', 'fees', 'how_to_get_here', 'location', 'recommended', 'duration'])
     {
         $vars = $request->only($columns);
 
@@ -119,5 +119,9 @@ class Destination extends Model
 
     public function renderRemoveImageUrl($prefix = 'admin') {
         return route($prefix . '.destinations.remove-image', $this->id);
+    }
+
+    public function renderRequestVisitUrl() {
+        return route('web.request-to-visit', [$this->id, $this->name]);
     }
 }
