@@ -142,15 +142,12 @@
 	* Typography
 	* frm : frame
 	*/
-	.frm-title {
-		font-size: 2.5em;
-	}
+	.frm-title { font-size: 2em; }
 
-	.frm-title.small {
-		font-size: 1.6em;
-	}
+	.frm-title.small { font-size: 1.3em; }
+
+	.frm-header { font-size: 1em !important; }
 	 
-	.frm-header,
 	.frm-description {
 
 		* {
@@ -259,6 +256,30 @@
 	.abt-frm3 .abt-frm3__item-overlay,
 	.abt-frm3__item-title-small,
 	.abt-frm3__item-desc { opacity: 1 !important; }
+
+	/*
+	* Faqs Frame
+	* fqs-frm : faqs frame
+	*/
+	.fqs-frm1__selection-icon {
+		max-width: 40px;
+	}
+	.fqs-frm1__selection {
+		width: 100% !important;
+		margin-left: 0px !important;
+		margin-right: 0px !important;
+		margin-bottom: 20px !important;
+	}
+	.fqs-frm1 .fqs-frm1__cards {
+		width: 100% !important;
+	}
+	.fqs-frm1__cards .fqs-frm1__cards-icon { margin: 0px; }
+	.fqs-frm1 .fqs-frm1__cards .fqs-frm1__cards-icon:before { width: 10px !important; }
+	.fqs-frm1 .fqs-frm1__cards .fqs-frm1__cards-icon:after { height: 10px !important; }
+	.fqs-frm1__cards-header {
+		.width--95 { width: 85% !important; }
+		.width--5 { width: 15% !important; }
+	}
 
 	/*
 	* Contact Us Frame
