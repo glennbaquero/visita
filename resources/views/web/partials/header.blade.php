@@ -27,10 +27,8 @@
 				@else
 				<a href="sign-in" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.sign-in','web.sign-up','web.forgot-password','web.reset-password']) }}">Log In {{ auth()->user() }}</a>
 				@endif
-				{{-- Dashboard --}}
-				{{-- <a href="" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.login']) }}">Jethro</a> --}}
 			</div
-			><div class="hdr-frm__nav-col">
+			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col">
 				<a href="request-to-visit" class="frm-btn green">REQUEST A VISIT</a>
 			</div>
 		</div>
@@ -48,14 +46,19 @@
 			<div class="vertical-parent">
 				<div class="vertical-align">
 					<img src="{{ asset('images/close-button.png') }}" class="mbl-hdr-frm__link-holder-btn">
-					<a href="#home" class="js-trigger" data-section="frame-1">
+					<a href="/" class="js-trigger" data-section="frame-1">
 						<img src="{{ asset('images/visita-logo.png') }}" class="mbl-hdr-frm__nav-logo">
 					</a>
-					<a href="#about-us" class="mbl-hdr-frm__nav-link js-trigger" data-section="frame-2">About Us</a>
-					<a href="#alliance" class="mbl-hdr-frm__nav-link js-trigger" data-section="frame-3">Alliance</a>
-					<a href="#visita-app" class="mbl-hdr-frm__nav-link js-trigger" data-section="frame-4">Visita App</a>
-					<a href="#destinations" class="mbl-hdr-frm__nav-link js-trigger" data-section="frame-5">Destinations</a>
-					<a href="#contact-us" class="mbl-hdr-frm__nav-link js-trigger" data-section="frame-6">Contact Us</a>
+					<a href="about-us" class="mbl-hdr-frm__nav-link">About Us</a>
+					<a href="destinations" class="mbl-hdr-frm__nav-link">Destinations</a>
+					<a href="faqs" class="mbl-hdr-frm__nav-link">Faqs</a>
+					<a href="contact-us" class="mbl-hdr-frm__nav-link">Contact us</a>
+					@if(auth()->check())
+						<a href="sign-in" class="mbl-hdr-frm__nav-link">{{ auth()->user()->renderName() }}</a>
+					@else
+						<a href="sign-in" class="mbl-hdr-frm__nav-link">Login</a>
+					@endif
+					<a href="request-to-visit" class="mbl-hdr-frm__nav-link">Ruquest a visit</a>
 				</div>
 			</div>		
 		</div>

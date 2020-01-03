@@ -31,53 +31,70 @@
 	</div>
 	<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
 </section>
+<div class="mbl-abt-frm1 frm-cntnr align-c width--100 m-margin-tb">
+	<div class="width--85 margin-a">
+		<p class="frm-header s-margin-b clr--green">About</p>
+		<h5 class="frm-title s-margin-b clr--green abt-frm1-fade-up__animation-title">Visita</h5>
+		<div class="abt-frm1-fade-up__animation-description frm-description clr--gray gnrl-scrll">
+			<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+		</div>
+	</div>
+</div>
 <section class="abt-frm2">
 	<div class="frm-cntnr align-c width--85 abt-frm2-fade-up__animation">
 		<div class="abt-frm2-fade-up__item1">
-			<div class="abt-frm2__tabbing inlineBlock-parent abt-frm2-fade-up__animation-tabbing">
+			<div class="abt-frm2__tabbing inlineBlock-parent">
 				<p class="abt-frm2__tabbing-btn" data-frame2tab-id="frame2tab-team">Team</p>
 				<p class="abt-frm2__tabbing-btn" data-frame2tab-id="frame2tab-collaborators">Collaborators</p>
 				<p class="abt-frm2__tabbing-btn" data-frame2tab-id="frame2tab-advisors">Advisors</p>
 			</div>
 		</div>
-		<div class="abt-frm2-fade-up__item2 abt-frm2-scale__animation">
+		<div class="abt-frm2-fade-up__item2 abt-frm2-fade-up__animation-content">
 			<div class="abt-frm2__tabbing-content gnrl-scrll" id="frame2tab-team">
 				<div class="abt-frm2__tabbing-slider">
 
 					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img abt-frm2-scale__animation-img">
+						<div class="abt-frm2__tabbing-slider-img">
 							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
 						</div>
 						<p class="frm-header bold clr--white">Name</p>
 						<p class="frm-header bold clr--white">Designation</p>
-						<p class="frm-header bold clr--white">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						</div>
 					</div>
 
 					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img abt-frm2-scale__animation-img">
+						<div class="abt-frm2__tabbing-slider-img">
 							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
 						</div>
 						<p class="frm-header bold clr--white m-margin-b">Name</p>
 						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<p class="frm-header bold clr--white m-margin-b">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						</div>
 					</div>
 
 					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img abt-frm2-scale__animation-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
+						<div class="abt-frm2__tabbing-slider-img">
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
 						</div>
 						<p class="frm-header bold clr--white m-margin-b">Name</p>
 						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<p class="frm-header bold clr--white m-margin-b">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						</div>
 					</div>
 
 					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img abt-frm2-scale__animation-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
+						<div class="abt-frm2__tabbing-slider-img">
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
 						</div>
 						<p class="frm-header bold clr--white m-margin-b">Name</p>
 						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<p class="frm-header bold clr--white m-margin-b">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						</div>
 					</div>
 
 				</div>
@@ -86,39 +103,47 @@
 				<div class="abt-frm2__tabbing-slider">
 
 					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img abt-frm2-scale__animation-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
-						</div>
-						<p class="frm-header bold clr--white">Name</p>
-						<p class="frm-header bold clr--white">Designation</p>
-						<p class="frm-header bold clr--white">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-					</div>
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img abt-frm2-scale__animation-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
+						<div class="abt-frm2__tabbing-slider-img">
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
 						</div>
 						<p class="frm-header bold clr--white m-margin-b">Name</p>
 						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<p class="frm-header bold clr--white m-margin-b">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						</div>
 					</div>
 
 					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img abt-frm2-scale__animation-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
+						<div class="abt-frm2__tabbing-slider-img">
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
 						</div>
 						<p class="frm-header bold clr--white m-margin-b">Name</p>
 						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<p class="frm-header bold clr--white m-margin-b">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						</div>
 					</div>
 
 					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img abt-frm2-scale__animation-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
+						<div class="abt-frm2__tabbing-slider-img">
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
 						</div>
 						<p class="frm-header bold clr--white m-margin-b">Name</p>
 						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<p class="frm-header bold clr--white m-margin-b">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						</div>
+					</div>
+
+					<div class="abt-frm2__tabbing-slider-items">
+						<div class="abt-frm2__tabbing-slider-img">
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
+						</div>
+						<p class="frm-header bold clr--white m-margin-b">Name</p>
+						<p class="frm-header bold clr--white m-margin-b">Designation</p>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						</div>
 					</div>
 
 				</div>
@@ -128,38 +153,46 @@
 
 					<div class="abt-frm2__tabbing-slider-items">
 						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
 						</div>
-						<p class="frm-header bold clr--white">Name</p>
-						<p class="frm-header bold clr--white">Designation</p>
-						<p class="frm-header bold clr--white">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						<p class="frm-header bold clr--white m-margin-b">Name</p>
+						<p class="frm-header bold clr--white m-margin-b">Designation</p>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						</div>
+					</div>
+					
+					<div class="abt-frm2__tabbing-slider-items">
+						<div class="abt-frm2__tabbing-slider-img">
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
+						</div>
+						<p class="frm-header bold clr--white m-margin-b">Name</p>
+						<p class="frm-header bold clr--white m-margin-b">Designation</p>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						</div>
 					</div>
 
 					<div class="abt-frm2__tabbing-slider-items">
 						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
 						</div>
 						<p class="frm-header bold clr--white m-margin-b">Name</p>
 						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<p class="frm-header bold clr--white m-margin-b">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+						</div>
 					</div>
 
 					<div class="abt-frm2__tabbing-slider-items">
 						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
 						</div>
 						<p class="frm-header bold clr--white m-margin-b">Name</p>
 						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<p class="frm-header bold clr--white m-margin-b">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-					</div>
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
+						<div class="frm-description bold clr--white gnrl-scrll">
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
 						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<p class="frm-header bold clr--white m-margin-b">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
 					</div>
 
 				</div>
