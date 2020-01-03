@@ -268,20 +268,6 @@ var app = {
 
         	});
 
-			$('.abt-frm2-scale__animation').each(function() {
-	            var tl = new TimelineMax({delay:0, repeat:0, repeatDelay:0});
-	            tl.staggerFrom('.abt-frm2-scale__animation-img', 1, { opacity: 0, y: '20px', ease:Power4.easeIn }, 0.25,)
-	              .staggerTo('.abt-frm2-scale__animation-img', 1, { opacity: 0, y: '0px', ease:Power4.easeNone }, 0.25,)
-
-	            var fadeScene = new ScrollMagic.Scene({
-	                triggerElement: this,
-	                triggerHook: .7,
-	                reverse:false,
-	            })
-	            .setTween(tl)
-	            .addTo(controller);
-        	});
-
 			$('.abt-frm3-fade-up__animation').each(function() {
 	            var tl = new TimelineMax({delay:0, repeat:0, repeatDelay:0});
 	            tl.staggerFrom('.abt-frm3-fade-up__animation-title', 1, { opacity: 0, y: '20px', ease:Power4.easeIn }, 0.25,)
@@ -410,6 +396,17 @@ var app = {
 		        autoplaySpeed: 3000,
 		        arrows: true,
 		        dots: false,
+				responsive: [
+				    {
+				      breakpoint: 1025,
+				      settings: {
+				      	slidesToShow: 1,
+				      	dots: true,
+				        arrows: false,
+				        speed: 500
+				      }
+				    }
+				]
 		    });
 
 			$('.slick-prev').html('<img src="images/left-arrow.png">');
