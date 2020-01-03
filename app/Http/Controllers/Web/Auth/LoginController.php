@@ -17,7 +17,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/request-to-visit';
 
     /**
      * Create a new controller instance.
@@ -48,12 +48,16 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($user->hasVerifiedEmail()) {
-            activity()
-                ->causedBy($user)
-                ->performedOn($user)
-                ->log('Account has been logged in.');
+        if (!$user->hasVerifiedEmail()) {
+            auth()->logout();
+            return redirect()->back();
+            // activity()
+            //     ->causedBy($user)
+            //     ->performedOn($user)
+            //     ->log('Account has been logged in.');
         }
+
+        return redirect()->route('web.request-to-visit');
     }
 
     /**

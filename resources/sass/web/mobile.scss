@@ -1,5 +1,6 @@
 .mbl-hdr-frm__nav-holder,
-.mbl-hdr-frm__nav-links-holder {
+.mbl-hdr-frm__nav-links-holder,
+.mbl-abt-frm1 {
 	display: none;
 }
 
@@ -141,11 +142,12 @@
 	* Typography
 	* frm : frame
 	*/
-	.frm-title {
-		font-size: 2.5em;
-	}
+	.frm-title { font-size: 2em; }
+
+	.frm-title.small { font-size: 1.3em; }
+
+	.frm-header { font-size: 1em !important; }
 	 
-	.frm-header,
 	.frm-description {
 
 		* {
@@ -219,6 +221,86 @@
 	}
 
 	/*
+	* About Frame
+	* abt-frm : about frame
+	*/
+	.abt-frm1 {
+		height: 50vh;
+	}
+	.abt-frm1__container { display: none; }
+	.mbl-abt-frm1 { display: inline-block; }
+
+	.abt-frm2__tabbing-btn {
+		font-size: 1em !important;
+	}
+
+	.abt-frm2__tabbing-slider-items .frm-header {
+		font-size: 1em !important;
+	}
+	.abt-frm2__tabbing-slider-items .abt-frm2__tabbing-slider-img {
+		width: 130px !important;
+		height: 130px !important;
+	}
+
+	.abt-frm2__tabbing-slider .slick-dots {
+    	bottom: -10% !important;
+	}
+
+	.abt-frm3__item {
+		width: 100% !important;
+		height: 50vh !important;
+	}
+
+	.abt-frm3__item-title { opacity: 0 !important; }
+
+	.abt-frm3 .abt-frm3__item-overlay,
+	.abt-frm3__item-title-small,
+	.abt-frm3__item-desc { opacity: 1 !important; }
+
+	/*
+	* Faqs Frame
+	* fqs-frm : faqs frame
+	*/
+	.fqs-frm1__selection-icon {
+		max-width: 40px;
+	}
+	.fqs-frm1__selection {
+		width: 100% !important;
+		margin-left: 0px !important;
+		margin-right: 0px !important;
+		margin-bottom: 20px !important;
+	}
+	.fqs-frm1 .fqs-frm1__cards {
+		width: 100% !important;
+	}
+	.fqs-frm1__cards .fqs-frm1__cards-icon { margin: 0px; }
+	.fqs-frm1 .fqs-frm1__cards .fqs-frm1__cards-icon:before { width: 10px !important; }
+	.fqs-frm1 .fqs-frm1__cards .fqs-frm1__cards-icon:after { height: 10px !important; }
+	.fqs-frm1__cards-header {
+		.width--95 { width: 85% !important; }
+		.width--5 { width: 15% !important; }
+	}
+
+	/*
+	* Contact Us Frame
+	* cntct-frm : cntct frame
+	*/
+	.cntct-frm1 {
+	    height: auto;
+	    padding-top: 15vh;
+	    padding-bottom: 10vh;
+	}
+	.cntct-frm__animation-form,
+	.cntct-frm__animation-form .width--50,
+	.cntct-frm__animation-form .width--95 {
+		width: 100%;
+	}
+
+	.cntct-frm__animation-form .frm-inpt:nth-child(3n) {
+    	margin-bottom: 0px;
+	}
+
+	/*
 	* General Remodal
 	* gnrl-rmdl : general remodal
 	*/
@@ -248,5 +330,15 @@
 
 	.remodal {
 		padding: 25px;
+	}
+	
+	/** 
+	 * Input, Textarea, Select
+	 * frm-inpt : frame input
+	 */
+	.frm-inpt {
+		input,select,textarea {
+			min-width: 100%;
+		}
 	}
 }

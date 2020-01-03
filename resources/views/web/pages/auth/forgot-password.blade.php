@@ -32,13 +32,17 @@
 						<div class="frm-description clr--gray m-margin-b">
 							<p>Enter your email address below, and we'll send you an email allowing you to reset it.</p>
 						</div>
-						<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-							<input type="" name="" placeholder="Email Address">
-						</div>
-						
-						<div class="width--100 align-c">
-							<button class="frm-btn green m-margin-b">Reset my password</button>
-						</div>
+						<form method="POST" action="{{ route('web.password.email') }}">
+						    @csrf
+							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
+								<input type="" name="email" placeholder="Email Address" value="{{ old('email') }}">
+								<p class="error-show">{{ $errors->has('email') ? $errors->first('email') : '' }}</p>
+							</div>
+							
+							<div class="width--100 align-c">
+								<button class="frm-btn green m-margin-b">Reset my password</button>
+							</div>
+						</form>
 						<div class="lgn-frm1__sign-up-holder width--100 inlineBlock-parent">
 							<div class="frm-description clr--gray">
 								<p>Go back to login?</p>
