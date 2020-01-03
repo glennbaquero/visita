@@ -3,7 +3,7 @@
 @section('content')
 
 <section class="rqst-frm1">
-	<user-booking>
+	<user-booking :destination="{{ $destination }}">
 	</user-booking>
 </section>
 

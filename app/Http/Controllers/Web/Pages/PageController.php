@@ -60,8 +60,22 @@ class PageController extends Controller
 	* Show Destinations, Destinations Info and Request A Visit 
 	*/
 	public function showDestinations() {
+		$result = [];
+        $destinations = Destination::with('experiences')->get();
+        foreach ($destinations as $key => $destination) {
+        	array_push($result, [
+        		'destination' => $destination,
+        		'id' => $destination->id,
+        		'name' => $destination->name,
+        		'short_description' => str_limit($destination->overview, 70),
+        		'capacity' => $destination->capacity,
+        		'image' => $destination->pictures->first()->renderImagePath(),
+        		'requestVisitUrl' => $destination->renderRequestVisitUrl()
+        	]);
+        }
         return view('web.pages.destination.destinations', [
-        	'page_scripts'=> 'destinations'
+        	'page_scripts'=> 'destinations',
+        	'destinations' => $result
         ]);
 	}
 
@@ -71,9 +85,13 @@ class PageController extends Controller
         ]);
 	}
 
-	public function showRequestToVisit() {
+	public function showRequestToVisit($id, $name) {
+		$destination = Destination::find($id);
+		$destination->image = $destination->pictures->first()->renderImagePath();
+		$destination->experiences = $destination->experiences;
         return view('web.pages.destination.request-to-visit', [
-        	'page_scripts'=> 'requestToVisit'
+        	'page_scripts'=> 'requestToVisit',
+        	'destination' => $destination
         ]);
 	}
 
@@ -163,7 +181,6 @@ class PageController extends Controller
 
 	public function formatData() {
 		$result = [];
-
 
 		$destinations = Destination::all();
 
