@@ -29,7 +29,7 @@
 				<div class="vertical-parent">
 					<div class="vertical-align">
 						<div class="margin-a width--80">
-							<div class="l-margin-b align-c">
+							<div class="l-margin-b m-margin-t align-c">
 								<p class="lgn-frm1__form-title frm-header bold clr--orange">Sign Up</p>
 							</div>
 							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
@@ -85,7 +85,7 @@
 								<div class="frm-description clr--gray">
 									<p>Already have an account?</p>
 								</div>
-								<a href="login" class="lgn-frm1__sign-up bold">Sign In</a>
+								<a href="sign-in" class="lgn-frm1__sign-up bold">Sign In</a>
 							</div>
 						</div>
 					</div>

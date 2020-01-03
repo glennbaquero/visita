@@ -141,8 +141,8 @@
 	    }
 
 	    & li.slick-active button:before {
-	        color: $green;
-	        background: $green;
+	        color: $orange;
+	        background: $orange;
 	        opacity: 1;
 	    }
 
@@ -179,6 +179,13 @@
 			width: 85%;
 			margin: auto;
 			margin-bottom: 20px;
+		}
+
+		.frm-description {
+			overflow-y: auto;
+			height: 120px;
+			width: 100%;
+			padding-right: 5px;
 		}
 
 		.abt-frm2__tabbing-slider-img {

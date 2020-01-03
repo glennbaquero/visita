@@ -1,14 +1,16 @@
 <template>
 	
 <div>
-	<div class="gnrl-frm--sldr fade-up__trigger">
+	<div class="gnrl-frm--sldr gnrl-frm--sldr2">
 		<div class="gnrl-frm--sldr__item" v-for="dest in destination">
 			<div class="frm-cntnr align-c width--85">
 				<div class="vertical-parent">
 					<div class="vertical-align align-c">
-						<p class="frm-header m-margin-b clr--white">Destination Partner</p>
-						<h5 class="frm-title l-margin-b clr--white hm-frm5-fade-up__item">{{ dest.destination.name }}</h5>
-						<a href="#" class="frm-btn green" data-remodal-target="hm-frm5--modal-1" @click="exploreDestination(dest)">Explore Destination</a>
+						<p class="gnrl-frm--sldr2__animation-title frm-header m-margin-b clr--white">Destination Partner</p>
+						<h5 class="gnrl-frm--sldr2__animation-title frm-title l-margin-b clr--white hm-frm5-fade-up__item">{{ dest.destination.name }}</h5>
+						<div class="gnrl-frm--sldr2__animation-button">
+							<a href="#" class="frm-btn green" data-remodal-target="hm-frm5--modal" @click="exploreDestination(dest)">Explore Destination</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -16,7 +18,7 @@
 		</div>
 	</div>
 
-	<div id="gnrl-rmdl" class="remodal custom-width" data-remodal-id="hm-frm5--modal-1">
+	<div id="gnrl-rmdl" class="remodal custom-width" data-remodal-id="hm-frm5--modal">
 		<button data-remodal-action="close" class="gnrl-rmdl__close-btn">
 			<img :src="close_btn" class="gnrl-rmdl__close-btn-img">
 		</button>
