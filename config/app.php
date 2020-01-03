@@ -185,6 +185,7 @@ return [
         * Sweet Alert
         */
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
         'Webpatser\Countries\CountriesServiceProvider',
 
@@ -242,8 +243,8 @@ return [
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Countries' => 'Webpatser\Countries\CountriesFacade',
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
-        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
-
+        // 'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
     ],
 
 ];

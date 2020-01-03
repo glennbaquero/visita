@@ -11,7 +11,7 @@
                 </div>
                 <div class="info">
                     <a href="{{ route('admin.profiles.show') }}" class="d-block">
-                        {{ $self->renderName() }}
+                        {{-- {{ $self->renderName() }} --}}
                     </a>
                 </div>
             </div>

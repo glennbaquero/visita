@@ -69,34 +69,36 @@ class VerificationController extends Controller
     public function verify(Request $request)
     {
 
-        $management = $this->management()->findOrFail($request->route('id'));
+        if(!$request->route('user')) {
+            $management = $this->management()->findOrFail($request->route('id'));
 
-        if ($request->route('id') != $management->getKey()) {
-            throw new AuthorizationException;
-        }
+            if ($request->route('id') != $management->getKey()) {
+                throw new AuthorizationException;
+            }
 
-        if ($management->hasVerifiedEmail()) {
-            return redirect($this->redirectPath());
-        }
+            if ($management->hasVerifiedEmail()) {
+                return redirect($this->redirectPath());
+            }
 
-        if ($management->markEmailAsVerified()) {
-            $this->guard()->login($management);
-            event(new Verified($management));
-        }
-        
-        $user = $this->user()->findOrFail($request->route('id'));
+            if ($management->markEmailAsVerified()) {
+                $this->guard()->login($management);
+                event(new Verified($management));
+            }
+        } else {
+            $user = $this->user()->findOrFail($request->route('id'));
 
-        if ($request->route('id') != $user->getKey()) {
-            throw new AuthorizationException;
-        }
+            if ($request->route('id') != $user->getKey()) {
+                throw new AuthorizationException;
+            }
 
-        if ($user->hasVerifiedEmail()) {
-            return redirect($this->redirectPath());
-        }
+            if ($user->hasVerifiedEmail()) {
+                return redirect($this->redirectPath());
+            }
 
-        if ($user->markEmailAsVerified()) {
-            $this->guard()->login($user);
-            event(new Verified($user));
+            if ($user->markEmailAsVerified()) {
+                $this->guard()->login($user);
+                event(new Verified($user));
+            }
         }
 
         return redirect($this->redirectPath())->with('verified', true);

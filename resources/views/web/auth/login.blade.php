@@ -39,7 +39,7 @@
     </div>
 
     <div class="mb-3">
-        <a class="float-right" href="{{ route('web.password.request') }}">I forgot my password</a><br>
+        <a class="float-right" href="forgot-password">I forgot my password</a><br>
     </div>
 
     <div class="row">

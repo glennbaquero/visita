@@ -8,7 +8,8 @@
 
 </head>
 <body>
-
+    
+    @include('sweetalert::alert')
     <div id="app">
 
         @include('web.partials.header')
@@ -16,7 +17,7 @@
         @yield('content')
 
         @include('web.partials.footer')
-
+        
         {{-- Dialogs --}}
         <dialog-container></dialog-container>
 

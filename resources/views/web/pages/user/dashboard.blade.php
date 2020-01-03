@@ -19,7 +19,7 @@
 					<p class="dshbrd-frm1__btn {{ $checker->route->areOnRoutes(['web.dashboard']) }}">Dashboard</p>
 				</a>
 
-				<a href="user/profile" class="dshbrd-frm1__btn-list inlineBlock-parent">
+				<a href="{{ route('web.profile') }}#" class="dshbrd-frm1__btn-list inlineBlock-parent">
 					<img src="{{ asset('images/profile-icon.png') }}" class="dshbrd-frm1__btn-icon {{ $checker->route->areOnRoutes(['web.profile']) }}">
 					<p class="dshbrd-frm1__btn {{ $checker->route->areOnRoutes(['web.profile']) }}">Profile</p>
 				</a>

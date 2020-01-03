@@ -29,8 +29,17 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'first_name' => ['required', new Varchar],
             'last_name' => ['required', new Varchar],
-            'email' => 'required|email|unique:users,email,' . $this->user()->id,
-            'image_path' => ['nullable', new Image],
+            'contact_no' => ['required'],
+            'old_password' => ['required'],
+            'password' => ['required', 'confirmed', 'min:8'],
+        ];
+    }
+
+    public function messages() {
+        return [
+            'first_name.required' => 'The firstname is required',
+            'last_name.required' => 'The lastname is required',
+            'contact_no.required' => 'The contact number is required',
         ];
     }
 }
