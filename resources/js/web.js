@@ -28,3 +28,10 @@ Vue.component('user-booking', require('./views/web/bookings/Booking.vue').defaul
 * User Profile
 */
 Vue.component('profile', require('./views/web/auth/Profile.vue').default);
+
+
+/*
+* Request Visit
+*/
+Vue.component('destinations', require('./views/web/visit-requests/Destinations.vue').default);
+

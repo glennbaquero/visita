@@ -82,7 +82,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 		Route::get('/reset-password/success', 'PageController@frontlinerSuccessPage')->name('management.reset.password.success');
 
 		Route::middleware('auth:web')->group(function() {
-			Route::get('/request-to-visit', 'PageController@showRequestToVisit')->name('request-to-visit');
+			Route::get('/request-to-visit/{id}/{name}', 'PageController@showRequestToVisit')->name('request-to-visit');
 			Route::get('/user/dashboard', 'PageController@showDashboard')->name('dashboard');
 			Route::get('/user/profile', 'PageController@showProfile')->name('profile');
 		});

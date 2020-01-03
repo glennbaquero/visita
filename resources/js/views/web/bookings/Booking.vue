@@ -88,64 +88,7 @@
 			<div class="inlineBlock-parent">
 				<div class="width--60 align-t">
 					<!-- Step 1 -->
-					<div class="rqst-frm1__step-1" v-if="step === 1">
-						<div class="rqst-frm1__step-1-content">
-							<div class="rqst-frm1__step-1-content-img m-margin-b">
-								<div class="frm-bckgrnd size-cover" style="background-image: url('https://visita.org.ph/storage/images/5dedb00ae2944ArVSyajiYq2kOpHI1y3q6kYoH2iEuFBKvNBUXXeK.png');"></div>
-							</div>
-							<div class="align-l m-margin-b">
-								<h5 class="frm-title small clr--gray">Mt. Pulag</h5>
-							</div>
-							<div class="inlineBlock-parent">
-								<img
-								  class="rqst-frm1__step-1-content-icon" 
-								  :src="locationIcon"
-								>	
-								<p class="frm-header s-margin-b clr--gray">Location: Baguio, Luzon, Philippines.</p>
-							</div>
-							<div class="inlineBlock-parent">
-								<img 
-								  class="rqst-frm1__step-1-content-icon" 
-								  :src="calendarIcon"
-								>	
-								<p class="frm-header s-margin-b clr--gray">Duration: 1 - 3 Days</p>
-							</div>
-							<div class="inlineBlock-parent">
-								<img
-								  class="rqst-frm1__step-1-content-icon"
-								  :src="recommendedIcon"
-								>	
-								<p class="frm-header s-margin-b clr--gray">Recommended for: Beginner hikders, nature enthusiasts</p>
-							</div>
-							<div class="inlineBlock-parent">
-								<img 
-								  class="rqst-frm1__step-1-content-icon" 
-								  :src="activitiesIcon"
-								>	
-								<p class="frm-header s-margin-b clr--gray">Activities: Hiking</p>
-							</div>
-
-							<hr class="m-margin-b">
-							<div class="frm-description">
-								<p><strong>About the Destination</strong></p>
-								<p>The Mount Pulag National Park, famous for its “sea of clouds” and is referred to as the “stairway to heaven” in local folklore is the highest mountain in the north and the third highest in the country at 2, 922 meters above sea level.</p>
-								<p><strong>Flora and Fauna</strong></p>
-								<p>Recognized by scientists because of its ecological value, one could be mesmerized by the various species, both flora and fauna, that could be found in the area including thirty three (33) bird species and several threatened mammals such as the Philippine Deer, Giant Bushy-tailed Cloud Rat (“bowet”) and the Long-Haired Fruit Bat. Mt. Pulag is also the only place that hosts the four (4) cloud rat species. It is also home to the endemic Dwarf Bamboo (Yushania niitakayamensis) and the Benguet Pine (Pinus insularis) which dominates the areas of Luzon tropical pine forests found on the mountainside.</p>
-								<p><strong>Trail Characteristics</strong></p>
-								<p>Hiking in Mount Pulag is like a multi-trip to different beautiful destinations. It has three distinct natural vegetation zone namely: the lower montane (pine forest), the upper montane (mossy forest) and the grassland where the summit lies. The pine forest provides a complete Cordillera experience with its famous Benguet pine trees. At the grassland summit, alpine grass and dwarf bamboos could be seen as well as the ever famous breathtaking view of the sea of clouds. Mount Pulag is also known for its pristine lakes and caves and its historical significance for it is considered sacred by its people and the home of their god “Kabunian”.</p><p><strong>Other things to note:</strong></p>
-								<ul>
-									<li>Reservation for Saturday schedule is always high hence trekkers are advised to come on week days where it is less congested.</li>
-									<li>Camping at Camp 2 is allowed during Monday to Thursday except on holidays.</li>
-									<li>Medical Certificate is a must before ascent showing the vital signs</li>
-									<li>Dennis Molintas Memorial Hospital (DMMH) / Private Clinic offers medical certificate before climb during office hours (8:00am to 5:00pm).</li>
-								</ul>
-								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30588.6617312151!2d120.88165697435267!3d16.597498967601513!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33904accf133372f%3A0xa20b501379e7d400!2sMount%20Pulag!5e0!3m2!1sen!2sph!4v1576566050468!5m2!1sen!2sph" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-								<br>
-								<br>
-								<iframe width="560" height="315" src="https://www.youtube.com/embed/bKIIdCNOQwY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-							</div>
-						</div>
-					</div>
+					<StepOne v-if="step === 1" :destination="destination"></StepOne>
 					<!--  -->
 					<!-- Step 2 -->
 					<div class="rqst-frm1__step-2" v-if="step === 2">
@@ -827,51 +770,12 @@
 				><div class="width--40 align-t">
 					<div class="width--90 margin-l-a">
 						<!-- Step 1 -->
-						<div class="rqst-frm1__steps-form-cards" v-if="step === 1">
-							<div class="width--90 margin-a rqst-frm1__steps-form-cards-container gnrl-scrll">
-								<div class="align-l m-margin-b">
-									<h5 class="frm-title x-small clr--gray">Experience & Schedule</h5>
-									<hr>
-
-									<p class="frm-header bold s-margin-b clr--gray">Visit Date</p>
-									<div class="frm-inpt m-margin-b">
-										<input type="date">
-									</div>
-
-									<p class="frm-header bold s-margin-b clr--gray">Select Experience</p>
-									<div class="frm-inpt m-margin-b">
-										<select>
-											<option>Option 1</option>
-										</select>
-									</div>
-
-									<p class="frm-header bold s-margin-b clr--gray">Number of guest/s</p>
-									<div class="frm-inpt m-margin-b">
-										<input type="number">
-									</div>
-
-									<p class="frm-header bold s-margin-b clr--gray">Time</p>
-									<div class="frm-inpt m-margin-b">
-										<input type="time">
-									</div>
-
-								</div>
-							</div>
-							<hr>
-							<div class="inlineBlock-parent">
-								<div class="width--45">
-									
-								</div
-								><div class="width--45">
-									<div class="width--95">
-										<button 
-										  class="frm-btn green"
-										  @click="showStep2()"
-										>Next</button>
-									</div>
-								</div>
-							</div>
-						</div>
+						<FormStepOne 
+							v-if="step === 1" 
+							:destination="destination" 
+							@showStep2="showStep2()"
+							:step-data="stepData"
+							></FormStepOne>
 						<!--  -->
 						<!-- Step 2 -->
 						<div class="rqst-frm1__steps-form-cards" v-if="step === 2">
@@ -1459,11 +1363,22 @@
 </template>
 
 <script type="text/javascript">
-
+	import StepOne from './steps/StepOne.vue';
+	import FormStepOne from './steps/FormStepOne.vue';
 	export default {
+
+		props: {
+			destination: Object
+		},	
+
+		components: {
+			StepOne,
+			FormStepOne
+		},
 
 		data() {
 			return {
+				stepData: {},
 				step: 1,
 				activeStep1: true,
 				activeStep2: false,
@@ -1476,10 +1391,6 @@
 				guestForm: false,
 				guestCard: false,
 				visitaLogo: 'images/visita-logo.png',	
-				locationIcon: 'images/location-icon.png',
-				calendarIcon: 'images/calendar-icon.png',
-				recommendedIcon: 'images/recommended-icon.png',
-				activitiesIcon: 'images/activities-icon.png',
 				infoIcon: 'images/info-icon.png',
 				questionIcon: 'images/question-icon.png',
 				successIcon: 'images/success-icon.png',
