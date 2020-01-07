@@ -42,7 +42,9 @@ class GuestFetchController extends FetchController
         $result = [];
 
         foreach($items as $item) {
-            $data = $this->formatItem($item);
+            if($item->guests->where('main', true)->first()) {
+                $data = $this->formatItem($item);
+            }
             array_push($result, $data);
         }
 
@@ -59,7 +61,7 @@ class GuestFetchController extends FetchController
     {
         return [
         	'id' => $item->id,
-        	'main_contact' => $item->guests->where('main', true)->first()->first_name. ' ' .$item->guests->where('main', true)->first()->first_name."'s Group" ,
+        	'main_contact' => $item->guests->where('main', true)->first()->first_name. ' ' .$item->guests->where('main', true)->first()->last_name."'s Group" ,
         ];
     }
 }

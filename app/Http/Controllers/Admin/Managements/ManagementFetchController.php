@@ -29,7 +29,7 @@ class ManagementFetchController extends FetchController
     public function filterQuery($query)
     {
         $admin = auth()->guard('admin')->user();
-        if($admin->getRoleNames()[0] === 'Destination Manager') {
+        if($admin->destination_id) {
             $query = $query->where('destination_id', $admin->destination_id);
         }
 
@@ -81,7 +81,7 @@ class ManagementFetchController extends FetchController
         $admin = auth()->guard('admin')->user();
         $destinations = Destination::all();
 
-        if($admin->getRoleNames()[0] === 'Destination Manager') {
+        if($admin->destination_id) {
             $destinations = Destination::where('id', $admin->destination_id)->get();
         }
 

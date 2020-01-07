@@ -48,9 +48,17 @@
 				
 				<time-picker
 				v-model="item.operating_hours"
-				class="form-group col-sm-12 col-md-6 time"
-				label="Operating Hours"
+				class="form-group col-sm-12 col-md-3 time"
+				label="Operating Hours Start"
 				name="operating_hours"
+				placeholder="Choose time slot"
+				></time-picker>
+
+				<time-picker
+				v-model="item.operating_hours_end"
+				class="form-group col-sm-12 col-md-3 time"
+				label="Operating Hours End"
+				name="operating_hours_end"
 				placeholder="Choose time slot"
 				></time-picker>
 				

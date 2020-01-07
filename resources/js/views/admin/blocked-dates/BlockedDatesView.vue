@@ -5,19 +5,65 @@
 			<template v-slot:header>About Tabbing Information</template>
 
 			<div class="row">
+				<selector class="col-sm-12 col-md-6"
+				v-model="item.destination_id"
+				name="destination_id"
+				label="Destination"
+				:items="destinations"
+				item-value="id"
+				item-text="name"
+				placeholder="Please select destination"
+				></selector>
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Name</label>
 					<input v-model="item.name" name="name" type="text" class="form-control">
 				</div>
+			</div>
+			<div class="row">
+				<selector class="col-sm-12 col-md-6"
+				v-model="item.mode"
+				name="mode"
+				label="Select mode"
+				:items="modes"
+				item-value="name"
+				item-text="name"
+				empty-text="None"
+				placeholder="Please select mode"
+				></selector>
 				
 				<date-picker
-				v-model="item.date"
+				v-if="item.mode == 'single'"
+				v-model="dates"
 				:enableTime="false"
 				class="form-group col-sm-12 col-md-6"
 				label="Date"
-				name="date"
+				name="dates[]"
 				placeholder="Choose a date"
+				mode="single"
 				></date-picker>
+
+				<date-picker
+				v-if="item.mode == 'multiple or range'"
+				v-model="dates"
+				:enableTime="false"
+				class="form-group col-sm-12 col-md-6"
+				label="Date"
+				name="dates[]"
+				placeholder="Choose a date"
+				mode="multiple"
+				:default-date="dates"
+				></date-picker>
+
+				<!-- <date-picker
+				v-if="item.mode == 'range'"
+				v-model="dates"
+				:enableTime="false"
+				class="form-group col-sm-12 col-md-6"
+				label="Date"
+				name="dates[]"
+				placeholder="Choose a date"
+				mode="range"
+				></date-picker> -->
 			</div>
 
 			<template v-slot:footer>
@@ -57,7 +103,6 @@ import CrudMixin from '../../../mixins/crud.js';
 import ActionButton from '../../../components/buttons/ActionButton.vue';
 import Select from '../../../components/inputs/Select.vue';
 import ImagePicker from '../../../components/inputs/ImagePicker.vue';
-import TextEditor from '../../../components/inputs/TextEditor.vue';
 import Datepicker from '../../../components/datepickers/Datepicker.vue';
 import TimePicker from '../../../components/timepickers/Timepicker.vue';
 
@@ -65,12 +110,31 @@ export default {
 	methods: {
 		fetchSuccess(data) {
 			this.item = data.item ? data.item : this.item;
+			this.dates = data.dates ? data.dates : this.dates;
+			this.destinations = data.destinations ? data.destinations : this.destinations;
 		},
 	},
 
 	data() {
 		return {
 			item: [],
+			dates: [],
+			destinations: [],
+			modeSelected: 'single',
+			modes: [
+				{
+					id: 1,
+					name: 'single'
+				},
+				{
+					id: 2,
+					name: 'multiple or range'
+				},
+				// {
+				// 	id: 3,
+				// 	name: 'range'
+				// },
+			]
 		}
 	},
 
@@ -78,7 +142,6 @@ export default {
 		'action-button': ActionButton,
 		'selector': Select,
 		'image-picker': ImagePicker,
-		'text-editor': TextEditor,
 		'date-picker': Datepicker,
 		'time-picker': TimePicker,
 	},
