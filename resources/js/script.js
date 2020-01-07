@@ -425,7 +425,16 @@ var app = {
 		        arrows: false,
 		        dots: false,
 		        focusOnSelect: false,
-		        asNavFor: '.dstntns-frm1__slider-thumbnail'
+		        asNavFor: '.dstntns-frm1__slider-thumbnail',
+				responsive: [
+				    {
+				      breakpoint: 1025,
+				      settings: {
+				        speed: 500,
+				        dots: true
+				      }
+				    }
+				]
 		    });
 
 			$('.dstntns-frm1__slider-thumbnail').slick({
@@ -437,7 +446,17 @@ var app = {
 		        arrows: false,
 		        dots: false,
 		        focusOnSelect: true,
-		        asNavFor: '.dstntns-frm1__slider'
+		        asNavFor: '.dstntns-frm1__slider',
+				responsive: [
+				    {
+				      breakpoint: 1025,
+				      settings: {
+				      	slidesToShow: 1,
+				        arrows: true,
+				        speed: 500
+				      }
+				    }
+				]
 		    });
 
 

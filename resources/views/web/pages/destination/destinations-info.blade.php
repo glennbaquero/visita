@@ -52,6 +52,43 @@
 		</div>
 	</div>
 </section>
+<div class="mbl-dstntns-inf-frm1 frm-cntnr align-c width--100">
+	<div class="frm-cntnr align-c width--85">
+		<div class="vertical-parent">
+			<div class="vertical-align align-l">
+				<p class="frm-header s-margin-b clr--green">Destination</p>
+				<h5 class="frm-title small s-margin-b clr--orange">Mt. Pulag</h5>
+				
+				<div class="dstntns-inf-frm1__location inlineBlock-parent">
+					<img class="dstntns-inf-frm1__location-img" src="{{ asset('images/location-icon.png') }}">	
+					<p class="frm-header s-margin-b clr--gray">Location: Baguio, Luzon, Philippines.</p>
+				</div>
+
+				<div class="dstntns-inf-frm1__location inlineBlock-parent">
+					<img class="dstntns-inf-frm1__location-img" src="{{ asset('images/calendar-icon.png') }}">	
+					<p class="frm-header s-margin-b clr--gray">Duration: 1 - 3 Days</p>
+				</div>
+
+				<div class="dstntns-inf-frm1__location inlineBlock-parent">
+					<img class="dstntns-inf-frm1__location-img" src="{{ asset('images/recommended-icon.png') }}">	
+					<p class="frm-header s-margin-b clr--gray">Recommended for: Beginner hikders, nature enthusiasts</p>
+				</div>
+
+				<div class="dstntns-inf-frm1__location inlineBlock-parent">
+					<img class="dstntns-inf-frm1__location-img" src="{{ asset('images/activities-icon.png') }}">	
+					<p class="frm-header s-margin-b clr--gray">Activities: Hiking</p>
+				</div>
+
+				<div class="frm-description clr--gray m-margin-tb dstntns-inf-frm1__location-desc">
+					<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+				</div>
+
+				<button class="frm-btn green">Request to Visit</button>
+
+			</div>
+		</div>
+	</div>
+</div>
 <section class="dstntns-inf-frm2">
 	<div class="frm-cntnr width--85 align-c">
 		<div class="inlineBlock-parent">

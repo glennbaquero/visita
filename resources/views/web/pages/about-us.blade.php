@@ -31,7 +31,7 @@
 	</div>
 	<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
 </section>
-<div class="mbl-abt-frm1 frm-cntnr align-c width--100 m-margin-tb">
+<div class="mbl-abt-frm1 frm-cntnr align-c width--100">
 	<div class="width--85 margin-a">
 		<p class="frm-header s-margin-b clr--green">About</p>
 		<h5 class="frm-title s-margin-b clr--green abt-frm1-fade-up__animation-title">Visita</h5>

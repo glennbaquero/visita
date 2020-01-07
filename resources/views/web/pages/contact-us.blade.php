@@ -16,7 +16,6 @@
 				<user-inquiry
 		        	submit-url="{{ route('web.user.inquiry') }}"
 		        ></user-inquiry>
-
 			</div>
 		</div>
 	</div>

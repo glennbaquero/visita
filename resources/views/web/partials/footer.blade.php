@@ -7,6 +7,20 @@
 				</a>
 			</div
 			><div class="frm-cntnr__nav-col width--33 align-c frm-description clr--white">
+				<div class="inlineBlock-parent s-margin-b">
+                    <a href="" target="_blank" class="ftr-frm_img">
+                        <img src="{{ asset('images/facebook-icon.png') }}">
+                    </a>
+                    <a href="" target="_blank" class="ftr-frm_img">
+                        <img src="{{ asset('images/instagram-icon.png') }}">
+                    </a>
+                    <a href="" target="_blank" class="ftr-frm_img big">
+                        <img src="{{ asset('images/twitter-icon.png') }}">
+                    </a>
+                    <a href="" target="_blank" class="ftr-frm_img big">
+                        <img src="{{ asset('images/youtube-icon.png') }}">
+                    </a>
+				</div>
 				<p>{{ now()->year }} &copy; {{ config('app.name') }}</p>
 			</div
 			><div class="frm-cntnr__nav-col width--33 align-r">
