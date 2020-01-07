@@ -2,7 +2,7 @@
 	<div>
 		<div class="width--90 margin-a align-l">
 			<h5 class="frm-title x-small l-margin-b clr--orange">Hello {{ user.first_name }}</h5>
-			<p class="frm-header l-margin-b bold clr--green">Personal Information</p>
+			<p class="frm-header m-margin-b bold clr--green">Personal Information</p>
 
 			<div class="inlineBlock-parent">
 				
@@ -114,9 +114,9 @@
 				        :is-full-page="fullPage"></loading>
 			</div>
 		</div>
-
-		<div class="width--90 margin-a align-l" style="margin-top: 2%;">
-			<p class="frm-header l-margin-b bold clr--green">Update Password</p>
+		<div class="m-margin-t"></div>
+		<div class="width--90 margin-a align-l">
+			<p class="frm-header m-margin-b bold clr--green">Update Password</p>
 			<div class="inlineBlock-parent">
 				<div class="width--33 m-margin-b">
 					<div class="width--95">
@@ -143,7 +143,7 @@
 	                </div>	
 				</div>
 
-				<div class="l-margin-t align-r width--100 inlineBlock-parent">
+				<div class="prfl-btn__holder l-margin-t align-r width--100 inlineBlock-parent">
 					<button class="frm-btn gray s-margin-r">Cancel</button>
 					<!-- <button class="frm-btn green" >Save</button> -->
 					<button class="frm-btn green" @click="save">Save</button>

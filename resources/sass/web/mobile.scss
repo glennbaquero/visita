@@ -138,6 +138,10 @@
 		}
 	}
 
+	.ftr-frm .frm-cntnr__nav-link {
+		font-size: 1em;
+	}
+
 	/*
 	* Typography
 	* frm : frame
@@ -301,6 +305,105 @@
 	}
 
 	/*
+	* Login Frame
+	* lgn-frm : login frame
+	*/
+	.lgn-frm1 { margin-top: 70px; }
+
+	.lgn-frm1 .lgn-frm1__col {
+		width: 100%;
+
+		&.width--55 {
+			display: none;
+		}
+		&.width--45 {
+			height: auto;
+			padding: 5vh 0vh;
+		}
+		.frm-btn {
+			width: 100% !important;
+		}
+		.frm-btn img {
+			max-width: 15px;
+		}
+
+	}
+
+	.lgn-frm1__col {
+		.width--100 {
+			text-align: center;
+		}
+	}
+	.lgn-frm1 .lgn-frm1__frgt-psswrd, .lgn-frm1 .lgn-frm1__sign-up {
+		font-size: 1em !important;
+	}
+	.lgn-frm1__col {
+		.width--50,
+		.width--95 {
+			width: 100% !important;
+		}
+	}
+
+	/*
+	* Dashboard Frame
+	* dshbrd-frm : dashboard frame
+	*/
+	.dshbrd-frm1__btn-holder {
+		width: 100%;
+		min-height: auto !important;
+		padding-bottom: 10px !important;
+
+		.width--65 {
+			width: 85% !important;
+		}
+	}
+
+	.dshbrd-frm1 .dshbrd-frm1__btn { font-size: 1em !important; }
+	.dshbrd-frm1 .dshbrd-frm1__btn-icon { max-width: 13px !important; }
+
+	.dshbrd-frm1 .dshbrd-frm1__content-holder {
+		min-height: auto !important;
+		width: 95%;
+		padding-top: 20px !important;
+		border-top: 1px solid #BFBFBF;
+		border-left: none;
+	}
+
+	.dshbrd-frm1__content-holder {
+		.width--50 {
+			text-align: left;
+			width: 100% !important;
+		}
+		.width--33,
+		.width--95 {
+			width: 100% !important;
+		}
+
+		.frm-inpt__filter {
+			width: 100% !important;
+
+			select {
+				width: 100% !important;
+			}
+		}
+	}
+
+	.dshbrd-frm1 .dshbrd-frm1__content-card {
+		width: 100% !important;
+		margin-bottom: 20px;
+		margin-right: 0px !important;
+	}
+
+	.prfl-btn__holder {
+		text-align: center;
+		
+		.frm-btn {
+			margin: auto;
+			margin-bottom: 20px;
+		}
+	}
+
+	/*
 	* General Remodal
 	* gnrl-rmdl : general remodal
 	*/
@@ -326,6 +429,10 @@
 				padding-left: 0px !important
 			}
 		}
+
+		.gnrl-rmdl__close-btn-img {
+			height: 35px !important;
+		}
 	}
 
 	.remodal {
@@ -338,7 +445,11 @@
 	 */
 	.frm-inpt {
 		input,select,textarea {
-			min-width: 100%;
+			min-width: 100% !important;
+		}
+		input,select {
+			min-height: 45px !important;
+			font-size: 1em !important;
 		}
 	}
 }
