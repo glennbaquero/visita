@@ -8,6 +8,11 @@
 			<input ref="elem" :placeholder="placeholder" type="text" class="form-control" readonly>
 			<input v-for="date in value" :name="name" :value="date" type="hidden">
 		</template>
+
+		<template v-if="mode == 'range'">
+			<input ref="elem" :placeholder="placeholder" type="text" class="form-control" readonly>
+			<input v-for="date in value" :name="name" :value="date" type="hidden">
+		</template>
 	</div>
 </template>
 
@@ -35,11 +40,8 @@ export default {
 	methods: {
 		setup() {
 			let options = this.getOptions();
-			
-			if (this.defaultDate) {
-				options.defaultDate = this.defaultDate;
-			}
-
+			var $this = this;
+			console.log(options);
 			this.elem = flatpickr(this.$refs.elem, options);
 		},
 
@@ -104,6 +106,10 @@ export default {
 
 			if (this.maxDate) {
 				options.maxDate = this.maxDate;
+			}
+
+			if (this.defaultDate) {
+				options.defaultDate = this.defaultDate;
 			}
 
 			return options;

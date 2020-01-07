@@ -43,7 +43,7 @@ class SurveyFetchController extends FetchController
         $admin = auth()->guard('admin')->user();
 
         foreach($items as $item) {
-            if($admin->getRoleNames()[0] === 'Destination Manager') {
+            if($admin->destination_id) {
                 if($item->book->destination_id === $admin->destination_id) {
                     array_push($result,[
                         'id' => $item->id,

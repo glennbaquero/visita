@@ -11,6 +11,7 @@ use App\Models\Guests\Guest;
 use App\Models\Books\Book;
 
 use DB;
+use Carbon\Carbon;
 
 class WalkinController extends Controller
 {
@@ -26,7 +27,6 @@ class WalkinController extends Controller
     		$main_contact_vars['main_contact_person']['main'] = true;
     		$guests_vars = $request->only(['guests']);
 
-         
             $bookings_vars = $request->only(['booking_details']);
     		$bookings_vars['booking_details']['destination_id'] = $request->user()->destination_id;
     		$bookings_vars['booking_details']['is_walkin'] = true;
@@ -40,9 +40,26 @@ class WalkinController extends Controller
 
             $main->notify(new BookingNotification($book));
     	DB::commit();
+        $booking['id'] = $book->id;
+        $booking['main_contact'] = $book->guests()->where('main', 1)->first();
+        $booking['is_walkin'] = $book->is_walkin ? 'Walk-In' : 'Online';
+        $booking['is_walkin_label'] = $book->is_walkin ? 'Walk-In' : 'Online';
+        $booking['guests'] =  $book->guests;
+        $booking['allocation'] = $book->allocation;
+        $booking['schedule'] = Carbon::parse($book->scheduled_at)->format('j M Y');
+        $booking['status'] = $book->getStatus();
+        $booking['created_at'] = $book->created_at->format('j M Y h:i A');
+        $booking['violations'] = $book->groupViolations;
+        $booking['representative'] = $book->representative ?? null;
+        $booking['group_violations'] = $book->groupViolations;
+        $booking['group_remarks'] = $book->groupRemarks;
+        $booking['ended_at'] = $book->ended_at;
+        $booking['started_at'] = $book->started_at;
+        $booking['time'] = $book->start_time;
 
     	return response()->json([
-    		'success' => true
+    		'success' => true,
+            'book' => $booking
     	]);
     }
 

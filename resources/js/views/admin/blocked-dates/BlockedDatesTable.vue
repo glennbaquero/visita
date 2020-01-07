@@ -27,6 +27,7 @@
             <template v-slot:body="{ items }">
                 <tr v-for="item in items">
                     <td>{{ item.id }}</td>
+                    <td>{{ item.destination }}</td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.date }}</td>
                     <td>{{ item.created_at }}</td>
@@ -74,6 +75,7 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
+                { text: 'Destination', value: 'destination' },
                 { text: 'Name', value: 'name' },
                 { text: 'Date', value: 'date' },
             ];

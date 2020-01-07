@@ -302,6 +302,12 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&surveys=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.surveys');
 
+            Route::post('activity-logs/fetch?id={id?}&genders=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.genders');
+
+            Route::post('activity-logs/fetch?id={id?}&civil_statuses=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.civil_statuses');
+
+            Route::post('activity-logs/fetch?id={id?}&time-slots=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.time-slots');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -705,6 +711,51 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
         });
 
+         Route::namespace('Genders')->group(function() {
+            Route::get('genders', 'GenderController@index')->name('genders.index');
+            Route::get('genders/create', 'GenderController@create')->name('genders.create');
+            Route::post('genders/store', 'GenderController@store')->name('genders.store');
+            Route::get('genders/show/{id}', 'GenderController@show')->name('genders.show');
+            Route::post('genders/update/{id}', 'GenderController@update')->name('genders.update');
+            Route::post('genders/{id}/archive', 'GenderController@archive')->name('genders.archive');
+            Route::post('genders/{id}/restore', 'GenderController@restore')->name('genders.restore');
+        
+            Route::post('genders/fetch', 'GenderFetchController@fetch')->name('genders.fetch');
+            Route::post('genders/fetch?archived=1', 'GenderFetchController@fetch')->name('genders.fetch-archive');
+            Route::post('genders/fetch-item/{id?}', 'GenderFetchController@fetchView')->name('genders.fetch-item');
+            Route::post('genders/fetch-pagination/{id}', 'GenderFetchController@fetchPagePagination')->name('genders.fetch-pagination');
+        });
+
+        Route::namespace('CivilStatuses')->group(function() {
+            Route::get('civil_statuses', 'CivilStatusController@index')->name('civil_statuses.index');
+            Route::get('civil_statuses/create', 'CivilStatusController@create')->name('civil_statuses.create');
+            Route::post('civil_statuses/store', 'CivilStatusController@store')->name('civil_statuses.store');
+            Route::get('civil_statuses/show/{id}', 'CivilStatusController@show')->name('civil_statuses.show');
+            Route::post('civil_statuses/update/{id}', 'CivilStatusController@update')->name('civil_statuses.update');
+            Route::post('civil_statuses/{id}/archive', 'CivilStatusController@archive')->name('civil_statuses.archive');
+            Route::post('civil_statuses/{id}/restore', 'CivilStatusController@restore')->name('civil_statuses.restore');
+        
+            Route::post('civil_statuses/fetch', 'CivilStatusFetchController@fetch')->name('civil_statuses.fetch');
+            Route::post('civil_statuses/fetch?archived=1', 'CivilStatusFetchController@fetch')->name('civil_statuses.fetch-archive');
+            Route::post('civil_statuses/fetch-item/{id?}', 'CivilStatusFetchController@fetchView')->name('civil_statuses.fetch-item');
+            Route::post('civil_statuses/fetch-pagination/{id}', 'CivilStatusFetchController@fetchPagePagination')->name('civil_statuses.fetch-pagination');
+        });
+
+        Route::namespace('TimeSlots')->group(function() {
+            Route::get('time-slots', 'TimeSlotController@index')->name('time-slots.index');
+            Route::get('time-slots/create/{id}/{name}', 'TimeSlotController@create')->name('time-slots.create');
+            Route::post('time-slots/store/{id}', 'TimeSlotController@store')->name('time-slots.store');
+            Route::get('time-slots/show/{id}', 'TimeSlotController@show')->name('time-slots.show');
+            Route::post('time-slots/update/{id}', 'TimeSlotController@update')->name('time-slots.update');
+            Route::post('time-slots/{id}/archive', 'TimeSlotController@archive')->name('time-slots.archive');
+            Route::post('time-slots/{id}/restore', 'TimeSlotController@restore')->name('time-slots.restore');
+        
+            Route::post('time-slots/fetch', 'TimeSlotFetchController@fetch')->name('time-slots.fetch');
+            Route::post('time-slots/fetch?allocation={id?}/time', 'TimeSlotFetchController@fetch')->name('time-slots.fetch.time');
+            Route::post('time-slots/fetch?archived=1', 'TimeSlotFetchController@fetch')->name('time-slots.fetch-archive');
+            Route::post('time-slots/fetch-item/{id?}', 'TimeSlotFetchController@fetchView')->name('time-slots.fetch-item');
+            Route::post('time-slots/fetch-pagination/{id}', 'TimeSlotFetchController@fetchPagePagination')->name('time-slots.fetch-pagination');
+        });
 
     });
 });

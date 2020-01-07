@@ -5,12 +5,18 @@ namespace App\Models\Experiences;
 use App\Extenders\Models\BaseModel as Model;
 
 use App\Models\Destinations\Destination;
+use App\Models\Times\TimeSlot;
 
 class Experience extends Model
 {
     public function destination()
     {
     	return $this->belongsTo(Destination::class);
+    }
+
+    public function timeSlots()
+    {
+        return $this->hasMany(TimeSlot::class);
     }
 
     /**
