@@ -8,6 +8,7 @@ use Intervention\Image\Facades\Image;
 
 use App\Models\Books\Book;
 Use App\Models\Guests\Guest;
+Use App\Models\Newsletters\Newsletter;
 use Carbon\Carbon;
 
 class VisitController extends Controller
@@ -33,6 +34,11 @@ class VisitController extends Controller
             $guest = Guest::find($item['id'])->update([
                 'signature_path' => $this->encodeBase64($item['signature_path'])
             ]);
+
+            if($item['newsletter_optin']) {
+                Newsletter::firstOrCreate(['email' => $item['email']]);
+            }
+                
         }
 
         $book = Book::find($request->id);

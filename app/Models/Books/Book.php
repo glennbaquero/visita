@@ -78,6 +78,7 @@ class Book extends Model
         // $vars = $request->only($columns);
         $vars['allocation_id'] = $request->allocation_id;
         $vars['scheduled_at'] = $request->scheduled_at;
+        $vars['start_time'] = $request->scheduled_at;
         $vars['re_scheduled_at'] = $request->scheduled_at;
         $vars['destination_id'] = $destination_id;
         $vars['total_guest'] = $request->total_guest;
@@ -127,5 +128,20 @@ class Book extends Model
 
     public function renderName($first_column = 'first_name', $second_column = 'last_name') {
         return $this->guests->first();
+    }
+
+    public function getStatus() {
+        $started = $this->started_at;
+        $ended = $this->ended_at;
+        $status = 'Queue';
+        if($started != null && $ended == null) {
+            $status = 'Ongoing';
+        } 
+
+        if($started != null && $ended != null) {
+            $status = 'Finished';
+        }
+
+        return $status;
     }
 }

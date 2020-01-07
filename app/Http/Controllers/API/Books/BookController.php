@@ -30,9 +30,9 @@ class BookController extends Controller
                 'is_walkin_label' => $item->is_walkin ? 'Walk-In' : 'Online',
                 'guests' => $item->guests,
                 'allocation' => $item->allocation,
-                'schedule' => Carbon::parse($item->scheduled_at)->format('j M Y h:i A'),
-                'time' => Carbon::parse($item->scheduled_at)->toTimeString(),
-                'status' => $item->status ? 'Finished' : 'On-Queue',
+                'schedule' => Carbon::parse($item->scheduled_at)->format('j M Y'),
+                // 'time' => Carbon::parse($item->scheduled_at)->toTimeString(),
+                'status' => $item->getStatus(),
                 'created_at' => $item->created_at->format('j M Y h:i A'),
                 'violations' => $item->groupViolations,
                 'representative' => $item->representative ?? null,
@@ -40,6 +40,7 @@ class BookController extends Controller
                 'group_remarks' => $item->groupRemarks,
                 'ended_at' => $item->ended_at,
                 'started_at' => $item->started_at,
+                'time' => $item->start_time
             ];
         });
 
@@ -68,14 +69,15 @@ class BookController extends Controller
         $item['is_walkin'] = $book->is_walkin ? 'Walk-In' : 'Online';
         $item['guests'] = $book->guests;
         $item['allocation'] = $book->allocation;
-        $item['schedule'] = Carbon::parse($book->scheduled_at)->format('j M Y h:i A');
-        $item['time'] = Carbon::parse($book->scheduled_at)->toTimeString();
+        $item['schedule'] = Carbon::parse($book->scheduled_at)->format('j M Y');
+        // $item['time'] = Carbon::parse($book->scheduled_at)->toTimeString();
         $item['status'] = $book->status ? 'Finished' : 'On-Queue';
         $item['created_at'] = $book->created_at->format('j M Y h:i A');
         $item['violations'] = $book->groupViolations;
         $item['remarks'] = $book->groupRemarks;
         $item['ended_at'] = $book->ended_at;
         $item['start_at'] = $book->started_at;
+        $item['time'] = $item->start_time;
 
         return response()->json([
             'booking' => $item

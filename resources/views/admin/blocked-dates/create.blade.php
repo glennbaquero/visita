@@ -24,6 +24,7 @@
     <!-- Main content -->
     <section class="content">
         <blocked-dates-view
+        fetch-url="{{ route('admin.blocked-dates.fetch-item') }}"
         submit-url="{{ route('admin.blocked-dates.store') }}"
         ></blocked-dates-view>
     </section>

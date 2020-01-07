@@ -338,6 +338,28 @@
                             </li>
                             @endif
 
+                            <li class="nav-item">
+                                <a href="{{ route('admin.genders.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.genders.index','admin.genders.create','admin.genders.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        Genders
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('admin.civil_statuses.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.civil_statuses.index','admin.civil_statuses.create','admin.civil_statuses.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        Civil Status
+                                    </p>
+                                </a>
+                            </li>
+
                             @if ($self->hasAnyPermission(['admin.blocked-dates.crud']))
                             <li class="nav-item">
                                 <a href="{{ route('admin.blocked-dates.index') }}" class="nav-link {{ $checker->route->areOnRoutes([

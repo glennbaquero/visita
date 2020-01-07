@@ -7,6 +7,8 @@ use App\Extenders\Controllers\FetchController;
 use App\Models\Destinations\Destination;
 use App\Models\AddOns\AddOn;
 
+use Carbon\Carbon;
+
 class DestinationFetchController extends FetchController
 {
     /**
@@ -61,7 +63,7 @@ class DestinationFetchController extends FetchController
             'name' => $item->name,
             'code' => $item->code,
             'icon' => $item->icon,
-            'operating_hours' => $item->operating_hours,
+            'operating_hours' => Carbon::parse($item->operating_hours)->toTimeString()->format('h:i:s A').'-'.Carbon::parse($item->operating_hours_end)->toTimeString(),
             'capacity_per_day' => $item->capacity_per_day,
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),
