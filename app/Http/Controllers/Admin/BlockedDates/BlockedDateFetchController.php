@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\BlockedDates;
 use App\Extenders\Controllers\FetchController;
 
 use App\Models\BlockedDates\BlockedDate;
+use App\Models\Destinations\Destination;
 
 use Carbon\Carbon;
 
@@ -47,6 +48,7 @@ class BlockedDateFetchController extends FetchController
                 array_push($result, [
                     'id' => $item->id,
                     'name' => $item->name,
+                    'destination' => $item->destination->name,
                     'date' => $date->date->format('F d, Y'),
                     'created_at' => $item->renderDate(),
                     'showUrl' => $item->renderShowUrl(),
@@ -83,6 +85,12 @@ class BlockedDateFetchController extends FetchController
     public function fetchView($id = null) {
         $item = null;
         $dates = [];
+        
+        $destinations = Destination::all();
+        $admin = auth()->guard('admin')->user();
+        if($admin->destination_id) {
+            $destinations = Destination::where('id', $admin->destination_id)->get();
+        }
 
         if ($id) {
         	$item = BlockedDate::withTrashed()->findOrFail($id);
@@ -99,6 +107,7 @@ class BlockedDateFetchController extends FetchController
 
     	return response()->json([
     		'item' => $item,
+            'destinations' => $destinations,
             'dates' => collect($dates)->flatten()
     	]);
     }

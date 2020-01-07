@@ -129,4 +129,19 @@ class Book extends Model
     public function renderName($first_column = 'first_name', $second_column = 'last_name') {
         return $this->guests->first();
     }
+
+    public function getStatus() {
+        $started = $this->started_at;
+        $ended = $this->ended_at;
+        $status = 'Queue';
+        if($started != null && $ended == null) {
+            $status = 'Ongoing';
+        } 
+
+        if($started != null && $ended != null) {
+            $status = 'Finished';
+        }
+
+        return $status;
+    }
 }

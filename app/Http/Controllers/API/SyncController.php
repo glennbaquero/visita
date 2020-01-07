@@ -10,7 +10,7 @@ use App\Models\Guests\Guest;
 use App\Models\Remarks\GroupRemark;
 use App\Models\Violations\GroupViolation;
 use App\Models\Feedbacks\GroupFeedback;
-
+use App\Models\Newsletters\Newsletter;
 
 use Intervention\Image\Facades\Image;
 
@@ -30,30 +30,31 @@ class SyncController extends Controller
     					$reservation = Book::find($book['id']);
     					// update the book/reservation
     					$reservation->update([
-    						'checked_in_at' => $book['checked_in_at'] ? $book['checked_in_at'] : null,
+    						'checked_in_at' => $book['checked_in_at'] ? $this->converDate($book['checked_in_at']) : null,
     						// 're_scheduled_at' => $book['re_scheduled_at'] ? $book['re_scheduled_at']->format('m-d-y H:i:s') : null,
-                            'started_at' => $book['started_at'] ? $book['started_at'] : null,
+                            'started_at' => $book['started_at'] ? $this->converDate($book['started_at']) : null,
     						'start_time' => $book['start_time'] ? $book['start_time'] : null,
-    						'ended_at' => $book['ended_at'] ? $book['ended_at'] : null,
-    						'scheduled_at' => $book['scheduled_at'] ? $book['scheduled_at'] : null,
+    						'ended_at' => $book['ended_at'] ? $this->converDate($book['ended_at']) : null,
+    						'scheduled_at' => $book['scheduled_at'] ? $this->converDate($book['scheduled_at']) : null,
     					]);
     				} else {
     					// create the book/reservation
     					$reservation = Book::create([
     						'destination_id' => auth()->guard('api')->user()->destination_id,
     						'allocation_id' => json_decode($book['allocation'])->id,
-    						'checked_in_at' => $book['checked_in_at'] ? $book['checked_in_at'] : null,
+    						'checked_in_at' => $book['checked_in_at'] ? $this->converDate($book['checked_in_at']) : null,
     						// 're_scheduled_at' => $book['re_scheduled_at'] ? $book['re_scheduled_at']->format('m-d-y H:i:s') : null,
-    						'started_at' => $book['started_at'] ? $book['started_at'] : null,
-    						'ended_at' => $book['ended_at'] ? $book['ended_at'] : null,
-    						'scheduled_at' => $book['scheduled_at'] ? $book['scheduled_at'] : null,
+    						'started_at' => $book['started_at'] ? $this->converDate($book['started_at']) : null,
+    						'ended_at' => $book['ended_at'] ? $this->converDate($book['ended_at']) : null,
+    						'scheduled_at' => $book['scheduled_at'] ? $this->converDate($book['scheduled_at']) : null,
     						'status' => $book['status'],
     						'total_guest' => $book['total_guest'],
     						'is_walkin' => $book['is_walkin'],
     						'created_at' => $book['created_at'],
     						'bookable_id' => auth()->guard('api')->user()->id,
 							'bookable_type' => 'App\Models\Users\Management',
-							'offline_id' => $book['offline_id']
+							'offline_id' => $book['offline_id'],
+                            'start_time' => $book['start_time'] ? $book['start_time'] : null,
     					]);
     				}
 
@@ -94,6 +95,10 @@ class SyncController extends Controller
     					$guestWithId->update([
     						'signature_path' => $guest['signature_path'] ? $this->encodeBase64($guest['signature_path']) : null
     					]);
+
+                        if($guest['opt_in']) {
+                            Newsletter::firstOrCreate(['email' => $guestWithId->email]);
+                        }
     				} else {
                         Guest::create([
                             'book_id' => $book->id,
@@ -110,6 +115,10 @@ class SyncController extends Controller
                             'emergency_contact_number' => $guest['emergency_contact_number'] ?? null ,
                             'signature_path' => $guest['signature_path'] ? $this->encodeBase64($guest['signature_path']) : null
                         ]);
+
+                        if($guest['opt_in']) {
+                            Newsletter::firstOrCreate(['email' => $guest['email']]);
+                        }
     				}
     			}
     		}
@@ -165,5 +174,15 @@ class SyncController extends Controller
         \Storage::put($file_path, $optimized_image);
 
         return $file_path;
+    }
+
+
+    public function converDate($date) 
+    {
+        $date = strtotime($date);
+
+        $newformat = date('Y-m-d H:i:s a', $date);
+
+        return $newformat;
     }
 }

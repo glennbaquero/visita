@@ -109,3 +109,6 @@ Vue.component('genders-view', require('./views/admin/genders/GendersView.vue').d
 
 Vue.component('civil_statuses-table', require('./views/admin/civil_statuses/CivilStatusesTable.vue').default);
 Vue.component('civil_statuses-view', require('./views/admin/civil_statuses/CivilStatusesView.vue').default);
+
+Vue.component('time-slots-table', require('./views/admin/time-slots/TimeSlotTable.vue').default);
+Vue.component('time-slots-view', require('./views/admin/time-slots/TimeSlotView.vue').default);

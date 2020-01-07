@@ -100,7 +100,7 @@ class CapacityFetchController extends FetchController
         $admin = auth()->guard('admin')->user();
         $allocations = Allocation::with('destination')->whereNotIn('id', $ids)->get();
         
-        if($admin->getRoleNames()[0] === 'Destination Manager') {
+        if($admin->destination_id) {
             $allocations = Allocation::where('destination_id', $admin->destination_id)->with('destination')->whereNotIn('id', $ids)->get();
         }
 

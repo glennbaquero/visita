@@ -53,7 +53,6 @@ class ResourceFetchController extends Controller
         $faqs = Faq::all();
         $remarks = Remark::all();
         $violations = Violation::all();
-        $blocked_dates = BlockedDate::all();
         $management = Management::where('role_id', 5)->where('destination_id', $request->user()->destination_id)->get();
         $bookings = $this->getBookings();
         $guests = $this->getGuests();
@@ -67,6 +66,19 @@ class ResourceFetchController extends Controller
             array_push($nationalities, [
                 'citizenship' => $country->citizenship
             ]);
+        }
+
+        $blocked_dates = [];
+        $blocks = BlockedDate::where('destination_id', $request->user()->destination_id)->get();
+        
+        foreach ($blocks as $block) {
+            foreach ($block->dates as $date) {
+                array_push($blocked_dates, [
+                    'id' => $block->id,
+                    'name' => $block->name,
+                    'date' => $date->date
+                ]);
+            }
         }
 
         return response()->json([
@@ -147,7 +159,7 @@ class ResourceFetchController extends Controller
                 'ended_at' => $item->ended_at ?? null,
                 'checked_in_at' => $item->checked_in_at,
                 're_scheduled_at' => Carbon::parse($item->re_scheduled_at)->toDateString(),
-                'status' => $item->status,
+                'status' => $item->getStatus(),
                 'agency_code' => $item->agency_code,
                 'total_guest' => $item->total_guest,
                 'payment_type' => $item->payment_type,

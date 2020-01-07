@@ -17,7 +17,7 @@ Vue.component('user-destination', require('./views/web/destinations/Destination.
 /*
 * Faqs
 */
-Vue.component('faqs', require('./views/web/faqs/Faqs.vue').default);
+// Vue.component('faqs', require('./views/web/faqs/Faqs.vue').default);
 
 /*
 * User Booking

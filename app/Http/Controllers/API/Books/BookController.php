@@ -32,7 +32,7 @@ class BookController extends Controller
                 'allocation' => $item->allocation,
                 'schedule' => Carbon::parse($item->scheduled_at)->format('j M Y'),
                 // 'time' => Carbon::parse($item->scheduled_at)->toTimeString(),
-                'status' => $item->status ? 'Finished' : 'On-Queue',
+                'status' => $item->getStatus(),
                 'created_at' => $item->created_at->format('j M Y h:i A'),
                 'violations' => $item->groupViolations,
                 'representative' => $item->representative ?? null,

@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin\TrainingModules;
+namespace App\Http\Controllers\Admin\TimeSlots;
 
 use App\Extenders\Controllers\FetchController;
 
-use App\Models\TrainingModules\TrainingModule;
-use App\Models\Destinations\Destination;
+use App\Models\Times\TimeSlot;
 
-class TrainingModuleFetchController extends FetchController
+class TimeSlotFetchController extends FetchController
 {
     /**
      * Set object class of fetched data
@@ -16,7 +15,7 @@ class TrainingModuleFetchController extends FetchController
      */
     public function setObjectClass()
     {
-        $this->class = new TrainingModule;
+        $this->class = new TimeSlot;
     }
 
     /**
@@ -27,11 +26,9 @@ class TrainingModuleFetchController extends FetchController
      */
     public function filterQuery($query)
     {
-        $admin = auth()->guard('admin')->user();
-        if($admin->destination_id) {
-            $query = $query->where('destination_id', $admin->destination_id);
+    	if ($this->request->filled('allocation')) {
+            $query = $query->where('allocation_id', $this->request->input('allocation'));
         }
-
         return $query;
     }
 
@@ -61,10 +58,10 @@ class TrainingModuleFetchController extends FetchController
      */
     protected function formatItem($item)
     {
+        $time = strtotime($item->time);
         return [
             'id' => $item->id,
-            'title' => str_limit($item->title, 20),
-            'type' => $item->getType(),
+            'time' => date('h:i a', $time),
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),
             'archiveUrl' => $item->renderArchiveUrl(),
@@ -75,22 +72,15 @@ class TrainingModuleFetchController extends FetchController
 
     public function fetchView($id = null) {
         $item = null;
-        $destinations = Destination::all();
-        $admin = auth()->guard('admin')->user();
-        if($admin->destination_id) {
-            $destinations = Destination::where('id', $admin->destination_id)->get();
-        }
-        
+
         if ($id) {
-        	$item = TrainingModule::withTrashed()->findOrFail($id);
-        	$item->path = $item->renderImagePath('path');
+        	$item = TimeSlot::withTrashed()->findOrFail($id);
             $item->archiveUrl = $item->renderArchiveUrl();
             $item->restoreUrl = $item->renderRestoreUrl();
         }
 
     	return response()->json([
     		'item' => $item,
-            'destinations' => $destinations,
     	]);
     }
 }

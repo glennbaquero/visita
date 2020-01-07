@@ -1,24 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin\BlockedDates;
+namespace App\Http\Controllers\Admin\TimeSlots;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\BlockedDates\BlockedDate;
+use App\Models\Times\TimeSlot;
+use App\Models\Allocations\Allocation;
 
-use App\Http\Requests\Admin\BlockedDates\BlockedDateStoreRequest;
-
-use DB;
-
-class BlockedDateController extends Controller
+class TimeSlotController extends Controller
 {
-
-    public function __construct() {
-        $this->middleware('App\Http\Middleware\Admin\BlockedDates\BlockedDateMiddleware', 
-            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
-        );
-    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +17,7 @@ class BlockedDateController extends Controller
      */
     public function index()
     {
-        return view('admin.blocked-dates.index');
+        //
     }
 
     /**
@@ -34,9 +25,12 @@ class BlockedDateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id, $name)
     {
-        return view('admin.blocked-dates.create');
+        $allocation = Allocation::find($id);
+        return view('admin.timeslots.create', [
+            'allocation' => $allocation
+        ]);
     }
 
     /**
@@ -45,19 +39,12 @@ class BlockedDateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BlockedDateStoreRequest $request)
+    public function store(Request $request, $id)
     {
-        DB::beginTransaction();
-        $item = BlockedDate::store($request);
+        $request['allocation_id'] = $id;
+        $item = TimeSlot::store($request);
 
-        foreach ($request->dates as $key => $date) {
-            if($date != null) {
-                $item->dates()->firstOrCreate([ 'date' => $date ]);
-            }
-        }
-        DB::commit();
-
-        $message = "You have successfully created {$item->renderName()}";
+        $message = "You have successfully created {$item->time}";
         $redirect = $item->renderShowUrl();
 
         return response()->json([
@@ -74,8 +61,8 @@ class BlockedDateController extends Controller
      */
     public function show($id)
     {
-        $item = BlockedDate::withTrashed()->findOrFail($id);
-        return view('admin.blocked-dates.show', [
+        $item = TimeSlot::withTrashed()->findOrFail($id);
+        return view('admin.timeslots.show', [
             'item' => $item,
         ]);
     }
@@ -98,14 +85,12 @@ class BlockedDateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BlockedDateStoreRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        DB::beginTransaction();
-        $item = BlockedDate::withTrashed()->findOrFail($id);
-        $message = "You have successfully updated {$item->renderName()}";
+        $item = TimeSlot::withTrashed()->findOrFail($id);
+        $message = "You have successfully updated {$item->time}";
 
-        $item = BlockedDate::store($request, $item);
-        DB::commit();
+        $item = TimeSlot::store($request, $item);
 
         return response()->json([
             'message' => $message,
@@ -115,32 +100,32 @@ class BlockedDateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\BlockedDate  $sampleItem
+     * @param  \App\TimeSlot  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function archive($id)
     {
-        $item = BlockedDate::withTrashed()->findOrFail($id);
+        $item = TimeSlot::withTrashed()->findOrFail($id);
         $item->archive();
 
         return response()->json([
-            'message' => "You have successfully archived {$item->renderName()}",
+            'message' => "You have successfully archived {$item->time}",
         ]);
     }
 
     /**
      * Restore the specified resource from storage.
      *
-     * @param  \App\BlockedDate  $sampleItem
+     * @param  \App\TimeSlot  $sampleItem
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        $item = BlockedDate::withTrashed()->findOrFail($id);
+        $item = TimeSlot::withTrashed()->findOrFail($id);
         $item->unarchive();
 
         return response()->json([
-            'message' => "You have successfully restored {$item->renderName()}",
+            'message' => "You have successfully restored {$item->time}",
         ]);
     }
 }

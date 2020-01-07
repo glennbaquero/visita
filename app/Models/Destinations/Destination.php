@@ -16,6 +16,7 @@ use App\Models\AddOns\AddOn;
 use App\Models\Books\Book;
 use App\Models\Announcements\Announcement;
 use App\Models\Users\Admin;
+use App\Models\BlockedDates\BlockedDate;
 
 class Destination extends Model
 {
@@ -76,10 +77,15 @@ class Destination extends Model
         return $this->belongsTo(Admin::class);
     }
 
+    public function blockedDates()
+    {
+        return $this->hasMany(BlockedDate::class);
+    }
+
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['name', 'code', 'icon', 'terms_conditions', 'visitor_policies', 'operating_hours', 'orientation_module', 'capacity_per_day', 'overview', 'contact_us', 'fees', 'how_to_get_here', 'location', 'recommended', 'duration'])
+    public static function store($request, $item = null, $columns = ['name', 'code', 'icon', 'terms_conditions', 'visitor_policies', 'operating_hours', 'operating_hours_end', 'orientation_module', 'capacity_per_day', 'overview', 'contact_us', 'fees', 'how_to_get_here', 'location', 'recommended', 'duration'])
     {
         $vars = $request->only($columns);
 

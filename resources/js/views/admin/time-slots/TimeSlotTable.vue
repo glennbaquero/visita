@@ -27,9 +27,7 @@
             <template v-slot:body="{ items }">
                 <tr v-for="item in items">
                     <td>{{ item.id }}</td>
-                    <td>{{ item.destination }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.date }}</td>
+                    <td>{{ item.time }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>
                         <view-button :href="item.showUrl"></view-button>
@@ -48,8 +46,8 @@
                         :disabled="loading"
                         title="Archive Item"
                         alt-title="Restore Item"
-                        :message="'Are you sure you want to archive Blocked Date #' + item.id + '?'"
-                        :alt-message="'Are you sure you want to restore Blocked Date #' + item.id + '?'"
+                        :message="'Are you sure you want to archive Timeslot ' + item.time + '?'"
+                        :alt-message="'Are you sure you want to restore Timeslot ' + item.time + '?'"
                         @load="load"
                         @success="sync"
                         ></action-button>
@@ -75,9 +73,7 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Destination', value: 'destination' },
-                { text: 'Name', value: 'name' },
-                { text: 'Date', value: 'date' },
+                { text: 'Time', value: 'time' },
             ];
 
 

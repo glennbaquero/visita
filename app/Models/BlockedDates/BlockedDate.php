@@ -3,6 +3,7 @@
 namespace App\Models\BlockedDates;
 
 use App\Extenders\Models\BaseModel as Model;
+use App\Models\Destinations\Destination;
 
 class BlockedDate extends Model
 {
@@ -14,10 +15,15 @@ class BlockedDate extends Model
         return $this->hasMany(Date::class);
     }
 
+    public function destination() 
+    {
+        return $this->belongsTo(Destination::class);
+    }
+
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['name', 'mode', 'description'])
+    public static function store($request, $item = null, $columns = ['name', 'mode', 'description', 'destination_id'])
     {
         $vars = $request->only($columns);
 
