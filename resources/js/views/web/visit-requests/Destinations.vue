@@ -1,18 +1,20 @@
 <template>
 	<div>
-		<div class="inlineBlock-parent">
+		<div class="dstntns-frm1__container inlineBlock-parent">
 			<div class="dstntns-frm1__col width--55">
-				<div class="dstntns-frm1__slider">
+				<div class="dstntns-frm1__slider dstntns-frm--sldr__animation">
 					<div class="dstntns-frm1__slider-item" v-for="destination in searchableDestinations">
 						<div class="dstntns-frm1__slider-item-info-holder margin-a width--85"  >
 							<div class="vertical-parent">
 								<div class="vertical-align align-b">
 									<div class="dstntns-frm1__slider-item-info">
-										<h5 class="frm-title l-margin-b clr--white">{{ destination.name }}</h5>
-										<div class="frm-description s-margin-b clr--white">
-											<p v-html="destination.short_description"></p>
+										<h5 class="frm-title l-margin-b clr--white dstntns-frm--sldr__animation-title">{{ destination.name }}</h5>
+										<div 
+											class="dstntns-frm--sldr__animation-description frm-description s-margin-b clr--white"
+											v-html="destination.short_description"
+										>
 										</div>
-										<div class="inlineBlock-parent width--100">
+										<div class="dstntns-frm--sldr__animation-button inlineBlock-parent width--100">
 											<a href="destinations-info" class="frm-btn green s-margin-r">View Destination</a>
 											<a :href="destination.requestVisitUrl" class="frm-btn orange">Request to Visit</a>
 										</div>

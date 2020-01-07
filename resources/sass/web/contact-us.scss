@@ -15,4 +15,29 @@
 		}
 	}
 
+	.cntct-frm1__img {
+		transition: all 300ms ease-in;
+		opacity: 1;
+		cursor: pointer;
+
+		&:hover {
+			opacity: 0.5;
+		}
+
+		img {
+			max-width: 18px;
+			margin: 5px;
+
+			&:nth-child(1n) {
+				margin-left: 0px;
+			}
+		}
+
+		&.big {
+			img {
+				max-width: 22px;	
+			}
+		}
+	}
+
 }

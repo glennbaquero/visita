@@ -145,24 +145,15 @@
 	.dstntns-inf-frm1__container {
 		padding: 5vh 0vh;
 		background: rgba(0, 0, 0, 0.50);
-	}	
 
-	.dstntns-inf-frm1__location-img {
-		max-width: 18px;
-		margin-right: 5px;
-		display: inline-block;
-		vertical-align: text-bottom;
-   		filter: brightness(0) invert(1);
-	}
-
-	.dstntns-inf-frm1__location-desc {
-		* {
-			display: -webkit-box;
-	  		-webkit-line-clamp: 2;
-	  		-webkit-box-orient: vertical;  
-	  		overflow: hidden;	
+		.dstntns-inf-frm1__location-img {
+			max-width: 18px;
+			margin-right: 5px;
+			display: inline-block;
+			vertical-align: text-bottom;
+	   		filter: brightness(0) invert(1);
 		}
-	}
+	}	
 }
 
 .dstntns-inf-frm2 {

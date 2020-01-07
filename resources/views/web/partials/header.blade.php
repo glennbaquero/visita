@@ -49,6 +49,7 @@
 					<a href="/" class="js-trigger" data-section="frame-1">
 						<img src="{{ asset('images/visita-logo.png') }}" class="mbl-hdr-frm__nav-logo">
 					</a>
+					<a href="" class="mbl-hdr-frm__nav-link">Home</a>
 					<a href="about-us" class="mbl-hdr-frm__nav-link">About Us</a>
 					<a href="destinations" class="mbl-hdr-frm__nav-link">Destinations</a>
 					<a href="faqs" class="mbl-hdr-frm__nav-link">Faqs</a>
