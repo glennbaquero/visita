@@ -128,7 +128,7 @@ class BookFetchController extends FetchController
         $nationalities = Countries::all();
         $special_fees = Allocation::find($experience)->fees;
         $visitor_types = VisitorType::all();
-        $blocked_dates = $this->blockedDates();
+        $blocked_dates = $this->blockedDates($destination);
 
     	return response()->json([
     		'item' => $item,
@@ -141,15 +141,18 @@ class BookFetchController extends FetchController
     	]);
     }
 
-    public function blockedDates() {
-        $items = BlockedDate::all();
+    public function blockedDates($destination) {
+        $destination = Destination::find($destination);
+        $items = $destination->blockedDates;
 
         $result = [];
 
         foreach($items as $item) {
-            array_push($result, [
-                Carbon::parse($item->date)->toDateString()
-            ]);
+            foreach ($item->dates as $date) {
+                array_push($result, [
+                    Carbon::parse($date->date)->toDateString()
+                ]);
+            }
         }
 
         return $result;

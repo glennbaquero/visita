@@ -12,6 +12,9 @@ use App\Models\Carousels\HomeBanner;
 use App\Models\Tabbings\AboutInfo;
 
 use App\Models\Destinations\Destination;
+use App\Models\Types\VisitorType;
+use App\Models\Genders\Gender;
+use Webpatser\Countries\Countries;
 
 class PageController extends Controller
 {
@@ -89,10 +92,19 @@ class PageController extends Controller
 	public function showRequestToVisit($id, $name) {
 		$destination = Destination::find($id);
 		$destination->image = $destination->pictures->first()->renderImagePath();
-		$destination->experiences = $destination->experiences;
+		$destination->allocations = $destination->allocations;
+		$destination->dateBlock = $destination->getBlockedDates();
+		$result = $destination->getFormattedData();
+		$visitor_types = VisitorType::all();
+		$genders = Gender::all();
+		$countries = Countries::all();
         return view('web.pages.destination.request-to-visit', [
         	'page_scripts'=> 'requestToVisit',
-        	'destination' => $destination
+        	'destination' => $destination,
+        	'visitor_types' => $visitor_types,
+        	'genders' => $genders,
+        	'countries' => $countries,
+        	'items' => json_encode($result),
         ]);
 	}
 

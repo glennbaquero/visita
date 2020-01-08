@@ -10,11 +10,13 @@ export default {
 			return result;
 		},
 
-		toTime(value) {
+		toTime(value, format='HH:mm') {
 			let result = '';
 			
 			if (moment(value).isValid()) {
-				result = moment(value).format('HH:mm');
+				result = moment(value).format(format);
+			} else {
+				result = moment(value, format).format(format)
 			}
 
 			return result;

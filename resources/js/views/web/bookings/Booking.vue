@@ -92,161 +92,13 @@
 					<!--  -->
 					<!-- Step 2 -->
 					<div class="rqst-frm1__step-2" v-if="step === 2">
-						<div class="rqst-frm1__step-2-content">
-							<div class="align-l m-margin-b">
-								<h5 class="frm-title small clr--gray">Main Contact Person</h5>
-							</div>
-							<hr>
-
-							<div class="inlineBlock-parent align-l">
-								<div class="width--50">
-									<div class="width--95">
-										<p class="frm-header bold s-margin-b clr--gray">First Name*</p>
-										<div class="frm-inpt m-margin-b">
-											<input type="text">
-										</div>
-									</div>
-								</div
-								><div class="width--50">
-									<div class="width--95 margin-l-a">
-										<p class="frm-header bold s-margin-b clr--gray">Last Name*</p>
-										<div class="frm-inpt m-margin-b">
-											<input type="text">
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="inlineBlock-parent align-l">
-								<div class="width--50">
-									<div class="width--95">
-										<p class="frm-header bold s-margin-b clr--gray">Nationality*</p>
-										<div class="frm-inpt m-margin-b">
-											<select>
-												<option></option>
-											</select>
-										</div>
-									</div>
-								</div
-								><div class="width--50">
-									<div class="width--95 margin-l-a">
-										<p class="frm-header bold s-margin-b clr--gray">Email Address*</p>
-										<div class="frm-inpt m-margin-b">
-											<input type="email">
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="inlineBlock-parent align-l">
-								<div class="width--50">
-									<div class="width--95">
-										<p class="frm-header bold s-margin-b clr--gray">Contact No.*</p>
-										<div class="inlineBlock-parent">
-											<div class="width--30">
-												<div class="width--90">
-													<div class="frm-inpt align-c m-margin-b">
-														<input type="text" name="" value="+63" disabled>
-													</div>
-												</div>
-											</div
-											><div class="width--70">
-												<div class="frm-inpt align-c m-margin-b">
-													<input type="number" name="" placeholder="">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div
-								><div class="width--50">
-									<div class="width--95 margin-l-a">
-										<p class="frm-header bold s-margin-b clr--gray">Emergency Contact*</p>
-										<div class="inlineBlock-parent">
-											<div class="width--30">
-												<div class="width--90">
-													<div class="frm-inpt align-c m-margin-b">
-														<input type="text" name="" value="+63" disabled>
-													</div>
-												</div>
-											</div
-											><div class="width--70">
-												<div class="frm-inpt align-c m-margin-b">
-													<input type="number" name="" placeholder="">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="inlineBlock-parent align-l">
-								<div class="width--50">
-									<div class="width--95">
-										<p class="frm-header bold s-margin-b clr--gray">Birthdate*</p>
-										<div class="frm-inpt m-margin-b">
-											<input type="date">
-										</div>
-									</div>
-								</div
-								><div class="width--50">
-									<div class="width--95 margin-l-a">
-										<p class="frm-header bold s-margin-b clr--gray">Gender*</p>
-										<div class="frm-inpt m-margin-b">
-											<select>
-												<option></option>
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="inlineBlock-parent align-l">
-								<div class="width--50">
-									<div class="width--95">
-										<p class="frm-header bold s-margin-b clr--gray">Visitor Type*</p>
-										<div class="frm-inpt m-margin-b">
-											<select>
-												<option></option>
-											</select>
-										</div>
-									</div>
-								</div
-								><div class="width--50">
-									<div class="width--95 margin-l-a">
-										<p class="frm-header bold s-margin-b clr--gray">Special Fees</p>
-										<div class="frm-inpt m-margin-b">
-											<select>
-												<option>None</option>
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="inlineBlock-parent align-l">
-								<div class="width--50">
-									<div class="width--95">
-										<p class="frm-header bold s-margin-b clr--gray">Agency Code</p>
-										<div class="frm-inpt m-margin-b">
-											<input type="text">
-										</div>
-									</div>
-								</div
-								><div class="width--50">
-									<div class="width--95 margin-l-a">
-										<p class="frm-header bold s-margin-b clr--gray">Health Certificate/Letter of Consent*</p>
-										<div class="frm-inpt m-margin-b">
-											<input type="file">
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-						<div class="inlineBlock-parent width--100 align-l">
-							<p class="frm-header bold clr--green">NOTE:</p>
-							<p class="frm-header clr--gray">Contact Person should be 18 years old and above.</p>
-						</div>
+						<FormStepTwo
+							:step-data="stepData"
+							:visitor-types="visitorTypes"
+							:special-fees="specialFees"
+							:countries="countries"
+							:genders="genders"
+						></FormStepTwo>
 					</div>
 					<!--  -->
 					<!-- Step 3 -->
@@ -773,53 +625,20 @@
 						<FormStepOne 
 							v-if="step === 1" 
 							:destination="destination" 
+							:items="items"
 							@showStep2="showStep2()"
 							:step-data="stepData"
-							></FormStepOne>
+						></FormStepOne>
 						<!--  -->
 						<!-- Step 2 -->
 						<div class="rqst-frm1__steps-form-cards" v-if="step === 2">
-							<div class="width--90 margin-a rqst-frm1__steps-form-cards-container gnrl-scrll">
-								<div class="align-l">
-									<h5 class="frm-title x-small clr--gray">Experience & Schedule</h5>
-									<hr>
-									<div class="inlineBlock-parent">
-										<p class="frm-header bold clr--gray">Date:</p>
-										<p class="frm-header clr--gray">October 9, 2019</p>
-									</div>
-									<div class="inlineBlock-parent">
-										<p class="frm-header bold clr--gray">Experience:</p>
-										<p class="frm-header clr--gray">Camping</p>
-									</div>
-									<div class="inlineBlock-parent">
-										<p class="frm-header bold clr--gray">No. of guests:</p>
-										<p class="frm-header clr--gray">5</p>
-									</div>
-									<div class="inlineBlock-parent">
-										<p class="frm-header bold clr--gray">Time:</p>
-										<p class="frm-header clr--gray">6:00 AM</p>
-									</div>
-								</div>
-							</div>
-							<hr>
-							<div class="inlineBlock-parent">
-								<div class="width--45">
-									<div class="width--95">
-										<button
-										  class="frm-btn gray"
-										  @click="returnStep1()"
-										>Back</button>
-									</div>
-								</div
-								><div class="width--45">
-									<div class="width--95">
-										<button 
-										  class="frm-btn green"
-										  @click="showStep3()"
-										>Next</button>
-									</div>
-								</div>
-							</div>
+							<StepTwo
+								:step-data="stepData"
+								:items="items"
+								@returnStep1="returnStep1()"
+								@showStep3="showStep3()"
+							></StepTwo>
+							
 						</div>
 						<!--  -->
 						<!-- Step 3 -->
@@ -1364,21 +1183,49 @@
 
 <script type="text/javascript">
 	import StepOne from './steps/StepOne.vue';
+	import StepTwo from './steps/StepTwo.vue';
 	import FormStepOne from './steps/FormStepOne.vue';
+	import FormStepTwo from './steps/FormStepTwo.vue';
 	export default {
 
 		props: {
-			destination: Object
+			destination: Object,
+			items: Array,
+			genders: Array,
+			countries: Array,
+			visitorTypes: Array,
 		},	
 
 		components: {
 			StepOne,
-			FormStepOne
+			FormStepOne,
+			FormStepTwo,
+			StepTwo,
 		},
 
 		data() {
 			return {
-				stepData: {},
+				stepData: {
+					allocationSelected: null,
+					numberOfGuests: 0,
+					timeSelected: null,
+					visitDate: null,
+
+					main: {
+						special_fee_id: 0,
+						visitor_type_id: 0,
+						first_name: null,
+						gender: null,
+						nationality: null,
+						last_name: null,
+						email: null,
+						birthdate: null,
+						contact_number: null,
+						emergency_contact_number: null,
+						main: true,
+						agency_code: null
+					}
+				},
 				step: 1,
 				activeStep1: true,
 				activeStep2: false,
@@ -1397,6 +1244,19 @@
 				editButton: 'images/edit-button.png',
 				removeButton: 'images/remove-button.png',
 				addButton: 'images/add-button.png'
+			}
+		},
+
+		computed: {
+			specialFees() {
+				var fees = null;
+				_.forEach(this.items, (value) => {
+			    	if(value.allocation_id == this.stepData.allocationSelected){
+			      		fees = value.special_fees;
+			    	}
+			  	});
+
+			  	return fees;
 			}
 		},
 
