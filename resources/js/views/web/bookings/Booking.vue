@@ -74,7 +74,7 @@
 				</div
 				>
 			</div
-			><div class="width--25 align-t rqst-frm1__steps-col">
+			><div class="rqst-frm1__steps-header-col width--25 align-t">
 				<img 
 				  class="rqst-frm1__steps-header-logo"
 				  :src="visitaLogo" 
