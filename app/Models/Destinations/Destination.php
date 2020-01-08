@@ -18,6 +18,8 @@ use App\Models\Announcements\Announcement;
 use App\Models\Users\Admin;
 use App\Models\BlockedDates\BlockedDate;
 
+use Carbon\Carbon;
+
 class Destination extends Model
 {
 
@@ -129,5 +131,38 @@ class Destination extends Model
 
     public function renderRequestVisitUrl() {
         return route('web.request-to-visit', [$this->id, $this->name]);
+    }
+
+    public function getFormattedData() {
+        $result = [];
+
+        foreach ($this->allocations as $key => $allocation) {
+            // foreach ($allocation->timeSlots as $timeslot) {
+                array_push($result, [
+                    'image' => $this->pictures->first()->renderImagePath(),
+                    'allocation_name' => $allocation->name,
+                    'allocation_id' => $allocation->id,
+                    'special_fees' => $allocation->fees,
+                    'timeslot' => $allocation->getTimeSlot(),
+                ]);
+            // }
+        }
+
+        return $result;
+    }
+
+    public function getBlockedDates() {
+        $items = $this->blockedDates;
+
+        $result = [];
+
+        foreach($items as $item) {
+            foreach ($item->dates as $date) {
+                array_push($result, [
+                    Carbon::parse($date->date)->toDateString()
+                ]);
+            }
+        }
+        return collect($result)->flatten();
     }
 }

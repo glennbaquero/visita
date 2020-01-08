@@ -8,13 +8,13 @@
 
 					<p class="frm-header bold s-margin-b clr--gray">Visit Date</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="date" v-model="stepData.visitDate">
+						<input type="text" v-model="stepData.visitDate" id="visit-date">
 					</div>
 
 					<p class="frm-header bold s-margin-b clr--gray">Select Experience</p>
 					<div class="frm-inpt m-margin-b">
-						<select v-model="stepData.experienceSelected">
-							<option v-for="experience in destination.experiences" :value="experience.id" >{{ experience.name }}</option>
+						<select v-model="stepData.allocationSelected" @change="allocationChanged()">
+							<option v-for="allocation in items" :value="allocation.allocation_id" >{{ allocation.allocation_name }}</option>
 						</select>
 					</div>
 
@@ -27,7 +27,7 @@
 					<div class="frm-inpt m-margin-b">
 						<!-- <input type="time"> -->
 						<select v-model="stepData.timeSelected">
-							<option value="id" >6:30</option>
+							<option v-for="timeslot in timeslots" :value="timeslot.time" >{{ timeslot.formatted_time }}</option>
 						</select>
 					</div>
 
@@ -41,8 +41,9 @@
 				><div class="width--45">
 					<div class="width--95">
 						<button 
-						  class="frm-btn green"
-						  @click="$emit('showStep2')"
+							v-if="detailsComplete"
+						  	class="frm-btn green"
+						  	@click="$emit('showStep2')"
 						>Next</button>
 					</div>
 				</div>
@@ -51,15 +52,55 @@
 	</div>
 </template>
 <script>
+	/* Flatpickr Documentation: https://flatpickr.js.org/options/ */
+	import flatpickr from 'flatpickr';
+	import 'flatpickr/dist/flatpickr.css';
+
 	export default{
 		props: {
 			destination: Object,
-			stepData: Object
+			stepData: Object,
+			items: Array
 		},
 
 		data() {
 			return {
-				
+				// timeslots: [],
+			}
+		},
+
+		computed: {
+			detailsComplete() {
+				if(this.stepData.visitDate != null && this.stepData.timeSelected != null && this.stepData.allocationSelected != null) return true;
+
+				return false;
+			},
+
+			timeslots() {
+				var result = [];
+				_.forEach(this.items, (value) => {
+			    	if(value.allocation_id  === this.stepData.allocationSelected){
+			      		result = value.timeslot;
+			    	}
+			  	});
+
+			  	return result;
+			}
+		},
+
+		mounted() {
+			flatpickr('#visit-date', { minDate: 'today', disable: this.destination.dateBlock });
+		},
+
+		methods: {
+			allocationChanged() {
+				var result = [];
+
+			  	_.forEach(this.items, (value) => {
+			    	if(value.allocation_id  === this.stepData.allocationSelected){
+			      		this.timeslots = value.timeslot;
+			    	}
+			  	});
 			}
 		}
 	}
