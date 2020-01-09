@@ -74,7 +74,7 @@
 				</div
 				>
 			</div
-			><div class="rqst-frm1__steps-header-col width--25 align-t">
+			><div class="width--25 align-t rqst-frm1__steps-col">
 				<img 
 				  class="rqst-frm1__steps-header-logo"
 				  :src="visitaLogo" 
@@ -95,7 +95,7 @@
 						<FormStepTwo
 							:step-data="stepData"
 							:visitor-types="visitorTypes"
-							:special-fees="specialFees"
+							:special-fees="selectedAllocation.special_fees"
 							:countries="countries"
 							:genders="genders"
 						></FormStepTwo>
@@ -114,143 +114,17 @@
 									<h5 class="frm-title small clr--gray">Guest Details</h5>
 								</div>
 								<hr>
-								<div class="inlineBlock-parent align-l m-margin-b">
-									
-									<div class="rqst-frm1__step-3-content-col">
-										<p class="frm-header s-margin-b">Guest 1:</p>
-										<div class="rqst-frm1__step-3-content-card">
-											<div class="width--90 margin-a inlineBlock-parent">
-												<div class="width--40 inlineBlock-parent">
-													<img 
-													  class="rqst-frm1__step-3-content-card-edit-btn" 
-													  :src="editButton"
-													  @click="openGuestForm()"
-													>
-													<p class="frm-header bold clr--light-gray">|</p>
-													<img 
-													  class="rqst-frm1__step-3-content-card-remove-btn" 
-													  :src="removeButton"
-													>
-												</div
-												><div class="width--60">
-													<p class="frm-header bold clr--green">Register Guest</p>
-												</div>
-											</div>
-										</div>
-									</div
-									><div class="rqst-frm1__step-3-content-col">
-										<p class="frm-header s-margin-b">Guest 2:</p>
-										<div class="rqst-frm1__step-3-content-card">
-											<div class="width--90 margin-a inlineBlock-parent">
-												<div class="width--40 inlineBlock-parent">
-													<img 
-													  class="rqst-frm1__step-3-content-card-edit-btn" 
-													  :src="editButton"
-													>
-													<p class="frm-header bold clr--light-gray">|</p>
-													<img 
-													  class="rqst-frm1__step-3-content-card-remove-btn" 
-													  :src="removeButton"
-													>
-												</div
-												><div class="width--60">
-													<p class="frm-header bold clr--green">Register Guest</p>
-												</div>
-											</div>
-										</div>
-									</div
-									><div class="rqst-frm1__step-3-content-col">
-										<p class="frm-header s-margin-b">Guest 3:</p>
-										<div class="rqst-frm1__step-3-content-card">
-											<div class="width--90 margin-a inlineBlock-parent">
-												<div class="width--40 inlineBlock-parent">
-													<img 
-													  class="rqst-frm1__step-3-content-card-edit-btn" 
-													  :src="editButton"
-													>
-													<p class="frm-header bold clr--light-gray">|</p>
-													<img 
-													  class="rqst-frm1__step-3-content-card-remove-btn" 
-													  :src="removeButton"
-													>
-												</div
-												><div class="width--60">
-													<p class="frm-header bold clr--green">Register Guest</p>
-												</div>
-											</div>
-										</div>
-									</div
-									><div class="rqst-frm1__step-3-content-col">
-										<p class="frm-header s-margin-b">Guest 4:</p>
-										<div class="rqst-frm1__step-3-content-card">
-											<div class="width--90 margin-a inlineBlock-parent">
-												<div class="width--40 inlineBlock-parent">
-													<img 
-													  class="rqst-frm1__step-3-content-card-edit-btn" 
-													  :src="editButton"
-													>
-													<p class="frm-header bold clr--light-gray">|</p>
-													<img 
-													  class="rqst-frm1__step-3-content-card-remove-btn" 
-													  :src="removeButton"
-													>
-												</div
-												><div class="width--60">
-													<p class="frm-header bold clr--green">Register Guest</p>
-												</div>
-											</div>
-										</div>
-									</div
-									><div class="rqst-frm1__step-3-content-col">
-										<p class="frm-header s-margin-b">Guest 5:</p>
-										<div class="rqst-frm1__step-3-content-card">
-											<div class="width--90 margin-a inlineBlock-parent">
-												<div class="width--40 inlineBlock-parent">
-													<img 
-													  class="rqst-frm1__step-3-content-card-edit-btn" 
-													  :src="editButton"
-													>
-													<p class="frm-header bold clr--light-gray">|</p>
-													<img 
-													  class="rqst-frm1__step-3-content-card-remove-btn" 
-													  :src="removeButton"
-													>
-												</div
-												><div class="width--60">
-													<p class="frm-header bold clr--green">Register Guest</p>
-												</div>
-											</div>
-										</div>
-									</div
-									><div class="rqst-frm1__step-3-content-col">
-										<p class="frm-header s-margin-b">Guest 6:</p>
-										<div class="rqst-frm1__step-3-content-card">
-											<div class="width--90 margin-a inlineBlock-parent">
-												<div class="width--40 inlineBlock-parent">
-													<img 
-													  class="rqst-frm1__step-3-content-card-edit-btn" 
-													  :src="editButton"
-													>
-													<p class="frm-header bold clr--light-gray">|</p>
-													<img 
-													  class="rqst-frm1__step-3-content-card-remove-btn" 
-													  :src="removeButton"
-													>
-												</div
-												><div class="width--60">
-													<p class="frm-header bold clr--green">Register Guest</p>
-												</div>
-											</div>
-										</div>
-									</div
-									>
-								</div>
+								<GuestInfo
+									v-if="!guestCard"
+									:step-data="stepData"
+									@openGuestForm="openGuestForm(...arguments)"
+									@removeGuest="removeGuest(...arguments)"
+								></GuestInfo>
 								<div class="rqst-frm1__step-3-content-add-guest-holder inlineBlock-parent align-l">
 									<img 
-									  class="rqst-frm1__step-3-content-add-guest-btn" 
-									  :src="addButton"
-									>
-									<p class="frm-header bold clr--green rqst-frm1__step-3-content-add-guest-btn-label">Add Guest</p>
+									  	class="rqst-frm1__step-3-content-add-guest-btn" 
+									  	src="images/add-button.png" @click="addGuest()">
+									<p class="frm-header bold clr--green rqst-frm1__step-3-content-add-guest-btn-label" @click="addGuest()">Add Guest</p>
 								</div>
 							</div>
 
@@ -259,155 +133,18 @@
 							  class="rqst-frm1__step-3-content-guest-form align-l m-margin-b"
 							  :class="guestForm ? 'show' : ''"
 							>
-								<div class="inlineBlock-parent">
-									<div class="width--60">
-										<h5 class="frm-title small clr--gray">Guest 1 Details</h5>
-									</div
-									><div class="width--40 align-r inlineBlock-parent">
-										
-									</div>
-								</div>
-								<hr>
-
-								<div class="inlineBlock-parent align-l">
-									<div class="width--50">
-										<div class="width--95">
-											<p class="frm-header bold s-margin-b clr--gray">First Name*</p>
-											<div class="frm-inpt m-margin-b">
-												<input type="text">
-											</div>
-										</div>
-									</div
-									><div class="width--50">
-										<div class="width--95 margin-l-a">
-											<p class="frm-header bold s-margin-b clr--gray">Last Name*</p>
-											<div class="frm-inpt m-margin-b">
-												<input type="text">
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="inlineBlock-parent align-l">
-									<div class="width--50">
-										<div class="width--95">
-											<p class="frm-header bold s-margin-b clr--gray">Nationality*</p>
-											<div class="frm-inpt m-margin-b">
-												<select>
-													<option></option>
-												</select>
-											</div>
-										</div>
-									</div
-									><div class="width--50">
-										<div class="width--95 margin-l-a">
-											<p class="frm-header bold s-margin-b clr--gray">Email Address*</p>
-											<div class="frm-inpt m-margin-b">
-												<input type="email">
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="inlineBlock-parent align-l">
-									<div class="width--50">
-										<div class="width--95">
-											<p class="frm-header bold s-margin-b clr--gray">Contact No.*</p>
-											<div class="inlineBlock-parent">
-												<div class="width--30">
-													<div class="width--90">
-														<div class="frm-inpt align-c m-margin-b">
-															<input type="text" name="" value="+63" disabled>
-														</div>
-													</div>
-												</div
-												><div class="width--70">
-													<div class="frm-inpt align-c m-margin-b">
-														<input type="number" name="" placeholder="">
-													</div>
-												</div>
-											</div>
-										</div>
-									</div
-									><div class="width--50">
-										<div class="width--95 margin-l-a">
-											<p class="frm-header bold s-margin-b clr--gray">Emergency Contact*</p>
-											<div class="inlineBlock-parent">
-												<div class="width--30">
-													<div class="width--90">
-														<div class="frm-inpt align-c m-margin-b">
-															<input type="text" name="" value="+63" disabled>
-														</div>
-													</div>
-												</div
-												><div class="width--70">
-													<div class="frm-inpt align-c m-margin-b">
-														<input type="number" name="" placeholder="">
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="inlineBlock-parent align-l">
-									<div class="width--50">
-										<div class="width--95">
-											<p class="frm-header bold s-margin-b clr--gray">Birthdate*</p>
-											<div class="frm-inpt m-margin-b">
-												<input type="date">
-											</div>
-										</div>
-									</div
-									><div class="width--50">
-										<div class="width--95 margin-l-a">
-											<p class="frm-header bold s-margin-b clr--gray">Gender*</p>
-											<div class="frm-inpt m-margin-b">
-												<select>
-													<option></option>
-												</select>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="inlineBlock-parent align-l">
-									<div class="width--50">
-										<div class="width--95">
-											<p class="frm-header bold s-margin-b clr--gray">Visitor Type*</p>
-											<div class="frm-inpt m-margin-b">
-												<select>
-													<option></option>
-												</select>
-											</div>
-										</div>
-									</div
-									><div class="width--50">
-										<div class="width--95 margin-l-a">
-											<p class="frm-header bold s-margin-b clr--gray">Special Fees</p>
-											<div class="frm-inpt m-margin-b">
-												<select>
-													<option>None</option>
-												</select>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="inlineBlock-parent align-l">
-									<div class="width--50">
-										<div class="width--95">
-											<p class="frm-header bold s-margin-b clr--gray">Health Certificate/Letter of Consent (Optional)</p>
-											<div class="frm-inpt m-margin-b">
-												<input type="file">
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="align-l">
-									<button class="frm-btn green">Submit</button>
-								</div>
+								<template v-for="(guest, key) in stepData.guests">
+									<FormStepThree
+										v-if="key === guest_key"
+										:step-data="guest"
+										:guest-key="key"
+										:visitor-types="visitorTypes"
+										:special-fees="selectedAllocation.special_fees"
+										:countries="countries"
+										:genders="genders"
+										@submitGuestDetails="submitGuestDetails(...arguments)"
+									></FormStepThree>
+								</template>
 
 							</div>
 
@@ -627,6 +364,7 @@
 							:destination="destination" 
 							:items="items"
 							@showStep2="showStep2()"
+							@numberOfGuestsChanged="numberOfGuestsChanged()"
 							:step-data="stepData"
 						></FormStepOne>
 						<!--  -->
@@ -635,6 +373,7 @@
 							<StepTwo
 								:step-data="stepData"
 								:items="items"
+								:allocation="selectedAllocation"
 								@returnStep1="returnStep1()"
 								@showStep3="showStep3()"
 							></StepTwo>
@@ -643,151 +382,13 @@
 						<!--  -->
 						<!-- Step 3 -->
 						<div class="rqst-frm1__steps-form-cards" v-if="step === 3">
-							<div class="width--90 margin-a rqst-frm1__steps-form-cards-container gnrl-scrll">
-								<div class="width--100">
-									<div class="align-l m-margin-b">
-										<h5 class="frm-title x-small clr--gray">Experience & Schedule</h5>
-										<hr>
-										<div class="inlineBlock-parent">
-											<p class="frm-header bold clr--gray">Date:</p>
-											<p class="frm-header clr--gray">October 9, 2019</p>
-										</div>
-										<div class="inlineBlock-parent">
-											<p class="frm-header bold clr--gray">Experience:</p>
-											<p class="frm-header clr--gray">Camping</p>
-										</div>
-										<div class="inlineBlock-parent">
-											<p class="frm-header bold clr--gray">No. of guests:</p>
-											<p class="frm-header clr--gray">5</p>
-										</div>
-										<div class="inlineBlock-parent">
-											<p class="frm-header bold clr--gray">Time:</p>
-											<p class="frm-header clr--gray">6:00 AM</p>
-										</div>
-									</div>
-								</div>
-								<div class="width--100">
-									<div class="align-l">
-										<h5 class="frm-title x-small clr--gray">Contact Person</h5>
-										<hr>
-
-										<div class="inlineBlock-parent">
-											<div class="width--50 align-t">
-												<div class="width--95">
-													<div class="inlineBlock-parent">
-														<p class="frm-header bold clr--gray">Name:</p>
-														<p class="frm-header clr--gray">Jethro Hitosis</p>
-													</div>
-												</div>
-											</div
-											><div class="width--50 align-t">
-												<div class="width--95 margin-l-a">
-													<div class="inlineBlock-parent">
-														<p class="frm-header bold clr--gray">Email:</p>
-														<p class="frm-header clr--gray">jethro@praxxys.ph</p>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="inlineBlock-parent">
-											<div class="width--50 align-t">
-												<div class="width--95">
-													<div class="inlineBlock-parent">
-														<p class="frm-header bold clr--gray">Nationality:</p>
-														<p class="frm-header clr--gray">Filipino</p>
-													</div>
-												</div>
-											</div
-											><div class="width--50 align-t">
-												<div class="width--95 margin-l-a">
-													<div class="inlineBlock-parent">
-														<p class="frm-header bold clr--gray">Birthdate:</p>
-														<p class="frm-header clr--gray">August 7, 2019</p>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="inlineBlock-parent">
-											<div class="width--50 align-t">
-												<div class="width--95">
-													<div class="inlineBlock-parent">
-														<p class="frm-header bold clr--gray">Contact No.:</p>
-														<p class="frm-header clr--gray">+6309565612284</p>
-													</div>
-												</div>
-											</div
-											><div class="width--50 align-t">
-												<div class="width--95 margin-l-a">
-													<div class="inlineBlock-parent">
-														<p class="frm-header bold clr--gray">Emergency No.:</p>
-														<p class="frm-header clr--gray">+6309565612284</p>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="inlineBlock-parent">
-											<div class="width--50 align-t">
-												<div class="width--95">
-													<div class="inlineBlock-parent">
-														<p class="frm-header bold clr--gray">Gender:</p>
-														<p class="frm-header clr--gray">Male</p>
-													</div>
-												</div>
-											</div
-											><div class="width--50 align-t">
-												<div class="width--95 margin-l-a">
-													<div class="inlineBlock-parent">
-														<p class="frm-header bold clr--gray">Visitor Type:</p>
-														<p class="frm-header clr--gray">--</p>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="inlineBlock-parent">
-											<div class="width--50 align-t">
-												<div class="width--95">
-													<div class="inlineBlock-parent">
-														<p class="frm-header bold clr--gray">Special Fees:</p>
-														<p class="frm-header clr--gray">--</p>
-													</div>
-												</div>
-											</div
-											><div class="width--50 align-t">
-												<div class="width--95 margin-l-a">
-													<div class="inlineBlock-parent">
-														<p class="frm-header bold clr--gray">Agency Code:</p>
-														<p class="frm-header clr--gray">--</p>
-													</div>
-												</div>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<hr>
-							<div class="inlineBlock-parent">
-								<div class="width--45">
-									<div class="width--95">
-										<button 
-										  class="frm-btn gray"
-										  @click="returnStep2()"
-										>Back</button>
-									</div>
-								</div
-								><div class="width--45">
-									<div class="width--95">
-										<button 
-										  class="frm-btn green"
-										  @click="showStep4()"
-										>Next</button>
-									</div>
-								</div>
-							</div>
+							<StepThree
+								:allocation="selectedAllocation"
+								:step-data="stepData"
+								:visitor-types="visitorTypes"
+								@returnStep2="returnStep2()"
+								@showStep4="showStep4()"
+							></StepThree>
 						</div>
 						<!--  -->
 						<!-- Step 4 -->
@@ -1182,10 +783,17 @@
 </template>
 
 <script type="text/javascript">
+	import flatpickr from 'flatpickr';
+	import 'flatpickr/dist/flatpickr.css';
+
 	import StepOne from './steps/StepOne.vue';
 	import StepTwo from './steps/StepTwo.vue';
+	import StepThree from './steps/StepThree.vue';
 	import FormStepOne from './steps/FormStepOne.vue';
 	import FormStepTwo from './steps/FormStepTwo.vue';
+	import FormStepThree from './steps/FormStepThree.vue';
+	import GuestInfo from './steps/GuestInfo.vue';
+
 	export default {
 
 		props: {
@@ -1198,9 +806,12 @@
 
 		components: {
 			StepOne,
+			StepTwo,
+			StepThree,
 			FormStepOne,
 			FormStepTwo,
-			StepTwo,
+			FormStepThree,
+			GuestInfo,
 		},
 
 		data() {
@@ -1223,9 +834,13 @@
 						contact_number: null,
 						emergency_contact_number: null,
 						main: true,
-						agency_code: null
-					}
+						agency_code: null,
+						paths: []
+					},
+
+					guests: [],
 				},
+
 				step: 1,
 				activeStep1: true,
 				activeStep2: false,
@@ -1243,21 +858,25 @@
 				successIcon: 'images/success-icon.png',
 				editButton: 'images/edit-button.png',
 				removeButton: 'images/remove-button.png',
-				addButton: 'images/add-button.png'
+				addButton: 'images/add-button.png',
+				numberOfGuests: 0,
+				guest_key: null
 			}
 		},
 
 		computed: {
-			specialFees() {
-				var fees = null;
+			selectedAllocation() {
+				var result = null;
 				_.forEach(this.items, (value) => {
 			    	if(value.allocation_id == this.stepData.allocationSelected){
-			      		fees = value.special_fees;
+			      		result = value;
 			    	}
 			  	});
+			  	return result;
+			},
+		},
 
-			  	return fees;
-			}
+		mounted() {
 		},
 
 		methods: {
@@ -1303,11 +922,68 @@
 				this.doneStep3 = false;
 				window.scrollTo(0,0);
 			},
-			openGuestForm() {
+			openGuestForm(key) {
+				this.guest_key = key;
 				this.guestForm = true;
 				this.guestCard = true;
-			}
+			},
+			removeGuest(key) {
+				this.stepData.guests.splice(key, 1);
+				var totalGuests = parseInt(this.stepData.numberOfGuests) - 1;
+				this.stepData.numberOfGuests = totalGuests;
+			},
 
+			numberOfGuestsChanged() {
+				var details = {
+					special_fee_id: 0,
+					visitor_type_id: 0,
+					first_name: null,
+					gender: null,
+					nationality: null,
+					last_name: null,
+					email: null,
+					birthdate: null,
+					contact_number: null,
+					emergency_contact_number: null,
+					main: false,
+					paths: []
+				}
+
+				this.stepData.guests = [];
+				for(var i = 0; i < parseInt(this.stepData.numberOfGuests); i++) {
+					this.stepData.guests.push(details);
+				}
+			},
+
+			addGuest() {
+				var details = {
+					special_fee_id: 0,
+					visitor_type_id: 0,
+					first_name: null,
+					gender: null,
+					nationality: null,
+					last_name: null,
+					email: null,
+					birthdate: null,
+					contact_number: null,
+					emergency_contact_number: null,
+					main: false,
+					paths: []
+				}
+				var totalGuests = parseInt(this.stepData.numberOfGuests) + 1;
+				this.stepData.numberOfGuests = totalGuests;
+				this.stepData.guests.push(details);
+			},
+
+			submitGuestDetails(guest_key, guest_data) {
+				this.guest_key = null;
+				console.log(guest_key, guest_data);
+				this.stepData.guests[guest_key] = guest_data;
+				this.guestCard = false;
+				this.guestForm = false;
+				guest_key = null;
+				guest_data = null;
+			},
 		}
 	}
 </script>
