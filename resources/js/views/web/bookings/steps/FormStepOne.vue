@@ -20,7 +20,7 @@
 
 					<p class="frm-header bold s-margin-b clr--gray">Number of guest/s</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="number" v-model="stepData.numberOfGuests" min="0">
+						<input type="number" v-model="stepData.numberOfGuests" min="0" @change="$emit('numberOfGuestsChanged')">
 					</div>
 
 					<p class="frm-header bold s-margin-b clr--gray">Time</p>
@@ -61,12 +61,6 @@
 			destination: Object,
 			stepData: Object,
 			items: Array
-		},
-
-		data() {
-			return {
-				// timeslots: [],
-			}
 		},
 
 		computed: {

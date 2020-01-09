@@ -1,10 +1,10 @@
 export default {
 	methods: {
-		toDate(value) {
+		toDate(value, format='MMM D, YYYY') {
 			let result = '';
 
 			if (moment(value).isValid()) {
-				result = moment(value).format('MMM D, YYYY');
+				result = moment(value).format(format);
 			}
 
 			return result;

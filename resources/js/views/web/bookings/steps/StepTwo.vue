@@ -46,31 +46,22 @@
 </template>
 <script>
 	import DateMixin from 'Mixins/date.js';
+	
 	export default {
 		props: {
 			stepData: Object,
-			items: Array
+			items: Array,
+			allocation: Object
 		},
 
 		mixins: [ DateMixin ],
 
 		computed: {
-			allocation() {
-				var name = null;
-				_.forEach(this.items, (value) => {
-			    	if(value.allocation_id == this.stepData.allocationSelected){
-			      		name = value;
-			    	}
-			  	});
-
-			  	return name;
-			},
-
 			detailsComplete() {
-				if(this.stepData.main.first_name != null && this.stepData.main.gender != null && 
-					this.stepData.main.nationality != null && this.stepData.main.last_name != null && 
-					this.stepData.main.email != null && this.stepData.main.birthdate != null && 
-					this.stepData.main.contact_number != null && this.stepData.main.emergency_contact_number != null &&
+				if(this.stepData.main.first_name != '' && this.stepData.main.gender != '' && 
+					this.stepData.main.nationality != '' && this.stepData.main.last_name != '' && 
+					this.stepData.main.email != '' && this.stepData.main.birthdate != '' && 
+					this.stepData.main.contact_number != '' && this.stepData.main.emergency_contact_number != '' &&
 					this.stepData.main.visitor_type_id != 0) return true;
 
 				return false;
