@@ -533,9 +533,7 @@ var app = {
 		    	$(this).addClass('active');
 		    });	
 
-		    $('.rqst-frm1__step-4-content-select').on('click', function(){
-		    	$('.rqst-frm1__step-4-content-select-option').fadeToggle(200);
-		    });		
+	
 
 			var information = $('.rqst-frm1__step-4-content-info-icon');
 

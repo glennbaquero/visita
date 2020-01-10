@@ -20,7 +20,7 @@
 
 					<p class="frm-header bold s-margin-b clr--gray">Number of guest/s</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="number" v-model="stepData.numberOfGuests" min="0" @change="$emit('numberOfGuestsChanged')">
+						<input type="number" v-model="stepData.numberOfGuests" min="0" @keypress="regexNumber()" @change="$emit('numberOfGuestsChanged')">
 					</div>
 
 					<p class="frm-header bold s-margin-b clr--gray">Time</p>
@@ -55,6 +55,7 @@
 	/* Flatpickr Documentation: https://flatpickr.js.org/options/ */
 	import flatpickr from 'flatpickr';
 	import 'flatpickr/dist/flatpickr.css';
+	import RegexMixin from 'Mixins/regex.js';
 
 	export default{
 		props: {
@@ -62,6 +63,8 @@
 			stepData: Object,
 			items: Array
 		},
+
+		mixins: [ RegexMixin ],
 
 		computed: {
 			detailsComplete() {

@@ -11,7 +11,7 @@
 					<div class="width--95">
 						<p class="frm-header bold s-margin-b clr--gray">First Name*</p>
 						<div class="frm-inpt m-margin-b">
-							<input type="text" v-model="stepData.main.first_name">
+							<input type="text" v-model="stepData.main.first_name" @keypress="regexString();" @keyup="capitalize(stepData.main.first_name)">
 						</div>
 					</div>
 				</div
@@ -19,7 +19,7 @@
 					<div class="width--95 margin-l-a">
 						<p class="frm-header bold s-margin-b clr--gray">Last Name*</p>
 						<div class="frm-inpt m-margin-b">
-							<input type="text" v-model="stepData.main.last_name">
+							<input type="text" v-model="stepData.main.last_name" @keypress="regexString()">
 						</div>
 					</div>
 				</div>
@@ -60,7 +60,7 @@
 							</div
 							><div class="width--70">
 								<div class="frm-inpt align-c m-margin-b">
-									<input type="number" name="" placeholder="" v-model="stepData.main.contact_number">
+									<input type="number" name="" placeholder="" v-model="stepData.main.contact_number" @keypress="regexNumber()">
 								</div>
 							</div>
 						</div>
@@ -79,7 +79,7 @@
 							</div
 							><div class="width--70">
 								<div class="frm-inpt align-c m-margin-b">
-									<input type="number" name="" placeholder="" v-model="stepData.main.emergency_contact_number">
+									<input type="number" name="" placeholder="" v-model="stepData.main.emergency_contact_number" @keypress="regexNumber()">
 								</div>
 							</div>
 						</div>
@@ -163,6 +163,7 @@
 	/* Flatpickr Documentation: https://flatpickr.js.org/options/ */
 	import flatpickr from 'flatpickr';
 	import 'flatpickr/dist/flatpickr.css';
+	import RegexMixin from 'Mixins/regex.js';
 
 	export default {
 		props: {
@@ -172,6 +173,8 @@
 			countries: Array,
 			genders: Array,
 		},
+
+		mixins: [ RegexMixin ],
 
 		computed: {
 			showFileInput() {
