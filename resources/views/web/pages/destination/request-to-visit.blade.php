@@ -9,6 +9,7 @@
 		:genders="{{ $genders }}"
 		:countries="{{ $countries }}"
 		:visitor-types="{{ $visitor_types }}"
+		book-url="{{ route('web.book.store') }}"
 	></user-booking>
 </section>
 

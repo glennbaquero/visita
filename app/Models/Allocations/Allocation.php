@@ -50,7 +50,7 @@ class Allocation extends Model
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['destination_id', 'name', 'description'])
+    public static function store($request, $item = null, $columns = ['destination_id', 'name', 'description', 'transaction_fees', 'platform_fees', 'fee_per_head'])
     {
         $vars = $request->only($columns);
 

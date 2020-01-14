@@ -112,3 +112,5 @@ Vue.component('civil_statuses-view', require('./views/admin/civil_statuses/Civil
 
 Vue.component('time-slots-table', require('./views/admin/time-slots/TimeSlotTable.vue').default);
 Vue.component('time-slots-view', require('./views/admin/time-slots/TimeSlotView.vue').default);
+
+Vue.component('invoices-view', require('./views/admin/bookings/InvoiceView.vue').default);

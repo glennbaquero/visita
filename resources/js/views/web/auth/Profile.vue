@@ -155,7 +155,7 @@
 </template>
 <script>
 	import Modal from '../partials/Modal.vue';
-	import ResponseMixin from '../../../mixins/errorResponse.js';
+	import ResponseMixin from 'Mixins/errorResponse.js';
 
 	export default{
 		props: {

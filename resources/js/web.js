@@ -29,6 +29,10 @@ Vue.component('user-booking', require('./views/web/bookings/Booking.vue').defaul
 */
 Vue.component('profile', require('./views/web/auth/Profile.vue').default);
 
+/*
+* Dashboard
+*/
+Vue.component('reservation-list-card', require('./views/web/auth/ReservationListCard.vue').default);
 
 /*
 * Request Visit

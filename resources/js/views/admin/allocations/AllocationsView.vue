@@ -3,13 +3,7 @@
 	
 		<card>
 			<template v-slot:header>Allocation Information</template>
-
 			<div class="row">
-				<div class="form-group col-sm-12 col-md-6">
-					<label>Name</label>
-					<input v-model="item.name" name="name" type="text" class="form-control">
-				</div>
-
 				<selector class="col-sm-12 col-md-6"
 				v-model="item.destination_id"
 				name="destination_id"
@@ -20,6 +14,27 @@
 				empty-text="None"
 				placeholder="Please select a Destination"
 				></selector>
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-sm-12 col-md-6">
+					<label>Name</label>
+					<input v-model="item.name" name="name" type="text" class="form-control">
+				</div>
+				<div class="form-group col-sm-12 col-md-6">
+					<label>Platform Fees</label>
+					<input v-model="item.platform_fees" name="platform_fees" type="number" class="form-control">
+				</div>
+
+				<div class="form-group col-sm-12 col-md-6">
+					<label>Transaction Fees</label>
+					<input v-model="item.transaction_fees" name="transaction_fees" type="number" class="form-control">
+				</div>
+
+				<div class="form-group col-sm-12 col-md-6">
+					<label>Fee Per Head</label>
+					<input v-model="item.fee_per_head" name="fee_per_head" type="number" class="form-control">
+				</div>
 			</div>
 			
 			<div class="row">

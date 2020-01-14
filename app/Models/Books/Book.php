@@ -11,6 +11,7 @@ use App\Models\Allocations\Allocation;
 use App\Models\Destinations\Destination;
 use App\Models\Guests\Guest;
 use App\Models\Feedbacks\GuestFeedback;
+use App\Models\Invoices\Invoice;
 
 use App\Traits\FileTrait;
 use App\Models\Users\Management;
@@ -68,6 +69,11 @@ class Book extends Model
     public function representative()
     {
         return $this->belongsTo(Management::class, 'destination_representative_id');
+    }
+
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class);
     }
 
     /**

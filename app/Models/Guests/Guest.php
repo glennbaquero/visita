@@ -44,4 +44,13 @@ class Guest extends Model
 
           return $this->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [$start, $end]);
       }
+
+      public function renderFullname() 
+      {
+        return ucwords($this->first_name. ' '. $this->last_name);
+      }
+
+      public function renderName() {
+        return ucwords($this->first_name . ' ' . $this->last_name);
+    }
 }

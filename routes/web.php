@@ -94,6 +94,20 @@ Route::namespace('Web')->name('web.')->group(function() {
 		});
 	});
 
+	Route::namespace('Paypal')->group(function() {
+		Route::middleware('auth:web')->group(function() {
+			Route::post('/paypal/transaction', 'PaypalController@transaction')->name('transaction');
+		});
+	});
+
+	Route::namespace('Invoices')->group(function() {
+		Route::middleware('auth:web')->group(function() {
+			Route::post('/book/store', 'InvoiceController@store')->name('book.store');
+			Route::get('reservation/get', 'InvoiceController@show')->name('reservations.show');
+			Route::post('upload/deposit', 'InvoiceController@uploadDepositSlip')->name('upload.deposit');
+		});
+	});
+
 	/* Inquiries Routes */
 	Route::namespace('Inquiries')->group(function() {
 		Route::post('inquiry', 'InquiryController@inquiryPost')->name('user.inquiry');
@@ -115,7 +129,6 @@ Route::namespace('Web')->name('web.')->group(function() {
 	/* Destination Routes */
 	Route::namespace('Destinations')->group(function() {
 		Route::get('/fetch/destination', 'DestinationFetchController@fetchDestination')->name('fetch.destination');
-
 	});
 
 

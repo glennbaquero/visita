@@ -757,5 +757,14 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('time-slots/fetch-pagination/{id}', 'TimeSlotFetchController@fetchPagePagination')->name('time-slots.fetch-pagination');
         });
 
+        Route::namespace('Invoices')->group(function() {
+            Route::post('invoices/update/{id}', 'InvoiceController@update')->name('invoices.update');
+            Route::post('invoices/{id}/archive', 'InvoiceController@archive')->name('invoices.archive');
+            Route::post('invoices/{id}/reject', 'InvoiceController@depositSlipReject')->name('invoices.reject.deposit');
+            Route::post('invoices/{id}/approve', 'InvoiceController@depositSlipApproved')->name('invoices.approve.deposit');
+        
+            Route::post('invoices/fetch-item/{id?}', 'InvoiceFetchController@fetchView')->name('invoices.fetch-item');
+        });
+
     });
 });
