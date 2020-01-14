@@ -19,6 +19,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+        'prx_paypal/notify_url',
         'forgot-password/frontliner/email',
     ];
 }

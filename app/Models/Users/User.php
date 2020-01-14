@@ -10,6 +10,8 @@ use App\Notifications\Web\Auth\ResetPassword;
 use App\Notifications\Web\Auth\VerifyEmail;
 use Password;
 
+use App\Models\Invoices\Invoice;
+
 class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 {
     /**
@@ -30,6 +32,10 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 
     public function providers() {
         return $this->morphMany(SocialiteProvider::class, 'user');
+    }
+
+    public function invoices() {
+        return $this->hasMany(Invoice::class);
     }
 
     /**

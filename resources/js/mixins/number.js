@@ -11,6 +11,10 @@ export default {
 		toMoney(value, prefix = '₱') {
 			if (!value) { return; }
 			return prefix + ' ' + (parseFloat(value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')).toString();
-		}
+		},
+
+		withComma(value) {
+            return parseFloat(value).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
 	}
 }

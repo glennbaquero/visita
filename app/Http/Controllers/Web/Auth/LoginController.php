@@ -36,7 +36,8 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('web.auth.login');
+        return redirect()->route('web.sign-in');
+        // return view('web.auth.login');
     }
 
     /**

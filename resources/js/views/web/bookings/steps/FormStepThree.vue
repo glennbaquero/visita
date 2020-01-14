@@ -14,7 +14,7 @@
 				<div class="width--95">
 					<p class="frm-header bold s-margin-b clr--gray">First Name*</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="text" v-model="guest.first_name">
+						<input type="text" v-model="guest.first_name" @keypress="regexString($evt)">
 					</div>
 				</div>
 			</div
@@ -22,7 +22,7 @@
 				<div class="width--95 margin-l-a">
 					<p class="frm-header bold s-margin-b clr--gray">Last Name*</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="text" v-model="guest.last_name">
+						<input type="text" v-model="guest.last_name" @keypress="regexString($evt)">
 					</div>
 				</div>
 			</div>
@@ -63,7 +63,7 @@
 						</div
 						><div class="width--70">
 							<div class="frm-inpt align-c m-margin-b">
-								<input type="number" name="" placeholder="" v-model="guest.contact_number">
+								<input type="number" name="" placeholder="" v-model="guest.contact_number" @keypress="regexNumber($evt)">
 							</div>
 						</div>
 					</div>
@@ -82,7 +82,7 @@
 						</div
 						><div class="width--70">
 							<div class="frm-inpt align-c m-margin-b">
-								<input type="number" name="" placeholder="" v-model="guest.emergency_contact_number">
+								<input type="number" name="" placeholder="" v-model="guest.emergency_contact_number" @keypress="regexNumber($evt)">
 							</div>
 						</div>
 					</div>
@@ -156,6 +156,7 @@
 	/* Flatpickr Documentation: https://flatpickr.js.org/options/ */
 	import flatpickr from 'flatpickr';
 	import 'flatpickr/dist/flatpickr.css';
+	import RegexMixin from 'Mixins/regex.js';
 
 	export default{
 		props: {
@@ -167,6 +168,8 @@
 			specialFees: Array
 		},
 
+		mixins: [ RegexMixin ],
+		
 		data() {
 			return {
 				guest: {},
