@@ -158,6 +158,7 @@
 							:step-data="stepData"
 							:visitor-types="visitorTypes"
 							:allocation="selectedAllocation"
+							ref="formStepFour"
 						></FormStepFour>
 					</div>
 					<!--  -->
@@ -239,7 +240,8 @@
 				<div class="frm-description no-height clr--gray m-margin-b">
 					<p>Confirm payment?</p>
 				</div>
-				<button class="frm-btn green m-margin-b" data-remodal-target="success-modal">Confirm</button>
+				<!-- data-remodal-target="success-modal" -->
+				<button class="frm-btn green m-margin-b"  @click="confirmedPayment()">Confirm</button>
 				<button class="frm-btn gray" data-remodal-action="close">Cancel</button>
 			</div>
 		</div>
@@ -259,9 +261,9 @@
 			</div>
 		</div>
 		<!--  -->
-
 	</div>
-
+	
+		<loading :active.sync="isLoading" :is-full-page="fullPage"></loading>
 	</div>
 </template>
 
@@ -287,6 +289,7 @@
 			genders: Array,
 			countries: Array,
 			visitorTypes: Array,
+			bookUrl: String
 		},	
 
 		components: {
@@ -299,6 +302,7 @@
 			FormStepThree,
 			FormStepFour,
 			GuestInfo,
+	        Loading,
 		},
 
 		data() {
@@ -347,7 +351,10 @@
 				removeButton: 'images/remove-button.png',
 				addButton: 'images/add-button.png',
 				numberOfGuests: 0,
-				guest_key: null
+				guest_key: null,
+
+				isLoading: false,
+             	fullPage: true,
 			}
 		},
 
@@ -464,13 +471,51 @@
 
 			submitGuestDetails(guest_key, guest_data) {
 				this.guest_key = null;
-				console.log(guest_key, guest_data);
 				this.stepData.guests[guest_key] = guest_data;
 				this.guestCard = false;
 				this.guestForm = false;
 				guest_key = null;
 				guest_data = null;
 			},
+
+			confirmedPayment() {
+				var guests = [];
+				var confirmationModal = $('[data-remodal-id=confirmation-modal]').remodal();
+				var successModal = $('[data-remodal-id=success-modal]').remodal();
+				
+				confirmationModal.close();
+
+				this.isLoading = true;
+
+				this.stepData.guests.push(this.stepData.main);
+
+				var data = {
+					// Invoice
+					transaction_fee: this.$refs.formStepFour.transactionFee,
+					conservation_fee: this.$refs.formStepFour.conservationFeeTotal,
+					platform_fee: this.$refs.formStepFour.platformFee,
+					sub_total: this.$refs.formStepFour.subTotal,
+					grand_total: this.$refs.formStepFour.grandTotal,
+					is_paypal_payment: this.$refs.formStepFour.isPaypal,
+
+					// Guest
+					guests: this.stepData.guests,
+
+					// Booking
+					start_time: this.stepData.timeSelected,
+					allocation_id: this.stepData.allocationSelected,
+					destination_id: this.destination.id,
+					scheduled_at: this.stepData.visitDate,
+					total_guest: this.stepData.numberOfGuests,
+					agency_code: this.stepData.main.agency_code,
+				};
+
+				axios.post(this.bookUrl, data)
+					.then(response => {
+						this.isLoading = false;
+						successModal.open();
+					})
+			}
 		}
 	}
 </script>

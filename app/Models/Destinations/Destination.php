@@ -142,6 +142,10 @@ class Destination extends Model
                     'image' => $this->pictures->first()->renderImagePath(),
                     'allocation_name' => $allocation->name,
                     'allocation_id' => $allocation->id,
+                    'platform_fee' => $allocation->platform_fees,
+                    'transaction_fee' => $allocation->transaction_fees,
+                    'transaction_fee' => $allocation->transaction_fees,
+                    'fee_per_head' => $allocation->fee_per_head,
                     'special_fees' => $allocation->fees,
                     'timeslot' => $allocation->getTimeSlot(),
                 ]);

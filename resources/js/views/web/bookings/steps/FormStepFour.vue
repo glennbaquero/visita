@@ -10,7 +10,7 @@
 			<div class="rqst-frm1__step-4-content-checkbox">
 				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent">
 					<div class="width--10">
-						<input type="radio" name="payment">
+						<input type="radio" name="payment" v-model="isPaypal" :value="true" @change="paymentSelectionChanged()">
 						<span class="checkmark"></span>
 					</div
 					><div class="width--50">
@@ -28,11 +28,11 @@
 			<div class="rqst-frm1__step-4-content-checkbox">
 				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent">
 					<div class="width--10">
-						<input type="radio" name="payment">
+						<input type="radio" name="payment" v-model="isPaypal" :value="false" @change="paymentSelectionChanged()">
 						<span class="checkmark"></span>
 					</div
 					><div class="width--50">
-						<p class="frm-header clr--gray">Credit Card</p>
+						<p class="frm-header clr--gray">Bank Deposit</p>
 					</div
 					><div class="width--40 align-r">
 						<img
@@ -115,10 +115,10 @@
 							</div>
 						</div>
 					</div>
-					<p class="frm-header clr--gray s-margin-b">8 Guests x Php 50</p>
+					<p class="frm-header clr--gray s-margin-b">{{ stepData.guests.length }} Guests x Php {{ allocation.platform_fee }}</p>
 				</div
 				><div class="width--50 align-r align-t">
-					<p class="frm-header bold clr--gray s-margin-b">Php 400</p>
+					<p class="frm-header bold clr--gray s-margin-b">Php {{ withComma(platformFee) }}</p>
 				</div>
 			</div>
 
@@ -127,7 +127,7 @@
 					<p class="frm-header bold clr--light-gray">Subtotal</p>
 				</div
 				><div class="width--50 align-r align-t">
-					<p class="frm-header bold clr--light-gray">Php 11,900</p>
+					<p class="frm-header bold clr--light-gray">Php {{ withComma(subTotal) }}</p>
 				</div>
 			</div>
 			<hr>
@@ -153,7 +153,7 @@
 					</div>
 				</div
 				><div class="width--50 align-r align-t">
-					<p class="frm-header bold clr--gray s-margin-b">Php 25</p>
+					<p class="frm-header bold clr--gray s-margin-b">Php {{ withComma(transactionFee) }}</p>
 				</div>
 			</div>
 
@@ -162,7 +162,7 @@
 					<h5 class="frm-title x-small clr--gray">Total</h5>
 				</div
 				><div class="width--50 align-r">
-					<h5 class="frm-title x-small clr--gray">Php 11,925</h5>
+					<h5 class="frm-title x-small clr--gray">Php {{ withComma(grandTotal) }}</h5>
 				</div>
 			</div>							
 			
@@ -210,6 +210,33 @@
 				showOptionStyle: 'none',
 				visitorTypeList: [],
 				conservationFeeTotal: 0,
+				transactionFee: parseFloat(this.allocation.transaction_fee),
+				isPaypal: true, // true - paypal, false - bank deposit,
+			}
+		},
+
+		computed: {
+			platformFee() {
+				var guests = this.stepData.guests.length;
+				var platform_fee = parseFloat(this.allocation.platform_fee);
+				var fee = guests * platform_fee;
+				return fee;
+			},
+
+			subTotal() {
+				var conservationFee = this.conservationFeeTotal;
+				var platformFee = this.platformFee;
+				var total = conservationFee + platformFee;
+
+				return total;
+			},
+
+			grandTotal() {
+				var subTotal = this.subTotal;
+				var transactionFee = this.transactionFee;
+				var total = subTotal + transactionFee;
+
+				return total;
 			}
 		},
 
@@ -283,6 +310,14 @@
 						}			    		
 			    	})
 			  	});
+			},
+
+			paymentSelectionChanged() {
+				this.transactionFee = parseFloat(this.allocation.transaction_fee);
+				
+				if(!this.isPaypal) {
+					this.transactionFee = 0;
+				}
 			}
 		}
 	}
