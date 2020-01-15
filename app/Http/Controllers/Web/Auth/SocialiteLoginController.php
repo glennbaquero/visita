@@ -75,7 +75,7 @@ class SocialiteLoginController extends Controller
 		/* Create user if does not exists */
 		if (!$user) {
 			$user = $this->createUser($socialite);
-			$user->storeImage(FileHelpers::getExternalImage($avatar_url), 'image_path', 'user-avatars');
+			// $user->storeImage(FileHelpers::getExternalImage($avatar_url), 'image_path', 'user-avatars');
 		}
 
 		/* Check if user is trashed */
@@ -106,7 +106,7 @@ class SocialiteLoginController extends Controller
 
         DB::commit();
 
-		return $token;
+		return redirect()->route('web.destinations');
 	}
 
 	/**
@@ -119,6 +119,7 @@ class SocialiteLoginController extends Controller
 			'first_name' => $socialite->first_name,
 			'last_name' => $socialite->last_name,
 			'email' => $socialite->email,
+			'username' => $socialite->email,
 			'email_verified_at' => now(),
 			'password' => Str::random(),
 		]);
