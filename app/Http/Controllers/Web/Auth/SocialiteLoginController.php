@@ -106,7 +106,7 @@ class SocialiteLoginController extends Controller
 
         DB::commit();
 
-		return $token;
+		return redirect()->route('web.destinations');
 	}
 
 	/**
