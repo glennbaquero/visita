@@ -41,12 +41,10 @@ class SocialiteGoogleLoginController extends Controller
         } catch (\Exception $e) {
             return redirect('/sign-in');
         }
-        // only allow people with @company.com to login
-        if(explode("@", $socialite->email)[1] !== 'company.com'){
-            return redirect()->to('/');
-        }
+        
         // check if they're an existing user
         $existingUser = User::where('email', $socialite->email)->first();
+        
         if($existingUser){
             // log them in
 	        $this->guard()->login($existingUser);
