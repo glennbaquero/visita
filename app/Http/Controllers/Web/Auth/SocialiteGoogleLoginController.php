@@ -44,7 +44,7 @@ class SocialiteGoogleLoginController extends Controller
         
         // check if they're an existing user
         $existingUser = User::where('email', $socialite->email)->first();
-        
+
         if($existingUser){
             // log them in
 	        $this->guard()->login($existingUser);
@@ -74,6 +74,7 @@ class SocialiteGoogleLoginController extends Controller
 	 */
 	protected function createUser($socialite) {
 		$socialite = json_decode(json_encode($socialite->user));
+		dd($socialite);
 
 		return User::create([
 			'first_name' => $socialite->first_name,
