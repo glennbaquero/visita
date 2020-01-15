@@ -17,7 +17,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/request-to-visit';
+    protected $redirectTo = '/destinations';
 
     /**
      * Create a new controller instance.
@@ -36,8 +36,8 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return redirect()->route('web.sign-in');
-        // return view('web.auth.login');
+        // return redirect()->route('web.sign-in');
+        return view('web.auth.login');
     }
 
     /**

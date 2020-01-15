@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Extenders\Controllers\FetchController;
 
 use App\Models\Invoices\Invoice;
+use App\Models\Books\Book;
 use Carbon\Carbon;
 
 class InvoiceFetchController extends FetchController
 {
+    private $is_walkin;
 	/**
      * Set object class of fetched data
      * 
@@ -28,6 +30,43 @@ class InvoiceFetchController extends FetchController
      */
     public function filterQuery($query)
     {
+
+        $this->is_walkin = $this->request->booking_type == 'walkin' ? true : false;
+
+        if($this->request->category != 'all') {
+            if($this->request->category == 'paid') {
+                $query = $query->where('is_paid', true);
+            }
+
+            if($this->request->category == 'unpaid') {
+                $query = $query->where(['is_approved' => true, 'is_paid' => false]);   
+            }
+
+            if($this->request->category == 'forconformation') {
+                $query = $query->where(['is_approved' => false, 'is_paid' => false]);   
+            }
+
+            if($this->request->category == 'reject') {
+                $query = $query->withTrashed()->whereNotNull('deleted_at');   
+            }
+        } else {
+            $query = $query->withTrashed();
+        }
+
+        
+
+        if($this->request->booking_type != 'all') {
+            $query = $query->whereHas('book', function($book) {
+                $book->where(['destination_id' => $this->request->destination_id, 'allocation_id' => $this->request->allocation_id, 'is_walkin' => $this->is_walkin]);
+            });
+        } else {
+            $query = $query->whereHas('book', function($book) {
+                $book->where(['destination_id' => $this->request->destination_id, 'allocation_id' => $this->request->allocation_id]);
+            });
+        }
+
+        $query = $query->where('created_at','>=',$this->request->start_date)->where('created_at','<=',$this->request->end_date);
+
         return $query;
     } 
 
@@ -40,7 +79,44 @@ class InvoiceFetchController extends FetchController
     public function formatData($items)
     {
         $result = [];
+        foreach($items as $item) {
+            $data = $this->formatItem($item);
+            array_push($result, $data);
+        }
+
         return $result;
+    }
+
+    /**
+     * Build array data
+     * 
+     * @param  App\Models\Invoices\Invoice
+     * @return array
+     */
+    protected function formatItem($item)
+    {
+        return [
+            'id' => $item->id,
+            'destination' => $item->book->destination->name,
+            'allocation' => $item->book->allocation->name,
+            'main_contact' => $item->book->guests->where('main', true)->first()->renderFullname(),
+            'email' => $item->book->guests->where('main', true)->first()->email,
+            'contact_number' => $item->book->guests->where('main', true)->first()->contact_number,
+            'emergency_contact_number' => $item->book->guests->where('main', true)->first()->emergency_contact_number,
+            'total_guest' => $item->book->total_guest,
+            'scheduled_at' => $item->book->scheduled_at->format('M d, Y') .' '. Carbon::createFromFormat('H:i:s', $item->book->start_time)->format('h:i A'),
+            'conservation_fee' => $item->conservation_fee,
+            'platform_fee' => $item->platform_fee,
+            'transaction_fee' => $item->transaction_fee,
+            'sub_total' => $item->sub_total,
+            'grand_total' => $item->grand_total,
+            'payment_type' => $item->is_paypal_payment ? 'Paypal' : 'Bank Deposit',
+            'is_approved' => $item->is_approved ? 'Already Approved' : ($item->deleted_at ? 'Rejected' : 'For Confirmation'),
+            'reference_code' => $item->reference_code,
+            'is_paid' => $item->is_paid ? 'Already Approved' : 'No transaction of payment',
+            'created_at' => $item->renderDate(),
+            'deleted_at' => $item->renderDate('deleted_at'),
+        ];
     }
 
     public function fetchView($id = null) {

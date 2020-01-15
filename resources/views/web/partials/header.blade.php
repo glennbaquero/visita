@@ -22,10 +22,10 @@
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col inlineBlock-parent">
 				<img class="hdr-frm__nav-link-img" src="{{ asset('images/user-icon.png') }}">
-				@if(auth()->check()) 
+				@if(Auth::check()) 
 				<a href="{{ route('web.dashboard') }}" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.sign-in','web.sign-up','web.forgot-password','web.reset-password']) }}">{{ auth()->user()->renderName() }}</a>
 				@else
-				<a href="sign-in" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.sign-in','web.sign-up','web.forgot-password','web.reset-password']) }}">Log In</a>
+				<a href="{{ route('web.login') }}" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.sign-in','web.sign-up','web.forgot-password','web.reset-password']) }}">Log In</a>
 				@endif
 			</div
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col">
@@ -54,10 +54,10 @@
 					<a href="destinations" class="mbl-hdr-frm__nav-link">Destinations</a>
 					<a href="faqs" class="mbl-hdr-frm__nav-link">Faqs</a>
 					<a href="contact-us" class="mbl-hdr-frm__nav-link">Contact us</a>
-					@if(auth()->check())
-						<a href="sign-in" class="mbl-hdr-frm__nav-link">{{ auth()->user()->renderName() }}</a>
+					@if(Auth::check())
+						<a href="{{ route('web.dashboard') }}" class="mbl-hdr-frm__nav-link">{{ auth()->user()->renderName() }}</a>
 					@else
-						<a href="sign-in" class="mbl-hdr-frm__nav-link">Login</a>
+						<a href="{{ route('web.login') }}" class="mbl-hdr-frm__nav-link">Login</a>
 					@endif
 					<a href="{{ route('web.destinations') }}" class="mbl-hdr-frm__nav-link">Request a visit</a>
 				</div>

@@ -762,7 +762,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('invoices/{id}/archive', 'InvoiceController@archive')->name('invoices.archive');
             Route::post('invoices/{id}/reject', 'InvoiceController@depositSlipReject')->name('invoices.reject.deposit');
             Route::post('invoices/{id}/approve', 'InvoiceController@depositSlipApproved')->name('invoices.approve.deposit');
-        
+            Route::get('invoices/exports', 'InvoiceController@reports')->name('invoices.reports');
+            Route::post('invoices/exports', 'InvoiceController@export')->name('invoices.export');
+
+            Route::post('invoices/fetch', 'InvoiceFetchController@fetch')->name('invoices.fetch');
             Route::post('invoices/fetch-item/{id?}', 'InvoiceFetchController@fetchView')->name('invoices.fetch-item');
         });
 

@@ -4,10 +4,19 @@ namespace App\Http\Controllers\Admin\Invoices;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationException;
+
+use App\Http\Controllers\Admin\Invoices\InvoiceFetchController;
+
+use App\Exports\Invoices\InvoiceExport;
 
 use DB;
+use Excel;
+use Carbon\Carbon;
 
 use App\Models\Invoices\Invoice;
+use App\Models\Destinations\Destination;
 
 use App\Notifications\Admin\ReservationApproved;
 use App\Notifications\Admin\ReservationRejected;
@@ -27,7 +36,7 @@ class InvoiceController extends Controller
     {
         DB::beginTransaction();
             $item = Invoice::withTrashed()->findOrFail($id);   
-            $item->update(['is_approved' => $request->is_approved]);
+            $item->update(['is_approved' => 1]);
         DB::commit();
 
         $main = $item->book->guests->where('main', true)->first();
@@ -123,5 +132,69 @@ class InvoiceController extends Controller
         return response()->json([
             'message' => "You have successfully approved the invoice",
         ]);
+    }
+
+    public function reports()
+    {
+        $filterDestinations = [];
+        $destinations = Destination::all();
+        
+        foreach ($destinations as $destination) {
+            array_push($filterDestinations, [
+                'label' => $destination->name,
+                'value' => $destination->id,
+                'allocations' => $destination->getAllocationFilters()
+            ]);
+        }
+
+        $filterCategories = [
+            ['value' => 'paid', 'label' => 'Paid Reservation'],
+            ['value' => 'unpaid', 'label' => 'Unpaid Reservation'],
+            ['value' => 'forconformation', 'label' => 'For Confirmation'],
+            ['value' => 'reject', 'label' => 'Rejected Reservation'],
+            ['value' => 'all', 'label' => 'All'],
+        ];
+
+        $filterTypes = [
+            ['value' => 'walkin', 'label' => 'Walk-In Reservation'],
+            ['value' => 'online', 'label' => 'Online Reservation'],
+            ['value' => 'all', 'label' => 'All'],
+        ];
+
+        return view('admin.exports.index', [
+            'filterCategories' => json_encode($filterCategories),
+            'filterTypes' => json_encode($filterTypes),
+            'filterDestinations' => json_encode($filterDestinations)
+        ]);
+    }
+
+    public function export(Request $request)
+    {
+        $controller = new InvoiceFetchController;
+
+        $request = $request->merge(['nopagination' => 1]);
+
+        $data = [];
+        $data = $controller->fetch($request);
+
+        $message = 'Exporting data, please wait...';
+
+        if (!$data) {
+            throw ValidationException::withMessages([
+                'items' => 'No sample items found.',
+            ]);
+        }
+
+
+        if (!$request->ajax()) {
+            $ids = Arr::pluck($data->original['items'], 'id');
+            return Excel::download(new InvoiceExport($data->original['items']), 'Samples_' . Carbon::now()->toDateTimeString() . '.xls');
+        }
+
+        if ($request->ajax()) {
+            return response()->json([
+                'message' => $message,
+            ]);
+        }
     }
 }

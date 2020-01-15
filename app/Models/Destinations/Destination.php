@@ -169,4 +169,17 @@ class Destination extends Model
         }
         return collect($result)->flatten();
     }
+
+    public function getAllocationFilters() {
+        $filterAllocations = [];
+
+        foreach ($this->allocations as $allocation) {
+            array_push($filterAllocations, [
+                'label' => $allocation->name,
+                'value' => $allocation->id,
+            ]);
+        }
+
+        return $filterAllocations;
+    }
 }

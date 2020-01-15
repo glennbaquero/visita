@@ -28,6 +28,7 @@ class InvoiceController extends Controller
 	    		'scheduled_at' => $request->scheduled_at,
 	    		'total_guest' => $request->total_guest,
 	    		'agency_code' => $request->agency_code,
+                'is_walkin' => false
 	    	]);
 
 	    	foreach ($guests as $guest) {
