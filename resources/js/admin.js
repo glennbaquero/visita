@@ -115,3 +115,12 @@ Vue.component('time-slots-view', require('./views/admin/time-slots/TimeSlotView.
 
 Vue.component('invoices-view', require('./views/admin/bookings/InvoiceView.vue').default);
 Vue.component('export-view', require('./views/admin/exports/ExportView.vue').default);
+
+Vue.component('about-us-table', require('./views/admin/about-us/AboutUsTable.vue').default);
+Vue.component('about-us-view', require('./views/admin/about-us/AboutUsView.vue').default);
+
+Vue.component('teams-table', require('./views/admin/teams/TeamTable.vue').default);
+Vue.component('teams-view', require('./views/admin/teams/TeamView.vue').default);
+
+Vue.component('frame-three-table', require('./views/admin/frame-three/FrameThreeTable.vue').default);
+Vue.component('frame-three-view', require('./views/admin/frame-three/FrameThreeView.vue').default);

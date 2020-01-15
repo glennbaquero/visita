@@ -308,6 +308,12 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&time-slots=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.time-slots');
 
+            Route::post('activity-logs/fetch?id={id?}&about-us=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.about-us');
+
+            Route::post('activity-logs/fetch?id={id?}&teams=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.teams');
+
+            Route::post('activity-logs/fetch?id={id?}&frame-three=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.frame-three');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -767,6 +773,51 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('invoices/fetch', 'InvoiceFetchController@fetch')->name('invoices.fetch');
             Route::post('invoices/fetch-item/{id?}', 'InvoiceFetchController@fetchView')->name('invoices.fetch-item');
+        });
+
+        Route::namespace('AboutUs')->group(function() {
+            Route::get('about-us', 'AboutUsController@index')->name('about-us.index');
+            Route::get('about-us/create', 'AboutUsController@create')->name('about-us.create');
+            Route::post('about-us/store', 'AboutUsController@store')->name('about-us.store');
+            Route::get('about-us/show/{id}', 'AboutUsController@show')->name('about-us.show');
+            Route::post('about-us/update/{id}', 'AboutUsController@update')->name('about-us.update');
+            Route::post('about-us/{id}/archive', 'AboutUsController@archive')->name('about-us.archive');
+            Route::post('about-us/{id}/restore', 'AboutUsController@restore')->name('about-us.restore');
+        
+            Route::post('about-us/fetch', 'AboutUsFetchController@fetch')->name('about-us.fetch');
+            Route::post('about-us/fetch?archived=1', 'AboutUsFetchController@fetch')->name('about-us.fetch-archive');
+            Route::post('about-us/fetch-item/{id?}', 'AboutUsFetchController@fetchView')->name('about-us.fetch-item');
+            Route::post('about-us/fetch-pagination/{id}', 'AboutUsFetchController@fetchPagePagination')->name('about-us.fetch-pagination');
+        });
+
+        Route::namespace('Teams')->group(function() {
+            Route::get('teams', 'TeamController@index')->name('teams.index');
+            Route::get('teams/create', 'TeamController@create')->name('teams.create');
+            Route::post('teams/store', 'TeamController@store')->name('teams.store');
+            Route::get('teams/show/{id}', 'TeamController@show')->name('teams.show');
+            Route::post('teams/update/{id}', 'TeamController@update')->name('teams.update');
+            Route::post('teams/{id}/archive', 'TeamController@archive')->name('teams.archive');
+            Route::post('teams/{id}/restore', 'TeamController@restore')->name('teams.restore');
+        
+            Route::post('teams/fetch', 'TeamFetchController@fetch')->name('teams.fetch');
+            Route::post('teams/fetch?archived=1', 'TeamFetchController@fetch')->name('teams.fetch-archive');
+            Route::post('teams/fetch-item/{id?}', 'TeamFetchController@fetchView')->name('teams.fetch-item');
+            Route::post('teams/fetch-pagination/{id}', 'TeamFetchController@fetchPagePagination')->name('teams.fetch-pagination');
+        });
+
+        Route::namespace('AboutUs')->group(function() {
+            Route::get('frame-three', 'FrameThreeController@index')->name('frame-three.index');
+            Route::get('frame-three/create', 'FrameThreeController@create')->name('frame-three.create');
+            Route::post('frame-three/store', 'FrameThreeController@store')->name('frame-three.store');
+            Route::get('frame-three/show/{id}', 'FrameThreeController@show')->name('frame-three.show');
+            Route::post('frame-three/update/{id}', 'FrameThreeController@update')->name('frame-three.update');
+            Route::post('frame-three/{id}/archive', 'FrameThreeController@archive')->name('frame-three.archive');
+            Route::post('frame-three/{id}/restore', 'FrameThreeController@restore')->name('frame-three.restore');
+        
+            Route::post('frame-three/fetch', 'FrameThreeFetchController@fetch')->name('frame-three.fetch');
+            Route::post('frame-three/fetch?archived=1', 'FrameThreeFetchController@fetch')->name('frame-three.fetch-archive');
+            Route::post('frame-three/fetch-item/{id?}', 'FrameThreeFetchController@fetchView')->name('frame-three.fetch-item');
+            Route::post('frame-three/fetch-pagination/{id}', 'FrameThreeFetchController@fetchPagePagination')->name('frame-three.fetch-pagination');
         });
 
     });

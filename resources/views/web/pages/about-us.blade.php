@@ -18,9 +18,9 @@
 						<div class="vertical-parent">
 							<div class="vertical-align align-l">
 								<p class="frm-header s-margin-b clr--white">About</p>
-								<h5 class="frm-title s-margin-b clr--white abt-frm1-fade-up__animation-title">Visita</h5>
+								<h5 class="frm-title s-margin-b clr--white abt-frm1-fade-up__animation-title">{{ $content->title }}</h5>
 								<div class="abt-frm1-fade-up__animation-description frm-description clr--white gnrl-scrll">
-									<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+									{!! $content->description !!}
 								</div>
 							</div>
 						</div>
@@ -29,14 +29,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
+	<div class="frm-bckgrnd size-cover bring-back" style="background-image: url({{ $content->image_url }});"></div>
 </section>
 <div class="mbl-abt-frm1 frm-cntnr align-c width--100">
 	<div class="width--85 margin-a">
 		<p class="frm-header s-margin-b clr--green">About</p>
 		<h5 class="frm-title s-margin-b clr--green abt-frm1-fade-up__animation-title">Visita</h5>
 		<div class="abt-frm1-fade-up__animation-description frm-description clr--gray gnrl-scrll">
-			<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+			{!! $content->description !!}
 		</div>
 	</div>
 </div>
@@ -52,149 +52,54 @@
 		<div class="abt-frm2-fade-up__item2 abt-frm2-fade-up__animation-content">
 			<div class="abt-frm2__tabbing-content gnrl-scrll" id="frame2tab-team">
 				<div class="abt-frm2__tabbing-slider">
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.carltonhairsalons.com/wp-content/uploads/2017/10/signature-style-hairstyles-classic-mens-taper-hugh-1x1.png');"></div>
+					
+					@foreach($teams as $team)
+						<div class="abt-frm2__tabbing-slider-items">
+							<div class="abt-frm2__tabbing-slider-img">
+								<div class="frm-bckgrnd size-cover bring-back" style="background-image: url({{ $team['image_path'] }});"></div>
+							</div>
+							<p class="frm-header bold clr--white">{{ $team['name'] }}</p>
+							<p class="frm-header bold clr--white">{{ $team['role'] }}</p>
+							<div class="frm-description bold clr--white gnrl-scrll">
+								{!! $team['description'] !!}
+							</div>
 						</div>
-						<p class="frm-header bold clr--white">Name</p>
-						<p class="frm-header bold clr--white">Designation</p>
-						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-						</div>
-					</div>
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
-						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-						</div>
-					</div>
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
-						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-						</div>
-					</div>
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
-						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-						</div>
-					</div>
-
+					@endforeach
 				</div>
 			</div>
 			<div class="abt-frm2__tabbing-content gnrl-scrll" id="frame2tab-collaborators">
 				<div class="abt-frm2__tabbing-slider">
-
+					@foreach($collaborators as $collaborator)
 					<div class="abt-frm2__tabbing-slider-items">
 						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url({{ $collaborator['image_path'] }});"></div>
 						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
+						<p class="frm-header bold clr--white m-margin-b">{{ $collaborator['name'] }}</p>
+						<p class="frm-header bold clr--white m-margin-b">{{ $collaborator['role'] }}</p>
 						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+							{!! $collaborator['description'] !!}
 						</div>
 					</div>
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
-						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-						</div>
-					</div>
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
-						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-						</div>
-					</div>
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
-						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-						</div>
-					</div>
+					@endforeach
 
 				</div>
 			</div>
 			<div class="abt-frm2__tabbing-content gnrl-scrll" id="frame2tab-advisors">
 				<div class="abt-frm2__tabbing-slider">
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
-						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-						</div>
-					</div>
 					
+					@foreach($advisors as $advisor)
 					<div class="abt-frm2__tabbing-slider-items">
 						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
+							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url({{ $advisor['image_path'] }});"></div>
 						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
+						<p class="frm-header bold clr--white m-margin-b">{{ $advisor['name'] }}</p>
+						<p class="frm-header bold clr--white m-margin-b">{{ $advisor['role'] }}</p>
 						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+							{!! $advisor['description'] !!}
 						</div>
 					</div>
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
-						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-						</div>
-					</div>
-
-					<div class="abt-frm2__tabbing-slider-items">
-						<div class="abt-frm2__tabbing-slider-img">
-							<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://i0.wp.com/www.lifeinlimbo.org/wp-content/uploads/2014/12/Igidae-Coastal-Walk.jpg?resize=1000%2C667&ssl=1');"></div>
-						</div>
-						<p class="frm-header bold clr--white m-margin-b">Name</p>
-						<p class="frm-header bold clr--white m-margin-b">Designation</p>
-						<div class="frm-description bold clr--white gnrl-scrll">
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-						</div>
-					</div>
-
+					@endforeach
+					
 				</div>
 			</div>
 		</div>
@@ -202,19 +107,20 @@
 </section>
 <section class="abt-frm3">
 	<div class="abt-frm3-fade-up__animation inlineBlock-parent">
+		@foreach($frame_threes as $frame)
 		<div class="abt-frm3__item">
 			<div class="vertical-parent">
 				<div class="vertical-align">
 					<div class="abt-frm3-fade-up__animation-title"> 
-						<h5 class="abt-frm3__item-title frm-title clr--white">Title</h5>
+						<h5 class="abt-frm3__item-title frm-title clr--white">{{ $frame['title'] }}</h5>
 					</div>
 					<div class="abt-frm3__item-overlay">
 						<div class="frm-cntnr align-c width--85">
 							<div class="vertical-parent">
 								<div class="vertical-align">
-									<h5 class="abt-frm3__item-title-small frm-title small clr--white m-margin-b">Title</h5>
+									<h5 class="abt-frm3__item-title-small frm-title small clr--white m-margin-b">{{ $frame['title'] }}</h5>
 									<div class="abt-frm3__item-desc frm-description clr--white gnrl-scrll">
-										<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</p>
+										{!! $frame['description'] !!}
 									</div>
 								</div>
 							</div>
@@ -222,53 +128,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://www.adventureinyou.com/wp-content/uploads/2017/02/philippine-guiting-guiting-960x640.jpg');"></div>	
+			<div class="frm-bckgrnd size-cover bring-back" style="background-image: url({{ $frame['image_path'] }});"></div>	
 		</div
-		><div class="abt-frm3__item">
-			<div class="vertical-parent">
-				<div class="vertical-align">
-					<div class="abt-frm3-fade-up__animation-title"> 
-						<h5 class="abt-frm3__item-title frm-title clr--white">Title</h5>
-					</div>
-					<div class="abt-frm3__item-overlay">
-						<div class="frm-cntnr align-c width--85">
-							<div class="vertical-parent">
-								<div class="vertical-align">
-									<h5 class="abt-frm3__item-title-small frm-title small clr--white m-margin-b">Title</h5>
-									<div class="abt-frm3__item-desc frm-description clr--white gnrl-scrll">
-										<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://lensdrop.imgix.net/photos/j3ngt/stock-photo-j3ngt.jpeg?mark=%2Fwm.png&markalign=center%2Cmiddle&markh=0.1&w=1200&h=650&s=3112ee2fd18a20b6b7a6dd94a4206d3c');"></div>	
-		</div
-		><div class="abt-frm3__item">
-			<div class="vertical-parent">
-				<div class="vertical-align">
-					<div class="abt-frm3-fade-up__animation-title"> 
-						<h5 class="abt-frm3__item-title frm-title clr--white">Title</h5>
-					</div>
-					<div class="abt-frm3__item-overlay">
-						<div class="frm-cntnr align-c width--85">
-							<div class="vertical-parent">
-								<div class="vertical-align">
-									<h5 class="abt-frm3__item-title-small frm-title small clr--white m-margin-b">Title</h5>
-									<div class="abt-frm3__item-desc frm-description clr--white gnrl-scrll">
-										<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('https://hikers.shop/wp-content/uploads/2019/04/hi.jpg');"></div>
-		</div
-		>
+		>@endforeach
 	</div>
 </section>
 
