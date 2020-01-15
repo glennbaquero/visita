@@ -74,11 +74,10 @@ class SocialiteGoogleLoginController extends Controller
 	 */
 	protected function createUser($socialite) {
 		$socialite = json_decode(json_encode($socialite->user));
-		dd($socialite);
 
 		return User::create([
-			'first_name' => $socialite->first_name,
-			'last_name' => $socialite->last_name,
+			'first_name' => $socialite->given_name,
+			'last_name' => $socialite->family_name,
 			'email' => $socialite->email,
 			'username' => $socialite->email,
 			'email_verified_at' => now(),
