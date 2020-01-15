@@ -40,16 +40,16 @@ Route::namespace('Web')->name('web.')->group(function() {
 	        Route::post('register', 'RegisterController@register')->name('register');
 
 	        /* Socialite Login */
-	  //       Route::get('socialite/{provider}/login', 'SocialiteLoginController@login')->name('socialite.login');
-			// Route::get('socialite/{provider}/callback', 'SocialiteLoginController@callback')->name('socialite.callback');
+	        Route::get('socialite/{provider}/login', 'SocialiteLoginController@login')->name('socialite.login');
+			Route::get('socialite/{provider}/callback', 'SocialiteLoginController@callback')->name('socialite.callback');
 
 			/* Facebook Login */
 			Route::get('socialite/facebook/login', 'SocialiteLoginController@login')->name('facebook.login');
 			Route::get('socialite/facebook/callback', 'SocialiteLoginController@callback')->name('facebook.callback');
 			
 			/* Google Login */
-			Route::get('socialite/google/login', 'SocialiteGoogleLoginController@login')->name('google.login');
-			Route::get('socialite/google/callback', 'SocialiteGoogleLoginController@callback')->name('google.callback');
+			Route::get('google/login', 'SocialiteGoogleLoginController@login')->name('google.login');
+			Route::get('google/callback', 'SocialiteGoogleLoginController@callback')->name('google.callback');
 
 			Route::middleware(['guest:management', 'cors'])->group(function() {
 
