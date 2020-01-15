@@ -51,11 +51,12 @@
 		</div>
 
 		<div class="fqs-frm1__cards-holder" id="tab-1">
+			@foreach($visitors as $visitor)
 			<div class="fqs-frm1__cards align-l">
 				<div class="fqs-frm1__cards-header">
 					<div class="width--90 margin-a inlineBlock-parent">
 						<div class="width--95">
-							<p class="frm-header bold clr--gray">How do I request for a visit:</p>
+							<p class="frm-header bold clr--gray">{{ $visitor->question }}</p>
 						</div
 						><div class="width--5 align-r">
 							<div class="fqs-frm1__cards-icon"></div>
@@ -65,45 +66,21 @@
 				<div class="fqs-frm1__cards-content">
 					<div class="width--90 margin-a">
 						<div class="frm-description clr--gray">
-							<p><strong>About the Destination</strong></p>
-							<p>The Mount Pulag National Park, famous for its “sea of clouds” and is referred to as the “stairway to heaven” in local folklore is the highest mountain in the north and the third highest in the country at 2, 922 meters above sea level.</p>
-							<p><strong>Flora and Fauna</strong></p>
-							<p>Recognized by scientists because of its ecological value, one could be mesmerized by the various species, both flora and fauna, that could be found in the area including thirty three (33) bird species and several threatened mammals such as the Philippine Deer, Giant Bushy-tailed Cloud Rat (“bowet”) and the Long-Haired Fruit Bat. Mt. Pulag is also the only place that hosts the four (4) cloud rat species. It is also home to the endemic Dwarf Bamboo (Yushania niitakayamensis) and the Benguet Pine (Pinus insularis) which dominates the areas of Luzon tropical pine forests found on the mountainside.</p>
+							{!! $visitor->answer !!}
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="fqs-frm1__cards align-l">
-				<div class="fqs-frm1__cards-header">
-					<div class="width--90 margin-a inlineBlock-parent">
-						<div class="width--95">
-							<p class="frm-header bold clr--gray">How do I request for a visit:</p>
-						</div
-						><div class="width--5 align-r">
-							<div class="fqs-frm1__cards-icon"></div>
-						</div>
-					</div>
-				</div>
-				<div class="fqs-frm1__cards-content">
-					<div class="width--90 margin-a">
-						<div class="frm-description clr--gray">
-							<p><strong>About the Destination</strong></p>
-							<p>The Mount Pulag National Park, famous for its “sea of clouds” and is referred to as the “stairway to heaven” in local folklore is the highest mountain in the north and the third highest in the country at 2, 922 meters above sea level.</p>
-							<p><strong>Flora and Fauna</strong></p>
-							<p>Recognized by scientists because of its ecological value, one could be mesmerized by the various species, both flora and fauna, that could be found in the area including thirty three (33) bird species and several threatened mammals such as the Philippine Deer, Giant Bushy-tailed Cloud Rat (“bowet”) and the Long-Haired Fruit Bat. Mt. Pulag is also the only place that hosts the four (4) cloud rat species. It is also home to the endemic Dwarf Bamboo (Yushania niitakayamensis) and the Benguet Pine (Pinus insularis) which dominates the areas of Luzon tropical pine forests found on the mountainside.</p>
-						</div>
-					</div>
-				</div>
-			</div>
+			@endforeach
 		</div>	
 
 		<div class="fqs-frm1__cards-holder" id="tab-2">
+			@foreach($managers as $manager)
 			<div class="fqs-frm1__cards align-l">
 				<div class="fqs-frm1__cards-header">
 					<div class="width--90 margin-a inlineBlock-parent">
 						<div class="width--95">
-							<p class="frm-header bold clr--gray">How do I request for a visit:</p>
+							<p class="frm-header bold clr--gray">{{ $manager->question }}</p>
 						</div
 						><div class="width--5 align-r">
 							<div class="fqs-frm1__cards-icon"></div>
@@ -113,14 +90,12 @@
 				<div class="fqs-frm1__cards-content">
 					<div class="width--90 margin-a">
 						<div class="frm-description clr--gray">
-							<p><strong>About the Destination</strong></p>
-							<p>The Mount Pulag National Park, famous for its “sea of clouds” and is referred to as the “stairway to heaven” in local folklore is the highest mountain in the north and the third highest in the country at 2, 922 meters above sea level.</p>
-							<p><strong>Flora and Fauna</strong></p>
-							<p>Recognized by scientists because of its ecological value, one could be mesmerized by the various species, both flora and fauna, that could be found in the area including thirty three (33) bird species and several threatened mammals such as the Philippine Deer, Giant Bushy-tailed Cloud Rat (“bowet”) and the Long-Haired Fruit Bat. Mt. Pulag is also the only place that hosts the four (4) cloud rat species. It is also home to the endemic Dwarf Bamboo (Yushania niitakayamensis) and the Benguet Pine (Pinus insularis) which dominates the areas of Luzon tropical pine forests found on the mountainside.</p>
+							{!! $manager->answer !!}
 						</div>
 					</div>
 				</div>
 			</div>
+			@endforeach
 		</div>	
 
 	</div>

@@ -451,6 +451,17 @@
                             </li>
                             @endif
 
+                            <li class="nav-item">
+                                <a href="{{ route('admin.about-us.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.about-us.index','admin.about-us.create','admin.about-us.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        About Us
+                                    </p>
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
                 @endif

@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Inspiring;
 
 use App\Models\Pages\Page;
+use App\Models\Faqs\Faq;
+use App\Models\Pages\AboutUs;
+use App\Models\Pages\AboutUsFrameThree;
+use App\Models\Pages\Team;
 use App\Models\Carousels\HomeBanner;
 use App\Models\Tabbings\AboutInfo;
+
 
 use App\Models\Destinations\Destination;
 use App\Models\Types\VisitorType;
@@ -55,9 +60,50 @@ class PageController extends Controller
 	* Show About Us 
 	*/
 	public function showAboutUs() {
+		$content = AboutUs::latest()->first();
+		$content['image_url'] = $content->renderImagePath();
+
+		$teams = $this->getFrameTwoContent(Team::where('type', 0)->get());
+		$collaborators = $this->getFrameTwoContent(Team::where('type', 1)->get());
+		$advisors = $this->getFrameTwoContent(Team::where('type', 2)->get());
+
+		$frame_threes = $this->getFrameThreeContent(AboutUsFrameThree::all());
+
         return view('web.pages.about-us', [
-        	'page_scripts'=> 'about'
+        	'page_scripts'=> 'about',
+        	'content' => $content,
+        	'teams' => $teams,
+        	'collaborators' => $collaborators,
+        	'advisors' => $advisors,
+        	'frame_threes' => $frame_threes,
         ]);
+	}
+
+	public function getFrameTwoContent($datas) {
+		$result = [];
+		foreach ($datas as $data) {
+			array_push($result, [
+				'name' => $data->name,
+				'role' => $data->renderTypeLabel(),
+				'description' => $data->description,
+				'image_path' => $data->renderImagePath()
+			]);
+		}
+
+		return $result;
+	}
+
+	public function getFrameThreeContent($datas) {
+		$result = [];
+		foreach ($datas as $data) {
+			array_push($result, [
+				'title' => $data->title,
+				'description' => $data->description,
+				'image_path' => $data->renderImagePath()
+			]);
+		}
+
+		return $result;
 	}
 
 	/* 
@@ -112,8 +158,12 @@ class PageController extends Controller
 	* Show Faqs 
 	*/
 	public function showFaqs() {
+		$visitors = Faq::where('type', 'VISITOR')->get();
+		$managers = Faq::where('type', 'DESTINATION MANAGER')->get();
         return view('web.pages.faqs', [
-        	'page_scripts'=> 'faqs'
+        	'page_scripts'=> 'faqs',
+        	'visitors'=> $visitors,
+        	'managers'=> $managers
         ]);
 	}
 
