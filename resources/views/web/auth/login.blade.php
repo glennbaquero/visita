@@ -54,8 +54,8 @@
                             <p>or</p>
                         </div>
                         <div class="inlineBlock-parent align-c">
-                            <button class="frm-btn lgn-frm1__login-scl-btn facebook m-margin-b"><img src="{{ asset('images/facebook-icon.png') }}">Facebook</button>
-                            <button class="frm-btn lgn-frm1__login-scl-btn google m-margin-b"><img src="{{ asset('images/google-plus-icon.png') }}">Google</button>
+                            <a href="{{ route('web.facebook.login') }}" class="frm-btn lgn-frm1__login-scl-btn facebook m-margin-b"><img src="{{ asset('images/facebook-icon.png') }}">Facebook</a>
+                            <a href="{{ route('web.google.login') }}" class="frm-btn lgn-frm1__login-scl-btn google m-margin-b"><img src="{{ asset('images/google-plus-icon.png') }}">Google</a>
                         </div>
                         <div class="lgn-frm1__sign-up-holder width--100 inlineBlock-parent">
                             <div class="frm-description clr--gray">

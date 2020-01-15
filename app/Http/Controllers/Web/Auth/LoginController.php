@@ -37,7 +37,9 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         // return redirect()->route('web.sign-in');
-        return view('web.auth.login');
+        return view('web.auth.login',[
+            'provider' => 'facebook'
+        ]);
     }
 
     /**
@@ -49,16 +51,16 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if (!$user->hasVerifiedEmail()) {
-            auth()->logout();
-            return redirect()->back();
-            // activity()
-            //     ->causedBy($user)
-            //     ->performedOn($user)
-            //     ->log('Account has been logged in.');
-        }
+        // if (!$user->hasVerifiedEmail()) {
+        //     auth()->logout();
+        //     return redirect()->back();
+            activity()
+                ->causedBy($user)
+                ->performedOn($user)
+                ->log('Account has been logged in.');
+        // }
 
-        return redirect()->route('web.request-to-visit');
+        // return redirect()->route('web.destinations');
     }
 
     /**
