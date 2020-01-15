@@ -114,3 +114,4 @@ Vue.component('time-slots-table', require('./views/admin/time-slots/TimeSlotTabl
 Vue.component('time-slots-view', require('./views/admin/time-slots/TimeSlotView.vue').default);
 
 Vue.component('invoices-view', require('./views/admin/bookings/InvoiceView.vue').default);
+Vue.component('export-view', require('./views/admin/exports/ExportView.vue').default);

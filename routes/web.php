@@ -27,8 +27,8 @@ Route::namespace('Web')->name('web.')->group(function() {
 		/* Guest Routes */
 		Route::middleware('guest:web')->group(function() {
 
-	        Route::get('login', 'LoginController@showLoginForm')->name('login');
-	        Route::post('login', 'LoginController@login');
+	        Route::get('sign-in', 'LoginController@showLoginForm')->name('login');
+	        Route::post('sign-in', 'LoginController@login');
 
 	        Route::get('reset-password/{token}/{email}', 'ResetPasswordController@showResetForm')->name('password.reset');
 	        Route::post('reset-password/change', 'ResetPasswordController@reset')->name('password.change');
@@ -60,7 +60,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 	/* Page Routes */
 	Route::namespace('Pages')->group(function() {
 		Route::middleware('guest:web')->group(function() {
-			Route::get('/sign-in', 'PageController@showLogin')->name('sign-in');
+			// Route::get('/login', 'PageController@showLogin')->name('login');
 			Route::get('/sign-up', 'PageController@showSignUp')->name('sign-up');
 		});
 

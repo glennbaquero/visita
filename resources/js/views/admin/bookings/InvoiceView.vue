@@ -93,21 +93,21 @@
 			<template v-slot:footer>
 				<action-button type="submit" :disabled="loading" class="btn-success" v-if="!item.is_paid">Approve</action-button>
             	
-                <action-button
-                v-if="item.archiveUrl && !item.is_paid"
-                color="btn-danger"
-                alt-color="btn-warning"
-                :action-url="item.archiveUrl"
-                label="Reject"
-                :show-alt="item.deleted_at"
-                confirm-dialog
-                title="Reject"
-                :message="'Are you sure you want to reject this reservation #' + item.id + '?'"
-                :disabled="loading"
-                @load="load"
-                @success="fetch"
-                @error="fetch"
-                ></action-button>
+        <action-button
+        v-if="item.archiveUrl && !item.is_paid"
+        color="btn-danger"
+        alt-color="btn-warning"
+        :action-url="item.archiveUrl"
+        label="Reject"
+        :show-alt="item.deleted_at"
+        confirm-dialog
+        title="Reject"
+        :message="'Are you sure you want to reject this reservation #' + item.id + '?'"
+        :disabled="loading"
+        @load="load"
+        @success="fetch"
+        @error="fetch"
+        ></action-button>
 			</template>
 		</card>
 

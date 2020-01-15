@@ -610,6 +610,17 @@
                         </a>
                     </li>
                 @endif
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.invoices.reports') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.invoices.reports',
+                    ]) }}">
+                        <i class="nav-icon fa fa-file-alt"></i>
+                        <p>
+                            Export Report
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
 

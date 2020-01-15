@@ -2,7 +2,7 @@
 	<div>
         <form-request :submit-url="exportUrl" @load="load" submit-on-success method="POST" :action="exportUrl">
             <filter-box @refresh="fetch">
-                <template v-slot:left>
+                <template>
                     <action-button v-if="exportUrl" type="submit" :disabled="loading" class="btn-warning mr-2" icon="fa fa-download">Export</action-button>
 
                     <date-range
