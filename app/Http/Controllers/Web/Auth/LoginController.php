@@ -58,7 +58,7 @@ class LoginController extends Controller
             //     ->log('Account has been logged in.');
         }
 
-        return redirect()->route('web.request-to-visit');
+        return redirect()->route('web.destinations');
     }
 
     /**
