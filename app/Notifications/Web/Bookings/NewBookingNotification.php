@@ -56,11 +56,11 @@ class NewBookingNotification extends Notification
                 ->subject(config('app.name') . ': ' . $this->title)
                 ->greeting('Hello ' . $notifiable->fullname . ',')
                 ->line($this->description)
-                ->line('Reservation Details : ');
+                ->line('Reservation Details : ')
                 ->line('Book ID : '. $this->booking->id)
                 ->line('Destination : '. $this->destination->name)
                 ->line('Experience : '. $this->allocation->name)
-                ->line('Main Contact Person : '. $this->main->first_name. ' '$this->main->last_name);
+                ->line('Main Contact Person : '. $this->main->first_name. ' '.$this->main->last_name);
     }
 
     /**

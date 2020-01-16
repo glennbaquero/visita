@@ -216,7 +216,7 @@
 						contact_number: null,
 						emergency_contact_number: null,
 						main: false,
-						paths: []
+						paths: null
 					}
 				}
 			},

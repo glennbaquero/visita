@@ -10,14 +10,17 @@ use App\Notifications\Web\Bookings\NewBookingNotification;
 
 use App\Models\Invoices\Invoice;
 use App\Models\Books\Book;
+use App\Models\Users\Admin;
 
 use DB;
+use Storage;
 
 class InvoiceController extends Controller
 {
     public function store(Request $request)
     {
-    	$guests = $request->guests;
+    	$guests = json_decode($request->guests);
+        $admins = Admin::all();
 
     	DB::beginTransaction();
 
@@ -31,24 +34,34 @@ class InvoiceController extends Controller
                 'is_walkin' => false
 	    	]);
 
-	    	foreach ($guests as $guest) {
+	    	foreach ($guests as $key => $guest) {
+                $upload_path = null;
+                if($request['special_fee_path'][$key] != 'null') {
+                    $file = $request['special_fee_path'][$key];
+                    $filename = $file->getClientOriginalName();
+                    $path = 'public/special_fee';
+                    $upload_path = Storage::putFileAs($path, $file, $filename);
+                }
+
 	    		$book->guests()->create([
-	    			'visitor_type_id' => $guest['visitor_type_id'],
-	    			'special_fee_id' => $guest['special_fee_id'] != 0 ?? null,
-	    			'main' => $guest['main'],
-	    			'first_name' => $guest['first_name'],
-	    			'last_name' => $guest['last_name'],
-	    			'nationality' => $guest['nationality'],
-	    			'gender' => $guest['gender'],
-	    			'emergency_contact_number' => $guest['emergency_contact_number'],
-	    			'contact_number' => $guest['contact_number'],
-	    			'email' => $guest['email'],
-	    			'birthdate' => $guest['birthdate'],
+	    			'visitor_type_id' => $guest->visitor_type_id,
+	    			'special_fee_id' => $guest->special_fee_id != 0 ?? null,
+	    			'main' => $guest->main,
+	    			'first_name' => $guest->first_name,
+	    			'last_name' => $guest->last_name,
+	    			'nationality' => $guest->nationality,
+	    			'gender' => $guest->gender,
+	    			'emergency_contact_number' => $guest->emergency_contact_number,
+	    			'contact_number' => $guest->contact_number,
+	    			'email' => $guest->email,
+	    			'birthdate' => $guest->birthdate,
+                    'special_fee_path' => $upload_path
 	    		]);
 	    	}
 
-	    	$book->invoice()->create([
-	    		'user_id' => auth()->user()->id,
+	    	auth()->user()->invoices()->create([
+                // 'user_id' => auth()->user()->id,
+	    		'book_id' => $book->id,
 	    		'conservation_fee' => $request->conservation_fee,
 	    		'platform_fee' => $request->platform_fee,
 	    		'transaction_fee' => $request->transaction_fee,
@@ -63,11 +76,9 @@ class InvoiceController extends Controller
 
     	DB::commit();
 
-    	$admins = Admin::all();
-    	
-    	foreach ($admins as $admin) {
-    		$admin->notify(new NewBookingNotification($book->destination, $book->allocation, $book, $main));
-    	}
+    	// foreach ($admins as $admin) {
+     //        $admin->notify(new NewBookingNotification($book->destination, $book->allocation, $book, $main));
+     //    }
 
     	return response()->json([
     		'success' => true
