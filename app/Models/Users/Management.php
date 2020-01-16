@@ -19,6 +19,7 @@ use App\Traits\HelperTrait;
 
 use App\Models\Destinations\Destination;
 use App\Models\Roles\Role;
+use App\Models\Invoices\Invoice;
 
 class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
 {
@@ -58,6 +59,11 @@ class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
 	public function representative()
 	{
 		return $this->hasMany(Book::class, 'destination_representative_id');
+	}
+
+	public function invoices()
+	{
+		return $this->morphMany(Invoice::class, 'bookable');
 	}
 
     /*

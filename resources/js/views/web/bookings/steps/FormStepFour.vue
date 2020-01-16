@@ -90,7 +90,15 @@
 									<p class="frm-header clr--gray">Php {{ withComma(type.fee) }}</p>
 								</div>
 							</div>
-
+							
+							<div class="inlineBlock-parent rqst-frm1__step-4-content-option" v-for="special in specialFeeTypeList">
+								<div class="width--50">
+									<p class="frm-header clr--gray">{{ special.name }} x {{ special.count }}</p>
+								</div
+								><div class="width--50 align-r">
+									<p class="frm-header clr--gray">(-) Php {{ withComma(special.fee) }}</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -209,7 +217,9 @@
 			return {
 				showOptionStyle: 'none',
 				visitorTypeList: [],
+				specialFeeTypeList: [],
 				conservationFeeTotal: 0,
+				specialFeeTotal: 0,
 				transactionFee: parseFloat(this.allocation.transaction_fee),
 				isPaypal: true, // true - paypal, false - bank deposit,
 			}
@@ -242,6 +252,8 @@
 
 		mounted() {
 			this.conservationFeeForVisitorType();
+			this.specialFee();
+		  	this.conservationFeeTotal = this.conservationFeeTotal - this.specialFeeTotal;
 		},
 
 		methods: {
@@ -251,6 +263,64 @@
 				} else {
 					this.showOptionStyle = 'none';
 				}
+			},
+
+			specialFee() {
+				var result = 0;
+				var fee = 0;
+				var visitDate = moment(this.stepData.visitDate + " " + this.stepData.timeSelected);
+				var is_daytour = visitDate.hours() > 12 ? false : true ;
+				var is_weekend = (visitDate.day() === 6) || (visitDate.day() === 0);
+
+				_.forEach(this.allocation.special_fees, (value) => {
+					if(is_daytour){
+		      			fee = parseFloat(value.daytour);
+		      		} else {
+		      			fee = parseFloat(value.overnight)
+		      		}
+
+		      		if(is_weekend) {
+		      			fee += parseFloat(value.weekend);
+		      		} else {
+		      			fee += parseFloat(value.weekday);
+		      		}
+
+		      		if(value.id == this.stepData.main.special_fee_id){
+			      		result += parseFloat(value.daytour);
+
+			      		var data = {
+			      			name: value.name,
+			      			fee: fee,
+			      			count: 1
+			      		};
+
+			      		this.specialFeeTotal += fee;
+
+			      		this.specialFeeTypeList.push(data)
+
+			      		_.forEach(this.stepData.guests, (guest) => {
+						if(value.id == guest.special_fee_id){
+					  		result += parseFloat(value.daytour_fee);
+					  		_.forEach(this.specialFeeTypeList, (data, key) => {
+					  			var data = {
+					  				name: value.name,
+					  				fee: fee,
+					  				count: 1
+					  			};
+						  		if(value.name === data.name) {
+						  			data.count += 1;
+							  		this.specialFeeTypeList[key].count += 1;
+							  		this.specialFeeTypeList[key].fee += fee;
+						      		this.specialFeeTotal += fee;
+						  		} else {
+						  			this.specialFeeTypeList.push(data);
+						      		this.specialFeeTotal += fee;
+						  		}
+					  		})
+						}			    		
+			    	})
+			    	}
+				});
 			},
 
 			conservationFeeForVisitorType() {
@@ -263,19 +333,19 @@
 				_.forEach(this.visitorTypes, (value) => {
 			      		
 		      		if(is_daytour){
-		      			fee = parseInt(value.daytour_fee);
+		      			fee = parseFloat(value.daytour_fee);
 		      		} else {
-		      			fee = parseInt(value.overnight_fee)
+		      			fee = parseFloat(value.overnight_fee)
 		      		}
 
 		      		if(is_weekend) {
-		      			fee += parseInt(value.weekend_fee);
+		      			fee += parseFloat(value.weekend_fee);
 		      		} else {
-		      			fee += parseInt(value.weekday_fee);
+		      			fee += parseFloat(value.weekday_fee);
 		      		}
 
 			    	if(value.id == this.stepData.main.visitor_type_id){
-			      		result += parseInt(value.daytour_fee);
+			      		result += parseFloat(value.daytour_fee);
 
 			      		var data = {
 			      			name: value.name,
@@ -290,7 +360,7 @@
 
 			    	_.forEach(this.stepData.guests, (guest) => {
 						if(value.id == guest.visitor_type_id){
-					  		result += parseInt(value.daytour_fee);
+					  		result += parseFloat(value.daytour_fee);
 					  		_.forEach(this.visitorTypeList, (data, key) => {
 					  			var data = {
 					  				name: value.name,

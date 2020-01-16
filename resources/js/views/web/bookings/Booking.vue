@@ -489,26 +489,46 @@
 
 				this.stepData.guests.push(this.stepData.main);
 
-				var data = {
-					// Invoice
-					transaction_fee: this.$refs.formStepFour.transactionFee,
-					conservation_fee: this.$refs.formStepFour.conservationFeeTotal,
-					platform_fee: this.$refs.formStepFour.platformFee,
-					sub_total: this.$refs.formStepFour.subTotal,
-					grand_total: this.$refs.formStepFour.grandTotal,
-					is_paypal_payment: this.$refs.formStepFour.isPaypal,
+				var data = new FormData();
 
-					// Guest
-					guests: this.stepData.guests,
+				_.each(this.stepData.guests, (guest, key) => {
+					data.append('special_fee_path['+key+']', guest.paths);
+				})
 
-					// Booking
-					start_time: this.stepData.timeSelected,
-					allocation_id: this.stepData.allocationSelected,
-					destination_id: this.destination.id,
-					scheduled_at: this.stepData.visitDate,
-					total_guest: this.stepData.numberOfGuests,
-					agency_code: this.stepData.main.agency_code,
-				};
+				data.append('transaction_fee', this.$refs.formStepFour.transactionFee);
+				data.append('conservation_fee', this.$refs.formStepFour.conservationFeeTotal);
+				data.append('platform_fee', this.$refs.formStepFour.platformFee);
+				data.append('sub_total', this.$refs.formStepFour.subTotal);
+				data.append('grand_total', this.$refs.formStepFour.grandTotal);
+				data.append('is_paypal_payment', this.$refs.formStepFour.isPaypal);
+				data.append('guests', JSON.stringify(this.stepData.guests));
+				data.append('start_time', this.stepData.timeSelected);
+				data.append('allocation_id', this.stepData.allocationSelected);
+				data.append('destination_id', this.destination.id);
+				data.append('scheduled_at', this.stepData.visitDate);
+				data.append('total_guest', this.stepData.numberOfGuests);
+				data.append('agency_code', this.stepData.main.agency_code);
+
+				// var data = {
+				// 	// Invoice
+				// 	transaction_fee: this.$refs.formStepFour.transactionFee,
+				// 	conservation_fee: this.$refs.formStepFour.conservationFeeTotal,
+				// 	platform_fee: this.$refs.formStepFour.platformFee,
+				// 	sub_total: this.$refs.formStepFour.subTotal,
+				// 	grand_total: this.$refs.formStepFour.grandTotal,
+				// 	is_paypal_payment: this.$refs.formStepFour.isPaypal,
+
+				// 	// Guest
+				// 	guests: this.stepData.guests,
+
+				// 	// Booking
+				// 	start_time: this.stepData.timeSelected,
+				// 	allocation_id: this.stepData.allocationSelected,
+				// 	destination_id: this.destination.id,
+				// 	scheduled_at: this.stepData.visitDate,
+				// 	total_guest: this.stepData.numberOfGuests,
+				// 	agency_code: this.stepData.main.agency_code,
+				// };
 
 				axios.post(this.bookUrl, data)
 					.then(response => {
