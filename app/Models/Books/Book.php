@@ -150,4 +150,21 @@ class Book extends Model
 
         return $status;
     }
+
+    public function getGuests() {
+        $result = [];
+
+        foreach ($this->guests as $guest) {
+            array_push($result, [
+                'name' => $guest->renderFullname(),
+                'email' => $guest->email,
+                'main' => $guest->main ? true : false,
+                'nationality' => $guest->nationality,
+                'birthdate' => $guest->birthdate,
+                'contact_number' => $guest->contact_number,
+            ]);
+        }
+
+        return $result;
+    }
 }

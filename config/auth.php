@@ -55,6 +55,11 @@ return [
             'driver' => 'jwt',
             'provider' => 'managements',
         ],
+
+        'masungi' => [
+            'driver' => 'jwt',
+            'provider' => 'masungis',
+        ],
     ],
 
     /*
@@ -89,6 +94,11 @@ return [
         'managements' => [
             'driver' => 'eloquent',
             'model' => App\Models\Users\Management::class,
+        ],
+
+        'masungis' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\API\Masungi::class,
         ],
     ],
 
