@@ -1,20 +1,22 @@
 export default {
 	methods: {
-		toDate(value) {
+		toDate(value, format='MMM D, YYYY') {
 			let result = '';
 
 			if (moment(value).isValid()) {
-				result = moment(value).format('MMM D, YYYY');
+				result = moment(value).format(format);
 			}
 
 			return result;
 		},
 
-		toTime(value) {
+		toTime(value, format='HH:mm') {
 			let result = '';
 			
 			if (moment(value).isValid()) {
-				result = moment(value).format('HH:mm');
+				result = moment(value).format(format);
+			} else {
+				result = moment(value, format).format(format)
 			}
 
 			return result;

@@ -8,6 +8,7 @@ use App\Models\Destinations\Destination;
 use App\Models\Capacities\Capacity;
 use App\Models\Fees\Fee;
 use App\Models\Books\Book;
+use App\Models\Times\TimeSlot;
 
 class Allocation extends Model
 {
@@ -40,11 +41,16 @@ class Allocation extends Model
     	return $this->hasMany(Fee::class);
     }
 
+    public function timeSlots()
+    {
+        return $this->hasMany(TimeSlot::class);
+    }
+
 
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['destination_id', 'name', 'description'])
+    public static function store($request, $item = null, $columns = ['destination_id', 'name', 'description', 'transaction_fees', 'platform_fees', 'fee_per_head'])
     {
         $vars = $request->only($columns);
 
@@ -81,6 +87,20 @@ class Allocation extends Model
 
     public function renderDestination() {
         return $this->destination->name;
+    }
+
+    public function getTimeSlot() {
+        $result = [];
+
+        foreach ($this->timeSlots as $timeslot) {
+            $time = strtotime($timeslot->time);
+            array_push($result, [
+                'time' => $timeslot->time,
+                'formatted_time' => date('h:i a', $time)
+            ]);
+        }
+
+        return $result;
     }
 
 }

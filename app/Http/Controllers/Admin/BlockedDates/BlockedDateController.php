@@ -47,7 +47,15 @@ class BlockedDateController extends Controller
      */
     public function store(BlockedDateStoreRequest $request)
     {
+        DB::beginTransaction();
         $item = BlockedDate::store($request);
+
+        foreach ($request->dates as $key => $date) {
+            if($date != null) {
+                $item->dates()->firstOrCreate([ 'date' => $date ]);
+            }
+        }
+        DB::commit();
 
         $message = "You have successfully created {$item->renderName()}";
         $redirect = $item->renderShowUrl();
@@ -92,10 +100,12 @@ class BlockedDateController extends Controller
      */
     public function update(BlockedDateStoreRequest $request, $id)
     {
+        DB::beginTransaction();
         $item = BlockedDate::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->renderName()}";
 
         $item = BlockedDate::store($request, $item);
+        DB::commit();
 
         return response()->json([
             'message' => $message,

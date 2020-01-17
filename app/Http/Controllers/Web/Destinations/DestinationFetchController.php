@@ -10,12 +10,20 @@ use App\Models\Destinations\Destination;
 class DestinationFetchController extends Controller
 {
     public function fetchDestination() {
-
-        $destination = Destination::with('experiences')->get();
-        // $destination->picture = $destination->pictures()->first()->renderImagePath();
-
+    	$result = [];
+        $destinations = Destination::with('experiences')->get();
+        foreach ($destinations as $key => $destination) {
+        	array_push($result, [
+        		'destination' => $destination,
+        		'id' => $destination->id,
+        		'name' => $destination->name,
+        		'short_description' => str_limit($destination->overview, 70),
+        		'capacity' => $destination->capacity,
+        		'image' => $destination->pictures->first()->renderImagePath()
+        	]);
+        }
         return response()->json([
-        	'destination' => $destination
+        	'destinations' => $result
         ]);
         
 	}

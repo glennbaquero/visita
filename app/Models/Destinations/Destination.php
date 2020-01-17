@@ -16,6 +16,9 @@ use App\Models\AddOns\AddOn;
 use App\Models\Books\Book;
 use App\Models\Announcements\Announcement;
 use App\Models\Users\Admin;
+use App\Models\BlockedDates\BlockedDate;
+
+use Carbon\Carbon;
 
 class Destination extends Model
 {
@@ -76,10 +79,15 @@ class Destination extends Model
         return $this->belongsTo(Admin::class);
     }
 
+    public function blockedDates()
+    {
+        return $this->hasMany(BlockedDate::class);
+    }
+
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['name', 'code', 'icon', 'terms_conditions', 'visitor_policies', 'operating_hours', 'orientation_module', 'capacity_per_day', 'overview', 'contact_us', 'fees', 'how_to_get_here'])
+    public static function store($request, $item = null, $columns = ['name', 'code', 'icon', 'terms_conditions', 'visitor_policies', 'operating_hours', 'operating_hours_end', 'orientation_module', 'capacity_per_day', 'overview', 'contact_us', 'fees', 'how_to_get_here', 'location', 'recommended', 'duration'])
     {
         $vars = $request->only($columns);
 
@@ -119,5 +127,59 @@ class Destination extends Model
 
     public function renderRemoveImageUrl($prefix = 'admin') {
         return route($prefix . '.destinations.remove-image', $this->id);
+    }
+
+    public function renderRequestVisitUrl() {
+        return route('web.request-to-visit', [$this->id, $this->name]);
+    }
+
+    public function getFormattedData() {
+        $result = [];
+
+        foreach ($this->allocations as $key => $allocation) {
+            // foreach ($allocation->timeSlots as $timeslot) {
+                array_push($result, [
+                    'image' => $this->pictures->first()->renderImagePath(),
+                    'allocation_name' => $allocation->name,
+                    'allocation_id' => $allocation->id,
+                    'platform_fee' => $allocation->platform_fees,
+                    'transaction_fee' => $allocation->transaction_fees,
+                    'transaction_fee' => $allocation->transaction_fees,
+                    'fee_per_head' => $allocation->fee_per_head,
+                    'special_fees' => $allocation->fees,
+                    'timeslot' => $allocation->getTimeSlot(),
+                ]);
+            // }
+        }
+
+        return $result;
+    }
+
+    public function getBlockedDates() {
+        $items = $this->blockedDates;
+
+        $result = [];
+
+        foreach($items as $item) {
+            foreach ($item->dates as $date) {
+                array_push($result, [
+                    Carbon::parse($date->date)->toDateString()
+                ]);
+            }
+        }
+        return collect($result)->flatten();
+    }
+
+    public function getAllocationFilters() {
+        $filterAllocations = [];
+
+        foreach ($this->allocations as $allocation) {
+            array_push($filterAllocations, [
+                'label' => $allocation->name,
+                'value' => $allocation->id,
+            ]);
+        }
+
+        return $filterAllocations;
     }
 }

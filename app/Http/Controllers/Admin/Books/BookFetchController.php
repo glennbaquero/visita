@@ -74,7 +74,7 @@ class BookFetchController extends FetchController
             'is_walkin' => $item->is_walkin === 1 ? 'Walk-In' : 'Online',
             'total_guest' => $item->total_guest,
             'allocation' => $item->allocation->name,
-            'time' => Carbon::parse($item->scheduled_at)->toTimeString(),
+            'time' => $item->start_time ? Carbon::createFromFormat('H:i:s', $item->start_time)->format('h:i A') : 'No visit time selected.',
             'status' => $item->ended_at != null ? 'Visit End ( '.$item->renderDate('ended_at').' )' : ($item->started_at == null ? 'Not yet started' : 'Started ( '.$item->renderDate('started_at').' )'),
             'qr_path' => $item->renderImagePath('qr_code_path'),
             'qr_id' => $item->qr_id,
@@ -128,7 +128,7 @@ class BookFetchController extends FetchController
         $nationalities = Countries::all();
         $special_fees = Allocation::find($experience)->fees;
         $visitor_types = VisitorType::all();
-        $blocked_dates = $this->blockedDates();
+        $blocked_dates = $this->blockedDates($destination);
 
     	return response()->json([
     		'item' => $item,
@@ -141,15 +141,18 @@ class BookFetchController extends FetchController
     	]);
     }
 
-    public function blockedDates() {
-        $items = BlockedDate::all();
+    public function blockedDates($destination) {
+        $destination = Destination::find($destination);
+        $items = $destination->blockedDates;
 
         $result = [];
 
         foreach($items as $item) {
-            array_push($result, [
-                Carbon::parse($item->date)->toDateString()
-            ]);
+            foreach ($item->dates as $date) {
+                array_push($result, [
+                    Carbon::parse($date->date)->toDateString()
+                ]);
+            }
         }
 
         return $result;

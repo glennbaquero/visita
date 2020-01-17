@@ -17,7 +17,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/destinations';
 
     /**
      * Create a new controller instance.
@@ -36,7 +36,10 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('web.auth.login');
+        // return redirect()->route('web.sign-in');
+        return view('web.auth.login',[
+            'provider' => 'facebook'
+        ]);
     }
 
     /**
@@ -48,12 +51,16 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($user->hasVerifiedEmail()) {
+        // if (!$user->hasVerifiedEmail()) {
+        //     auth()->logout();
+        //     return redirect()->back();
             activity()
                 ->causedBy($user)
                 ->performedOn($user)
                 ->log('Account has been logged in.');
-        }
+        // }
+
+        // return redirect()->route('web.destinations');
     }
 
     /**

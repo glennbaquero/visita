@@ -27,6 +27,10 @@ class AnnouncementFetchController extends FetchController
      */
     public function filterQuery($query)
     {
+        $admin = auth()->guard('admin')->user();
+        if($admin->destination_id) {
+            $query = $query->where('destination_id', $admin->destination_id);
+        }
         return $query;
     }
 
@@ -70,6 +74,7 @@ class AnnouncementFetchController extends FetchController
 
     public function fetchView($id = null) {
         $item = null;
+        $admin = auth()->guard('admin')->user();
 
         if ($id) {
         	$item = Announcement::withTrashed()->findOrFail($id);
@@ -79,6 +84,10 @@ class AnnouncementFetchController extends FetchController
         }
 
         $destinations = Destination::all();
+
+        if($admin->destination_id) {
+            $destinations = Destination::where('id', $admin->destination_id)->get();
+        }
 
     	return response()->json([
     		'item' => $item,

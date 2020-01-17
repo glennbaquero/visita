@@ -15,25 +15,7 @@ Route::get('sandbox', 'SandboxController@index')->name('sandbox.index');
 
 
 Route::namespace('Web')->name('web.')->group(function() {
-	Route::namespace('Pages')->group(function() {
-		Route::get('', 'PageController@showHome')->name('home');
-		Route::get('/about-us', 'PageController@showAboutUs')->name('about-us');
-		
-		Route::get('/destinations', 'PageController@showDestinations')->name('destinations');
-		Route::get('/destinations-info', 'PageController@showDestinationsInfo')->name('destinations-info');
-		
-		Route::get('/faqs', 'PageController@showFaqs')->name('faqs');
-		Route::get('/contact-us', 'PageController@showContactUs')->name('contact-us');
-		
-		Route::get('/forgot-password', 'PageController@showForgotPassword')->name('forgot-password');
-		// Route::get('/reset-password/{token}/{email}', 'PageController@showResetPassword')->name('password.reset');
-		
-		Route::get('stylesheet', 'PageController@showStylesheet')->name('stylesheet');
-		Route::get('/privacy-policy', 'PageController@showPrivacyPolicy')->name('privacy-policy');
-		Route::get('/reset-password/success', 'PageController@frontlinerSuccessPage')->name('management.reset.password.success');
 
-	});
-	
 	Route::namespace('Auth')->group(function() {
 
         Route::get('email/verify/{id}/{user}', 'VerificationController@verify')->name('verification.verify');
@@ -85,7 +67,22 @@ Route::namespace('Web')->name('web.')->group(function() {
 			Route::get('/sign-up', 'PageController@showSignUp')->name('sign-up');
 		});
 
+		Route::get('', 'PageController@showHome')->name('home');
+		Route::get('/about-us', 'PageController@showAboutUs')->name('about-us');
 		
+		Route::get('/destinations', 'PageController@showDestinations')->name('destinations');
+		Route::get('/destinations-info', 'PageController@showDestinationsInfo')->name('destinations-info');
+		
+		Route::get('/faqs', 'PageController@showFaqs')->name('faqs');
+		Route::get('/contact-us', 'PageController@showContactUs')->name('contact-us');
+		
+		Route::get('/forgot-password', 'PageController@showForgotPassword')->name('forgot-password');
+		// Route::get('/reset-password/{token}/{email}', 'PageController@showResetPassword')->name('password.reset');
+		
+		Route::get('stylesheet', 'PageController@showStylesheet')->name('stylesheet');
+		Route::get('/privacy-policy', 'PageController@showPrivacyPolicy')->name('privacy-policy');
+		Route::get('/reset-password/success', 'PageController@frontlinerSuccessPage')->name('management.reset.password.success');
+
 		Route::middleware('auth:web')->group(function() {
 			Route::get('/request-to-visit/{id}/{name}', 'PageController@showRequestToVisit')->name('request-to-visit');
 			Route::get('/user/dashboard', 'PageController@showDashboard')->name('dashboard');

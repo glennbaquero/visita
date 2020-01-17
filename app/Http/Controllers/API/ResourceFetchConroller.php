@@ -22,6 +22,9 @@ use App\Models\Remarks\Remark;
 use App\Models\Violations\Violation;
 use App\Models\Users\Management;
 use App\Models\BlockedDates\BlockedDate;
+use App\Models\Genders\Gender;
+use App\Models\CivilStatuses\CivilStatus;
+use Webpatser\Countries\Countries;
 use Carbon\Carbon;
 
 class ResourceFetchController extends Controller
@@ -39,7 +42,7 @@ class ResourceFetchController extends Controller
         $fetch_incomes = new AnnualIncomeFetchController($request);
         $fetch_feedbacks = new FeedbackFetchController($request);
 
-        $nationalities = $fetch_nationalities->fetch($request);
+        // $nationalities = $fetch_nationalities->fetch($request);
         $experiences = $fetch_experiences->fetch($request);
         $visitor_types = $fetch_types->fetch($request);
         $religions = $fetch_religions->fetch($request);
@@ -50,15 +53,37 @@ class ResourceFetchController extends Controller
         $faqs = Faq::all();
         $remarks = Remark::all();
         $violations = Violation::all();
-        $blocked_dates = BlockedDate::all();
         $management = Management::where('role_id', 5)->where('destination_id', $request->user()->destination_id)->get();
         $bookings = $this->getBookings();
         $guests = $this->getGuests();
         $destination = auth()->guard('api')->user()->destination;
+        $genders = Gender::all();
+        $civil_status = CivilStatus::all();
+
+        $nationalities = [];
+        $countries = Countries::all();
+        foreach ($countries as $key => $country) {
+            array_push($nationalities, [
+                'citizenship' => $country->citizenship
+            ]);
+        }
+
+        $blocked_dates = [];
+        $blocks = BlockedDate::where('destination_id', $request->user()->destination_id)->get();
+        
+        foreach ($blocks as $block) {
+            foreach ($block->dates as $date) {
+                array_push($blocked_dates, [
+                    'id' => $block->id,
+                    'name' => $block->name,
+                    'date' => $date->date
+                ]);
+            }
+        }
 
         return response()->json([
             'user' => $user,
-            'nationalities' => $nationalities->original['items'],
+            'nationalities' => $nationalities,
             'experiences' => $experiences->original['items'],
             'visitor_types' => $visitor_types->original['items'],
             'religions' => $religions->original['items'],
@@ -74,6 +99,8 @@ class ResourceFetchController extends Controller
             'guests' => $guests,
             'blocked_dates' => $blocked_dates,
             'destination' => $destination,
+            'genders' => $genders,
+            'civil_status' => $civil_status,
         ]);
     }
 
@@ -132,7 +159,7 @@ class ResourceFetchController extends Controller
                 'ended_at' => $item->ended_at ?? null,
                 'checked_in_at' => $item->checked_in_at,
                 're_scheduled_at' => Carbon::parse($item->re_scheduled_at)->toDateString(),
-                'status' => $item->status,
+                'status' => $item->getStatus(),
                 'agency_code' => $item->agency_code,
                 'total_guest' => $item->total_guest,
                 'payment_type' => $item->payment_type,
@@ -147,6 +174,7 @@ class ResourceFetchController extends Controller
                 'allocation' => json_encode($item->allocation),
                 'created_at' => $item->created_at->format('j M Y h:i A'),
                 'is_walkin_label' => $item->is_walkin ? 'Walk-In' : 'Online',
+                'start_time' => $item->start_time
             ]);
         }
 

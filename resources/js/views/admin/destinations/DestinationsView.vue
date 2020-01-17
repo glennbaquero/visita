@@ -15,6 +15,21 @@
 					<input v-model="item.code" name="code" type="text" class="form-control">
 				</div>
 
+				<div class="form-group col-sm-12 col-md-4">
+					<label>Location</label>
+					<input v-model="item.location" name="location" type="text" class="form-control">
+				</div>
+
+				<div class="form-group col-sm-12 col-md-4">
+					<label>Duration</label>
+					<input v-model="item.duration" name="duration" type="text" class="form-control">
+				</div>
+
+				<div class="form-group col-sm-12 col-md-4">
+					<label>Recommend visitor</label>
+					<input v-model="item.recommended" name="recommended" type="text" class="form-control">
+				</div>
+
 				<selector class="col-sm-4"
 				v-model="item.add_ons"
 				name="add_ons[]"
@@ -33,9 +48,17 @@
 				
 				<time-picker
 				v-model="item.operating_hours"
-				class="form-group col-sm-12 col-md-6 time"
-				label="Operating Hours"
+				class="form-group col-sm-12 col-md-3 time"
+				label="Operating Hours Start"
 				name="operating_hours"
+				placeholder="Choose time slot"
+				></time-picker>
+
+				<time-picker
+				v-model="item.operating_hours_end"
+				class="form-group col-sm-12 col-md-3 time"
+				label="Operating Hours End"
+				name="operating_hours_end"
 				placeholder="Choose time slot"
 				></time-picker>
 				
@@ -43,13 +66,13 @@
 			
 			<div class="row">
 
-				<text-editor
+				<!-- <text-editor
 				v-model="item.icon"
 				class="col-sm-12"
 				label="Icon"
 				name="icon"
 				row="5"
-				></text-editor>
+				></text-editor> -->
 
 				<text-editor
 				v-model="item.overview"

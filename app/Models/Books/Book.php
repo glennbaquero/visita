@@ -11,6 +11,7 @@ use App\Models\Allocations\Allocation;
 use App\Models\Destinations\Destination;
 use App\Models\Guests\Guest;
 use App\Models\Feedbacks\GuestFeedback;
+use App\Models\Invoices\Invoice;
 
 use App\Traits\FileTrait;
 use App\Models\Users\Management;
@@ -70,6 +71,11 @@ class Book extends Model
         return $this->belongsTo(Management::class, 'destination_representative_id');
     }
 
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class);
+    }
+
     /**
      * @Setters
      */
@@ -78,6 +84,7 @@ class Book extends Model
         // $vars = $request->only($columns);
         $vars['allocation_id'] = $request->allocation_id;
         $vars['scheduled_at'] = $request->scheduled_at;
+        $vars['start_time'] = $request->scheduled_at;
         $vars['re_scheduled_at'] = $request->scheduled_at;
         $vars['destination_id'] = $destination_id;
         $vars['total_guest'] = $request->total_guest;
@@ -127,5 +134,37 @@ class Book extends Model
 
     public function renderName($first_column = 'first_name', $second_column = 'last_name') {
         return $this->guests->first();
+    }
+
+    public function getStatus() {
+        $started = $this->started_at;
+        $ended = $this->ended_at;
+        $status = 'Queue';
+        if($started != null && $ended == null) {
+            $status = 'Ongoing';
+        } 
+
+        if($started != null && $ended != null) {
+            $status = 'Finished';
+        }
+
+        return $status;
+    }
+
+    public function getGuests() {
+        $result = [];
+
+        foreach ($this->guests as $guest) {
+            array_push($result, [
+                'name' => $guest->renderFullname(),
+                'email' => $guest->email,
+                'main' => $guest->main ? true : false,
+                'nationality' => $guest->nationality,
+                'birthdate' => $guest->birthdate,
+                'contact_number' => $guest->contact_number,
+            ]);
+        }
+
+        return $result;
     }
 }

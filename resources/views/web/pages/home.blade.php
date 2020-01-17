@@ -1,16 +1,25 @@
 @extends('web.master')
 
+{{-- @section('meta:title', $page->renderMeta('title'))
+@section('meta:description', $page->renderMeta('description'))
+@section('meta:keywords', $page->renderMeta('keywords'))
+@section('og:image', $page->renderMetaImage())
+@section('og:title', $page->renderMeta('og_title'))
+@section('og:description', $page->renderMeta('og_description'))
+ --}}
 @section('content')
 
-<section class="hm-frm1 gnrl-frm--sldr__container scrllfy-frame" id="frame-1">
-	<div class="gnrl-frm--sldr fade-up__trigger">
+<section class="hm-frm1 gnrl-frm--sldr__container scrllfy-frame">
+	<div class="gnrl-frm--sldr gnrl-frm--sldr1">
 		@foreach ($home_banners as $home_banner)
 		<div class="gnrl-frm--sldr__item">
 			<div class="frm-cntnr align-c width--85">
 				<div class="vertical-parent">
 					<div class="vertical-align align-c">
-						<h5 class="frm-title l-margin-b clr--white hm-frm1-fade-up__item">{{ $home_banner->name }}</h5>
-						<a href="{{ $home_banner->link }}" class="frm-btn green js-trigger" data-section="frame-6">{{ $home_banner->link_label }}</a>
+						<h5 class="frm-title l-margin-b clr--white gnrl-frm--sldr1__animation-title">{{ $home_banner->name }}</h5>
+						<div class="gnrl-frm--sldr1__animation-button">
+							<a href="{{ $home_banner->link }}" class="frm-btn green">{{ $home_banner->link_label }}</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -19,20 +28,19 @@
 		@endforeach
 	</div>
 </section>
-<section class="hm-frm2 scrllfy-frame" id="frame-2">
+<section class="hm-frm2 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align align-c">
 				<p class="frm-header m-margin-b clr--white">{{ $data['pageItems']['frame_2_header'] }}</p>
 				<h5 class="frm-title l-margin-b clr--white">{{ $data['pageItems']['frame_2_title'] }}</h5>
-				<div class="hm-frm2-fade-up__item1">
+				<div class="hm-frm2-fade-up__animation">
 					<div class="hm-frm2__tabbing inlineBlock-parent">
 						@foreach ($about_infos as $about_info)
 						<p class="hm-frm2__tabbing-btn" data-frame2tab-id="frame2tab-{{ $about_info->id }}">{{ $about_info->name }}</p>
 						@endforeach
 					</div>
-				</div>
-				<div class="hm-frm2-fade-up__item2">
+
 					@foreach ($about_infos as $about_info)
 					<div class="hm-frm2__tabbing-content gnrl-scrll" id="frame2tab-{{ $about_info->id }}">
 						<p class="frm-header bold clr--white">{{ $about_info->label }}</p>
@@ -47,24 +55,24 @@
 		</div>
 	</div>
 </section>
-<section class="hm-frm3 scrllfy-frame hm-frm3-fade-up__trigger" id="frame-3">
+<section class="hm-frm3 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
-				<div class="inlineBlock-parent hm-frm3__col-holder">
+				<div class="inlineBlock-parent hm-frm3__col-holder hm-frm3-fade-up__animation">
 					<div class="width--50 align-l">
 						<h5 class="frm-title l-margin-b clr--white">{{ $data['pageItems']['frame_3_title'] }}</h5>
-						<p class="frm-header m-margin-b clr--white bold hm-frm3-fade-up__item">{{ $data['pageItems']['frame_3_header'] }}</p>
-						<div class="frm-description m-margin-b clr--white hm-frm3-fade-up__item">
+						<p class="hm-frm3-fade-up__animation-content frm-header m-margin-b clr--white bold hm-frm3-fade-up__item">{{ $data['pageItems']['frame_3_header'] }}</p>
+						<div class="hm-frm3-fade-up__animation-content frm-description m-margin-b clr--white hm-frm3-fade-up__item">
 							{!! $data['pageItems']['frame_3_content'] !!}
 						</div>
-						<div class="inlineBlock-parent hm-frm3-fade-up__item">
+						<div class="inlineBlock-parent hm-frm3-fade-up__animation-button">
 							{{-- <a href="#" class="frm-btn green m-margin-r">Discover the Alliance</a> --}}
 							<a href="#" class="frm-btn orange" data-remodal-target="hm-frm3--modal-1">{{ $data['pageItems']['frame_3_link_2_label'] }}</a>
 						</div>
 					</div
 					><div class="width--50 align-c">
-						<img src="{!! $data['pageItems']['frame_3_image'] !!}" class="hm-frm3__img">
+						<img src="{!! $data['pageItems']['frame_3_image'] !!}" class="hm-frm3__img hm-frm3-fade-up__animation-img">
 					</div>
 				</div>
 			</div>
@@ -86,21 +94,21 @@
 	{{--  --}}
 
 </section>
-<section class="hm-frm4 scrllfy-frame hm-frm4-fade-up__trigger" id="frame-4">
+<section class="hm-frm4 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
-				<div class="inlineBlock-parent">
+				<div class="inlineBlock-parent hm-frm4-fade-up__animation">
 					<div class="width--50 align-c">
-						<img src="{!! $data['pageItems']['frame_4_image'] !!}" class="hm-frm4__img">
+						<img src="{!! $data['pageItems']['frame_4_image'] !!}" class="hm-frm4__img hm-frm4-fade-up__animation-img">
 					</div
 					><div class="width--50 align-l">
 						<h5 class="frm-title l-margin-b clr--white">{{ $data['pageItems']['frame_4_title'] }}</h5>
-						<p class="frm-header m-margin-b clr--white bold hm-frm4-fade-up__item">{{ $data['pageItems']['frame_4_header'] }}</p>
-						<div class="frm-description m-margin-b clr--white hm-frm4-fade-up__item">
+						<p class="hm-frm4-fade-up__animation-content frm-header m-margin-b clr--white bold">{{ $data['pageItems']['frame_4_header'] }}</p>
+						<div class="hm-frm4-fade-up__animation-content frm-description m-margin-b clr--white hm-frm4-fade-up__item">
 							{!! $data['pageItems']['frame_4_content'] !!}
 						</div>
-						<div class="inlineBlock-parent hm-frm4-fade-up__item">
+						<div class="hm-frm4-fade-up__animation-button inlineBlock-parent">
 							<a href="#" class="frm-btn green m-margin-r" data-remodal-target="hm-frm4--modal-1">{{ $data['pageItems']['frame_4_link_1_label'] }}</a>
 							{{-- <a href="" class="frm-btn orange">Learn More</a> --}}
 						</div>
@@ -125,20 +133,19 @@
 	{{--  --}}
 
 </section>
-<section class="hm-frm5 gnrl-frm--sldr__container scrllfy-frame" id="frame-5">
+<section class="hm-frm5 gnrl-frm--sldr__container scrllfy-frame">
 	<user-destination
 		{{-- fetch-url="{{ route('web.fetch.destination') }}" --}}
 		:destination="{{ $destination }}"
 	></user-destination>
 </section>
-<section class="hm-frm6 scrllfy-frame" id="frame-6">
+<section class="hm-frm6 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
 				<user-inquiry
 		        	submit-url="{{ route('web.user.inquiry') }}"
 		        ></user-inquiry>
-
 			</div>
 		</div>
 	</div>

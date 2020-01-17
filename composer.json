@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.1.3",
         "barryvdh/laravel-cors": "^0.11.3",
+        "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "~6.0",
         "intervention/image": "^2.4",
@@ -18,6 +19,8 @@
         "laravel/socialite": "^4.2",
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "^3.1",
+        "praxxys-ecommerce/paypal": "^0.1.1",
+        "realrashid/sweet-alert": "^3.1",
         "spatie/eloquent-sortable": "^3.7",
         "spatie/laravel-activitylog": "^3.2",
         "spatie/laravel-permission": "^2.36",
@@ -35,6 +38,12 @@
         "nunomaduro/collision": "^2.0",
         "phpunit/phpunit": "^7.0"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "ssh://git@gitlab.praxxys.ph:52222/laravel/praxxys-ecommerce-paypal.git"
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",

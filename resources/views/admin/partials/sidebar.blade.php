@@ -11,7 +11,7 @@
                 </div>
                 <div class="info">
                     <a href="{{ route('admin.profiles.show') }}" class="d-block">
-                        {{ $self->renderName() }}
+                        {{-- {{ $self->renderName() }} --}}
                     </a>
                 </div>
             </div>
@@ -338,6 +338,28 @@
                             </li>
                             @endif
 
+                            <li class="nav-item">
+                                <a href="{{ route('admin.genders.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.genders.index','admin.genders.create','admin.genders.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        Genders
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('admin.civil_statuses.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.civil_statuses.index','admin.civil_statuses.create','admin.civil_statuses.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        Civil Status
+                                    </p>
+                                </a>
+                            </li>
+
                             @if ($self->hasAnyPermission(['admin.blocked-dates.crud']))
                             <li class="nav-item">
                                 <a href="{{ route('admin.blocked-dates.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
@@ -428,6 +450,17 @@
                                 </a>
                             </li>
                             @endif
+
+                            <li class="nav-item">
+                                <a href="{{ route('admin.about-us.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.about-us.index','admin.about-us.create','admin.about-us.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        About Us
+                                    </p>
+                                </a>
+                            </li>
 
                         </ul>
                     </li>
@@ -588,6 +621,17 @@
                         </a>
                     </li>
                 @endif
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.invoices.reports') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.invoices.reports',
+                    ]) }}">
+                        <i class="nav-icon fa fa-file-alt"></i>
+                        <p>
+                            Export Report
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
 

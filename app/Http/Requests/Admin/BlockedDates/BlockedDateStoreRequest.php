@@ -25,7 +25,7 @@ class BlockedDateStoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'date' => 'required',
+            // 'date' => 'required',
         ];
     }
 }

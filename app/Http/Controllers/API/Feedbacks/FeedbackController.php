@@ -17,13 +17,15 @@ class FeedbackController extends Controller
     {
     	DB::beginTransaction();
     		$book = Book::find($request->book_id);
-    		foreach ($request->feedbacks as $feedback) {
-	    		$book->guestFeedbacks()->create([
-	    			'answer' => $feedback['selected'],
-	    			'remarks' => $feedback['remarks'],
-	    			'feedback_data' => json_encode($feedback)
-	    		]);
-    		}
+            if($request->skip) {
+                foreach ($request->feedbacks as $feedback) {
+                    $book->guestFeedbacks()->create([
+                        'answer' => $feedback['selected'],
+                        'remarks' => $feedback['remarks'],
+                        'feedback_data' => json_encode($feedback)
+                    ]);
+                }
+            }
 
     		$book->ended_at = Carbon::now();
             $book->status = true;

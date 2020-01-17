@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 use Auth;
+use DB;
 
 use App\Models\Users\User;
+use App\Notifications\Web\Auth\VerifyEmail;
+use Alert;
 
 class RegisterController extends Controller
 {
@@ -31,8 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
-
+    protected $redirectTo = '/sign-in';
     /**
      * Create a new controller instance.
      *
@@ -62,9 +64,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'contact_no' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -77,21 +81,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'username' => $data['username'],
+            'contact_no' => $data['contact_no'],
             'password' => Hash::make($data['password']),
         ]);
+
+        alert()->success('Registration success', 'Check your email to activate the account!');
+        
+        return $user;
     }
 
-    /**
-     * Get the guard to be used during registration.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
-     */
-    protected function guard()
-    {
-        return Auth::guard('web');
-    }
+    // *
+    //  * Get the guard to be used during registration.
+    //  *
+    //  * @return \Illuminate\Contracts\Auth\StatefulGuard
+     
+    // protected function guard()
+    // {
+    //     return Auth::guard('guest');
+    // }
 }

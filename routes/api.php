@@ -83,4 +83,17 @@ Route::name('api.')
         });
           
     });
+
+    Route::namespace('Masungi')->group(function() {
+        Route::namespace('Auth')->group(function() {
+            Route::post('masungi/{option}', 'LoginController@redirectToLogin');
+            // Route::post('masungi/login/device', 'LoginController@login')->name('masungi.invoice.store');
+        });
+
+        Route::group(['middleware' => ['assign.guard:masungi', 'jwt.auth']], function() {
+            Route::namespace('Invoices')->group(function() {
+                Route::post('masungi/invoice/store', 'InvoiceController@store')->name('masungi.invoice.store');
+            });
+        });
+    });
 });

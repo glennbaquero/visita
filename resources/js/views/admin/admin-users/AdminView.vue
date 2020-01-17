@@ -29,7 +29,7 @@
                 placeholder="Please select a role"
                 ></selector>
 
-                <selector class="col col-sm-6" v-if="editable" :disabled="roleIds != 4"
+                <selector class="col col-sm-6" v-if="editable"
                 v-model="item.destination_id"
                 name="destination_id"
                 label="Destination"
