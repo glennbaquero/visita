@@ -40,6 +40,7 @@ class InvoiceExport implements FromArray, WithStrictNullComparison, WithHeadings
                 'Payment Type' => $item['payment_type'],
                 'Is Approved' => $item['is_approved'],
                 'Is Paid' => $item['is_paid'],
+                'Reservation' => $item['reservation_from'],
                 'Created Date' => $item['created_at'],
                 'Rejected Date' => $item['deleted_at'],
             ];
@@ -69,6 +70,7 @@ class InvoiceExport implements FromArray, WithStrictNullComparison, WithHeadings
             'Payment Type',
             'Is Approved',
             'Is Paid',
+            'Reservation',
             'Created Date',
             'Rejected Date',
         ];

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Notifications\Reservation\BookingNotification;
 use App\Notifications\Web\Bookings\NewBookingNotification;
+use App\Notifications\Reservation\BankDepositSlipUploadedNotification;
 
 use App\Models\Invoices\Invoice;
 use App\Models\Books\Book;
@@ -72,13 +73,13 @@ class InvoiceController extends Controller
 	    	]);
 
 	    	$main = $book->guests->where('main', true)->first();
-      //       $main->notify(new BookingNotification($book));
+            // $main->notify(new BookingNotification($book));
 
     	DB::commit();
-
+        $admins = Admin::all();
     	// foreach ($admins as $admin) {
-     //        $admin->notify(new NewBookingNotification($book->destination, $book->allocation, $book, $main));
-     //    }
+        //    $admin->notify(new NewBookingNotification($book->destination, $book->allocation, $book, $main));
+        // }
 
     	return response()->json([
     		'success' => true
@@ -127,12 +128,19 @@ class InvoiceController extends Controller
             'bank_deposit_slip' => 'required|mimes:jpeg,bmp,png'
         ]);
 		$invoice = Invoice::find($request->id);
+        $admins = Admin::all();
+        $main = $invoice->book->guests->where('main', true)->first();
 
     	DB::beginTransaction();
     		$image = $request->file('bank_deposit_slip')->store('deposit-slip', 'public');
     		$invoice->update([
     			'bank_deposit_slip' => $image
     		]);
+
+
+            // foreach ($admins as $admin) {
+            //    $admin->notify(new BankDepositSlipUploadedNotification($invoice, $main));
+            // }
     	DB::commit();
 
 

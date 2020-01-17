@@ -1,9 +1,12 @@
 <template>
 	<form-request :submit-url="submitUrl" @load="load" @success="fetch" confirm-dialog sync-on-success>
 		<card>
-			<template v-slot:header>Reservation Payment Information</template>
+      <template v-slot:header>Reservation Payment Information</template>
 
 			<div class="row">
+        <div class="col-12">
+          <h3><b>{{ item.reservation_from }}</b></h3>
+        </div>
 				<div class="col-12 table-responsive">
                   	<table class="table table-striped">
                     	<thead>
@@ -31,7 +34,7 @@
                       			<td class="text-center">{{ guest.special_fee_weekdayOrWeekend }}</td>
                       			<td class="text-center">{{ guest.total }}</td>
                     		</tr>
-                    		<tr>
+                    		<tr v-if="!item.from_masungi_reservation">
                       			<td class="text-center"></td>
                       			<td class="text-center"></td>
                       			<td class="text-center"></td>
@@ -47,49 +50,49 @@
                 </div>
 			</div>
 			<div class="row">
-                <!-- accepted payments column -->
-                <div class="col-6">
-	                <p class="lead">Payment Method:</p>
-	                <img src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404_960_720.png" width="15%" alt="Paypal" v-if="item.is_paypal_payment"> 
+          <!-- accepted payments column -->
+        <div class="col-6">
+          <p class="lead">Payment Method:</p>
+          <img src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404_960_720.png" width="15%" alt="Paypal" v-if="item.is_paypal_payment"> 
 
-                  	<label v-if="!item.is_paypal_payment"><b>Bank Deposit</b></label>
-                  	<br>
-                  	<template v-if="item.showImgTag">
-                  		<p>Uploaded Deposit Slip <a :href="item.renderDepositSlip" target="_blank">view here</a></p>
-                  		<!-- <img :src="item.renderDepositSlip"> -->
-              		</template>
-                </div>
-                <!-- /.col -->
-                <div class="col-6">
-                  	<p class="lead">Amount</p>
+          	<label v-if="!item.is_paypal_payment"><b>Bank Deposit</b></label>
+          	<br>
+          	<template v-if="item.showImgTag">
+          		<p>Uploaded Deposit Slip <a :href="item.renderDepositSlip" target="_blank">view here</a></p>
+          		<!-- <img :src="item.renderDepositSlip"> -->
+      		</template>
+        </div>
+          <!-- /.col -->
+        <div class="col-6">
+          	<p class="lead">Amount</p>
 
-	                <div class="table-responsive">
-	                    <table class="table">
-	                      	<tr>
-	                        	<th style="width:50%">Conservation Fee</th>
-	                        	<td>&#8369; {{ item.conservation_fee }}</td>
-	                      	</tr>
-	                      	<tr>
-	                        	<th>Platform Fee</th>
-	                        	<td>&#8369; {{ item.platform_fee }}</td>
-	                      	</tr>
-	                      	<tr>
-	                        	<th>Sub Total</th>
-	                        	<td>&#8369; {{ item.sub_total }}</td>
-	                      	</tr>
-	                      	<tr>
-	                        	<th>Transaction Fee</th>
-	                        	<td>&#8369; {{ item.transaction_fee }}</td>
-	                      	</tr>
-	                      	<tr>
-	                        	<th>Total</th>
-	                        	<td><b>&#8369; {{ item.grand_total }}</b></td>
-	                      	</tr>
-	                    </table>
-	                </div>
-                </div>
-                <!-- /.col -->
-            </div>
+          <div class="table-responsive">
+              <table class="table">
+                	<tr>
+                  	<th style="width:50%">Conservation Fee</th>
+                  	<td>&#8369; {{ item.conservation_fee }}</td>
+                	</tr>
+                	<tr>
+                  	<th>Platform Fee</th>
+                  	<td>&#8369; {{ item.platform_fee }}</td>
+                	</tr>
+                	<tr>
+                  	<th>Sub Total</th>
+                  	<td>&#8369; {{ item.sub_total }}</td>
+                	</tr>
+                	<tr>
+                  	<th>Transaction Fee</th>
+                  	<td>&#8369; {{ item.transaction_fee }}</td>
+                	</tr>
+                	<tr>
+                  	<th>Total</th>
+                  	<td><b>&#8369; {{ item.grand_total }}</b></td>
+                	</tr>
+              </table>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
 			<template v-slot:footer>
 				<action-button type="submit" :disabled="loading" class="btn-success" v-if="!item.is_paid">Approve</action-button>
             	
