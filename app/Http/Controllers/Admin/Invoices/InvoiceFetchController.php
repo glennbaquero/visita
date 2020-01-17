@@ -114,6 +114,7 @@ class InvoiceFetchController extends FetchController
             'is_approved' => $item->is_approved ? 'Already Approved' : ($item->deleted_at ? 'Rejected' : 'For Confirmation'),
             'reference_code' => $item->reference_code,
             'is_paid' => $item->is_paid ? 'Already Approved' : 'No transaction of payment',
+            'reservation_from' => $item->book->from_masungi_reservation ? 'Masungi' : 'Visita',
             'created_at' => $item->renderDate(),
             'deleted_at' => $item->renderDate('deleted_at'),
         ];
@@ -126,6 +127,8 @@ class InvoiceFetchController extends FetchController
         	$item = Invoice::withTrashed()->findOrFail($id);
         	$item->guests = $this->getGuests($item->book);
             $item->is_paypal_payment = $item->is_paypal_payment ? true : false;
+            $item->from_masungi_reservation = $item->book->from_masungi_reservation ? true : false;
+            $item->reservation_from = $item->book->from_masungi_reservation ? 'Masungi Reservation' : 'Visita Reservation';
             $item->is_approved = $item->is_approved ? true : false;
         	$item->is_paid = $item->is_paid ? true : false;
         	$item->payment_type = $item->is_paypal_payment ? 'Paypal' : 'Bank Deposit';
@@ -147,19 +150,27 @@ class InvoiceFetchController extends FetchController
     	$is_weekday = Carbon::parse($book->scheduled_at)->isWeekday();
     	$converted_time = strtotime($book->start_time);
     	$is_daytour = date('H', $converted_time) < 12 ?? false;
+        $type_daytourOrOvernight_fee = 0;
+        $type_weekdayOrWeekend_fee = 0;
+        $special_fee_weekdayOrWeekend = 0;
+        $special_fee_daytourOrOvernight = 0;
+
 
     	foreach ($book->guests as $guest) {
+            if(!$book->from_masungi_reservation) {
+                $type_daytourOrOvernight_fee = $is_daytour ? $guest->visitorType->daytour_fee : $guest->visitorType->overnight_fee;
+                $type_weekdayOrWeekend_fee = $is_weekday ? $guest->visitorType->weekday_fee : $guest->visitorType->weekend_fee;
+                $special_fee_weekdayOrWeekend = $guest->special_fee_id != null ? ($is_weekday ? $guest->specialFee->weekday_fee : $guest->specialFee->weekend_fee) : 0;
+                $special_fee_daytourOrOvernight = $guest->special_fee_id != null ? ($is_daytour ? $guest->specialFee->daytour : $guest->specialFee->overnight) : 0;
 
-    		$type_daytourOrOvernight_fee = $is_daytour ? $guest->visitorType->daytour_fee : $guest->visitorType->overnight_fee;
-    		$type_weekdayOrWeekend_fee = $is_weekday ? $guest->visitorType->weekday_fee : $guest->visitorType->weekend_fee;
-    		$special_fee_weekdayOrWeekend = $guest->special_fee_id != null ? ($is_weekday ? $guest->specialFee->weekday_fee : $guest->specialFee->weekend_fee) : 0;
-    		$special_fee_daytourOrOvernight = $guest->special_fee_id != null ? ($is_daytour ? $guest->specialFee->daytour : $guest->specialFee->overnight) : 0;
+            }
 
-    		$total = $type_daytourOrOvernight_fee + $type_weekdayOrWeekend_fee - ($special_fee_weekdayOrWeekend + $special_fee_daytourOrOvernight);
+            $total = $type_daytourOrOvernight_fee + $type_weekdayOrWeekend_fee - ($special_fee_weekdayOrWeekend + $special_fee_daytourOrOvernight);
+    		
 
     		array_push($result, [
     			'name' => $guest->renderFullname(),
-    			'visitor_type_name' => $guest->visitorType->name,
+    			'visitor_type_name' => $guest->visitorType ? $guest->visitorType->name : '---',
     			'type_daytourOrOvernight_fee' => $type_daytourOrOvernight_fee,
     			'type_weekdayOrWeekend_fee' => $type_weekdayOrWeekend_fee,
     			'special_fee_name' => $guest->special_fee_id != null ? $guest->specialFee->name : '---',

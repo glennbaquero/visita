@@ -97,7 +97,7 @@ class InvoiceController extends Controller
 	    		'sub_total' => $request->sub_total,
 	    		'grand_total' => $request->grand_total,
 	    		'is_paypal_payment' => $request->is_paypal_payment,
-	    		'reference_code' => $request->grand_total.$this->generateReferenceCode().'MSNG'
+	    		'reference_code' => $request->grand_total.$this->generateReferenceCode().'MSNG',
 	    	]);
 
 
