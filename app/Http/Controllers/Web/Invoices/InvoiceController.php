@@ -68,7 +68,7 @@ class InvoiceController extends Controller
 	    		'transaction_fee' => $request->transaction_fee,
 	    		'sub_total' => $request->sub_total,
 	    		'grand_total' => $request->grand_total,
-	    		'is_paypal_payment' => $request->is_paypal_payment,
+	    		'is_paypal_payment' => $request->is_paypal_payment == true ? 1 : 0,
 	    		'reference_code' => $request->grand_total.$this->generateReferenceCode().'VST'
 	    	]);
 
