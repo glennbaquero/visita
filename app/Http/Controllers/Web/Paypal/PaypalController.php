@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class PaypalController extends Controller
 {
-    public function transaction(Request $request)
+    public function transaction()
     {
     	return view('web.pages.user.dashboard', [
         	'page_scripts'=> 'dashboard'
