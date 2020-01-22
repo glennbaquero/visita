@@ -98,7 +98,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 
 	Route::namespace('Paypal')->group(function() {
 		Route::middleware('auth:web')->group(function() {
-			Route::post('/paypal/transaction', 'PaypalController@transaction')->name('transaction');
+			Route::get('/paypal/transaction', 'PaypalController@transaction')->name('transaction');
 		});
 	});
 
