@@ -40,14 +40,14 @@ class InvoiceController extends Controller
         DB::commit();
 
         $main = $item->book->guests->where('main', true)->first();
-        $user = $item->user;
+        // $user = $item->user;
 
         if($item->is_paypal_payment) {
             $main->notify(new ReservationApproved('Payment thru Paypal'));
-            $user->notify(new ReservationApproved('Payment thru Paypal'));
+            // $user->notify(new ReservationApproved('Payment thru Paypal'));
         } else {
             $main->notify(new ReservationApproved('Upload Deposit Slip'));
-            $user->notify(new ReservationApproved('Upload Deposit Slip'));
+            // $user->notify(new ReservationApproved('Upload Deposit Slip'));
         }
 
         $message = "You have successfully updated the booking.";
@@ -68,14 +68,14 @@ class InvoiceController extends Controller
     {
         $item = Invoice::withTrashed()->findOrFail($id);
         $main = $item->book->guests->where('main', true)->first();
-        $user = $item->user;
+        // $user = $item->user;
         
         if($item->is_paypal_payment) {
             $main->notify(new ReservationRejected);
-            $user->notify(new ReservationRejected);
+            // $user->notify(new ReservationRejected);
         } else {
             $main->notify(new ReservationRejected);
-            $user->notify(new ReservationRejected);
+            // $user->notify(new ReservationRejected);
         }
 
         $item->archive();
@@ -95,10 +95,10 @@ class InvoiceController extends Controller
     {
         $item = Invoice::withTrashed()->findOrFail($id);
         $main = $item->book->guests->where('main', true)->first();
-        $user = $item->user;
+        // $user = $item->user;
         
         $main->notify(new BankDepositUploadRejected($item));
-        $user->notify(new BankDepositUploadRejected($item));
+        // $user->notify(new BankDepositUploadRejected($item));
 
         $item->update([
             'deposit_slip_approve' => 2 
@@ -119,10 +119,10 @@ class InvoiceController extends Controller
     {
         $item = Invoice::withTrashed()->findOrFail($id);
         $main = $item->book->guests->where('main', true)->first();
-        $user = $item->user;
+        // $user = $item->user;
         
         $main->notify(new BankDepositUploadApprove($item));
-        $user->notify(new BankDepositUploadApprove($item));
+        // $user->notify(new BankDepositUploadApprove($item));
 
         $item->update([
             'deposit_slip_approve' => 1,
