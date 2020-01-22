@@ -500,7 +500,7 @@
 				data.append('platform_fee', this.$refs.formStepFour.platformFee);
 				data.append('sub_total', this.$refs.formStepFour.subTotal);
 				data.append('grand_total', this.$refs.formStepFour.grandTotal);
-				data.append('is_paypal_payment', this.$refs.formStepFour.isPaypal);
+				data.append('is_paypal_payment', this.$refs.formStepFour.isPaypal == true ? 1 : 0);
 				data.append('guests', JSON.stringify(this.stepData.guests));
 				data.append('start_time', this.stepData.timeSelected);
 				data.append('allocation_id', this.stepData.allocationSelected);
