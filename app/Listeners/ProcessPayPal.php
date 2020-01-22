@@ -61,7 +61,7 @@ class ProcessPayPal
 
     private function notifyUser()
     {
-        $this->invoice->user->notify(new UserInvoicePaid($this->invoice));
+        $this->invoice->bookable->notify(new UserInvoicePaid($this->invoice));
     }
 
     private function notifyAdmin()
@@ -73,9 +73,6 @@ class ProcessPayPal
             $admin->notify(new AdminInvoicePaid($this->invoice));
         }
     }
-
-
-}
 
 
 }
