@@ -37,12 +37,12 @@ class InvoiceController extends Controller
 
 	    	foreach ($guests as $key => $guest) {
                 $upload_path = null;
-                if($request['special_fee_path'][$key] != 'null' || $request['special_fee_path'][$key] == '') {
-                    $file = $request['special_fee_path'][$key];
-                    $filename = $file->getClientOriginalName();
-                    $path = 'public/special_fee';
-                    $upload_path = Storage::putFileAs($path, $file, $filename);
-                }
+                // if($request['special_fee_path'][$key] != 'null' || $request['special_fee_path'][$key] == '') {
+                //     $file = $request['special_fee_path'][$key];
+                //     $filename = $file->getClientOriginalName();
+                //     $path = 'public/special_fee';
+                //     $upload_path = Storage::putFileAs($path, $file, $filename);
+                // }
 
 	    		$book->guests()->create([
 	    			'visitor_type_id' => $guest->visitor_type_id,
