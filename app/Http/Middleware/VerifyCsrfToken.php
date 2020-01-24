@@ -22,5 +22,6 @@ class VerifyCsrfToken extends Middleware
         'prx_paypal/notify_url',
         'paypal/transaction',
         'forgot-password/frontliner/email',
+        'api/masungi/',
     ];
 }
