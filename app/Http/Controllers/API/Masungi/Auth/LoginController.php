@@ -64,10 +64,11 @@ class LoginController extends Controller
         	// $invoiceController->store($request, $user);
         	$response = $invoiceController->store($request, $user);
         } elseif ($option === 'fetch') {
-        	if(!$request->user_id) {
-        		return 1;
-        	}
-        	$response = $invoiceController->showReservations($request->user_id, $user);
+        	// if(!$request->user_id) {
+        	// 	return 1;
+        	// }
+            // $response = $invoiceController->showReservations($request->user_id, $user);
+        	$response = $invoiceController->showReservations($user);
         } elseif($option === 'update') {
         	$response = $invoiceController->uploadDepositSlip($request);
         }

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Log;
 use App\Notifications\Web\Paypal\UserInvoicePaid;
 use App\Notifications\Admin\Paypal\AdminInvoicePaid;
 
+use App\Models\Invoices\Invoice;
+
 class ProcessPayPal
 {
 

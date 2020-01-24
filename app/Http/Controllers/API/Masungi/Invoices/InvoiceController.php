@@ -49,9 +49,9 @@ class InvoiceController extends Controller
     		$allocation = Allocation::where('name', $request->trail_name)->first();
     		$destination = Destination::where('name', 'Masungi')->first();
 
-    		if(!$request->user_id) {
-    			return 1; // ID of masungi user is required 
-    		}
+    		// if(!$request->user_id) {
+    		// 	return 1; // ID of masungi user is required 
+    		// }
 
     		if(!$destination) {
     			return 10; // 'destination' => "Masungi is not registered in system, contact Visita then add the Masungi in their system (Required to add name = Masungi)",
@@ -72,7 +72,7 @@ class InvoiceController extends Controller
                 'from_masungi_reservation' => true,
                 'trail_data' => json_encode($request->trail_data),
                 'other_data' => $request->other_data ? json_encode($request->other_data) : null,
-                'masungi_user_id' => $request->user_id,
+                // 'masungi_user_id' => $request->user_id,
     		]);
 
     		foreach ($request->guests as $key => $guest) {
@@ -121,13 +121,15 @@ class InvoiceController extends Controller
 	                       0, 20);
     }
 
-    public function showReservations($masungi_user_id, $user)
+    // public function showReservations($masungi_user_id, $user)
+    public function showReservations($user)
     {
-    	$this->masungi_user_id = $masungi_user_id;
+    	// $this->masungi_user_id = $masungi_user_id;
     	$result = [];
     	$invoices = $user->invoices()->whereHas('book', function($book) {
     		$book->where('masungi_user_id', $this->masungi_user_id);
     	})->get();
+        $invoices = [];
 
     	foreach ($invoices as $invoice) {
     		array_push($result, [
@@ -163,9 +165,9 @@ class InvoiceController extends Controller
     		return 4; // No uploaded file
     	}
 
-    	if(!$request->user_id) {
-    		return 1; // ID of masungi user is required 
-    	}
+    	// if(!$request->user_id) {
+    	// 	return 1; // ID of masungi user is required 
+    	// }
 
     	if(!$request->invoice_id) {
     		return 3; // ID of masungi user is required 
