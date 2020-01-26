@@ -45,7 +45,7 @@ class LoginController extends Controller
         if (!$user) {
             $appName = config('app.name');
 
-            return "key is not valid or secret is not valid.";
+            return "key is not valid or secret is not valid. Api Key (".$api_key.") Api Secret (".$api_secret.")";
         }
 
         // $response = Hash::check($request->input('password'), $user->password);
