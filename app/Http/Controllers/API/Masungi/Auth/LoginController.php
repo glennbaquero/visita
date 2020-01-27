@@ -38,7 +38,6 @@ class LoginController extends Controller
         $action = false;
         $api_key = $request->input('api_key');
         $api_secret = $request->input('api_secret');
-        return $api_key;
         $user = Masungi::where(['api_key' => $api_key, 'api_secret' => $api_secret])->first();
 
         /* Short circuit if no user found with requested username */
