@@ -160,31 +160,23 @@ class InvoiceController extends Controller
     	]);
     }
 
-    public function uploadDepositSlip(Request $request) 
+    public function paypalPaid(Request $request) 
     {
-    	if(!$request->bank_deposit_slip) {
-    		return 4; // No uploaded file
+
+    	if(!$request->reference_code) {
+    		return 3; // reference code is required 
     	}
 
-    	// if(!$request->user_id) {
-    	// 	return 1; // ID of masungi user is required 
-    	// }
-
-    	if(!$request->invoice_id) {
-    		return 3; // ID of masungi user is required 
-    	}
-
-		$invoice = Invoice::find($request->invoice_id);		
+        $invoice = Invoice::where('reference_code', $request->reference_code)->first();      
 		
 		$admins = Admin::all();
 		$main = $invoice->book->guests->where('main', true)->first();
 		
-		$image = $request->file('bank_deposit_slip')->store('deposit-slip', 'public');
-
     	DB::beginTransaction();
-    		$invoice->upload([
-    			'bank_deposit_slip' => $image
-    		]);
+            $invoice->update([
+                'is_paid' => true,
+                'payment_code' => $request->payment_code
+            ]);     
 
     		// foreach ($admins as $admin) {
             //    $admin->notify(new BankDepositSlipUploadedNotification($invoice, $main));
