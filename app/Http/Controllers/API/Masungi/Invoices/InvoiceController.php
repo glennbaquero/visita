@@ -14,6 +14,7 @@ use App\Models\Invoices\Invoice;
 use App\Models\Books\Book;
 use App\Models\Allocations\Allocation;
 use App\Models\Destinations\Destination;
+use App\Models\Users\Admin;
 
 use App\Notifications\Reservation\BookingNotification;
 use App\Notifications\Web\Bookings\NewBookingNotification;
@@ -25,24 +26,24 @@ class InvoiceController extends Controller
 	private $masungi_user_id;
 
 	public function validateRequest($request) {
-		if(!$request->trail_name || $request->start_time || $request->scheduled_at || 
-    		$request->total_guest || $request->trail_data || $request->guests || 
-    		$request->conservation_fee ||  $request->transaction_fee ||  $request->transaction_fee || 
-    		$request->sub_total || $request->grand_total || $request->is_paypal_payment) {
+		if(!$request->trail_name || !$request->start_time || !$request->scheduled_at || 
+    		!$request->total_guest || !$request->trail_data || !$request->guests || 
+    		!$request->conservation_fee || $request->transaction_fee === null ||
+    		!$request->sub_total || !$request->grand_total || !$request->is_paypal_payment) {
+
 			return 2; // ID of masungi user is required 
 		}
-
 		return true;
 	}
 
     public function store(Request $request, $user) 
     {
 
-    	$validation = $this->validateRequest($request);
+    	// $validation = $this->validateRequest($request);
 
-    	if($validation === 2) {
-    		return $validation;
-    	}
+    	// if($validation === 2) {
+    	// 	return $validation;
+    	// }
 
     	DB::beginTransaction();
 
@@ -74,18 +75,18 @@ class InvoiceController extends Controller
                 'other_data' => $request->other_data ? json_encode($request->other_data) : null,
                 // 'masungi_user_id' => $request->user_id,
     		]);
-
     		foreach ($request->guests as $key => $guest) {
-	    		$book->guests()->create([
-	    			'main' => $guest['main'],
+                $book->guests()->create([
+	    			'main' => $guest['main'] == '1' ? 1 : 0,
 	    			'first_name' => $guest['first_name'],
 	    			'last_name' => $guest['last_name'],
-	    			'gender' => $guest['gender'],
-	    			'nationality' => $guest['nationality'],
+                    // 'gender' => $guest['gender'],
+	    			'gender' => 'Male',
+	    			'nationality' => $guest['country'],
 	    			'emergency_contact_number' => $guest['contact_number'],
 	    			'contact_number' => $guest['contact_number'],
 	    			'email' => $guest['email'],
-	    			'birthdate' => $guest['birthdate'],
+	    			'birthdate' => $guest['birthday'],
 	    		]);
 	    	}
 
@@ -101,12 +102,12 @@ class InvoiceController extends Controller
 	    	]);
 
 
-	    	$main = $book->guests->where('main', true)->first();
+	    	$main = $book->guests->where('main', 1)->first();
 	    	$main->notify(new BookingNotification($book));
-
-	    	foreach ($admins as $admin) {
-	            $admin->notify(new NewBookingNotification($book->destination, $book->allocation, $book, $main));
-	        }
+      //       $admins = Admin::all();
+	    	// foreach ($admins as $admin) {
+	     //        $admin->notify(new NewBookingNotification($book->destination, $book->allocation, $book, $main));
+	     //    }
     	DB::commit();
 
 
