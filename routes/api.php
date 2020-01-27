@@ -86,7 +86,7 @@ Route::name('api.')
 
     Route::namespace('Masungi')->group(function() {
         Route::namespace('Auth')->group(function() {
-            Route::post('masungi/{option}', 'LoginController@redirectToLogin');
+            Route::post('masungi/{option}', 'LoginController@login');
             // Route::post('masungi/login/device', 'LoginController@login')->name('masungi.invoice.store');
         });
 
