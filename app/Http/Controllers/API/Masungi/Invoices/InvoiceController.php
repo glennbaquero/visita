@@ -48,7 +48,7 @@ class InvoiceController extends Controller
     	DB::beginTransaction();
 
     		$allocation = Allocation::where('name', $request->trail_name)->first();
-    		$destination = Destination::where('name', 'Masungi')->first();
+    		$destination = Destination::where('name', 'Masungi Georeserve')->first();
 
     		// if(!$request->user_id) {
     		// 	return 1; // ID of masungi user is required 
