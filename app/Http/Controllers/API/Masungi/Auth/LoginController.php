@@ -38,7 +38,6 @@ class LoginController extends Controller
         $action = false;
         $api_key = $request->input('api_key');
         $api_secret = $request->input('api_secret');
-
         $user = Masungi::where(['api_key' => $api_key, 'api_secret' => $api_secret])->first();
 
         /* Short circuit if no user found with requested username */
@@ -70,7 +69,7 @@ class LoginController extends Controller
             // $response = $invoiceController->showReservations($request->user_id, $user);
         	$response = $invoiceController->showReservations($user);
         } elseif($option === 'update') {
-        	$response = $invoiceController->uploadDepositSlip($request);
+        	$response = $invoiceController->paypalPaid($request);
         }
 
         return $response;

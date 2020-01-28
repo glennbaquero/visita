@@ -63,7 +63,7 @@ class DestinationFetchController extends FetchController
             'name' => $item->name,
             'code' => $item->code,
             'icon' => $item->icon,
-            'operating_hours' => Carbon::parse($item->operating_hours)->toTimeString()->format('h:i:s A').'-'.Carbon::parse($item->operating_hours_end)->toTimeString(),
+            'operating_hours' => Carbon::parse($item->operating_hours)->format('h:i:s A').'-'.Carbon::parse($item->operating_hours_end)->format('h:i:s A'),
             'capacity_per_day' => $item->capacity_per_day,
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),

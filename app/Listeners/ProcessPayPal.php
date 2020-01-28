@@ -14,6 +14,7 @@ class ProcessPayPal
 {
 
     protected $result;
+    protected $invoice;
 
     /**
      * Handle the event.

@@ -19,6 +19,7 @@ use App\Models\Invoices\Invoice;
 use App\Models\Destinations\Destination;
 
 use App\Notifications\Admin\ReservationApproved;
+use App\Notifications\Admin\MasungiReservationApproved;
 use App\Notifications\Admin\ReservationRejected;
 use App\Notifications\Admin\BankDepositUploadRejected;
 use App\Notifications\Admin\BankDepositUploadApprove;
@@ -43,7 +44,11 @@ class InvoiceController extends Controller
         // $user = $item->user;
 
         if($item->is_paypal_payment) {
-            $main->notify(new ReservationApproved('Payment thru Paypal'));
+            if($item->bookable_type === 'App\Models\API\Masungi') {
+                $main->notify(new MasungiReservationApproved('Payment thru Paypal', $item));
+            } else {
+                $main->notify(new ReservationApproved('Payment thru Paypal'));
+            }
             // $user->notify(new ReservationApproved('Payment thru Paypal'));
         } else {
             $main->notify(new ReservationApproved('Upload Deposit Slip'));
