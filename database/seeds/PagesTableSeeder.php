@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Imports\Pages\PageImport;
 use App\Imports\Pages\PageItemImport;
 
+use App\Imports\Carousels\HomeBannerImport;
+
 class PagesTableSeeder extends Seeder
 {
     /**
@@ -21,6 +23,7 @@ class PagesTableSeeder extends Seeder
 
         Excel::import(new PageImport, storage_path('imports/pages.xls'));
         Excel::import(new PageItemImport, storage_path('imports/page_items.xls'));
+        Excel::import(new HomeBannerImport, storage_path('imports/home_banners.xls'));
 
         DB::commit();
     }

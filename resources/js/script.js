@@ -11,6 +11,7 @@ var app = {
 		page_type = page_type.content;
 
 		setup.menu();
+		setup.loading();
 		setup.slickSliders();
 		setup.animations();
 
@@ -26,6 +27,9 @@ var app = {
 				break;
 			case 'faqs':
                 setup.faqs();                
+				break;
+			case 'login':
+                setup.login();                
 				break;
 			case 'requestToVisit':
                 setup.requestToVisit();                
@@ -61,6 +65,13 @@ var app = {
 
 		},
 
+		loading: function() {
+			$(window).on('load', function() {
+				$('.ldng-scrn').fadeOut(500);
+				$('body').removeClass('ovrflw-hddn');
+			});
+		},
+
 		slickSliders: function() {
 
 			var controller = new ScrollMagic.Controller();
@@ -91,13 +102,13 @@ var app = {
 				.fromTo(
         			$('.gnrl-frm--sldr1__animation-title'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
         			"=.35"
 	        	).fromTo(
         			$('.gnrl-frm--sldr1__animation-button'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
         			"=-.35"
 	        	);
@@ -108,13 +119,13 @@ var app = {
 				.fromTo(
         			$('.gnrl-frm--sldr2__animation-title'), 
         			.7,
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
         			"=.35"
 	        	).fromTo(
         			$('.gnrl-frm--sldr2__animation-button'), 
         			.7,
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
         			"=-.35"
 	        	);
@@ -138,12 +149,12 @@ var app = {
 				.fromTo(
         			$('.hm-frm2__tabbing'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone}
 	        	).fromTo(
         			$('.hm-frm2__tabbing-content'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
         			"=-.35"
 	        	);
@@ -163,18 +174,18 @@ var app = {
 				.fromTo(
         			$('.hm-frm3-fade-up__animation-content'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
 	        	).fromTo(
         			$('.hm-frm3-fade-up__animation-button'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
         			"=-.35"
 	        	).fromTo(
         			$('.hm-frm3-fade-up__animation-img'), 
         			.7, 
-        			{opacity:0, x: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, x: '50px', ease:Power4.easeIn}, 
         			{opacity:1, x: '0px', ease:Power4.easeNone},
         			"=-.35"
 	        	);
@@ -194,18 +205,18 @@ var app = {
 				.fromTo(
         			$('.hm-frm4-fade-up__animation-content'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
 	        	).fromTo(
         			$('.hm-frm4-fade-up__animation-button'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
         			"=-.35"
 	        	).fromTo(
         			$('.hm-frm4-fade-up__animation-img'), 
         			.7, 
-        			{opacity:0, x: '-20px', ease:Power4.easeIn}, 
+        			{opacity:0, x: '-50px', ease:Power4.easeIn}, 
         			{opacity:1, x: '0px', ease:Power4.easeNone},
         			"=-.35"
 	        	);
@@ -228,12 +239,12 @@ var app = {
 				.fromTo(
         			$('.abt-frm1-fade-up__animation-title'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone}
 	        	).fromTo(
         			$('.abt-frm1-fade-up__animation-description'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
         			"=-.35"
 	        	);
@@ -253,7 +264,7 @@ var app = {
 				.fromTo(
         			$('.abt-frm2-fade-up__animation-content'), 
         			.7, 
-        			{opacity:0, y: '40px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
         			"=.35"
 	        	);
@@ -270,7 +281,7 @@ var app = {
 
 			$('.abt-frm3-fade-up__animation').each(function() {
 	            var tl = new TimelineMax({delay:0, repeat:0, repeatDelay:0});
-	            tl.staggerFrom('.abt-frm3-fade-up__animation-title', 1, { opacity: 0, y: '20px', ease:Power4.easeIn }, 0.25,)
+	            tl.staggerFrom('.abt-frm3-fade-up__animation-title', 1, { opacity: 0, y: '50px', ease:Power4.easeIn }, 0.25,)
 	              .staggerTo('.abt-frm3-fade-up__animation-title', 1, { opacity: 1, y: '0px', ease:Power4.easeNone }, 0.25,)
 
 	            var fadeScene = new ScrollMagic.Scene({
@@ -287,12 +298,12 @@ var app = {
 				.fromTo(
         			$('.cntct-frm__animation-form'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone}
 	        	).fromTo(
         			$('.cntct-frm__animation-button'), 
         			.7, 
-        			{opacity:0, y: '20px', ease:Power4.easeIn}, 
+        			{opacity:0, y: '50px', ease:Power4.easeIn}, 
         			{opacity:1, y: '0px', ease:Power4.easeNone},
         			"=-.35"
 	        	);
@@ -467,28 +478,6 @@ var app = {
 		    	$(this).parent().addClass('active');
 		    });	
 
-			$('.dstntns-frm--sldr__animation').on('beforeChange', function(event, slick, currentSlide, nextSlide){
-				var tl = new TimelineMax()
-				.fromTo(
-        			$('.dstntns-frm--sldr__animation-title'), 
-        			.5, 
-        			{opacity:0, x: '-20px', ease:Power4.easeIn}, 
-        			{opacity:1, x: '0px', ease:Power4.easeNone},
-        			"=.25"
-	        	).fromTo(
-        			$('.dstntns-frm--sldr__animation-description'), 
-        			.5, 
-        			{opacity:0, x: '-20px', ease:Power4.easeIn}, 
-        			{opacity:1, x: '0px', ease:Power4.easeNone},
-        			"=-.25"
-	        	).fromTo(
-        			$('.dstntns-frm--sldr__animation-button'), 
-        			.5, 
-        			{opacity:0, x: '-20px', ease:Power4.easeIn}, 
-        			{opacity:1, x: '0px', ease:Power4.easeNone},
-        			"=-.25"
-	        	);
-			});
 
 			$('.slick-prev').html('<img src="images/left-arrow.png">');
 			$('.slick-next').html('<img src="images/right-arrow.png">');
@@ -556,8 +545,18 @@ var app = {
 		        }
 		    });
 
+		},
+
+		login: function() {
+			$('.hdr-frm').addClass('active');
 		}
 
 	}
+}
 
+/*
+ * @ IF PAGE WAS RELOAD ON THE TOP OF THE PAGE.
+ */
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
 }
