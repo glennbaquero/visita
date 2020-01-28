@@ -10,6 +10,8 @@ use App\Imports\Pages\PageItemImport;
 
 use App\Imports\Carousels\HomeBannerImport;
 
+use App\Imports\Tabbings\AboutInfoImport;
+
 class PagesTableSeeder extends Seeder
 {
     /**
@@ -22,8 +24,9 @@ class PagesTableSeeder extends Seeder
     	DB::beginTransaction();
 
         Excel::import(new PageImport, storage_path('imports/pages.xls'));
-        Excel::import(new PageItemImport, storage_path('imports/page_items.xls'));
+        Excel::import(new PageItemImport, storage_path('imports/page-items.xls'));
         Excel::import(new HomeBannerImport, storage_path('imports/home_banners.xls'));
+        Excel::import(new AboutInfoImport, storage_path('imports/about_infos.xls'));
 
         DB::commit();
     }

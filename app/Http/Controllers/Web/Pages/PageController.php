@@ -37,46 +37,59 @@ class PageController extends Controller
 	* Show Home 
 	*/
 	public function showHome() {
-		
-		$page = Page::where('slug', 'home')->first();
-		$home_banners = HomeBanner::all();
-		$about_infos = AboutInfo::all();
 
-        $data = $page->getData();
-        $destination = $this->formatData();
-
-        // $destinations = Destination::all();
-
-        return view('web.pages.home', [ 
-        	'data' => $data, 
-        	'home_banners' => $home_banners, 
-        	'about_infos' => $about_infos, 
+        $data = $this->getPageData('home');
+    	$destination = $this->formatData();
+        
+        return view('web.pages.home', array_merge($data, [
+        	'quote' => Inspiring::quote(),
+        	'home_banners' => HomeBanner::all(),
+        	'about_infos' => AboutInfo::all(),
         	'destination' => json_encode($destination),
         	'page_scripts'=> 'home'
-        ]);
+        ]));
+
 	}
 
 	/* 
 	* Show About Us 
 	*/
 	public function showAboutUs() {
-		$content = AboutUs::latest()->first();
-		$content['image_url'] = $content->renderImagePath();
 
-		$teams = $this->getFrameTwoContent(Team::where('type', 0)->get());
-		$collaborators = $this->getFrameTwoContent(Team::where('type', 1)->get());
-		$advisors = $this->getFrameTwoContent(Team::where('type', 2)->get());
+        $data = $this->getPageData('about');
+        
+        $teams = $this->getFrameTwoContent(Team::where('type', 0)->get());
+        $collaborators = $this->getFrameTwoContent(Team::where('type', 1)->get());
+        $advisors = $this->getFrameTwoContent(Team::where('type', 2)->get());
 
-		$frame_threes = $this->getFrameThreeContent(AboutUsFrameThree::all());
+        $frame_threes = $this->getFrameThreeContent(AboutUsFrameThree::all());
 
-        return view('web.pages.about-us', [
-        	'page_scripts'=> 'about',
-        	'content' => $content,
+        return view('web.pages.about-us', array_merge($data, [
+        	'quote' => Inspiring::quote(),
         	'teams' => $teams,
         	'collaborators' => $collaborators,
         	'advisors' => $advisors,
         	'frame_threes' => $frame_threes,
-        ]);
+        	'page_scripts'=> 'about'
+        ]));
+
+		// $content = AboutUs::latest()->first();
+		// $content['image_url'] = $content->renderImagePath();
+
+		// $teams = $this->getFrameTwoContent(Team::where('type', 0)->get());
+		// $collaborators = $this->getFrameTwoContent(Team::where('type', 1)->get());
+		// $advisors = $this->getFrameTwoContent(Team::where('type', 2)->get());
+
+		// $frame_threes = $this->getFrameThreeContent(AboutUsFrameThree::all());
+
+  //       return view('web.pages.about-us', [
+  //       	'page_scripts'=> 'about',
+  //       	'content' => $content,
+  //       	'teams' => $teams,
+  //       	'collaborators' => $collaborators,
+  //       	'advisors' => $advisors,
+  //       	'frame_threes' => $frame_threes,
+  //       ]);
 	}
 
 	public function getFrameTwoContent($datas) {
