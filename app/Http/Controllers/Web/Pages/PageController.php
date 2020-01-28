@@ -72,24 +72,7 @@ class PageController extends Controller
         	'frame_threes' => $frame_threes,
         	'page_scripts'=> 'about'
         ]));
-
-		// $content = AboutUs::latest()->first();
-		// $content['image_url'] = $content->renderImagePath();
-
-		// $teams = $this->getFrameTwoContent(Team::where('type', 0)->get());
-		// $collaborators = $this->getFrameTwoContent(Team::where('type', 1)->get());
-		// $advisors = $this->getFrameTwoContent(Team::where('type', 2)->get());
-
-		// $frame_threes = $this->getFrameThreeContent(AboutUsFrameThree::all());
-
-  //       return view('web.pages.about-us', [
-  //       	'page_scripts'=> 'about',
-  //       	'content' => $content,
-  //       	'teams' => $teams,
-  //       	'collaborators' => $collaborators,
-  //       	'advisors' => $advisors,
-  //       	'frame_threes' => $frame_threes,
-  //       ]);
+        
 	}
 
 	public function getFrameTwoContent($datas) {
@@ -123,11 +106,17 @@ class PageController extends Controller
 	* Show Destinations, Destinations Info and Request A Visit 
 	*/
 	public function showDestinations() {
+
+        $data = $this->getPageData('destination');
+
 		$result = [];
         $destinations = Destination::with('experiences')->get();
+        $destination_info = Destination::orderBy('id', 'ASC')->get();
+
         foreach ($destinations as $key => $destination) {
         	array_push($result, [
         		'destination' => $destination,
+        		'destination_info' => $destination_info,
         		'id' => $destination->id,
         		'name' => $destination->name,
         		'short_description' => str_limit($destination->overview, 70),
@@ -136,16 +125,23 @@ class PageController extends Controller
         		'requestVisitUrl' => $destination->renderRequestVisitUrl()
         	]);
         }
-        return view('web.pages.destination.destinations', [
-        	'page_scripts'=> 'destinations',
-        	'destinations' => $result
-        ]);
+        
+        return view('web.pages.destination.destinations', array_merge($data, [
+        	'destinations' => $result,
+        	'page_scripts'=> 'destinations'
+        ]));
 	}
 
-	public function showDestinationsInfo() {
-        return view('web.pages.destination.destinations-info', [
-        	'page_scripts'=> 'destinations'
-        ]);
+	public function showDestinationsInfo($id) {
+       
+        $data = $this->getPageData('destination');
+        $selected_destination = Destination::withTrashed()->findOrFail($id);
+        
+        return view('web.pages.destination.destinations-info', array_merge($data, [
+        	'quote' => Inspiring::quote(),
+        	'selected_destination' => $selected_destination
+        ]));
+
 	}
 
 	public function showRequestToVisit($id, $name) {

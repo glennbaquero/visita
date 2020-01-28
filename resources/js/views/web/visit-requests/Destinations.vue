@@ -15,7 +15,10 @@
 										>
 										</div>
 										<div class="dstntns-frm--sldr__animation-button inlineBlock-parent width--100">
-											<a href="destinations-info" class="frm-btn green s-margin-r">View Destination</a>
+											<a 
+												:href="'destinations/destinations-info/'+destination.id" 
+												class="frm-btn green s-margin-r"
+											>View Destination</a>
 											<a :href="destination.requestVisitUrl" class="frm-btn orange">Request to Visit</a>
 										</div>
 									</div>

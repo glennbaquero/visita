@@ -182,4 +182,14 @@ class Destination extends Model
 
         return $filterAllocations;
     }
+
+    public function renderShortOverview()
+    {
+        if($this->overview) {
+            $result = strip_tags($this->overview);
+            return str_limit($result, 200);
+        }        
+
+    }
+
 }

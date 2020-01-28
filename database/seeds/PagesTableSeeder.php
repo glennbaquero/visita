@@ -12,6 +12,10 @@ use App\Imports\Carousels\HomeBannerImport;
 
 use App\Imports\Tabbings\AboutInfoImport;
 
+use App\Imports\Teams\TeamImport;
+
+use App\Imports\AboutUsFrameThrees\AboutUsFrameThreeImport;
+
 class PagesTableSeeder extends Seeder
 {
     /**
@@ -27,6 +31,8 @@ class PagesTableSeeder extends Seeder
         Excel::import(new PageItemImport, storage_path('imports/page-items.xls'));
         Excel::import(new HomeBannerImport, storage_path('imports/home_banners.xls'));
         Excel::import(new AboutInfoImport, storage_path('imports/about_infos.xls'));
+        Excel::import(new TeamImport, storage_path('imports/teams.xls'));
+        Excel::import(new AboutUsFrameThreeImport, storage_path('imports/about_us_frame_threes.xls'));
 
         DB::commit();
     }

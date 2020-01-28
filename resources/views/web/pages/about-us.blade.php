@@ -65,6 +65,7 @@
 							</div>
 						</div>
 					@endforeach
+
 				</div>
 			</div>
 			<div class="abt-frm2__tabbing-content gnrl-scrll" id="frame2tab-collaborators">
@@ -107,8 +108,7 @@
 </section>
 <section class="abt-frm3">
 	<div class="abt-frm3-fade-up__animation inlineBlock-parent">
-		@foreach($frame_threes as $frame)
-		<div class="abt-frm3__item">
+		@foreach($frame_threes as $frame)<div class="abt-frm3__item">
 			<div class="vertical-parent">
 				<div class="vertical-align">
 					<div class="abt-frm3-fade-up__animation-title"> 
