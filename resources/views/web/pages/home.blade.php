@@ -1,12 +1,12 @@
 @extends('web.master')
 
-{{-- @section('meta:title', $page->renderMeta('title'))
+@section('meta:title', $page->renderMeta('title'))
 @section('meta:description', $page->renderMeta('description'))
 @section('meta:keywords', $page->renderMeta('keywords'))
 @section('og:image', $page->renderMetaImage())
 @section('og:title', $page->renderMeta('og_title'))
 @section('og:description', $page->renderMeta('og_description'))
- --}}
+
 @section('content')
 
 <section class="hm-frm1 gnrl-frm--sldr__container scrllfy-frame">
@@ -32,8 +32,8 @@
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align align-c">
-				<p class="frm-header m-margin-b clr--white">{{ $data['pageItems']['frame_2_header'] }}</p>
-				<h5 class="frm-title l-margin-b clr--white">{{ $data['pageItems']['frame_2_title'] }}</h5>
+				<p class="frm-header m-margin-b clr--white">{{ $pageItems['frame_2_header'] }}</p>
+				<h5 class="frm-title l-margin-b clr--white">{{ $pageItems['frame_2_title'] }}</h5>
 				<div class="hm-frm2-fade-up__animation">
 					<div class="hm-frm2__tabbing inlineBlock-parent">
 						@foreach ($about_infos as $about_info)
@@ -61,18 +61,18 @@
 			<div class="vertical-align">
 				<div class="inlineBlock-parent hm-frm3__col-holder hm-frm3-fade-up__animation">
 					<div class="width--50 align-l">
-						<h5 class="frm-title l-margin-b clr--white">{{ $data['pageItems']['frame_3_title'] }}</h5>
-						<p class="hm-frm3-fade-up__animation-content frm-header m-margin-b clr--white bold hm-frm3-fade-up__item">{{ $data['pageItems']['frame_3_header'] }}</p>
+						<h5 class="frm-title l-margin-b clr--white">{{ $pageItems['frame_3_title'] }}</h5>
+						<p class="hm-frm3-fade-up__animation-content frm-header m-margin-b clr--white bold hm-frm3-fade-up__item">{{ $pageItems['frame_3_header'] }}</p>
 						<div class="hm-frm3-fade-up__animation-content frm-description m-margin-b clr--white hm-frm3-fade-up__item">
-							{!! $data['pageItems']['frame_3_content'] !!}
+							{!! $pageItems['frame_3_content'] !!}
 						</div>
 						<div class="inlineBlock-parent hm-frm3-fade-up__animation-button">
 							{{-- <a href="#" class="frm-btn green m-margin-r">Discover the Alliance</a> --}}
-							<a href="#" class="frm-btn orange" data-remodal-target="hm-frm3--modal-1">{{ $data['pageItems']['frame_3_link_2_label'] }}</a>
+							<a href="#" class="frm-btn orange" data-remodal-target="hm-frm3--modal-1">{{ $pageItems['frame_3_link_2_label'] }}</a>
 						</div>
 					</div
 					><div class="width--50 align-c">
-						<img src="{!! $data['pageItems']['frame_3_image'] !!}" class="hm-frm3__img hm-frm3-fade-up__animation-img">
+						<img src="{!! $pageItems['frame_3_image'] !!}" class="hm-frm3__img hm-frm3-fade-up__animation-img">
 					</div>
 				</div>
 			</div>
@@ -85,9 +85,9 @@
 			<img src="{{ asset('images/close-button.png') }}" class="gnrl-rmdl__close-btn-img">
 		</button>
 		<div class="frm-cntnr align-c">
-			<h5 class="frm-title l-margin-b clr--green align-l">{{ $data['pageItems']['frame_3_modal_title'] }}</h5>
+			<h5 class="frm-title l-margin-b clr--green align-l">{{ $pageItems['frame_3_modal_title'] }}</h5>
 			<div class="frm-description clr--gray align-l gnrl-scrll">
-				{!! $data['pageItems']['frame_3_modal_content'] !!}
+				{!! $pageItems['frame_3_modal_content'] !!}
 			</div>
 		</div>
 	</div>
@@ -100,16 +100,16 @@
 			<div class="vertical-align">
 				<div class="inlineBlock-parent hm-frm4-fade-up__animation">
 					<div class="width--50 align-c">
-						<img src="{!! $data['pageItems']['frame_4_image'] !!}" class="hm-frm4__img hm-frm4-fade-up__animation-img">
+						<img src="{!! $pageItems['frame_4_image'] !!}" class="hm-frm4__img hm-frm4-fade-up__animation-img">
 					</div
 					><div class="width--50 align-l">
-						<h5 class="frm-title l-margin-b clr--white">{{ $data['pageItems']['frame_4_title'] }}</h5>
-						<p class="hm-frm4-fade-up__animation-content frm-header m-margin-b clr--white bold">{{ $data['pageItems']['frame_4_header'] }}</p>
+						<h5 class="frm-title l-margin-b clr--white">{{ $pageItems['frame_4_title'] }}</h5>
+						<p class="hm-frm4-fade-up__animation-content frm-header m-margin-b clr--white bold">{{ $pageItems['frame_4_header'] }}</p>
 						<div class="hm-frm4-fade-up__animation-content frm-description m-margin-b clr--white hm-frm4-fade-up__item">
-							{!! $data['pageItems']['frame_4_content'] !!}
+							{!! $pageItems['frame_4_content'] !!}
 						</div>
 						<div class="hm-frm4-fade-up__animation-button inlineBlock-parent">
-							<a href="#" class="frm-btn green m-margin-r" data-remodal-target="hm-frm4--modal-1">{{ $data['pageItems']['frame_4_link_1_label'] }}</a>
+							<a href="#" class="frm-btn green m-margin-r" data-remodal-target="hm-frm4--modal-1">{{ $pageItems['frame_4_link_1_label'] }}</a>
 							{{-- <a href="" class="frm-btn orange">Learn More</a> --}}
 						</div>
 					</div>
@@ -124,9 +124,9 @@
 			<img src="{{ asset('images/close-button.png') }}" class="gnrl-rmdl__close-btn-img">
 		</button>
 		<div class="frm-cntnr align-c">
-			<h5 class="frm-title l-margin-b clr--green align-l">{{ $data['pageItems']['frame_4_modal_title'] }}</h5>
+			<h5 class="frm-title l-margin-b clr--green align-l">{{ $pageItems['frame_4_modal_title'] }}</h5>
 			<div class="frm-description m-margin-b clr--gray align-l gnrl-scrll">
-				{!! $data['pageItems']['frame_4_modal_content'] !!}
+				{!! $pageItems['frame_4_modal_content'] !!}
 			</div>
 		</div>
 	</div>
@@ -149,6 +149,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="frm-bckgrnd size-cover bring-front" style="background-image: url('{!! $data['pageItems']['frame_6_background_image'] !!}');"></div>
+	<div class="frm-bckgrnd size-cover bring-front" style="background-image: url('{!! $pageItems['frame_6_background_image'] !!}');"></div>
 </section>
 @endsection
