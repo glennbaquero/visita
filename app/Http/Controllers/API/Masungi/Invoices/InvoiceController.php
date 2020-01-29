@@ -165,6 +165,7 @@ class InvoiceController extends Controller
     {
 
         Log::info($request);
+        Log::info($request['reference_code']. '----'.$request['payment_code']);
 
     	if(!$request['reference_code']) {
     		return 3; // reference code is required 
