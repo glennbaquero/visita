@@ -38,7 +38,8 @@ class LoginController extends Controller
     {
         // return redirect()->route('web.sign-in');
         return view('web.auth.login',[
-            'provider' => 'facebook'
+            'provider' => 'facebook',
+            'page_scripts'=> 'login'
         ]);
     }
 

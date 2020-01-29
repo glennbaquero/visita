@@ -1,11 +1,11 @@
 @extends('web.master')
 
-{{-- @section('meta:title', $page->renderMeta('title'))
+@section('meta:title', $page->renderMeta('title'))
 @section('meta:description', $page->renderMeta('description'))
 @section('meta:keywords', $page->renderMeta('keywords'))
 @section('og:image', $page->renderMetaImage())
 @section('og:title', $page->renderMeta('og_title'))
-@section('og:description', $page->renderMeta('og_description')) --}}
+@section('og:description', $page->renderMeta('og_description'))
 
 @section('content')
 
@@ -18,9 +18,9 @@
 						<div class="vertical-parent">
 							<div class="vertical-align align-l">
 								<p class="frm-header s-margin-b clr--white">About</p>
-								<h5 class="frm-title s-margin-b clr--white abt-frm1-fade-up__animation-title">{{ $content->title }}</h5>
+								<h5 class="frm-title s-margin-b clr--white abt-frm1-fade-up__animation-title">{{ $pageItems['frame_1_text'] }}</h5>
 								<div class="abt-frm1-fade-up__animation-description frm-description clr--white gnrl-scrll">
-									{!! $content->description !!}
+									{!! $pageItems['frame_1_content'] !!}
 								</div>
 							</div>
 						</div>
@@ -29,14 +29,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="frm-bckgrnd size-cover bring-back" style="background-image: url({{ $content->image_url }});"></div>
+	<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('{!! $pageItems['frame_1_image'] !!}');"></div>
 </section>
 <div class="mbl-abt-frm1 frm-cntnr align-c width--100">
 	<div class="width--85 margin-a">
 		<p class="frm-header s-margin-b clr--green">About</p>
-		<h5 class="frm-title s-margin-b clr--green abt-frm1-fade-up__animation-title">Visita</h5>
+		<h5 class="frm-title s-margin-b clr--green abt-frm1-fade-up__animation-title">{{ $pageItems['frame_1_text'] }}</h5>
 		<div class="abt-frm1-fade-up__animation-description frm-description clr--gray gnrl-scrll">
-			{!! $content->description !!}
+			{!! $pageItems['frame_1_content'] !!}
 		</div>
 	</div>
 </div>
@@ -65,6 +65,7 @@
 							</div>
 						</div>
 					@endforeach
+
 				</div>
 			</div>
 			<div class="abt-frm2__tabbing-content gnrl-scrll" id="frame2tab-collaborators">
@@ -107,8 +108,7 @@
 </section>
 <section class="abt-frm3">
 	<div class="abt-frm3-fade-up__animation inlineBlock-parent">
-		@foreach($frame_threes as $frame)
-		<div class="abt-frm3__item">
+		@foreach($frame_threes as $frame)<div class="abt-frm3__item">
 			<div class="vertical-parent">
 				<div class="vertical-align">
 					<div class="abt-frm3-fade-up__animation-title"> 

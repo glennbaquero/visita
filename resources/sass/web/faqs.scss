@@ -31,14 +31,8 @@
 
 		&.active,
 		&:hover {
-			background: $green;
+			background: $white;
 			
-			.fqs-frm1__selection-icon,
-			.frm-title,
-			.frm-description * {
-				color: $white !important;
-				filter: brightness(0) invert(1);
-			}
 		}
 	}
 

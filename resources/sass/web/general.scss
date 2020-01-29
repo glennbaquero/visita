@@ -5,7 +5,9 @@ body {
     overflow-x: hidden;
     margin: 0;
 
-    &.overflow-hidden {
+    &.ovrflw-hddn {
+    	width: 100%;
+    	height: 100vh;
     	overflow: hidden;
     }
 }
@@ -77,20 +79,19 @@ $font-family-work-sans-bold: 'WorkSans-Bold';
 
 	* {
 		font-family: $font-family-work-sans-regular;
-		font-size: 1.1em;
+		font-size: 15px;
 		line-height: 1.5em;
 	}
 
 	strong {
 		font-family: $font-family-work-sans-bold;
-		font-size: 1.08em;
 	}
 }
 
 p,a {
 	font-family: $font-family-work-sans-regular;
 	line-height: 1.5em;
-	font-size: 1.1em;
+	font-size: 15px;
 }
 
 /*
@@ -281,7 +282,7 @@ $frame-bg--pos__b: bottom center;
 			text-decoration: none;
 			color: $white;
 			cursor: pointer;
-			font-size: 1.1em;
+			font-size: 15px;
 			transition: all 300ms ease;
 			text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.65);
 
@@ -388,7 +389,7 @@ $frame-bg--pos__b: bottom center;
 	.frm-cntnr__nav-link {
 		text-transform: uppercase;
 		color: $white;
-		font-size: 1.1em;
+		font-size: 15px;
 		text-decoration: none;
 		transition: all 300ms ease;
 
@@ -576,62 +577,62 @@ $frame-bg--pos__b: bottom center;
 			padding-left: 5%;
 		}
 
-	    ul {
-	    	font-size: 1em;
-	        width: 100%;
-	        padding-left: 15px;
-	    } 
+	  //   ul {
+	  //   	font-size: 1em;
+	  //       width: 100%;
+	  //       padding-left: 15px;
+	  //   } 
 
-	    ol {
-	    	font-size: 1em;
-	        width: 100%;
-	        padding-left: 15px;
+	  //   ol {
+	  //   	font-size: 1em;
+	  //       width: 100%;
+	  //       padding-left: 15px;
 
-	        strong {
-	        	font-size: 1em;
-	        }
-	    }
+	  //       strong {
+	  //       	font-size: 1em;
+	  //       }
+	  //   }
 
-	    li {
-	        display: list-item;
-	        padding-bottom: 5px;
-	        list-style-position: inside;
-	    }
+	  //   li {
+	  //       display: list-item;
+	  //       padding-bottom: 5px;
+	  //       list-style-position: inside;
+	  //   }
 
-	    p {
-	    	a { font-size: 0.9em; }
-			p {	font-size: 1em; }
-	    }
+	  //   p {
+	  //   	a { font-size: 0.9em; }
+			// p {	font-size: 1em; }
+	  //   }
 
-	    a {
-    		color: $green;
-    		text-decoration: underline;
-	    }
+	  //   a {
+   //  		color: $green;
+   //  		text-decoration: underline;
+	  //   }
 
-	    ul li {
-	    	li { font-size: 1em; }
-	    }
+	  //   ul li {
+	  //   	li { font-size: 1em; }
+	  //   }
 
-	    ul li {
-	    	strong { font-size: 1em; }
-	    }
+	  //   ul li {
+	  //   	strong { font-size: 1em; }
+	  //   }
 
-	    b {
-	    	font-family: $font-family-work-sans-bold;
-	    	font-size: 1em;
-	    }
+	  //   b {
+	  //   	font-family: $font-family-work-sans-bold;
+	  //   	font-size: 1em;
+	  //   }
 
-	    p {
-	    	strong {
-		    	font-family: $font-family-work-sans-bold;
-		    	font-size: 1em;
+	  //   p {
+	  //   	strong {
+		 //    	font-family: $font-family-work-sans-bold;
+		 //    	font-size: 1em;
 
-		    	u {
-			    	font-family: $font-family-work-sans-bold;
-			    	font-size: 1em;
-		    	}
-	    	}
-	    }
+		 //    	u {
+			//     	font-family: $font-family-work-sans-bold;
+			//     	font-size: 1em;
+		 //    	}
+	  //   	}
+	  //   }
 
 	}
 
@@ -720,7 +721,81 @@ $frame-bg--pos__b: bottom center;
 
 }
 
-
 .error-show {
 	color: #f12727;
+}
+
+/*
+* Loading Screen
+* ldng-scrn : loading screen
+*/
+.ldng-scrn {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 100vh;
+	overflow: hidden;
+	width: 100%;
+	z-index: 99999;
+	background: $white;
+
+	.loader,
+	.loader:after {
+		border-radius: 50%;
+		width: 10em;
+		height: 10em;
+	}
+	.loader {
+		position: absolute;
+		left: 0px;
+		right: 0px;
+		top: 41vh;
+		margin: auto;
+		font-size: 6px;
+		text-indent: -9999em;
+		border-top: 1.1em solid $orange;
+		border-right:1.1em solid $green;
+		border-bottom: 1.1em solid $green;
+		border-left: 1.1em solid $green;
+		-webkit-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-animation: load8 1.1s infinite linear;
+		animation: load8 1.1s infinite linear;
+	}
+	@-webkit-keyframes load8 {
+		0% {
+	    	-webkit-transform: rotate(0deg);
+	    	transform: rotate(0deg);
+	  	}
+	  	100% {
+	    	-webkit-transform: rotate(360deg);
+	    	transform: rotate(360deg);
+	 	}
+	}
+	@keyframes load8 {
+		0% {
+	    	-webkit-transform: rotate(0deg);
+	    	transform: rotate(0deg);
+	  	}
+	  	100% {
+	    	-webkit-transform: rotate(360deg);
+	    	transform: rotate(360deg);
+	  	}
+	}
+
+	.ldng-scrn__text {
+		position: absolute;
+		text-align: center;
+		top: 52vh;
+		left: 0px;
+		right: 0px;
+		margin: auto;
+
+		.frm-header {
+			font-weight: bold;
+			color: $orange;
+		}
+	}
+
 }

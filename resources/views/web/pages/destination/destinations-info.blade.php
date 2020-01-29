@@ -1,5 +1,12 @@
 @extends('web.master')
 
+@section('meta:title', $page->renderMeta('title'))
+@section('meta:description', $page->renderMeta('description'))
+@section('meta:keywords', $page->renderMeta('keywords'))
+@section('og:image', $page->renderMetaImage())
+@section('og:title', $page->renderMeta('og_title'))
+@section('og:description', $page->renderMeta('og_description'))
+
 @section('content')
 
 <section class="dstntns-inf-frm1 gnrl-frm--sldr__container">
@@ -13,30 +20,30 @@
 								<div class="vertical-parent">
 									<div class="vertical-align align-l">
 										<p class="frm-header s-margin-b clr--white">Destination</p>
-										<h5 class="frm-title small s-margin-b clr--white">Mt. Pulag</h5>
+										<h5 class="frm-title small s-margin-b clr--white">{{ $selected_destination->name }}</h5>
 										
 										<div class="dstntns-inf-frm1__location inlineBlock-parent">
 											<img class="dstntns-inf-frm1__location-img" src="{{ asset('images/location-icon.png') }}">	
-											<p class="frm-header s-margin-b clr--white">Location: Baguio, Luzon, Philippines.</p>
+											<p class="frm-header s-margin-b clr--white">Location: {{ $selected_destination->location }}</p>
 										</div>
 
 										<div class="dstntns-inf-frm1__location inlineBlock-parent">
 											<img class="dstntns-inf-frm1__location-img" src="{{ asset('images/calendar-icon.png') }}">	
-											<p class="frm-header s-margin-b clr--white">Duration: 1 - 3 Days</p>
+											<p class="frm-header s-margin-b clr--white">Duration: {{ $selected_destination->duration }} Day(s)</p>
 										</div>
 
 										<div class="dstntns-inf-frm1__location inlineBlock-parent">
 											<img class="dstntns-inf-frm1__location-img" src="{{ asset('images/recommended-icon.png') }}">	
-											<p class="frm-header s-margin-b clr--white">Recommended for: Beginner hikders, nature enthusiasts</p>
+											<p class="frm-header s-margin-b clr--white">Recommended for: {{ $selected_destination->recommended }}</p>
 										</div>
 
 										<div class="dstntns-inf-frm1__location inlineBlock-parent">
 											<img class="dstntns-inf-frm1__location-img" src="{{ asset('images/activities-icon.png') }}">	
-											<p class="frm-header s-margin-b clr--white">Activities: Hiking</p>
+											<p class="frm-header s-margin-b clr--white">Activities: {{ $selected_destination->experience }}</p>
 										</div>
 
 										<div class="frm-description clr--white l-margin-t m-margin-b dstntns-inf-frm1__location-desc">
-											<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
+											<p>{{ $selected_destination->renderShortOverview() }}</p>
 										</div>
 
 										<button class="frm-btn green">Request to Visit</button>
@@ -48,7 +55,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('http://www.lakwatseradeprimera.com/wp-content/uploads/2010/02/133.jpg');"></div>
+			<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('{{ $selected_destination->pictures()->first()->renderImagePath() }}');"></div>
 		</div>
 	</div>
 </section>

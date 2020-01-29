@@ -11,7 +11,6 @@ Vue.component('user-inquiry', require('./views/web/inquiries/Inquiry.vue').defau
 /*
 * User Destination
 */
-
 Vue.component('user-destination', require('./views/web/destinations/Destination.vue').default);
 
 /*

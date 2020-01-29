@@ -7,10 +7,12 @@
     @include('web.partials.styles')
 
 </head>
-<body>
+<body class="ovrflw-hddn">
     
     @include('sweetalert::alert')
     <div id="app">
+
+        @include('web.partials.loading-screen')
 
         @include('web.partials.header')
         
