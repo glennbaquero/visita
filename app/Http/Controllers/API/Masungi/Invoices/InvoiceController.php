@@ -170,22 +170,28 @@ class InvoiceController extends Controller
     	if(!$request['reference_code']) {
     		return 3; // reference code is required 
     	}
+        Log::info('Condition pass');
 
         $invoice = Invoice::where('reference_code', $request['reference_code'])->first();      
+        Log::info('Invoice is get');
 		
 		$admins = Admin::all();
+        Log::info('Admins get');
 		$main = $invoice->book->guests->where('main', true)->first();
+        Log::info('main guest get');
 		
     	DB::beginTransaction();
             $invoice->update([
                 'is_paid' => true,
                 'payment_code' => $request['payment_code']
             ]);     
+            Log::info('invoice update');
 
     		// foreach ($admins as $admin) {
             //    $admin->notify(new BankDepositSlipUploadedNotification($invoice, $main));
             // }
     	DB::commit();
+        Log::info('DB commit');
 
     	return 200;
     }
