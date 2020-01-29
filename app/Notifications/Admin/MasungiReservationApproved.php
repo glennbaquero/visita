@@ -47,7 +47,7 @@ class MasungiReservationApproved extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                ->subject(config('app.name') . ': ' . 'Reservation Approved!')
+                ->subject('Masungi Georeserve: ' . 'Reservation Approved!')
                 ->greeting('Hello ' . $notifiable->renderName() . ',')
                 ->line('Your reservation is approved!')
                 ->line('To complete your reservation please click the link below to redirect you to payment.')

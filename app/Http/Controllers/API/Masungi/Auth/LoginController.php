@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Support\Facades\Log;
 
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
@@ -70,6 +71,7 @@ class LoginController extends Controller
         	$response = $invoiceController->showReservations($user);
         } elseif($option === 'update') {
         	$response = $invoiceController->paypalPaid($request);
+            Log::info($request);
         }
 
         return $response;
