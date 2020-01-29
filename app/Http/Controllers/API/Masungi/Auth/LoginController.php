@@ -35,6 +35,7 @@ class LoginController extends Controller
      */
     public function login(Request $request, $option)
     {
+        Log::info($request);
         $token = null;
         $action = false;
         $api_key = $request->input('api_key');
@@ -71,7 +72,6 @@ class LoginController extends Controller
         	$response = $invoiceController->showReservations($user);
         } elseif($option === 'update') {
         	$response = $invoiceController->paypalPaid($request);
-            Log::info($request);
         }
 
         return $response;
