@@ -3,15 +3,26 @@
 namespace App\Models\Invoices;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 use App\Models\Books\Book;
 use App\Models\Users\User;
 use App\Traits\ArchiveableTrait;
+use App\Traits\HelperTrait;
+use App\Traits\DateTrait;
+use App\Traits\PaginationTrait;
+use App\Traits\ArrayFormatterTrait;
 
 class Invoice extends Model
 {
-    use ArchiveableTrait;
-    
+    use ArchiveableTrait, HelperTrait, DateTrait, LogsActivity, PaginationTrait, ArrayFormatterTrait;
+
+    protected $guarded = [];
+
+    protected static $logAttributes = [];
+    protected static $ignoreChangedAttributes = ['updated_at'];
+    protected static $logOnlyDirty = false;
+
     public function book() {
     	return $this->belongsTo(Book::class);
     }
