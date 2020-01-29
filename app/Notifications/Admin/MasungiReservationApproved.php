@@ -13,7 +13,7 @@ class MasungiReservationApproved extends Notification
 
     public $next_step;
     private $invoice;
-    public $masungi_url = config('masungi.url');
+    public $masungi_url;
 
     /**
      * Create a new notification instance.
@@ -24,6 +24,7 @@ class MasungiReservationApproved extends Notification
     {
         $this->next_step = $next_step;
         $this->invoice = $invoice;
+        $this->masungi_url = config('masungi.url');
     }
 
     /**
