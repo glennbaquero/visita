@@ -253,6 +253,10 @@ class BaseUser extends Authenticatable
         return ucwords($this->first_name . ' ' . $this->last_name);
     }
 
+    public function renderFirstName() {
+        return ucwords($this->first_name);
+    }
+
     public function renderImagePath($column = 'image_path') {
         $path = '/images/avatar.png';
 

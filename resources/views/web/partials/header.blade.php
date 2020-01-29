@@ -23,7 +23,7 @@
 			><div class="hdr-frm__nav-col mbl-hdr-frm__nav-col inlineBlock-parent">
 				<img class="hdr-frm__nav-link-img" src="{{ asset('images/user-icon.png') }}">
 				@if(auth()->guard('web')->check()) 
-				<a href="{{ route('web.dashboard') }}" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.sign-in','web.sign-up','web.forgot-password','web.reset-password']) }}">{{ auth()->guard('web')->user()->renderName() }}</a>
+				<a href="{{ route('web.dashboard') }}" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.sign-in','web.sign-up','web.forgot-password','web.reset-password']) }}">{{ auth()->guard('web')->user()->renderFirstName() }}</a>
 				@else
 				<a href="{{ route('web.login') }}" class="hdr-frm__nav-link {{ $checker->route->areOnRoutes(['web.sign-in','web.sign-up','web.forgot-password','web.reset-password']) }}">Log In</a>
 				@endif

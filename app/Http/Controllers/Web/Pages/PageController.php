@@ -145,6 +145,9 @@ class PageController extends Controller
 	}
 
 	public function showRequestToVisit($id, $name) {
+
+        $data = $this->getPageData('destination');
+
 		$destination = Destination::find($id);
 		$destination->image = $destination->pictures->first()->renderImagePath();
 		$destination->allocations = $destination->allocations;
@@ -153,42 +156,48 @@ class PageController extends Controller
 		$visitor_types = VisitorType::all();
 		$genders = Gender::all();
 		$countries = Countries::all();
-        return view('web.pages.destination.request-to-visit', [
-        	'page_scripts'=> 'requestToVisit',
-        	'destination' => $destination,
+        
+        return view('web.pages.destination.request-to-visit', array_merge($data, [
+        	'quote' => Inspiring::quote(),
+           	'destination' => $destination,
         	'visitor_types' => $visitor_types,
         	'genders' => $genders,
         	'countries' => $countries,
         	'items' => json_encode($result),
-        ]);
+        	'page_scripts'=> 'requestToVisit'
+        ]));
+
 	}
 
 	/* 
 	* Show Faqs 
 	*/
 	public function showFaqs() {
+
+        $data = $this->getPageData('faqs');
 		$visitors = Faq::where('type', 'VISITOR')->get();
 		$managers = Faq::where('type', 'DESTINATION MANAGER')->get();
-        return view('web.pages.faqs', [
-        	'page_scripts'=> 'faqs',
+        
+        return view('web.pages.faqs', array_merge($data, [
+        	'quote' => Inspiring::quote(),
         	'visitors'=> $visitors,
-        	'managers'=> $managers
-        ]);
+        	'managers'=> $managers,
+        	'page_scripts'=> 'faqs'
+        ]));
 	}
 
 	/* 
 	* Show Contact Us 
 	*/
 	public function showContactUs() {
-		$page = Page::where('slug', 'home')->first();
 
-        $data = $page->getData();
-        $destination = $this->formatData();
-
-        return view('web.pages.contact-us', [
-        	'data' => $data,
+        $data = $this->getPageData('contact_us');
+        
+        return view('web.pages.contact-us', array_merge($data, [
+        	'quote' => Inspiring::quote(),
         	'page_scripts'=> 'contact-us'
-        ]);
+        ]));
+
 	}
 
 	/* 
@@ -202,23 +211,35 @@ class PageController extends Controller
 
 	public function showSignUp() {
 
-        return view('web.pages.auth.sign-up', [
+        $data = $this->getPageData('login');
+        
+        return view('web.pages.auth.sign-up', array_merge($data, [
+        	'quote' => Inspiring::quote(),
         	'page_scripts'=> 'sign-up'
-        ]);
+        ]));
+
 	}
 
 	public function showForgotPassword() {
 
-        return view('web.pages.auth.forgot-password', [
+        $data = $this->getPageData('login');
+        
+        return view('web.pages.auth.forgot-password', array_merge($data, [
+        	'quote' => Inspiring::quote(),
         	'page_scripts'=> 'forgot-password'
-        ]);
+        ]));
+
 	}
 
 	public function showResetPassword() {
 
-        return view('web.pages.auth.reset-password', [
+        $data = $this->getPageData('login');
+        
+        return view('web.pages.auth.reset-password', array_merge($data, [
+        	'quote' => Inspiring::quote(),
         	'page_scripts'=> 'reset-password'
-        ]);
+        ]));
+   
 	}
 
 	/* 
@@ -226,16 +247,24 @@ class PageController extends Controller
 	*/
 	public function showDashboard() {
 
-        return view('web.pages.user.dashboard', [
+        $data = $this->getPageData('dashboard');
+        
+        return view('web.pages.user.dashboard', array_merge($data, [
+        	'quote' => Inspiring::quote(),
         	'page_scripts'=> 'dashboard'
-        ]);
+        ]));
+
 	}
 
 	public function showProfile() {
 
-        return view('web.pages.user.profile', [
+        $data = $this->getPageData('dashboard');
+        
+        return view('web.pages.user.dashboard', array_merge($data, [
+        	'quote' => Inspiring::quote(),
         	'page_scripts'=> 'profile'
-        ]);
+        ]));
+
 	}
 
 	/* 

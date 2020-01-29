@@ -1,11 +1,11 @@
 @extends('web.master')
 
-{{-- @section('meta:title', $page->renderMeta('title'))
+@section('meta:title', $page->renderMeta('title'))
 @section('meta:description', $page->renderMeta('description'))
 @section('meta:keywords', $page->renderMeta('keywords'))
 @section('og:image', $page->renderMetaImage())
 @section('og:title', $page->renderMeta('og_title'))
-@section('og:description', $page->renderMeta('og_description')) --}}
+@section('og:description', $page->renderMeta('og_description'))
 
 @section('content')
 
@@ -19,7 +19,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="frm-bckgrnd size-cover bring-front" style="background-image: url('{!! $data['pageItems']['frame_6_background_image'] !!}');"></div>
+	<div class="frm-bckgrnd size-cover bring-front" style="background-image: url('{!! $pageItems['frame_1_background_image'] !!}');"></div>
 </section>
 
 @endsection

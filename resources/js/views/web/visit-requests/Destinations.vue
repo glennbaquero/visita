@@ -33,8 +33,25 @@
 				<div class="dstntns-frm1__col-inner-holder margin-a width--85">
 					<div class="dstntns-frm1__search-holder width--100 align-r">
 						<div class="dstntns-frm1__search frm-inpt m-margin-b">
-							<input type="text" v-model="searchItem" placeholder="Where do you want to go?" @keyup="search">
-							<button><img src="images/search-button.png"></button>
+							<input 
+							    id="input-destination"
+								type="text" 
+								list="destinations-list"
+								placeholder="Where do you want to go?"
+								autocomplete="on"
+							/>
+							<datalist 
+								id="destinations-list"
+							>
+								<option
+									v-for="destination in searchableDestinations" 
+									:id="'destinations/destinations-info/'+destination.id"
+									:value="destination.name"
+								>
+								</option>
+							</datalist>
+							<!-- <input type="text" v-model="searchItem" placeholder="Where do you want to go?" @keyup="search">
+							<button><img src="images/search-button.png"></button> -->
 						</div>
 					</div>
 					<p class="dstntns-frm1__caption frm-header clr--gray">Choose from stunning destinations committed to sustainable tourism.</p>
@@ -72,8 +89,18 @@
 		},
 
 		mounted() {
+
 			this.duplicateDestinations = this.destinations;
 			this.searchableDestinations = this.destinations;
+
+
+			// Search
+			$('#input-destination').on('change',function() {
+				var opt = $('option[value="'+$(this).val()+'"]');
+				var url = opt.attr('id');
+				window.location.href = url;
+			});
+
 		},
 
 		methods: {

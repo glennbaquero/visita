@@ -471,7 +471,7 @@ var app = {
 		    });
 
 
-		    $('.dstntns-frm1__slider-thumbnail-item').first().addClass('active');
+		    $('.dstntns-frm1__slider-thumbnail-item[data-slick-index=0]').addClass('active');
 
 		    $('.dstntns-frm1__slider-thumbnail-item-img').on('click', function(){
 		    	$('.dstntns-frm1__slider-thumbnail-item').removeClass('active');
@@ -517,34 +517,7 @@ var app = {
 		},
 
 		requestToVisit: function(){
-		    $('.rqst-frm1__step-4-content-checkbox-container').on('click', function(){
-		    	$('.rqst-frm1__step-4-content-checkbox-container').removeClass('active');
-		    	$(this).addClass('active');
-		    });	
-
-	
-
-			var information = $('.rqst-frm1__step-4-content-info-icon');
-
- 			information.hover(function(e) {
-				$(this).next().fadeIn(200);
-			}, function(e) {
-				$(this).next().fadeOut(200);
-			});
-
-			$('*').not('.rqst-frm1__step-4-content-info-icon').on('touchstart', function(){ 
-	            $(this).next().fadeOut(200);
- 			})
-
-			var $window = $(window);
-		    	$window.scroll(function () {
-		        if ($window.scrollTop() > 0) {
-		          	$('.rqst-frm1__steps-header, .rqst-frm1__steps-form-cards').addClass('scroll');
-		        } else {
-		        	$('.rqst-frm1__steps-header, .rqst-frm1__steps-form-cards').removeClass('scroll');
-		        }
-		    });
-
+		  
 		},
 
 		login: function() {

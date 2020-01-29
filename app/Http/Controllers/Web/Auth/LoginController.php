@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use App\Models\Pages\Page;
+
 use Auth;
+
 
 class LoginController extends Controller
 {
@@ -36,11 +39,17 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        // return redirect()->route('web.sign-in');
-        return view('web.auth.login',[
+
+        $page = Page::where('slug', 'login')->first();
+
+        $data = $page->getData();
+        
+        return view('web.auth.login', [ 
+            'data' => $data, 
             'provider' => 'facebook',
             'page_scripts'=> 'login'
         ]);
+
     }
 
     /**

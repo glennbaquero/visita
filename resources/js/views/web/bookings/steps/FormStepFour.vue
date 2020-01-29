@@ -66,8 +66,8 @@
 									>
 									<div class="rqst-frm1__step-4-content-info-position">
 										<div class="rqst-frm1__step-4-content-info">
-											<div class="width--90 margin-a">
-												<p class="frm-header clr--white"><strong>Information:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here</p>
+											<div class="width--90 margin-a frm-description clr--white">
+												<p><strong>Information:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here</p>
 											</div>
 										</div>
 									</div>
@@ -116,8 +116,8 @@
 							>
 							<div class="rqst-frm1__step-4-content-info-position">
 								<div class="rqst-frm1__step-4-content-info">
-									<div class="width--90 margin-a">
-										<p class="frm-header clr--white"><strong>Information:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here</p>
+									<div class="width--90 margin-a frm-description clr--white">
+										<p><strong>Information:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here</p>
 									</div>
 								</div>
 							</div>
@@ -152,8 +152,8 @@
 							>
 							<div class="rqst-frm1__step-4-content-info-position">
 								<div class="rqst-frm1__step-4-content-info">
-									<div class="width--90 margin-a">
-										<p class="frm-header clr--white"><strong>Information:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here</p>
+									<div class="width--90 margin-a frm-description clr--white">
+										<p><strong>Information:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here</p>
 									</div>
 								</div>
 							</div>
@@ -254,6 +254,33 @@
 			this.conservationFeeForVisitorType();
 			this.specialFee();
 		  	this.conservationFeeTotal = this.conservationFeeTotal - this.specialFeeTotal;
+
+		    $('.rqst-frm1__step-4-content-checkbox-container').on('click', function(){
+		    	$('.rqst-frm1__step-4-content-checkbox-container').removeClass('active');
+		    	$(this).addClass('active');
+		    });	
+
+			var information = $('.rqst-frm1__step-4-content-info-icon');
+
+ 			information.hover(function(e) {
+				$(this).next().fadeIn(200);
+			}, function(e) {
+				$(this).next().fadeOut(200);
+			});
+
+			$('*').not('.rqst-frm1__step-4-content-info-icon').on('touchstart', function(){ 
+	            $(this).next().fadeOut(200);
+ 			})
+
+			var $window = $(window);
+		    	$window.scroll(function () {
+		        if ($window.scrollTop() > 0) {
+		          	$('.rqst-frm1__steps-header, .rqst-frm1__steps-form-cards').addClass('scroll');
+		        } else {
+		        	$('.rqst-frm1__steps-header, .rqst-frm1__steps-form-cards').removeClass('scroll');
+		        }
+		    });
+
 		},
 
 		methods: {
