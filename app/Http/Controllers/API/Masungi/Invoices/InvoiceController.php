@@ -19,6 +19,8 @@ use App\Models\Users\Admin;
 
 use App\Notifications\Reservation\BookingNotification;
 use App\Notifications\Web\Bookings\NewBookingNotification;
+use App\Notifications\Admin\Paypal\AdminInvoicePaid;
+use App\Notifications\Web\Paypal\UserInvoicePaid;
 
 use DB;
 
@@ -191,11 +193,17 @@ class InvoiceController extends Controller
             // $invoice->save();
             Log::info('invoice update');
 
-    		// foreach ($admins as $admin) {
-            //    $admin->notify(new BankDepositSlipUploadedNotification($invoice, $main));
-            // }
+    		
     	DB::commit();
         Log::info('DB commit');
+        
+        $main->notify(new UserInvoicePaid($invoice));
+        Log::info('Email sent to user');
+
+        foreach ($admins as $admin) {
+           $admin->notify(new AdminInvoicePaid($invoice));
+        }
+        Log::info('Email sent to admin');
 
     	return 200;
     }
