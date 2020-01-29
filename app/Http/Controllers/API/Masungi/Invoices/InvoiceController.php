@@ -166,11 +166,11 @@ class InvoiceController extends Controller
 
         Log::info($request);
 
-    	if(!$request->reference_code) {
+    	if(!$request['reference_code']) {
     		return 3; // reference code is required 
     	}
 
-        $invoice = Invoice::where('reference_code', $request->reference_code)->first();      
+        $invoice = Invoice::where('reference_code', $request['reference_code'])->first();      
 		
 		$admins = Admin::all();
 		$main = $invoice->book->guests->where('main', true)->first();
@@ -178,7 +178,7 @@ class InvoiceController extends Controller
     	DB::beginTransaction();
             $invoice->update([
                 'is_paid' => true,
-                'payment_code' => $request->payment_code
+                'payment_code' => $request['payment_code']
             ]);     
 
     		// foreach ($admins as $admin) {
