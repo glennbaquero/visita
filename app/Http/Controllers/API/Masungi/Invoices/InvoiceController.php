@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Masungi\Invoices;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 use App\Http\Requests\API\Masungi\InvoiceStoreRequest;
 
@@ -18,6 +19,8 @@ use App\Models\Users\Admin;
 
 use App\Notifications\Reservation\BookingNotification;
 use App\Notifications\Web\Bookings\NewBookingNotification;
+use App\Notifications\Admin\Paypal\AdminInvoicePaid;
+use App\Notifications\Web\Paypal\UserInvoicePaid;
 
 use DB;
 
@@ -160,28 +163,47 @@ class InvoiceController extends Controller
     	]);
     }
 
-    public function paypalPaid(Request $request) 
+    public function paypalPaid($request) 
     {
 
-    	if(!$request->reference_code) {
+        Log::info($request);
+        Log::info($request['reference_code']. '----'.$request['payment_code']);
+
+    	if(!$request['reference_code']) {
     		return 3; // reference code is required 
     	}
+        Log::info('Condition pass');
 
-        $invoice = Invoice::where('reference_code', $request->reference_code)->first();      
+        $invoice = Invoice::where('reference_code', $request['reference_code'])->first();      
+        Log::info('Invoice is get');
 		
 		$admins = Admin::all();
+        Log::info('Admins get');
 		$main = $invoice->book->guests->where('main', true)->first();
+        Log::info('main guest get');
 		
     	DB::beginTransaction();
+            Log::info($invoice);
             $invoice->update([
                 'is_paid' => true,
-                'payment_code' => $request->payment_code
+                'payment_code' => $request['payment_code']
             ]);     
+            // $invoice->is_paid = true;
+            // $invoice->payment_code = $request['payment_code'];
+            // $invoice->save();
+            Log::info('invoice update');
 
-    		// foreach ($admins as $admin) {
-            //    $admin->notify(new BankDepositSlipUploadedNotification($invoice, $main));
-            // }
+    		
     	DB::commit();
+        Log::info('DB commit');
+        
+        $main->notify(new UserInvoicePaid($invoice));
+        Log::info('Email sent to user');
+
+        foreach ($admins as $admin) {
+           $admin->notify(new AdminInvoicePaid($invoice));
+        }
+        Log::info('Email sent to admin');
 
     	return 200;
     }

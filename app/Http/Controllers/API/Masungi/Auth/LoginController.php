@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Support\Facades\Log;
 
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
@@ -34,6 +35,7 @@ class LoginController extends Controller
      */
     public function login(Request $request, $option)
     {
+        Log::info($request->input('api_key'). $request->input('api_secret').' - '. $request->input('reference_code'). '--- '. $request->input('payment_code'));
         $token = null;
         $action = false;
         $api_key = $request->input('api_key');
