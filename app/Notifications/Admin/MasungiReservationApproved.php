@@ -55,7 +55,7 @@ class MasungiReservationApproved extends Notification
                 ->line('Invoice Reference # : '.$this->invoice->reference_code)
                 ->line('Total Payment: '.$this->invoice->grand_total)
                 ->line('Thank you!')
-                ->action('Pay now', $this->$masungi_url.$notifiable->renderName().'/'.$this->invoice->reference_code.'/'.$this->invoice->grand_total);
+                ->action('Pay now', $this->masungi_url.$notifiable->renderName().'/'.$this->invoice->reference_code.'/'.$this->invoice->grand_total);
     }
 
     /**
