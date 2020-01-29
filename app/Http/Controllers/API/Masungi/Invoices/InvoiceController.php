@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Masungi\Invoices;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 use App\Http\Requests\API\Masungi\InvoiceStoreRequest;
 
@@ -162,6 +163,8 @@ class InvoiceController extends Controller
 
     public function paypalPaid(Request $request) 
     {
+
+        Log::info($request);
 
     	if(!$request->reference_code) {
     		return 3; // reference code is required 
