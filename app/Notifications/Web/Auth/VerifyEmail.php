@@ -89,7 +89,7 @@ class VerifyEmail extends Notification implements ShouldQueue
      */
     protected function verificationUrl($notifiable)
     {
-        $user = get_class($notifiable) === 'App\Models\Users\User' ? true : false;
+        $user = get_class($notifiable) === 'App\Models\Users\User' ? 'user' : 'frontliner';
         return URL::temporarySignedRoute(
             'web.verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey(), 'user' => $user]
         );
