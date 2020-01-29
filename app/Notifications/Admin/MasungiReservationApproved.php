@@ -13,6 +13,7 @@ class MasungiReservationApproved extends Notification
 
     public $next_step;
     private $invoice;
+    public $masungi_url = config('masungi.url');
 
     /**
      * Create a new notification instance.
