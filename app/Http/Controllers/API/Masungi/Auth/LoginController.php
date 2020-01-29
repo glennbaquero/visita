@@ -71,7 +71,7 @@ class LoginController extends Controller
             // $response = $invoiceController->showReservations($request->user_id, $user);
         	$response = $invoiceController->showReservations($user);
         } elseif($option === 'update') {
-        	$response = $invoiceController->paypalPaid($request->all());
+        	$response = $invoiceController->paypalPaid($request);
         }
 
         return $response;

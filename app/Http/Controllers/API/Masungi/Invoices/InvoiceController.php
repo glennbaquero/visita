@@ -161,7 +161,7 @@ class InvoiceController extends Controller
     	]);
     }
 
-    public function paypalPaid(Request $request) 
+    public function paypalPaid($request) 
     {
 
         Log::info($request);
