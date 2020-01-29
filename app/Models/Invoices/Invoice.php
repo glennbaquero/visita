@@ -2,13 +2,16 @@
 
 namespace App\Models\Invoices;
 
-use App\Extenders\Models\BaseModel as Model;
+use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Books\Book;
 use App\Models\Users\User;
+use App\Traits\ArchiveableTrait;
 
 class Invoice extends Model
 {
+    use ArchiveableTrait;
+    
     public function book() {
     	return $this->belongsTo(Book::class);
     }

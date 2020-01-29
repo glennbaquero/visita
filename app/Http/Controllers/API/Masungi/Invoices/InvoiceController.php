@@ -182,13 +182,13 @@ class InvoiceController extends Controller
 		
     	DB::beginTransaction();
             Log::info($invoice);
-            // $invoice->update([
-            //     'is_paid' => true,
-            //     'payment_code' => $request['payment_code']
-            // ]);     
-            $invoice->is_paid = true;
-            $invoice->payment_code = $request['payment_code'];
-            $invoice->save();
+            $invoice->update([
+                'is_paid' => true,
+                'payment_code' => $request['payment_code']
+            ]);     
+            // $invoice->is_paid = true;
+            // $invoice->payment_code = $request['payment_code'];
+            // $invoice->save();
             Log::info('invoice update');
 
     		// foreach ($admins as $admin) {
