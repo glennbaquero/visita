@@ -35,7 +35,7 @@ class LoginController extends Controller
      */
     public function login(Request $request, $option)
     {
-        Log::info($request->input('api_key'), $request->input('api_secret'), $request->input('reference_code'), $request->input('payment_code'));
+        Log::info($request->input('api_key'). $request->input('api_secret').' - '. $request->input('reference_code'). '--- '. $request->input('payment_code'));
         $token = null;
         $action = false;
         $api_key = $request->input('api_key');
