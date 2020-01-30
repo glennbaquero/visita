@@ -30,7 +30,7 @@ class Admin extends Authenticatable
     
     public function destination()
     {
-        return $this->hasOne(Destination::class);
+        return $this->belongsTo(Destination::class, 'destination_id');
     }
     
     /**

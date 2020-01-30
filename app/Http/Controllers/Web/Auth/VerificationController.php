@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Passwords\PasswordBroker;
+use Illuminate\Auth\Passwords\TokenRepositoryInterface;
 use Auth;
 
 use App\Models\Users\User;
@@ -69,7 +70,7 @@ class VerificationController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function verify(Request $request)
+    public function verify(Request $request, TokenRepositoryInterface $token)
     {
 
         if($request->route('user') === 'frontliner') {
@@ -90,7 +91,8 @@ class VerificationController extends Controller
 
                 // $token->sendResetLink(collect($management));
                 // $management->save();
-                // return redirect()->route('web.frontliner.password.reset', [$token, $management->email]);
+                // $_token = $token->createToken($management);
+                // return redirect()->route('web.frontliner.password.reset', [$_token, $management->email]);
                 // $this->guard()->login($management);
                 event(new Verified($management));
             }

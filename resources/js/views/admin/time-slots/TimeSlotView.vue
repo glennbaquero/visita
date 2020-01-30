@@ -5,9 +5,19 @@
 			<template v-slot:header>About Tabbing Information</template>
 
 			<div class="row">
+				<selector class="col-sm-12 col-md-6"
+				v-model="item.allocation_id"
+				name="allocation_id"
+				label="Type"
+				:items="experiences"
+				item-value="id"
+				item-text="name"
+				placeholder="Please select a experience"
+				></selector>
+
 				<time-picker
 				v-model="item.time"
-				class="form-group col-sm-12 col-md-12 time"
+				class="form-group col-sm-12 col-md-6 time"
 				label="Time"
 				name="time"
 				placeholder="Choose time slot"
@@ -59,12 +69,14 @@ export default {
 	methods: {
 		fetchSuccess(data) {
 			this.item = data.item ? data.item : this.item;
+			this.experiences = data.experiences ? data.experiences : this.experiences;
 		},
 	},
 
 	data() {
 		return {
 			item: [],
+			experiences: [],
 		}
 	},
 

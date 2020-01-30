@@ -92,8 +92,10 @@ class Allocation extends Model
     public function getTimeSlot() {
         $result = [];
 
+
         foreach ($this->timeSlots as $timeslot) {
             $time = strtotime($timeslot->time);
+            
             array_push($result, [
                 'time' => $timeslot->time,
                 'formatted_time' => date('h:i a', $time)

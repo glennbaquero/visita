@@ -61,6 +61,13 @@ class BookController extends Controller
     {
         DB::beginTransaction();
             $item = Book::store($request, null, null, $destination);
+            
+            if($request->special_fee_path) {
+                $file = $request->special_fee_path;
+                $filename = $file->getClientOriginalName();
+                $path = 'public/special_fee';
+                $upload_path = Storage::putFileAs($path, $file, $filename);
+            }
 
             $item->guests()->create([
                     'first_name' => $request->first_name,
@@ -72,10 +79,19 @@ class BookController extends Controller
                     'emergency_contact_number' => $request->emergency_contact_number,
                     'email' => $request->email,
                     'visitor_type_id' => $request->visitor_type_id,
+                    'special_fee_id' => $request->special_fee_id,
+                    'special_fee_path' => $upload_path,
                     'main' => true
                 ]);
             if($request->guest_first_name) {
                 foreach($request->guest_first_name as $key => $guest) {
+                    if($request->guest_special_fee_path[$key]) {
+                        $file = $request->guest_special_fee_path[$key];
+                        $filename = $file->getClientOriginalName();
+                        $path = 'public/special_fee';
+                        $upload_path = Storage::putFileAs($path, $file, $filename);
+                    }
+
                     $item->guests()->create([
                         'first_name' => $request->guest_first_name[$key],
                         'last_name' => $request->guest_last_name[$key],
@@ -85,6 +101,7 @@ class BookController extends Controller
                         'nationality' => $request->guest_nationality[$key],
                         'visitor_type_id' => $request->guest_visitor_type[$key],
                         'special_fee_id' => $request->guest_special_fee_id[$key],
+                        'special_fee_path' => $upload_path,
                     ]);   
                 }
             }
@@ -118,6 +135,10 @@ class BookController extends Controller
     public function show($id, $selectedDate,$destination, $experience, $destination_name)
     {
         $item = Book::withTrashed()->findOrFail($id);
+        $submitUrl = route('admin.invoices.update', $item->invoice->id);
+        if(!$item->invoice->is_paid && $item->invoice->is_approved && $item->invoice->bank_deposit_slip) {
+            $submitUrl = route('admin.invoices.approve.deposit', $item->invoice->id);
+        }
 
         return view('admin.bookings.show', [
             'item' => $item,
@@ -125,7 +146,8 @@ class BookController extends Controller
             'date' => Carbon::parse($selectedDate)->format('F d, Y'),
             'destination' => $destination,
             'destination_name' => $destination_name,
-            'experience' => $experience
+            'experience' => $experience,
+            'submitUrl' => $submitUrl,
         ]);
     }
 

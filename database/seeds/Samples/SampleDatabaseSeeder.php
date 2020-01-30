@@ -35,8 +35,9 @@ class SampleDatabaseSeeder extends Seeder
         $this->call(FeedbackAnswersTableSeeder::class);
         $this->call(SurveyExperienceQuestionsTableSeeder::class);
         $this->call(SurveyExperienceAnswersTableSeeder::class);
-         $this->call(FaqsTableSeeder::class);
+        $this->call(FaqsTableSeeder::class);
 
+        $this->call(NewPageItemSeeder::class);
 
     }
 }

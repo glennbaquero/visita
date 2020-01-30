@@ -150,32 +150,34 @@ class ResourceFetchController extends Controller
         $items = Book::all();
         $data = [];
         foreach ($items as $item) {
-            array_push($data, [
-                'id' => $item->id,
-                'allocation_id' => $item->allocation_id,
-                'destination_id' => $item->destination_id,
-                'scheduled_at' => Carbon::parse($item->scheduled_at)->toDateString(),
-                'started_at' => $item->started_at ?? null,
-                'ended_at' => $item->ended_at ?? null,
-                'checked_in_at' => $item->checked_in_at,
-                're_scheduled_at' => Carbon::parse($item->re_scheduled_at)->toDateString(),
-                'status' => $item->getStatus(),
-                'agency_code' => $item->agency_code,
-                'total_guest' => $item->total_guest,
-                'payment_type' => $item->payment_type,
-                'payment_status' => $item->payment_status,
-                'is_walkin' => $item->is_walkin,
-                'qr_code_path' => $item->qr_code_path,
-                'qr_id' => $item->qr_id,
-                'group_remarks' => json_encode($item->groupRemarks),
-                'group_violations' => json_encode($item->groupViolations),
-                'guests' => json_encode($item->guests),
-                'main_contact' => json_encode($item->guests()->where('main', 1)->first()),
-                'allocation' => json_encode($item->allocation),
-                'created_at' => $item->created_at->format('j M Y h:i A'),
-                'is_walkin_label' => $item->is_walkin ? 'Walk-In' : 'Online',
-                'start_time' => $item->start_time
-            ]);
+            if($item->invoice->is_paid == 1) {
+                array_push($data, [
+                    'id' => $item->id,
+                    'allocation_id' => $item->allocation_id,
+                    'destination_id' => $item->destination_id,
+                    'scheduled_at' => Carbon::parse($item->scheduled_at)->toDateString(),
+                    'started_at' => $item->started_at ?? null,
+                    'ended_at' => $item->ended_at ?? null,
+                    'checked_in_at' => $item->checked_in_at,
+                    're_scheduled_at' => Carbon::parse($item->re_scheduled_at)->toDateString(),
+                    'status' => $item->getStatus(),
+                    'agency_code' => $item->agency_code,
+                    'total_guest' => $item->total_guest,
+                    'payment_type' => $item->payment_type,
+                    'payment_status' => $item->payment_status,
+                    'is_walkin' => $item->is_walkin,
+                    'qr_code_path' => $item->qr_code_path,
+                    'qr_id' => $item->qr_id,
+                    'group_remarks' => json_encode($item->groupRemarks),
+                    'group_violations' => json_encode($item->groupViolations),
+                    'guests' => json_encode($item->guests),
+                    'main_contact' => json_encode($item->guests()->where('main', 1)->first()),
+                    'allocation' => json_encode($item->allocation),
+                    'created_at' => $item->created_at->format('j M Y h:i A'),
+                    'is_walkin_label' => $item->is_walkin ? 'Walk-In' : 'Online',
+                    'start_time' => $item->start_time
+                ]);
+            }
         }
 
         return $data;
