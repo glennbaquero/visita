@@ -173,6 +173,7 @@
 							@showStep2="showStep2()"
 							@numberOfGuestsChanged="numberOfGuestsChanged()"
 							:step-data="stepData"
+							:checker-url="checkerUrl"
 						></FormStepOne>
 						<!--  -->
 						<!-- Step 2 -->
@@ -289,7 +290,8 @@
 			genders: Array,
 			countries: Array,
 			visitorTypes: Array,
-			bookUrl: String
+			bookUrl: String,
+			checkerUrl: String
 		},	
 
 		components: {

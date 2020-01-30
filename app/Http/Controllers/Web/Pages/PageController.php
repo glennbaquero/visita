@@ -12,6 +12,8 @@ use App\Models\Faqs\Faq;
 use App\Models\Pages\AboutUs;
 use App\Models\Pages\AboutUsFrameThree;
 use App\Models\Pages\Team;
+use App\Models\Allocations\Allocation;
+use App\Models\Books\Book;
 use App\Models\Carousels\HomeBanner;
 use App\Models\Tabbings\AboutInfo;
 
@@ -20,6 +22,8 @@ use App\Models\Destinations\Destination;
 use App\Models\Types\VisitorType;
 use App\Models\Genders\Gender;
 use Webpatser\Countries\Countries;
+
+use Carbon\Carbon;
 
 class PageController extends Controller
 {
@@ -150,7 +154,6 @@ class PageController extends Controller
 
 		$destination = Destination::find($id);
 		$destination->image = $destination->pictures->first()->renderImagePath();
-		$destination->allocations = $destination->allocations;
 		$destination->dateBlock = $destination->getBlockedDates();
 		$result = $destination->getFormattedData();
 		$visitor_types = VisitorType::all();
@@ -311,5 +314,25 @@ class PageController extends Controller
 
 	public function frontlinerSuccessPage() {
 		return view('web.pages.management.password-reset-success');
+	}
+
+	public function getTimeSlot(Request $request) {
+		$allocation = Allocation::find($request->allocationSelected);
+		$reserveds = Book::where(['allocation_id' => $allocation->id])->get();
+		$total_reservation = $allocation->capacities->first() ? $allocation->capacities->first()->online : null;
+
+		$result = [];
+
+		foreach ($reserveds as $reserved) {
+			$is_reserved = $reserveds->where('scheduled_at', $reserved->scheduled_at)->count();
+			if($is_reserved >= $total_reservation) {
+				array_push($result, [
+					Carbon::parse($reserved->scheduled_at)->format('Y-m-d')
+				]);
+			}
+		}
+
+		return collect($result)->flatten();
+		
 	}
 }

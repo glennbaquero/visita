@@ -17,6 +17,7 @@
 		:countries="{{ $countries }}"
 		:visitor-types="{{ $visitor_types }}"
 		book-url="{{ route('web.book.store') }}"
+		checker-url="{{ route('web.getTimeSlot') }}"
 	></user-booking>
 </section>
 

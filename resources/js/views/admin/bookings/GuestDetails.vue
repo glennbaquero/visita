@@ -74,10 +74,10 @@
 			></selector>
 
 			<image-picker
-			:value="guest.special_fees_path"
+			:value="guest.specialFeeImagePath"
 			class="form-group col-sm-12 col-md-12"
             label="Image"
-            name="guest_image_path[]"
+            name="guest_special_fee_path[]"
             placeholder="Choose a File"
 			></image-picker>
 		</div>

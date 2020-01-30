@@ -5,17 +5,17 @@
 				<div class="align-l m-margin-b">
 					<h5 class="frm-title x-small clr--gray">Experience & Schedule</h5>
 					<hr>
-
-					<p class="frm-header bold s-margin-b clr--gray">Visit Date</p>
-					<div class="frm-inpt m-margin-b">
-						<input type="text" v-model="stepData.visitDate" id="visit-date">
-					</div>
-
+					
 					<p class="frm-header bold s-margin-b clr--gray">Select Experience</p>
 					<div class="frm-inpt m-margin-b">
 						<select v-model="stepData.allocationSelected" @change="allocationChanged()">
 							<option v-for="allocation in items" :value="allocation.allocation_id" >{{ allocation.allocation_name }}</option>
 						</select>
+					</div>
+
+					<p class="frm-header bold s-margin-b clr--gray">Visit Date</p>
+					<div class="frm-inpt m-margin-b">
+						<input type="text" v-model="stepData.visitDate" id="visit-date">
 					</div>
 
 					<p class="frm-header bold s-margin-b clr--gray">Number of guest/s</p>
@@ -27,7 +27,7 @@
 					<div class="frm-inpt m-margin-b">
 						<!-- <input type="time"> -->
 						<select v-model="stepData.timeSelected">
-							<option v-for="timeslot in timeslots" :value="timeslot.time" >{{ timeslot.formatted_time }}</option>
+							<option v-for="timeslot in timeslots" :value="timeslot.time">{{ timeslot.formatted_time }}</option>
 						</select>
 					</div>
 
@@ -49,6 +49,7 @@
 				</div>
 			</div>
 		</div>
+		<loading :active.sync="isLoading" :is-full-page="true"></loading>
 	</div>
 </template>
 <script>
@@ -61,10 +62,22 @@
 		props: {
 			destination: Object,
 			stepData: Object,
-			items: Array
+			items: Array,
+			checkerUrl: String
+		},
+
+		components: {
+		    Loading,
 		},
 
 		mixins: [ RegexMixin ],
+
+		data() {
+			return {
+				timeslots: [],
+				isLoading: false
+			}
+		},
 
 		computed: {
 			detailsComplete() {
@@ -91,7 +104,21 @@
 
 		methods: {
 			allocationChanged() {
-				var result = [];
+				this.isLoading = true;
+				var data = {
+					allocationSelected: this.stepData.allocationSelected
+				};
+
+				axios.post(this.checkerUrl, data)
+					.then(response => {
+						_.each(response.data, (data)=> {
+							this.destination.dateBlock.push(data);
+						})
+						flatpickr('#visit-date', { minDate: 'today', disable: this.destination.dateBlock });
+						this.isLoading = false;
+					})
+
+				// var result = [];
 
 			  	_.forEach(this.items, (value) => {
 			    	if(value.allocation_id  === this.stepData.allocationSelected){

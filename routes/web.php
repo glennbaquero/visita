@@ -87,6 +87,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 			Route::get('/request-to-visit/{id}/{name}', 'PageController@showRequestToVisit')->name('request-to-visit');
 			Route::get('/user/dashboard', 'PageController@showDashboard')->name('dashboard');
 			Route::get('/user/profile', 'PageController@showProfile')->name('profile');
+			Route::post('/timeslot/available', 'PageController@getTimeSlot')->name('getTimeSlot');
 		});
 	});
 
