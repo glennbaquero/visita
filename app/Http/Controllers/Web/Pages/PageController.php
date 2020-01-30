@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Inspiring;
 
 use App\Models\Pages\Page;
+use App\Models\Pages\PageItem;
 use App\Models\Faqs\Faq;
 use App\Models\Pages\AboutUs;
 use App\Models\Pages\AboutUsFrameThree;
@@ -159,6 +160,11 @@ class PageController extends Controller
 		$visitor_types = VisitorType::all();
 		$genders = Gender::all();
 		$countries = Countries::all();
+
+		$info['conservation_fee_info'] = PageItem::where('slug', 'conservation_fee_info')->first() ? PageItem::where('slug', 'conservation_fee_info')->first()->content : null;
+		$info['platform_fee_info'] = PageItem::where('slug', 'platform_fee_info')->first() ? PageItem::where('slug', 'platform_fee_info')->first()->content : null;
+		$info['transaction_fee_info'] = PageItem::where('slug', 'transaction_fee_info')->first() ? PageItem::where('slug', 'transaction_fee_info')->first()->content : null;
+
         
         return view('web.pages.destination.request-to-visit', array_merge($data, [
         	'quote' => Inspiring::quote(),
@@ -167,7 +173,8 @@ class PageController extends Controller
         	'genders' => $genders,
         	'countries' => $countries,
         	'items' => json_encode($result),
-        	'page_scripts'=> 'requestToVisit'
+        	'page_scripts'=> 'requestToVisit',
+			'info' => json_encode($info)       	
         ]));
 
 	}
@@ -334,5 +341,14 @@ class PageController extends Controller
 
 		return collect($result)->flatten();
 		
+	}
+
+	public function showPolicies($type) {
+		$page = Page::where('slug', $type)->first() ?? 'We still working on it!';
+		$data = $page->getData();
+
+		return view('web.pages.privacy-policy', [
+			'data' => $data
+		]);
 	}
 }

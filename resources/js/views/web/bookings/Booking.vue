@@ -158,6 +158,9 @@
 							:step-data="stepData"
 							:visitor-types="visitorTypes"
 							:allocation="selectedAllocation"
+							:info="info"
+							@terms_conditions_click="termsConditionClick()"
+							@privacy_policy_click="privacyPolicyClick()"
 							ref="formStepFour"
 						></FormStepFour>
 					</div>
@@ -205,6 +208,7 @@
 								:step-data="stepData"
 								:allocation="selectedAllocation"
 								:visitor-types="visitorTypes"
+								:is-accepted="isAccepted"
 							></StepFour>
 							<hr>
 							<div class="inlineBlock-parent">
@@ -217,7 +221,7 @@
 									</div>
 								</div
 								><div class="width--45">
-									<div class="width--95">
+									<div class="width--95" v-if="isAccepted.termsAndConditions && isAccepted.privacyPolicy">
 										<button class="frm-btn green" data-remodal-target="confirmation-modal">Pay Now</button>
 									</div>
 								</div>
@@ -291,7 +295,8 @@
 			countries: Array,
 			visitorTypes: Array,
 			bookUrl: String,
-			checkerUrl: String
+			checkerUrl: String,
+			info: Object,
 		},	
 
 		components: {
@@ -357,6 +362,10 @@
 
 				isLoading: false,
              	fullPage: true,
+             	isAccepted: {
+             		termsAndConditions: false,
+             		privacyPolicy: false,
+             	},
 			}
 		},
 
@@ -511,32 +520,19 @@
 				data.append('total_guest', this.stepData.numberOfGuests);
 				data.append('agency_code', this.stepData.main.agency_code);
 
-				// var data = {
-				// 	// Invoice
-				// 	transaction_fee: this.$refs.formStepFour.transactionFee,
-				// 	conservation_fee: this.$refs.formStepFour.conservationFeeTotal,
-				// 	platform_fee: this.$refs.formStepFour.platformFee,
-				// 	sub_total: this.$refs.formStepFour.subTotal,
-				// 	grand_total: this.$refs.formStepFour.grandTotal,
-				// 	is_paypal_payment: this.$refs.formStepFour.isPaypal,
-
-				// 	// Guest
-				// 	guests: this.stepData.guests,
-
-				// 	// Booking
-				// 	start_time: this.stepData.timeSelected,
-				// 	allocation_id: this.stepData.allocationSelected,
-				// 	destination_id: this.destination.id,
-				// 	scheduled_at: this.stepData.visitDate,
-				// 	total_guest: this.stepData.numberOfGuests,
-				// 	agency_code: this.stepData.main.agency_code,
-				// };
-
 				axios.post(this.bookUrl, data)
 					.then(response => {
 						this.isLoading = false;
 						successModal.open();
 					})
+			},
+
+			termsConditionClick() {
+				this.isAccepted.termsAndConditions = !this.isAccepted.termsAndConditions;
+			},
+
+			privacyPolicyClick() {
+				this.isAccepted.privacyPolicy = !this.isAccepted.privacyPolicy;
 			}
 		}
 	}

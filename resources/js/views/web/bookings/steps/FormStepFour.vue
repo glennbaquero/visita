@@ -67,7 +67,7 @@
 									<div class="rqst-frm1__step-4-content-info-position">
 										<div class="rqst-frm1__step-4-content-info">
 											<div class="width--90 margin-a frm-description clr--white">
-												<p><strong>Information:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here</p>
+												<p><strong>Information:</strong> <span v-html="info.conservation_fee_info"></span> </p>
 											</div>
 										</div>
 									</div>
@@ -117,7 +117,7 @@
 							<div class="rqst-frm1__step-4-content-info-position">
 								<div class="rqst-frm1__step-4-content-info">
 									<div class="width--90 margin-a frm-description clr--white">
-										<p><strong>Information:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here</p>
+										<p><strong>Information:</strong> <span v-html="info.platform_fee_info"></span> </p>
 									</div>
 								</div>
 							</div>
@@ -153,7 +153,7 @@
 							<div class="rqst-frm1__step-4-content-info-position">
 								<div class="rqst-frm1__step-4-content-info">
 									<div class="width--90 margin-a frm-description clr--white">
-										<p><strong>Information:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here</p>
+										<p><strong>Information:</strong><span v-html="info.transaction_fee_info"></span></p>
 									</div>
 								</div>
 							</div>
@@ -186,12 +186,12 @@
 				</div>
 
 				<div class="inlineBlock-parent align-l m-margin-b">
-					<input type="checkbox" name="">
-					<h5 class="frm-header clr--gray">I agree to the <a href="" target="_blank">Terms and Conditions, Changes, Refunds and Postponements and Policies.</a> I also agree to pay the total amount shown, which includes <strong>other fees.</strong></h5>
+					<input type="checkbox" @click="$emit('terms_conditions_click')">
+					<h5 class="frm-header clr--gray">I agree to the <a href="/read/terms_and_conditions" target="_blank">Terms and Conditions, Changes, Refunds and Postponements and Policies.</a> I also agree to pay the total amount shown, which includes <strong>other fees.</strong></h5>
 				</div>
 				<div class="inlineBlock-parent align-l m-margin-b">
-					<input type="checkbox" name="">
-					<h5 class="frm-header clr--gray">I agree to the <a href="privacy-policy" target="_blank">Privacy Policy.</a></h5>
+					<input type="checkbox" @click="$emit('privacy_policy_click')">
+					<h5 class="frm-header clr--gray">I agree to the <a href="/read/privacy_policy" target="_blank">Privacy Policy.</a></h5>
 				</div>
 
 			</div>
@@ -208,7 +208,8 @@
 			destination: Object,
 			stepData: Object,
 			visitorTypes: Array,
-			allocation:Object
+			allocation:Object,
+			info:Object,
 		},
 
 		mixins: [ DateMixin, NumberMixin ],
