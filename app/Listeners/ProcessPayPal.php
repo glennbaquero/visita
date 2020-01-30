@@ -54,7 +54,7 @@ class ProcessPayPal
         # will cause error if no code is there
         $this->invoice = Invoice::where('reference_code', $this->result['reference_code'])->first();
         $this->invoice->is_paid = true;
-        $this->invoice->payment_gateway_code = $this->result['transaction_code'];
+        $this->invoice->payment_code = $this->result['transaction_code'];
 
         $this->invoice->save();
 
