@@ -9,6 +9,7 @@ use App\Notifications\Web\Paypal\UserInvoicePaid;
 use App\Notifications\Admin\Paypal\AdminInvoicePaid;
 
 use App\Models\Invoices\Invoice;
+use App\Models\Users\Admin;
 
 class ProcessPayPal
 {
