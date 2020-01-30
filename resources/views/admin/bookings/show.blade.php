@@ -72,7 +72,7 @@
                         <invoices-view
                         ref="table-5"
                         fetch-url="{{ route('admin.invoices.fetch-item', $item->invoice->id) }}"
-                        submit-url="{{ $item->invoice->is_paypal_payment ? route('admin.invoices.update', $item->invoice->id) : route('admin.invoices.approve.deposit', $item->invoice->id) }}"
+                        submit-url="{{ $submitUrl }}"
                         ></invoices-view>
                     </div>
 

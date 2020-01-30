@@ -96,6 +96,25 @@
 				placeholder="Select Type of Visitor"
 				></selector>
 
+				<selector class="col-sm-4"
+				v-model="item.special_fee_id"
+				name="guest_special_fee_id[]"
+				label="Special Fees"
+				:items="specialFees"
+				item-value="id"
+				item-text="name"
+				placeholder="Select Special Fee"
+				></selector>
+
+
+				<image-picker
+				:value="item.specialFeeImagePath"
+				class="form-group col-sm-12 col-md-12"
+	            label="Image"
+	            name="special_fee_path"
+	            placeholder="Choose a File"
+				></image-picker>
+
 			</div>
 		</card>
 
@@ -175,6 +194,7 @@ export default {
 			this.special_fees = data.special_fees ? data.special_fees : this.special_fees;
 			this.visitor_types = data.visitor_types ? data.visitor_types : this.visitor_types;
 			this.blocked_dates = data.blocked_dates ? data.blocked_dates : this.blocked_dates;
+			this.genders = data.genders ? data.genders : this.genders;
 		},
 
 		addGuest() {
@@ -204,15 +224,7 @@ export default {
 			blocked_dates: [],
 			experiences: [],
 			guest: 1,
-			genders: [
-				{
-					name: 'Female'
-				},
-				{
-					name: 'Male'
-				},
-			],
-
+			genders: [],
 			total_guest: [],
 			hide: false
 		}

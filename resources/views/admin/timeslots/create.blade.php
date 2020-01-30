@@ -14,7 +14,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.faqs.index') }}">Time Slots</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.time-slots.index') }}">Time Slots</a></li>
                     <li class="breadcrumb-item active"><a href="javascript:void(0)">Create</a></li>
                 </ol>
             </div>
@@ -25,7 +25,7 @@
     <section class="content">
         <time-slots-view
         fetch-url="{{ route('admin.time-slots.fetch-item') }}"
-        submit-url="{{ route('admin.time-slots.store', $allocation->id) }}"
+        submit-url="{{ route('admin.time-slots.store') }}"
         ></time-slots-view>
     </section>
 </div>

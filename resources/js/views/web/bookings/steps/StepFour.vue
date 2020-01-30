@@ -238,7 +238,7 @@
 </template>
 <script>
 	import DateMixin from 'Mixins/date.js';
-
+ 
 	export default {
 		props: {
 			stepData: Object,

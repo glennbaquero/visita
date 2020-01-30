@@ -27,6 +27,7 @@
             <template v-slot:body="{ items }">
                 <tr v-for="item in items">
                     <td>{{ item.id }}</td>
+                    <td>{{ item.experience }}</td>
                     <td>{{ item.time }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>

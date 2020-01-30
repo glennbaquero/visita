@@ -245,6 +245,7 @@ return [
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         // 'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'auth.password.tokens' => Illuminate\Auth\Passwords\TokenRepositoryInterface::class
     ],
 
 ];

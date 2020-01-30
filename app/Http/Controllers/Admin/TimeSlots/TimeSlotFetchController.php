@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\TimeSlots;
 use App\Extenders\Controllers\FetchController;
 
 use App\Models\Times\TimeSlot;
+use App\Models\Allocations\Allocation;
 
 class TimeSlotFetchController extends FetchController
 {
@@ -26,9 +27,12 @@ class TimeSlotFetchController extends FetchController
      */
     public function filterQuery($query)
     {
-    	if ($this->request->filled('allocation')) {
-            $query = $query->where('allocation_id', $this->request->input('allocation'));
+    	$admin = auth()->guard('admin')->user();
+        if($admin->destination_id) {
+            $experiences = $admin->destination->allocations->pluck('id');
+            $query = $query->whereIn('allocation_id', $experiences);
         }
+
         return $query;
     }
 
@@ -62,6 +66,7 @@ class TimeSlotFetchController extends FetchController
         return [
             'id' => $item->id,
             'time' => date('h:i a', $time),
+            'experience' => $item->allocation->name,
             'created_at' => $item->renderDate(),
             'showUrl' => $item->renderShowUrl(),
             'archiveUrl' => $item->renderArchiveUrl(),
@@ -72,6 +77,14 @@ class TimeSlotFetchController extends FetchController
 
     public function fetchView($id = null) {
         $item = null;
+        $experiences = Allocation::all();
+
+        $admin = auth()->guard('admin')->user();
+        if($admin->destination_id) {
+            $experiences = $admin->destination->allocations->pluck('id');
+            $experiences = Allocation::whereIn('id', $experiences)->get();
+        }
+
 
         if ($id) {
         	$item = TimeSlot::withTrashed()->findOrFail($id);
@@ -81,6 +94,7 @@ class TimeSlotFetchController extends FetchController
 
     	return response()->json([
     		'item' => $item,
+            'experiences' => $experiences
     	]);
     }
 }

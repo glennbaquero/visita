@@ -16,36 +16,46 @@ class BookController extends Controller
      */
     public function fetch(Request $request)
     {
+        $data = [];
+
         $items = Book::where('destination_id', $request->destination_id)->whereDate('scheduled_at', $request->selected_date)->get();
 
         if($request->filled('started_at')) {
             $items = Book::where('destination_id', auth()->guard('api')->user()->destination_id)->whereNotNull('started_at')->whereNull('ended_at')->get();
         }
 
-        $items = $items->map(function($item) {
-            return [
-                'id' => $item->id,
-                'main_contact' => $item->guests()->where('main', 1)->first(),
-                'is_walkin' => $item->is_walkin ? 'Walk-In' : 'Online',
-                'is_walkin_label' => $item->is_walkin ? 'Walk-In' : 'Online',
-                'guests' => $item->guests,
-                'allocation' => $item->allocation,
-                'schedule' => Carbon::parse($item->scheduled_at)->format('j M Y'),
-                // 'time' => Carbon::parse($item->scheduled_at)->toTimeString(),
-                'status' => $item->getStatus(),
-                'created_at' => $item->created_at->format('j M Y h:i A'),
-                'violations' => $item->groupViolations,
-                'representative' => $item->representative ?? null,
-                'group_violations' => $item->groupViolations,
-                'group_remarks' => $item->groupRemarks,
-                'ended_at' => $item->ended_at,
-                'started_at' => $item->started_at,
-                'time' => $item->start_time
-            ];
-        });
+
+        foreach ($items as $item) {
+            if($item->invoice->is_paid == 1) {
+                array_push($data, [
+                   'id' => $item->id,
+                   'main_contact' => $item->guests()->where('main', 1)->first(),
+                   'is_walkin' => $item->is_walkin ? 'Walk-In' : 'Online',
+                   'is_walkin_label' => $item->is_walkin ? 'Walk-In' : 'Online',
+                   'guests' => $item->guests,
+                   'allocation' => $item->allocation,
+                   'schedule' => Carbon::parse($item->scheduled_at)->format('j M Y'),
+                   // 'time' => Carbon::parse($item->scheduled_at)->toTimeString(),
+                   'status' => $item->getStatus(),
+                   'created_at' => $item->created_at->format('j M Y h:i A'),
+                   'violations' => $item->groupViolations,
+                   'representative' => $item->representative ?? null,
+                   'group_violations' => $item->groupViolations,
+                   'group_remarks' => $item->groupRemarks,
+                   'ended_at' => $item->ended_at,
+                   'started_at' => $item->started_at,
+                   'time' => $item->start_time
+                ]);
+            }
+        }
+
+        // $items = $items->map(function($item) {
+        //     return [
+        //     ];
+        // });
 
         return response()->json([
-            'bookings' => $items,
+            'bookings' => $data,
         ]);
     }
 

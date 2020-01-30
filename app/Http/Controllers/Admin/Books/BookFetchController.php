@@ -12,6 +12,7 @@ use App\Models\Fees\Fee;
 use App\Models\Allocations\Allocation;
 use App\Models\Types\VisitorType;
 use App\Models\BlockedDates\BlockedDate;
+use App\Models\Genders\Gender;
 
 use Carbon\Carbon;
 
@@ -70,7 +71,7 @@ class BookFetchController extends FetchController
     {
         return [
             'id' => $item->id,
-            'main_contact' => $this->getGuests($item->guests),
+            'main_contact' => $this->getGuest($item->guests),
             'is_walkin' => $item->is_walkin === 1 ? 'Walk-In' : 'Online',
             'total_guest' => $item->total_guest,
             'allocation' => $item->allocation->name,
@@ -86,7 +87,18 @@ class BookFetchController extends FetchController
         ];
     }
 
-    public function getGuests($guests)
+    protected function sortQuery($query) {
+
+        switch ($this->orderBy) {
+            default:
+                    $query = $query->orderBy($this->orderBy, 'desc');
+                break;
+        }
+
+        return $query;
+    }
+
+    public function getGuest($guests)
     {
     	$result = [];
 
@@ -108,7 +120,7 @@ class BookFetchController extends FetchController
 
         if ($id != 0) {
         	$item = Book::withTrashed()->findOrFail($id);
-            $item->total_guests = $item->guests->where('main', false);
+            $item->total_guests = $this->getGuests($item->guests()->where('main', false)->get());
             $main = $item->guests()->where('main', true)->first();
             $item->id = $main->id;
             $item->first_name = $main->first_name;
@@ -119,6 +131,8 @@ class BookFetchController extends FetchController
             $item->contact_number = $main->contact_number;
             $item->email = $main->email;
             $item->visitor_type_id = $main->visitor_type_id;
+            $item->special_fee_id = $main->special_fee_id;
+            $item->specialFeeImagePath = $main->renderImagePath('special_fee_path');
             $item->emergency_contact_number = $main->emergency_contact_number;
             $item->archiveUrl = $item->renderArchiveUrl();
             $item->restoreUrl = $item->renderRestoreUrl();
@@ -129,6 +143,7 @@ class BookFetchController extends FetchController
         $special_fees = Allocation::find($experience)->fees;
         $visitor_types = VisitorType::all();
         $blocked_dates = $this->blockedDates($destination);
+        $genders = Gender::all();
 
     	return response()->json([
     		'item' => $item,
@@ -137,7 +152,8 @@ class BookFetchController extends FetchController
             'nationalities' => $nationalities,
             'special_fees' => $special_fees,
             'visitor_types' => $visitor_types,
-            'blocked_dates' => $blocked_dates
+            'blocked_dates' => $blocked_dates,
+            'genders' => $genders
     	]);
     }
 
@@ -156,5 +172,27 @@ class BookFetchController extends FetchController
         }
 
         return $result;
+    }
+
+    public function getGuests($items) {
+        $data = [];
+
+        foreach ($items as $item) {
+            array_push($data, [
+                'id' => $item->id,
+                'first_name' => $item->first_name,
+                'last_name' => $item->last_name,
+                'birthdate' => $item->birthdate,
+                'gender' => $item->gender,
+                'nationality' => $item->nationality,
+                'contact_number' => $item->contact_number,
+                'email' => $item->email,
+                'visitor_type_id' => $item->visitor_type_id,
+                'special_fee_id' => $item->special_fee_id,
+                'specialFeeImagePath' => $item->renderImagePath('special_fee_path'),
+            ]);
+        }
+
+        return $data;
     }
 }

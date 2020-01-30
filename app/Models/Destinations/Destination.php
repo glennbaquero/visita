@@ -74,9 +74,9 @@ class Destination extends Model
         return $this->belongsToMany(Announcement::class, 'destination_announcements', 'announcement_id', 'destination_id');
     }
 
-    public function admin() 
+    public function admins() 
     {
-        return $this->belongsTo(Admin::class);
+        return $this->hasMany(Admin::class);
     }
 
     public function blockedDates()
@@ -137,11 +137,12 @@ class Destination extends Model
         $result = [];
 
         foreach ($this->allocations as $key => $allocation) {
-            // foreach ($allocation->timeSlots as $timeslot) {
+            if($allocation->capacities()->exists()) {
                 array_push($result, [
                     'image' => $this->pictures->first()->renderImagePath(),
                     'allocation_name' => $allocation->name,
                     'allocation_id' => $allocation->id,
+                    'allocation_capacity' => $allocation->capacities->first(),
                     'platform_fee' => $allocation->platform_fees,
                     'transaction_fee' => $allocation->transaction_fees,
                     'transaction_fee' => $allocation->transaction_fees,
@@ -149,7 +150,7 @@ class Destination extends Model
                     'special_fees' => $allocation->fees,
                     'timeslot' => $allocation->getTimeSlot(),
                 ]);
-            // }
+            }
         }
 
         return $result;

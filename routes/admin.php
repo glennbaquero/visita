@@ -552,7 +552,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             #Fetch Guest Feedbacks
             Route::post('feedbacks/fetch/guest', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch');
-            Route::post('feedbacks/fetch?bookid={id?}/guest', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch.bookid');
+            Route::post('feedbacks/fetch/guest?bookid={id?}', 'GuestFeedbackFetchController@fetch')->name('guest-feedbacks.fetch.bookid');
         });
 
         Route::namespace('Managements')->group(function() {
@@ -749,8 +749,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
         Route::namespace('TimeSlots')->group(function() {
             Route::get('time-slots', 'TimeSlotController@index')->name('time-slots.index');
-            Route::get('time-slots/create/{id}/{name}', 'TimeSlotController@create')->name('time-slots.create');
-            Route::post('time-slots/store/{id}', 'TimeSlotController@store')->name('time-slots.store');
+            Route::get('time-slots/create/', 'TimeSlotController@create')->name('time-slots.create');
+            Route::post('time-slots/store', 'TimeSlotController@store')->name('time-slots.store');
             Route::get('time-slots/show/{id}', 'TimeSlotController@show')->name('time-slots.show');
             Route::post('time-slots/update/{id}', 'TimeSlotController@update')->name('time-slots.update');
             Route::post('time-slots/{id}/archive', 'TimeSlotController@archive')->name('time-slots.archive');

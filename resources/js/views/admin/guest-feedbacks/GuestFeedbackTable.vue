@@ -27,7 +27,6 @@
             <template v-slot:body="{ items }">
                 <tr v-for="item in items">
                     <td>{{ item.id }}</td>
-                    <td>{{ item.book_id }}</td>
                     <td>{{ item.feedback }}</td>
                     <td>{{ item.answer }}</td>
                     <td>{{ item.remarks }}</td>
@@ -53,8 +52,7 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Book Id', value: 'book_id' },
-                { text: 'Question', value: 'feedback' },
+                { text: 'Feedback Quesstion', value: 'feedback' },
                 { text: 'Answer', value: 'answer' },
                 { text: 'Remarks', value: 'remarks' },
             ];

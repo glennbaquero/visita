@@ -26,7 +26,7 @@ class CalendarController extends Controller
     {
         $admin = auth()->guard('admin')->user();
         $destinations = Destination::with('allocations')->get();
-        if($admin->getRoleNames()[0] === 'Destination Manager') {
+        if($admin->destination_id) {
             $destinations = Destination::where('id', $admin->destination_id)->with('allocations')->get();
         }
 

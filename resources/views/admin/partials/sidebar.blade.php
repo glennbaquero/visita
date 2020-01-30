@@ -146,6 +146,17 @@
                         </li>
                         @endif
 
+                        <li class="nav-item">
+                            <a href="{{ route('admin.time-slots.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                'admin.time-slots.index','admin.time-slots.create','admin.time-slots.show',
+                            ]) }}">
+                                <i class="nav-icon far fa-circle"></i>
+                                <p>
+                                    Timeslot
+                                </p>
+                            </a>
+                        </li>
+
                         @if ($self->hasAnyPermission(['admin.capacities.crud']))
                         <li class="nav-item">
                             <a href="{{ route('admin.capacities.index') }}" class="nav-link {{ $checker->route->areOnRoutes([

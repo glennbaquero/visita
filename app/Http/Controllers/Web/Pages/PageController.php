@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Inspiring;
 
 use App\Models\Pages\Page;
+use App\Models\Pages\PageItem;
 use App\Models\Faqs\Faq;
 use App\Models\Pages\AboutUs;
 use App\Models\Pages\AboutUsFrameThree;
 use App\Models\Pages\Team;
+use App\Models\Allocations\Allocation;
+use App\Models\Books\Book;
 use App\Models\Carousels\HomeBanner;
 use App\Models\Tabbings\AboutInfo;
 
@@ -20,6 +23,8 @@ use App\Models\Destinations\Destination;
 use App\Models\Types\VisitorType;
 use App\Models\Genders\Gender;
 use Webpatser\Countries\Countries;
+
+use Carbon\Carbon;
 
 class PageController extends Controller
 {
@@ -150,12 +155,16 @@ class PageController extends Controller
 
 		$destination = Destination::find($id);
 		$destination->image = $destination->pictures->first()->renderImagePath();
-		$destination->allocations = $destination->allocations;
 		$destination->dateBlock = $destination->getBlockedDates();
 		$result = $destination->getFormattedData();
 		$visitor_types = VisitorType::all();
 		$genders = Gender::all();
 		$countries = Countries::all();
+
+		$info['conservation_fee_info'] = PageItem::where('slug', 'conservation_fee_info')->first() ? PageItem::where('slug', 'conservation_fee_info')->first()->content : null;
+		$info['platform_fee_info'] = PageItem::where('slug', 'platform_fee_info')->first() ? PageItem::where('slug', 'platform_fee_info')->first()->content : null;
+		$info['transaction_fee_info'] = PageItem::where('slug', 'transaction_fee_info')->first() ? PageItem::where('slug', 'transaction_fee_info')->first()->content : null;
+
         
         return view('web.pages.destination.request-to-visit', array_merge($data, [
         	'quote' => Inspiring::quote(),
@@ -164,7 +173,8 @@ class PageController extends Controller
         	'genders' => $genders,
         	'countries' => $countries,
         	'items' => json_encode($result),
-        	'page_scripts'=> 'requestToVisit'
+        	'page_scripts'=> 'requestToVisit',
+			'info' => json_encode($info)       	
         ]));
 
 	}
@@ -311,5 +321,34 @@ class PageController extends Controller
 
 	public function frontlinerSuccessPage() {
 		return view('web.pages.management.password-reset-success');
+	}
+
+	public function getTimeSlot(Request $request) {
+		$allocation = Allocation::find($request->allocationSelected);
+		$reserveds = Book::where(['allocation_id' => $allocation->id])->get();
+		$total_reservation = $allocation->capacities->first() ? $allocation->capacities->first()->online : null;
+
+		$result = [];
+
+		foreach ($reserveds as $reserved) {
+			$is_reserved = $reserveds->where('scheduled_at', $reserved->scheduled_at)->count();
+			if($is_reserved >= $total_reservation) {
+				array_push($result, [
+					Carbon::parse($reserved->scheduled_at)->format('Y-m-d')
+				]);
+			}
+		}
+
+		return collect($result)->flatten();
+		
+	}
+
+	public function showPolicies($type) {
+		$page = Page::where('slug', $type)->first() ?? 'We still working on it!';
+		$data = $page->getData();
+
+		return view('web.pages.privacy-policy', [
+			'data' => $data
+		]);
 	}
 }

@@ -17,7 +17,7 @@ class TimeSlotController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.timeslots.index');
     }
 
     /**
@@ -25,12 +25,9 @@ class TimeSlotController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id, $name)
+    public function create()
     {
-        $allocation = Allocation::find($id);
-        return view('admin.timeslots.create', [
-            'allocation' => $allocation
-        ]);
+        return view('admin.timeslots.create');
     }
 
     /**
@@ -39,9 +36,8 @@ class TimeSlotController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-        $request['allocation_id'] = $id;
         $item = TimeSlot::store($request);
 
         $message = "You have successfully created {$item->time}";
