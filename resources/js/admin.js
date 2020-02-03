@@ -124,3 +124,6 @@ Vue.component('teams-view', require('./views/admin/teams/TeamView.vue').default)
 
 Vue.component('frame-three-table', require('./views/admin/frame-three/FrameThreeTable.vue').default);
 Vue.component('frame-three-view', require('./views/admin/frame-three/FrameThreeView.vue').default);
+
+Vue.component('generated-emails-table', require('./views/admin/generated-emails/GeneratedEmailsTable.vue').default);
+Vue.component('generated-emails-view', require('./views/admin/generated-emails/GeneratedEmailsView.vue').default);

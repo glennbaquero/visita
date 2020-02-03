@@ -224,6 +224,7 @@
                             'admin.announcements.index','admin.announcements.create','admin.announcements.show',
                             'admin.remarks.index','admin.remarks.create','admin.remarks.show',
                             'admin.violations.index','admin.violations.create','admin.violations.show',
+                            'admin.generated-emails.index','admin.generated-emails.create','admin.generated-emails.show',
                         ]) }}">
                             <i class="nav-icon fas fa-feather"></i>
                             <p>
@@ -469,6 +470,17 @@
                                     <i class="nav-icon far fa-circle"></i>
                                     <p>
                                         About Us
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('admin.generated-emails.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                                    'admin.generated-emails.index','admin.generated-emails.create','admin.generated-emails.show',
+                                ]) }}">
+                                    <i class="nav-icon far fa-circle"></i>
+                                    <p>
+                                        Generated Emails
                                     </p>
                                 </a>
                             </li>
