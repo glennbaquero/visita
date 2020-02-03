@@ -53,7 +53,7 @@
           <!-- accepted payments column -->
         <div class="col-6">
           <p class="lead">Payment Method:</p>
-          <img src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404_960_720.png" width="15%" alt="Paypal" v-if="item.is_paypal_payment"> 
+          <img src="images/paynamics" width="15%" alt="Paypal" v-if="item.is_paypal_payment"> 
 
           	<label v-if="!item.is_paypal_payment"><b>Bank Deposit</b></label>
           	<br>

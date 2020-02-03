@@ -19,19 +19,19 @@
 					><div class="width--40 align-r">
 						<img
 						  class="rqst-frm1__step-4-content-checkbox-img" 
-						  src="images/paynamics.png"
+						  src="images/paynamics"
 						>
 					</div>
 				</label>
 			</div>
 
-			<div class="rqst-frm1__step-4-content-checkbox">
+			<!-- <div class="rqst-frm1__step-4-content-checkbox">
 				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent">
 					<div class="width--10">
 						<input type="radio" name="payment" v-model="isPaypal" :value="false" @change="paymentSelectionChanged()">
 						<span class="checkmark"></span>
 					</div
-					><!-- <div class="width--50">
+					><div class="width--50">
 						<p class="frm-header clr--gray">Bank Deposit</p>
 					</div
 					><div class="width--40 align-r">
@@ -43,9 +43,9 @@
 						  class="rqst-frm1__step-4-content-checkbox-img" 
 						  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_2019_logo.svg/1200px-Mastercard_2019_logo.svg.png"
 						>
-					</div> -->
+					</div>
 				</label>
-			</div>
+			</div> -->
 
 			<div class="align-l m-margin-b l-margin-t">
 				<h5 class="frm-title small clr--gray">Fees</h5>
