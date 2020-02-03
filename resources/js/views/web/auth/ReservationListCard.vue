@@ -190,7 +190,7 @@
 					.then(response => {
 						var data = response.data;
                         let form = this.$refs['paynamics-form'];
-                        form.setVars(data.paynamics_url, data.signature);
+                        form.setVars(data.gateway_url, data.signature);
                         form.submit();
 					})
 				// this.PRXPayPalSubmit(this.buildItems(), this.item.reference_code, 'PHP');
