@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Invoices;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 use App\Notifications\Reservation\BookingNotification;
 use App\Notifications\Web\Bookings\NewBookingNotification;
@@ -176,6 +177,7 @@ class InvoiceController extends Controller
      */
     public function processPaynamics(Request $request)
     {
+        Log::info($request);
         $processor = new PaynamicsProcessor();
 
         /** Process Paynamics */
