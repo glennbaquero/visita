@@ -141,7 +141,6 @@ class PaynamicsProcessor
 	{
         Log::info('Proccessing transaction...');
 
-
         $body = $request->paymentresponse;
         Log::info('PAYMENT RESPONSE: ' . $body);        
 

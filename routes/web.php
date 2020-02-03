@@ -110,10 +110,11 @@ Route::namespace('Web')->name('web.')->group(function() {
 			Route::get('reservation/get', 'InvoiceController@show')->name('reservations.show');
 			Route::post('upload/deposit', 'InvoiceController@uploadDepositSlip')->name('upload.deposit');
 			Route::post('/generate/form', 'InvoiceController@generatePaynamicsForm')->name('book.generate-form');
-	        Route::post('checkout/processPaynamics', 'InvoiceController@processPaynamics')->name('checkout.process_paynamics');
-	        Route::get('checkout/paynamicsReturn', 'InvoiceController@paynamicsReturn')->name('checkout.paynamics_return');        
-	        Route::get('checkout/paynamicsCancel', 'InvoiceController@paynamicsCancel')->name('checkout.paynamics-cancel');
 		});
+		
+		Route::post('checkout/processPaynamics', 'InvoiceController@processPaynamics')->name('checkout.process_paynamics');
+		Route::get('checkout/paynamicsReturn', 'InvoiceController@paynamicsReturn')->name('checkout.paynamics_return');        
+		Route::get('checkout/paynamicsCancel', 'InvoiceController@paynamicsCancel')->name('checkout.paynamics-cancel');
 	});
 
 	/* Inquiries Routes */
