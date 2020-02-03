@@ -8,16 +8,16 @@
 			</div
 			><div class="frm-cntnr__nav-col width--33 align-c frm-description clr--white">
 				<div class="inlineBlock-parent s-margin-b">
-                    <a href="" target="_blank" class="ftr-frm_img">
+                    <a href="{{ $fb->content }}" target="_blank" class="ftr-frm_img">
                         <img src="{{ asset('images/facebook-icon.png') }}">
                     </a>
-                    <a href="" target="_blank" class="ftr-frm_img">
+                    <a href="{{ $fb->insta }}" target="_blank" class="ftr-frm_img">
                         <img src="{{ asset('images/instagram-icon.png') }}">
                     </a>
-                    <a href="" target="_blank" class="ftr-frm_img big">
+                    <a href="{{ $fb->twitter }}" target="_blank" class="ftr-frm_img big">
                         <img src="{{ asset('images/twitter-icon.png') }}">
                     </a>
-                    <a href="" target="_blank" class="ftr-frm_img big">
+                    <a href="{{ $fb->youtube }}" target="_blank" class="ftr-frm_img big">
                         <img src="{{ asset('images/youtube-icon.png') }}">
                     </a>
 				</div>
