@@ -253,9 +253,9 @@ class PaynamicsProcessor
         
         $this->invoice = Invoice::where('reference_code', $reference_code)->first();
         Log::info('Invoice: ' . $this->invoice);
-        Log::info('Response Code: '. $this->invoice->response_code);
+        Log::info('Response Code: '. $this->invoice->payment_code);
 
-        if ($this->invoice->response_code == 'GR001' || $this->invoice->response_code == 'GR002')
+        if ($this->invoice->payment_code == 'GR001' || $this->invoice->payment_code == 'GR002')
         {
 			/**
 			 * return for success payment
@@ -263,7 +263,7 @@ class PaynamicsProcessor
 			 */
         }
         // check if pending payment
-        else if ($this->invoice->response_code == 'GR033')
+        else if ($this->invoice->payment_code == 'GR033')
         {
 			/**
 			 * response for pending payment
@@ -271,7 +271,7 @@ class PaynamicsProcessor
 			 */
         }
         // check if payment was cancelled
-        else if ($this->invoice->response_code == 'GR053')
+        else if ($this->invoice->payment_code == 'GR053')
         {
 			/**
 			 * response for cancelled payment
