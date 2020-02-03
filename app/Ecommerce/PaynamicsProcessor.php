@@ -120,6 +120,8 @@ class PaynamicsProcessor
 		$strxml = $strxml . "<signature>" . $_sign . "</signature>";
 		$strxml = $strxml . "</Request>";
 
+        Log::info('XML : ' .  $strxml);
+        
         Log::info('Encoding xml to base64');
 
         $b64string =  base64_encode($strxml);
