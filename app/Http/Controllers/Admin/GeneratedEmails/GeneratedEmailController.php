@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Emails\GeneratedEmail;
 
+use App\Http\Requests\Admin\GeneratedEmails\GeneratedEmailStoreRequest;
+
 class GeneratedEmailController extends Controller
 {
     /**
@@ -32,10 +34,10 @@ class GeneratedEmailController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\GeneratedEmailStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GeneratedEmailStoreRequest $request)
     {
         $item = GeneratedEmail::store($request);
 
@@ -76,11 +78,11 @@ class GeneratedEmailController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\GeneratedEmailStoreRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GeneratedEmailStoreRequest $request, $id)
     {
         $item = GeneratedEmail::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->title}";
