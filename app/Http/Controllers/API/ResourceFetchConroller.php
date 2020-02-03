@@ -54,7 +54,7 @@ class ResourceFetchController extends Controller
         $remarks = Remark::all();
         $violations = Violation::all();
         $management = Management::where('role_id', 5)->where('destination_id', $request->user()->destination_id)->get();
-        $bookings = $this->getBookings();
+        $bookings = $this->getBookings($request->user()->destination_id);
         $guests = $this->getGuests();
         $destination = auth()->guard('api')->user()->destination;
         $genders = Gender::all();
@@ -145,9 +145,9 @@ class ResourceFetchController extends Controller
     	]);
     }
 
-    public function getBookings() 
+    public function getBookings($id) 
     {
-        $items = Book::all();
+        $items = Book::where('destination_id', $id)->get();
         $data = [];
         foreach ($items as $item) {
             if($item->invoice->is_paid == 1) {

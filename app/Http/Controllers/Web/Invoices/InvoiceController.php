@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Invoices;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 use App\Notifications\Reservation\BookingNotification;
 use App\Notifications\Web\Bookings\NewBookingNotification;
@@ -12,6 +13,8 @@ use App\Notifications\Reservation\BankDepositSlipUploadedNotification;
 use App\Models\Invoices\Invoice;
 use App\Models\Books\Book;
 use App\Models\Users\Admin;
+
+use App\Ecommerce\PaynamicsProcessor;
 
 use DB;
 use Storage;
@@ -147,5 +150,58 @@ class InvoiceController extends Controller
     	return response()->json([
     		'message' => 200
     	]);
+    }
+
+    /**
+    * Generate Paynamics form
+    *
+    * @param object $invoice
+    * @return string $form
+    */
+    public function generatePaynamicsForm(Request $request)
+    {
+        $invoice = Invoice::find($request->id);
+        $paynamics = new PaynamicsProcessor();
+        $signature = $paynamics->createXML($invoice);
+
+        return response()->json([
+            'signature' => $signature,
+            'gateway_url' => config('ecommerce.paynamics.gateway')
+        ]);
+    }
+
+    /**
+     * Processing paynamics
+     * 
+     * @param  Requests $request 
+     */
+    public function processPaynamics(Request $request)
+    {
+        Log::info($request);
+        $processor = new PaynamicsProcessor();
+
+        /** Process Paynamics */
+        return $processor->process($request);
+    }
+
+    /**
+     * Paynamics success return
+     * 
+     */
+    public function paynamicsReturn(Request $request)
+    {
+        $processor = new PaynamicsProcessor();
+        $route = $processor->processReturnResponse($request);
+
+        return redirect()->route('web.dashboard');
+    }
+
+    /**
+     * Paynamics cancel
+     * 
+     */
+    public function paynamicsCancel()
+    {
+         return redirect()->routes('web.dashboard');
     }
 }
