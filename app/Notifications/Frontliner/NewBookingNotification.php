@@ -14,19 +14,27 @@ class NewBookingNotification extends Notification
     use Queueable;
 
     public $title;
-    public $request;
     public $description;
+    public $request;
+    public $date;
+    public $destination;
+    public $allocation;
+    public $book;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($request)
+    public function __construct($destination, $allocation, $book, $main, , $notification)
     {
-        $this->request = $request;
-        $this->title = 'New Reservation';
-        $this->description = 'A new reservation of visitor for '.Carbon::parse($request['scheduled_at'])->format('M d, Y'). '.';
+        $this->destination = $destination;
+        $this->allocation = $allocation;
+        $this->book = $book;
+        $this->main = $main;
+        $this->title = $notification->title;
+        $this->description = $notification->message;
+        $this->date = Carbon::parse($request['scheduled_at'])->format('M d, Y');
     }
 
     /**
@@ -53,10 +61,10 @@ class NewBookingNotification extends Notification
             ->greeting('Hello ' . $notifiable->fullname . ',')
             ->line($this->description)
             ->line('Details of point person of the group ')
-            ->line('Mr/Mrs/Ms.'. $this->request->first_name. ' '. $this->request->last_name)
-            ->line('Email : '. $this->request->email)
-            ->line('Contact Number : '. $this->request->contact_number)
-            ->line('Point person of the group details : ')
+            ->line('Mr/Mrs/Ms.'. $this->main->first_name. ' '. $this->main->last_name)
+            ->line('Email : '. $this->main->email)
+            ->line('Contact Number : '. $this->main->contact_number)
+            ->line('Visit Date : '.$this->date)
             ->line('For full details check the calendar in Visita Mobile App.');
     }
 

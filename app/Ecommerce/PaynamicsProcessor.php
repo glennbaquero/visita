@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\Users\Admin;
 use App\Models\Invoices\Invoice;
+use App\Models\Emails\GeneratedEmail;
+
+use App\Notifications\Admin\Paypal\AdminInvoicePaid;
+use App\Notifications\Web\Paypal\UserInvoicePaid;
 
 use Auth;
 
@@ -197,6 +201,26 @@ class PaynamicsProcessor
 
 				/** End transaction */
 				\DB::commit();
+
+			    $admins_per_destination = Admin::where('destination_id', $book->destination->id)->get();
+				// $admins = Admin::all();
+
+			    $qr_email = GeneratedEmail::where('notification_type', 'Booking notification')->first();
+			    $new_booking_frontliner = GeneratedEmail::where('notification_type', 'New booking notification')->first();
+
+				$main = $this->invoice->book->guests->where('main', true)->first();
+			    $main->notify(new BookingNotification($this->invoice->book, $qr_email));
+
+				foreach ($admins_per_destination as $admin) {
+			       $admin->notify(new NewBookingNotification($this->invoice->book->destination, $this->invoice->book->allocation, $this->invoice->book, $main, $new_booking_frontliner));
+			    }
+
+				foreach ($admins_per_destination as $admin) {
+					$admin->notify(new AdminInvoicePaid($this->invoice));
+				}
+
+				$this->invoice->book->guests->where('main', true)->first()->notify(new UserInvoicePaid($this->invoice));
+				$this->invoice->bookable->notify(new UserInvoicePaid($this->invoice));
 
 				/**
 				 * @todo

@@ -38,6 +38,7 @@ class SampleDatabaseSeeder extends Seeder
         $this->call(FaqsTableSeeder::class);
 
         $this->call(NewPageItemSeeder::class);
+        $this->call(GeneratedEmailTableSeeder::class);
 
     }
 }

@@ -17,6 +17,7 @@ use Carbon\Carbon;
 
 use App\Models\Invoices\Invoice;
 use App\Models\Destinations\Destination;
+use App\Models\Emails\GeneratedEmail;
 
 use App\Notifications\Admin\ReservationApproved;
 use App\Notifications\Admin\MasungiReservationApproved;
@@ -42,12 +43,13 @@ class InvoiceController extends Controller
 
         $main = $item->book->guests->where('main', true)->first();
         // $user = $item->user;
+        $approved_notification = GeneratedEmail::where('notification_type', 'Approved reservation')->first();
 
         if($item->is_paypal_payment) {
             if($item->bookable_type === 'App\Models\API\Masungi') {
                 $main->notify(new MasungiReservationApproved('Payment thru Paypal', $item));
             } else {
-                $main->notify(new ReservationApproved('Payment thru Paypal'));
+                $main->notify(new ReservationApproved('Payment thru Paypal', $approved_notification));
             }
             // $user->notify(new ReservationApproved('Payment thru Paypal'));
         } else {
@@ -75,11 +77,13 @@ class InvoiceController extends Controller
         $main = $item->book->guests->where('main', true)->first();
         // $user = $item->user;
         
+        $rejected_notification = GeneratedEmail::where('notification_type', 'Rejected reservation')->first();
+
         if($item->is_paypal_payment) {
-            $main->notify(new ReservationRejected);
+            $main->notify(new ReservationRejected($rejected_notification));
             // $user->notify(new ReservationRejected);
         } else {
-            $main->notify(new ReservationRejected);
+            $main->notify(new ReservationRejected($rejected_notification));
             // $user->notify(new ReservationRejected);
         }
 

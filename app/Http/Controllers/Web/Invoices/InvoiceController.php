@@ -13,6 +13,7 @@ use App\Notifications\Reservation\BankDepositSlipUploadedNotification;
 use App\Models\Invoices\Invoice;
 use App\Models\Books\Book;
 use App\Models\Users\Admin;
+use App\Models\Emails\GeneratedEmail;
 
 use App\Ecommerce\PaynamicsProcessor;
 
@@ -75,14 +76,8 @@ class InvoiceController extends Controller
 	    		'reference_code' => $request->grand_total.$this->generateReferenceCode().'VST'
 	    	]);
 
-	    	$main = $book->guests->where('main', true)->first();
-            // $main->notify(new BookingNotification($book));
 
     	DB::commit();
-        $admins = Admin::all();
-    	// foreach ($admins as $admin) {
-        //    $admin->notify(new NewBookingNotification($book->destination, $book->allocation, $book, $main));
-        // }
 
     	return response()->json([
     		'success' => true
