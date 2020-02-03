@@ -314,6 +314,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&frame-three=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.frame-three');
 
+            Route::post('activity-logs/fetch?id={id?}&generated-emails=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.generated-emails');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -818,6 +820,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('frame-three/fetch?archived=1', 'FrameThreeFetchController@fetch')->name('frame-three.fetch-archive');
             Route::post('frame-three/fetch-item/{id?}', 'FrameThreeFetchController@fetchView')->name('frame-three.fetch-item');
             Route::post('frame-three/fetch-pagination/{id}', 'FrameThreeFetchController@fetchPagePagination')->name('frame-three.fetch-pagination');
+        });
+
+        Route::namespace('GeneratedEmails')->group(function() {
+            Route::get('generated-emails', 'GeneratedEmailController@index')->name('generated-emails.index');
+            Route::get('generated-emails/create', 'GeneratedEmailController@create')->name('generated-emails.create');
+            Route::post('generated-emails/store', 'GeneratedEmailController@store')->name('generated-emails.store');
+            Route::get('generated-emails/show/{id}', 'GeneratedEmailController@show')->name('generated-emails.show');
+            Route::post('generated-emails/update/{id}', 'GeneratedEmailController@update')->name('generated-emails.update');
+            Route::post('generated-emails/{id}/archive', 'GeneratedEmailController@archive')->name('generated-emails.archive');
+            Route::post('generated-emails/{id}/restore', 'GeneratedEmailController@restore')->name('generated-emails.restore');
+        
+            Route::post('generated-emails/fetch', 'GeneratedEmailFetchController@fetch')->name('generated-emails.fetch');
+            Route::post('generated-emails/fetch?archived=1', 'GeneratedEmailFetchController@fetch')->name('generated-emails.fetch-archive');
+            Route::post('generated-emails/fetch-item/{id?}', 'GeneratedEmailFetchController@fetchView')->name('generated-emails.fetch-item');
+            Route::post('generated-emails/fetch-pagination/{id}', 'GeneratedEmailFetchController@fetchPagePagination')->name('generated-emails.fetch-pagination');
         });
 
     });

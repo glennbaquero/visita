@@ -20,11 +20,12 @@ class BookingNotification extends Notification
      *
      * @return void
      */
-    public function __construct($book)
+    public function __construct($book, $email)
     {
         $this->book = $book;
-        $this->title = 'Thank you for reservation';
-        $this->message = "Download the QR here : ".url($this->book->renderImagePath('qr_code_path')).".";
+        $this->title = $email->title;
+        $this->message = $email->message;
+        $this->qr_path = "Download the QR here : ".url($this->book->renderImagePath('qr_code_path')).".";
     }
 
     /**
@@ -35,7 +36,7 @@ class BookingNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -47,10 +48,11 @@ class BookingNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject(config('app.name') . ': Reservation')
+                    ->subject(config('app.name') . ':'.$this->title)
                     ->greeting('Hello '.$notifiable->first_name.'!')
                     ->from('no-reply@visita.com')
-                    ->line($this->message);
+                    ->line($this->message)
+                    ->line($this->qr_path);
     }
 
     /**
