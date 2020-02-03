@@ -23,5 +23,8 @@ class VerifyCsrfToken extends Middleware
         'paypal/transaction',
         'forgot-password/frontliner/email',
         'api/masungi/',
+        'checkout/processPaynamics',
+        'checkout/paynamicsReturn',
+        'checkout/paynamicsCancel'
     ];
 }
