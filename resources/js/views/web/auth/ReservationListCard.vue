@@ -134,7 +134,7 @@
 	import ResponseMixin from 'Mixins/errorResponse.js';
 	import prx_paypal_mixin from '../../../../../public/vendor/praxxys/ecommerce/paypal/js/vue-mixin.js';
 	import SuccessErrorModal from '../partials/SuccessErrorModal.vue';
-	import PaynamicsForm from './components/PaynamicsForm.vue';
+	import PaynamicsForm from '../components/PaynamicsForm.vue';
 
 	export default {
 		props: {
