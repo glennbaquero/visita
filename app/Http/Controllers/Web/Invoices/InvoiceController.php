@@ -191,7 +191,7 @@ class InvoiceController extends Controller
         $processor = new PaynamicsProcessor();
         $route = $processor->processReturnResponse($request);
 
-        return redirect()->routes('web.dashboard');
+        return redirect()->route('web.dashboard');
     }
 
     /**
