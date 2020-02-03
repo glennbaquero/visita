@@ -38,6 +38,7 @@
 				<reservation-list-card
 					fetch-url="{{ route('web.reservations.show') }}"
 					upload-deposit-slip-url="{{ route('web.upload.deposit') }}"
+					process-payment-url="{{ route('web.book.generate-form') }}"
 				></reservation-list-card>
 
 			</div>

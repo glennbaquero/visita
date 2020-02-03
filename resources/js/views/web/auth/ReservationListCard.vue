@@ -124,6 +124,9 @@
 		<!-- {{  }} -->
 		<loading :active.sync="isLoading" :is-full-page="fullPage"></loading>
 		<SuccessErrorModal :message="message" :icon="iconToShow"></SuccessErrorModal>
+		<paynamics-form
+		ref="paynamics-form"
+		></paynamics-form>
 	</div>
 </template>
 <script>
@@ -131,18 +134,21 @@
 	import ResponseMixin from 'Mixins/errorResponse.js';
 	import prx_paypal_mixin from '../../../../../public/vendor/praxxys/ecommerce/paypal/js/vue-mixin.js';
 	import SuccessErrorModal from '../partials/SuccessErrorModal.vue';
+	import PaynamicsForm from '../components/PaynamicsForm.vue';
 
 	export default {
 		props: {
 			fetchUrl: String,
-			uploadDepositSlipUrl: String
+			processPaymentUrl: String,
+			uploadDepositSlipUrl: String,
 		},
 
 		mixins: [ NumberMixin, prx_paypal_mixin, ResponseMixin ],
 
 		components: {
 	        Loading,
-	        SuccessErrorModal
+	        SuccessErrorModal,
+	        PaynamicsForm
 		},
 
 		data() {
@@ -176,7 +182,18 @@
 			},
 
 			processPayment() {
-				this.PRXPayPalSubmit(this.buildItems(), this.item.reference_code, 'PHP');
+				var data = {
+					id: this.item.id
+				};
+
+				axios.post(this.processPaymentUrl, data)
+					.then(response => {
+						var data = response.data;
+                        let form = this.$refs['paynamics-form'];
+                        form.setVars(data.gateway_url, data.signature);
+                        form.submit();
+					})
+				// this.PRXPayPalSubmit(this.buildItems(), this.item.reference_code, 'PHP');
 			},
 
 			buildItems() {

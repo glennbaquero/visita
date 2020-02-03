@@ -30,17 +30,6 @@ class AdminInvoicePaid extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
-    }
-
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
         return ['mail', 'database'];
     }
 
