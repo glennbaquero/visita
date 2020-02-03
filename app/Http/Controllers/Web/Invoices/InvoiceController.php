@@ -191,9 +191,7 @@ class InvoiceController extends Controller
         $processor = new PaynamicsProcessor();
         $route = $processor->processReturnResponse($request);
 
-        return response()->json([
-
-        ]);
+        return redirect()->routes('web.dashboard');
     }
 
     /**
@@ -202,8 +200,6 @@ class InvoiceController extends Controller
      */
     public function paynamicsCancel()
     {
-        return response()->json([
-
-        ]);
+         return redirect()->routes('web.dashboard');
     }
 }
