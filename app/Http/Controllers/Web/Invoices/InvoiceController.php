@@ -172,4 +172,42 @@ class InvoiceController extends Controller
             'form' => $form
         ]);
     }
+
+    /**
+     * Processing paynamics
+     * 
+     * @param  Requests $request 
+     */
+    public function processPaynamics(Request $request)
+    {
+        $processor = new PaynamicsProcessor();
+
+        /** Process Paynamics */
+        return $processor->process($request);
+    }
+
+    /**
+     * Paynamics success return
+     * 
+     */
+    public function paynamicsReturn(Request $request)
+    {
+        $processor = new PaynamicsProcessor();
+        $route = $processor->processReturnResponse($request);
+
+        return response()->json([
+
+        ]);
+    }
+
+    /**
+     * Paynamics cancel
+     * 
+     */
+    public function paynamicsCancel()
+    {
+        return response()->json([
+
+        ]);
+    }
 }
