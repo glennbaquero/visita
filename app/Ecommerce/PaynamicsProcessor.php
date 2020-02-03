@@ -99,7 +99,7 @@ class PaynamicsProcessor
 		$strxml = $strxml . "<response_url>" . $_resurl . "</response_url>";
 		$strxml = $strxml . "<cancel_url>" . $_cancelurl . "</cancel_url>";
 		$strxml = $strxml . "<mtac_url></mtac_url>"; // pls set this to the url where your terms and conditions are hosted
-		$strxml = $strxml . "<descriptor_note>PERIGON</descriptor_note>"; // pls set this to the descriptor of the merchant ""
+		$strxml = $strxml . "<descriptor_note>VISITA Reservation</descriptor_note>"; // pls set this to the descriptor of the merchant ""
 		$strxml = $strxml . "<fname>" . $_fname . "</fname>";
 		$strxml = $strxml . "<lname>" . $_lname . "</lname>";
 		$strxml = $strxml . "<address1>" . $_addr1 . "</address1>";
@@ -121,7 +121,7 @@ class PaynamicsProcessor
 		$strxml = $strxml . "</Request>";
 
         Log::info('XML : ' .  $strxml);
-        
+
         Log::info('Encoding xml to base64');
 
         $b64string =  base64_encode($strxml);
