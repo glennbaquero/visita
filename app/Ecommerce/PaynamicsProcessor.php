@@ -251,7 +251,7 @@ class PaynamicsProcessor
         $reference_code = base64_decode($request->requestid);
         Log::info('Reference Code: ' . $reference_code);
         
-        $this->invoice = Invoice::where('code', $reference_code)->first();
+        $this->invoice = Invoice::where('reference_code', $reference_code)->first();
         Log::info('Invoice: ' . $this->invoice);
         Log::info('Response Code: '. $this->invoice->response_code);
 
