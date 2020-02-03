@@ -38,16 +38,16 @@ class Invoice extends Model
 
     public function renderStatusLabel() {
     	$label = 'Pending';
-    	if($this->is_approved && !$this->is_paid) $label = 'Payment';
-    	if(!$this->is_approved && !$this->is_paid) $label = 'Confirmation';
-    	if($this->is_approved && $this->is_paid) $label = 'Reserved';
+    	if($this->is_approved && !$this->is_paid) $label = 'Payment Pending';
+    	if(!$this->is_approved && !$this->is_paid) $label = 'For Approval';
+    	if($this->is_approved && $this->is_paid) $label = 'Paid';
     	return $label;
     }
 
     public function renderStatusClass() {
     	$class = 'pending';
-    	if($this->is_approved && !$this->is_paid) $class = 'pending';
-    	if(!$this->is_approved && !$this->is_paid) $class = 'confirmed';
+    	if($this->is_approved && !$this->is_paid) $class = 'payment-pending';
+    	if(!$this->is_approved && !$this->is_paid) $class = 'for-approval';
     	if($this->is_approved && $this->is_paid) $class = 'confirmed';
     	return $class;
     }

@@ -97,5 +97,7 @@
 
 		&.pending { background: $orange; }
 		&.confirmed { background: $green; }
+		&.for-approval { background: #e0af3c; }
+		&.payment-pending { background: #0505ade0; }
 	}
 }

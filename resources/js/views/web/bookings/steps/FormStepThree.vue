@@ -5,7 +5,7 @@
 				<h5 class="frm-title small clr--gray">Guest {{ headCount }} Details</h5>
 			</div
 			><div class="width--40 align-r inlineBlock-parent">
-				
+				<input type="checkbox" @change="sameAsContactPerson()" v-model="isSameDetails">
 			</div>
 		</div>
 		<hr>
@@ -165,7 +165,8 @@
 			countries: Array,
 			genders: Array,
 			visitorTypes: Array,
-			specialFees: Array
+			specialFees: Array,
+			main: Object
 		},
 
 		mixins: [ RegexMixin ],
@@ -174,6 +175,7 @@
 			return {
 				guest: {},
 				headCount: this.guestKey + 1,
+				isSameDetails: false
 			}
 		},	
 
@@ -229,6 +231,25 @@
 
 	            this.guest.paths = files[0];
 	        },
+
+
+	        sameAsContactPerson() {
+	        	this.isSameDetails = true;
+	        	this.guest = {
+						special_fee_id: this.main.special_fee_id,
+						visitor_type_id: this.main.visitor_type_id,
+						first_name: this.main.first_name,
+						gender: this.main.gender,
+						nationality: this.main.nationality,
+						last_name: this.main.last_name,
+						email: this.main.email,
+						birthdate: this.main.birthdate,
+						contact_number: this.main.contact_number,
+						emergency_contact_number: this.main.emergency_contact_number,
+						main: false,
+						paths: this.main.paths
+					}
+	        }
 		}
 	}
 </script>

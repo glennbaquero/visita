@@ -3,8 +3,20 @@
 	
 		<card>
 			<template v-slot:header>About Tabbing Information</template>
+			
+			<div class="row">
+				<div class="custom-control custom-switch ml-3">
+					<input
+					v-model="item.is_available"
+					name="is_available" :checked="item.is_available" type="checkbox" class="custom-control-input" id="is_available">
+					<label class="custom-control-label" for="is_available">Is this available for reservation?</label>
+				</div>
+			</div>
+
+			<br>
 
 			<div class="row">
+			
 				<div class="form-group col-sm-12 col-md-4">
 					<label>Name</label>
 					<input v-model="item.name" name="name" type="text" class="form-control">

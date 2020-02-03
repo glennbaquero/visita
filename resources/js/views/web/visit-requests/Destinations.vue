@@ -19,7 +19,7 @@
 												:href="'destinations/destinations-info/'+destination.id" 
 												class="frm-btn green s-margin-r"
 											>View Destination</a>
-											<a :href="destination.requestVisitUrl" class="frm-btn orange">Request to Visit</a>
+											<a :href="destination.requestVisitUrl" class="frm-btn orange" v-if="destination.is_available">Request to Visit</a>
 										</div>
 									</div>
 								</div>
