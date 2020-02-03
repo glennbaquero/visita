@@ -13,6 +13,8 @@ use App\Models\Invoices\Invoice;
 use App\Models\Books\Book;
 use App\Models\Users\Admin;
 
+use App\Ecommerce\PaynamicsProcessor;
+
 use DB;
 use Storage;
 
@@ -147,5 +149,27 @@ class InvoiceController extends Controller
     	return response()->json([
     		'message' => 200
     	]);
+    }
+
+    /**
+    * Generate Paynamics form
+    *
+    * @param object $invoice
+    * @return string $form
+    */
+    public function generatePaynamicsForm(Request $request)
+    {
+        $invoice = Invoice::find($request->id);
+        $paynamics = new PaynamicsProcessor();
+        $signature = $paynamics->createXML($invoice);
+
+        /** Create form */
+        $form = '<html><head><style>.lds-dual-ring {display: inline-block;width: 64px;height: 64px;} .lds-dual-ring:after {content: " ";display: block;width:46px;height: 46px;margin: 1px;border-radius: 50%;border: 5px solid red;border-color: red transparent red transparent;animation: lds-dual-ring 1.2s linear infinite;} @keyframes lds-dual-ring { 0% { transform: rotate(0deg); } 100% {transform: rotate(360deg);}} .centered { position: fixed;top: 50%;left: 50%;margin-top: -50px;margin-left: -20px; }</style></head><body onload="submitForm()"><div class="centered"><div class="lds-dual-ring"></div></div><form id="paynamicsForm" name="form1" method="post" action="'. config('ecommerce.paynamics.gateway') .'">'.
+            '<input type="hidden" name="paymentrequest" id="paymentrequest" value="'. $signature  .'" style="width:800px; padding: 10px;">'.
+            '</form><script type="text/javascript">function submitForm() { document.getElementById("paynamicsForm").submit(); }</script></body></html>';
+
+        return response()->json([
+            'form' => $form
+        ]);
     }
 }

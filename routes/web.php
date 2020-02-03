@@ -109,6 +109,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 			Route::post('/book/store', 'InvoiceController@store')->name('book.store');
 			Route::get('reservation/get', 'InvoiceController@show')->name('reservations.show');
 			Route::post('upload/deposit', 'InvoiceController@uploadDepositSlip')->name('upload.deposit');
+			Route::post('/generate/form', 'InvoiceController@generatePaynamicsForm')->name('book.generate-form');
 		});
 	});
 

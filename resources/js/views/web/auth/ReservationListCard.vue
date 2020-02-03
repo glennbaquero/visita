@@ -135,7 +135,8 @@
 	export default {
 		props: {
 			fetchUrl: String,
-			uploadDepositSlipUrl: String
+			processPaymentUrl: String,
+			uploadDepositSlipUrl: String,
 		},
 
 		mixins: [ NumberMixin, prx_paypal_mixin, ResponseMixin ],
@@ -176,7 +177,15 @@
 			},
 
 			processPayment() {
-				this.PRXPayPalSubmit(this.buildItems(), this.item.reference_code, 'PHP');
+				var data = {
+					id: this.item.id
+				};
+
+				axios.post(this.processPaymentUrl, data)
+					.then(response => {
+						window.location.href = response.data.form;
+					})
+				// this.PRXPayPalSubmit(this.buildItems(), this.item.reference_code, 'PHP');
 			},
 
 			buildItems() {
