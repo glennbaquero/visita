@@ -14,18 +14,18 @@
 						<span class="checkmark"></span>
 					</div
 					><div class="width--50">
-						<p class="frm-header clr--gray">Paypal</p>
+						<p class="frm-header clr--gray">Paynamics</p>
 					</div
 					><div class="width--40 align-r">
 						<img
 						  class="rqst-frm1__step-4-content-checkbox-img" 
-						  src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404_960_720.png"
+						  src="images/paynamics"
 						>
 					</div>
 				</label>
 			</div>
 
-			<div class="rqst-frm1__step-4-content-checkbox">
+			<!-- <div class="rqst-frm1__step-4-content-checkbox">
 				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent">
 					<div class="width--10">
 						<input type="radio" name="payment" v-model="isPaypal" :value="false" @change="paymentSelectionChanged()">
@@ -45,7 +45,7 @@
 						>
 					</div>
 				</label>
-			</div>
+			</div> -->
 
 			<div class="align-l m-margin-b l-margin-t">
 				<h5 class="frm-title small clr--gray">Fees</h5>
