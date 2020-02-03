@@ -82,7 +82,7 @@ class PaynamicsProcessor
 		$strxml = $strxml . "</Items>";
 
 		Log::info('Destination Name : ' . $this->invoice->book->destination->name);
-		Log::info('Experience Name : ' . $this->invoice->book->destination->allocation->name);
+		Log::info('Experience Name : ' . $this->invoice->book->allocation->name);
 
 		$strxml = $strxml . "<Items>";
 			$strxml = $strxml . "<itemname> Transaction Fee </itemname><quantity>". 1 ."</quantity><amount>" . number_format($this->invoice->transaction_fee, 2, '.', '') . "</amount>";		
