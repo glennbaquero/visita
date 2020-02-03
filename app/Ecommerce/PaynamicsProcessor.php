@@ -39,7 +39,7 @@ class PaynamicsProcessor
 		$this->invoice = $invoice;
 
 		$_mid = $this->merchantID;
-		$_requestid = $this->invoice->payment_code;
+		$_requestid = $this->invoice->reference_code;
 
 		$_fname = $this->invoice->book->guests->where('main', true)->first()->first_name;
 		$_mname = '';
