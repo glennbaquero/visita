@@ -24,9 +24,8 @@ class GeneratedEmailTableSeeder extends Seeder
                 $item->notification_type = $data[0];
                 $item->title = $data[1];
                 $item->message = $data[2];
-                $item->deleted_at = $data[3];
-                $item->created_at = $data[4];
-                $item->updated_at = $data[5];
+                $item->created_at = $data[3];
+                $item->updated_at = $data[4];
 
                 $item->save();
 
