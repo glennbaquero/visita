@@ -54,8 +54,8 @@ class PaynamicsProcessor
 		$_phone = $this->invoice->book->guests->where('main', true)->first()->contact_number;
 		$_mobile = $this->invoice->book->guests->where('main', true)->first()->contact_number;
 		$_ipaddress = config('ecommerce.paynamics.ipaddress');
-		$_noturl = route('web.checkout.process_paynamics'); // url where response is posted
-		$_resurl = route('web.checkout.paynamics_return'); //url of merchant landing page
+		$_noturl = route('web.checkout.paynamics_return'); // url where response is posted
+		$_resurl = route('web.checkout.process_paynamics'); //url of merchant landing page
 		$_cancelurl = route('web.checkout.paynamics-cancel');		
 		$_clientip = $_SERVER['REMOTE_ADDR'];
 		$_sec3d = "try3d";
