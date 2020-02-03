@@ -47,11 +47,11 @@ class InvoiceController extends Controller
 
         if($item->is_paypal_payment) {
             if($item->bookable_type === 'App\Models\API\Masungi') {
-                $main->notify(new MasungiReservationApproved('Payment thru Paypal', $item));
+                $main->notify(new MasungiReservationApproved('Payment thru Paynamics', $item));
             } else {
-                $main->notify(new ReservationApproved('Payment thru Paypal', $approved_notification));
+                $main->notify(new ReservationApproved('Payment thru Paynamics', $approved_notification));
             }
-            // $user->notify(new ReservationApproved('Payment thru Paypal'));
+            // $user->notify(new ReservationApproved('Payment thru Paynamics'));
         } else {
             $main->notify(new ReservationApproved('Upload Deposit Slip'));
             // $user->notify(new ReservationApproved('Upload Deposit Slip'));
