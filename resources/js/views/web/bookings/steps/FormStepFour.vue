@@ -19,7 +19,7 @@
 					><div class="width--40 align-r">
 						<img
 						  class="rqst-frm1__step-4-content-checkbox-img" 
-						  src="images/paynamics"
+						  src="images/paynamics.png"
 						>
 					</div>
 				</label>

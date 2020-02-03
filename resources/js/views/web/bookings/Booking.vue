@@ -137,6 +137,7 @@
 									<FormStepThree
 										v-if="key === guest_key"
 										:step-data="guest"
+										:main="stepData.main"
 										:guest-key="key"
 										:visitor-types="visitorTypes"
 										:special-fees="selectedAllocation.special_fees"

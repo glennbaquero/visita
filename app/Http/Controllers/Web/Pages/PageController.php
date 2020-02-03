@@ -127,7 +127,8 @@ class PageController extends Controller
         		'short_description' => str_limit($destination->overview, 70),
         		'capacity' => $destination->capacity,
         		'image' => $destination->pictures->first()->renderImagePath(),
-        		'requestVisitUrl' => $destination->renderRequestVisitUrl()
+        		'is_available' => $destination->is_available,
+        		'requestVisitUrl' => $destination->renderRequestVisitUrl(),
         	]);
         }
         
