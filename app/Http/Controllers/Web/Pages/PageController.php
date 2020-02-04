@@ -141,11 +141,12 @@ class PageController extends Controller
 	public function showDestinationsInfo($id) {
        
         $data = $this->getPageData('destination');
-        $selected_destination = Destination::withTrashed()->findOrFail($id);
+        $selected_destination = Destination::with('allocations')->find($id);
+        $selected_destination['request_url'] = $selected_destination->renderRequestVisitUrl();
         
         return view('web.pages.destination.destinations-info', array_merge($data, [
         	'quote' => Inspiring::quote(),
-        	'selected_destination' => $selected_destination
+        	'selected_destination' => $selected_destination,
         ]));
 
 	}

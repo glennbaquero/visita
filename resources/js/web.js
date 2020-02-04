@@ -38,3 +38,6 @@ Vue.component('reservation-list-card', require('./views/web/auth/ReservationList
 */
 Vue.component('destinations', require('./views/web/visit-requests/Destinations.vue').default);
 
+Vue.component('destination-info', require('./views/web/destinations/DestinationInfo.vue').default);
+
+

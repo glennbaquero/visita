@@ -18,7 +18,7 @@ class Allocation extends Model
     
     public function destination()
     {
-    	return $this->belongsTo(Destination::class);
+    	return $this->belongsTo(Destination::class)->withTrashed();
     }
 
     public function books()

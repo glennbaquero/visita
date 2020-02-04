@@ -35,8 +35,8 @@
 					  src="images/activities-icon.png"
 					>	
 					<p class="frm-header s-margin-b clr--gray">Activities: 
-						<template v-for="(experience, key) in destination.experiences">
-							{{ experience.name }}<span v-if="key+1 < destination.experiences.length">,</span>
+						<template v-for="(experience, key) in destination.allocations">
+							{{ experience.name }}<span v-if="key+1 < destination.allocations.length">,</span>
 						</template>
 					</p>
 				</div>
@@ -48,7 +48,7 @@
 					<iframe :src="'https://www.google.com/maps/embed/v1/place?q='+destination.location+'&key=AIzaSyAaWOelGGDTWA2E9riZAqGGnQ8DRYKws6M'" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
 					<br>
 					<br>
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/bKIIdCNOQwY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/bKIIdCNOQwY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 				</div>
 			</div>
 		</div>
