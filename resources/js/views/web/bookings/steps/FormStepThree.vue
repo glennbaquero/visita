@@ -5,7 +5,8 @@
 				<h5 class="frm-title small clr--gray">Guest {{ headCount }} Details</h5>
 			</div
 			><div class="width--40 align-r inlineBlock-parent">
-				<input type="checkbox" @change="sameAsContactPerson()" v-model="isSameDetails">
+				<input type="checkbox" class="s-margin-r" @change="sameAsContactPerson()" v-model="isSameDetails">
+				<p class="frm-header clr--gray mb-0">Same as contact person</p>
 			</div>
 		</div>
 		<hr>
