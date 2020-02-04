@@ -127,3 +127,6 @@ Vue.component('frame-three-view', require('./views/admin/frame-three/FrameThreeV
 
 Vue.component('generated-emails-table', require('./views/admin/generated-emails/GeneratedEmailsTable.vue').default);
 Vue.component('generated-emails-view', require('./views/admin/generated-emails/GeneratedEmailsView.vue').default);
+
+Vue.component('bookings-v2-table', require('./views/admin/bookings/version2/BookingsTable.vue').default);
+Vue.component('bookings-v2-view', require('./views/admin/bookings/version2/BookingsView.vue').default);

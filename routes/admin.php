@@ -501,6 +501,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('bookings/fetch/{selectedDate?}/{destination?}/{experience?}?archived=1', 'BookFetchController@fetch')->name('bookings.fetch-archive');
             Route::post('bookings/fetch-item/{id?}/{destination?}/{experience?}', 'BookFetchController@fetchView')->name('bookings.fetch-item');
             Route::post('bookings/fetch-pagination/{id}', 'BookFetchController@fetchPagePagination')->name('bookings.fetch-pagination');
+
+
+            Route::get('reservations', 'BookingController@index')->name('bookings-version2.index');
+            Route::post('reservations/fetch', 'BookingFetchController@fetch')->name('bookings-version2.fetch');
         });
 
         Route::namespace('Fees')->group(function() {
