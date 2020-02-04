@@ -45,6 +45,17 @@
                 </li>
                 @endif
 
+                <li class="nav-item">
+                    <a href="{{ route('admin.bookings-version2.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.bookings-version2.*',
+                    ]) }}">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
+                        <p>
+                            Reservations
+                        </p>
+                    </a>
+                </li>
+
                 @if ($self->hasAnyPermission(['admin.agencies.crud']))
                 <li class="nav-item">
                     <a href="{{ route('admin.agencies.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
