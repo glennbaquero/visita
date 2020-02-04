@@ -41,7 +41,7 @@ class Destination extends Model
 
     public function allocations()
     {
-        return $this->hasMany(Allocation::class);
+        return $this->hasMany(Allocation::class)->with('fees');
     }
 
     public function experiences()
