@@ -16,6 +16,7 @@ use App\Models\Books\Book;
 use App\Models\Allocations\Allocation;
 use App\Models\Destinations\Destination;
 use App\Models\Users\Admin;
+use App\Models\Capacities\Capacity;
 
 use App\Notifications\Reservation\BookingNotification;
 use App\Notifications\Web\Bookings\NewBookingNotification;
@@ -23,6 +24,7 @@ use App\Notifications\Admin\Paypal\AdminInvoicePaid;
 use App\Notifications\Web\Paypal\UserInvoicePaid;
 
 use DB;
+use Carbon\Carbon;
 
 class InvoiceController extends Controller
 {
@@ -206,5 +208,35 @@ class InvoiceController extends Controller
         Log::info('Email sent to admin');
 
     	return 200;
+    }
+
+    public function getAvailability($request) {
+        $allocation = Allocation::where('name', $request->trail_name)->first();
+        $capacity = Capacity::where('allocation_id', $allocation->id)->first()->online;
+        $time = $request->start_time;
+        $schedule_date = $request->date;
+
+        $invoices = Invoice::where('is_paid', true)->get();
+
+        $count = 0;
+
+        $canShow = 'true';
+        $sample = [];
+        foreach ($invoices as $key => $invoice) {
+            if($invoice->book->allocation->id === $allocation->id && $invoice->book->scheduled_at == Carbon::parse($schedule_date) && $invoice->book->start_time == Carbon::parse($time)->format('H:i:s')) {
+                $count += 1;
+            }
+            // array_push($sample, [
+            //     'invoice' => $invoice->book
+            // ]);
+            // $count += $invoice->book->where('allocation_id', $allocation->id)->count();
+
+        }
+
+        if($capacity <= $count) {
+            $canShow = 'false';
+        }
+
+        return $canShow;
     }
 }
