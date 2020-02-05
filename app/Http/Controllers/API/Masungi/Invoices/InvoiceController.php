@@ -97,8 +97,10 @@ class InvoiceController extends Controller
 	    			'birthdate' => $guest['birthday'],
 	    		]);
 	    	}
+            $firstpayment = true;
+            $secondpayment = true;
 
-            if($request->is_fullpayment) {
+            if(!$request->is_fullpayment) {
                 $firstpayment = false;
                 $secondpayment = false;
             }
