@@ -104,6 +104,9 @@ class InvoiceController extends Controller
 	    		'grand_total' => $request->grand_total,
 	    		'is_paypal_payment' => $request->is_paypal_payment,
 	    		'reference_code' => $request->grand_total.$this->generateReferenceCode().'MSNG',
+                'is_fullpayment' => $request->is_fullpayment,
+                'amount_settled' => $request->amount_settled,
+                'balance' => $request->balance,
 	    	]);
 
 
@@ -187,9 +190,37 @@ class InvoiceController extends Controller
     	DB::beginTransaction();
             Log::info($invoice);
             $invoice->update([
-                'is_paid' => true,
-                'payment_code' => $request['payment_code']
+                'payment_code' => $request['payment_code'],
             ]);     
+            
+            if($invoice->is_fullpayment) {
+                $invoice->paid = true;
+                $invoice->is_firstpayment_paid = true;
+                $invoice->is_secondpayment_paid = true;
+                $main->notify(new UserInvoicePaid($invoice));
+                Log::info('Email sent to user');
+                foreach ($admins as $admin) {
+                   $admin->notify(new AdminInvoicePaid($invoice));
+                }
+                Log::info('Email sent to admin');
+            }
+
+            if(!$invoice->is_fullpayment && !$invoice->is_firstpayment_paid) {
+                $invoice->is_firstpayment_paid = true;
+            } 
+
+            if(!$invoice->is_fullpayment && $invoice->is_firstpayment_paid && !$invoice->is_secondpayment_paid) {
+                $invoice->is_secondpayment_paid = true;
+                $invoice->paid = true;
+                $main->notify(new UserInvoicePaid($invoice));
+                Log::info('Email sent to user');
+                foreach ($admins as $admin) {
+                   $admin->notify(new AdminInvoicePaid($invoice));
+                }
+                Log::info('Email sent to admin');
+            }
+
+            $invoice->save();
             // $invoice->is_paid = true;
             // $invoice->payment_code = $request['payment_code'];
             // $invoice->save();
@@ -199,13 +230,7 @@ class InvoiceController extends Controller
     	DB::commit();
         Log::info('DB commit');
         
-        $main->notify(new UserInvoicePaid($invoice));
-        Log::info('Email sent to user');
 
-        foreach ($admins as $admin) {
-           $admin->notify(new AdminInvoicePaid($invoice));
-        }
-        Log::info('Email sent to admin');
 
     	return 200;
     }

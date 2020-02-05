@@ -61,4 +61,20 @@ class Invoice extends Model
     {
     	return route('admin.invoices.reject.deposit', $this->id);
     }
+
+    public function renderPaymentStatusForMasungi() {
+        
+        if($this->is_firstpayment_paid && !$this->is_secondpayment_paid) {
+            $label = 'Partially Paid';
+        } elseif ($this->is_firstpayment_paid && $this->is_secondpayment_paid) {
+            $label = 'Fully Paid';
+        } elseif (!$this->is_approved) {
+            $label = 'For Approval';
+        } elseif ($this->is_approved && !$this->is_paid && !$this->is_firstpayment_paid) {
+            $label = 'No transaction found';
+        }
+
+        return $label;
+        
+    }
 }
