@@ -48,9 +48,9 @@ class MasungiReservationApproved extends Notification
     {
         $payment = $this->invoice->grand_total;
 
-        if($this->is_firstpayment_paid && !$this->is_secondpayment_paid && !$this->is_paid && !$this->invoice->is_fullpayment) {
+        if($this->invoice->is_firstpayment_paid && !$this->invoice->is_secondpayment_paid && !$this->invoice->is_paid && !$this->invoice->is_fullpayment) {
             $payment = $this->invoice->balance;
-        } elseif (!$this->is_firstpayment_paid && !$this->is_secondpayment_paid && !$this->is_paid && !$this->invoice->is_fullpayment) {
+        } elseif (!$this->invoice->is_firstpayment_paid && !$this->invoice->is_secondpayment_paid && !$this->invoice->is_paid && !$this->invoice->is_fullpayment) {
             $payment = $this->invoice->amount_settled;
         }
 
