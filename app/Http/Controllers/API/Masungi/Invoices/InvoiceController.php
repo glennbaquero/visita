@@ -195,7 +195,7 @@ class InvoiceController extends Controller
             $invoice->update([
                 'payment_code' => $request['payment_code'],
             ]);     
-
+            
             if($invoice->is_fullpayment) {
                 $invoice->paid = true;
                 $invoice->is_firstpayment_paid = true;
