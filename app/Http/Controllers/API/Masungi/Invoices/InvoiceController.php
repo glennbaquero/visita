@@ -17,6 +17,7 @@ use App\Models\Allocations\Allocation;
 use App\Models\Destinations\Destination;
 use App\Models\Users\Admin;
 use App\Models\Capacities\Capacity;
+use App\Models\Emails\GeneratedEmail;
 
 use App\Notifications\Reservation\BookingNotification;
 use App\Notifications\Web\Bookings\NewBookingNotification;
@@ -111,10 +112,12 @@ class InvoiceController extends Controller
 
 
 	    	$main = $book->guests->where('main', 1)->first();
-	    	$main->notify(new BookingNotification($book));
+            $qr_email = GeneratedEmail::where('notification_type', 'Booking notification')->first();
+            $new_booking_frontliner = GeneratedEmail::where('notification_type', 'New booking notification')->first();
+	    	$main->notify(new BookingNotification($book, $qr_email));
       //       $admins = Admin::all();
 	    	// foreach ($admins as $admin) {
-	     //        $admin->notify(new NewBookingNotification($book->destination, $book->allocation, $book, $main));
+	     //        $admin->notify(new NewBookingNotification($book->destination, $book->allocation, $book, $main, $new_booking_frontliner));
 	     //    }
     	DB::commit();
 
@@ -192,7 +195,7 @@ class InvoiceController extends Controller
             $invoice->update([
                 'payment_code' => $request['payment_code'],
             ]);     
-            
+
             if($invoice->is_fullpayment) {
                 $invoice->paid = true;
                 $invoice->is_firstpayment_paid = true;
