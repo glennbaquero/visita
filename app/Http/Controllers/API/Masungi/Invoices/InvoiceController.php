@@ -45,6 +45,8 @@ class InvoiceController extends Controller
     public function store(Request $request, $user) 
     {
 
+        Log::info($request->all());
+
     	// $validation = $this->validateRequest($request);
 
     	// if($validation === 2) {
