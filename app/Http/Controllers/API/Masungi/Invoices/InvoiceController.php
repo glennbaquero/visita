@@ -24,6 +24,7 @@ use App\Notifications\Admin\Paypal\AdminInvoicePaid;
 use App\Notifications\Web\Paypal\UserInvoicePaid;
 
 use DB;
+use Carbon\Carbon;
 
 class InvoiceController extends Controller
 {
@@ -222,7 +223,7 @@ class InvoiceController extends Controller
         $canShow = 'true';
         $sample = [];
         foreach ($invoices as $key => $invoice) {
-            if($invoice->book->allocation->id === $allocation->id && $invoice->book->scheduled_at == $scheduled_date && $invoice->book->start_time == $time) {
+            if($invoice->book->allocation->id === $allocation->id && $invoice->book->scheduled_at == Carbon::parse($scheduled_date) && $invoice->book->start_time == Carbon::parse($time)->format('H:i:s')) {
                 $count += 1;
             }
             // array_push($sample, [
