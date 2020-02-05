@@ -223,7 +223,7 @@ class InvoiceController extends Controller
         $canShow = 'true';
         $sample = [];
         foreach ($invoices as $key => $invoice) {
-            if($invoice->book->allocation->id === $allocation->id && $invoice->book->scheduled_at == Carbon::parse($scheduled_date) && $invoice->book->start_time == Carbon::parse($time)->format('H:i:s')) {
+            if($invoice->book->allocation->id === $allocation->id && $invoice->book->scheduled_at == Carbon::parse($schedule_date) && $invoice->book->start_time == Carbon::parse($time)->format('H:i:s')) {
                 $count += 1;
             }
             // array_push($sample, [
