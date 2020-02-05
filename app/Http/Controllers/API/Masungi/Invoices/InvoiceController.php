@@ -98,6 +98,11 @@ class InvoiceController extends Controller
 	    		]);
 	    	}
 
+            if($request->is_fullpayment) {
+                $firstpayment = false;
+                $secondpayment = false;
+            }
+
 	    	$user->invoices()->create([
 	    		'book_id' => $book->id,
 	    		'conservation_fee' => $request->conservation_fee,
@@ -110,6 +115,8 @@ class InvoiceController extends Controller
                 'is_fullpayment' => $request->is_fullpayment,
                 'amount_settled' => $request->amount_settled,
                 'balance' => $request->balance,
+                'is_firstpayment_paid' => $firstpayment,
+                'is_secondpayment_paid' => $secondpayment,
 	    	]);
 
 
