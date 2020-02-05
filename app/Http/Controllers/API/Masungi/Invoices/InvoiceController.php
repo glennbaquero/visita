@@ -222,7 +222,7 @@ class InvoiceController extends Controller
         $canShow = 'true';
         $sample = [];
         foreach ($invoices as $key => $invoice) {
-            if($invoice->book->allocation->id === $allocation->id) {
+            if($invoice->book->allocation->id === $allocation->id && $invoice->book->scheduled_at == $scheduled_date && $invoice->book->start_time == $time) {
                 $count += 1;
             }
             // array_push($sample, [
