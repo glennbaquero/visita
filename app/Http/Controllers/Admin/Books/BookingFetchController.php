@@ -79,6 +79,7 @@ class BookingFetchController extends FetchController
             'allocation' => $item->allocation->name,
             'destination' => $item->destination->name,
             'grand_total' => 'P '.$item->invoice->grand_total,
+            'initial_payment' => 'P '.$item->invoice->amount_settled,
             'balance' => 'P '.$item->invoice->balance,
             'is_fullpayment' => $item->invoice->is_fullpayment ? 'Full Payment' : 'Half Payment' ,
             'payment_status' => $item->invoice->renderPaymentStatusForMasungi() ,

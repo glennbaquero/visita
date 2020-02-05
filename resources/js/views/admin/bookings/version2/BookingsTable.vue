@@ -56,6 +56,7 @@
                     <td>{{ item.is_walkin }}</td>
                     <td>{{ item.status }}</td>
                     <td>{{ item.is_fullpayment }}</td>
+                    <td>{{ item.initial_payment }}</td>
                     <td>{{ item.balance }}</td>
                     <td>{{ item.grand_total }}</td>
                     <td>{{ item.payment_status }}</td>
@@ -112,6 +113,7 @@ export default {
                 { text: 'Reservation Type', value: 'is_walkin' },
                 { text: 'Visit Status', value: 'status' },
                 { text: 'Amount Settled', value: '' },
+                { text: 'Initial Payment', value: '' },
                 { text: 'Balance', value: '' },
                 { text: 'Total', value: 'grand_total' },
                 { text: 'Payment Status', value: 'payment_status' },
