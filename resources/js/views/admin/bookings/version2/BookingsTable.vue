@@ -55,7 +55,10 @@
                     <td>{{ item.main_contact.type }}</td>
                     <td>{{ item.is_walkin }}</td>
                     <td>{{ item.status }}</td>
+                    <td>{{ item.is_fullpayment }}</td>
+                    <td>{{ item.balance }}</td>
                     <td>{{ item.grand_total }}</td>
+                    <td>{{ item.payment_status }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>
                         <action-button
@@ -107,8 +110,11 @@ export default {
                 { text: 'Time', value: 'time' },
                 { text: 'Type', value: 'type' },
                 { text: 'Reservation Type', value: 'is_walkin' },
-                { text: 'Status', value: 'status' },
+                { text: 'Visit Status', value: 'status' },
+                { text: 'Amount Settled', value: '' },
+                { text: 'Balance', value: '' },
                 { text: 'Total', value: 'grand_total' },
+                { text: 'Payment Status', value: 'payment_status' },
             ];
 
 
