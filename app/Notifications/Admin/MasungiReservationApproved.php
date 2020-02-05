@@ -46,6 +46,14 @@ class MasungiReservationApproved extends Notification
      */
     public function toMail($notifiable)
     {
+        $payment = $this->invoice->grand_total;
+
+        if($this->is_firstpayment_paid && !$this->is_secondpayment_paid && !$this->is_paid && !$this->invoice->is_fullpayment) {
+            $payment = $this->invoice->balance;
+        } elseif (!$this->is_firstpayment_paid && !$this->is_secondpayment_paid && !$this->is_paid && !$this->invoice->is_fullpayment) {
+            $payment = $this->invoice->amount_settled;
+        }
+
         return (new MailMessage)
                 ->subject('Masungi Georeserve: ' . 'Reservation Approved!')
                 ->greeting('Hello ' . $notifiable->renderName() . ',')
@@ -55,7 +63,7 @@ class MasungiReservationApproved extends Notification
                 ->line('Invoice Reference # : '.$this->invoice->reference_code)
                 ->line('Total Payment: '.$this->invoice->grand_total)
                 ->line('Thank you!')
-                ->action('Pay now', $this->masungi_url.'payment/'.$notifiable->renderName().'/'.$this->invoice->reference_code.'/'.$this->invoice->grand_total);
+                ->action('Pay now', $this->masungi_url.'payment/'.$notifiable->renderName().'/'.$this->invoice->reference_code.'/'.$payment);
     }
 
     /**
