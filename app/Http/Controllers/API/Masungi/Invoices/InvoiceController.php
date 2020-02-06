@@ -209,7 +209,7 @@ class InvoiceController extends Controller
             ]);     
             
             if($invoice->is_fullpayment) {
-                $invoice->paid = true;
+                $invoice->is_paid = true;
                 $invoice->is_firstpayment_paid = true;
                 $invoice->is_secondpayment_paid = true;
                 $main->notify(new UserInvoicePaid($invoice));
@@ -226,7 +226,7 @@ class InvoiceController extends Controller
 
             if(!$invoice->is_fullpayment && $invoice->is_firstpayment_paid && !$invoice->is_secondpayment_paid) {
                 $invoice->is_secondpayment_paid = true;
-                $invoice->paid = true;
+                $invoice->is_paid = true;
                 $main->notify(new UserInvoicePaid($invoice));
                 Log::info('Email sent to user');
                 foreach ($admins as $admin) {
