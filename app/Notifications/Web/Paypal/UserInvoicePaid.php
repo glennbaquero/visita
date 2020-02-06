@@ -14,6 +14,7 @@ class UserInvoicePaid extends Notification
     use Queueable;
 
     private $invoice;
+    public $qr_path;
     /**
      * Create a new notification instance.
      *
@@ -22,6 +23,7 @@ class UserInvoicePaid extends Notification
     public function __construct($invoice)
     {
         $this->invoice = $invoice;
+        $this->qr_path = "Download the QR here : ".url($this->invoice->book->renderImagePath('qr_code_path')).".";
     }
 
     /**
@@ -60,6 +62,7 @@ class UserInvoicePaid extends Notification
                 ->line('Number of Guests : '. $this->invoice->book->total_guest)
                 ->line('Schedule : '. $this->invoice->book->scheduled_at->format('M d, Y'))
                 ->line('Start time of the visit : '. Carbon::createFromFormat('H:i:s', $this->invoice->book->start_time)->format('h:i A'))
+                ->line($this->qr_path)
                 ->line('Thank you!');
     }
 
