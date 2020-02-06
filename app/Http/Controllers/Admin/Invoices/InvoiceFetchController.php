@@ -131,7 +131,14 @@ class InvoiceFetchController extends FetchController
             $item->reservation_from = $item->book->from_masungi_reservation ? 'Masungi Reservation' : 'Visita Reservation';
             $item->is_approved = $item->is_approved ? true : false;
         	$item->is_paid = $item->is_paid ? true : false;
-        	$item->payment_type = $item->is_paypal_payment ? 'Paypal' : 'Bank Deposit';
+            $item->payment_type = $item->is_paypal_payment ? 'Paypal' : 'Bank Deposit';
+            $item->payment_settle = $item->is_fullpayment ? 'Full Payment' : 'Half Payment';
+        	$item->btn_label = 'Approved and send payment';
+            if(!$item->is_fullpayment && !$item->is_firstpayment_paid && !$item->is_secondpayment_paid) {
+                $item->btn_label = 'Approved and send initial payment';
+            } elseif (!$item->is_fullpayment && $item->is_firstpayment_paid && !$item->is_secondpayment_paid) {
+                $item->btn_label = 'Send succeeding payment';
+            }
         	$item->deposit_slip_show = $item->is_paypal_payment ? true : false;
         	$item->archiveUrl = $item->bank_deposit_slip && !$item->is_paypal_payment ? $item->renderRejectDepositSlipUrl() : $item->renderArchiveUrl();
             $item->renderDepositSlip = $item->bank_deposit_slip ? url('storage/'.$item->bank_deposit_slip) : null;

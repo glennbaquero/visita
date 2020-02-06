@@ -56,11 +56,13 @@
                     <td>{{ item.is_walkin }}</td>
                     <td>{{ item.status }}</td>
                     <td>{{ item.is_fullpayment }}</td>
+                    <td>{{ item.initial_payment }}</td>
                     <td>{{ item.balance }}</td>
                     <td>{{ item.grand_total }}</td>
                     <td>{{ item.payment_status }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>
+                        <view-button :href="item.showUrl+'/'+item.scheduled_at+'/'+item.destination_id+'/'+item.allocation_id+'/'+item.destination"></view-button>
                         <action-button
                         v-if="!hideButtons"
                         small 
@@ -92,6 +94,7 @@
 
 <script type="text/javascript">
 import ListMixin from 'Mixins/list.js';
+import NumberFormat from 'Mixins/number.js';
 
 import SearchForm from 'Components/forms/SearchForm.vue';
 import ActionButton from 'Components/buttons/ActionButton.vue';
@@ -112,7 +115,8 @@ export default {
                 { text: 'Reservation Type', value: 'is_walkin' },
                 { text: 'Visit Status', value: 'status' },
                 { text: 'Amount Settled', value: '' },
-                { text: 'Balance', value: '' },
+                { text: 'Initial Payment', value: '' },
+                { text: 'Succeeding Payment', value: '' },
                 { text: 'Total', value: 'grand_total' },
                 { text: 'Payment Status', value: 'payment_status' },
             ];
@@ -147,7 +151,7 @@ export default {
         destinations: Array
     },
 
-    mixins: [ ListMixin ],
+    mixins: [ ListMixin, NumberFormat ],
 
     components: {
         'search-form': SearchForm,

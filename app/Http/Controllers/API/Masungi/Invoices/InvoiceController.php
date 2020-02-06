@@ -45,6 +45,8 @@ class InvoiceController extends Controller
     public function store(Request $request, $user) 
     {
 
+        Log::info('Step Storing of Booking');
+
     	// $validation = $this->validateRequest($request);
 
     	// if($validation === 2) {
@@ -95,6 +97,13 @@ class InvoiceController extends Controller
 	    			'birthdate' => $guest['birthday'],
 	    		]);
 	    	}
+            $firstpayment = true;
+            $secondpayment = true;
+
+            if(!$request->is_fullpayment) {
+                $firstpayment = false;
+                $secondpayment = false;
+            }
 
 	    	$user->invoices()->create([
 	    		'book_id' => $book->id,
@@ -108,6 +117,8 @@ class InvoiceController extends Controller
                 'is_fullpayment' => $request->is_fullpayment,
                 'amount_settled' => $request->amount_settled,
                 'balance' => $request->balance,
+                'is_firstpayment_paid' => $firstpayment,
+                'is_secondpayment_paid' => $secondpayment,
 	    	]);
 
 
@@ -174,12 +185,19 @@ class InvoiceController extends Controller
     public function paypalPaid($request) 
     {
 
+        Log::info('Step Payment');
         Log::info($request);
         Log::info($request['reference_code']. '----'.$request['payment_code']);
 
     	if(!$request['reference_code']) {
     		return 3; // reference code is required 
     	}
+
+        if(strpos($request['reference_code'], '*secondpayment')) {
+            $request['reference_code'] = str_replace('*secondpayment','',$request['reference_code']);
+            Log::info('Second payment new reference_code : '. $request['reference_code']);
+        }
+
         Log::info('Condition pass');
 
         $invoice = Invoice::where('reference_code', $request['reference_code'])->first();      
@@ -196,8 +214,8 @@ class InvoiceController extends Controller
                 'payment_code' => $request['payment_code'],
             ]);     
             
-            if($invoice->is_fullpayment) {
-                $invoice->paid = true;
+            if($invoice->is_fullpayment == 1) {
+                $invoice->is_paid = true;
                 $invoice->is_firstpayment_paid = true;
                 $invoice->is_secondpayment_paid = true;
                 $main->notify(new UserInvoicePaid($invoice));
@@ -206,15 +224,11 @@ class InvoiceController extends Controller
                    $admin->notify(new AdminInvoicePaid($invoice));
                 }
                 Log::info('Email sent to admin');
-            }
-
-            if(!$invoice->is_fullpayment && !$invoice->is_firstpayment_paid) {
+            } elseif ($invoice->is_fullpayment == 0 && $invoice->is_firstpayment_paid == 0) {
                 $invoice->is_firstpayment_paid = true;
-            } 
-
-            if(!$invoice->is_fullpayment && $invoice->is_firstpayment_paid && !$invoice->is_secondpayment_paid) {
+            } elseif ($invoice->is_fullpayment == 0 && $invoice->is_firstpayment_paid == 1 && $invoice->is_secondpayment_paid == 0) {
                 $invoice->is_secondpayment_paid = true;
-                $invoice->paid = true;
+                $invoice->is_paid = true;
                 $main->notify(new UserInvoicePaid($invoice));
                 Log::info('Email sent to user');
                 foreach ($admins as $admin) {
@@ -232,8 +246,6 @@ class InvoiceController extends Controller
     		
     	DB::commit();
         Log::info('DB commit');
-        
-
 
     	return 200;
     }

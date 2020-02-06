@@ -63,14 +63,14 @@ class Invoice extends Model
     }
 
     public function renderPaymentStatusForMasungi() {
-        
-        if($this->is_firstpayment_paid && !$this->is_secondpayment_paid) {
-            $label = 'Partially Paid';
-        } elseif ($this->is_firstpayment_paid && $this->is_secondpayment_paid) {
+        $label = null;
+        if($this->is_firstpayment_paid && !$this->is_secondpayment_paid && !$this->is_paid && !$this->is_fullpayment) {
+            $label = 'Initial Payment Paid';
+        } elseif ($this->is_firstpayment_paid && $this->is_secondpayment_paid && $this->is_paid) {
             $label = 'Fully Paid';
         } elseif (!$this->is_approved) {
             $label = 'For Approval';
-        } elseif ($this->is_approved && !$this->is_paid && !$this->is_firstpayment_paid) {
+        } elseif ($this->is_approved && !$this->is_paid && !$this->is_firstpayment_paid || $this->is_fullpayment) {
             $label = 'No transaction found';
         }
 

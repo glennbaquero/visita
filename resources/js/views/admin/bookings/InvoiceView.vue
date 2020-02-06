@@ -70,23 +70,35 @@
               <table class="table">
                 	<tr>
                   	<th style="width:50%">Conservation Fee</th>
-                  	<td>&#8369; {{ item.conservation_fee }}</td>
+                  	<td>&#8369; {{ withComma(item.conservation_fee) }}</td>
                 	</tr>
                 	<tr>
                   	<th>Platform Fee</th>
-                  	<td>&#8369; {{ item.platform_fee }}</td>
+                  	<td>&#8369; {{ withComma(item.platform_fee) }}</td>
                 	</tr>
                 	<tr>
                   	<th>Sub Total</th>
-                  	<td>&#8369; {{ item.sub_total }}</td>
+                  	<td>&#8369; {{ withComma(item.sub_total) }}</td>
                 	</tr>
                 	<tr>
                   	<th>Transaction Fee</th>
-                  	<td>&#8369; {{ item.transaction_fee }}</td>
+                  	<td>&#8369; {{ withComma(item.transaction_fee) }}</td>
                 	</tr>
+                  <tr>
+                    <th>Amount to Settle</th>
+                    <td>{{ item.payment_settle }}</td>
+                  </tr>
+                  <tr>
+                    <th>Initial Payment</th>
+                    <td>&#8369; {{ withComma(item.amount_settled) }}</td>
+                  </tr>
+                  <tr>
+                    <th>Succeeding Payment</th>
+                    <td>&#8369; {{ withComma(item.balance) }}</td>
+                  </tr>
                 	<tr>
                   	<th>Total</th>
-                  	<td><b>&#8369; {{ item.grand_total }}</b></td>
+                  	<td><b>&#8369; {{ withComma(item.grand_total) }}</b></td>
                 	</tr>
               </table>
           </div>
@@ -94,7 +106,7 @@
         <!-- /.col -->
       </div>
 			<template v-slot:footer>
-				<action-button type="submit" :disabled="loading" class="btn-success" v-if="!item.is_paid">Approve</action-button>
+				<action-button type="submit" :disabled="loading" class="btn-success" v-if="!item.is_paid">{{ item.btn_label }}</action-button>
             	
         <action-button
         v-if="item.archiveUrl && !item.is_paid"
@@ -121,7 +133,8 @@
 
 <script type="text/javascript">
 import { EventBus }from '../../../EventBus.js';
-import CrudMixin from '../../../mixins/crud.js';
+import CrudMixin from 'Mixins/crud.js';
+import NumberFormat from 'Mixins/number.js';
 
 import ActionButton from '../../../components/buttons/ActionButton.vue';
 import Select from '../../../components/inputs/Select.vue';
@@ -152,6 +165,6 @@ export default {
 		'time-picker': TimePicker,
 	},
 
-	mixins: [ CrudMixin ],
+	mixins: [ CrudMixin, NumberFormat ],
 }
 </script>
