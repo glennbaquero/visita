@@ -56,9 +56,9 @@
                     <td>{{ item.is_walkin }}</td>
                     <td>{{ item.status }}</td>
                     <td>{{ item.is_fullpayment }}</td>
-                    <td>{{ toMoney(parseFloat(item.initial_payment)) }}</td>
-                    <td>{{ toMoney(parseFloat(item.balance)) }}</td>
-                    <td>{{ toMoney(parseFloat(item.grand_total)) }}</td>
+                    <td>{{ withComma(item.initial_payment) }}</td>
+                    <td>{{ withComma(item.balance) }}</td>
+                    <td>{{ withComma(item.grand_total) }}</td>
                     <td>{{ item.payment_status }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>
