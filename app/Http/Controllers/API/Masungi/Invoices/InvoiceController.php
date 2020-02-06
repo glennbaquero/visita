@@ -208,7 +208,7 @@ class InvoiceController extends Controller
                 'payment_code' => $request['payment_code'],
             ]);     
             
-            if($invoice->is_fullpayment) {
+            if($invoice->is_fullpayment == 1) {
                 $invoice->is_paid = true;
                 $invoice->is_firstpayment_paid = true;
                 $invoice->is_secondpayment_paid = true;
@@ -220,11 +220,11 @@ class InvoiceController extends Controller
                 Log::info('Email sent to admin');
             }
 
-            if(!$invoice->is_fullpayment && !$invoice->is_firstpayment_paid) {
+            if($invoice->is_fullpayment == 0 && $invoice->is_firstpayment_paid == 0) {
                 $invoice->is_firstpayment_paid = true;
             } 
 
-            if(!$invoice->is_fullpayment && $invoice->is_firstpayment_paid && !$invoice->is_secondpayment_paid) {
+            if($invoice->is_fullpayment == 0 && $invoice->is_firstpayment_paid == 1 && $invoice->is_secondpayment_paid == 0) {
                 $invoice->is_secondpayment_paid = true;
                 $invoice->is_paid = true;
                 $main->notify(new UserInvoicePaid($invoice));
