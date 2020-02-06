@@ -65,7 +65,7 @@ class MasungiReservationApproved extends Notification
                 ->line('To complete your reservation please click the link below to redirect you to payment.')
                 ->line('Next step : '.$this->next_step)
                 ->line('Invoice Reference # : '.$this->invoice->reference_code)
-                ->line('Payment need transact : '. $payment)
+                ->line('Payment needed to transact : '. $payment)
                 ->line('Total Payment: '.$this->invoice->grand_total)
                 ->line('Thank you!')
                 ->action('Pay now', $this->masungi_url.'payment/'.$notifiable->renderName().'/'.$reference_code.'/'.$payment);
