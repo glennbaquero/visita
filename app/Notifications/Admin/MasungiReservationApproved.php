@@ -48,21 +48,24 @@ class MasungiReservationApproved extends Notification
     {
         $payment = $this->invoice->grand_total;
         $reference_code = $this->invoice->reference_code;
-
+        $title = 'Reservation Approved';
         if($this->invoice->is_firstpayment_paid && !$this->invoice->is_secondpayment_paid && !$this->invoice->is_paid && !$this->invoice->is_fullpayment) {
             $payment = $this->invoice->balance;
             $reference_code = $this->invoice->reference_code.'*secondpayment';
+            $title = 'Succeeding Payment';
         } elseif (!$this->invoice->is_firstpayment_paid && !$this->invoice->is_secondpayment_paid && !$this->invoice->is_paid && !$this->invoice->is_fullpayment) {
             $payment = $this->invoice->amount_settled;
+            $title = 'Initial Payment';
         }
 
         return (new MailMessage)
-                ->subject('Masungi Georeserve: ' . 'Reservation Approved!')
+                ->subject('Masungi Georeserve: ' . $title)
                 ->greeting('Hello ' . $notifiable->renderName() . ',')
                 ->line('Your reservation is approved!')
                 ->line('To complete your reservation please click the link below to redirect you to payment.')
                 ->line('Next step : '.$this->next_step)
                 ->line('Invoice Reference # : '.$this->invoice->reference_code)
+                ->line('Payment need transact : '. $payment)
                 ->line('Total Payment: '.$this->invoice->grand_total)
                 ->line('Thank you!')
                 ->action('Pay now', $this->masungi_url.'payment/'.$notifiable->renderName().'/'.$reference_code.'/'.$payment);

@@ -93,7 +93,7 @@
                     <td>&#8369; {{ withComma(item.amount_settled) }}</td>
                   </tr>
                   <tr>
-                    <th>Second Payment</th>
+                    <th>Succeeding Payment</th>
                     <td>&#8369; {{ withComma(item.balance) }}</td>
                   </tr>
                 	<tr>
