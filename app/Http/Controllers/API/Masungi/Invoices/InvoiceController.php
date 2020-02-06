@@ -45,7 +45,7 @@ class InvoiceController extends Controller
     public function store(Request $request, $user) 
     {
 
-        Log::info($request->all());
+        Log::info('Step Storing of Booking');
 
     	// $validation = $this->validateRequest($request);
 
@@ -185,6 +185,7 @@ class InvoiceController extends Controller
     public function paypalPaid($request) 
     {
 
+        Log::info('Step Payment');
         Log::info($request);
         Log::info($request['reference_code']. '----'.$request['payment_code']);
 
