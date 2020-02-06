@@ -14,6 +14,7 @@ class BookingNotification extends Notification
     public $title;
     public $message;
     public $book;
+    public $qr_path;
 
     /**
      * Create a new notification instance.
