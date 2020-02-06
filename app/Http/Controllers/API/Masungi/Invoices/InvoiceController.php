@@ -192,6 +192,12 @@ class InvoiceController extends Controller
     	if(!$request['reference_code']) {
     		return 3; // reference code is required 
     	}
+
+        if(strpos($request['reference_code'], '*secondpayment')) {
+            $request['reference_code'] = str_replace('*secondpayment','',$request['reference_code']);
+            Log::info('Second payment new reference_code : '. $request['reference_code']);
+        }
+
         Log::info('Condition pass');
 
         $invoice = Invoice::where('reference_code', $request['reference_code'])->first();      

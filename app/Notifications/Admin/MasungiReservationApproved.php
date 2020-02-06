@@ -47,9 +47,11 @@ class MasungiReservationApproved extends Notification
     public function toMail($notifiable)
     {
         $payment = $this->invoice->grand_total;
+        $reference_code = $this->invoice->reference_code;
 
         if($this->invoice->is_firstpayment_paid && !$this->invoice->is_secondpayment_paid && !$this->invoice->is_paid && !$this->invoice->is_fullpayment) {
             $payment = $this->invoice->balance;
+            $reference_code = $this->invoice->reference_code.'*secondpayment'
         } elseif (!$this->invoice->is_firstpayment_paid && !$this->invoice->is_secondpayment_paid && !$this->invoice->is_paid && !$this->invoice->is_fullpayment) {
             $payment = $this->invoice->amount_settled;
         }
@@ -63,7 +65,7 @@ class MasungiReservationApproved extends Notification
                 ->line('Invoice Reference # : '.$this->invoice->reference_code)
                 ->line('Total Payment: '.$this->invoice->grand_total)
                 ->line('Thank you!')
-                ->action('Pay now', $this->masungi_url.'payment/'.$notifiable->renderName().'/'.$this->invoice->reference_code.'/'.$payment);
+                ->action('Pay now', $this->masungi_url.'payment/'.$notifiable->renderName().'/'.$reference_code.'/'.$payment);
     }
 
     /**
