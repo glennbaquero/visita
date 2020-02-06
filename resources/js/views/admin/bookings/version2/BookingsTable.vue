@@ -62,6 +62,7 @@
                     <td>{{ item.payment_status }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>
+                        <view-button :href="item.showUrl+'/'+item.scheduled_at+'/'+item.destination_id+'/'+item.allocation_id+'/'+item.destination"></view-button>
                         <action-button
                         v-if="!hideButtons"
                         small 
