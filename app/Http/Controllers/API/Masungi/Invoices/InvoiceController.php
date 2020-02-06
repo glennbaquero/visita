@@ -218,13 +218,9 @@ class InvoiceController extends Controller
                    $admin->notify(new AdminInvoicePaid($invoice));
                 }
                 Log::info('Email sent to admin');
-            }
-
-            if($invoice->is_fullpayment == 0 && $invoice->is_firstpayment_paid == 0) {
+            } elseif ($invoice->is_fullpayment == 0 && $invoice->is_firstpayment_paid == 0) {
                 $invoice->is_firstpayment_paid = true;
-            } 
-
-            if($invoice->is_fullpayment == 0 && $invoice->is_firstpayment_paid == 1 && $invoice->is_secondpayment_paid == 0) {
+            } elseif ($invoice->is_fullpayment == 0 && $invoice->is_firstpayment_paid == 1 && $invoice->is_secondpayment_paid == 0) {
                 $invoice->is_secondpayment_paid = true;
                 $invoice->is_paid = true;
                 $main->notify(new UserInvoicePaid($invoice));
@@ -244,8 +240,6 @@ class InvoiceController extends Controller
     		
     	DB::commit();
         Log::info('DB commit');
-        
-
 
     	return 200;
     }
