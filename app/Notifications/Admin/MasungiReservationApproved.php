@@ -51,7 +51,7 @@ class MasungiReservationApproved extends Notification
 
         if($this->invoice->is_firstpayment_paid && !$this->invoice->is_secondpayment_paid && !$this->invoice->is_paid && !$this->invoice->is_fullpayment) {
             $payment = $this->invoice->balance;
-            $reference_code = $this->invoice->reference_code.'*secondpayment'
+            $reference_code = $this->invoice->reference_code.'*secondpayment';
         } elseif (!$this->invoice->is_firstpayment_paid && !$this->invoice->is_secondpayment_paid && !$this->invoice->is_paid && !$this->invoice->is_fullpayment) {
             $payment = $this->invoice->amount_settled;
         }
