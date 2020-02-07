@@ -23,12 +23,12 @@
     <!-- Main content -->
     <section class="content">
 
-        <div class="mb-4">
+        {{-- <div class="mb-4">
             <a href="{{ route('admin.bookings.create', [$selectedDate, $destination, $experience, $destination_name]) }}" class="btn btn-primary text-white">
                 <i class="fa fa-plus"></i>
                 Create
             </a>
-        </div>
+        </div> --}}
 
         <div class="col-xs-12">
             <div class="card">

@@ -24,7 +24,7 @@ class Invoice extends Model
     protected static $logOnlyDirty = false;
 
     public function book() {
-    	return $this->belongsTo(Book::class);
+    	return $this->belongsTo(Book::class)->withTrashed();
     }
 
     // public function user() {
@@ -64,7 +64,7 @@ class Invoice extends Model
     	return route('admin.invoices.reject.deposit', $this->id);
     }
 
-    public function renderPaymentStatusForMasungi() {
+    public function renderPaymentStatus() {
         $label = null;
         if($this->is_firstpayment_paid && !$this->is_secondpayment_paid && !$this->is_paid && !$this->is_fullpayment) {
             $label = 'Initial Payment Paid';
@@ -74,6 +74,9 @@ class Invoice extends Model
             $label = 'For Approval';
         } elseif ($this->is_approved && !$this->is_paid && !$this->is_firstpayment_paid || $this->is_fullpayment) {
             $label = 'No transaction found';
+        }
+        if($this->deleted_at) {
+            $label = 'Rejected';
         }
 
         return $label;

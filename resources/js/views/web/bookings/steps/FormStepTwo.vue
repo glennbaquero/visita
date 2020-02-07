@@ -60,7 +60,7 @@
 							</div
 							><div class="width--70">
 								<div class="frm-inpt align-c m-margin-b">
-									<input type="number" name="" placeholder="" v-model="stepData.main.contact_number" @keypress="regexNumber()">
+									<input type="text" name="" maxlength="10" placeholder="" v-model="stepData.main.contact_number" @keypress="regexNumber()">
 								</div>
 							</div>
 						</div>
@@ -79,7 +79,7 @@
 							</div
 							><div class="width--70">
 								<div class="frm-inpt align-c m-margin-b">
-									<input type="number" name="" placeholder="" v-model="stepData.main.emergency_contact_number" @keypress="regexNumber()">
+									<input type="text" name="" placeholder="" maxlength="10" v-model="stepData.main.emergency_contact_number" @keypress="regexNumber()">
 								</div>
 							</div>
 						</div>

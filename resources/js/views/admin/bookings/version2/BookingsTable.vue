@@ -63,7 +63,7 @@
                     <td>{{ item.created_at }}</td>
                     <td>
                         <view-button :href="item.showUrl+'/'+item.scheduled_at+'/'+item.destination_id+'/'+item.allocation_id+'/'+item.destination"></view-button>
-                        <action-button
+                     <!--    <action-button
                         v-if="!hideButtons"
                         small 
                         color="btn-danger"
@@ -81,7 +81,7 @@
                         :alt-message="'Are you sure you want to restore this reservation?'"
                         @load="load"
                         @success="sync"
-                        ></action-button>
+                        ></action-button> -->
                     </td>
                 </tr>
             </template>

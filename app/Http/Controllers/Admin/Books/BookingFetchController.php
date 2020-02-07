@@ -85,7 +85,7 @@ class BookingFetchController extends FetchController
             'initial_payment' => 'P '.$item->invoice->amount_settled,
             'balance' => 'P '.$item->invoice->balance,
             'is_fullpayment' => $item->invoice->is_fullpayment ? 'Full Payment' : 'Half Payment' ,
-            'payment_status' => $item->invoice->renderPaymentStatusForMasungi() ,
+            'payment_status' => $item->invoice->renderPaymentStatus() ,
             'time' => $item->start_time ? Carbon::createFromFormat('H:i:s', $item->start_time)->format('h:i A') : 'No visit time selected.',
             'status' => $item->ended_at != null ? 'Visit End ( '.$item->renderDate('ended_at').' )' : ($item->started_at == null ? 'Queue' : 'Started ( '.$item->renderDate('started_at').' )'),
             'qr_path' => $item->renderImagePath('qr_code_path'),
@@ -94,7 +94,7 @@ class BookingFetchController extends FetchController
             'showUrl' => $item->renderShowUrl(),
             'archiveUrl' => $item->renderArchiveUrl(),
             'restoreUrl' => $item->renderRestoreUrl(),
-            'deleted_at' => $item->deleted_at,
+            'deleted_at' => $item->invoice->deleted_at,
         ];
     }
 

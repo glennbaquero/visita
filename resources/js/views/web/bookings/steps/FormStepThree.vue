@@ -64,7 +64,7 @@
 						</div
 						><div class="width--70">
 							<div class="frm-inpt align-c m-margin-b">
-								<input type="number" name="" placeholder="" v-model="guest.contact_number" @keypress="regexNumber($evt)">
+								<input type="text" name="" placeholder="" maxlength="10" v-model="guest.contact_number" @keypress="regexNumber($evt)">
 							</div>
 						</div>
 					</div>
@@ -83,7 +83,7 @@
 						</div
 						><div class="width--70">
 							<div class="frm-inpt align-c m-margin-b">
-								<input type="number" name="" placeholder="" v-model="guest.emergency_contact_number" @keypress="regexNumber($evt)">
+								<input type="text" name="" placeholder="" maxlength="10" v-model="guest.emergency_contact_number" @keypress="regexNumber($evt)">
 							</div>
 						</div>
 					</div>

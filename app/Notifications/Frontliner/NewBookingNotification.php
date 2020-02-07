@@ -26,7 +26,7 @@ class NewBookingNotification extends Notification
      *
      * @return void
      */
-    public function __construct($destination, $allocation, $book, $main, , $notification)
+    public function __construct($destination, $allocation, $book, $main, $notification)
     {
         $this->destination = $destination;
         $this->allocation = $allocation;
@@ -34,7 +34,7 @@ class NewBookingNotification extends Notification
         $this->main = $main;
         $this->title = $notification->title;
         $this->description = $notification->message;
-        $this->date = Carbon::parse($request['scheduled_at'])->format('M d, Y');
+        $this->date = Carbon::parse($book->scheduled_at)->format('M d, Y');
     }
 
     /**

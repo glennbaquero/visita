@@ -11,6 +11,7 @@ use App\Notifications\Reservation\BookingNotification;
 use App\Models\Books\Book;
 use App\Models\Guests\Guest;
 use App\Models\Users\Management;
+use App\Models\Emails\GeneratedEmail;
 
 use App\Services\PushService;
 
@@ -61,7 +62,11 @@ class BookController extends Controller
     {
         DB::beginTransaction();
             $item = Book::store($request, null, null, $destination);
+            // $item->invoice->create([
+                
+            // ]);
             
+            $upload_path = null;
             if($request->special_fee_path) {
                 $file = $request->special_fee_path;
                 $filename = $file->getClientOriginalName();
@@ -108,12 +113,14 @@ class BookController extends Controller
         DB::commit();
         
         $point_person = $item->guests()->where('main', true)->first();
-        $point_person->notify(new BookingNotification($item));
+        $qr_email = GeneratedEmail::where('notification_type', 'Booking notification')->first();
+        $point_person->notify(new BookingNotification($item, $qr_email));
+        $new_booking_frontliner = GeneratedEmail::where('notification_type', 'New booking notification')->first();
 
         $frontliners = Management::where('destination_id', $destination)->get();
         
         foreach ($frontliners as $key => $frontliner) {
-            $frontliner->notify(new NewBookingNotification($request));
+            $frontliner->notify(new NewBookingNotification($item->destination, $item->alloction, $item, $point_person, $new_booking_frontliner));
         }
         $receiver = new PushService('New Reservation', 'A new reservation of visitor for '.Carbon::parse($request->scheduled_at)->format('M d, Y'). '.');
         $receiver->pushToMany($frontliners);
@@ -191,18 +198,43 @@ class BookController extends Controller
                 ]);     
             }
             
-            foreach($request->guest_first_name as $key => $guest) {
-                $guest = Guest::find($request->guest_id[$key]);
-                $guest->update([
-                    'first_name' => $request->guest_first_name[$key],
-                    'last_name' => $request->guest_last_name[$key],
-                    'birthdate' => $request->guest_birthdate[$key],
-                    'email' => $request->guest_email[$key],
-                    'gender' => $request->guest_gender[$key],
-                    'nationality' => $request->guest_nationality[$key],
-                    'visitor_type_id' => $request->guest_visitor_type[$key],
-                    'special_fee_id' => $request->guest_special_fee_id[$key],
-                ]);   
+            if($request->guest_first_name) {
+                foreach($request->guest_first_name as $key => $guest) {
+                    $guest = Guest::find($request->guest_id[$key]);
+
+                    if($guest) {
+                        $guest->update([
+                            'first_name' => $request->guest_first_name[$key],
+                            'last_name' => $request->guest_last_name[$key],
+                            'birthdate' => $request->guest_birthdate[$key],
+                            'email' => $request->guest_email[$key],
+                            'gender' => $request->guest_gender[$key],
+                            'nationality' => $request->guest_nationality[$key],
+                            'visitor_type_id' => $request->guest_visitor_type[$key],
+                            'special_fee_id' => $request->guest_special_fee_id[$key],
+                        ]);  
+                    } else {
+                        $upload_path = null;
+                        if($request->guest_special_fee_path[$key]) {
+                            $file = $request->guest_special_fee_path[$key];
+                            $filename = $file->getClientOriginalName();
+                            $path = 'public/special_fee';
+                            $upload_path = Storage::putFileAs($path, $file, $filename);
+                        }
+
+                        $item->guests()->create([
+                            'first_name' => $request->guest_first_name[$key],
+                            'last_name' => $request->guest_last_name[$key],
+                            'birthdate' => $request->guest_birthdate[$key],
+                            'email' => $request->guest_email[$key],
+                            'gender' => $request->guest_gender[$key],
+                            'nationality' => $request->guest_nationality[$key],
+                            'visitor_type_id' => $request->guest_visitor_type[$key],
+                            'special_fee_id' => $request->guest_special_fee_id[$key],
+                            'special_fee_path' => $upload_path,
+                        ]);  
+                    } 
+                }
             }
 
         DB::commit();
