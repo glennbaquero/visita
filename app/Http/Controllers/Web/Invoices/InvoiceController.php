@@ -111,7 +111,8 @@ class InvoiceController extends Controller
     			'reference_code' => $invoice->reference_code,
     			'id' => $invoice->id,
     			'showImgTag' => $invoice->bank_deposit_slip ?? false,
-    			'deposit_slip' => !$invoice->is_paypal_payment ? url('storage/'.$invoice->bank_deposit_slip) : null
+    			'deposit_slip' => !$invoice->is_paypal_payment ? url('storage/'.$invoice->bank_deposit_slip) : null,
+                'deleted_at' => $invoice->deleted_at
     		]);
     	}
 

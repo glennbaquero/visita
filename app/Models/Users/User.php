@@ -35,7 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     }
 
     public function invoices() {
-        return $this->morphMany(Invoice::class, 'bookable');
+        return $this->morphMany(Invoice::class, 'bookable')->withTrashed();
     }
 
     /**

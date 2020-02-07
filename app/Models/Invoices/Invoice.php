@@ -41,6 +41,7 @@ class Invoice extends Model
     	if($this->is_approved && !$this->is_paid) $label = 'Payment Pending';
     	if(!$this->is_approved && !$this->is_paid) $label = 'For Approval';
     	if($this->is_approved && $this->is_paid) $label = 'Paid';
+        if($this->deleted_at) $label = 'Rejected';
     	return $label;
     }
 
@@ -48,7 +49,8 @@ class Invoice extends Model
     	$class = 'pending';
     	if($this->is_approved && !$this->is_paid) $class = 'payment-pending';
     	if(!$this->is_approved && !$this->is_paid) $class = 'for-approval';
-    	if($this->is_approved && $this->is_paid) $class = 'confirmed';
+        if($this->is_approved && $this->is_paid) $class = 'confirmed';
+    	if($this->deleted_at) $class = 'rejected';
     	return $class;
     }
 
