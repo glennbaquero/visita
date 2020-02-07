@@ -13,6 +13,6 @@ class SurveyAnswer extends Model
 	
     public function survey()
     {
-    	return $this->belongsTo(Survey::class);
+    	return $this->belongsTo(Survey::class)->withTrashed();
     }
 }

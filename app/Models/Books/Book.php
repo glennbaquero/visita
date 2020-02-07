@@ -48,12 +48,12 @@ class Book extends Model
 
     public function allocation()
     {
-        return $this->belongsTo(Allocation::class);
+        return $this->belongsTo(Allocation::class)->withTrashed();
     }
 
     public function destination()
     {
-        return $this->belongsTo(Destination::class);
+        return $this->belongsTo(Destination::class)->withTrashed();
     }
 
     public function guests()
@@ -68,12 +68,12 @@ class Book extends Model
     
     public function representative()
     {
-        return $this->belongsTo(Management::class, 'destination_representative_id');
+        return $this->belongsTo(Management::class, 'destination_representative_id')->withTrashed();
     }
 
     public function invoice()
     {
-        return $this->hasOne(Invoice::class);
+        return $this->hasOne(Invoice::class)->withTrashed();
     }
 
     /**
@@ -89,12 +89,13 @@ class Book extends Model
         $vars['destination_id'] = $destination_id;
         $vars['total_guest'] = $request->total_guest;
         $vars['is_walkin'] = true;
+        
         if (!$item) {
             // $item = static::create($vars);
             $item = auth()->user()->books()->create($vars);
         } else {
             $item->update($vars);
-            $item->total_guest += $request->total_guest;
+            $item->total_guest = $request->total_guest;
             $item->save();
         }
 

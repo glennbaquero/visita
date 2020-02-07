@@ -14,7 +14,7 @@ class Announcement extends Model
 	
 	public function destinations() 
 	{
-		return $this->belongsToMany(Destination::class, 'destination_announcements', 'destination_id', 'announcement_id');
+		return $this->belongsToMany(Destination::class, 'destination_announcements', 'destination_id', 'announcement_id')->withTrashed();
 	}
 
     /**

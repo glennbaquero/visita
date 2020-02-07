@@ -126,11 +126,18 @@ class InvoiceController extends Controller
             $qr_email = GeneratedEmail::where('notification_type', 'Booking notification')->first();
             $new_booking_frontliner = GeneratedEmail::where('notification_type', 'New booking notification')->first();
 	    	$main->notify(new BookingNotification($book, $qr_email));
-      //       $admins = Admin::all();
-	    	// foreach ($admins as $admin) {
-	     //        $admin->notify(new NewBookingNotification($book->destination, $book->allocation, $book, $main, $new_booking_frontliner));
-	     //    }
+            $admins = Admin::all();
+	    	foreach ($admins as $admin) {
+	            $admin->notify(new NewBookingNotification($book->destination, $book->allocation, $book, $main, $new_booking_frontliner));
+	        }
+            $frontliners = Management::where('destination_id', $book->destination->id)->get();
+            
+            foreach ($frontliners as $key => $frontliner) {
+                $frontliner->notify(new NewBookingNotification($request, $new_booking_frontliner));
+            }
     	DB::commit();
+
+
 
 
     	return 200;

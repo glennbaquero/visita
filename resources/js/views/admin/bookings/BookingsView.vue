@@ -181,7 +181,11 @@ import GuestDetails from './GuestDetails.vue';
 export default {
 	computed: {
 		totalGuest() {
-			return this.total_guest.length + 1;
+			var totalGuests = 0;
+			if(this.item.total_guest) {
+				totalGuests = this.item.total_guest;
+			}
+			return totalGuests  + this.total_guest.length;
 		}
 	},
 

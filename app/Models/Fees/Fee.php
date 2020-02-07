@@ -10,7 +10,7 @@ class Fee extends Model
 {
     public function allocation()
     {
-    	return $this->belongsTo(Allocation::class);
+    	return $this->belongsTo(Allocation::class)->withTrashed();
     }
 
     /**

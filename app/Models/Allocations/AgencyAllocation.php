@@ -14,11 +14,11 @@ class AgencyAllocation extends Model
     
     public function allocation()
     {
-    	return $this->belongsTo(Allocation::class);
+    	return $this->belongsTo(Allocation::class)->withTrashed();
     }
 
     public function agency()
     {
-    	return $this->belongsTo(Agency::class);
+    	return $this->belongsTo(Agency::class)->withTrashed();
     }
 }

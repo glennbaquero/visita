@@ -20,16 +20,16 @@ class Guest extends Model
       
    	public function visitorType()
    	{
-   		return $this->belongsTo(VisitorType::class);
+   		return $this->belongsTo(VisitorType::class)->withTrashed();
    	}
 
    	public function book()
    	{
-   		return $this->belongsTo(Book::class);
+   		return $this->belongsTo(Book::class)->withTrashed();
    	}
 
       public function specialFee() {
-         return $this->belongsTo(Fee::class);
+         return $this->belongsTo(Fee::class)->withTrashed();
       }
 
       public function scopeAgedBetween($query, $start, $end = null)
