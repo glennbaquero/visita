@@ -23,7 +23,7 @@ class NewBookingNotification extends Notification
      *
      * @return void
      */
-    public function __construct($destination, $allocation, $booking, $main)
+    public function __construct($destination, $allocation, $booking, $main, $notification)
     {
         $this->destination = $destination;
         $this->allocation = $allocation;
