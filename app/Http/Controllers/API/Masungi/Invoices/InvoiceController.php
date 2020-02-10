@@ -21,6 +21,7 @@ use App\Models\Emails\GeneratedEmail;
 
 use App\Notifications\Reservation\BookingNotification;
 use App\Notifications\Web\Bookings\NewBookingNotification;
+use App\Notifications\Frontliner\NewBookingNotification as FrontlinerBooking;
 use App\Notifications\Admin\Paypal\AdminInvoicePaid;
 use App\Notifications\Web\Paypal\UserInvoicePaid;
 
@@ -133,7 +134,7 @@ class InvoiceController extends Controller
             $frontliners = Management::where('destination_id', $book->destination->id)->get();
             
             foreach ($frontliners as $key => $frontliner) {
-                $frontliner->notify(new NewBookingNotification($request, $new_booking_frontliner));
+                $frontliner->notify(new FrontlinerBooking($book->destination, $book->allocation, $book, $main, $new_booking_frontliner));
             }
     	DB::commit();
 
