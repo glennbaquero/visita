@@ -126,7 +126,7 @@ class InvoiceController extends Controller
 	    	$main = $book->guests->where('main', 1)->first();
             $qr_email = GeneratedEmail::where('notification_type', 'Booking notification')->first();
             $new_booking_frontliner = GeneratedEmail::where('notification_type', 'New booking notification')->first();
-	    	$main->notify(new BookingNotification($book, $qr_email));
+	    	// $main->notify(new BookingNotification($book, $qr_email));
             Log::info('Main contact person sent!');
             // $admins = Admin::all();
 	    	// foreach ($admins as $admin) {
