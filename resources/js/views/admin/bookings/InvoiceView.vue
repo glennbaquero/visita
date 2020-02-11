@@ -106,7 +106,6 @@
         <!-- /.col -->
       </div>
 			<template v-slot:footer>
-				<action-button type="submit" :disabled="loading" class="btn-success" v-if="!item.is_paid && !item.deleted_at">{{ item.btn_label }}</action-button>
             	
         <action-button
         v-if="item.archiveUrl && !item.is_paid && !item.deleted_at"
@@ -123,6 +122,8 @@
         @success="fetch"
         @error="fetch"
         ></action-button>
+        
+        <action-button type="submit" :disabled="loading" class="btn-success" v-if="!item.is_paid && !item.deleted_at">{{ item.btn_label }}</action-button>
 			</template>
 		</card>
 

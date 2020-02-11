@@ -43,8 +43,6 @@
 			</div>
 
 			<template v-slot:footer>
-				<action-button type="submit" :disabled="loading" class="btn-primary" v-if="remainingCapacity == 0">Save Changes</action-button>
-            
                 <action-button
                 v-if="item.archiveUrl && item.restoreUrl"
                 color="btn-danger"
@@ -64,6 +62,8 @@
                 @success="fetch"
                 @error="fetch"
                 ></action-button>
+                
+				<action-button type="submit" :disabled="loading" class="btn-primary" v-if="remainingCapacity == 0">Save Changes</action-button>
 			</template>
 		</card>
 
