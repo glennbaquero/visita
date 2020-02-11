@@ -1,7 +1,7 @@
 @component('mail::message')
 {{-- Greeting --}}
 @if (! empty($greeting))
-# {{ $greeting }}
+# {!! $greeting !!}
 @else
 @if ($level === 'error')
 # @lang('Whoops!')
@@ -41,7 +41,7 @@
 
 {{-- Salutation --}}
 @if (! empty($salutation))
-{{ $salutation }}
+{!! $salutation !!}
 @endif
 
 {{-- Subcopy --}}
