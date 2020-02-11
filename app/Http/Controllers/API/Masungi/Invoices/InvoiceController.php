@@ -24,6 +24,8 @@ use App\Notifications\Web\Bookings\NewBookingNotification as AdminBooking;
 use App\Notifications\Frontliner\NewBookingNotification as FrontlinerBooking;
 use App\Notifications\Admin\Paypal\AdminInvoicePaid;
 use App\Notifications\Web\Paypal\UserInvoicePaid;
+use App\Notifications\Masungi\InitialPaymentPaid;
+use App\Notifications\Masungi\FinalPaymentPaid;
 
 use DB;
 use Carbon\Carbon;
@@ -236,10 +238,12 @@ class InvoiceController extends Controller
                 Log::info('Email sent to admin');
             } elseif ($invoice->is_fullpayment == 0 && $invoice->is_firstpayment_paid == 0) {
                 $invoice->is_firstpayment_paid = true;
+                $main->notify(new InitialPaymentPaid($invoice));
             } elseif ($invoice->is_fullpayment == 0 && $invoice->is_firstpayment_paid == 1 && $invoice->is_secondpayment_paid == 0) {
                 $invoice->is_secondpayment_paid = true;
                 $invoice->is_paid = true;
                 $main->notify(new UserInvoicePaid($invoice));
+                $main->notify(new FinalPaymentPaid());
                 Log::info('Email sent to user');
                 foreach ($admins as $admin) {
                    $admin->notify(new AdminInvoicePaid($invoice));
@@ -266,16 +270,24 @@ class InvoiceController extends Controller
         $time = $request->start_time;
         $schedule_date = $request->date;
 
-        $invoices = Invoice::where('is_paid', true)->get();
+        // $invoices = Invoice::where('is_paid', true)->get();
+        $invoices = Invoice::all();
 
         $count = 0;
 
         $canShow = 'true';
         $sample = [];
         foreach ($invoices as $key => $invoice) {
-            if($invoice->book->allocation->id === $allocation->id && $invoice->book->scheduled_at == Carbon::parse($schedule_date) && $invoice->book->start_time == Carbon::parse($time)->format('H:i:s')) {
-                $count += 1;
+            if($invoice->is_fullpayment && $invoice->is_paid) {
+                if($invoice->book->allocation->id === $allocation->id && $invoice->book->scheduled_at == Carbon::parse($schedule_date) && $invoice->book->start_time == Carbon::parse($time)->format('H:i:s')) {
+                    $count += 1;
+                }
+            } elseif(!$invoice->is_fullpayment && $invoice->is_firstpayment_paid) {
+                if($invoice->book->allocation->id === $allocation->id && $invoice->book->scheduled_at == Carbon::parse($schedule_date) && $invoice->book->start_time == Carbon::parse($time)->format('H:i:s')) {
+                    $count += 1;
+                }
             }
+            
             // array_push($sample, [
             //     'invoice' => $invoice->book
             // ]);
