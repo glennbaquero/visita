@@ -60,6 +60,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Book::observe(BookingObserver::class);
+        Book::observe(BookingObserver::class);
     }
 }

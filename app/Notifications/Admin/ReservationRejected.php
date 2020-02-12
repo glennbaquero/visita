@@ -7,20 +7,26 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
+use Carbon\Carbon;
+
 class ReservationRejected extends Notification
 {
     use Queueable;
 
     public $notification;
+    private $invoice;
+    public $message;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($notification)
+    public function __construct($notification, $invoice)
     {
         $this->notification = $notification;
+        $this->invoice = $invoice;
+        $this->message = str_replace('[timestamp]', Carbon::now()->format('M. d Y'), str_replace('[reason_for_reject]', $invoice->rejected_reason, $notification->message));
     }
 
     /**
@@ -43,9 +49,8 @@ class ReservationRejected extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                ->subject(config('app.name') . ': ' . $this->notification->title)
-                ->greeting('Hello ' . $notifiable->renderName() . ',')
-                ->line($this->notification->message);
+                ->greeting('Dear Guest,')
+                ->line($this->message);
     }
 
     /**
@@ -57,7 +62,7 @@ class ReservationRejected extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => $this->notification->message,
+            'message' => $this->message,
             'title' => $this->notification->title,
             'subject_id' => $notifiable->id, 
             'subject_type' => get_class($notifiable),

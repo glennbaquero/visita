@@ -19,6 +19,7 @@ export default {
 				type: this.dialogType,
 				verification: this.verification,
 				verificationHelp: this.verificationHelp,
+				customClass: ''
 			};
 
 			this.$dialog.confirm(message, options)

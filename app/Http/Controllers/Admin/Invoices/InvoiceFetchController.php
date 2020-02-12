@@ -133,11 +133,11 @@ class InvoiceFetchController extends FetchController
         	$item->is_paid = $item->is_paid ? true : false;
             $item->payment_type = $item->is_paypal_payment ? 'Paypal' : 'Bank Deposit';
             $item->payment_settle = $item->is_fullpayment ? 'Full Payment' : 'Half Payment';
-        	$item->btn_label = 'Approved and send payment';
+        	$item->btn_label = 'Approved and send billing';
             if(!$item->is_fullpayment && !$item->is_firstpayment_paid && !$item->is_secondpayment_paid) {
-                $item->btn_label = 'Approved and send initial payment';
+                $item->btn_label = 'Approved and send initial billing';
             } elseif (!$item->is_fullpayment && $item->is_firstpayment_paid && !$item->is_secondpayment_paid) {
-                $item->btn_label = 'Send succeeding payment';
+                $item->btn_label = 'Send second billing';
             }
         	$item->deposit_slip_show = $item->is_paypal_payment ? true : false;
         	$item->archiveUrl = $item->bank_deposit_slip && !$item->is_paypal_payment ? $item->renderRejectDepositSlipUrl() : $item->renderArchiveUrl();

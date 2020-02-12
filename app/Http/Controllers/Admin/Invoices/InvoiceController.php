@@ -53,7 +53,9 @@ class InvoiceController extends Controller
             }
             // $user->notify(new ReservationApproved('Payment thru Paynamics'));
         } else {
-            $main->notify(new ReservationApproved('Upload Deposit Slip'));
+            if($item->bookable_type === 'App\Models\API\Masungi') {
+                $main->notify(new ReservationApproved('Upload Deposit Slip', $approved_notification));
+            }
             // $user->notify(new ReservationApproved('Upload Deposit Slip'));
         }
 
@@ -71,19 +73,20 @@ class InvoiceController extends Controller
      * @param  \App\Destination  $sampleItem
      * @return \Illuminate\Http\Response
      */
-    public function archive($id)
+    public function archive(Request $request, $id)
     {
         $item = Invoice::withTrashed()->findOrFail($id);
+        $item->update(['rejected_reason' => $request->rejected_reason]);
         $main = $item->book->guests->where('main', true)->first();
         // $user = $item->user;
         
         $rejected_notification = GeneratedEmail::where('notification_type', 'Rejected reservation')->first();
 
         if($item->is_paypal_payment) {
-            $main->notify(new ReservationRejected($rejected_notification));
+            $main->notify(new ReservationRejected($rejected_notification, $item));
             // $user->notify(new ReservationRejected);
         } else {
-            $main->notify(new ReservationRejected($rejected_notification));
+            $main->notify(new ReservationRejected($rejected_notification, $item));
             // $user->notify(new ReservationRejected);
         }
 
@@ -103,6 +106,7 @@ class InvoiceController extends Controller
     public function depositSlipReject($id)
     {
         $item = Invoice::withTrashed()->findOrFail($id);
+        $item->update(['rejected_reason' => $request->rejected_reason]);
         $main = $item->book->guests->where('main', true)->first();
         // $user = $item->user;
         

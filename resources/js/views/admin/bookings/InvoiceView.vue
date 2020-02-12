@@ -104,25 +104,38 @@
           </div>
         </div>
         <!-- /.col -->
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Reason</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form>
+                  <div class="modal-body">
+                    <text-editor
+                    class="col-sm-12"
+                    label=" "
+                    v-model="item.rejected_reason"
+                    name="rejected_reason"
+                    row="5"
+                    ></text-editor>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" v-if="!item.deleted_at && !item.is_paid" @click="rejectReservation()">Reject</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
       </div>
 			<template v-slot:footer>
-				<action-button type="submit" :disabled="loading" class="btn-success" v-if="!item.is_paid && !item.deleted_at">{{ item.btn_label }}</action-button>
-            	
-        <action-button
-        v-if="item.archiveUrl && !item.is_paid && !item.deleted_at"
-        color="btn-danger"
-        alt-color="btn-warning"
-        :action-url="item.archiveUrl"
-        label="Reject"
-        :show-alt="item.deleted_at"
-        confirm-dialog
-        title="Reject"
-        :message="'Are you sure you want to reject this reservation #' + item.id + '?'"
-        :disabled="loading"
-        @load="load"
-        @success="fetch"
-        @error="fetch"
-        ></action-button>
+        <button type="button" v-if="!item.deleted_at && !item.is_paid" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">Reject</button>
+        <button type="button" v-if="item.deleted_at && !item.is_paid" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">View Reason</button>
+        <action-button type="submit" :disabled="loading" class="btn-success" v-if="!item.is_paid && !item.deleted_at">{{ item.btn_label }}</action-button>
 			</template>
 		</card>
 
@@ -135,6 +148,7 @@
 import { EventBus }from '../../../EventBus.js';
 import CrudMixin from 'Mixins/crud.js';
 import NumberFormat from 'Mixins/number.js';
+import ResponseHandler from 'Mixins/response.js';
 
 import ActionButton from '../../../components/buttons/ActionButton.vue';
 import Select from '../../../components/inputs/Select.vue';
@@ -148,11 +162,25 @@ export default {
 		fetchSuccess(data) {
 			this.item = data.item ? data.item : this.item;
 		},
+
+    rejectReservation() {
+      this.loading = true;
+      var data = {
+        'rejected_reason': this.item.rejected_reason
+      };
+
+      axios.post(this.item.archiveUrl, data)
+        .then(response => {
+          this.fetch();
+          this.loading = true;
+        })
+    }
 	},
 
 	data() {
 		return {
 			item: [],
+      loading: false
 		}
 	},
 
@@ -165,6 +193,6 @@ export default {
 		'time-picker': TimePicker,
 	},
 
-	mixins: [ CrudMixin, NumberFormat ],
+	mixins: [ CrudMixin, NumberFormat, ResponseHandler ],
 }
 </script>

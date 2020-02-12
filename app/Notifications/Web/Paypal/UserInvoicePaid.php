@@ -46,7 +46,7 @@ class UserInvoicePaid extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                ->subject(config('app.name') . ': ' . 'Invoice Paid')
+                ->subject('Reservation Invoice Paid')
                 ->greeting('Hello ' . $notifiable->renderName() . ',')
                 ->line('Invoice Paid via Paypal')
                 ->line('Invoice Details : ')
