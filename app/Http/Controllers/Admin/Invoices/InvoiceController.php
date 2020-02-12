@@ -53,7 +53,9 @@ class InvoiceController extends Controller
             }
             // $user->notify(new ReservationApproved('Payment thru Paynamics'));
         } else {
-            $main->notify(new ReservationApproved('Upload Deposit Slip'));
+            if($item->bookable_type === 'App\Models\API\Masungi') {
+                $main->notify(new ReservationApproved('Upload Deposit Slip', $approved_notification));
+            }
             // $user->notify(new ReservationApproved('Upload Deposit Slip'));
         }
 
