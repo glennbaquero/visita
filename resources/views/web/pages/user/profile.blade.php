@@ -24,7 +24,7 @@
 					<p class="dshbrd-frm1__btn {{ $checker->route->areOnRoutes(['web.profile']) }}">Profile</p>
 				</a>
 
-				<a href="#" class="dshbrd-frm1__btn-list inlineBlock-parent">
+				<a href="{{ route('web.logout') }}" class="dshbrd-frm1__btn-list inlineBlock-parent">
 					<img src="{{ asset('images/log-out-icon.png') }}" class="dshbrd-frm1__btn-icon">
 					<p class="dshbrd-frm1__btn">Log Out</p>
 				</a>

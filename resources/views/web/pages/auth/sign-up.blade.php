@@ -44,7 +44,7 @@
 								<p class="error-show">{{ $errors->has('email') ? $errors->first('email') : '' }}</p>
 							</div>
 							<div class="inlineBlock-parent">
-								<div class="width--50">
+								{{-- <div class="width--50">
 									<div class="width--95">
 										<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
 											<input type="text" name="username" value="{{ old('username') }}" placeholder="Username" >
@@ -52,8 +52,8 @@
 										</div>
 									</div>
 								</div
-								><div class="width--50">
-									<div class="width--95 margin-l-a inlineBlock-parent">
+								> --}}<div class="width--100">
+									<div class="width--100 margin-l-a inlineBlock-parent">
 										<div class="width--30">
 											<div class="width--90">
 												<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
