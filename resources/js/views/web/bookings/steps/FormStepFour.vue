@@ -256,10 +256,10 @@
 			this.specialFee();
 		  	this.conservationFeeTotal = this.conservationFeeTotal - this.specialFeeTotal;
 
-		    $('.rqst-frm1__step-4-content-checkbox-container').on('click', function(){
-		    	$('.rqst-frm1__step-4-content-checkbox-container').removeClass('active');
-		    	$(this).addClass('active');
-		    });	
+		    // $('.rqst-frm1__step-4-content-checkbox-container').on('click', function(){
+		    // 	$('.rqst-frm1__step-4-content-checkbox-container').removeClass('active');
+		    // 	$(this).addClass('active');
+		    // });	
 
 			var information = $('.rqst-frm1__step-4-content-info-icon');
 

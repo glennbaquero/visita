@@ -777,6 +777,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::get('invoices/exports', 'InvoiceController@reports')->name('invoices.reports');
             Route::post('invoices/exports', 'InvoiceController@export')->name('invoices.export');
 
+            Route::get('invoices/initial-paid/{id}', 'InvoiceController@initialPaid')->name('invoices.initial-paid');
+            Route::get('invoices/final-paid/{id}', 'InvoiceController@finalPaid')->name('invoices.final-paid');
+            Route::get('invoices/full-final-paid/{id}', 'InvoiceController@fullFinalPaid')->name('invoices.full-final-paid');
+
             Route::post('invoices/fetch', 'InvoiceFetchController@fetch')->name('invoices.fetch');
             Route::post('invoices/fetch-item/{id?}', 'InvoiceFetchController@fetchView')->name('invoices.fetch-item');
         });

@@ -160,6 +160,7 @@
 							:visitor-types="visitorTypes"
 							:allocation="selectedAllocation"
 							:info="info"
+							:is-accepted="isAccepted"
 							@terms_conditions_click="termsConditionClick()"
 							@privacy_policy_click="privacyPolicyClick()"
 							ref="formStepFour"
@@ -223,7 +224,7 @@
 								</div
 								><div class="width--45">
 									<div class="width--95" v-if="isAccepted.termsAndConditions && isAccepted.privacyPolicy">
-										<button class="frm-btn green" data-remodal-target="confirmation-modal">Pay Now</button>
+										<button class="frm-btn green" data-remodal-target="confirmation-modal">Send Request</button>
 									</div>
 								</div>
 							</div>
@@ -261,7 +262,7 @@
 				  :src="successIcon" 
 				>
 				<div class="frm-description no-height clr--gray m-margin-b">
-					<p>Success! You are going to <strong>Mt. Pulag</strong>. A QR code will be sent to your email once your visit is confirmed and approved. You may check your dashboard for the status of your request.</p>
+					<p>Success! You are going to <strong>{{ destination.name }}</strong>. A confirmation will be sent to your email once your visit is confirmed and approved. You may check your dashboard for the status of your request.</p>
 				</div>
 				<a href="user/dashboard" class="frm-btn green">Dashboard</a>
 			</div>

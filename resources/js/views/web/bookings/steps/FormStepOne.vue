@@ -99,7 +99,7 @@
 		},
 
 		mounted() {
-			flatpickr('#visit-date', { minDate: 'today', disable: this.destination.dateBlock });
+			flatpickr('#visit-date', { minDate: 'today', disable: this.destination.dateBlock, disableMobile: 'true' });
 		},
 
 		methods: {
@@ -114,7 +114,7 @@
 						_.each(response.data, (data)=> {
 							this.destination.dateBlock.push(data);
 						})
-						flatpickr('#visit-date', { minDate: 'today', disable: this.destination.dateBlock });
+						flatpickr('#visit-date', { minDate: 'today', disable: this.destination.dateBlock, disableMobile: 'true' });
 						this.isLoading = false;
 					})
 
@@ -125,6 +125,7 @@
 			      		this.timeslots = value.timeslot;
 			    	}
 			  	});
+
 			}
 		}
 	}

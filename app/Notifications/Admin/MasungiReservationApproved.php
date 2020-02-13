@@ -14,17 +14,19 @@ class MasungiReservationApproved extends Notification
     public $next_step;
     private $invoice;
     public $masungi_url;
+    public $show;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($next_step, $invoice)
+    public function __construct($next_step, $invoice, $show=true)
     {
         $this->next_step = $next_step;
         $this->invoice = $invoice;
         $this->masungi_url = config('masungi.url');
+        $this->show = $show;
     }
 
     /**
@@ -58,17 +60,26 @@ class MasungiReservationApproved extends Notification
             $title = 'Initial Payment';
         }
 
-        return (new MailMessage)
-                ->subject('Masungi Georeserve: ' . $title)
-                ->greeting('Hello ' . $notifiable->renderName() . ',')
-                ->line('Your reservation is approved!')
-                ->line('To complete your reservation please click the link below to redirect you to payment.')
-                ->line('Next step : '.$this->next_step)
-                ->line('Invoice Reference # : '.$this->invoice->reference_code)
-                ->line('Payment needed to transact : '. $payment)
-                ->line('Total Payment: '.$this->invoice->grand_total)
-                ->line('Thank you!')
-                ->action('Pay now', $this->masungi_url.'payment/'.$notifiable->renderName().'/'.$reference_code.'/'.$payment);
+        $mailMessage = new MailMessage;
+        $mailMessage
+            ->subject('Masungi Georeserve: ' . $title)
+            ->greeting('Hello ' . $notifiable->renderName() . ',')
+            ->line('Your reservation is approved!')
+            ->line('Next step : '.$this->next_step)
+            ->line('Invoice Reference # : '.$this->invoice->reference_code)
+            ->line('Payment needed to transact : '. $payment)
+            ->line('Total Payment: '.$this->invoice->grand_total);
+
+            if($this->show) {
+                $mailMessage->line('To complete your reservation please click the link below to redirect you to payment.');
+                $mailMessage->action('Pay now', $this->masungi_url.'payment/'.$notifiable->renderName().'/'.$reference_code.'/'.$payment);
+                $mailMessage->line('Thank you!');
+            } else {
+                $mailMessage->line('Please contact us if you are already done in paying the payment above, Thank you!.');
+            }
+
+        return $mailMessage;
+                
     }
 
     /**

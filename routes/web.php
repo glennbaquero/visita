@@ -28,7 +28,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 		Route::middleware('guest:web')->group(function() {
 
 	        Route::get('sign-in', 'LoginController@showLoginForm')->name('login');
-	        Route::post('sign-in', 'LoginController@login');
+	        Route::post('sign-in', 'LoginController@login')->name('user.login');
 
 	        Route::get('reset-password/{token}/{email}', 'ResetPasswordController@showResetForm')->name('password.reset');
 	        Route::post('reset-password/change', 'ResetPasswordController@reset')->name('password.change');

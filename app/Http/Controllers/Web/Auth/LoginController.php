@@ -64,13 +64,16 @@ class LoginController extends Controller
         // if (!$user->hasVerifiedEmail()) {
         //     auth()->logout();
         //     return redirect()->back();
-            activity()
-                ->causedBy($user)
-                ->performedOn($user)
-                ->log('Account has been logged in.');
+            // activity()
+            //     ->causedBy($user)
+            //     ->performedOn($user)
+            //     ->log('Account has been logged in.');
         // }
-
-        // return redirect()->route('web.destinations');
+        if($user->email_verified_at == null) {
+            \Auth::logout();
+            return redirect('/sign-in');
+        }
+        return redirect()->route('web.destinations');
     }
 
     /**

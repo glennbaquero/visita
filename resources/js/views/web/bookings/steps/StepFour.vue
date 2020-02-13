@@ -15,7 +15,7 @@
 					</div>
 					<div class="inlineBlock-parent">
 						<p class="frm-header bold clr--gray">No. of guests:</p>
-						<p class="frm-header clr--gray">{{ stepData.numberOfGuests }}</p>
+						<p class="frm-header clr--gray">{{ parseInt(stepData.numberOfGuests) + 1 }}</p>
 					</div>
 					<div class="inlineBlock-parent">
 						<p class="frm-header bold clr--gray">Time:</p>
@@ -244,6 +244,7 @@
 			stepData: Object,
 			allocation: Object,
 			visitorTypes: Array,
+			isAccepted: Object
 		},
 
 		mixins: [ DateMixin ],

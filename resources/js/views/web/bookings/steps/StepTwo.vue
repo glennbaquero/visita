@@ -14,7 +14,7 @@
 				</div>
 				<div class="inlineBlock-parent">
 					<p class="frm-header bold clr--gray">No. of guests:</p>
-					<p class="frm-header clr--gray">{{ stepData.numberOfGuests }}</p>
+					<p class="frm-header clr--gray">{{ parseInt(stepData.numberOfGuests) + 1 }}</p>
 				</div>
 				<div class="inlineBlock-parent">
 					<p class="frm-header bold clr--gray">Time:</p>
@@ -54,6 +54,12 @@
 			allocation: Object
 		},
 
+		data() {
+			return {
+				reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+			}
+		},
+
 		mixins: [ DateMixin ],
 
 		computed: {
@@ -62,10 +68,16 @@
 					this.stepData.main.nationality != '' && this.stepData.main.last_name != '' && 
 					this.stepData.main.email != '' && this.stepData.main.birthdate != '' && 
 					this.stepData.main.contact_number != '' && this.stepData.main.emergency_contact_number != '' &&
-					this.stepData.main.visitor_type_id != 0) return true;
+					this.stepData.main.visitor_type_id != 0 && this.reg.test(this.stepData.main.email)) return true;
 
 				return false;
 			},
+		},
+
+		methods: {
+			// isEmailValid() {
+		 //      	return (this.stepData.main.email == "")? "" : (this.reg.test(this.stepData.main.email)) ? 'has-success' : 'has-error';
+		 //    }
 		}
 	}
 </script>

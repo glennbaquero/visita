@@ -24,6 +24,10 @@ use App\Notifications\Admin\MasungiReservationApproved;
 use App\Notifications\Admin\ReservationRejected;
 use App\Notifications\Admin\BankDepositUploadRejected;
 use App\Notifications\Admin\BankDepositUploadApprove;
+use App\Notifications\Masungi\ApprovedReservationThruBankDeposit;
+use App\Notifications\Web\Paypal\UserInvoicePaid;
+use App\Notifications\Masungi\FinalPaymentPaid;
+use App\Notifications\Masungi\InitialPaymentPaid;
 
 class InvoiceController extends Controller
 {
@@ -54,7 +58,7 @@ class InvoiceController extends Controller
             // $user->notify(new ReservationApproved('Payment thru Paynamics'));
         } else {
             if($item->bookable_type === 'App\Models\API\Masungi') {
-                $main->notify(new ReservationApproved('Upload Deposit Slip', $approved_notification));
+                $main->notify(new MasungiReservationApproved('Payment thru bank deposit', $item, false));
             }
             // $user->notify(new ReservationApproved('Upload Deposit Slip'));
         }
@@ -209,5 +213,55 @@ class InvoiceController extends Controller
                 'message' => $message,
             ]);
         }
+    }
+
+    public function initialPaid($id) {
+        DB::beginTransaction();
+            $invoice = Invoice::findOrFail($id);
+            $invoice->update([
+                'is_firstpayment_paid' => true
+            ]);
+        DB::commit();
+        $main = $invoice->book->guests->where('main', true)->first();
+        $main->notify(new InitialPaymentPaid($invoice));
+
+        return response()->json([
+            'paid' => true
+        ]);
+    }
+
+    public function finalPaid($id) {
+        DB::beginTransaction();
+            $invoice = Invoice::findOrFail($id);
+            $invoice->update([
+                'is_secondpayment_paid' => true,
+                'is_paid' => true
+            ]);
+        DB::commit();
+        $main = $invoice->book->guests->where('main', true)->first();
+        $main->notify(new UserInvoicePaid($invoice));
+        $main->notify(new FinalPaymentPaid());
+
+        return response()->json([
+            'paid' => true
+        ]);
+    }
+
+    public function fullFinalPaid($id) {
+        DB::beginTransaction();
+            $invoice = Invoice::findOrFail($id);
+            $invoice->update([
+                'is_firstpayment_paid' => true,
+                'is_secondpayment_paid' => true,
+                'is_paid' => true
+            ]);
+        DB::commit();
+        $main = $invoice->book->guests->where('main', true)->first();
+        $main->notify(new UserInvoicePaid($invoice));
+        $main->notify(new FinalPaymentPaid());
+
+        return response()->json([
+            'paid' => true
+        ]);
     }
 }

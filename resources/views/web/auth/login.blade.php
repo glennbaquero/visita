@@ -35,7 +35,7 @@
                             <li><p class="">{{$error}}</p></li>
                         @endforeach
                         </ul>
-                        <form action="{{ route('web.login') }}" method="POST">
+                        <form action="{{ route('web.user.login') }}" method="POST">
                             @csrf
                             <div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
                                 <input type="email" name="email" value="{{ old('email') }}" placeholder="Email Address">

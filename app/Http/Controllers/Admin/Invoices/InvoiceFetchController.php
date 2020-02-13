@@ -143,6 +143,10 @@ class InvoiceFetchController extends FetchController
         	$item->archiveUrl = $item->bank_deposit_slip && !$item->is_paypal_payment ? $item->renderRejectDepositSlipUrl() : $item->renderArchiveUrl();
             $item->renderDepositSlip = $item->bank_deposit_slip ? url('storage/'.$item->bank_deposit_slip) : null;
             $item->showImgTag = $item->bank_deposit_slip && !$item->is_paypal_payment ? true : false;
+            $item->updateInitialPaymentUrl = $item->renderInitialPaymentUrl();
+            $item->updateFinalPaymentUrl = $item->renderFinalPaymentUrl();
+            $item->updateFullFinalPaymentUrl = $item->renderFullFinalPaymentUrl();
+            $item->showButtonForBankDeposit = $item->renderShowButtonTypeForBankDeposit();
         }
 
     	return response()->json([

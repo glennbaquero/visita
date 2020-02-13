@@ -184,7 +184,7 @@
 		},
 
 		mounted() {
-			flatpickr('#birthdate', { maxDate: new Date().fp_incr(-6570) });
+			flatpickr('#birthdate', { maxDate: new Date().fp_incr(-6570), disableMobile: 'true' });
 		},
 
 		methods: {

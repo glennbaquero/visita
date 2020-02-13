@@ -54,7 +54,6 @@
         <div class="col-6">
           <p class="lead">Payment Method:</p>
           <img src="images/paynamics.png" width="15%" alt="Paypal" v-if="item.is_paypal_payment"> 
-
           	<label v-if="!item.is_paypal_payment"><b>Bank Deposit</b></label>
           	<br>
           	<template v-if="item.showImgTag">
@@ -136,6 +135,12 @@
         <button type="button" v-if="!item.deleted_at && !item.is_paid" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">Reject</button>
         <button type="button" v-if="item.deleted_at && !item.is_paid" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">View Reason</button>
         <action-button type="submit" :disabled="loading" class="btn-success" v-if="!item.is_paid && !item.deleted_at">{{ item.btn_label }}</action-button>
+        
+        <!-- Bank Deposit Payment Method -->
+        <button type="button" v-if="item.showButtonForBankDeposit == 'initial_button-show'" class="btn btn-primary" @click="setAsPaid('initial')">Set as paid for Initial Payment</button>
+        <button type="button" v-if="item.showButtonForBankDeposit == 'final_button-show'" class="btn btn-primary" @click="setAsPaid('final')">Set as Fully Paid</button>
+        <button type="button" v-if="item.showButtonForBankDeposit == 'fullpayment-final_button-show'" class="btn btn-primary" @click="setAsPaid('fullpayment_final')">Set as Fully Paid</button>
+        <!-- End -->
 			</template>
 		</card>
 
@@ -158,6 +163,10 @@ import Datepicker from '../../../components/datepickers/Datepicker.vue';
 import TimePicker from '../../../components/timepickers/Timepicker.vue';
 
 export default {
+  props: {
+    updateInitialPaymentUrl: String
+  },
+
 	methods: {
 		fetchSuccess(data) {
 			this.item = data.item ? data.item : this.item;
@@ -172,7 +181,23 @@ export default {
       axios.post(this.item.archiveUrl, data)
         .then(response => {
           this.fetch();
-          this.loading = true;
+          this.loading = false;
+        })
+    },
+
+    setAsPaid(payment){
+      this.loading = true;
+      var url = this.item.updateInitialPaymentUrl;
+      if(payment == 'final') {
+        url = this.item.updateFinalPaymentUrl;
+      } else if(payment == 'fullpayment_final') {
+        url = this.item.updateFullFinalPaymentUrl;
+      }
+
+      axios.get(url)
+        .then(response => {
+          this.fetch();
+          this.loading = false;
         })
     }
 	},

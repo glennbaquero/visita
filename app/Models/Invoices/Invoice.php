@@ -64,6 +64,36 @@ class Invoice extends Model
     	return route('admin.invoices.reject.deposit', $this->id);
     }
 
+    public function renderInitialPaymentUrl() 
+    {
+        return route('admin.invoices.initial-paid', $this->id);
+    }
+
+    public function renderFinalPaymentUrl() 
+    {
+        return route('admin.invoices.final-paid', $this->id);
+    }
+
+    public function renderFullFinalPaymentUrl() 
+    {
+        return route('admin.invoices.full-final-paid', $this->id);
+    }
+
+    public function renderShowButtonTypeForBankDeposit() 
+    {
+        $btn = null;
+
+        if(!$this->is_paypal_payment && !$this->is_fullpayment && $this->is_firstpayment_paid && !$this->is_paid) {
+            $btn = 'final_button-show';
+        } elseif (!$this->is_paypal_payment && !$this->is_fullpayment && $this->is_firstpayment_paid == 0) {
+            $btn = 'initial_button-show';
+        } elseif(!$this->is_paypal_payment && $this->is_fullpayment == 1 && $this->is_paid == 0) {
+            $btn = 'fullpayment-final_button-show';
+        }
+
+        return $btn;
+    }
+
     public function renderPaymentStatus() {
         $label = null;
         if($this->is_firstpayment_paid && !$this->is_secondpayment_paid && !$this->is_paid && !$this->is_fullpayment) {

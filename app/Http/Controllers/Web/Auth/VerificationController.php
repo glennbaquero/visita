@@ -70,9 +70,8 @@ class VerificationController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function verify(Request $request, TokenRepositoryInterface $token)
+    public function verify(Request $request)
     {
-
         if($request->route('user') === 'frontliner') {
             $management = $this->management()->findOrFail($request->route('id'));
 
