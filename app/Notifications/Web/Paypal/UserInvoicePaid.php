@@ -48,7 +48,7 @@ class UserInvoicePaid extends Notification
         return (new MailMessage)
                 ->subject('Reservation Invoice Paid')
                 ->greeting('Hello ' . $notifiable->renderName() . ',')
-                ->line('Invoice Paid via Paypal')
+                ->line('Invoice Paid')
                 ->line('Invoice Details : ')
                 ->line('Reference # : '. $this->invoice->reference_code)
                 ->line('Conservation Fee : '. $this->invoice->conservation_fee)

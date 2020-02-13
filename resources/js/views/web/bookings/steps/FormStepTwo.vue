@@ -40,7 +40,7 @@
 					<div class="width--95 margin-l-a">
 						<p class="frm-header bold s-margin-b clr--gray" :style="{ 'color': color }">Email Address*</p>
 						<div class="frm-inpt m-margin-b">
-							<input type="email" v-model="stepData.main.email" @keypress="emailKeyPressed">
+							<input type="email" v-model="stepData.main.email" @keyup="emailKeyPressed">
 						</div>
 					</div>
 				</div>

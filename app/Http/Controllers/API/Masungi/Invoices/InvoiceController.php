@@ -231,6 +231,7 @@ class InvoiceController extends Controller
                 $invoice->is_firstpayment_paid = true;
                 $invoice->is_secondpayment_paid = true;
                 $main->notify(new UserInvoicePaid($invoice));
+                $main->notify(new FinalPaymentPaid());
                 Log::info('Email sent to user');
                 foreach ($admins as $admin) {
                    $admin->notify(new AdminInvoicePaid($invoice));
