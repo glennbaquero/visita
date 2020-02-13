@@ -66,7 +66,7 @@ var app = {
 		},
 
 		loading: function() {
-			$(window).on('load', function() {
+			$(document).ready(function() {
 				$('.ldng-scrn').fadeOut(500);
 				$('body').removeClass('ovrflw-hddn');
 			});
