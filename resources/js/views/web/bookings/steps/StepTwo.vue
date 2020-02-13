@@ -14,7 +14,7 @@
 				</div>
 				<div class="inlineBlock-parent">
 					<p class="frm-header bold clr--gray">No. of guests:</p>
-					<p class="frm-header clr--gray">{{ parseInt(stepData.numberOfGuests) + 1 }}</p>
+					<p class="frm-header clr--gray">{{ stepData.numberOfGuests }}</p>
 				</div>
 				<div class="inlineBlock-parent">
 					<p class="frm-header bold clr--gray">Time:</p>

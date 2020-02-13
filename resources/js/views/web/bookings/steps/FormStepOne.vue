@@ -20,7 +20,7 @@
 
 					<p class="frm-header bold s-margin-b clr--gray">Number of guest/s</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="number" v-model="stepData.numberOfGuests" min="0" @keypress="regexNumber()" @change="$emit('numberOfGuestsChanged')">
+						<input type="number" v-model="stepData.numberOfGuests" min="1" @keypress="regexNumber()" @change="$emit('numberOfGuestsChanged')">
 					</div>
 
 					<p class="frm-header bold s-margin-b clr--gray">Time</p>
@@ -81,7 +81,7 @@
 
 		computed: {
 			detailsComplete() {
-				if(this.stepData.visitDate != null && this.stepData.timeSelected != null && this.stepData.allocationSelected != null) return true;
+				if(this.stepData.visitDate != null && this.stepData.timeSelected != null && this.stepData.allocationSelected != null && parseInt(this.stepData.numberOfGuests) >= 1) return true;
 
 				return false;
 			},

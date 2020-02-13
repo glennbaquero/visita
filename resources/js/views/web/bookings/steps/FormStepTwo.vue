@@ -38,9 +38,9 @@
 				</div
 				><div class="width--50">
 					<div class="width--95 margin-l-a">
-						<p class="frm-header bold s-margin-b clr--gray">Email Address*</p>
+						<p class="frm-header bold s-margin-b clr--gray" :style="{ 'color': color }">Email Address*</p>
 						<div class="frm-inpt m-margin-b">
-							<input type="email" v-model="stepData.main.email">
+							<input type="email" v-model="stepData.main.email" @keypress="emailKeyPressed">
 						</div>
 					</div>
 				</div>
@@ -174,13 +174,44 @@
 			genders: Array,
 		},
 
+		data() {
+			return {
+				color: null,
+				reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+			}
+		},
+
 		mixins: [ RegexMixin ],
 
 		computed: {
 			showFileInput() {
 				if(this.stepData.main.special_fee_id != 0) { return true }
 				return false;
-			}
+			},
+
+			firstNameNull() {
+				if(this.stepData.main.first_name == null) return '#d43f3f';
+
+				return null;
+			},
+
+			lastNameNull() {
+				if(this.stepData.main.last_name == null) return '#d43f3f';
+
+				return null;
+			},
+
+			contactNumberNull() {
+				if(this.stepData.main.contact_number == null) return '#d43f3f';
+
+				return null;
+			},
+
+			emergencyContactNumberNull() {
+				if(this.stepData.main.emergency_contact_number == null) return '#d43f3f';
+
+				return null;
+			},
 		},
 
 		mounted() {
@@ -196,6 +227,14 @@
 
 	            this.stepData.main.paths = files[0];
 	        },
+
+	        emailKeyPressed() {
+	        	if(!this.reg.test(this.stepData.main.email)) {
+	        		this.color = '#d43f3f';
+	        	} else {
+	        		this.color = null;
+	        	}
+	        }
 		}
 	}
 </script>

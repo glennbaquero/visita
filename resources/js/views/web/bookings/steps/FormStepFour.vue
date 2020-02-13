@@ -313,41 +313,41 @@
 		      			fee += parseFloat(value.weekday);
 		      		}
 
-		      		if(value.id == this.stepData.main.special_fee_id){
-			      		result += parseFloat(value.daytour);
+		      		// if(value.id == this.stepData.main.special_fee_id){
+			      		// result += parseFloat(value.daytour);
 
-			      		var data = {
-			      			name: value.name,
-			      			fee: fee,
-			      			count: 1
-			      		};
+			      		// var data = {
+			      		// 	name: value.name,
+			      		// 	fee: fee,
+			      		// 	count: 1
+			      		// };
 
-			      		this.specialFeeTotal += fee;
+			      		// this.specialFeeTotal += fee;
 
-			      		this.specialFeeTypeList.push(data)
+			      		// this.specialFeeTypeList.push(data)
 
 			      		_.forEach(this.stepData.guests, (guest) => {
 						if(value.id == guest.special_fee_id){
 					  		result += parseFloat(value.daytour_fee);
-					  		_.forEach(this.specialFeeTypeList, (data, key) => {
+					  		// _.forEach(this.specialFeeTypeList, (data, key) => {
 					  			var data = {
 					  				name: value.name,
 					  				fee: fee,
 					  				count: 1
 					  			};
-						  		if(value.name === data.name) {
-						  			data.count += 1;
-							  		this.specialFeeTypeList[key].count += 1;
-							  		this.specialFeeTypeList[key].fee += fee;
-						      		this.specialFeeTotal += fee;
-						  		} else {
+						  		// if(value.name === data.name) {
+						  		// 	data.count += 1;
+							  	// 	this.specialFeeTypeList[key].count += 1;
+							  	// 	this.specialFeeTypeList[key].fee += fee;
+						    //   		this.specialFeeTotal += fee;
+						  		// } else {
 						  			this.specialFeeTypeList.push(data);
 						      		this.specialFeeTotal += fee;
-						  		}
-					  		})
+						  		// }
+					  		// })
 						}			    		
 			    	})
-			    	}
+			    	// }
 				});
 			},
 
@@ -381,30 +381,30 @@
 			      			count: 1
 			      		};
 
-			      		this.conservationFeeTotal += fee;
+			      		// this.conservationFeeTotal += fee;
 
-			      		this.visitorTypeList.push(data)
+			      		// this.visitorTypeList.push(data)
 			    	}
 
 			    	_.forEach(this.stepData.guests, (guest) => {
 						if(value.id == guest.visitor_type_id){
 					  		result += parseFloat(value.daytour_fee);
-					  		_.forEach(this.visitorTypeList, (data, key) => {
+					  		// _.forEach(this.visitorTypeList, (data, key) => {
 					  			var data = {
 					  				name: value.name,
 					  				fee: fee,
 					  				count: 1
 					  			};
-						  		if(value.name === data.name) {
-						  			data.count += 1;
-							  		this.visitorTypeList[key].count += 1;
-							  		this.visitorTypeList[key].fee += fee;
-						      		this.conservationFeeTotal += fee;
-						  		} else {
+						  		// if(value.name === data.name) {
+						  		// 	data.count += 1;
+							  	// 	this.visitorTypeList[key].count += 1;
+							  	// 	this.visitorTypeList[key].fee += fee;
+						    //   		this.conservationFeeTotal += fee;
+						  		// } else {
 						  			this.visitorTypeList.push(data);
 						      		this.conservationFeeTotal += fee;
-						  		}
-					  		})
+						  		// }
+					  		// })
 						}			    		
 			    	})
 			  	});

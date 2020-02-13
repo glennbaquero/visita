@@ -270,9 +270,9 @@ class PageController extends Controller
 
 	public function showProfile() {
 
-        $data = $this->getPageData('dashboard');
+        $data = $this->getPageData('profile');
         
-        return view('web.pages.user.dashboard', array_merge($data, [
+        return view('web.pages.user.profile', array_merge($data, [
         	'quote' => Inspiring::quote(),
         	'page_scripts'=> 'profile'
         ]));
