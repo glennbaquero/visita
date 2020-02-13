@@ -71,7 +71,7 @@ class LoginController extends Controller
         // }
         if($user->email_verified_at == null) {
             \Auth::logout();
-            return redirect('/sign-in');
+            return redirect()->route('web.destinations');
         }
         return redirect()->route('web.destinations');
     }
