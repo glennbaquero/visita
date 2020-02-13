@@ -87,7 +87,7 @@ class InitialPaymentPaid extends Notification
                     ->line('Masungi Georeserve Location Map: Use Marcos Highway route coming from Metro Manila. <a href="https://www.google.com.ph/maps/place/Masungi+Georeserve/@14.6048064,121.3150886,1789m/data=!3m1!1e3!4m5!3m4!1s0x33979457fe4d85ab:0xf0304d8f00c74db9!8m2!3d14.6021942!4d121.319657">CLICK FOR GOOGLE MAPS</a>')
                     ->line('<b>Masungi Georeserve Entrance Signage:</b> At the right side of the road. For early morning guests, please note that the gates open at 5:00 am to 5:30 am.')
                     ->line('Thank you and we look forward to seeing you around soon! Safe travels to the georeserve!')
-                    ->salutation('<p>Best regards,</p>
+                    ->line('<p>Best regards,</p>
                             <p>Masungi Georeserve (Garden Cottages)</p>
                             <p>Kilometer 45, Marcos Highway,</p>
                             <p>Baras, Rizal, Philippines, 1970</p>
