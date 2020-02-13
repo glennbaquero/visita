@@ -439,8 +439,16 @@
 
 		.frm-btn {
 			&:nth-child(1n) {
+				display: block;
 				margin-right: 0px;
+				margin: auto;
+				width: 170px;
 				margin-bottom: 20px;
+			}
+			&:nth-child(2n) {
+				display: block;
+				margin: auto;
+				width: 170px;
 			}
 		}
 	}
@@ -661,6 +669,9 @@
 		box-shadow: none !important;
     	z-index: 1 !important;
 	}
+	.rqst-frm1__steps-header .rqst-frm1__steps-header-logo {
+		display: none !important;
+	}
 	.rqst-frm1__breadcrumbs {
 		p { font-size: 1em !important; }
 	}
@@ -694,6 +705,7 @@
 		.width--40,
 		.width--90 {
 			width: 100% !important;
+			display: inline-block !important;
 		}
 	}
 	.rqst-frm1__step-1-content .rqst-frm1__step-1-content-icon {
@@ -786,6 +798,12 @@
 
 		.width--40 {
 			width: 40% !important;
+		}
+	}
+	.rqst-frm1__step-4-content .rqst-frm1__step-4-content-terms {
+		.frm-header,
+		.inlineBlock-parent {
+			display: inline-block !important;
 		}
 	}
 	.rqst-frm1__step-4-content-checkbox .rqst-frm1__step-4-content-checkbox-img {
