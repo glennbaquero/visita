@@ -57,8 +57,7 @@
 					<div class="rqst-frm1__step-4-content-select">
 						<div class="width--95 margin-a inlineBlock-parent">
 							<div class="width--50 inlineBlock-parent">
-								<p class="frm-header clr--gray s-margin-r">Conservation Fees</p>
-								
+								<p class="frm-header clr--gray s-margin-r">Conservation Fees</p>								
 								<div class="rqst-frm1__step-4-content-info-holder">
 									<img 
 									  class="rqst-frm1__step-4-content-info-icon" 
@@ -67,7 +66,7 @@
 									<div class="rqst-frm1__step-4-content-info-position">
 										<div class="rqst-frm1__step-4-content-info">
 											<div class="width--90 margin-a frm-description clr--white">
-												<p><strong>Information:</strong> <span v-html="info.conservation_fee_info"></span> </p>
+												<p><span v-html="info.conservation_fee_info"></span></p>
 											</div>
 										</div>
 									</div>
@@ -117,7 +116,7 @@
 							<div class="rqst-frm1__step-4-content-info-position">
 								<div class="rqst-frm1__step-4-content-info">
 									<div class="width--90 margin-a frm-description clr--white">
-										<p><strong>Information:</strong> <span v-html="info.platform_fee_info"></span> </p>
+										<p><span v-html="info.platform_fee_info"></span></p>
 									</div>
 								</div>
 							</div>
@@ -140,7 +139,7 @@
 			</div>
 			<hr>
 
-			<div class="inlineBlock-parent l-margin-b">
+			<div class="inlineBlock-parent l-margin-b align-l">
 				<div class="width--50 align-l align-t">
 					<div class="inlineBlock-parent">
 						<p class="frm-header clr--gray s-margin-b s-margin-r">Transaction Fees</p>
@@ -153,7 +152,7 @@
 							<div class="rqst-frm1__step-4-content-info-position">
 								<div class="rqst-frm1__step-4-content-info">
 									<div class="width--90 margin-a frm-description clr--white">
-										<p><strong>Information:</strong><span v-html="info.transaction_fee_info"></span></p>
+										<p><span v-html="info.transaction_fee_info"></span></p>
 									</div>
 								</div>
 							</div>

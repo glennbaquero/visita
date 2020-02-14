@@ -769,6 +769,7 @@
 	.rqst-frm1__step-3-content-card {
 		.width--90 {
 			width: 90% !important;
+			margin-left: 5%;
 		}
 
 		.width--40 {
@@ -813,11 +814,10 @@
 		width: 35px !important;
 		height: 35px !important;
 	}
-	.rqst-frm1__step-4-content-info-holder .rqst-frm1__step-4-content-info {
-		width: 240px !important;
-		padding: 10px 2.5% !important;
+	.rqst-frm1__step-4-content-info-holder {
+		display: none;
 	}
-
+	
 	/*
 	* General Remodal
 	* gnrl-rmdl : general remodal
