@@ -143,7 +143,7 @@
 				</div>
 			</div
 			><div class="width--45">
-				<div class="width--95">
+				<div class="width--95" v-if="showNextButton">
 					<button 
 					  class="frm-btn green"
 					  @click="$emit('showStep4')"
@@ -155,6 +155,7 @@
 </template>
 <script>
 	import DateMixin from 'Mixins/date.js';
+	import { EventBus } from 'Root/EventBus.js';
 
 	export default {
 		props: {
@@ -163,9 +164,20 @@
 			visitorTypes: Array,
 		},
 
+		data() {
+			return {
+				showNextButton: false,
+			}
+		},
+
 		mixins: [ DateMixin ],
 
 		computed: {
+
+			guests() {
+				return this.stepData.guests;
+			},
+
 			specialFee() {
 				var result = null;
 				_.forEach(this.allocation.special_fees, (value) => {
@@ -187,20 +199,22 @@
 
 			  	return result;
 			},
+		},
 
-			showNextButton() {
-				var totalGuests = parseInt(this.stepData.numberOfGuests)
-				var guest = this.stepData.guests;
-				for (var i = 0; i >= totalGuests; i++) {
-					if(guest[i].first_name != '' && guest[i].gender != '' && 
-						guest[i].nationality != '' && guest[i].last_name != '' && 
-						guest[i].email != '' && guest[i].birthdate != '' && 
-						guest[i].contact_number != '' && guest[i].emergency_contact_number != '' &&
-						guest[i].visitor_type_id != 0) return true;
-				}
-
-				return false;
-			}
+		created() {
+			EventBus.$on('changed', () => {
+				this.$nextTick(() => {
+					var guests = this.guests;
+					for(var i = 0; i < guests.length; i++) {
+						if(guests[i].first_name != null) {
+							this.showNextButton = true;
+						} else {
+							this.showNextButton = false;
+						}
+					}
+				}, 200)
+				
+			})
 		}
 	}
 </script>

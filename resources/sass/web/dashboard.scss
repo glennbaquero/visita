@@ -95,10 +95,10 @@
 		border-radius: 8px;
 		color: $white;
 
-		&.pending { background: $orange; }
-		&.confirmed { background: $green; }
-		&.for-approval { background: #e0af3c; }
-		&.payment-pending { background: #0505ade0; }
-		&.rejected { background: #f90606e0; }
+		&.pending { background: #434244; }
+		&.confirmed { background: #657008; }
+		&.for-approval { background: #E0AF3C; }
+		&.payment-pending { background: #434244; }
+		&.rejected { background: #A74424; }
 	}
 }

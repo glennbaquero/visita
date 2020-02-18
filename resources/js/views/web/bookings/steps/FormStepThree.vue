@@ -15,7 +15,7 @@
 				<div class="width--95">
 					<p class="frm-header bold s-margin-b clr--gray">First Name*</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="text" v-model="guest.first_name" @keypress="regexString($evt)">
+						<input type="text" v-model="guest.first_name" @keypress="regexString($evt);">
 					</div>
 				</div>
 			</div

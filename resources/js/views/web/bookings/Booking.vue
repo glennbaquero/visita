@@ -245,7 +245,7 @@
 				  :src="questionIcon" 
 				>
 				<div class="frm-description no-height clr--gray m-margin-b">
-					<p>Confirm payment?</p>
+					<p>Are you sure the details you provided are correct?</p>
 				</div>
 				<!-- data-remodal-target="success-modal" -->
 				<button class="frm-btn green m-margin-b"  @click="confirmedPayment()">Confirm</button>
@@ -262,7 +262,7 @@
 				  :src="successIcon" 
 				>
 				<div class="frm-description no-height clr--gray m-margin-b">
-					<p>Success! You are going to <strong>{{ destination.name }}</strong>. A confirmation will be sent to your email once your visit is confirmed and approved. You may check your dashboard for the status of your request.</p>
+					<p>Success! You have submitted your visit request to <strong>{{ destination.name }}!</strong>. A confirmation will be sent to your email once your visit is confirmed and approved. You may check your dashboard for the status of your request.</p>
 				</div>
 				<a href="user/dashboard" class="frm-btn green">Dashboard</a>
 			</div>
@@ -287,6 +287,8 @@
 	import FormStepThree from './steps/FormStepThree.vue';
 	import FormStepFour from './steps/FormStepFour.vue';
 	import GuestInfo from './steps/GuestInfo.vue';
+
+	import {EventBus} from 'Root/EventBus.js';
 
 	export default {
 
@@ -480,9 +482,12 @@
 				var totalGuests = parseInt(this.stepData.numberOfGuests) + 1;
 				this.stepData.numberOfGuests = totalGuests;
 				this.stepData.guests.push(details);
+				EventBus.$emit('changed');
 			},
 
 			submitGuestDetails(guest_key, guest_data) {
+
+				EventBus.$emit('changed');
 				this.guest_key = null;
 				this.stepData.guests[guest_key] = guest_data;
 				this.guestCard = false;
