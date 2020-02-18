@@ -386,6 +386,17 @@
 		},
 
 		mounted() {
+			var $document = $(document);
+			$document.ready(function() {
+				var $window = $(window);
+			    	$window.scroll(function () {
+			        if ($window.scrollTop() > 0) {
+			          	$('.rqst-frm1__steps-header, .rqst-frm1__steps-form-cards').addClass('scroll');
+			        } else {
+			        	$('.rqst-frm1__steps-header, .rqst-frm1__steps-form-cards').removeClass('scroll');
+			        }
+			    });
+			});	
 		},
 
 		methods: {

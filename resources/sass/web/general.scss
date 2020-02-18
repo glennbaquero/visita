@@ -88,6 +88,16 @@ $font-family-work-sans-bold: 'WorkSans-Bold';
 	}
 }
 
+.frm-lbl__smll {
+	font-family: $font-family-work-sans-regular;
+	font-size: 12px;
+	line-height: 1.5em;
+	
+	strong, b {
+		font-family: $font-family-work-sans-bold;	
+	}
+}
+
 p,a {
 	font-family: $font-family-work-sans-regular;
 	line-height: 1.5em;
@@ -253,7 +263,12 @@ $frame-bg--pos__b: bottom center;
 	    font-family: $font-family-d-din-regular;
 
 	    &:focus {
-        	outline: none;
+		    outline: none;
+		    -webkit-appearance: none;
+		    -moz-appearance: none;
+		    appearance: none;
+		    border-color: #80bdff;
+		    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
     	}
 
     	&::placeholder {
