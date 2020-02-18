@@ -16,7 +16,21 @@ class Guest extends Model
 {
    	use FileTrait, Notifiable;
 	  
-      protected $dates = ['birthdate'];
+    protected $dates = ['birthdate'];
+
+    /**
+    * Get the indexable data array for the model.
+    *
+    * @return array
+    */
+    public function toSearchableArray()
+    {
+        return [
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email,
+        ];
+    }
       
    	public function visitorType()
    	{

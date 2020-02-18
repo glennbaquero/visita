@@ -12,6 +12,9 @@ use App\Models\Allocations\Allocation;
 use App\Models\Types\VisitorType;
 use App\Models\BlockedDates\BlockedDate;
 use App\Models\Genders\Gender;
+use App\Models\Guests\Guest;
+
+use DB;
 
 use Carbon\Carbon;
 
@@ -42,6 +45,59 @@ class BookingFetchController extends FetchController
     	if($this->request->experience) {
 	    	$query = $query->where('allocation_id', $this->request->experience);
     	}
+
+        if($this->request->payment_type) {
+            if($this->request->payment_type == 1) {
+                $query = $query->whereHas('invoice', function($query)  {
+                    $query->where('bookable_type', 'App\Models\API\Masungi')->where('is_paypal_payment', true);
+                });
+            } elseif ($this->request->payment_type == 2) {
+                $query = $query->whereHas('invoice', function($query)  {
+                    $query->whereNotIn('bookable_type', ['App\Models\API\Masungi'])->where('is_paypal_payment', true);
+                });
+            } elseif ($this->request->payment_type == 3) {
+                $query = $query->whereHas('invoice', function($query)  {
+                    $query->where('bookable_type', 'App\Models\API\Masungi')->where('is_paypal_payment', false);
+                });
+            }
+        }
+
+        if($this->request->payment_status) {
+            if($this->request->payment_status == 1) {
+                $query = $query->whereHas('invoice', function($query)  {
+                    $query->where('is_paid', true);
+                });
+            } elseif ($this->request->payment_status == 2) {
+                $query = $query->whereHas('invoice', function($query)  {
+                    $query->where('is_paid', false)->where('is_fullpayment', false)->where('is_firstpayment_paid', true);
+                });
+            } elseif ($this->request->payment_status == 3) {
+                $query = $query->whereHas('invoice', function($query)  {
+                    $query->where('is_approved', false);
+                });
+            } elseif ($this->request->payment_status == 4) {
+                $query = $query->whereHas('invoice', function($query)  {
+                    $query->whereNotNull('deleted_at');
+                });
+            }
+        }
+
+        
+
+        return $query;
+    }
+
+    /**
+     * Custom search query
+     * 
+     * @param  string $query
+     */
+    protected function searchQuery($query) {
+        if($this->request->filled('search')){
+            $ids = Guest::where('main', true)->where('email', 'like', '%'.$this->request->input('search').'%')->orWhere(DB::raw('CONCAT(`first_name`, " ", `last_name`)'), 'like', '%'.$this->request->input('search').'%')->pluck('book_id');
+            $query = $this->class::whereIn('id', $ids);
+        }
+
         return $query;
     }
 
@@ -56,6 +112,10 @@ class BookingFetchController extends FetchController
         $result = [];
 
         foreach($items as $item) {
+            // if($this->request->search) {
+            //     $item = $item->guests->where('main', true)->where('emaill', 'like', '%'.$this->request->search.'%')->first()->book;
+            // }
+
             $data = $this->formatItem($item);
             array_push($result, $data);
         }

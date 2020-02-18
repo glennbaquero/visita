@@ -7,6 +7,7 @@
             v-model="destination"
             item-text="name"
             item-value="id"
+            label="Filter by destination"
             @change="filter($event, 'destination'); destinationChange()"
             placeholder="Filter by destination"
             ></selector>
@@ -16,8 +17,29 @@
             :items="experiences"
             item-text="name"
             item-value="id"
+            label="Filter by experience"
             @change="filter($event, 'experience')"
             placeholder="Filter by experience"
+            ></selector>
+
+
+            <selector
+            class="mt-2 col-md-6"
+            :items="payment_status"
+            item-text="label"
+            item-value="value"
+            label="Filter by Payment Status"
+            @change="filter($event, 'payment_status')"
+            placeholder="Filter by Payment Status"
+            ></selector>
+            <selector
+            class="mt-2 col-md-6"
+            :items="payment_types"
+            item-text="label"
+            item-value="value"
+            label="Filter by Payment Types"
+            @change="filter($event, 'payment_type')"
+            placeholder="Filter by Payment Types"
             ></selector>
         </div>
         <filter-box @refresh="fetch">
@@ -134,6 +156,46 @@ export default {
         return {
             destination: null,
             experiences: [],
+            payment_status: [
+                {
+                    label: 'All',
+                    value: 0
+                },
+                {
+                    label: 'Fully Paid',
+                    value: 1
+                },
+                {
+                    label: 'Initially Paid',
+                    value: 2
+                },
+                {
+                    label: 'For Approval',
+                    value: 3
+                },
+                {
+                    label: 'Rejected',
+                    value: 4
+                }
+            ],
+            payment_types: [
+                {
+                    label: 'All',
+                    value: 0
+                },
+                {
+                    label: 'Paypal',
+                    value: 1
+                },
+                {
+                    label: 'Paynamics',
+                    value: 2
+                },
+                {
+                    label: 'Bank Deposit',
+                    value: 3
+                }
+            ]
         }
     },
 
@@ -148,7 +210,7 @@ export default {
             type: Boolean,
         },
 
-        destinations: Array
+        destinations: Array,
     },
 
     mixins: [ ListMixin, NumberFormat ],
