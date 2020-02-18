@@ -87,18 +87,21 @@ class InvoiceController extends Controller
                 // 'masungi_user_id' => $request->user_id,
     		]);
     		foreach ($request->guests as $key => $guest) {
-                $book->guests()->create([
-	    			'main' => $guest['main'] == '1' ? 1 : 0,
-	    			'first_name' => $guest['first_name'],
-	    			'last_name' => $guest['last_name'],
-                    // 'gender' => $guest['gender'],
-	    			'gender' => 'Male',
-	    			'nationality' => $guest['country'],
-	    			'emergency_contact_number' => $guest['contact_number'],
-	    			'contact_number' => $guest['contact_number'],
-	    			'email' => $guest['email'],
-	    			'birthdate' => $guest['birthday'],
-	    		]);
+                if($guest['first_name'] != null && $guest['last_name'] != null && $guest['country'] != null && $guest['contact_number'] && $guest['email'] != null && $guest['birthday'] != null) {
+                    $book->guests()->create([
+                        'main' => $guest['main'] == '1' ? 1 : 0,
+                        'first_name' => $guest['first_name'],
+                        'last_name' => $guest['last_name'],
+                        // 'gender' => $guest['gender'],
+                        'gender' => 'Male',
+                        'nationality' => $guest['country'],
+                        'emergency_contact_number' => $guest['contact_number'],
+                        'contact_number' => $guest['contact_number'],
+                        'email' => $guest['email'],
+                        'birthdate' => $guest['birthday'],
+                    ]);
+                }
+                
 	    	}
             $firstpayment = true;
             $secondpayment = true;
