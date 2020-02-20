@@ -144,6 +144,7 @@ class PageController extends Controller
         $data = $this->getPageData('destination');
         $selected_destination = Destination::with('allocations')->find($id);
         $selected_destination['request_url'] = $selected_destination->renderRequestVisitUrl();
+        $selected_destination['is_available_for_request'] = $selected_destination->is_available ? true : false;
         
         return view('web.pages.destination.destinations-info', array_merge($data, [
         	'quote' => Inspiring::quote(),
