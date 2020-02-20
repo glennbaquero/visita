@@ -11,7 +11,7 @@
 						<p class="dstntns-inf-frm2__btn" :class="tab === 4 ? 'active' : null" @click="activeTab(4, destination.terms_conditions, 'Terms & Condtions of Visit Request')">Terms & Condtions of Visit Request</p>
 						<p class="dstntns-inf-frm2__btn" :class="tab === 5 ? 'active' : null" @click="activeTab(5, destination.how_to_get_here, 'How to Get Here')">How to Get Here</p>
 						<p class="dstntns-inf-frm2__btn" :class="tab === 6 ? 'active' : null" @click="activeTab(6, destination.contact_us, 'Contact Us')">Contact Us</p>
-						<a :href="destination.request_url" class="frm-btn green" >Request to Visit</a>
+						<a v-if="destination.is_available_for_request" :href="destination.request_url" class="frm-btn green" >Request to Visit</a>
 					</div
 					><div class="width--70 align-l align-t">
 						<div class="dstntns-inf-frm2__content-inner">
