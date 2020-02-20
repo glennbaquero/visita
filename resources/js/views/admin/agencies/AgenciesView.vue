@@ -6,7 +6,7 @@
 
 			<div class="row">
 				<div class="form-group col-sm-12 col-md-6">
-					<label>Name</label>
+					<label>Code</label>
 					<input v-model="item.name" name="name" type="text" class="form-control">
 				</div>
 
