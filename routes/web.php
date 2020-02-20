@@ -72,7 +72,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 		Route::get('/about-us', 'PageController@showAboutUs')->name('about-us');
 		
 		Route::get('/destinations', 'PageController@showDestinations')->name('destinations');
-		Route::get('/destinations/destinations-info/{id}', 'PageController@showDestinationsInfo')->name('destinations-info');
+		Route::get('/destinations/info/{id}/{name}', 'PageController@showDestinationsInfo')->name('destinations-info');
 		
 		Route::get('/faqs', 'PageController@showFaqs')->name('faqs');
 		Route::get('/contact-us', 'PageController@showContactUs')->name('contact-us');

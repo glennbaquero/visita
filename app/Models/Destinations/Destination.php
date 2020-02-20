@@ -134,6 +134,10 @@ class Destination extends Model
         return route('web.request-to-visit', [$this->id, $this->name]);
     }
 
+    public function renderViewDestinationUrl() {
+        return route('web.destinations-info', [$this->id, $this->name]);
+    }
+
     public function getFormattedData() {
         $result = [];
 

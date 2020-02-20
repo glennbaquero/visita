@@ -16,7 +16,7 @@
 										</div>
 										<div class="dstntns-frm--sldr__animation-button inlineBlock-parent width--100">
 											<a 
-												:href="'destinations/destinations-info/'+destination.id" 
+												:href="destination.viewDestinationUrl" 
 												class="frm-btn green s-margin-r"
 											>View Destination</a>
 											<a :href="destination.requestVisitUrl" class="frm-btn orange" v-if="destination.is_available">Request to Visit</a>

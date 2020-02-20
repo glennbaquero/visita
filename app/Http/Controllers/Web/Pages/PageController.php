@@ -129,6 +129,7 @@ class PageController extends Controller
         		'image' => $destination->pictures->first()->renderImagePath(),
         		'is_available' => $destination->is_available,
         		'requestVisitUrl' => $destination->renderRequestVisitUrl(),
+        		'viewDestinationUrl' => $destination->renderViewDestinationUrl(),
         	]);
         }
         
