@@ -99,9 +99,10 @@
 				<div class="frm-description clr--gray m-margin-tb dstntns-inf-frm1__location-desc">
 					<p>{{ $selected_destination->renderShortOverview() }}</p>
 				</div>
-
-				<a href="{{ $selected_destination->request_url }}" class="frm-btn green">Request to Visit</a>
-
+				
+				@if($selected_destination->is_available) 
+					<a href="{{ $selected_destination->request_url }}" class="frm-btn green">Request to Visit</a>
+				@endif
 			</div>
 		</div>
 	</div>
