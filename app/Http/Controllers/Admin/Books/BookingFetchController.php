@@ -134,6 +134,7 @@ class BookingFetchController extends FetchController
         return [
             'id' => $item->id,
             'main_contact' => $this->getGuest($item->guests),
+            'agency_code' => $item->agency_code,
             'is_walkin' => $item->is_walkin === 1 ? 'Walk-In' : 'Online',
             'total_guest' => $item->total_guest,
             'allocation' => $item->allocation->name,

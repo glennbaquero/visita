@@ -70,6 +70,7 @@
                 <tr v-for="item in items">
                     <td>{{ item.id }}</td>
                     <td>{{ item.main_contact.fullname }}</td>
+                    <td>{{ item.agency_code }}</td>
                     <td>{{ item.destination }}</td>
                     <td>{{ item.allocation }}</td>
                     <td>{{ item.total_guest }}</td>
@@ -129,6 +130,7 @@ export default {
             let array = [
                 { text: '#', value: 'id' },
                 { text: 'Point Person', value: 'fullname' },
+                { text: 'Agency Code', value: 'agency_code' },
                 { text: 'Destination', value: 'destination' },
                 { text: 'Experience', value: 'allocation' },
                 { text: 'Total Guest', value: 'total_guest' },

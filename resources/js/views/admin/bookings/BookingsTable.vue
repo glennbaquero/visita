@@ -34,6 +34,7 @@
                         </a>
                     </td>
                     <td>{{ item.main_contact.fullname }}</td>
+                    <td>{{ item.agency_code }}</td>
                     <td>{{ item.total_guest }}</td>
                     <td>{{ item.time }}</td>
                     <td>{{ item.allocation }}</td>
@@ -87,6 +88,7 @@ export default {
                 { text: '#', value: 'id' },
                 { text: 'QR', value: 'qr_id' },
                 { text: 'Point Person', value: 'fullname' },
+                { text: 'Agency Code', value: 'agency_code' },
                 { text: 'Total Guest', value: 'total_guest' },
                 { text: 'Time', value: 'time' },
                 { text: 'Experience', value: 'allocation' },

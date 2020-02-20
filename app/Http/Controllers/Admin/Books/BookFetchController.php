@@ -74,6 +74,7 @@ class BookFetchController extends FetchController
             'main_contact' => $this->getGuest($item->guests),
             'is_walkin' => $item->is_walkin === 1 ? 'Walk-In' : 'Online',
             'total_guest' => $item->total_guest,
+            'agency_code' => $item->agency_code,
             'allocation' => $item->allocation->name,
             'time' => $item->start_time ? Carbon::createFromFormat('H:i:s', $item->start_time)->format('h:i A') : 'No visit time selected.',
             'status' => $item->ended_at != null ? 'Visit End ( '.$item->renderDate('ended_at').' )' : ($item->started_at == null ? 'Not yet started' : 'Started ( '.$item->renderDate('started_at').' )'),
