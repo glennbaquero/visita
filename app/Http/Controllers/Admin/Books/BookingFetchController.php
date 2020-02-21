@@ -134,7 +134,7 @@ class BookingFetchController extends FetchController
         return [
             'id' => $item->id,
             'main_contact' => $this->getGuest($item->guests),
-            'agency_code' => $item->agency_code,
+            'agency_code' => $item->agency_code  ?? '---',
             'is_walkin' => $item->is_walkin === 1 ? 'Walk-In' : 'Online',
             'total_guest' => $item->total_guest,
             'allocation' => $item->allocation->name,
@@ -142,9 +142,9 @@ class BookingFetchController extends FetchController
             'scheduled_at' => $item->scheduled_at,
             'destination_id' => $item->destination->id,
             'allocation_id' => $item->allocation->id,
-            'grand_total' => 'P '.$item->invoice->grand_total,
-            'initial_payment' => 'P '.$item->invoice->amount_settled,
-            'balance' => 'P '.$item->invoice->balance,
+            'grand_total' => '₱ '.$item->invoice->grand_total,
+            'initial_payment' => '₱ '.$item->invoice->amount_settled,
+            'balance' => '₱ '.$item->invoice->balance,
             'is_fullpayment' => $item->invoice->is_fullpayment ? 'Full Payment' : 'Half Payment' ,
             'payment_status' => $item->invoice->renderPaymentStatus() ,
             'time' => $item->start_time ? Carbon::createFromFormat('H:i:s', $item->start_time)->format('h:i A') : 'No visit time selected.',
@@ -179,7 +179,7 @@ class BookingFetchController extends FetchController
             	$result['fullname'] = $guest->first_name.' '. $guest->last_name;
             	$result['email'] = $guest->email;
             	$result['contact_number'] = $guest->contact_number;
-            	$result['type'] = $guest->visitorType ? $guest->visitorType->name : null;
+            	$result['type'] = $guest->visitorType ? $guest->visitorType->name : '---';
                 $result['deleted_at'] = $guest->deleted_at;
             }
         }
