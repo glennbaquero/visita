@@ -58,10 +58,10 @@ class SocialiteLoginController extends Controller
 
 		$token = $this->authenticate($socialite, $provider);
 
-		return view('socialite.callback', [
-            'provider' => $provider,
-            'token' => $token,
-        ]);
+		$destination = session('destination');
+        $route = $destination ? $destination->renderRequestVisitUrl() : route('web.destinations');
+
+		return redirect($route);
     }
 
 	public function authenticate($socialite, $provider) {
