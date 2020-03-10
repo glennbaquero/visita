@@ -83,6 +83,11 @@
                     <td>{{ item.balance }}</td>
                     <td>{{ item.grand_total }}</td>
                     <td>{{ item.payment_status }}</td>
+                    <!-- <td>
+                        <select class="select__type" v-model="item.invoice_status">
+                            <option v-for="action in actions" :value="action.value"> {{ action.label }} </option>
+                        </select>
+                    </td> -->
                     <td>{{ item.created_at }}</td>
                     <td>
                         <view-button :href="item.showUrl+'/'+item.scheduled_at+'/'+item.destination_id+'/'+item.allocation_id+'/'+item.destination"></view-button>
@@ -143,11 +148,12 @@ export default {
                 { text: 'Succeeding Payment', value: '' },
                 { text: 'Total', value: 'grand_total' },
                 { text: 'Payment Status', value: 'payment_status' },
+                // { text: 'Set Invoice As', value: '' },
             ];
 
 
             array = array.concat([
-                { text: 'Created Date', value: 'created_at' },
+                { text: 'Created At', value: 'created_at' },
             ]);
 
             return array;
@@ -197,7 +203,29 @@ export default {
                     label: 'Bank Deposit',
                     value: 3
                 }
-            ]
+            ],
+            actions: [
+                {
+                    label: 'Fully Paid',
+                    value: 1
+                },
+                {
+                    label: 'Initially Paid',
+                    value: 2
+                },
+                {
+                    label: 'For Approval',
+                    value: 3
+                },
+                {
+                    label: 'Rejected',
+                    value: 4
+                },
+                {
+                    label: 'Expired',
+                    value: 4
+                }
+            ],
         }
     },
 

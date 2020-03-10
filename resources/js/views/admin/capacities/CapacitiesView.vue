@@ -26,19 +26,19 @@
 			<div class="row">
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Online</label>
-					<input v-model="item.online" name="online" type="number" min="1" class="form-control">
+					<input v-model="item.online" name="online" type="number" min="0" class="form-control">
 				</div>
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Walk In</label>
-					<input v-model="item.walk_in" name="walk_in" type="number" min="1" class="form-control">
+					<input v-model="item.walk_in" name="walk_in" type="number" min="0" class="form-control">
 				</div>
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Management (LGU)</label>
-					<input v-model="item.mgt_lgu" name="mgt_lgu" type="number" min="1" class="form-control">
+					<input v-model="item.mgt_lgu" name="mgt_lgu" type="number" min="0" class="form-control">
 				</div>
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Agency</label>
-					<input v-model="item.agency" name="agency" type="number" min="1" class="form-control">
+					<input v-model="item.agency" name="agency" type="number" min="0" class="form-control">
 				</div>
 			</div>
 

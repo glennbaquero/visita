@@ -6,6 +6,8 @@ use App\Extenders\Models\BaseModel as Model;
 
 use App\Models\Allocations\Allocation;
 
+use Carbon\Carbon;
+
 class TimeSlot extends Model
 {
     
@@ -43,5 +45,9 @@ class TimeSlot extends Model
 
     public function renderRestoreUrl($prefix = 'admin') {
         return route($prefix . '.time-slots.restore', $this->id);
+    }
+
+    public function renderTime() {
+        return Carbon::parse($this->time)->format('H:i A');
     }
 }

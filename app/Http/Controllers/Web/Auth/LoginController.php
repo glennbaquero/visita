@@ -20,7 +20,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/destinations';
+    // protected $redirectTo = '/destinations';
+    protected $redirectTo;
 
     /**
      * Create a new controller instance.
@@ -69,11 +70,16 @@ class LoginController extends Controller
             //     ->performedOn($user)
             //     ->log('Account has been logged in.');
         // }
+        
         if($user->email_verified_at == null) {
             \Auth::logout();
             return redirect()->route('web.destinations');
         }
-        return redirect()->route('web.destinations');
+
+        $destination = session('destination');
+        $route = $destination ? $destination->renderRequestVisitUrl() : route('web.destinations');
+        
+        return redirect($route);
     }
 
     /**

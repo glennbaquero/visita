@@ -51,7 +51,7 @@
                 <!-- /*---------------------------------------------------
                 | <tfoot> Used for sorting and mass selection
                 |---------------------------------------------------*/ -->
-                <!-- <tfoot>
+                <tfoot>
                     <tr>
                         <th v-if="selectable"><input type="checkbox" v-model="selectAll"></th>
                         <th v-for="(header, index) in headers">
@@ -64,7 +64,7 @@
                         </th>
                         <th v-show="actionable">Actions</th>
                     </tr>
-                </tfoot> -->
+                </tfoot>
 
             </table>
         </div>

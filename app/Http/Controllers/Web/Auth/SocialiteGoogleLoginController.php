@@ -66,7 +66,11 @@ class SocialiteGoogleLoginController extends Controller
 
 	        $this->guard()->login($user);
         }
-        return redirect()->to('/destinations');
+
+        $destination = session('destination');
+        $route = $destination ? $destination->renderRequestVisitUrl() : route('web.destinations');
+
+        return redirect($route);
     }
 
     /**

@@ -30,16 +30,16 @@
             <div class="width--100 align-l l-margin-b">
                 <p class="frm-header s-margin-b clr--white">Follow us:</p>
                 <div class="inlineBlock-parent">
-                    <a href="" target="_blank" class="cntct-frm1__img">
+                    <a :href="fb" target="_blank" class="cntct-frm1__img">
                         <img :src="facebookIcon">
                     </a>
-                    <a href="" target="_blank" class="cntct-frm1__img">
+                    <a :href="insta" target="_blank" class="cntct-frm1__img">
                         <img :src="instagramIcon">
                     </a>
-                    <a href="" target="_blank" class="cntct-frm1__img big">
+                    <a :href="twitter" target="_blank" class="cntct-frm1__img big">
                         <img :src="twitterIcon">
                     </a>
-                    <a href="" target="_blank" class="cntct-frm1__img big">
+                    <a :href="youtube" target="_blank" class="cntct-frm1__img big">
                         <img :src="youtubeIcon">
                     </a>
                 </div>
@@ -62,6 +62,14 @@ import ActionButton from '../../../components/buttons/ActionButton.vue';
 import ImagePicker from '../../..//components/inputs/ImagePicker.vue'
 
 export default {
+    props: {
+        fb: String,
+        insta: String,
+        twitter: String,
+        insta: String,
+        youtube: String,
+    },
+
     methods: {
         fetchSuccess(data) {
             this.item = data.item ? data.item : this.item;

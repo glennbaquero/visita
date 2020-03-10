@@ -99,7 +99,9 @@
 		},
 
 		mounted() {
-			flatpickr('#visit-date', { minDate: 'today', disable: this.destination.dateBlock, disableMobile: 'true' });
+			// flatpickr('#visit-date', { maxDate: new Date().fp_incr(-this.destination.cut_off_days), disable: this.destination.dateBlock, disableMobile: 'true' });
+			var date = new Date();
+			flatpickr('#visit-date', { minDate: date.setDate(date.getDate() + this.destination.cut_off_days), disable: this.destination.dateBlock, disableMobile: 'true' });
 		},
 
 		methods: {

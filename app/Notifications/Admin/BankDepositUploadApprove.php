@@ -62,7 +62,8 @@ class BankDepositUploadApprove extends Notification
                 ->line('Number of Guests : '. $this->invoice->book->total_guest)
                 ->line('Schedule : '. $this->invoice->book->scheduled_at->format('M d, Y'))
                 ->line('Start time of the visit : '. Carbon::createFromFormat('H:i:s', $this->invoice->book->start_time)->format('h:i A'))
-                ->line('Thank you!');
+                ->line('Thank you!')
+                ->line('<a href="'.route('web.dashboard').'">View Dashboard</a>');
     }
 
     /**

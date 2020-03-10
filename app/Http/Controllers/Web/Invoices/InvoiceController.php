@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use App\Notifications\Reservation\BookingNotification;
 use App\Notifications\Web\Bookings\NewBookingNotification;
 use App\Notifications\Reservation\BankDepositSlipUploadedNotification;
+use App\Notifications\Web\Reservation\ReservationReceived;
 
 use App\Models\Invoices\Invoice;
 use App\Models\Books\Book;
@@ -26,6 +27,7 @@ class InvoiceController extends Controller
     {
     	$guests = json_decode($request->guests);
         $admins = Admin::all();
+        $email = GeneratedEmail::where('notification_type', 'Reservation Received')->first();
 
     	DB::beginTransaction();
 
@@ -64,7 +66,7 @@ class InvoiceController extends Controller
 	    		]);
 	    	}
 
-	    	auth()->user()->invoices()->create([
+	    	$invoice = auth()->user()->invoices()->create([
                 // 'user_id' => auth()->user()->id,
 	    		'book_id' => $book->id,
 	    		'conservation_fee' => $request->conservation_fee,
@@ -78,6 +80,8 @@ class InvoiceController extends Controller
 
 
     	DB::commit();
+
+        $invoice->user->notify(new ReservationReceived($invoice, $email));
 
     	return response()->json([
     		'success' => true

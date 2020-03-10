@@ -105,7 +105,7 @@ export default {
 			page: 1,
 
 			/* Visible items per page */
-			limit: 10,
+			limit: 5,
 
 			/* list of items */
 			items: [],
@@ -217,13 +217,13 @@ export default {
 		/* Visible item per page */
 		perPage: {
 			type: Number,
-			default: 10,
+			default: 5,
 		},
 
 		/* List of visible item per page */
 		limits: {
 			type: Array,
-			default: () => [10, 15, 20],
+			default: () => [5, 10, 15, 20],
 		},
 
 		/* Disable intial fetch */

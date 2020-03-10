@@ -87,7 +87,7 @@ class Destination extends Model
     /**
      * @Setters
      */
-    public static function store($request, $item = null, $columns = ['name', 'code', 'icon', 'terms_conditions', 'visitor_policies', 'operating_hours', 'operating_hours_end', 'orientation_module', 'capacity_per_day', 'overview', 'contact_us', 'fees', 'how_to_get_here', 'location', 'recommended', 'duration'])
+    public static function store($request, $item = null, $columns = ['name', 'code', 'icon', 'terms_conditions', 'visitor_policies', 'operating_hours', 'operating_hours_end', 'orientation_module', 'capacity_per_day', 'overview', 'contact_us', 'fees', 'how_to_get_here', 'location', 'recommended', 'duration', 'cut_off_days'])
     {
         $vars = $request->only($columns);
         $vars['is_available'] = $request->is_available ? 1: 0;

@@ -50,7 +50,8 @@ class ReservationRejected extends Notification
     {
         return (new MailMessage)
                 ->greeting('Dear Guest,')
-                ->line($this->message);
+                ->line($this->message)
+                ->line('<a href="'.route('web.dashboard').'">View Dashboard</a>');
     }
 
     /**

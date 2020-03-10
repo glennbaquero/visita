@@ -65,7 +65,7 @@ class InvoiceFetchController extends FetchController
             });
         }
 
-        $query = $query->where('created_at','>=',$this->request->start_date)->where('created_at','<=',$this->request->end_date);
+        $query = $query->where('created_at','>=',$this->request->start_date)->where('created_at','<=',$this->request->end_date)->where('main', false);
 
         return $query;
     } 
@@ -136,9 +136,15 @@ class InvoiceFetchController extends FetchController
         	$item->is_paid = $item->is_paid ? true : false;
             $item->payment_type = $item->is_paypal_payment ? 'Paypal' : 'Bank Deposit';
             $item->payment_settle = $item->is_fullpayment ? 'Full Payment' : 'Half Payment';
-        	$item->btn_label = 'Approved and send billing';
+        	$item->btn_label = $item->is_sent_first_payment ? 'Resend billing' : 'Approved and send billing';
             if(!$item->is_fullpayment && !$item->is_firstpayment_paid && !$item->is_secondpayment_paid) {
-                $item->btn_label = 'Approved and send initial billing';
+                // if($item->is_sent_first_payment) {
+                    if(!$item->is_sent_first_payment) {
+                        $item->btn_label = 'Approved and send initial billing';
+                    }  else {
+                        $item->btn_label = 'Resend billing';
+                    }
+                // }
             } elseif (!$item->is_fullpayment && $item->is_firstpayment_paid && !$item->is_secondpayment_paid) {
                 $item->btn_label = 'Send second billing';
             }

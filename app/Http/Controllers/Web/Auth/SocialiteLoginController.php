@@ -106,7 +106,11 @@ class SocialiteLoginController extends Controller
 
         DB::commit();
 
-		return redirect()->route('web.destinations');
+
+        $destination = session('destination');
+        $route = $destination ? $destination->renderRequestVisitUrl() : route('web.destinations');
+
+		return redirect($route);
 	}
 
 	/**

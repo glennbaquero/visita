@@ -42,7 +42,7 @@ class InvoiceController extends Controller
     {
         DB::beginTransaction();
             $item = Invoice::withTrashed()->findOrFail($id);   
-            $item->update(['is_approved' => 1]);
+            $item->update(['is_approved' => 1, 'is_sent_first_payment' => true ]);
         DB::commit();
 
         $main = $item->book->guests->where('main', true)->first();

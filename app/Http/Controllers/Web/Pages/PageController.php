@@ -45,13 +45,21 @@ class PageController extends Controller
 
         $data = $this->getPageData('home');
     	$destination = $this->formatData();
+        $twitter = PageItem::where('slug', 'twitter')->first();
+        $fb = PageItem::where('slug', 'facebook')->first();
+        $insta = PageItem::where('slug', 'instagram')->first();
+        $youtube = PageItem::where('slug', 'youtube')->first();
         
         return view('web.pages.home', array_merge($data, [
         	'quote' => Inspiring::quote(),
         	'home_banners' => HomeBanner::all(),
         	'about_infos' => AboutInfo::all(),
         	'destination' => json_encode($destination),
-        	'page_scripts'=> 'home'
+        	'page_scripts'=> 'home',
+        	'fb' => $fb,
+        	'twitter' => $twitter,
+        	'insta' => $insta,
+        	'youtube' => $youtube,
         ]));
 
 	}
@@ -140,7 +148,6 @@ class PageController extends Controller
 	}
 
 	public function showDestinationsInfo($id) {
-       
         $data = $this->getPageData('destination');
         $selected_destination = Destination::with('allocations')->find($id);
         $selected_destination['request_url'] = $selected_destination->renderRequestVisitUrl();
@@ -154,10 +161,14 @@ class PageController extends Controller
 	}
 
 	public function showRequestToVisit($id, $name) {
-
+		$destination = Destination::find($id);
         $data = $this->getPageData('destination');
 
-		$destination = Destination::find($id);
+		if(!auth()->guard('web')->check()) {
+	       	session(['destination' => $destination]);
+	       	return redirect()->route('web.login');
+		}
+
 		$destination->image = $destination->pictures->first()->renderImagePath();
 		$destination->dateBlock = $destination->getBlockedDates();
 		$result = $destination->getFormattedData();

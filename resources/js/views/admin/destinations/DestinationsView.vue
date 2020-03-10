@@ -53,9 +53,14 @@
 				placeholder="Please select an item"
 				></selector>
 
-				<div class="form-group col-sm-12 col-md-6">
+				<div class="form-group col-sm-12 col-md-3">
 					<label>Capacity Per Day</label>
 					<input v-model="item.capacity_per_day" name="capacity_per_day" type="number" min="1" class="form-control">
+				</div>
+
+				<div class="form-group col-sm-12 col-md-3">
+					<label>Cut Off</label>
+					<input v-model="item.cut_off_days" name="cut_off_days" type="number" min="1" class="form-control">
 				</div>
 				
 				<time-picker

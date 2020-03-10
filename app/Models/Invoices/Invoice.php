@@ -23,6 +23,8 @@ class Invoice extends Model
     protected static $ignoreChangedAttributes = ['updated_at'];
     protected static $logOnlyDirty = false;
 
+    protected $appends = ['invoice_status'];
+
     public function book() {
     	return $this->belongsTo(Book::class)->withTrashed();
     }
@@ -110,6 +112,22 @@ class Invoice extends Model
         }
 
         return $label;
-        
+    }
+
+    public function getInvoiceStatusAttribute() {
+        $status = null;
+        if($this->is_firstpayment_paid && !$this->is_secondpayment_paid && !$this->is_paid && !$this->is_fullpayment) {
+            $status = 2;
+        } elseif ($this->is_firstpayment_paid && $this->is_secondpayment_paid && $this->is_paid) {
+            $status = 1;
+        } elseif (!$this->is_approved) {
+            $status = 3;
+        }
+
+        if($this->deleted_at) {
+            $status = 4;
+        }
+
+        return $status;
     }
 }

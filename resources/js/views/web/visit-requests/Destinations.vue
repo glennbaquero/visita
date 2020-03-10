@@ -45,7 +45,7 @@
 							>
 								<option
 									v-for="destination in searchableDestinations" 
-									:id="'destinations/destinations-info/'+destination.id"
+									:id="destination.viewDestinationUrl"
 									:value="destination.name"
 								>
 								</option>

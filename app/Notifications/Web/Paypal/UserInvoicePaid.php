@@ -62,6 +62,7 @@ class UserInvoicePaid extends Notification
                 ->line('Number of Guests : '. $this->invoice->book->total_guest)
                 ->line('Schedule : '. $this->invoice->book->scheduled_at->format('M d, Y'))
                 ->line('Start time of the visit : '. Carbon::createFromFormat('H:i:s', $this->invoice->book->start_time)->format('h:i A'))
+                ->line('<img src="'.$this->qr_path.'"/>')
                 ->line($this->qr_path)
                 ->line('Thank you!');
     }

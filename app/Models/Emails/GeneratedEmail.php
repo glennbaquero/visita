@@ -12,7 +12,8 @@ class GeneratedEmail extends Model
 	const GENERATED_QR_NOTIFICATION = 'Generating QR notification';
 	const NEW_BOOKING_NOTIFICATION = 'New booking notification';
 	const RESERVATION_REJECTED = 'Rejected reservation';
-	const RESERVATION_APPROVED = 'Approved reservation';
+    const RESERVATION_APPROVED = 'Approved reservation';
+	const RESERVATION_RECEIVED = 'Reservation Received';
 
     /**
      * @Setters
@@ -40,6 +41,7 @@ class GeneratedEmail extends Model
             ['value' => static::NEW_BOOKING_NOTIFICATION, 'label' => 'New booking notification', 'class' => 'bg-warning'],
             ['value' => static::RESERVATION_REJECTED, 'label' => 'Rejected reservation', 'class' => 'bg-warning'],
             ['value' => static::RESERVATION_APPROVED, 'label' => 'Approved reservation', 'class' => 'bg-warning'],
+            ['value' => static::RESERVATION_RECEIVED, 'label' => 'Reservation Received', 'class' => 'bg-warning'],
         ];
     }
 

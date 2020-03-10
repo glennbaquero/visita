@@ -68,7 +68,7 @@ export default {
     mixins: [ ResponseHandler ],
 
     mounted() {
-    	// this.init();
+    	this.init();
     },
 
     methods: {

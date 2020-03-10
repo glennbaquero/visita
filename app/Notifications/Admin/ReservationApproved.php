@@ -48,7 +48,8 @@ class ReservationApproved extends Notification
                 ->subject(config('app.name') . ': ' . $this->notification->title)
                 ->greeting('Hello ' . $notifiable->renderName() . ',')
                 ->line($this->notification->message)
-                ->line('Next step : '.$this->next_step);
+                ->line('Next step : '.$this->next_step)
+                ->line('<a href="'.route('web.dashboard').'">View Dashboard</a>');
     }
 
     /**
