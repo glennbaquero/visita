@@ -9,6 +9,7 @@ use App\Notifications\Reservation\BookingNotification;
 
 use App\Models\Guests\Guest;
 use App\Models\Books\Book;
+use App\Models\Emails\GeneratedEmail;
 
 use DB;
 use Carbon\Carbon;
@@ -60,7 +61,8 @@ class WalkinController extends Controller
                 'is_approved' => true,
             ]);
 
-            $main->notify(new BookingNotification($book));
+            $cms = GeneratedEmail::where('notification_type', 'Booking notification')->first();
+            $main->notify(new BookingNotification($book, $cms));
     	DB::commit();
         $booking['id'] = $book->id;
         $booking['main_contact'] = $book->guests()->where('main', 1)->first();
