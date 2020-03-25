@@ -102,6 +102,9 @@
 			// flatpickr('#visit-date', { maxDate: new Date().fp_incr(-this.destination.cut_off_days), disable: this.destination.dateBlock, disableMobile: 'true' });
 			var date = new Date();
 			flatpickr('#visit-date', { minDate: date.setDate(date.getDate() + this.destination.cut_off_days), disable: this.destination.dateBlock, disableMobile: 'true' });
+			if(this.stepData.allocationSelected) {
+				this.allocationChanged();
+			}
 		},
 
 		methods: {

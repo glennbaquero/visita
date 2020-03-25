@@ -43,7 +43,8 @@ class InvoiceController extends Controller
 
 	    	foreach ($guests as $key => $guest) {
                 $upload_path = null;
-                if($request->file('special_fee_path')[$key] != null || $request->file('special_fee_path')[$key] != '') {
+
+                if($request->file('special_fee_path') != null || $request->file('special_fee_path') != '') {
                     $file = $request['special_fee_path'][$key];
                     $filename = $file->getClientOriginalName();
                     $path = 'public/special_fee';
@@ -81,7 +82,7 @@ class InvoiceController extends Controller
 
     	DB::commit();
 
-        $invoice->user->notify(new ReservationReceived($invoice, $email));
+        $invoice->bookable->notify(new ReservationReceived($invoice, $email));
 
     	return response()->json([
     		'success' => true
@@ -96,10 +97,18 @@ class InvoiceController extends Controller
 	                       0, 20);
     }
 
-    public function show() 
+    public function show(Request $request) 
     {
     	$result = [];
-    	$invoices = auth()->user()->invoices;
+        if($request->sort === 'date') {
+        	$invoices = auth()->user()->invoices()->orderBy('created_at', 'desc')->get();
+        } elseif ($request->sort === 'paid') {
+            $invoices = auth()->user()->invoices()->where(['is_paid' => true, 'is_approved' => true])->get();
+        } elseif ($request->sort === 'pending') {
+            $invoices = auth()->user()->invoices()->where(['is_paid' => false, 'is_approved' => true])->get();
+        } elseif ($request->sort === 'for approval') {
+            $invoices = auth()->user()->invoices()->where(['is_paid' => false, 'is_approved' => false])->get();
+        }
 
     	foreach ($invoices as $invoice) {
     		array_push($result, [

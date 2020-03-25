@@ -1,11 +1,11 @@
 @extends('web.master')
 
-@section('meta:title', $page->renderMeta('title'))
-@section('meta:description', $page->renderMeta('description'))
-@section('meta:keywords', $page->renderMeta('keywords'))
-@section('og:image', $page->renderMetaImage())
-@section('og:title', $page->renderMeta('og_title'))
-@section('og:description', $page->renderMeta('og_description'))
+@section('meta:title', 'Reset Password')
+@section('meta:description', 'Reset Password')
+@section('meta:keywords', 'Reset Password')
+@section('og:image', '')
+@section('og:title', '')
+@section('og:description', '')
 
 @section('content')
 
@@ -15,12 +15,12 @@
 			<div class="vertical-parent">
 				<div class="vertical-align align-b">
 					<div class="margin-a width--85">
-						<p class="lgn-frm1__col-header frm-header s-margin-b clr--white">{{ $pageItems['frame_1_title'] }}</p>
-						<h5 class="lgn-frm1__col-label frm-title clr--white">{{ $pageItems['frame_1_label'] }}</h5>
+						<p class="lgn-frm1__col-header frm-header s-margin-b clr--white">{{ $frame_1_title }}</p>
+						<h5 class="lgn-frm1__col-label frm-title clr--white">{{ $frame_1_label }}</h5>
 					</div>
 				</div>
 			</div>
-			<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('{!! $pageItems['frame_1_background_image'] !!}');"></div>
+			<div class="frm-bckgrnd size-cover bring-back" style="background-image: url('{!! $frame_1_background_image !!}');"></div>
 		</div
 		><div class="lgn-frm1__col width--45">
 			<div class="vertical-parent">

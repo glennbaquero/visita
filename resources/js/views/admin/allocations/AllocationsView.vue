@@ -46,6 +46,70 @@
 				name="description"
 				row="5"
 				></text-editor>
+
+				<text-editor
+				v-model="item.recommended_for"
+				class="col-sm-12"
+				label="Recommended For (For Masungi Automated Email)"
+				name="recommended_for"
+				row="5"
+				></text-editor>
+
+				<text-editor
+				v-model="item.overview"
+				class="col-sm-12"
+				label="Overview (For Masungi Automated Email)"
+				name="overview"
+				row="5"
+				></text-editor>
+
+				<text-editor
+				v-model="item.characteristic"
+				class="col-sm-12"
+				label="Characteristic (For Masungi Automated Email)"
+				name="characteristic"
+				row="5"
+				></text-editor>
+
+				<text-editor
+				v-model="item.ideal_for"
+				class="col-sm-12"
+				label="Ideal For (For Masungi Automated Email)"
+				name="ideal_for"
+				row="5"
+				></text-editor>
+
+				<text-editor
+				v-model="item.inclusions"
+				class="col-sm-12"
+				label="Inclusions (For Masungi Automated Email)"
+				name="inclusions"
+				row="5"
+				></text-editor>
+
+				<text-editor
+				v-model="item.good_to_know"
+				class="col-sm-12"
+				label="Good To Know (For Masungi Automated Email)"
+				name="good_to_know"
+				row="5"
+				></text-editor>
+
+				<text-editor
+				v-model="item.visit_request_process"
+				class="col-sm-12"
+				label="Visit Request Process (For Masungi Automated Email)"
+				name="visit_request_process"
+				row="5"
+				></text-editor>
+
+				<text-editor
+				v-model="item.terms_and_condition"
+				class="col-sm-12"
+				label="Terms And Condition (For Masungi Automated Email)"
+				name="terms_and_condition"
+				row="5"
+				></text-editor>
 	
 			</div>
 

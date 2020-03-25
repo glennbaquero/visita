@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 
 use Auth;
 
+use App\Models\Pages\PageItem;
+
 class ResetPasswordController extends Controller
 {
     /*
@@ -31,7 +33,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/request-to-visit';
+    protected $redirectTo = '/sign-in';
 
     /**
      * Create a new controller instance.
@@ -55,8 +57,11 @@ class ResetPasswordController extends Controller
      */
     public function showResetForm(Request $request, $token = null)
     {
+        $frame_1_title = PageItem::where('slug', 'frame_1_title')->first()->content;
+        $frame_1_label = PageItem::where('slug', 'frame_1_label')->first()->content;
+        $frame_1_background_image = PageItem::where('slug', 'frame_1_background_image')->first()->content;
         return view('web.pages.auth.reset-password')->with(
-            ['token' => $token, 'email' => $request->email]
+            ['token' => $token, 'email' => $request->email, 'frame_1_title' => $frame_1_title, 'frame_1_label' => $frame_1_label, 'frame_1_background_image' => $frame_1_background_image]
         );
     }
 

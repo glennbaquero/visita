@@ -68,7 +68,8 @@
 					this.stepData.main.nationality != '' && this.stepData.main.last_name != '' && 
 					this.stepData.main.email != '' && this.stepData.main.birthdate != '' && 
 					this.stepData.main.contact_number != '' && this.stepData.main.emergency_contact_number != '' &&
-					this.stepData.main.visitor_type_id != 0 && this.reg.test(this.stepData.main.email)) return true;
+					this.stepData.main.visitor_type_id != 0 && this.reg.test(this.stepData.main.email) && 
+					this.stepData.main.emergency_contact_number.length === 10 && this.stepData.main.contact_number.length === 10) return true;
 
 				return false;
 			},

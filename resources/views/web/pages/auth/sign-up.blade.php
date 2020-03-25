@@ -63,12 +63,12 @@
 										</div
 										><div class="width--70">
 											<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-												<input type="number" name="contact_no" value="{{ old('contact_no') }}" placeholder="">
-												<p class="error-show">{{ $errors->has('contact_no') ? $errors->first('contact_no') : '' }}</p>
+												<input type="number" name="contact_no" max="10" value="{{ old('contact_no') }}" placeholder="">
 											</div>
 										</div>
 									</div>
 								</div>
+								<p class="error-show">{{ $errors->has('contact_no') ? $errors->first('contact_no') : '' }}</p>
 							</div>
 							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
 								<input type="password" name="password" placeholder="Password">

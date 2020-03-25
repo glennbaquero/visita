@@ -215,6 +215,19 @@
 				}, 200)
 				
 			})
+
+			EventBus.$on('guestRemoved', () => {
+				this.$nextTick(() => {
+					var guests = this.guests;
+					for(var i = 0; i < guests.length; i++) {
+						if(guests[i].first_name != null) {
+							this.showNextButton = true;
+						} else {
+							this.showNextButton = false;
+						}
+					}
+				}, 200)
+			});
 		}
 	}
 </script>

@@ -451,6 +451,7 @@
 				this.stepData.guests.splice(key, 1);
 				var totalGuests = parseInt(this.stepData.numberOfGuests) - 1;
 				this.stepData.numberOfGuests = totalGuests;
+				EventBus.$emit('guestRemoved');
 			},
 
 			numberOfGuestsChanged() {

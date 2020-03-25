@@ -57,7 +57,7 @@ class ForgotPasswordController extends Controller
     {     
         $user = User::where('email', $request->input('email'))->first();
 
-        alert()->success('Email Verified', 'We sent to your email the reset password link. Thank you!');
+        alert()->success('Email verified!', 'We sent to your email the reset password link. Thank you!');
         activity()
             ->causedBy($user)
             ->performedOn($user)

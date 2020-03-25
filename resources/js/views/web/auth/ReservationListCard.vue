@@ -7,8 +7,11 @@
 			><div class="width--50 align-r inlineBlock-parent">
 				<p class="frm-header bold clr--gray s-margin-b s-margin-r">Sort by:</p>
 				<div class="frm-inpt frm-inpt__filter">
-					<select>
-						<option>Date</option>
+					<select v-model="sortBy">
+						<option value="date">Date</option>
+						<option value="pending">Pending</option>
+						<option value="for approval">Approval</option>
+						<option value="paid">Paid</option>
 					</select>
 				</div>
 			</div>
@@ -159,7 +162,8 @@
 				isLoading: false,
              	fullPage: true,
              	message: null,
-             	iconToShow: null
+             	iconToShow: null,
+             	sortBy: 'date'
 			}
 		},
 
@@ -167,11 +171,19 @@
 			this.init();
 		},
 
+		watch: {
+			sortBy(val) {
+				this.init();
+			}
+		},
+
 		methods: {
 			init() {
-				axios.get(this.fetchUrl)
+				this.isLoading = true;
+				axios.post(this.fetchUrl, { sort: this.sortBy })
 					.then(response => {
 						this.items = response.data.items;
+						this.isLoading = false;
 					})
 			},
 

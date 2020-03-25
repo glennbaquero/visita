@@ -72,7 +72,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 		});
 
 		Route::get('', 'PageController@showHome')->name('home');
-		Route::get('/read/{type}', 'PageController@showPolicies')->name('home');
+		// Route::get('/read/{type}', 'PageController@showPolicies')->name('home');
 		Route::get('/about-us', 'PageController@showAboutUs')->name('about-us');
 		
 		Route::get('/destinations', 'PageController@showDestinations')->name('destinations');
@@ -111,7 +111,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 	Route::namespace('Invoices')->group(function() {
 		Route::middleware('auth:web')->group(function() {
 			Route::post('/book/store', 'InvoiceController@store')->name('book.store');
-			Route::get('reservation/get', 'InvoiceController@show')->name('reservations.show');
+			Route::post('reservation/get', 'InvoiceController@show')->name('reservations.show');
 			Route::post('upload/deposit', 'InvoiceController@uploadDepositSlip')->name('upload.deposit');
 			Route::post('/generate/form', 'InvoiceController@generatePaynamicsForm')->name('book.generate-form');
 		});
