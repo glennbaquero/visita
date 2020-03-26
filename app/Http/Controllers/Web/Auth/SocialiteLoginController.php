@@ -47,6 +47,10 @@ class SocialiteLoginController extends Controller
      */
     public function callback(Request $request, $provider)
     {
+    	if (!$request->has('code') || $request->has('denied')) {
+		    return redirect('/sign-in');
+		}
+
     	try {
 		    $socialite = Socialite::driver($provider)->scopes(static::SCOPES)->fields(static::FIELDS)->user();
     	} catch (InvalidStateException $e) {
