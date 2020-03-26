@@ -9,7 +9,7 @@
                             <input type="text" name="fullname" placeholder="Full Name">
                         </div>
                         <div class="frm-inpt m-margin-b">
-                            <input type="number" name="contact_number" placeholder="Contact Number">
+                            <input type="number" name="contact_number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" placeholder="Contact Number">
                         </div>
                         <div class="frm-inpt m-margin-b">
                             <input type="email" name="email" placeholder="Email Address">

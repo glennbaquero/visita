@@ -32,15 +32,15 @@
 								<p class="lgn-frm1__form-title frm-header bold clr--orange">Sign Up</p>
 							</div>
 							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-								<input type="text" name="first_name" value="{{ old('first_name') }}" placeholder="Firstname" >
+								<input type="text" name="first_name" value="{{ old('first_name') }}" placeholder="Firstname" required>
 								<p class="error-show">{{ $errors->has('first_name') ? $errors->first('first_name') : '' }}</p>
 							</div>
 							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-								<input type="text" name="last_name" value="{{ old('last_name') }}" placeholder="Lastname" >
+								<input type="text" name="last_name" value="{{ old('last_name') }}" placeholder="Lastname" required>
 								<p class="error-show">{{ $errors->has('last_name') ? $errors->first('last_name') : '' }}</p>
 							</div>
 							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-								<input type="email" name="email" value="{{ old('email') }}" placeholder="Email Address" >
+								<input type="email" name="email" value="{{ old('email') }}" placeholder="Email Address" required>
 								<p class="error-show">{{ $errors->has('email') ? $errors->first('email') : '' }}</p>
 							</div>
 							<div class="inlineBlock-parent">
@@ -63,7 +63,7 @@
 										</div
 										><div class="width--70">
 											<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-												<input type="number" name="contact_no" max="10" value="{{ old('contact_no') }}" placeholder="">
+												<input type="number" name="contact_no" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" value="{{ old('contact_no') }}" placeholder="" required>
 											</div>
 										</div>
 									</div>
@@ -71,11 +71,11 @@
 								<p class="error-show">{{ $errors->has('contact_no') ? $errors->first('contact_no') : '' }}</p>
 							</div>
 							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-								<input type="password" name="password" placeholder="Password">
+								<input type="password" name="password" placeholder="Password" required min="8">
 								<p class="error-show">{{ $errors->has('password') ? $errors->first('password') : '' }}</p>
 							</div>
 							<div class="lgn-frm1__inpt frm-inpt align-c m-margin-b">
-								<input type="password" name="password_confirmation" placeholder="Re-type Password">
+								<input type="password" name="password_confirmation" placeholder="Re-type Password" required min="8">
 							</div>
 							<div class="width--100 align-c">
 								<button class="frm-btn green m-margin-b">Sign Up</button>
