@@ -60,7 +60,6 @@ class AnnouncementController extends Controller
                     }
                     $receiver = new PushService('Announcement', 'A new announcement has arrived!');
                     $receiver->pushToMany($destination->managements);
-
                 }
             } else {
                 $managements = Management::all();
@@ -68,6 +67,9 @@ class AnnouncementController extends Controller
                     $receiver->notify(new AnnouncementNotification($request->except(['destination_ids'])));
                 }
 
+                $receiver = new PushService('Announcement', 'A new announcement has arrived!');
+                $receiver->pushToMany($managements);
+            
             }
         DB::commit();
 

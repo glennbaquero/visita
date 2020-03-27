@@ -22,7 +22,7 @@ class NotificationController extends Controller
         $user = request()->user();
 
         return response()->json([
-            'notifications' => $user->notifications()->paginate(10)
+            'notifications' => $user->notifications()->paginate(99999999)
         ]);
     }
 
