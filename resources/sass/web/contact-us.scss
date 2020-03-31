@@ -41,3 +41,40 @@
 	}
 
 }
+
+.cntct-frm__number {
+	position: relative;
+
+	&::after {
+		position: absolute;
+		top: 12px;
+		left: 10px;
+		display: block;
+		content: "+63";
+		font-size: 1.2em;
+		font-family: $font-family-d-din-regular;
+		opacity: 0;
+	}
+
+	input[name="contact_number"] {
+		transition: all 0.3s ease;
+
+		&::-webkit-outer-spin-button, &::-webkit-inner-spin-button { 
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			margin: 0;
+		}
+	}
+
+	&.focus, &.active {
+
+		&::after {
+			opacity: 1;
+		}
+
+		input[name="contact_number"] {
+			padding-left: 35px;
+		}
+	}
+}
