@@ -47,8 +47,18 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
+            'driver' => 'jwt',
+            'provider' => 'managements',
+        ],
+
+        'management' => [
+            'driver' => 'jwt',
+            'provider' => 'managements',
+        ],
+
+        'masungi' => [
+            'driver' => 'jwt',
+            'provider' => 'masungis',
         ],
     ],
 
@@ -80,6 +90,16 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Users\Admin::class,
         ],
+
+        'managements' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Users\Management::class,
+        ],
+
+        'masungis' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\API\Masungi::class,
+        ],
     ],
 
     /*
@@ -108,6 +128,12 @@ return [
         'admins' => [
             'provider' => 'admins',
             'table' => 'admin_password_resets',
+            'expire' => 60,
+        ],
+
+        'managements' => [
+            'provider' => 'managements',
+            'table' => 'password_resets',
             'expire' => 60,
         ],
 

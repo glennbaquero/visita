@@ -1,5 +1,10 @@
 window.Vue = require('vue');
 
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+window.Loading = Loading;
+
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -8,6 +13,8 @@ window.Vue = require('vue');
 
 import jquery from 'jquery';
 window.$ = window.jQuery = jquery;
+
+window._ = require('lodash');
 
 import 'bootstrap';
 
@@ -23,6 +30,9 @@ window.moment = moment;
 import Swiper from 'swiper';
 window.Swiper = Swiper;
 
+// import flatpickr from 'flatpickr';
+// window.flatpickr = flatpickr;
+// import 'flatpickr/dist/flatpickr.css';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

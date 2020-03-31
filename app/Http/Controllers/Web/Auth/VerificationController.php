@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Passwords\PasswordBroker;
+use Illuminate\Auth\Passwords\TokenRepositoryInterface;
 use Auth;
 
 use App\Models\Users\User;
+use App\Models\Users\Management;
+
+use Alert;
 
 class VerificationController extends Controller
 {
@@ -31,7 +36,7 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -67,19 +72,44 @@ class VerificationController extends Controller
      */
     public function verify(Request $request)
     {
-        $user = $this->user()->findOrFail($request->route('id'));
+        if($request->route('user') === 'frontliner') {
+            $management = $this->management()->findOrFail($request->route('id'));
 
-        if ($request->route('id') != $user->getKey()) {
-            throw new AuthorizationException;
-        }
+            if ($request->route('id') != $management->getKey()) {
+                throw new AuthorizationException;
+            }
 
-        if ($user->hasVerifiedEmail()) {
-            return redirect($this->redirectPath());
-        }
+            if ($management->hasVerifiedEmail()) {
+                return redirect($this->redirectPath());
+            }
 
-        if ($user->markEmailAsVerified()) {
-            $this->guard()->login($user);
-            event(new Verified($user));
+            if ($management->markEmailAsVerified()) {
+
+                // $management->setRememberToken(Str::random(60));
+                // $token = $management->broker();
+
+                // $token->sendResetLink(collect($management));
+                // $management->save();
+                // $_token = $token->createToken($management);
+                // return redirect()->route('web.frontliner.password.reset', [$_token, $management->email]);
+                // $this->guard()->login($management);
+                event(new Verified($management));
+            }
+        } else {
+            $user = $this->user()->findOrFail($request->route('id'));
+
+            if ($request->route('id') != $user->getKey()) {
+                throw new AuthorizationException;
+            }
+
+            if ($user->hasVerifiedEmail()) {
+                return redirect($this->redirectPath());
+            }
+
+            if ($user->markEmailAsVerified()) {
+                $this->guard()->login($user);
+                event(new Verified($user));
+            }
         }
 
         return redirect($this->redirectPath())->with('verified', true);
@@ -87,6 +117,10 @@ class VerificationController extends Controller
 
     protected function user() {
         return new User;
+    }
+
+    protected function management() {
+        return new Management;
     }
 
     protected function guard() {

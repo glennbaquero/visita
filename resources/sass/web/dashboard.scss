@@ -1,0 +1,104 @@
+/*
+* Dashboard Frame
+* dshbrd-frm : dashboard frame
+*/
+.dshbrd-frm1 {
+	position: relative;
+	width: 100%;
+	margin-top: 40px;
+
+	.dshbrd-frm1__btn-holder {
+		min-height: 100vh;
+		padding-top: 15vh;
+		padding-bottom: 5vh;
+	}
+
+	.dshbrd-frm1__btn-list {
+		display: block;
+		width: 100%;
+		margin-bottom: 20px;
+		text-decoration: none;
+	}
+
+	.dshbrd-frm1__btn-icon {
+		max-width: 18px;
+		margin-right: 10px;
+	    filter: brightness(0);
+	    opacity: 0.4;
+
+	    &.active {
+		    filter: brightness(1);
+		    opacity: 1;
+	    }
+	}
+
+	.dshbrd-frm1__btn {
+		font-family: $font-family-d-din-bold;
+		font-size: 1.2em;
+		line-height: 1.5em;
+		margin-bottom: 0px;
+		color: $light-gray;
+		cursor: pointer;
+		transition: all 300ms ease;
+
+		&:hover {
+			color: $gray;
+		}
+
+		&.active {
+			color: $green;
+		}
+	}
+
+	.dshbrd-frm1__content-holder {
+		min-height: 100vh;
+		padding-top: 15vh;
+		padding-bottom: 5vh;
+  		border-left: 1px solid #BFBFBF;	
+
+		.frm-inpt__filter {
+			select {
+				min-width: 150px !important;
+			}
+		}
+
+		.frm-inpt {
+			input,
+			select {
+				min-width: 100%;
+				width: 100%;
+			}
+		}
+	}
+
+	.dshbrd-frm1__content-card {
+		width: 32%;
+		margin-right: 2%;
+		padding: 20px 0px;
+		border-radius: 10px;
+		box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+		vertical-align: top;
+
+		&:nth-child(3n) {
+			margin-right: 0%;
+		}
+
+		.frm-header {
+			margin-bottom: 0px;
+		}
+	}
+
+	.dshbrd-frm1__content-card-book-status {
+		text-align: center;
+		width: 100px;
+		padding: 0px 10px;
+		border-radius: 8px;
+		color: $white;
+
+		&.pending { background: #434244; }
+		&.confirmed { background: #657008; }
+		&.for-approval { background: #E0AF3C; }
+		&.payment-pending { background: #434244; }
+		&.rejected { background: #A74424; }
+	}
+}

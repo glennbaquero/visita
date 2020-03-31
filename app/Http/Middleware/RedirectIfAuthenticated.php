@@ -19,7 +19,8 @@ class RedirectIfAuthenticated
     {
         switch ($guard) {
             case 'web':
-                    $route = '/dashboard';
+                    $destination = session('destination');
+                    $route = $destination ? $destination->renderRequestVisitUrl() : route('web.destinations');
                 break;
             
             case 'admin':

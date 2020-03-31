@@ -8,12 +8,18 @@
 			<input ref="elem" :placeholder="placeholder" type="text" class="form-control" readonly>
 			<input v-for="date in value" :name="name" :value="date" type="hidden">
 		</template>
+
+		<template v-if="mode == 'range'">
+			<input ref="elem" :placeholder="placeholder" type="text" class="form-control" readonly>
+			<input v-for="date in value" :name="name" :value="date" type="hidden">
+		</template>
 	</div>
 </template>
 
 <script type="text/javascript">
 /* Flatpickr Documentation: https://flatpickr.js.org/options/ */
 import flatpickr from 'flatpickr';
+// window.flatpickr = flatpickr;
 import 'flatpickr/dist/flatpickr.css';
 
 import ArrayHelpers from '../../mixins/array.js';
@@ -34,12 +40,9 @@ export default {
 	methods: {
 		setup() {
 			let options = this.getOptions();
-			
-			if (this.defaultDate) {
-				options.defaultDate = this.defaultDate;
-			}
-
-			this.elem = $(this.$refs.elem).flatpickr(options);
+			var $this = this;
+			console.log(options);
+			this.elem = flatpickr(this.$refs.elem, options);
 		},
 
 		getOptions() {
@@ -64,7 +67,24 @@ export default {
 				"disable": [
 			        (date) => {
 			        	if (this.disabledDates) {
-			        		if (this.inArray(date.getDay(), this.disabledDates)) {
+			        		var day = date.getDate();
+
+			        		var month = date.getMonth()+1; 
+			        		var year = date.getFullYear();
+
+			        		if(day < 10) 
+			        		{
+			        		    day = '0'+day;
+			        		} 
+
+			        		if(month < 10) 
+			        		{
+			        		    month = '0'+month;
+			        		} 
+
+			        		var date = year+'-'+month+'-'+day;
+
+			        		if (this.inArray(date, this.disabledDates)) {
 				        		return true;
 				        	}	
 			        	}
@@ -82,6 +102,14 @@ export default {
 
 			if (this.minDate) {
 				options.minDate = this.minDate;
+			}
+
+			if (this.maxDate) {
+				options.maxDate = this.maxDate;
+			}
+
+			if (this.defaultDate) {
+				options.defaultDate = this.defaultDate;
 			}
 
 			return options;
@@ -126,6 +154,7 @@ export default {
 		defaultDate: {},
 
 		minDate: {},
+		maxDate: {},
 
 		disabledDays: {},
 		disabledDates: {},

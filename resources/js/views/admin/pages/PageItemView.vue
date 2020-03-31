@@ -46,10 +46,6 @@
 			></page-item-content>
 
 			<template v-slot:footer>
-				<a v-if="item.parentUrl" :href="item.parentUrl" target="_blank" class="btn btn-secondary text-white">View Parent</a>
-
-				<action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
-            
                 <action-button
                 v-if="item.archiveUrl && item.restoreUrl"
                 color="btn-danger"
@@ -68,6 +64,10 @@
                 @load="load"
                 @success="fetch"
                 ></action-button>
+                
+                <a v-if="item.parentUrl" :href="item.parentUrl" target="_blank" class="btn btn-secondary text-white">View Parent</a>
+
+                <action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
 	        </template>
 		</card>
 

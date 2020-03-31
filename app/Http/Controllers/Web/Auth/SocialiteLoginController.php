@@ -47,6 +47,10 @@ class SocialiteLoginController extends Controller
      */
     public function callback(Request $request, $provider)
     {
+    	if (!$request->has('code') || $request->has('denied')) {
+		    return redirect('/sign-in');
+		}
+
     	try {
 		    $socialite = Socialite::driver($provider)->scopes(static::SCOPES)->fields(static::FIELDS)->user();
     	} catch (InvalidStateException $e) {
@@ -58,10 +62,10 @@ class SocialiteLoginController extends Controller
 
 		$token = $this->authenticate($socialite, $provider);
 
-		return view('socialite.callback', [
-            'provider' => $provider,
-            'token' => $token,
-        ]);
+		$destination = session('destination');
+        $route = $destination ? $destination->renderRequestVisitUrl() : route('web.destinations');
+
+		return redirect($route);
     }
 
 	public function authenticate($socialite, $provider) {
@@ -75,7 +79,7 @@ class SocialiteLoginController extends Controller
 		/* Create user if does not exists */
 		if (!$user) {
 			$user = $this->createUser($socialite);
-			$user->storeImage(FileHelpers::getExternalImage($avatar_url), 'image_path', 'user-avatars');
+			// $user->storeImage(FileHelpers::getExternalImage($avatar_url), 'image_path', 'user-avatars');
 		}
 
 		/* Check if user is trashed */
@@ -106,7 +110,11 @@ class SocialiteLoginController extends Controller
 
         DB::commit();
 
-		return $token;
+
+        $destination = session('destination');
+        $route = $destination ? $destination->renderRequestVisitUrl() : route('web.destinations');
+
+		return redirect($route);
 	}
 
 	/**
@@ -119,6 +127,7 @@ class SocialiteLoginController extends Controller
 			'first_name' => $socialite->first_name,
 			'last_name' => $socialite->last_name,
 			'email' => $socialite->email,
+			'username' => $socialite->email,
 			'email_verified_at' => now(),
 			'password' => Str::random(),
 		]);

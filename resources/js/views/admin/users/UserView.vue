@@ -27,9 +27,7 @@
                 ></image-picker>
             </div>
             
-            <template v-slot:footer>
-                <action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
-                
+            <template v-slot:footer>                
                 <action-button
                 v-if="item.archiveUrl && item.restoreUrl"
                 color="btn-danger"
@@ -48,7 +46,8 @@
                 @load="load"
                 @success="fetch"
                 ></action-button>
-
+                
+                <action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
             </template>
         </card>
 

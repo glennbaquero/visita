@@ -19,6 +19,12 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'prx_paypal/notify_url',
+        'paypal/transaction',
+        'forgot-password/frontliner/email',
+        'api/masungi/',
+        'checkout/processPaynamics',
+        'checkout/paynamicsReturn',
+        'checkout/paynamicsCancel'
     ];
 }

@@ -84,6 +84,10 @@ class BaseUser extends Authenticatable
 
         $vars = $request->only($columns);
 
+        if ($request->filled('destination_id')) {
+            $vars['destination_id'] = $request->input('destination_id');
+        }
+
         if (!$item) {
             $vars['password'] = uniqid();
             $vars['email_verified_at'] = Carbon::now();
@@ -247,6 +251,10 @@ class BaseUser extends Authenticatable
 
     public function renderName() {
         return ucwords($this->first_name . ' ' . $this->last_name);
+    }
+
+    public function renderFirstName() {
+        return ucwords($this->first_name);
     }
 
     public function renderImagePath($column = 'image_path') {

@@ -8,11 +8,31 @@ use App\Notifications\Admin\Auth\ResetPassword;
 use Illuminate\Validation\ValidationException;
 use Password;
 
+use App\Models\Books\Book;
+use App\Models\Destinations\Destination;
+
 class Admin extends Authenticatable
 {
     /* Roles & Permission: https://github.com/spatie/laravel-permission */
     use HasRoles;
 
+    /**
+	 * Admin can create many bookings
+	 */
+	public function books()
+	{
+		return $this->morphMany(Book::class, 'bookable');
+    }
+
+    /**
+     * Admin can assign to specific destination this is also called destination manager
+     */
+    
+    public function destination()
+    {
+        return $this->belongsTo(Destination::class, 'destination_id');
+    }
+    
     /**
      * Overrides default reset password notification
      */

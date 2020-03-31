@@ -104,6 +104,268 @@ class PermissionsTableSeeder extends Seeder
                     ],
                 ],
             ],
+
+            [
+                'name' => 'Allocations',
+                'description' => 'Manage Allocations',
+                'icon' => 'fas fa-hiking',
+                'items' => [
+                    [
+                        'name' => 'admin.allocations.crud',
+                        'description' => 'Manage Allocations',
+                    ],
+                ],
+            ],
+            [
+                'name' => 'Destinations',
+                'description' => 'Manage Destinations',
+                'icon' => 'fas fa-map-marked-alt',
+                'items' => [
+                    [
+                        'name' => 'admin.destinations.crud',
+                        'description' => 'Manage Destinations',
+                    ],
+                ],
+            ],
+            [
+                'name' => 'Experiences',
+                'description' => 'Manage Experiences',
+                'icon' => 'fas fa-hiking',
+                'items' => [
+                    [
+                        'name' => 'admin.experiences.crud',
+                        'description' => 'Manage Experiences',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Inquiries',
+                'description' => 'View Inquiries',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.inquiries.crud',
+                        'description' => 'View Inquiries',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Annual Incomes',
+                'description' => 'Manage Annual Income',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.annual_incomes.crud',
+                        'description' => 'Manage Annual Income',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Survey Experiences',
+                'description' => 'Manage Survey Experience',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.survey_experiences.crud',
+                        'description' => 'Manage Survey Experience',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Special Fees',
+                'description' => 'Manage Special Fees',
+                'icon' => 'fas fa-comment-dollar',
+                'items' => [
+                    [
+                        'name' => 'admin.special_fees.crud',
+                        'description' => 'Manage Special Fees',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Add Ons',
+                'description' => 'Manage Add Ons',
+                'icon' => 'fas fa-plus-square',
+                'items' => [
+                    [
+                        'name' => 'admin.add_ons.crud',
+                        'description' => 'Manage Add Ons',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Visitor Types',
+                'description' => 'Manage Visitor Type',
+                'icon' => 'fas fa-user-friends',
+                'items' => [
+                    [
+                        'name' => 'admin.visitor_types.crud',
+                        'description' => 'Manage Visitor Type',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Feedbacks',
+                'description' => 'Manage Feedback',
+                'icon' => 'fas fa-comment-dots',
+                'items' => [
+                    [
+                        'name' => 'admin.feedbacks.crud',
+                        'description' => 'Manage Feedbacks',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Agencies',
+                'description' => 'Manage Agencies',
+                'icon' => 'fas fa-user-friends',
+                'items' => [
+                    [
+                        'name' => 'admin.agencies.crud',
+                        'description' => 'Manage Agencies',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Calendar',
+                'description' => 'Manage Calendar',
+                'icon' => 'fas fa-user-friends',
+                'items' => [
+                    [
+                        'name' => 'admin.calendar.crud',
+                        'description' => 'Manage Calendar',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Blocked Dates',
+                'description' => 'Manage Blocked Dates',
+                'icon' => 'fas fa-user-friends',
+                'items' => [
+                    [
+                        'name' => 'admin.blocked-dates.crud',
+                        'description' => 'Manage Blocked Dates',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Training Modules',
+                'description' => 'Manage Training Modules',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.training-modules.crud',
+                        'description' => 'Manage Training Modules',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Faqs',
+                'description' => 'Manage Faqs',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.faqs.crud',
+                        'description' => 'Manage Faqs',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Capacities',
+                'description' => 'Manage Capacities',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.capacities.crud',
+                        'description' => 'Manage Capacities',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Religions',
+                'description' => 'Manage Religions',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.religions.crud',
+                        'description' => 'Manage Religions',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Announcements',
+                'description' => 'Manage Announcements',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.announcements.crud',
+                        'description' => 'Manage Announcements',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Frontliners',
+                'description' => 'Manage Frontliners',
+                'icon' => 'fas fa-user-friends',
+                'items' => [
+                    [
+                        'name' => 'admin.managements.crud',
+                        'description' => 'Manage Frontliners',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Violations',
+                'description' => 'Manage Violations',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.violations.crud',
+                        'description' => 'Manage Violations',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Remarks',
+                'description' => 'Manage Remarks',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.remarks.crud',
+                        'description' => 'Manage Remarks',
+                    ],
+                ],
+            ],
+
+            [
+                'name' => 'Surveys',
+                'description' => 'View Surveys',
+                'icon' => 'fas fa-poll-h',
+                'items' => [
+                    [
+                        'name' => 'admin.surveys.crud',
+                        'description' => 'View Surveys',
+                    ],
+                ],
+            ],
         ];
 
     	foreach ($categories as $category) {

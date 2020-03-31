@@ -34,9 +34,7 @@
 	    </card>
 
 	    <div class="row mb-5">
-	    	<div class="col-sm-12 text-right">
-	    		<action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
-                
+	    	<div class="col-sm-12 text-right">               
                 <action-button
                 v-if="item.archiveUrl && item.restoreUrl"
                 color="btn-danger"
@@ -55,6 +53,8 @@
                 @load="load"
                 @success="fetch"
                 ></action-button>
+
+	    		<action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
 	    	</div>
 	    </div>
 

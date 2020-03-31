@@ -16,7 +16,8 @@ class CreateDeviceTokensTable extends Migration
         Schema::create('device_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->morphs('user');
+            $table->integer('deviceable_id')->unsigned()->index();
+            $table->string('deviceable_type')->nullable();
 
             $table->string('token')->nullable();
             $table->string('platform')->nullable();

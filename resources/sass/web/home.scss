@@ -33,7 +33,7 @@
 				&:after {
 					position: absolute;
 					content: "";
-					width: 70px;
+					width: -webkit-fill-available;
 					height: 4px;
 					border-radius: 5px;
 					left: 0px;
@@ -63,7 +63,7 @@
 
 	.hm-frm3__img {
 	    width: auto;
-	    height: 250px;
+	    height: 400px;
 	}
 }
 
@@ -83,6 +83,7 @@
 	position: relative;
 	height: 100vh;
 	width: 100%;
+	padding-top: 40px;
 
 	.frm-inpt {
 		
@@ -91,7 +92,29 @@
 		}
 	}
 
-	.frm-bckgrnd {
-		opacity: 0.2;
+	.cntct-frm1__img {
+		transition: all 300ms ease-in;
+		opacity: 1;
+		cursor: pointer;
+
+		&:hover {
+			opacity: 0.5;
+		}
+
+		img {
+			max-width: 18px;
+			margin: 5px;
+
+			&:nth-child(1n) {
+				margin-left: 0px;
+			}
+		}
+
+		&.big {
+			img {
+				max-width: 22px;	
+			}
+		}
 	}
+
 }

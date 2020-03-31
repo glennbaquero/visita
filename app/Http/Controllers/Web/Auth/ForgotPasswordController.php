@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Auth;
 
 use App\Models\Users\User;
+use Alert;
 
 class ForgotPasswordController extends Controller
 {
@@ -56,6 +57,7 @@ class ForgotPasswordController extends Controller
     {     
         $user = User::where('email', $request->input('email'))->first();
 
+        alert()->success('Email verified!', 'We sent to your email the reset password link. Thank you!');
         activity()
             ->causedBy($user)
             ->performedOn($user)

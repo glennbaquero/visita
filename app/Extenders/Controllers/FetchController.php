@@ -153,7 +153,7 @@ abstract class FetchController extends Controller
 
         switch ($this->orderBy) {
             default:
-                    $query = $query->orderBy($this->orderBy, $this->order);
+                    $query = $query->orderBy($this->orderBy, 'desc');
                 break;
         }
 

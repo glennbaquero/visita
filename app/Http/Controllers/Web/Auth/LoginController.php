@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use App\Models\Pages\Page;
+
 use Auth;
+
 
 class LoginController extends Controller
 {
@@ -17,7 +20,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    // protected $redirectTo = '/destinations';
+    protected $redirectTo;
 
     /**
      * Create a new controller instance.
@@ -36,7 +40,17 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('web.auth.login');
+
+        $page = Page::where('slug', 'login')->first();
+
+        $data = $page->getData();
+        
+        return view('web.auth.login', [ 
+            'data' => $data, 
+            'provider' => 'facebook',
+            'page_scripts'=> 'login'
+        ]);
+
     }
 
     /**
@@ -48,12 +62,24 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($user->hasVerifiedEmail()) {
-            activity()
-                ->causedBy($user)
-                ->performedOn($user)
-                ->log('Account has been logged in.');
+        // if (!$user->hasVerifiedEmail()) {
+        //     auth()->logout();
+        //     return redirect()->back();
+            // activity()
+            //     ->causedBy($user)
+            //     ->performedOn($user)
+            //     ->log('Account has been logged in.');
+        // }
+        
+        if($user->email_verified_at == null) {
+            \Auth::logout();
+            return redirect()->route('web.destinations');
         }
+
+        $destination = session('destination');
+        $route = $destination ? $destination->renderRequestVisitUrl() : route('web.destinations');
+        
+        return redirect($route);
     }
 
     /**

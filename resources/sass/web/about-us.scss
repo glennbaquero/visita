@@ -1,0 +1,254 @@
+/*
+* About Frame
+* abt-frm : about frame
+*/
+.abt-frm1 {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	margin-top: 40px;
+
+	.abt-frm1__container {
+		height: auto;
+		padding: 40px 0px;
+		background: rgba(0, 0, 0, 0.50);
+
+		.frm-description {
+			overflow-y: auto;
+			padding-right: 5px;
+			height: 30vh;
+		}
+	}
+}
+.abt-frm2 {
+	position: relative;
+	padding: 10vh 0vh;
+	width: 100%;
+	background: $green;
+
+	.abt-frm2__tabbing {
+		max-width: 500px;
+		margin: auto;
+		margin-bottom: 20px;
+
+		.abt-frm2__tabbing-btn {
+			position: relative;
+			line-height: 1.5em;
+			margin: 20px;
+			color: $white;
+			cursor: pointer;
+			font-size: 1.2em;
+			font-family: $font-family-d-din-regular;
+			transition: all 300ms ease;
+
+			&:hover {
+				opacity: 0.5;
+			}
+
+			&.active{
+				font-family: $font-family-d-din-bold;
+
+				&:after {
+					position: absolute;
+					content: "";
+					width: -webkit-fill-available;
+					height: 4px;
+					border-radius: 5px;
+					left: 0px;
+					right: 0px;
+					bottom: -5px;
+					margin: auto;
+					background: $orange;
+
+				}
+			}
+		}
+	}
+
+	.abt-frm2__tabbing-content {
+		width: 100%;
+		margin: auto;
+		display: none;
+	}
+
+	.abt-frm2__tabbing-slider {
+		width: 100%;
+		margin: auto;
+
+		.slick-next, .slick-prev {
+		    position: absolute;	
+		    z-index: 2;
+
+		    &:before {
+		    	display: none;
+		    }
+		}
+
+		.slick-next {
+  			top: 0px;
+		    bottom: 0px;
+		    right: -5%;
+		    margin: auto;
+
+			img {
+			    position: absolute;
+			    right: -5px;
+			    top: 0px;
+			    bottom: 0px;
+			    margin: auto;
+				width: auto;
+				height: 40px;
+				transition: all 300ms ease;
+
+				&:hover {
+				    opacity: 0.5;	
+				}
+			}
+		}
+
+		.slick-prev {
+  			top: 0px;
+		    bottom: 0px;
+		    left: -5%;
+		    margin: auto;
+
+			img {
+			    position: absolute;
+			    left: -5px;
+			    top: 0px;
+			    bottom: 0px;
+			    margin: auto;
+				width: auto;
+				height: 40px;
+				transition: all 300ms ease;
+
+				&:hover {
+				    opacity: 0.5;	
+				}
+			}
+		}
+
+	    .slick-dots {
+	        bottom: 20%;
+	        z-index: 2;
+	    }
+
+	    & li {
+	        margin: 2px 4px;    
+	    }
+
+	    & li:before {
+	        visibility: hidden; 
+	    }
+
+	    & li.slick-active button:before {
+	        color: $orange;
+	        background: $orange;
+	        opacity: 1;
+	    }
+
+	    & li button:before {
+	        position: absolute;
+	        top: 3px;
+	        left: 2px;
+	        content: "•";
+	        width: 10px;
+	        height: 10px;
+	        font-family: "slick";
+	        font-size: 0px;
+	        line-height: 20px;
+	        text-align: center;
+	        color: transparent;
+	        background: $white;
+	        border-radius: 50%;
+	        opacity: 1;
+	        -webkit-font-smoothing: antialiased;
+	    }
+
+	    & li:only-child {
+	        display: none;
+	    }
+
+	}	
+
+	.abt-frm2__tabbing-slider-items {
+		position: relative;
+		width: 33.33%;
+		text-align: center;
+
+		.frm-header {
+			width: 85%;
+			margin: auto;
+			margin-bottom: 20px;
+		}
+
+		.frm-description {
+			overflow-y: auto;
+			height: 120px;
+			width: 90%;
+			margin: auto;
+			padding-right: 5px;
+		}
+
+		.abt-frm2__tabbing-slider-img {
+			position: relative;
+			width: 175px;
+			height: 175px;
+			margin: 20px auto;
+			overflow: hidden;
+			border-radius: 100%;
+		}
+	}
+}
+.abt-frm3 {
+	.abt-frm3__item {
+		position: relative;
+		width: 33.33%;
+		height: 70vh;
+		text-align: center;
+
+		.abt-frm3__item-title {
+			opacity: 1;
+			transition: all 300ms ease;
+			text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+		}
+
+		.abt-frm3__item-title-small,
+		.abt-frm3__item-desc {
+			opacity: 0;
+			transition: all 500ms ease-in;
+		}
+
+		.abt-frm3__item-desc {
+			position: relative;
+			overflow-y: auto;
+		}
+
+		&:hover {
+			.abt-frm3__item-title {
+				opacity: 0;
+			}
+		
+			.abt-frm3__item-title-small,
+			.abt-frm3__item-desc {
+				opacity: 1;
+			}
+
+			.abt-frm3__item-overlay {
+				opacity: 1;
+			}
+		}
+	}
+
+	.abt-frm3__item-overlay {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		opacity: 0;
+		background: rgba(0, 0, 0, 0.50);
+		transition: all 300ms ease;
+	}
+}
