@@ -4,8 +4,8 @@
 			<div class="dstntns-frm1__col width--55">
 				<div class="dstntns-frm1__slider dstntns-frm--sldr__animation">
 					<div class="dstntns-frm1__slider-item" v-for="destination in searchableDestinations">
-						<div class="dstntns-frm1__slider-item-info-holder margin-a width--85"  >
-							<div class="vertical-parent">
+						<div class="dstntns-frm1__slider-item-info-holder margin-a width--85"  >	
+						<div class="vertical-parent">
 								<div class="vertical-align align-b">
 									<div class="dstntns-frm1__slider-item-info">
 										<h5 class="frm-title l-margin-b clr--white dstntns-frm--sldr__animation-title">{{ destination.name }}</h5>
@@ -26,6 +26,7 @@
 							</div>
 						</div>
 						<div class="frm-bckgrnd size-cover" :style="{backgroundImage: 'url(' + destination.image + ')'}"></div>
+						<div class="dstntns-frm1__bgOverlay"></div>
 					</div>
 				</div>
 			</div

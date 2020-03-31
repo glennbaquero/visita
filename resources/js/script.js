@@ -55,13 +55,33 @@ var app = {
 
 				$('.mbl-hdr-frm__nav-links-holder').addClass('show');
 
-			});		
+			});
 
 			$('.mbl-hdr-frm__link-holder-btn').on('click', function() {
 
 				$('.mbl-hdr-frm__nav-links-holder').removeClass('show');
 
-			});		
+			});
+
+			$(".cntct-frm__number input[name='contact_number']").on("focusin", function(){
+
+				if($(this).val() != '') {
+					$(this).parent().addClass('active');
+				} else {
+					$(this).parent().removeClass('active');
+					$(this).parent().toggleClass('focus');
+				}
+			});
+
+			$(".cntct-frm__number input[name='contact_number']").on("focusout", function(){
+
+				if($(this).val() != '') {
+					$(this).parent().addClass('active');
+				} else {
+					$(this).parent().removeClass('active');
+					$(this).parent().toggleClass('focus');
+				}
+			});
 
 		},
 

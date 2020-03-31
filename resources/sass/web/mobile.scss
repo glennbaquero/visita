@@ -874,4 +874,19 @@
 			font-size: 1em !important;
 		}
 	}
+
+	.cntct-frm__number {
+
+		::after {
+			top: 15px;
+			font-size: 1em !important;
+		}
+
+		&.active, &.focus {
+
+			input[name="contact_number"] {
+				padding-left: 31px;
+			}
+		} 
+	}
 }
