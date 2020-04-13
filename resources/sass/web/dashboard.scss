@@ -91,9 +91,12 @@
 
 	.dshbrd-frm1__content-card-book-status {
 		text-align: center;
-		width: 100px;
+		width: auto;
 		padding: 0px 10px;
-		border-radius: 8px;
+		font-size: 13px;
+		font-weight: bold;
+		display: inline-block;
+		border-radius: 4px;
 		color: $white;
 
 		&.pending { background: #434244; }
