@@ -20,7 +20,7 @@
             </div>
         </div>
 
-		<full-calendar :events="events" :editable="false" :header="header" :config="config" @day-click="selectedDay" defaultView="month"/>
+		<full-calendar v-if="destination && experience" :events="events" :editable="false" :header="header" :config="config" @day-click="selectedDay" defaultView="month"/>
 	</div>
 </template>
 
