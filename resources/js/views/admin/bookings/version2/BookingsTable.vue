@@ -145,7 +145,7 @@ export default {
                 { text: 'Visit Status', value: 'status' },
                 { text: 'Amount Settled', value: '' },
                 { text: 'Initial Payment', value: '' },
-                { text: 'Succeeding Payment', value: '' },
+                { text: 'Remaining Balance', value: '' },
                 { text: 'Total', value: 'grand_total' },
                 { text: 'Payment Status', value: 'payment_status' },
                 // { text: 'Set Invoice As', value: '' },

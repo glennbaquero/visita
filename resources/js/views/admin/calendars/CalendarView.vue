@@ -68,7 +68,11 @@ export default {
     mixins: [ ResponseHandler ],
 
     mounted() {
-    	this.init();
+        if(!_.isEmpty(JSON.parse(window.sessionStorage.getItem('destination')))) {
+            this.destination = JSON.parse(window.sessionStorage.getItem('destination'));
+            this.experiences = this.destination.allocations;
+        }
+    	// this.init();
     },
 
     methods: {
@@ -108,7 +112,13 @@ export default {
     	},
 
         destinationChange() {
-            this.experiences = this.destination.allocations;
+
+            window.sessionStorage.setItem('destination', JSON.stringify(this.destination));
+
+            // if(!_.isEmpty(JSON.parse(window.sessionStorage.getItem('destination')))) {
+            //     this.destination = JSON.parse(window.sessionStorage.getItem('destination'));
+            // }
+            this.experiences = !_.isEmpty(this.destination) ? this.destination.allocations : null;
         }
     }
 }
