@@ -87,7 +87,7 @@ class BookController extends Controller
         $item['remarks'] = $book->groupRemarks;
         $item['ended_at'] = $book->ended_at;
         $item['start_at'] = $book->started_at;
-        $item['time'] = $item->start_time;
+        $item['time'] = $book->start_time;
 
         return response()->json([
             'booking' => $item
