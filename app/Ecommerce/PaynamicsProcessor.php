@@ -202,7 +202,7 @@ class PaynamicsProcessor
 				/** End transaction */
 				\DB::commit();
 
-			    $admins_per_destination = Admin::where('destination_id', $book->destination->id)->get();
+			    $admins_per_destination = Admin::where('destination_id', $this->invoice->book->destination->id)->get();
 				// $admins = Admin::all();
 
 			    $qr_email = GeneratedEmail::where('notification_type', 'Booking notification')->first();
