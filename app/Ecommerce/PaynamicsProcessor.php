@@ -12,6 +12,9 @@ use App\Models\Emails\GeneratedEmail;
 use App\Notifications\Admin\Paypal\AdminInvoicePaid;
 use App\Notifications\Web\Paypal\UserInvoicePaid;
 
+use App\Notifications\Reservation\BookingNotification;
+use App\Notifications\Web\Bookings\NewBookingNotification;
+
 use Auth;
 
 class PaynamicsProcessor 
