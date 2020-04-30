@@ -26,7 +26,17 @@ class UserController extends Controller
         $user = User::find($id);
         DB::beginTransaction();
             $user->update($request->except(['old_password', 'password', 'password_confirmation']));
+        DB::commit();
 
+        return response()->json([
+            'message' => 200
+        ]);
+    }
+
+    public function updatePassword(Request $request, $id) 
+    {
+        $user = User::find($id);
+        DB::beginTransaction();
             if(Hash::check($request->old_password, $user->password)) {
                 if($request->password === $request->password_confirmation) {
                     $user->password = Hash::make($request->password);
@@ -42,7 +52,6 @@ class UserController extends Controller
                 ]);
             }
         DB::commit();
-
         return response()->json([
             'message' => 200
         ]);

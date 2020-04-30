@@ -145,7 +145,7 @@
 					<div class="width--95 margin-l-a" v-if="showFileInput">
 						<p class="frm-header bold s-margin-b clr--gray">Health Certificate/Letter of Consent*</p>
 						<div class="frm-inpt m-margin-b">
-							<input type="file" @change="proofForSpecialFee">
+							<input type="file" id="files" @change="proofForSpecialFee">
 						</div>
 					</div>
 				</div>
@@ -164,6 +164,7 @@
 	import flatpickr from 'flatpickr';
 	import 'flatpickr/dist/flatpickr.css';
 	import RegexMixin from 'Mixins/regex.js';
+	import {EventBus} from 'Root/EventBus.js';
 
 	export default {
 		props: {
@@ -224,6 +225,16 @@
 			},
 		},
 
+		watch: {
+			'stepData.main.paths'(val) {
+				if($('#files')[0].files.length) {
+					EventBus.$emit('hasFile', true);
+				} else {
+					EventBus.$emit('hasFile', false);
+				}
+			}
+		},
+
 		mounted() {
 			flatpickr('#birthdate', { maxDate: new Date().fp_incr(-6570), disableMobile: 'true' });
 		},
@@ -232,8 +243,10 @@
 			proofForSpecialFee(e) {
 	            var files = e.target.files || e.dataTransfer.files;
 
-	            if(!files.length)
-	                return;
+	            if(!files.length) {
+            		this.stepData.main.paths = [];
+            	    return;
+	            }
 
 	            this.stepData.main.paths = files[0];
 	        },

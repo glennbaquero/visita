@@ -38,7 +38,7 @@
 				</div>
 
 				<div class="form-group col-sm-12 col-md-4">
-					<label>Recommend visitor</label>
+					<label>Recommended For</label>
 					<input v-model="item.recommended" name="recommended" type="text" class="form-control">
 				</div>
 

@@ -30,9 +30,7 @@
 									</ul>
 								</template>
 								<template v-if="tab === 2">
-									<ul v-for="info in tabInfo">
-										<li v-for="fee in info.fees">{{ fee.name }}</li>
-									</ul>
+									<span v-html="destination.fees"></span>
 								</template>
 								
 							</div>

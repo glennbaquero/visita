@@ -99,6 +99,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 	Route::namespace('Users')->group(function() {
 		Route::middleware('auth:web')->group(function() {
 			Route::post('/user/update/{id}', 'UserController@update')->name('user.update');
+			Route::post('/user/update-password/{id}', 'UserController@updatePassword')->name('user.update-password');
 		});
 	});
 

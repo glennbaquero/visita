@@ -52,7 +52,7 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Feedback Quesstion', value: 'feedback' },
+                { text: 'Feedback Question', value: 'feedback' },
                 { text: 'Answer', value: 'answer' },
                 { text: 'Remarks', value: 'remarks' },
             ];

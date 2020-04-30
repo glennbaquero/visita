@@ -132,7 +132,8 @@
 					:nationalities="nationalities" 
 					:genders="genders" 
 					:index="parseInt(index)+1" 
-					@removeGuest="removeGuest(index)">
+					>
+					<!-- @removeGuest="removeGuest(index)" -->
 				</guest-details>
 			</template>
 

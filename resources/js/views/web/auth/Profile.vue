@@ -113,6 +113,9 @@
 				<loading :active.sync="isLoading" 
 				        :is-full-page="fullPage"></loading>
 			</div>
+			<div class="prfl-btn__holder l-margin-t align-r width--100 inlineBlock-parent">
+				<button class="frm-btn green" @click="save">Update Profile</button>
+			</div>
 		</div>
 		<div class="m-margin-t"></div>
 		<div class="width--90 margin-a align-l">
@@ -122,7 +125,7 @@
 					<div class="width--95">
 						<p class="frm-header s-margin-b bold clr--gray">Old Password</p>
 	 					<div class="frm-inpt">
-	                        <input type="password" placeholder="" v-model="user_details.old_password">
+	                        <input type="password" placeholder="" v-model="password.old_password">
 	                    </div>
                 	</div>
 				</div
@@ -130,7 +133,7 @@
 					<div class="width--95 margin-a">
 						<p class="frm-header s-margin-b bold clr--gray">New Password</p>
 	 					<div class="frm-inpt">
-	                        <input type="password" name="password" v-model="user_details.password">
+	                        <input type="password" name="password" v-model="password.password">
 	                    </div>
 	                </div>
 				</div
@@ -138,15 +141,13 @@
 					<div class="width--95 margin-a">
 						<p class="frm-header s-margin-b bold clr--gray">Confirm New Password</p>
 	 					<div class="frm-inpt">
-	                        <input type="password" name="password_confirmation" v-model="user_details.password_confirmation">
+	                        <input type="password" name="password_confirmation" v-model="password.password_confirmation">
 	                    </div>
 	                </div>	
 				</div>
 
 				<div class="prfl-btn__holder l-margin-t align-r width--100 inlineBlock-parent">
-					<button class="frm-btn gray s-margin-r">Cancel</button>
-					<!-- <button class="frm-btn green" >Save</button> -->
-					<button class="frm-btn green" @click="save">Save</button>
+					<button class="frm-btn green" @click="updatePassword">Update Password</button>
 				</div>
 
 			</div>
@@ -160,7 +161,8 @@
 	export default{
 		props: {
 			user: Object,
-			submitUrl: String
+			submitUrl: String,
+			updatePasswordUrl: String,
 		},
 
 		mixins: [ ResponseMixin ],
@@ -173,6 +175,7 @@
 		data() {
 			return {
 				user_details: this.user,
+				password: {},
 				isLoading: false,
                 fullPage: true,
                 callModal: null,
@@ -187,6 +190,25 @@
 				this.isLoading = true;
 				var inst = $('[data-remodal-id=remodal]').remodal();
 				axios.post(this.submitUrl, this.user_details)
+					.then(response => {
+						this.isLoading = false;
+						this.iconToShow = 'images/success-icon.png';
+						this.message = 'Information successfully updated.';
+						this.btnColor = 'green';
+						inst.open();
+					}).catch(errors => {
+						this.isLoading = false;
+						this.iconToShow = 'images/remove-button.png';
+						this.message = this.parseResponse(errors, 'error');
+						this.btnColor = 'red';
+						inst.open();
+					})
+			},
+
+			updatePassword() {
+				this.isLoading = true;
+				var inst = $('[data-remodal-id=remodal]').remodal();
+				axios.post(this.updatePasswordUrl, this.password)
 					.then(response => {
 						this.isLoading = false;
 						this.iconToShow = 'images/success-icon.png';

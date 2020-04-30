@@ -114,6 +114,8 @@
 					allocationSelected: this.stepData.allocationSelected
 				};
 
+				this.stepData.timeSelected = null;
+
 				axios.post(this.checkerUrl, data)
 					.then(response => {
 						_.each(response.data, (data)=> {
@@ -130,7 +132,6 @@
 			      		this.timeslots = value.timeslot;
 			    	}
 			  	});
-
 			}
 		}
 	}

@@ -46,6 +46,7 @@
 </template>
 <script>
 	import DateMixin from 'Mixins/date.js';
+	import {EventBus} from 'Root/EventBus.js';
 	
 	export default {
 		props: {
@@ -57,6 +58,7 @@
 		data() {
 			return {
 				reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+				hasFile: false,
 			}
 		},
 
@@ -69,10 +71,29 @@
 					this.stepData.main.email != '' && this.stepData.main.birthdate != '' && 
 					this.stepData.main.contact_number != '' && this.stepData.main.emergency_contact_number != '' &&
 					this.stepData.main.visitor_type_id != 0 && this.reg.test(this.stepData.main.email) && 
-					this.stepData.main.emergency_contact_number.length === 10 && this.stepData.main.contact_number.length === 10) return true;
+					this.stepData.main.emergency_contact_number.length === 10 && this.stepData.main.contact_number.length === 10) {
+
+					// if(this.stepData.main.special_fee_id > 0 && _.isEmpty(this.stepData.main.paths)) {
+					// 	return false;
+					// }
+					if(this.stepData.main.special_fee_id != 0) {
+						if(this.hasFile) {
+							return true
+						} else {
+							return false
+						}
+					}
+					return true;
+				}
 
 				return false;
 			},
+		},
+
+		created() {
+			EventBus.$on('hasFile', (data) => {
+				this.hasFile = data;
+			});
 		},
 
 		methods: {

@@ -6,7 +6,7 @@
 					<b>
 						Guest #{{ index }} 
 
-						<button type="button" class="btn btn-danger" @click="$emit('removeGuest')"><i class="fas fa-minus"></i></button> 
+						<!-- <button type="button" class="btn btn-danger" @click="$emit('removeGuest')"><i class="fas fa-minus"></i></button>  -->
 					</b>
 				</h3> 
 			</div>

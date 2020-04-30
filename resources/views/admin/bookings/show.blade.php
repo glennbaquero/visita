@@ -30,7 +30,7 @@
                     <li class="nav-item"><a @click="initList('table-1')" class="nav-link active" data-target="#tab1" href="javascript:void(0)" data-toggle="tab">Information</a></li>
                     <li class="nav-item"><a @click="initList('table-2')" class="nav-link" href="#tab2" data-toggle="tab">Remarks</a></li>
                     <li class="nav-item"><a @click="initList('table-3')" class="nav-link" href="#tab3" data-toggle="tab">Violations</a></li>
-                    <li class="nav-item"><a @click="initList('table-4')" class="nav-link" href="#tab4" data-toggle="tab">Feedback</a></li>
+                    <li class="nav-item"><a @click="initList('table-4')" class="nav-link" href="#tab4" data-toggle="tab">Feedbacks</a></li>
                     <li class="nav-item"><a @click="initList('table-5')" class="nav-link" href="#tab5" data-toggle="tab">Invoice</a></li>
                     <li class="nav-item"><a @click="initList('table-6')" class="nav-link" data-target="#tab6" href="javascript:void(0)" data-toggle="tab">Activity Logs</a></li>
                 </ul>

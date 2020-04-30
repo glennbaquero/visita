@@ -29,7 +29,7 @@
 
 										<div class="dstntns-inf-frm1__location inlineBlock-parent">
 											<img class="dstntns-inf-frm1__location-img" src="{{ asset('images/calendar-icon.png') }}">	
-											<p class="frm-header s-margin-b clr--white">Duration: {{ $selected_destination->duration }} Day(s)</p>
+											<p class="frm-header s-margin-b clr--white">Duration: {{ $selected_destination->duration }} </p>
 										</div>
 
 										<div class="dstntns-inf-frm1__location inlineBlock-parent">
