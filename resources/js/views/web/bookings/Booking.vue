@@ -337,7 +337,7 @@
 						emergency_contact_number: null,
 						main: true,
 						agency_code: null,
-						paths: []
+						paths: [],
 					},
 
 					guests: [],

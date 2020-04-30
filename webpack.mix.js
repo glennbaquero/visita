@@ -47,3 +47,4 @@ mix.js('resources/js/app.js', 'public/assets/app.js')
 	]);
 
 mix.version();
+mix.disableNotifications();

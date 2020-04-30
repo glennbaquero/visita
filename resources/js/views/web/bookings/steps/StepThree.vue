@@ -201,6 +201,10 @@
 			},
 		},
 
+		mounted() {
+			EventBus.$emit('changed');
+		},
+
 		created() {
 			EventBus.$on('changed', () => {
 				this.$nextTick(() => {

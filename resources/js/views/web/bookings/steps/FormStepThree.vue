@@ -15,7 +15,7 @@
 				<div class="width--95">
 					<p class="frm-header bold s-margin-b clr--gray">First Name*</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="text" v-model="guest.first_name" @keypress="regexString($evt);">
+						<input type="text" v-model="guest.first_name" @keypress="regexString($evt);" >
 					</div>
 				</div>
 			</div
@@ -23,7 +23,7 @@
 				<div class="width--95 margin-l-a">
 					<p class="frm-header bold s-margin-b clr--gray">Last Name*</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="text" v-model="guest.last_name" @keypress="regexString($evt)">
+						<input type="text" v-model="guest.last_name" @keypress="regexString($evt)" >
 					</div>
 				</div>
 			</div>
@@ -34,7 +34,7 @@
 				<div class="width--95">
 					<p class="frm-header bold s-margin-b clr--gray">Nationality*</p>
 					<div class="frm-inpt m-margin-b">
-						<select v-model="guest.nationality">
+						<select v-model="guest.nationality" >
 							<option v-for="country in countries" :value="country.citizenship">{{ country.citizenship }}</option>
 						</select>
 					</div>
@@ -64,7 +64,7 @@
 						</div
 						><div class="width--70">
 							<div class="frm-inpt align-c m-margin-b">
-								<input type="text" name="" placeholder="" maxlength="10" v-model="guest.contact_number" @keypress="regexNumber($evt)">
+								<input type="text" name="" placeholder="" maxlength="10" v-model="guest.contact_number" @keypress="regexNumber($evt)" >
 							</div>
 						</div>
 					</div>
@@ -83,7 +83,7 @@
 						</div
 						><div class="width--70">
 							<div class="frm-inpt align-c m-margin-b">
-								<input type="text" name="" placeholder="" maxlength="10" v-model="guest.emergency_contact_number" @keypress="regexNumber($evt)">
+								<input type="text" name="" placeholder="" maxlength="10" v-model="guest.emergency_contact_number" @keypress="regexNumber($evt)" >
 							</div>
 						</div>
 					</div>
@@ -96,7 +96,7 @@
 				<div class="width--95">
 					<p class="frm-header bold s-margin-b clr--gray">Birthdate*</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="text" id="birthdate-guests" v-model="guest.birthdate">
+						<input type="text" id="birthdate-guests" v-model="guest.birthdate" >
 					</div>
 				</div>
 			</div
@@ -104,7 +104,7 @@
 				<div class="width--95 margin-l-a">
 					<p class="frm-header bold s-margin-b clr--gray">Gender*</p>
 					<div class="frm-inpt m-margin-b">
-						<select v-model="guest.gender">
+						<select v-model="guest.gender" >
 							<option v-for="gender in genders" :value="gender.name"> {{ gender.name }} </option>
 						</select>
 					</div>
@@ -117,7 +117,7 @@
 				<div class="width--95">
 					<p class="frm-header bold s-margin-b clr--gray">Visitor Type*</p>
 					<div class="frm-inpt m-margin-b">
-						<select v-model="guest.visitor_type_id">
+						<select v-model="guest.visitor_type_id" >
 							<option v-for="type in visitorTypes" :value="type.id"> {{ type.name }} </option>
 						</select>
 					</div>
@@ -139,7 +139,7 @@
 		<div class="inlineBlock-parent align-l" v-if="showFileInput">
 			<div class="width--50">
 				<div class="width--95">
-					<p class="frm-header bold s-margin-b clr--gray">Health Certificate/Letter of Consent (Optional)</p>
+					<p class="frm-header bold s-margin-b clr--gray">Health Certificate/Letter of Consent *</p>
 					<div class="frm-inpt m-margin-b">
 						<input type="file" @change="proofForSpecialFee">
 					</div>
@@ -174,7 +174,10 @@
 		
 		data() {
 			return {
+				reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
 				guest: {},
+				errors: {},
+				color: null,
 				headCount: this.guestKey + 1,
 				isSameDetails: false
 			}
@@ -191,7 +194,8 @@
 					this.guest.nationality != '' && this.guest.last_name != '' && 
 					this.guest.email != '' && this.guest.birthdate != '' && 
 					this.guest.contact_number != '' && this.guest.emergency_contact_number != '' &&
-					this.guest.visitor_type_id != 0) return true;
+					this.guest.visitor_type_id != 0 && this.reg.test(this.guest.email) && 
+					this.guest.contact_number.length === 10 && this.guest.emergency_contact_number.length === 10) return true;
 
 				return false;				
 			}
@@ -227,8 +231,10 @@
 			proofForSpecialFee(e) {
 	            var files = e.target.files || e.dataTransfer.files;
 
-	            if(!files.length)
+	            if(!files.length){
+	            	this.guest.paths = [];
 	                return;
+	            }
 
 	            this.guest.paths = files[0];
 	        },
@@ -250,7 +256,7 @@
 						main: false,
 						paths: this.main.paths
 					}
-	        }
+	        },
 		}
 	}
 </script>

@@ -35,6 +35,7 @@
 			<profile
 				:user="{{ auth()->user() }}"
 				submit-url="{{ route('web.user.update', auth()->user()->id) }}"
+				update-password-url="{{ route('web.user.update-password', auth()->user()->id) }}"
 			></profile>
 		</div>
 	</div>
