@@ -9,7 +9,7 @@
 
 @section('content')
 
-<section class="hm-frm1 gnrl-frm--sldr__container scrllfy-frame">
+<section id="frame1" class="hm-frm1 gnrl-frm--sldr__container scrllfy-frame">
 	<div class="gnrl-frm--sldr gnrl-frm--sldr1">
 		@foreach ($home_banners as $home_banner)
 		<div class="gnrl-frm--sldr__item">
@@ -28,7 +28,7 @@
 		@endforeach
 	</div>
 </section>
-<section class="hm-frm2 scrllfy-frame">
+<section id="frame2" class="hm-frm2 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align align-c">
@@ -55,7 +55,7 @@
 		</div>
 	</div>
 </section>
-<section class="hm-frm3 scrllfy-frame">
+<section id="frame3" class="hm-frm3 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
@@ -94,7 +94,7 @@
 	{{--  --}}
 
 </section>
-<section class="hm-frm4 scrllfy-frame">
+<section id="frame4" class="hm-frm4 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
@@ -133,13 +133,13 @@
 	{{--  --}}
 
 </section>
-<section class="hm-frm5 gnrl-frm--sldr__container scrllfy-frame">
+<section id="frame5" class="hm-frm5 gnrl-frm--sldr__container scrllfy-frame">
 	<user-destination
 		{{-- fetch-url="{{ route('web.fetch.destination') }}" --}}
 		:destination="{{ $destination }}"
 	></user-destination>
 </section>
-<section class="hm-frm6 scrllfy-frame">
+<section id="frame6" class="hm-frm6 scrllfy-frame">
 	<div class="frm-cntnr align-c width--85">
 		<div class="vertical-parent">
 			<div class="vertical-align">
