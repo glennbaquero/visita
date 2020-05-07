@@ -61,7 +61,7 @@ class FeesFetchController extends FetchController
     {
         return [
             'id' => $item->id,
-            'allocation' => $item->allocation_id,
+            'allocation' => $item->allocation->name,
             'name' => $item->name,
             'weekend' => $item->weekend,
             'weekday' => $item->weekday,

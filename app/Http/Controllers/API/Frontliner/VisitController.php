@@ -31,9 +31,11 @@ class VisitController extends Controller
             // $imageName = str_random(10).'.'.'png';
             // $path = \File::put(storage_path() . '/app/signatures/' . $imageName, base64_decode($image));
             // return $path;
-            $guest = Guest::find($item['id'])->update([
-                'signature_path' => $this->encodeBase64($item['signature_path'])
-            ]);
+            if($item['main'] != 1) {
+                $guest = Guest::find($item['id'])->update([
+                    'signature_path' => $this->encodeBase64($item['signature_path'])
+                ]);
+            }
 
             if($item['newsletter_optin']) {
                 Newsletter::firstOrCreate(['email' => $item['email']]);
