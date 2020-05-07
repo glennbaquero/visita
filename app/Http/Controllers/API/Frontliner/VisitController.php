@@ -35,11 +35,11 @@ class VisitController extends Controller
                 $guest = Guest::find($item['id'])->update([
                     'signature_path' => $this->encodeBase64($item['signature_path'])
                 ]);
+                if($item['newsletter_optin']) {
+                    Newsletter::firstOrCreate(['email' => $item['email']]);
+                }
             }
 
-            if($item['newsletter_optin']) {
-                Newsletter::firstOrCreate(['email' => $item['email']]);
-            }
                 
         }
 
