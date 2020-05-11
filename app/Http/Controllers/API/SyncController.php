@@ -9,7 +9,7 @@ use App\Models\Books\Book;
 use App\Models\Guests\Guest;
 use App\Models\Remarks\GroupRemark;
 use App\Models\Violations\GroupViolation;
-use App\Models\Feedbacks\GroupFeedback;
+use App\Models\Feedbacks\GuestFeedback;
 use App\Models\Newsletters\Newsletter;
 
 use Intervention\Image\Facades\Image;
@@ -134,7 +134,7 @@ class SyncController extends Controller
                     //         'remarks' => $feedback['remarks']
                     //     ]);
                     // } else {
-                        GroupFeedback::create([
+                        GuestFeedback::create([
                             'book_id' => $book->id,
                             'feedback_data' => $feedback['feedback_data'],
                             'answer' => $feedback['answer'],
