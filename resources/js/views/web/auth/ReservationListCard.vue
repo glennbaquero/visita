@@ -9,9 +9,10 @@
 				<div class="frm-inpt frm-inpt__filter">
 					<select v-model="sortBy">
 						<option value="date">Date</option>
-						<option value="pending">Pending</option>
-						<option value="for approval">Approval</option>
+						<option value="pending">Approved</option>
+						<option value="for approval">For Approval</option>
 						<option value="paid">Paid</option>
+						<option value="rejected">Rejected</option>
 					</select>
 				</div>
 			</div>

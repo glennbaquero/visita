@@ -108,6 +108,8 @@ class InvoiceController extends Controller
             $invoices = auth()->user()->invoices()->where(['is_paid' => false, 'is_approved' => true])->get();
         } elseif ($request->sort === 'for approval') {
             $invoices = auth()->user()->invoices()->where(['is_paid' => false, 'is_approved' => false])->get();
+        } elseif($request->sort === 'rejected') {
+            $invoices = auth()->user()->invoices()->where('is_approved', false)->whereNotNull('deleted_at')->get();
         }
 
     	foreach ($invoices as $invoice) {
