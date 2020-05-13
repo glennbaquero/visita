@@ -175,7 +175,8 @@ class ResourceFetchController extends Controller
                     'allocation' => json_encode($item->allocation),
                     'created_at' => $item->created_at->format('j M Y h:i A'),
                     'is_walkin_label' => $item->is_walkin ? 'Walk-In' : 'Online',
-                    'start_time' => $item->start_time
+                    'start_time' => $item->start_time,
+                    'destination_representative_id' => $item->destination_representative_id,
                 ]);
             }
         }
