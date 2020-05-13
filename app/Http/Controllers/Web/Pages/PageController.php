@@ -217,10 +217,18 @@ class PageController extends Controller
 	public function showContactUs() {
 
         $data = $this->getPageData('contact_us');
+        $twitter = PageItem::where('slug', 'twitter')->first();
+        $fb = PageItem::where('slug', 'facebook')->first();
+        $insta = PageItem::where('slug', 'instagram')->first();
+        $youtube = PageItem::where('slug', 'youtube')->first();
         
         return view('web.pages.contact-us', array_merge($data, [
         	'quote' => Inspiring::quote(),
-        	'page_scripts'=> 'contact-us'
+        	'page_scripts'=> 'contact-us',
+        	'twitter' => $twitter,
+        	'fb' => $fb,
+        	'insta' => $insta,
+        	'youtube' => $youtube,
         ]));
 
 	}

@@ -15,6 +15,10 @@
 			<div class="vertical-align">
 				<user-inquiry
 		        	submit-url="{{ route('web.user.inquiry') }}"
+		        	fb="{{ $fb }}"
+		        	twitter="{{ $twitter }}"
+		        	insta="{{ $insta }}"
+		        	youtube="{{ $youtube }}"
 		        ></user-inquiry>
 			</div>
 		</div>
