@@ -80,10 +80,14 @@ class SyncController extends Controller
 						foreach (json_decode($request->data[$key]['group_violations']) as $violation) {
 							// check if the violation has an id
 							if(!isset($violation->id)) {
-								$reservation->groupViolations()->create([
+								$violations = $reservation->groupViolations()->create([
 									'violation' => $violation->violation,
-									'statement' => $violation->statement
 								]);
+                                if($violation->statement) {
+                                    $violations->update([
+                                        'statement' => $violation->statement
+                                    ]);
+                                }
 							}
 						}
 					}
