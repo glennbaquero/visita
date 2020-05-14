@@ -53,7 +53,7 @@ class ResourceFetchController extends Controller
         $faqs = Faq::where('type', 'FRONTLINER')->get();
         $remarks = Remark::all();
         $violations = Violation::all();
-        $management = Management::where('role_id', 5)->where('destination_id', $request->user()->destination_id)->get();
+        $management = Admin::where('role_id', 5)->where('destination_id', $request->user()->destination_id)->get();
         $bookings = $this->getBookings($request->user()->destination_id);
         $guests = $this->getGuests();
         $destination = auth()->guard('api')->user()->destination;
