@@ -83,7 +83,7 @@ class SyncController extends Controller
 								$violations = $reservation->groupViolations()->create([
 									'violation' => $violation->violation,
 								]);
-                                if($violation->statement) {
+                                if(isset($violation->statement)) {
                                     $violations->update([
                                         'statement' => $violation->statement
                                     ]);
