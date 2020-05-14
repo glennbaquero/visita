@@ -62,12 +62,13 @@ class SyncController extends Controller
     				}
 
 					if($request->data[$key]['group_remarks']) {
+                        $remarks = json_decode($request->data[$key]['group_remarks']);
 						// adding of group remark
-						foreach (json_decode($request->data[$key]['group_remarks']) as $remark) {
+						foreach ($remarks as $remark) {
 							// check if the remark has an id
 							if(!isset($remark->id)) {
 								$reservation->groupRemarks()->create([
-									'remark' => $remark->remark,
+									'remark' => $remark->statement,
 									'statement' => $remark->statement
 								]);
 							}
