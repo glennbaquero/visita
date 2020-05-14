@@ -91,7 +91,7 @@ class ManagementFetchController extends FetchController
             $item->restoreUrl = $item->renderRestoreUrl();
         }
 
-        // $roles = Role::where('name', 'Frontliner')->get();
+        // $roles = Role::where('name', 'Destination Representative')->get();
 
     	return response()->json([
     		'item' => $item,
