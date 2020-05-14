@@ -67,6 +67,7 @@ class SyncController extends Controller
 						foreach ($remarks as $remark) {
 							// check if the remark has an id
 							if(!isset($remark->id)) {
+                                dd($remark);
 								$reservation->groupRemarks()->create([
 									'remark' => $remark['statement'],
 									'statement' => $remark['statement']
