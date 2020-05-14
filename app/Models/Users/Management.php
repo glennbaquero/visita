@@ -108,7 +108,7 @@ class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
 	public static function store($request, $item = null, $columns = ['first_name', 'last_name', 'destination_id', 'email', 'username', 'contact_number'])
 	{
 	    $vars = $request->only($columns);
-	    $vars['role_id'] = 5;
+	    $vars['role_id'] = $request->role_id;
 	    if (!$item) {
         	$vars['password'] = uniqid();
 	        $item = static::create($vars);
