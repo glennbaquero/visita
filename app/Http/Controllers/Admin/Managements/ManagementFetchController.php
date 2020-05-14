@@ -95,7 +95,7 @@ class ManagementFetchController extends FetchController
 
     	return response()->json([
     		'item' => $item,
-    		// 'roles' => $roles,
+    		'roles' => $roles,
     		'destinations' => $destinations
     	]);
     }
