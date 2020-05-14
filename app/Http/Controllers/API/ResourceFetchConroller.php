@@ -50,7 +50,7 @@ class ResourceFetchController extends Controller
         $surveys = $fetch_surveys->fetch($request);
         $incomes = $fetch_incomes->fetch($request);
         $feedbacks = $fetch_feedbacks->fetch($request);
-        $faqs = Faq::all();
+        $faqs = Faq::where('type', 'FRONTLINER')->get();
         $remarks = Remark::all();
         $violations = Violation::all();
         $management = Management::where('role_id', 5)->where('destination_id', $request->user()->destination_id)->get();

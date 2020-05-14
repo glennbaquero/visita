@@ -37,6 +37,7 @@ class SyncController extends Controller
     						'start_time' => $book['start_time'] ? $book['start_time'] : null,
     						'ended_at' => $book['ended_at'] ? $this->convertDate($book['ended_at']) : null,
     						'scheduled_at' => $book['scheduled_at'] ? $this->convertDate($book['scheduled_at']) : null,
+                            'destination_representative_id' => $book['destination_representative_id']
     					]);
     				} else {
     					// create the book/reservation
@@ -56,6 +57,7 @@ class SyncController extends Controller
 							'bookable_type' => 'App\Models\Users\Management',
 							'offline_id' => $book['offline_id'],
                             'start_time' => $book['start_time'] ? $book['start_time'] : null,
+                            'destination_representative_id' => $book['destination_representative_id']
     					]);
     				}
 
