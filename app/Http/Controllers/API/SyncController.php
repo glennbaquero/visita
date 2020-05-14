@@ -68,8 +68,8 @@ class SyncController extends Controller
 							// check if the remark has an id
 							if(!isset($remark->id)) {
 								$reservation->groupRemarks()->create([
-									'remark' => $remark->statement,
-									'statement' => $remark->statement
+									'remark' => $remark['statement'],
+									'statement' => $remark['statement']
 								]);
 							}
 						}
@@ -81,8 +81,8 @@ class SyncController extends Controller
 							// check if the violation has an id
 							if(!isset($violation->id)) {
 								$reservation->groupViolations()->create([
-									'violation' => $violation->violation,
-									'statement' => $violation->statement
+									'violation' => $violation['violation'],
+									'statement' => $violation['statement']
 								]);
 							}
 						}
