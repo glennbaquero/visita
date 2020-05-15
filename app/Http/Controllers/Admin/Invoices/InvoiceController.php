@@ -42,6 +42,9 @@ class InvoiceController extends Controller
     {
         DB::beginTransaction();
             $item = Invoice::withTrashed()->findOrFail($id);   
+            if($item->is_approved && $item->is_sent_first_payment) {
+                $item->update(['is_approved' => 1, 'is_sent_second_payment' => true ]);
+            }
             $item->update(['is_approved' => 1, 'is_sent_first_payment' => true ]);
         DB::commit();
 
