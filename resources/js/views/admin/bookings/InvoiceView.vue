@@ -137,9 +137,9 @@
         <action-button type="submit" :disabled="loading" class="btn-success" v-if="!item.is_paid && !item.deleted_at">{{ item.btn_label }}</action-button>
         
         <!-- Bank Deposit Payment Method -->
-        <button type="button" v-if="item.showButtonForBankDeposit == 'initial_button-show'" class="btn btn-primary" @click="setAsPaid('initial')">Set as paid for Initial Payment</button>
-        <button type="button" v-if="item.showButtonForBankDeposit == 'final_button-show'" class="btn btn-primary" @click="setAsPaid('final')">Set as Fully Paid</button>
-        <button type="button" v-if="item.showButtonForBankDeposit == 'fullpayment-final_button-show' && item.is_approved" class="btn btn-primary" @click="setAsPaid('fullpayment_final')">Set as Fully Paid</button>
+        <button type="button" v-if="item.showButtonForBankDeposit == 'initial_button-show' && item.is_approved && item.is_sent_second_payment" class="btn btn-primary" @click="setAsPaid('initial')">Set as paid for Initial Payment</button>
+        <button type="button" v-if="item.showButtonForBankDeposit == 'final_button-show' && item.is_approved && item.is_sent_second_payment" class="btn btn-primary" @click="setAsPaid('final')">Set as Fully Paid</button>
+        <button type="button" v-if="item.showButtonForBankDeposit == 'fullpayment-final_button-show' && item.is_approved && item.is_fullpayment" class="btn btn-primary" @click="setAsPaid('fullpayment_final')">Set as Fully Paid</button>
         <!-- End -->
 			</template>
 		</card>
