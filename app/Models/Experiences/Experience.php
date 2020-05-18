@@ -9,6 +9,8 @@ use App\Models\Times\TimeSlot;
 
 class Experience extends Model
 {
+    protected $table = 'experiences';
+    
     public function destination()
     {
     	return $this->belongsTo(Destination::class)->withTrashed();

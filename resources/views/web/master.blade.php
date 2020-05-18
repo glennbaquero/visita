@@ -24,7 +24,7 @@
         <dialog-container></dialog-container>
 
     </div>
-    @include('PRXPayPal::includes.js')
+    {{-- @include('PRXPayPal::includes.js') --}}
     @include('partials.script-tags')
 
 </body>
