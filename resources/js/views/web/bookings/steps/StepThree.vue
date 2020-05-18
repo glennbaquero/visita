@@ -212,7 +212,7 @@
 					for(var i = 0; i < guests.length; i++) {
 						if(guests[i].first_name != null) {
 					       	if(guests[i].special_fee_id != '0' || guests[i].spespecial_fee_id != 0) {
-					         	if(guests[i].paths != null) {
+					         	if(guests[i].paths != null || guests[i].paths.length) {
 							     	this.showNextButton = true;
 					        	} else {
 							     	this.showNextButton = false;
