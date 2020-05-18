@@ -141,7 +141,10 @@
 				<div class="width--95">
 					<p class="frm-header bold s-margin-b clr--gray">Health Certificate/Letter of Consent *</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="file" @change="proofForSpecialFee">
+						<input type="file" @change="proofForSpecialFee" v-if="!hasFileAttached">
+						<div class="align-l" v-if="hasFileAttached">
+							<button class="frm-btn green" @click="hasFileAttached = false">Already attached a file, click here to update</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -175,11 +178,15 @@
 		data() {
 			return {
 				reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
-				guest: {},
+				guest: {	
+					paths: []
+				},
 				errors: {},
 				color: null,
 				headCount: this.guestKey + 1,
-				isSameDetails: false
+				isSameDetails: false,
+				hasFile: false,
+				hasFileAttached: false,
 			}
 		},	
 
@@ -195,9 +202,30 @@
 					this.guest.email != '' && this.guest.birthdate != '' && 
 					this.guest.contact_number != '' && this.guest.emergency_contact_number != '' &&
 					this.guest.visitor_type_id != 0 && this.reg.test(this.guest.email) && 
-					this.guest.contact_number.length === 10 && this.guest.emergency_contact_number.length === 10) return true;
+					this.guest.contact_number.length === 10 && this.guest.emergency_contact_number.length === 10) {
+					if(this.guest.special_fee_id != 0 || this.guest.special_fee_id != '0') {
+						return this.hasFile;
+					}
+					return true;
+				} 
 
 				return false;				
+			}
+		},
+
+		watch: {
+			'guest.paths'(val) {
+				if(typeof(val) == 'object') {
+					if(val.name != undefined) {
+						this.hasFile = true
+						this.hasFileAttached = true;
+					} else {
+						this.hasFile = false
+					}
+				} else {
+					this.hasFile = false
+				}
+				console.log(val, typeof(val) == 'object', typeof(val));
 			}
 		},
 
@@ -223,9 +251,10 @@
 						contact_number: null,
 						emergency_contact_number: null,
 						main: false,
-						paths: null
+						paths: []
 					}
 				}
+
 			},
 
 			proofForSpecialFee(e) {

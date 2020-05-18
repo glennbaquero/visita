@@ -443,6 +443,7 @@
 				window.scrollTo(0,0);
 			},
 			openGuestForm(key) {
+				EventBus.$emit('guest_form_opened');
 				this.guest_key = key;
 				this.guestForm = true;
 				this.guestCard = true;

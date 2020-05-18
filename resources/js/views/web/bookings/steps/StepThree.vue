@@ -206,6 +206,10 @@
 		},
 
 		created() {
+			EventBus.$on('guest_form_opened', () => {
+				this.showNextButton = false;
+			});
+
 			EventBus.$on('changed', () => {
 				this.$nextTick(() => {
 					var guests = this.guests;
