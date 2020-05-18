@@ -45,7 +45,7 @@
 				<div class="frm-description">
 					<p><strong>About the Destination</strong></p>
 					<p v-html="destination.overview"></p>
-					<iframe :src="'https://www.google.com/maps/embed/v1/place?q='+destination.location+'&key=AIzaSyCyp_iv_YPt886xxk7Zs1Dr-wlLVkyIslo'" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+					<iframe :src="'https://www.google.com/maps/embed/v1/place?q='+destination.location+'&key=AIzaSyAaWOelGGDTWA2E9riZAqGGnQ8DRYKws6M'" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
 					<br>
 					<br>
 					<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/bKIIdCNOQwY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
