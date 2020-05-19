@@ -27,6 +27,8 @@ class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
 	use HelperTrait;
 	use Searchable;
 
+	protected $table = 'managements';
+
 	protected $fillable = [
 		'role_id', 'destination_id', 'first_name', 'last_name', 'email', 'username',
 		'contact_number', 'password', 'status'
