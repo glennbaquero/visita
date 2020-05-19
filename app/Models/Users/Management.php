@@ -115,8 +115,8 @@ class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
         	$vars['password'] = uniqid();
 	        $item = static::create($vars);
 			$broker = $item->broker();
-			$broker->sendResetLink($request->only('email'));
             $item->sendEmailVerificationNotification();
+			$broker->sendResetLink($request->only('email'));
 	    } else {
 	        $item->update($vars);
 	    }
