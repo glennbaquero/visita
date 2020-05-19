@@ -8,6 +8,8 @@ use App\Models\Answers\Answer;
 
 class SurveyExperience extends Model
 {
+
+    protected $table = 'survey_experiences';
     
 	/*
 	 * Relationship
