@@ -213,6 +213,6 @@ class InvoiceController extends Controller
      */
     public function paynamicsCancel()
     {
-         return redirect()->routes('web.dashboard');
+         return redirect()->routes('web.home');
     }
 }
