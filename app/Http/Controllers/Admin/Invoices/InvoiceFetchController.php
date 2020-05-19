@@ -174,7 +174,7 @@ class InvoiceFetchController extends FetchController
         $type_weekdayOrWeekend_fee = 0;
         $special_fee_weekdayOrWeekend = 0;
         $special_fee_daytourOrOvernight = 0;
-        $guests = $book->guests->where('main', false)->get();
+        $guests = $book->guests->where('main', false);
 
     	foreach ($guests as $guest) {
             if(!$book->from_masungi_reservation) {
