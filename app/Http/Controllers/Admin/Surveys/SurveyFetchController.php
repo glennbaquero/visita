@@ -27,6 +27,13 @@ class SurveyFetchController extends FetchController
      */
     public function filterQuery($query)
     {
+        $admin = auth()->guard('admin')->user();
+        if($admin->destination_id) {
+            $id = $admin->destination_id;
+            $query = $query->whereHas('book', function($query) use($id){
+                $query->where('destination_id', $id);
+            });
+        }
         return $query;
     }
 
@@ -43,25 +50,25 @@ class SurveyFetchController extends FetchController
         $admin = auth()->guard('admin')->user();
 
         foreach($items as $item) {
-            if($admin->destination_id) {
-                if($item->book->destination_id === $admin->destination_id) {
-                    array_push($result,[
-                        'id' => $item->id,
-                        'book_id' => $item->renderName(),
-                        'age' => $item->age,
-                        'gender' => $item->gender,
-                        'nationality' => $item->nationality,
-                        'created_at' => $item->renderDate(),
-                        'showUrl' => $item->renderShowUrl(),
-                        'archiveUrl' => $item->renderArchiveUrl(),
-                        'restoreUrl' => $item->renderRestoreUrl(),
-                        'deleted_at' => $item->deleted_at,
-                    ]);
-                } else {
+            // if($admin->destination_id) {
+                // if($item->book->destination_id === $admin->destination_id) {
+                    // array_push($result,[
+                    //     'id' => $item->id,
+                    //     'book_id' => $item->renderName(),
+                    //     'age' => $item->age,
+                    //     'gender' => $item->gender,
+                    //     'nationality' => $item->nationality,
+                    //     'created_at' => $item->renderDate(),
+                    //     'showUrl' => $item->renderShowUrl(),
+                    //     'archiveUrl' => $item->renderArchiveUrl(),
+                    //     'restoreUrl' => $item->renderRestoreUrl(),
+                    //     'deleted_at' => $item->deleted_at,
+                    // ]);
+                // } else {
                     $data = $this->formatItem($item);
                     array_push($result, $data);
-                }
-            }
+                // }
+            // }
         }
 
         return $result;
