@@ -24,7 +24,7 @@ class Survey extends Model
      */
 
      public function renderName() {
-        return $this->book->guests->first()->first_name . ' ' . $this->book->guests->first()->last_name . ' ' . 'Group';
+        return $this->book->guests->where('main', true)->first()->first_name . ' ' . $this->book->guests->where('main', true)->first()->last_name . ' ' . 'Group';
     }
 
     public function renderShowUrl($prefix = 'admin') {

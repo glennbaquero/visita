@@ -102,6 +102,7 @@ class SurveyFetchController extends FetchController
 
         if ($id) {
         	$item = Survey::withTrashed()->findOrFail($id);
+            $item->group = $item->renderName();
             $answers = $item->answers;
             $item->archiveUrl = $item->renderArchiveUrl();
             $item->restoreUrl = $item->renderRestoreUrl();

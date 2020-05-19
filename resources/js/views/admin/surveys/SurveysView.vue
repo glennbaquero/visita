@@ -7,7 +7,7 @@
 			<div class="row">
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Book ID</label>
-					<input v-model="item.book_id" name="book_id" type="text" class="form-control" readonly>
+					<input v-model="item.group" name="book_id" type="text" class="form-control" readonly>
 				</div>
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Age</label>
