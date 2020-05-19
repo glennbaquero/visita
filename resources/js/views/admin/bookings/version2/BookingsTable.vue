@@ -3,7 +3,7 @@
         <div class="row">
             <selector
             class="mt-2 col-md-6"
-            :items="destinations"
+            :items="new_destinations"
             v-model="destination"
             item-text="name"
             item-value="id"
@@ -163,6 +163,7 @@ export default {
     data() {
         return {
             destination: null,
+            new_destinations: this.destinations,
             experiences: [],
             payment_status: [
                 {
@@ -252,6 +253,17 @@ export default {
         'selector': Select,
     },
 
+    mounted() {
+        var all = {
+            'id': 0,
+            'name': 'All'
+        };
+
+        // setTimeout(() => {
+            this.new_destinations.push(all);
+        // }, 2000)
+    },
+
     methods: {
         destinationChange() {
             this.experiences = [];
@@ -260,6 +272,11 @@ export default {
                     this.experiences = destination.allocations;
                 }
             })
+            var all = {
+                'id': 0,
+                'name': 'All'
+            };
+            this.experiences.push(all)
         }
     }
 }

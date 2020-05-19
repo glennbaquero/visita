@@ -39,11 +39,16 @@ class BookingFetchController extends FetchController
     public function filterQuery($query)
     {
     	if($this->request->destination) {
-	    	$query = $query->where('destination_id', $this->request->destination);
+            if($this->request->destination != 0) {
+    	    	$query = $query->where('destination_id', $this->request->destination);
+            }
     	}
 
     	if($this->request->experience) {
-	    	$query = $query->where('allocation_id', $this->request->experience);
+            if($this->request->experience != 0) {
+                $query = $query->where('allocation_id', $this->request->experience);
+            }
+	    	
     	}
 
         if($this->request->payment_type) {
