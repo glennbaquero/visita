@@ -35,6 +35,12 @@ class UserController extends Controller
 
     public function updatePassword(Request $request, $id) 
     {
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required',
+            'password_confirmation' => 'required'
+        ]);
+
         $user = User::find($id);
         DB::beginTransaction();
             if(Hash::check($request->old_password, $user->password)) {

@@ -30,8 +30,8 @@ class ProfileUpdateRequest extends FormRequest
             'first_name' => ['required', new Varchar],
             'last_name' => ['required', new Varchar],
             'contact_no' => ['required'],
-            'old_password' => ['required'],
-            'password' => ['required', 'confirmed', 'min:8'],
+            // 'old_password' => ['required'],
+            // 'password' => ['required', 'confirmed', 'min:8'],
         ];
     }
 
