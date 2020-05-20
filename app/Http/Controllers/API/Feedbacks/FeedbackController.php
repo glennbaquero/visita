@@ -17,7 +17,7 @@ class FeedbackController extends Controller
     {
     	DB::beginTransaction();
     		$book = Book::find($request->book_id);
-            if($request->skip) {
+            if(!$request->skip) {
                 foreach ($request->feedbacks as $feedback) {
                     $book->guestFeedbacks()->create([
                         'answer' => $feedback['selected'],
