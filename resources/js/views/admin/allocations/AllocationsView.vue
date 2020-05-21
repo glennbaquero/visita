@@ -31,10 +31,10 @@
 					<input v-model="item.transaction_fees" name="transaction_fees" type="number" class="form-control">
 				</div>
 
-				<div class="form-group col-sm-12 col-md-6">
+				<!-- <div class="form-group col-sm-12 col-md-6">
 					<label>Fee Per Head</label>
 					<input v-model="item.fee_per_head" name="fee_per_head" type="number" class="form-control">
-				</div>
+				</div> -->
 			</div>
 			
 			<div class="row">

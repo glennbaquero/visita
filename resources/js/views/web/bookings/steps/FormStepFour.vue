@@ -190,7 +190,7 @@
 				</div>
 				<div class="inlineBlock-parent align-l m-margin-b">
 					<input type="checkbox" @click="$emit('privacy_policy_click')">
-					<h5 class="frm-header clr--gray">I agree to the <a href="/read/privacy_policy" target="_blank">Privacy Policy.</a></h5>
+					<h5 class="frm-header clr--gray">I agree to the <a href="/privacy-policy" target="_blank">Privacy Policy.</a></h5>
 				</div>
 
 			</div>

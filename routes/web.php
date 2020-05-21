@@ -72,7 +72,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 		});
 
 		Route::get('', 'PageController@showHome')->name('home');
-		// Route::get('/read/{type}', 'PageController@showPolicies')->name('home');
+		Route::get('/read/{type}', 'PageController@showPolicies')->name('home');
 		Route::get('/about-us', 'PageController@showAboutUs')->name('about-us');
 		
 		Route::get('/destinations', 'PageController@showDestinations')->name('destinations');
@@ -85,7 +85,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 		// Route::get('/reset-password/{token}/{email}', 'PageController@showResetPassword')->name('password.reset');
 		
 		Route::get('stylesheet', 'PageController@showStylesheet')->name('stylesheet');
-		Route::get('/privacy-policy', 'PageController@showPrivacyPolicy')->name('privacy-policy');
+		// Route::get('/privacy-policy', 'PageController@showPrivacyPolicy')->name('privacy-policy');
 		Route::get('/reset-password/success', 'PageController@frontlinerSuccessPage')->name('management.reset.password.success');
 
 		Route::middleware('auth:web')->group(function() {
