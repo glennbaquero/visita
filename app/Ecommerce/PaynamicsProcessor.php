@@ -122,7 +122,7 @@ class PaynamicsProcessor
 		$strxml = $strxml . "<client_ip>" . $_clientip . "</client_ip>";
 		$strxml = $strxml . "<amount>" . $_amount . "</amount>";
 		$strxml = $strxml . "<currency>" . $_currency . "</currency>";
-		$strxml = $strxml . "<mlogo_url></mlogo_url>";// pls set this to the url where your logo is hosted
+		$strxml = $strxml . "<mlogo_url>https://visita.org.ph/images/visita-logo.png</mlogo_url>";// pls set this to the url where your logo is hosted
 		$strxml = $strxml . "<pmethod></pmethod>";
 		$strxml = $strxml . "<signature>" . $_sign . "</signature>";
 		$strxml = $strxml . "</Request>";
