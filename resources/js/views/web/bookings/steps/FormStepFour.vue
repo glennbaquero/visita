@@ -122,7 +122,7 @@
 							</div>
 						</div>
 					</div>
-					<p class="frm-header clr--gray s-margin-b">{{ stepData.guests.length }} Guests x Php {{ allocation.platform_fee }}</p>
+					<!-- <p class="frm-header clr--gray s-margin-b">{{ stepData.guests.length }} Guests x Php {{ allocation.platform_fee }}</p> -->
 				</div
 				><div class="width--50 align-r align-t">
 					<p class="frm-header bold clr--gray s-margin-b">Php {{ withComma(platformFee) }}</p>
@@ -230,7 +230,7 @@
 				var guests = this.stepData.guests.length;
 				var platform_fee = parseFloat(this.allocation.platform_fee);
 				var fee = guests * platform_fee;
-				return fee;
+				return platform_fee;
 			},
 
 			subTotal() {
