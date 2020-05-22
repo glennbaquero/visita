@@ -24,7 +24,7 @@
 								<img class="fqs-frm1__selection-icon s-margin-r" src="{{ asset('images/visitor-icon.png') }}">
 								<h5 class="frm-title x-small m-margin-b clr--green">Visitors</h5>
 								<div class="frm-description clr--gray">
-									<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has</p>
+									{!! $pageItems['faq_visitor_description'] !!}
 								</div>
 							</div>
 						</div>
@@ -40,7 +40,7 @@
 								<img class="fqs-frm1__selection-icon s-margin-r" src="{{ asset('images/visitor-icon.png') }}">
 								<h5 class="frm-title x-small m-margin-b clr--green">Destination Managers</h5>
 								<div class="frm-description clr--gray">
-									<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has</p>
+									{!! $pageItems['faq_dm_description'] !!}
 								</div>
 							</div>
 						</div>

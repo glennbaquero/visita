@@ -202,7 +202,7 @@ class PageController extends Controller
         $data = $this->getPageData('faqs');
 		$visitors = Faq::where('type', 'VISITOR')->get();
 		$managers = Faq::where('type', 'DESTINATION MANAGER')->get();
-        
+        // dd($data);
         return view('web.pages.faqs', array_merge($data, [
         	'quote' => Inspiring::quote(),
         	'visitors'=> $visitors,
