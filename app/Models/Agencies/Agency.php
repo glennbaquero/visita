@@ -8,6 +8,25 @@ use App\Models\Allocations\AgencyAllocation;
 
 class Agency extends Model
 {
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $searchable = [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'contact_person' => $this->contact_person,
+            'contact_number' => $this->contact_number,
+        ];
+        
+        return $searchable;
+    }
+
     public function agencyAllocations()
     {
     	return $this->hasMany(AgencyAllocation::class);
