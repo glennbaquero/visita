@@ -25,6 +25,22 @@ class Destination extends Model
 
     use FileTrait, ManyImagesTrait;
 
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $searchable = [
+            'id' => $this->id,
+            'name' => $this->name,
+            'capacity_per_day' => $this->capacity_per_day,
+        ];
+        
+        return $searchable;
+    }
+
 	/*
 	 * Relationships
 	 */
