@@ -143,7 +143,7 @@
 				</div
 				><div class="width--50">
 					<div class="width--95 margin-l-a" v-if="showFileInput">
-						<p class="frm-header bold s-margin-b clr--gray">Health Certificate/Letter of Consent*</p>
+						<p class="frm-header bold s-margin-b clr--gray">Valid ID / Identification document*</p>
 						<div class="frm-inpt m-margin-b">
 							<input type="file" id="files" @change="proofForSpecialFee">
 						</div>

@@ -30,7 +30,7 @@ class InvoiceController extends Controller
         $admins = Admin::all();
         $email = GeneratedEmail::where('notification_type', 'Reservation Received')->first();
 
-        $totalReserved = Book::where('destination_id', $request->destination_id)->count();
+        $totalReserved = Book::where('destination_id', $request->destination_id)->whereDate('created_at', Carbon::now()->format('Y-m-d'))->count();
         $totalReservation = Destination::find($request->destination_id)->capacity_per_day;
         $availableSeat = $totalReservation - $totalReserved;
 
