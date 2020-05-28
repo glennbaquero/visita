@@ -523,7 +523,9 @@
 				var data = new FormData();
 
 				_.each(this.stepData.guests, (guest, key) => {
-					data.append('special_fee_path['+key+']', guest.paths);
+					if(guest.paths) {
+						data.append('special_fee_path['+key+']', guest.paths);
+					}
 				})
 
 				data.append('transaction_fee', this.$refs.formStepFour.transactionFee);
