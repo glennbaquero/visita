@@ -127,8 +127,8 @@
                 confirm-dialog
                 title="Archive Item"
                 alt-title="Restore Item"
-                :message="'Are you sure you want to archive Allocation #' + item.id + '?'"
-                :alt-message="'Are you sure you want to restore Allocation #' + item.id + '?'"
+                :message="'Are you sure you want to archive Experience #' + item.id + '?'"
+                :alt-message="'Are you sure you want to restore Experience #' + item.id + '?'"
                 :disabled="loading"
                 @load="load"
                 @success="fetch"
