@@ -110,7 +110,7 @@ class InvoiceFetchController extends FetchController
             'transaction_fee' => $item->transaction_fee,
             'sub_total' => $item->sub_total,
             'grand_total' => $item->grand_total,
-            'payment_type' => $item->is_paypal_payment ? 'Paypal' : 'Bank Deposit',
+            'payment_type' => $item->book->from_masungi_reservation ? ($item->is_paypal_payment ? 'Paypal' : 'Bank Deposit') : 'Paynamics',
             'is_approved' => $item->is_approved ? 'Already Approved' : ($item->deleted_at ? 'Rejected' : 'For Confirmation'),
             'reference_code' => $item->reference_code,
             'is_paid' => $item->renderPaymentStatus(),
