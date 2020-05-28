@@ -205,10 +205,13 @@ class InvoiceController extends Controller
             ]);
         }
 
-
+        $file_name = 'Reservation_' . Carbon::parse($request->start_date)->format('M. d Y') . '.xls';
+        if($request->end_date) {
+            $file_name = 'Reservation_from_' . Carbon::parse($request->start_date)->format('M. d Y') . '_to_'.Carbon::parse($request->end_date)->format('M. d Y').'.xls';
+        }
         if (!$request->ajax()) {
             $ids = Arr::pluck($data->original['items'], 'id');
-            return Excel::download(new InvoiceExport($data->original['items']), 'Samples_' . Carbon::now()->toDateTimeString() . '.xls');
+            return Excel::download(new InvoiceExport($data->original['items']), $file_name);
         }
 
         if ($request->ajax()) {

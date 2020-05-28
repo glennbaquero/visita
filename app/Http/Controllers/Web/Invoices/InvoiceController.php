@@ -44,7 +44,7 @@ class InvoiceController extends Controller
 	    	foreach ($guests as $key => $guest) {
                 $upload_path = null;
 
-                if($request->file('special_fee_path') != null || $request->file('special_fee_path') != '') {
+                if($request['special_fee_path'][$key] != null || $request['special_fee_path'][$key] != '') {
                     $file = $request['special_fee_path'][$key];
                     $filename = $file->getClientOriginalName();
                     $path = 'public/special_fee';

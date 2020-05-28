@@ -65,7 +65,7 @@ class InvoiceFetchController extends FetchController
             });
         }
 
-        $query = $query->where('created_at','>=',$this->request->start_date)->where('created_at','<=',$this->request->end_date)->where('main', false);
+        $query = $query->where('created_at','>=',$this->request->start_date)->where('created_at','<=',$this->request->end_date);
 
         return $query;
     } 
