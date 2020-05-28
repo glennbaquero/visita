@@ -394,15 +394,15 @@
 					  				fee: fee,
 					  				count: 1
 					  			};
-						  		if(value.name === data.name) {
-						  			data.count += 1;
-							  		this.visitorTypeList[key].count += 1;
-							  		this.visitorTypeList[key].fee += fee;
-						      		this.conservationFeeTotal += fee;
-						  		} else {
+						  		// if(value.name === data.name) {
+						  		// 	data.count += 1;
+							  	// 	this.visitorTypeList[key].count += 1;
+							  	// 	this.visitorTypeList[key].fee += fee;
+						    //   		this.conservationFeeTotal += fee;
+						  		// } else {
 						  			this.visitorTypeList.push(data);
 						      		this.conservationFeeTotal += fee;
-						  		}
+						  		// }
 					  		// })
 						}			    		
 			    	})
