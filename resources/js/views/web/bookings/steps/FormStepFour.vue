@@ -95,7 +95,7 @@
 									<p class="frm-header clr--gray">{{ special.name }} x {{ special.count }}</p>
 								</div
 								><div class="width--50 align-r">
-									<p class="frm-header clr--gray">(-) Php {{ withComma(special.fee) }}</p>
+									<p class="frm-header clr--gray">Php {{ withComma(special.fee) }}</p>
 								</div>
 							</div>
 						</div>
@@ -253,7 +253,7 @@
 		mounted() {
 			this.conservationFeeForVisitorType();
 			this.specialFee();
-		  	this.conservationFeeTotal = this.conservationFeeTotal - this.specialFeeTotal;
+		  	this.conservationFeeTotal = this.conservationFeeTotal + this.specialFeeTotal;
 
 		    // $('.rqst-frm1__step-4-content-checkbox-container').on('click', function(){
 		    // 	$('.rqst-frm1__step-4-content-checkbox-container').removeClass('active');
@@ -394,15 +394,15 @@
 					  				fee: fee,
 					  				count: 1
 					  			};
-						  		// if(value.name === data.name) {
-						  		// 	data.count += 1;
-							  	// 	this.visitorTypeList[key].count += 1;
-							  	// 	this.visitorTypeList[key].fee += fee;
-						    //   		this.conservationFeeTotal += fee;
-						  		// } else {
+						  		if(value.name === data.name) {
+						  			data.count += 1;
+							  		this.visitorTypeList[key].count += 1;
+							  		this.visitorTypeList[key].fee += fee;
+						      		this.conservationFeeTotal += fee;
+						  		} else {
 						  			this.visitorTypeList.push(data);
 						      		this.conservationFeeTotal += fee;
-						  		// }
+						  		}
 					  		// })
 						}			    		
 			    	})
