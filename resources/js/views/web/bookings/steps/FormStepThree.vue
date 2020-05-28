@@ -230,7 +230,7 @@
 		},
 
 		mounted() {
-			flatpickr('#birthdate-guests', { maxDate: 'today', disableMobile: 'true' });
+			flatpickr('#birthdate-guests', { maxDate: new Date().fp_incr(-6570), disableMobile: 'true' });
 			this.setupGuestData();
 		},
 

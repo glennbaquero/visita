@@ -14,7 +14,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.allocations.index') }}">Allocations</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.allocations.index') }}">Experiences</a></li>
                     <li class="breadcrumb-item active"><a href="javascript:void(0)">{{ $item->name }}</a></li>
                 </ol>
             </div>

@@ -13,6 +13,7 @@ use App\Models\Books\Book;
 use App\Models\ActivityLogs\ActivityLog;
 
 use App\Models\Guests\Guest;
+use App\Models\Invoices\Invoice;
 use DB;
 
 class DashboardAnalyticsController extends Controller
@@ -117,28 +118,63 @@ class DashboardAnalyticsController extends Controller
         $revenue = [
             [
                 "backgroundColor" => "#007bff",
-                "data" => 80.00,
+                "data" => Invoice::whereMonth('created_at', '1')->where('is_paid', true)->withTrashed()->sum('grand_total'),
                 "label" => "January"
             ],
             [
                 "backgroundColor" => "red",
-                "data" => 99.00,
+                "data" => Invoice::whereMonth('created_at', '2')->where('is_paid', true)->withTrashed()->sum('grand_total'),
                 "label" => "February"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => 100.00,
+                "data" => Invoice::whereMonth('created_at', '3')->where('is_paid', true)->withTrashed()->sum('grand_total'),
                 "label" => "March"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => 100.00,
+                "data" => Invoice::whereMonth('created_at', '4')->where('is_paid', true)->withTrashed()->sum('grand_total'),
                 "label" => "April"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => 200.00,
+                "data" => Invoice::whereMonth('created_at', '5')->where('is_paid', true)->withTrashed()->sum('grand_total'),
                 "label" => "May"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => Invoice::whereMonth('created_at', '6')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "label" => "June"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => Invoice::whereMonth('created_at', '7')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "label" => "July"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => Invoice::whereMonth('created_at', '8')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "label" => "August"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => Invoice::whereMonth('created_at', '9')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "label" => "September"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => Invoice::whereMonth('created_at', '10')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "label" => "October"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => Invoice::whereMonth('created_at', '11')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "label" => "November"
+            ],
+            [
+                "backgroundColor" => "green",
+                "data" => Invoice::whereMonth('created_at', '12')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "label" => "December"
             ]
         ];
 

@@ -35,7 +35,7 @@ class Inquiry extends Model
 
 
     public function renderWebHome() {
-        return route('web.home');
+        return '/';
     }
 
     /**

@@ -107,9 +107,9 @@ class InvoiceController extends Controller
         } elseif ($request->sort === 'pending') {
             $invoices = auth()->user()->invoices()->where(['is_paid' => false, 'is_approved' => true])->get();
         } elseif ($request->sort === 'for approval') {
-            $invoices = auth()->user()->invoices()->where(['is_paid' => false, 'is_approved' => false])->get();
+            $invoices = auth()->user()->invoices()->where(['is_paid' => false, 'is_approved' => false])->whereNull('deleted_at')->get();
         } elseif($request->sort === 'rejected') {
-            $invoices = auth()->user()->invoices()->where('is_approved', false)->whereNotNull('deleted_at')->get();
+            $invoices = auth()->user()->invoices()->whereNotNull('deleted_at')->get();
         }
 
     	foreach ($invoices as $invoice) {

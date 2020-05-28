@@ -255,7 +255,7 @@
 		<!--  -->
 
 		<!-- Modals -->
-		<div id="gnrl-rmdl" class="remodal custom-width__small" data-remodal-id="success-modal">
+		<div id="gnrl-rmdl" class="remodal custom-width__small" data-remodal-id="success-modal" data-remodal-options="closeOnOutsideClick: false, closeOnEscape: false">
 			<div class="width--90 margin-a">
 				<img 
 				  class="gnrl-rmdl__img-icon"
