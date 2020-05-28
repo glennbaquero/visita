@@ -16,6 +16,7 @@ use App\Models\Invoices\Invoice;
 use App\Models\Books\Book;
 use App\Models\Users\Admin;
 use App\Models\Emails\GeneratedEmail;
+use App\Models\Destinations\Destination;
 
 use App\Ecommerce\PaynamicsProcessor;
 

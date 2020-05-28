@@ -98,9 +98,9 @@
 
 				<selector class="col-sm-4"
 				v-model="item.special_fee_id"
-				name="guest_special_fee_id[]"
+				name="guest_special_fee_id"
 				label="Special Fees"
-				:items="specialFees"
+				:items="special_fees"
 				item-value="id"
 				item-text="name"
 				placeholder="Select Special Fee"
@@ -119,7 +119,7 @@
 		</card>
 
 		<card>
-			<template v-slot:header>Guest Details <button type="button" class="btn btn-primary" @click="addGuest()"><i class="fas fa-plus"></i></button></template>
+			<template v-slot:header>Guest Details <!-- <button type="button" class="btn btn-primary" @click="addGuest()"><i class="fas fa-plus"></i></button> --></template>
 			
 			<br>
 			
