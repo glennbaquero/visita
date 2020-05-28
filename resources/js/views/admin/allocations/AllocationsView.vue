@@ -47,7 +47,7 @@
 				row="5"
 				></text-editor>
 
-				<text-editor
+				<!-- <text-editor
 				v-model="item.recommended_for"
 				class="col-sm-12"
 				label="Recommended For (For Masungi Automated Email)"
@@ -109,7 +109,7 @@
 				label="Terms And Condition (For Masungi Automated Email)"
 				name="terms_and_condition"
 				row="5"
-				></text-editor>
+				></text-editor> -->
 	
 			</div>
 

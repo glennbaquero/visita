@@ -10,6 +10,22 @@ use Carbon\Carbon;
 
 class TimeSlot extends Model
 {
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $searchable = [
+            'id' => $this->id,
+            'experience' => $this->allocation ? $this->allocation->name : '',
+        ];
+        
+        return $searchable;
+    }
+
     
     public function allocation() 
     {

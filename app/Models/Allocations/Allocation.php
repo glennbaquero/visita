@@ -12,6 +12,23 @@ use App\Models\Times\TimeSlot;
 
 class Allocation extends Model
 {
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $searchable = [
+            'id' => $this->id,
+            'name' => $this->name,
+            'destination' => $this->destination ? $this->destination->name : null,
+        ];
+        
+        return $searchable;
+    }
+
     /*
      * Relationships
      */

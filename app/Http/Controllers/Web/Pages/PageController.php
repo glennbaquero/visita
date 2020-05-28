@@ -163,6 +163,12 @@ class PageController extends Controller
 	public function showRequestToVisit($id, $name) {
 		$destination = Destination::find($id);
         $data = $this->getPageData('destination');
+        $totalReserved = Book::where('destination_id', $id)->count();
+        $totalReservation = $destination->capacity_per_day;
+
+        $destination->totalReserved = $totalReserved;
+        $destination->totalReservation = $totalReservation;
+        $destination->availableSeat = $totalReservation - $totalReserved;
 
 		if(!auth()->guard('web')->check()) {
 	       	session(['destination' => $destination]);

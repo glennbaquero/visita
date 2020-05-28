@@ -8,6 +8,22 @@ use App\Models\Books\Book;
 
 class Survey extends Model
 {
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $searchable = [
+            'id' => $this->id,
+            'name' => $this->book ? $this->renderName() : '',
+        ];
+        
+        return $searchable;
+    }
+
     public function book()
     {
     	return $this->belongsTo(Book::class)->withTrashed();

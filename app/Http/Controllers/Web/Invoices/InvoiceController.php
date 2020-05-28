@@ -10,6 +10,7 @@ use App\Notifications\Reservation\BookingNotification;
 use App\Notifications\Web\Bookings\NewBookingNotification;
 use App\Notifications\Reservation\BankDepositSlipUploadedNotification;
 use App\Notifications\Web\Reservation\ReservationReceived;
+use Illuminate\Validation\ValidationException;
 
 use App\Models\Invoices\Invoice;
 use App\Models\Books\Book;
@@ -28,6 +29,10 @@ class InvoiceController extends Controller
     	$guests = json_decode($request->guests);
         $admins = Admin::all();
         $email = GeneratedEmail::where('notification_type', 'Reservation Received')->first();
+
+        $totalReserved = Book::where('destination_id', $request->destination_id)->count();
+        $totalReservation = Destination::find($request->destination_id)->capacity_per_day;
+        $availableSeat = $totalReservation - $totalReserved;
 
     	DB::beginTransaction();
 

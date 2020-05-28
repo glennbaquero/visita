@@ -320,7 +320,7 @@
 			return {
 				stepData: {
 					allocationSelected: null,
-					numberOfGuests: 0,
+					numberOfGuests: 1,
 					timeSelected: null,
 					visitDate: null,
 
@@ -361,7 +361,7 @@
 				editButton: 'images/edit-button.png',
 				removeButton: 'images/remove-button.png',
 				addButton: 'images/add-button.png',
-				numberOfGuests: 0,
+				numberOfGuests: 1,
 				guest_key: null,
 
 				isLoading: false,
@@ -492,9 +492,11 @@
 					main: false,
 					paths: []
 				}
-				var totalGuests = parseInt(this.stepData.numberOfGuests) + 1;
-				this.stepData.numberOfGuests = totalGuests;
-				this.stepData.guests.push(details);
+				if(this.stepData.numberOfGuests < this.destination.availableSeat) {
+					var totalGuests = parseInt(this.stepData.numberOfGuests) + 1;
+					this.stepData.numberOfGuests = totalGuests;
+					this.stepData.guests.push(details);
+				}
 				EventBus.$emit('changed');
 			},
 

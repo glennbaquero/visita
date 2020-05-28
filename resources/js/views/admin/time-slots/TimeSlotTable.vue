@@ -74,6 +74,7 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
+                { text: 'Experience', value: 'experience' },
                 { text: 'Time', value: 'time' },
             ];
 
