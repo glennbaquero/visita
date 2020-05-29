@@ -30,7 +30,6 @@
                     <td>{{ item.fullname }}</td>
                     <td>{{ item.email }}</td>
                     <td>{{ item.destination }}</td>
-                    <td>{{ item.verified_at }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>
                         <view-button :href="item.showUrl"></view-button>
@@ -79,7 +78,6 @@ export default {
                 { text: 'Name', value: 'name' },
                 { text: 'Email', value: 'email' },
                 { text: 'Destination', value: 'destination' },
-                { text: 'Verified At', value: 'verified_at' },
             ];
 
 

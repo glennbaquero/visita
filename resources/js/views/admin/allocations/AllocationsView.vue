@@ -2,7 +2,7 @@
 	<form-request :submit-url="submitUrl" @load="load" @success="fetch" confirm-dialog sync-on-success>
 	
 		<card>
-			<template v-slot:header>Allocation Information</template>
+			<template v-slot:header>Experience Information</template>
 			<div class="row">
 				<selector class="col-sm-12 col-md-6"
 				v-model="item.destination_id"
