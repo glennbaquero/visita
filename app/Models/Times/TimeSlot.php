@@ -21,6 +21,7 @@ class TimeSlot extends Model
         $searchable = [
             'id' => $this->id,
             'experience' => $this->allocation ? $this->allocation->name : '',
+            'experience' => $this->renderTime(),
         ];
         
         return $searchable;
