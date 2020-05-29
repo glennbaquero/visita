@@ -322,7 +322,7 @@
 			return {
 				stepData: {
 					allocationSelected: null,
-					numberOfGuests: 1,
+					numberOfGuests: 0,
 					timeSelected: null,
 					visitDate: null,
 
@@ -363,7 +363,7 @@
 				editButton: 'images/edit-button.png',
 				removeButton: 'images/remove-button.png',
 				addButton: 'images/add-button.png',
-				numberOfGuests: 1,
+				numberOfGuests: 0,
 				guest_key: null,
 
 				isLoading: false,

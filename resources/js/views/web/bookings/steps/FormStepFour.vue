@@ -83,7 +83,7 @@
 							
 							<div class="inlineBlock-parent rqst-frm1__step-4-content-option" v-for="type in visitorTypeList">
 								<div class="width--50">
-									<p class="frm-header clr--gray">{{ type.name }} x {{ type.count }}</p>
+									<p class="frm-header clr--gray">Guest #{{ type.number }} : {{ type.name }}</p>
 								</div
 								><div class="width--50 align-r">
 									<p class="frm-header clr--gray">Php {{ withComma(type.fee) }}</p>
@@ -92,7 +92,7 @@
 							
 							<div class="inlineBlock-parent rqst-frm1__step-4-content-option" v-for="special in specialFeeTypeList">
 								<div class="width--50">
-									<p class="frm-header clr--gray">{{ special.name }} x {{ special.count }}</p>
+									<p class="frm-header clr--gray">Guest #{{ special.number }} : {{ special.name }}</p>
 								</div
 								><div class="width--50 align-r">
 									<p class="frm-header clr--gray">Php {{ withComma(special.fee) }}</p>
@@ -325,12 +325,13 @@
 
 			      		// this.specialFeeTypeList.push(data)
 
-			      		_.forEach(this.stepData.guests, (guest) => {
+			      		_.forEach(this.stepData.guests, (guest, guestKey) => {
 						if(value.id == guest.special_fee_id){
 					  		result += parseFloat(value.daytour_fee);
 					  		// _.forEach(this.specialFeeTypeList, (data, key) => {
 					  			var data = {
 					  				name: value.name,
+					  				number: (guestKey + 1),
 					  				fee: fee,
 					  				count: 1
 					  			};
@@ -371,26 +372,13 @@
 		      			fee += parseFloat(value.weekday_fee);
 		      		}
 
-			    	if(value.id == this.stepData.main.visitor_type_id){
-			      		result += parseFloat(value.daytour_fee);
-
-			      		var data = {
-			      			name: value.name,
-			      			fee: fee,
-			      			count: 1
-			      		};
-
-			      		// this.conservationFeeTotal += fee;
-
-			      		// this.visitorTypeList.push(data)
-			    	}
-
-			    	_.forEach(this.stepData.guests, (guest) => {
+			    	_.forEach(this.stepData.guests, (guest, guestKey) => {
 						if(value.id == guest.visitor_type_id){
 					  		result += parseFloat(value.daytour_fee);
 					  		// _.forEach(this.visitorTypeList, (data, key) => {
 					  			var data = {
 					  				name: value.name,
+					  				number: (guestKey + 1),
 					  				fee: fee,
 					  				count: 1
 					  			};
