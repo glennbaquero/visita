@@ -65,6 +65,6 @@ class TimeSlot extends Model
     }
 
     public function renderTime() {
-        return Carbon::parse($this->time)->format('H:i A');
+        return Carbon::parse($this->time)->format('g:i A');
     }
 }
