@@ -46,9 +46,9 @@ class DashboardAnalyticsController extends Controller
             $today = $request->date;
         }
         // get all booking based on current destination assigned for logged-in user
-        $bookings = Book::whereDate('scheduled_at', $today);
+        $bookings = Book::whereDate('scheduled_at', $today)->whereDate('started_at', $today);
         if($request->date) {
-            $bookings = Book::whereDate('scheduled_at', $request->date);
+            $bookings = Book::whereDate('scheduled_at', $request->date)->whereDate('started_at', $request->date);
         }
 
         if($request->destination && $request->destination != null) {
@@ -61,15 +61,15 @@ class DashboardAnalyticsController extends Controller
         // total of guest today
 
         if($request->date) {
-            $total['guest'] = $bookings->whereDate('scheduled_at', $request->date)->sum('total_guest');
+            $total['guest'] = $bookings->whereDate('scheduled_at', $request->date)->whereDate('started_at', $request->date)->sum('total_guest');
         } else {
-            $total['guest'] = $bookings->whereDate('scheduled_at', $today)->sum('total_guest');
+            $total['guest'] = $bookings->whereDate('scheduled_at', $today)->whereDate('started_at', $today)->sum('total_guest');
         }
         // total of groups today
         if($request->date) {
-            $total['groups'] = $bookings->whereDate('scheduled_at', $request->date)->get()->count();
+            $total['groups'] = $bookings->whereDate('scheduled_at', $request->date)->whereDate('started_at', $request->date)->get()->count();
         } else {
-            $total['groups'] = $bookings->whereDate('scheduled_at', $today)->get()->count();
+            $total['groups'] = $bookings->whereDate('scheduled_at', $today)->whereDate('started_at', $today)->get()->count();
         }
         
         $bookings = Book::whereDate('scheduled_at', $today);
