@@ -158,6 +158,11 @@ class InvoiceController extends Controller
     {
         $filterDestinations = [];
         $destinations = Destination::all();
+        $admin = auth()->guard('admin')->user();
+        $destinations = Destination::all();
+        if($admin->destination_id) {
+            $destinations = Destination::where('id', $admin->destination_id)->get();
+        }
         
         foreach ($destinations as $destination) {
             array_push($filterDestinations, [

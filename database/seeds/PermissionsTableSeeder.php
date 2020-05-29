@@ -366,6 +366,58 @@ class PermissionsTableSeeder extends Seeder
                     ],
                 ],
             ],
+
+
+            [
+                'name' => 'Genders',
+                'description' => 'Manage Gender',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.genders.crud',
+                        'description' => 'Manage Genders',
+                    ],
+                ],
+            ],
+
+
+            [
+                'name' => 'Civil Status',
+                'description' => 'Manage Civil Status',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.civil_statuses.crud',
+                        'description' => 'Manage Civil Status',
+                    ],
+                ],
+            ],
+
+
+            [
+                'name' => 'About Us',
+                'description' => 'Manage About Us',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.about-us.crud',
+                        'description' => 'Manage About Us',
+                    ],
+                ],
+            ],
+
+
+            [
+                'name' => 'Generated Emails',
+                'description' => 'Manage Generated Emails',
+                'icon' => 'fas fa-at',
+                'items' => [
+                    [
+                        'name' => 'admin.generated-emails.crud',
+                        'description' => 'Manage Generated Emails',
+                    ],
+                ],
+            ],
         ];
 
     	foreach ($categories as $category) {

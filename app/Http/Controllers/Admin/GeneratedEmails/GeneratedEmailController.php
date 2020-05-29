@@ -11,6 +11,11 @@ use App\Http\Requests\Admin\GeneratedEmails\GeneratedEmailStoreRequest;
 
 class GeneratedEmailController extends Controller
 {
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\GeneratedEmails\GeneratedEmailMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *

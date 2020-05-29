@@ -360,7 +360,8 @@
                                 </a>
                             </li>
                             @endif
-
+                            
+                            @if ($self->hasAnyPermission(['admin.genders.crud']))
                             <li class="nav-item">
                                 <a href="{{ route('admin.genders.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                                     'admin.genders.index','admin.genders.create','admin.genders.show',
@@ -371,7 +372,9 @@
                                     </p>
                                 </a>
                             </li>
-
+                            @endif
+                            
+                            @if ($self->hasAnyPermission(['admin.civil_statuses.crud']))
                             <li class="nav-item">
                                 <a href="{{ route('admin.civil_statuses.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                                     'admin.civil_statuses.index','admin.civil_statuses.create','admin.civil_statuses.show',
@@ -382,6 +385,7 @@
                                     </p>
                                 </a>
                             </li>
+                            @endif
 
                             @if ($self->hasAnyPermission(['admin.blocked-dates.crud']))
                             <li class="nav-item">
@@ -473,7 +477,8 @@
                                 </a>
                             </li>
                             @endif
-
+                            
+                            @if ($self->hasAnyPermission(['admin.about-us.crud']))
                             <li class="nav-item">
                                 <a href="{{ route('admin.about-us.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                                     'admin.about-us.index','admin.about-us.create','admin.about-us.show',
@@ -484,7 +489,9 @@
                                     </p>
                                 </a>
                             </li>
-
+                            @endif
+                            
+                            @if ($self->hasAnyPermission(['admin.generated-emails.crud']))
                             <li class="nav-item">
                                 <a href="{{ route('admin.generated-emails.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
                                     'admin.generated-emails.index','admin.generated-emails.create','admin.generated-emails.show',
@@ -495,7 +502,7 @@
                                     </p>
                                 </a>
                             </li>
-
+                            @endif
                         </ul>
                     </li>
                 @endif

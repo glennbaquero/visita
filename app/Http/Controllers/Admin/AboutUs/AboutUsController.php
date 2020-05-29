@@ -10,6 +10,11 @@ use App\Models\Pages\AboutUs;
 
 class AboutUsController extends Controller
 {
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\AboutUs\AboutUsMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *

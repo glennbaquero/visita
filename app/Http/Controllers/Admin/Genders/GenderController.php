@@ -9,6 +9,11 @@ use App\Models\Genders\Gender;
 
 class GenderController extends Controller
 {
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\Genders\GenderMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *

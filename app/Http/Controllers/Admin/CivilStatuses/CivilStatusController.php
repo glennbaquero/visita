@@ -9,6 +9,11 @@ use App\Models\CivilStatuses\CivilStatus;
 
 class CivilStatusController extends Controller
 {
+    public function __construct() {
+        $this->middleware('App\Http\Middleware\Admin\CivilStatus\CivilStatusMiddleware', 
+            ['only' => ['index', 'create', 'store', 'show', 'update', 'archive', 'restore']]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
