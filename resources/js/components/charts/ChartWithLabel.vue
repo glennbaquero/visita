@@ -1,12 +1,15 @@
 <template>
 	<div>
-		<canvas ref="elem" :width="width" :height="height"></canvas>
+		<div :id="'chart-holder-'+chartId">
+			<canvas ref="elem" :width="width" :height="height" :id="chartId"></canvas>
+		</div>
 	</div>
+	
 </template>
 
 <script type="text/javascript">
 import Chart from 'chart.js';
-import ArrayHelpers from '../../mixins/array.js';
+import ArrayHelpers from 'Mixins/array.js';
 
 export default {
 	watch: {
@@ -18,7 +21,9 @@ export default {
 	},
 	methods: {
 		initChart(array) {
-			let ctx = this.$refs.elem.getContext('2d');
+			$('#'+this.chartId).remove();
+			$('#chart-holder-'+this.chartId).append('<canvas ref="elem" width="'+this.width+'" height="'+this.height+'" id="'+this.chartId+'"></canvas>')
+			var ctx = document.getElementById(this.chartId).getContext("2d");
 
 			let config = {
 			    type: this.type,
@@ -107,7 +112,9 @@ export default {
 		beginAtZero: {
 			default: false,
 			type: Boolean
-		}
+		},
+		
+		chartId: String
 	},
 
 	data() {

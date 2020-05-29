@@ -35,51 +35,168 @@ class DashboardAnalyticsController extends Controller
             $subject = 'App\Models\Users\User';
         }
 
-        $activities = $this->getUserActivity($users);
-        $usage = $this->getSystemUsageAnalytics($users, $subject);
+        $usage = $this->getSystemUsageAnalytics($users, $subject, $request);
 
     	return response()->json($usage);
     }
 
-    protected function getUserActivity($items) {
-        if ($this->startDate && $this->endDate) {
-            $items = $items->whereBetween('created_at', [$this->startDate, $this->endDate]);
-        }
-        
-        $active = $items->whereDate('created_at', '!=', now())->count();
-        $inactive = $items->onlyTrashed()->count();
-
-        return [
-            'active' => $active,
-            'inactive' => $inactive,
-        ];
-    }
-
-    protected function getSystemUsageAnalytics($items, $subject) {
-        
+    protected function getSystemUsageAnalytics($items, $subject, $request) {
         $today = Carbon::now();
+        if($request->date) {
+            $today = $request->date;
+        }
         // get all booking based on current destination assigned for logged-in user
         $bookings = Book::whereDate('scheduled_at', $today);
-        
+        if($request->date) {
+            $bookings = Book::whereDate('scheduled_at', $request->date);
+        }
+
+        if($request->destination && $request->destination != null) {
+            $bookings = Book::where('destination_id', $request->destination);
+        } 
+
+        if($request->experience) {
+            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
+        }
         // total of guest today
-        $total['guest'] = $bookings->whereDate('started_at', $today)->sum('total_guest');
 
+        if($request->date) {
+            $total['guest'] = $bookings->whereDate('scheduled_at', $request->date)->sum('total_guest');
+        } else {
+            $total['guest'] = $bookings->whereDate('scheduled_at', $today)->sum('total_guest');
+        }
         // total of groups today
-        $total['groups'] = $bookings->whereDate('started_at', $today)->get()->count();
+        if($request->date) {
+            $total['groups'] = $bookings->whereDate('scheduled_at', $request->date)->get()->count();
+        } else {
+            $total['groups'] = $bookings->whereDate('scheduled_at', $today)->get()->count();
+        }
         
+        $bookings = Book::whereDate('scheduled_at', $today);
+        if($request->date) {
+            $bookings = Book::whereDate('scheduled_at', $request->date);
+        }
+
+        if($request->destination && $request->destination != null) {
+            $bookings = Book::where('destination_id', $request->destination);
+        } 
+
+        if($request->experience) {
+            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
+        }
+
+        if($request->destination) {
+            $bookings = Book::where('destination_id', $request->destination);
+        } 
+
+        if($request->experience) {
+            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
+        }
         // get total checked in for walk in guest
-        $checked_in_walkin['visitors'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
-        $checked_in_walkin['groups'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
+        if($request->date) {
+            $checked_in_walkin['visitors'] = $bookings->where('is_walkin', true)->whereDate('started_at', $request->date)->get()->sum('total_guest'); 
+        } else {
+            $checked_in_walkin['visitors'] = $bookings->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+        }
+        if($request->date) {
+            $checked_in_walkin['groups'] = $bookings->where('is_walkin', true)->whereDate('started_at', $request->date)->get()->count(); 
+        } else {
+            $checked_in_walkin['groups'] = $bookings->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
+        }
 
+        $bookings = Book::whereDate('scheduled_at', $today);
+        
         // get total checked in for online in guest
-        $total_checked_in['online_visitor'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', false)->whereDate('started_at', $today)->get()->sum('total_guest'); 
-        $total_checked_in['online_group'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', false)->whereDate('started_at', $today)->get()->count(); 
-        $total_checked_in['walk_in'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
-        $total_checked_in['walk_in_group'] = Book::whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
+        $bookings = Book::whereDate('scheduled_at', $today);
+        if($request->date) {
+            $bookings = Book::whereDate('scheduled_at', $request->date);
+        }
 
+        if($request->destination) {
+            $bookings = Book::where('destination_id', $request->destination);
+        } 
+
+        if($request->experience) {
+            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
+        }
+
+        if($request->date) {
+            $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereDate('started_at', $request->date)->get()->sum('total_guest');
+        } else {
+            $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+        }
+
+        $bookings = Book::whereDate('scheduled_at', $today);
+        if($request->date) {
+            $bookings = Book::whereDate('scheduled_at', $request->date);
+        }
+
+        if($request->destination && $request->destination != null) {
+            $bookings = Book::where('destination_id', $request->destination);
+        } 
+
+        if($request->experience) {
+            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
+        }
+
+        if($request->date) {
+            $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->whereDate('started_at', $request->date)->get()->count();
+        } else {
+            $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->whereDate('started_at', $today)->get()->count(); 
+        }
+
+        $bookings = Book::whereDate('scheduled_at', $today);
+        if($request->date) {
+            $bookings = Book::whereDate('scheduled_at', $request->date);
+        }
+
+        if($request->destination && $request->destination != null) {
+            $bookings = Book::where('destination_id', $request->destination);
+        } 
+
+        if($request->experience) {
+            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
+        }
+
+        if($request->destination) {
+            $bookings = Book::where('destination_id', $request->destination);
+        } 
+
+        if($request->experience) {
+            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
+        }
+        if($request->date) {
+            $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->whereDate('started_at', $request->date)->get()->sum('total_guest'); 
+        } else {
+            $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+        }
+
+        if($request->date) {
+            $total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->whereDate('started_at', $request->date)->get()->count();  
+        } else {
+            $total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
+        }
+
+        $bookings = Book::whereDate('scheduled_at', $today)->get()->pluck('id')->toArray();
+        $collection = Guest::with('visitorType', 'specialFee')->whereIn('book_id', $bookings)->where('main', false)->get();
+
+        if($request->destination) {
+            $bookings = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->get()->pluck('id')->toArray();
+            if($request->date) {
+                $bookings = Book::where('destination_id', $request->destination)->whereDate('scheduled_at', $request->date)->get()->pluck('id')->toArray();
+            }
+            $collection = Guest::with('visitorType', 'specialFee')->where('main', false)->whereIn('book_id', $bookings)->get();
+        } 
+
+        if($request->experience) {
+            $bookings = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
+            if($request->date) {
+                $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date)->get()->pluck('id')->toArray();
+            }
+            $collection = Guest::with('visitorType', 'specialFee')->where('main', false)->whereIn('book_id', $bookings)->get();
+        }
         // get all the nationality of all guests
 
-        $collection = Guest::with('visitorType', 'specialFee')->get();
         $grouped = $collection->groupBy(function($item, $key) {
             return $item['nationality'];
         });
@@ -101,7 +218,24 @@ class DashboardAnalyticsController extends Controller
         $gender = $this->renderGraphDigits($grouped);
 
         // get all the $source of the book/reservation
-        $book = Book::all();
+        $book = Book::whereDate('scheduled_at', $today)->get();
+
+        if($request->destination) {
+            $book = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->get();
+            if($request->date) {
+                $book = Book::where('destination_id', $request->destination)->whereDate('scheduled_at', $request->date)->get();
+            }
+        } 
+
+        if($request->experience) {
+            $book = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get();
+            if($request->date) {
+                $book = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date)->get();
+            }
+        }
+
+        
+
         $grouped = $book->groupBy(function($item, $key) {
             return $item['is_walkin'] == true ? 'Walk-In' : 'Online';
         });
@@ -115,65 +249,67 @@ class DashboardAnalyticsController extends Controller
 
         $special_fees = $this->renderGraphDigits($grouped);
 
+        
+
         $revenue = [
             [
                 "backgroundColor" => "#007bff",
-                "data" => Invoice::whereMonth('created_at', '1')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 1),
                 "label" => "January"
             ],
             [
                 "backgroundColor" => "red",
-                "data" => Invoice::whereMonth('created_at', '2')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 2),
                 "label" => "February"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => Invoice::whereMonth('created_at', '3')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 3),
                 "label" => "March"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => Invoice::whereMonth('created_at', '4')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 4),
                 "label" => "April"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => Invoice::whereMonth('created_at', '5')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 5),
                 "label" => "May"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => Invoice::whereMonth('created_at', '6')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 6),
                 "label" => "June"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => Invoice::whereMonth('created_at', '7')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 7),
                 "label" => "July"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => Invoice::whereMonth('created_at', '8')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 8),
                 "label" => "August"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => Invoice::whereMonth('created_at', '9')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 9),
                 "label" => "September"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => Invoice::whereMonth('created_at', '10')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 10),
                 "label" => "October"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => Invoice::whereMonth('created_at', '11')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 11),
                 "label" => "November"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => Invoice::whereMonth('created_at', '12')->where('is_paid', true)->withTrashed()->sum('grand_total'),
+                "data" => $this->getGrandTotal($request, 12),
                 "label" => "December"
             ]
         ];
@@ -181,27 +317,27 @@ class DashboardAnalyticsController extends Controller
         $ages = [
             [
                 "backgroundColor" => "#673ab7",
-                "data" => Guest::whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [10, 18])->count(),
+                "data" => $this->getGuestAge($request, [10, 18]),
                 "label" => "10-18"
             ],
             [
                 "backgroundColor" => "#007bff",
-                "data" => Guest::whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [18, 25])->count(),
+                "data" => $this->getGuestAge($request, [18, 25]),
                 "label" => "18-25"
             ],
             [
                 "backgroundColor" => "red",
-                "data" => Guest::whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [26, 35])->count(),
+                "data" => $this->getGuestAge($request, [26, 35]),
                 "label" => "26-35"
             ],
             [
                 "backgroundColor" => "green",
-                "data" => Guest::whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [35, 40])->count(),
+                "data" => $this->getGuestAge($request, [35, 40]),
                 "label" => "35-40"
             ],
             [
                 "backgroundColor" => "yellow",
-                "data" => Guest::whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), [41, 300])->count(),
+                "data" => $this->getGuestAge($request, [41, 300]),
                 "label" => "41 +"
             ],
         ];
@@ -218,6 +354,48 @@ class DashboardAnalyticsController extends Controller
             'checked_in_walkin' => $checked_in_walkin,
             'total_checked_in' => $total_checked_in
         ];
+    }
+
+    public function getGrandTotal($request, $month) {
+        $invoice = Invoice::whereMonth('created_at', $month)->where('is_paid', true)->withTrashed()->sum('grand_total');
+
+
+        if($request->destination) {
+            $bookings = Book::where('destination_id', $request->destination)->get()->pluck('id')->toArray();
+            $invoice = Invoice::whereIn('book_id', $bookings)->whereMonth('created_at', $month)->where('is_paid', true)->withTrashed()->sum('grand_total');
+        } 
+
+        if($request->experience) {
+            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
+            $invoice = Invoice::whereIn('book_id', $bookings)->whereMonth('created_at', $month)->where('is_paid', true)->withTrashed()->sum('grand_total');
+        }
+
+        return $invoice;
+
+    }
+
+    public function getGuestAge($request, $arr) {
+        $today = Carbon::now();
+        $bookings = Book::whereDate('scheduled_at', $today)->get()->pluck('id')->toArray();
+        $guest = Guest::where('main', false)->whereIn('book_id', $bookings)->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), $arr)->count();
+
+        if($request->destination) {
+            $bookings = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->get()->pluck('id')->toArray();
+            if($request->date) {
+                $bookings = Book::whereDate('scheduled_at', $request->date)->where('destination_id', $request->destination)->get()->pluck('id')->toArray();
+            }
+            $guest = Guest::where('main', false)->whereIn('book_id', $bookings)->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), $arr)->count();
+        } 
+
+        if($request->experience) {
+            $bookings = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
+            if($request->date) {
+                $bookings = Book::whereDate('scheduled_at', $request->date)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
+            }
+            $guest = Guest::where('main', false)->whereIn('book_id', $bookings)->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), $arr)->count();
+        }
+
+        return $guest;
     }
 
     public function renderGraphDigits($grouped) 

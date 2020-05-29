@@ -25,7 +25,8 @@
             <div class="card-body">
                 <div class="tab-content">
                     <div class="tab-pane show active" id="tab1">
-                        <dashboard-analytics 
+                        <dashboard-analytics
+                        :destinations="{{ $destinations }}" 
                         fetch-url="{{ route('admin.analytics.fetch.user') }}"
                         ></dashboard-analytics>
                     </div>
