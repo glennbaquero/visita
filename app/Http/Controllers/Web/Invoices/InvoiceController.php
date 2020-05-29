@@ -17,6 +17,7 @@ use App\Models\Books\Book;
 use App\Models\Users\Admin;
 use App\Models\Emails\GeneratedEmail;
 use App\Models\Destinations\Destination;
+use App\Models\Allocations\Allocation;
 
 use App\Ecommerce\PaynamicsProcessor;
 
@@ -221,5 +222,22 @@ class InvoiceController extends Controller
     public function paynamicsCancel()
     {
          return redirect()->route('web.dashboard');
+    }
+
+    public function getRemaining(Request $request)
+    {
+        $destination = Destination::find($request->destination);
+        $totalReservation = $destination->capacity_per_day;
+        $allocation = Allocation::find($request->allocation)->capacities->first()->online;
+
+        $totalReserved = Book::whereDate('scheduled_at', $request->date)->where('allocation_id', $request->allocation)->sum('total_guest');
+
+        $availableSeat = $allocation - $totalReserved;
+
+        return response()->json([
+            'online' => $allocation,
+            'availableSeat' => $availableSeat
+        ]);
+
     }
 }

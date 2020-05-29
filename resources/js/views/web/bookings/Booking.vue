@@ -179,6 +179,7 @@
 							@numberOfGuestsChanged="numberOfGuestsChanged()"
 							:step-data="stepData"
 							:checker-url="checkerUrl"
+							:remaining-seat-url="remainingSeatUrl"
 						></FormStepOne>
 						<!--  -->
 						<!-- Step 2 -->
@@ -299,6 +300,7 @@
 			countries: Array,
 			visitorTypes: Array,
 			bookUrl: String,
+			remainingSeatUrl: String,
 			checkerUrl: String,
 			info: Object,
 		},	
@@ -496,6 +498,8 @@
 					var totalGuests = parseInt(this.stepData.numberOfGuests) + 1;
 					this.stepData.numberOfGuests = totalGuests;
 					this.stepData.guests.push(details);
+				} else {
+					swal.fire('Oops...', 'Capacity is full for selected date of visit!', 'error')
 				}
 				EventBus.$emit('changed');
 			},

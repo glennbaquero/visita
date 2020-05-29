@@ -14,6 +14,9 @@ window.Loading = Loading;
 import jquery from 'jquery';
 window.$ = window.jQuery = jquery;
 
+import Swal from 'sweetalert2'
+window.swal = Swal;
+
 window._ = require('lodash');
 
 import 'bootstrap';

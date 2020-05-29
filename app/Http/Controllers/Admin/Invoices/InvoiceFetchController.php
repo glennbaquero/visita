@@ -33,7 +33,7 @@ class InvoiceFetchController extends FetchController
 
         $this->is_walkin = $this->request->booking_type == 'walkin' ? true : false;
 
-        if($this->request->filled('category') && $this->request->category != 'all') {
+        if($this->request->filled('category') && $this->request->category != 'all' && $this->request->category != '') {
             if($this->request->category == 'paid') {
                 $query = $query->where('is_paid', true);
             }
@@ -49,17 +49,17 @@ class InvoiceFetchController extends FetchController
             if($this->request->category == 'reject') {
                 $query = $query->withTrashed()->whereNotNull('deleted_at');   
             }
-        } elseif ($this->request->filled('category') && $this->request->category == 'all') {
+        } elseif ($this->request->filled('category') && $this->request->category == 'all' && $this->request->category != '') {
             $query = $query->withTrashed();
         }
 
         
 
-        if($this->request->filled('booking_type') && $this->request->booking_type != 'all') {
+        if($this->request->filled('booking_type') && $this->request->booking_type != 'all' && $this->request->booking_type != '') {
             $query = $query->whereHas('book', function($book) {
                 $book->where(['destination_id' => $this->request->destination_id, 'allocation_id' => $this->request->allocation_id, 'is_walkin' => $this->is_walkin]);
             });
-        } elseif ($this->request->filled('booking_type') && $this->request->booking_type == 'all') {
+        } elseif ($this->request->filled('booking_type') && $this->request->booking_type == 'all' && $this->request->booking_type != '') {
             $query = $query->whereHas('book', function($book) {
                 $book->where(['destination_id' => $this->request->destination_id, 'allocation_id' => $this->request->allocation_id]);
             });

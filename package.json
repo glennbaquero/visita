@@ -37,6 +37,7 @@
     "dependencies": {
         "@algoz098/vue-player": "^0.4.3",
         "lodash": "^4.17.15",
+        "sweetalert2": "^9.13.2",
         "vue-full-calendar": "^2.7.0",
         "vue-loading-overlay": "^3.3.2",
         "vuedraggable": "^2.23.2"

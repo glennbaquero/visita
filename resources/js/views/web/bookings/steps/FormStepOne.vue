@@ -63,7 +63,8 @@
 			destination: Object,
 			stepData: Object,
 			items: Array,
-			checkerUrl: String
+			checkerUrl: String,
+			remainingSeatUrl: String,
 		},
 
 		components: {
@@ -71,6 +72,20 @@
 		},
 
 		mixins: [ RegexMixin ],
+
+		watch: {
+			'stepData.visitDate'(val) {
+				var data = {
+					destination: this.destination.id,
+					allocation: this.stepData.allocationSelected,
+					date: val
+				}
+				axios.post(this.remainingSeatUrl, data) 
+					.then(response => {
+						this.destination.availableSeat = response.data.availableSeat;
+					})
+			}
+		},
 
 		data() {
 			return {
@@ -81,7 +96,7 @@
 
 		computed: {
 			detailsComplete() {
-				if(this.stepData.visitDate != null && this.stepData.timeSelected != null && this.stepData.allocationSelected != null && parseInt(this.stepData.numberOfGuests) >= 1 && this.stepData.numberOfGuests < this.destination.availableSeat) return true;
+				if(this.stepData.visitDate != null && this.stepData.timeSelected != null && this.stepData.allocationSelected != null && parseInt(this.stepData.numberOfGuests) >= 1 && this.stepData.numberOfGuests <= this.destination.availableSeat) return true;
 
 				return false;
 			},

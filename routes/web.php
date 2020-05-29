@@ -113,6 +113,7 @@ Route::namespace('Web')->name('web.')->group(function() {
 		Route::middleware('auth:web')->group(function() {
 			Route::post('/book/store', 'InvoiceController@store')->name('book.store');
 			Route::post('reservation/get', 'InvoiceController@show')->name('reservations.show');
+			Route::post('reservation/remaining-seat', 'InvoiceController@getRemaining')->name('reservations.remaining-seat');
 			Route::post('upload/deposit', 'InvoiceController@uploadDepositSlip')->name('upload.deposit');
 			Route::post('/generate/form', 'InvoiceController@generatePaynamicsForm')->name('book.generate-form');
 		});
