@@ -8,7 +8,7 @@
 			<hr>
 
 			<div class="rqst-frm1__step-4-content-checkbox">
-				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent">
+				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent" style="box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25)">
 					<div class="width--10">
 						<input type="radio" name="payment" v-model="isPaypal" :value="true" @change="paymentSelectionChanged()">
 						<span class="checkmark"></span>
@@ -18,6 +18,7 @@
 					</div
 					><div class="width--40 align-r">
 						<img
+						  style="width: 100%; height: 100%;"
 						  class="rqst-frm1__step-4-content-checkbox-img" 
 						  src="images/paynamics.png"
 						>
