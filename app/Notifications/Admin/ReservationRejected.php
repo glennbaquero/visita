@@ -26,7 +26,10 @@ class ReservationRejected extends Notification
     {
         $this->notification = $notification;
         $this->invoice = $invoice;
-        $this->message = str_replace('[timestamp]', Carbon::now()->format('M. d Y'), str_replace('[reason_for_reject]', $invoice->rejected_reason, $notification->message));
+        $guest = $invoice->book->guests()->where('main', true)->first()->first_name;
+        $this->message = str_replace('[date of visit]', Carbon::now()->format('M. d Y'), str_replace('[insert reason for rejection here]', $invoice->rejected_reason, $notification->message));
+        $this->message = str_replace('[Destination]', $invoice->book->destination->name, str_replace('[First Name]', $guest, $this->message));
+        $this->message = str_replace('[number of guests]', $invoice->book->total_guest, $this->message);
     }
 
     /**
@@ -49,7 +52,6 @@ class ReservationRejected extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                ->greeting('Dear Guest,')
                 ->line($this->message)
                 ->line('<a href="'.route('web.dashboard').'">View Dashboard</a>');
     }

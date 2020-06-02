@@ -18,6 +18,26 @@ class Guest extends Model
 	  
     protected $dates = ['birthdate'];
 
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $searchable = [
+            'id' => $this->id,
+            'contact_number' => $this->contact_number,
+            'emergency_contact_number' => $this->emergency_contact_number,
+            'email' => $this->email,
+            'nationality' => $this->nationality,
+            'gender' => $this->gender,
+            'special_fee' => $this->specialFee ? $this->specialFee->name : '',
+        ];
+        
+        return $searchable;
+    }
+
    	public function visitorType()
    	{
    		return $this->belongsTo(VisitorType::class)->withTrashed();

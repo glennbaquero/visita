@@ -32,16 +32,30 @@
 				<label>Email</label>
 				<input v-model="guest.email" name="guest_email[]" type="email" class="form-control">
 			</div>
+
+			<div class="form-group col-sm-12 col-md-4">
+				<label>Contact #</label>
+				<input v-model="guest.contact_number" name="contact_number[]" type="number" class="form-control">
+			</div>
+			<div class="form-group col-sm-12 col-md-4">
+				<label>Emergency Contact #</label>
+				<input v-model="guest.emergency_contact_number" name="emergency_contact_number[]" type="number" class="form-control">
+			</div>
+
+			<div class="form-group col-sm-12 col-md-4">
+				<label>Birthday</label>
+				<input name="guest_birthdate[]" v-model="guest.birthdate" type="text" id="birthdate-flatpickr" class="form-control">
+			</div>
 			
-			<date-picker
+<!-- 			<date-picker
 			v-model="guest.birthdate"
-			class="form-group col-sm-12 col-md-4"
+			
 			label="Birthday"
 			:enableTime="false"
 			name="guest_birthdate[]"
 			placeholder="Choose a Birthday"
-			maxDate="today"
-			></date-picker>
+			date-format="Y-m-d"
+			></date-picker> -->
 
 			<selector class="col-sm-4"
 			v-model="guest.gender"
@@ -96,6 +110,10 @@
 			genders: Array,
 			specialFees: Array,
 			visitorTypes: Array
+		},
+		mounted() {
+			// $('#birthdate-flatpickr').flatpickr();
+			flatpickr('#birthdate-flatpickr', { maxDate: new Date().fp_incr(-6570), disableMobile: 'true' });
 		},
 
 		data() {

@@ -16,12 +16,33 @@ use App\Models\Invoices\Invoice;
 use App\Traits\FileTrait;
 use App\Models\Users\Management;
 
+use Carbon\Carbon;
+
 class Book extends Model
 {
 
     use FileTrait;
 
     protected $dates = ['scheduled_at', 'ended_at', 'started_at'];
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $guests = $this->guests;
+        $searchable = [
+            'id' => $this->id,
+            'destination' => $this->destination ? $this->destination->name : '',
+            'allocation' => $this->allocation ? $this->allocation->name : '',
+            'time' => $this->renderTime(),
+            'guest' => $guests
+        ];
+        
+        return $searchable;
+    }
 
     /**
      * Morph relationship to Management and User Models
@@ -167,5 +188,9 @@ class Book extends Model
         }
 
         return $result;
+    }
+
+    public function renderTime() {
+        return Carbon::parse($this->scheduled_at)->format('g:i A');
     }
 }

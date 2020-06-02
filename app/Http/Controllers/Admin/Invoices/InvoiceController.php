@@ -82,6 +82,11 @@ class InvoiceController extends Controller
      */
     public function archive(Request $request, $id)
     {
+        $request->validate([
+            'rejected_reason' => 'required'
+        ]);
+        DB::beginTransaction();
+
         $item = Invoice::withTrashed()->findOrFail($id);
         $item->update(['rejected_reason' => $request->rejected_reason]);
         $main = $item->book->guests->where('main', true)->first();
@@ -98,6 +103,7 @@ class InvoiceController extends Controller
         }
 
         $item->archive();
+        DB::commit();
 
         return response()->json([
             'message' => "You have successfully archived {$item->renderName()}",

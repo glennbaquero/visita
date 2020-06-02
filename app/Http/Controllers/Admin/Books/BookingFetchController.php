@@ -97,14 +97,14 @@ class BookingFetchController extends FetchController
      * 
      * @param  string $query
      */
-    protected function searchQuery($query) {
-        if($this->request->filled('search')){
-            $ids = Guest::where('main', true)->where('email', 'like', '%'.$this->request->input('search').'%')->orWhere(DB::raw('CONCAT(`first_name`, " ", `last_name`)'), 'like', '%'.$this->request->input('search').'%')->pluck('book_id');
-            $query = $this->class::whereIn('id', $ids);
-        }
+    // protected function searchQuery($query) {
+    //     if($this->request->filled('search')){
+    //         $ids = Guest::where('main', true)->where('email', 'like', '%'.$this->request->input('search').'%')->orWhere(DB::raw('CONCAT(`first_name`, " ", `last_name`)'), 'like', '%'.$this->request->input('search').'%')->pluck('book_id');
+    //         $query = $this->class::whereIn('id', $ids);
+    //     }
 
-        return $query;
-    }
+    //     return $query;
+    // }
 
     /**
      * Custom formatting of data
@@ -259,10 +259,11 @@ class BookingFetchController extends FetchController
                 'id' => $item->id,
                 'first_name' => $item->first_name,
                 'last_name' => $item->last_name,
-                'birthdate' => $item->birthdate,
+                'birthdate' => Carbon::parse($item->birthdate)->format('Y-m-d'),
                 'gender' => $item->gender,
                 'nationality' => $item->nationality,
                 'contact_number' => $item->contact_number,
+                'emergency_contact_number' => $item->emergency_contact_number,
                 'email' => $item->email,
                 'visitor_type_id' => $item->visitor_type_id,
                 'special_fee_id' => $item->special_fee_id,

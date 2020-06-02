@@ -180,12 +180,12 @@ class InvoiceFetchController extends FetchController
             if(!$book->from_masungi_reservation) {
                 $type_daytourOrOvernight_fee = $is_daytour ? $guest->visitorType->daytour_fee : $guest->visitorType->overnight_fee;
                 $type_weekdayOrWeekend_fee = $is_weekday ? $guest->visitorType->weekday_fee : $guest->visitorType->weekend_fee;
-                $special_fee_weekdayOrWeekend = $guest->special_fee_id != null ? ($is_weekday ? $guest->specialFee->weekday_fee : $guest->specialFee->weekend_fee) : 0;
+                $special_fee_weekdayOrWeekend = $guest->special_fee_id != null ? ($is_weekday ? $guest->specialFee->weekday : $guest->specialFee->weekend) : 0;
                 $special_fee_daytourOrOvernight = $guest->special_fee_id != null ? ($is_daytour ? $guest->specialFee->daytour : $guest->specialFee->overnight) : 0;
 
             }
 
-            $total = $type_daytourOrOvernight_fee + $type_weekdayOrWeekend_fee - ($special_fee_weekdayOrWeekend + $special_fee_daytourOrOvernight);
+            $total = $type_daytourOrOvernight_fee + $type_weekdayOrWeekend_fee + $special_fee_weekdayOrWeekend + $special_fee_daytourOrOvernight;
     		
 
     		array_push($result, [

@@ -182,6 +182,10 @@ export default {
         .then(response => {
           this.fetch();
           this.loading = false;
+        }).catch(error => {
+          this.parseError(error);
+          this.$emit('error');
+          this.loading = false;
         })
     },
 
