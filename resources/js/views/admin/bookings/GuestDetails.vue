@@ -44,7 +44,7 @@
 
 			<div class="form-group col-sm-12 col-md-4">
 				<label>Birthday</label>
-				<input name="guest_birthdate[]" v-model="guest.birthdate" type="text" id="birthdate-flatpickr" class="form-control">
+				<input name="guest_birthdate[]" v-model="guest.birthdate" type="text" :id="'birthdate-flatpickr'+guest.id" class="form-control">
 			</div>
 			
 <!-- 			<date-picker
@@ -113,7 +113,7 @@
 		},
 		mounted() {
 			// $('#birthdate-flatpickr').flatpickr();
-			flatpickr('#birthdate-flatpickr', { maxDate: new Date().fp_incr(-6570), disableMobile: 'true' });
+			flatpickr('#birthdate-flatpickr'+this.guest.id, { maxDate: new Date().fp_incr(-6570), disableMobile: 'true' });
 		},
 
 		data() {
