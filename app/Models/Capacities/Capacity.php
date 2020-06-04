@@ -8,6 +8,25 @@ use App\Models\Allocations\Allocation;
 
 class Capacity extends Model
 {
+
+	/**
+	 * Get the indexable data array for the model.
+	 *
+	 * @return array
+	 */
+	public function toSearchableArray()
+	{
+	    $searchable = [
+	        'id' => $this->id,
+	        'online' => $this->online,
+	        'walk_in' => $this->walk_in,
+	        'mgt_lgu' => $this->mgt_lgu,
+	        'agency' => $this->agency,
+	        'allocation' => $this->allocation->name,
+	    ];
+	    
+	    return $searchable;
+	}
     
     /*
      * Relationship

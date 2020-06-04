@@ -19,6 +19,7 @@
 		book-url="{{ route('web.book.store') }}"
 		checker-url="{{ route('web.getTimeSlot') }}"
 		:info="{{ $info }}"
+		agency-code-url-checker="{{ route('web.book.agency-code-checker') }}"
 		remaining-seat-url="{{ route('web.reservations.remaining-seat') }}"
 	></user-booking>
 </section>

@@ -38,8 +38,8 @@
 						:show-groups-capacity="true"
 						:total-groups="total_checked_in.online_group"
 						:total-visitors="total_checked_in.online_visitor"
-						:total-groups-capacity="20"
-						:total-visitors-capacity="200"
+						:total-groups-capacity="capacity.groups"
+						:total-visitors-capacity="capacity.visitors"
 						total-groups-label="Total Groups Check-In"
 						total-visitors-label="Total Visitors Check-In"
 					></box-widget-two>
@@ -194,6 +194,7 @@ export default {
 			this.total = data.total;
 			this.total_checked_in = data.total_checked_in;
 			this.checked_in_walkin = data.checked_in_walkin;
+			this.capacity = data.capacity;
 		},
 	},
 
@@ -217,6 +218,7 @@ export default {
 			total: [],
 			total_checked_in: [],
 			checked_in_walkin: [],
+			capacity: [],
 
 			destination: null,
 			experiences: null,

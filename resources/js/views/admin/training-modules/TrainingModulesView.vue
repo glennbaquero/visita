@@ -52,6 +52,7 @@
                 label="File"
                 name="path"
                 placeholder="Choose a File"
+                :format="format"
 				></image-picker>
 
 			    <vue-player v-if="item.type === 1"
@@ -115,6 +116,7 @@ export default {
 		return {
 			item: [],
 			destinations: [],
+			format: '.jpeg, .jpg, .png, .mp4, .ogg, .3gp, .wmv, .mov, .avi'
 		}
 	},
 

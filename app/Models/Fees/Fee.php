@@ -8,6 +8,22 @@ use App\Models\Allocations\Allocation;
 
 class Fee extends Model
 {
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $searchable = [
+            'id' => $this->id,
+            'allocation' => $this->allocation->name,
+            'name' => $this->name,
+        ];
+        
+        return $searchable;
+    }
+
     public function allocation()
     {
     	return $this->belongsTo(Allocation::class)->withTrashed();

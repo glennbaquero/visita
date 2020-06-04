@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin\Books;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
+use Illuminate\Http\UploadedFile;
 
 use App\Notifications\Frontliner\NewBookingNotification;
 use App\Notifications\Reservation\BookingNotification;
@@ -17,6 +20,7 @@ use App\Services\PushService;
 
 use Carbon\Carbon;
 use DB;
+use Storage;
 
 class BookController extends Controller
 {
@@ -183,8 +187,8 @@ class BookController extends Controller
         DB::beginTransaction();
             $item = Book::store($request, $item, null, $destination);
 
-            if($request->id) {
-                $main = Guest::find($request->id);
+            // if($request->id) {
+                $main = Guest::find($request->main_id);
                 $main->update([
                     'first_name' => $request->first_name,
                     'last_name' => $request->last_name,
@@ -195,13 +199,20 @@ class BookController extends Controller
                     'emergency_contact_number' => $request->emergency_contact_number,
                     'email' => $request->email,
                     'visitor_type_id' => $request->visitor_type_id,
+                    'special_fee_id' => $request->special_fee_id,
                 ]);     
-            }
+
+                if($request->special_fee_path) {
+                    $main->update([
+                        'special_fee_path' => $this->uploadImage($request->special_fee_path)
+                    ]);
+                }
+            // dd($item ? true : false);
+            // }
             
             if($request->guest_first_name) {
                 foreach($request->guest_first_name as $key => $guest) {
                     $guest = Guest::find($request->guest_id[$key]);
-
                     if($guest) {
                         $guest->update([
                             'first_name' => $request->guest_first_name[$key],
@@ -209,17 +220,25 @@ class BookController extends Controller
                             'birthdate' => $request->guest_birthdate[$key],
                             'email' => $request->guest_email[$key],
                             'gender' => $request->guest_gender[$key],
+                            'contact_number' => $request->guest_contact_number[$key],
+                            'emergency_contact_number' => $request->guest_emergency_contact_number[$key],
                             'nationality' => $request->guest_nationality[$key],
                             'visitor_type_id' => $request->guest_visitor_type[$key],
                             'special_fee_id' => $request->guest_special_fee_id[$key],
                         ]);  
+                        $upload_path = null;
+                        if($request->guest_special_fee_path[$key]) {
+                            $guest->update([
+                                'special_fee_path' => $this->uploadImage($request->guest_special_fee_path[$key])
+                            ]);
+                        }
                     } else {
                         $upload_path = null;
                         if($request->guest_special_fee_path[$key]) {
                             $file = $request->guest_special_fee_path[$key];
                             $filename = $file->getClientOriginalName();
                             $path = 'public/special_fee';
-                            $upload_path = Storage::putFileAs($path, $file, $filename);
+                            $upload_path = Storage::put($path, $file, $filename);
                         }
 
                         $item->guests()->create([
@@ -276,6 +295,46 @@ class BookController extends Controller
         return response()->json([
             'message' => "You have successfully restored the reservation",
         ]);
+    }
+
+    public function uploadImage($image) {
+        $directory = 'special_fees';
+        $extension = $image->getClientOriginalExtension() ? $image->getClientOriginalExtension() : 'jpg';
+        $optimized_image = Image::make($image)->encode($extension);
+        $width = $optimized_image->getWidth();
+        $height = $optimized_image->getHeight();
+
+        if ($width >= $height) {
+            $optimized_image->resize(700, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+        } else {
+            $optimized_image->resize(null, 700, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+        }
+
+        $optimized_image->save();
+
+        switch (config('web.filesystem')) {
+            case 's3':
+                    $root = null;
+                break;
+            
+            default:
+                    $image->store($directory, 'public');
+                    $root = 'public/';
+                break;
+        }
+
+        $file_path = $root . $directory . '/' . uniqid() . Str::random(40) . '.' . $extension;
+
+        Storage::put($file_path, $optimized_image);
+
+        return $file_path;
+        
     }
 
 }

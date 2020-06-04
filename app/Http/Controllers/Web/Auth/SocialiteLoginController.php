@@ -84,7 +84,7 @@ class SocialiteLoginController extends Controller
 
 		/* Check if user is trashed */
 		if ($user->trashed()) {
-			abort(403, 'User is no longer allowed to login');
+			abort(403, 'User has been deactivated by the admin.');
 		}
 
 		/* Find existing socialite provider */

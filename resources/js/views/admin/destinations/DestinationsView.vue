@@ -18,7 +18,7 @@
 			<div class="row">
 			
 				<div class="form-group col-sm-12 col-md-4">
-					<label>Name</label>
+					<label>Name *</label>
 					<input v-model="item.name" name="name" type="text" class="form-control">
 				</div>
 				
@@ -54,12 +54,12 @@
 				></selector>
 
 				<div class="form-group col-sm-12 col-md-3">
-					<label>Capacity Per Day</label>
+					<label>Capacity Per Day *</label>
 					<input v-model="item.capacity_per_day" name="capacity_per_day" type="number" min="1" class="form-control">
 				</div>
 
 				<div class="form-group col-sm-12 col-md-3">
-					<label>Cut Off</label>
+					<label>Cut Off *</label>
 					<input v-model="item.cut_off_days" name="cut_off_days" type="number" min="1" class="form-control">
 				</div>
 				
@@ -94,7 +94,7 @@
 				<text-editor
 				v-model="item.overview"
 				class="col-sm-12"
-				label="Overview"
+				label="Overview *"
 				name="overview"
 				row="5"
 				></text-editor>
@@ -102,7 +102,7 @@
 				<text-editor
 				v-model="item.fees"
 				class="col-sm-12"
-				label="Fees"
+				label="Fees *"
 				name="fees"
 				row="5"
 				></text-editor>
@@ -110,7 +110,7 @@
 				<text-editor
 				v-model="item.how_to_get_here"
 				class="col-sm-12"
-				label="How To Get Here"
+				label="How To Get Here *"
 				name="how_to_get_here"
 				row="5"
 				></text-editor>
@@ -118,7 +118,7 @@
 				<text-editor
 				v-model="item.terms_conditions"
 				class="col-sm-12"
-				label="Terms and conditions"
+				label="Terms and conditions *"
 				name="terms_conditions"
 				row="5"
 				></text-editor>
@@ -127,7 +127,7 @@
 				<text-editor
 				v-model="item.visitor_policies"
 				class="col-sm-12"
-				label="Visitor Policies"
+				label="Visitor Policies *"
 				name="visitor_policies"
 				row="5"
 				></text-editor>
@@ -135,7 +135,7 @@
 				<text-editor
 				v-model="item.contact_us"
 				class="col-sm-12"
-				label="Contact Us"
+				label="Contact Us *"
 				name="contact_us"
 				row="5"
 				></text-editor>
@@ -143,7 +143,7 @@
 				<text-editor
 				v-model="item.orientation_module"
 				class="col-sm-12"
-				label="Orientation Module for Mobile"
+				label="Orientation Module for Mobile *"
 				name="orientation_module"
 				row="5"
 				></text-editor>
@@ -154,7 +154,7 @@
 				<image-picker
 				:value="images"
 				class="form-group col-sm-12 col-md-12 mt-2"
-	            label="Images"
+	            label="Images *"
 	            name="images[]"
 	            placeholder="Choose Files"
 	            multiple

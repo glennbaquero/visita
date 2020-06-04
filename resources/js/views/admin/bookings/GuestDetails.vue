@@ -12,16 +12,16 @@
 			</div>
 			<div class="form-group col-sm-12 col-md-4">
 				<label>Firstname</label>
-				<input v-model="guest.first_name" name="guest_first_name[]" type="text" class="form-control">
-				<input v-model="guest.id" name="guest_id[]" type="text" class="form-control" v-show="hide">
+				<input v-model="guest.first_name" :name="'guest_first_name['+(index-1)+']'" type="text" class="form-control">
+				<input v-model="guest.id" :name="'guest_id['+(index-1)+']'" type="text" class="form-control" v-show="hide">
 			</div>
 			<div class="form-group col-sm-12 col-md-4">
 				<label>Lastname</label>
-				<input v-model="guest.last_name" name="guest_last_name[]" type="text" class="form-control">
+				<input v-model="guest.last_name" :name="'guest_last_name['+(index-1)+']'" type="text" class="form-control">
 			</div>
 			<selector class="col-sm-4"
 			v-model="guest.nationality"
-			name="guest_nationality[]"
+			:name="'guest_nationality['+(index-1)+']'"
 			label="Nationality"
 			:items="nationalities"
 			item-value="citizenship"
@@ -30,21 +30,21 @@
 			></selector>
 			<div class="form-group col-sm-12 col-md-4">
 				<label>Email</label>
-				<input v-model="guest.email" name="guest_email[]" type="email" class="form-control">
+				<input v-model="guest.email" :name="'guest_email['+(index-1)+']'" type="email" class="form-control">
 			</div>
 
 			<div class="form-group col-sm-12 col-md-4">
 				<label>Contact #</label>
-				<input v-model="guest.contact_number" name="contact_number[]" type="number" class="form-control">
+				<input v-model="guest.contact_number" :name="'guest_contact_number['+(index-1)+']'" type="number" class="form-control">
 			</div>
 			<div class="form-group col-sm-12 col-md-4">
 				<label>Emergency Contact #</label>
-				<input v-model="guest.emergency_contact_number" name="emergency_contact_number[]" type="number" class="form-control">
+				<input v-model="guest.emergency_contact_number" :name="'guest_emergency_contact_number['+(index-1)+']'" type="number" class="form-control">
 			</div>
 
 			<div class="form-group col-sm-12 col-md-4">
 				<label>Birthday</label>
-				<input name="guest_birthdate[]" v-model="guest.birthdate" type="text" :id="'birthdate-flatpickr'+guest.id" class="form-control">
+				<input :name="'guest_birthdate['+(index-1)+']'" v-model="guest.birthdate" type="text" :id="'birthdate-flatpickr'+guest.id" class="form-control">
 			</div>
 			
 <!-- 			<date-picker
@@ -59,7 +59,7 @@
 
 			<selector class="col-sm-4"
 			v-model="guest.gender"
-			name="guest_gender[]"
+			:name="'guest_gender['+(index-1)+']'"
 			label="Gender"
 			:items="genders"
 			item-value="name"
@@ -69,7 +69,7 @@
 
 			<selector class="col-sm-4"
 			v-model="guest.special_fee_id"
-			name="guest_special_fee_id[]"
+			:name="'guest_special_fee_id['+(index-1)+']'"
 			label="Special Fees"
 			:items="specialFees"
 			item-value="id"
@@ -79,7 +79,7 @@
 
 			<selector class="col-sm-4"
 			v-model="guest.visitor_type_id"
-			name="guest_visitor_type[]"
+			:name="'guest_visitor_type['+(index-1)+']'"
 			label="Visitor Type"
 			:items="visitorTypes"
 			item-value="id"
@@ -91,7 +91,7 @@
 			:value="guest.specialFeeImagePath"
 			class="form-group col-sm-12 col-md-12"
             label="Image"
-            name="guest_special_fee_path[]"
+            :name="'guest_special_fee_path['+(index-1)+']'"
             placeholder="Choose a File"
 			></image-picker>
 		</div>

@@ -18,6 +18,7 @@ use App\Models\Users\Admin;
 use App\Models\Emails\GeneratedEmail;
 use App\Models\Destinations\Destination;
 use App\Models\Allocations\Allocation;
+use App\Models\Agencies\Agency;
 
 use App\Ecommerce\PaynamicsProcessor;
 
@@ -239,5 +240,29 @@ class InvoiceController extends Controller
             'availableSeat' => $availableSeat
         ]);
 
+    }
+
+    public function agencyCodeChecker(Request $request) {
+        $agency = Agency::where('name', $request->code)->first();
+
+        if(!$agency) {
+            throw ValidationException::withMessages([
+                'message' => 'Agency code is not found.',
+            ]);
+        }
+
+
+        $destination = Destination::find($request->destination);
+        $totalReservation = $destination->capacity_per_day;
+        $allocation = Allocation::find($request->allocation)->capacities->first()->agency;
+
+        $totalReserved = Book::whereDate('scheduled_at', $request->date)->where('allocation_id', $request->allocation)->where('agency_code', '!=', 'null' )->sum('total_guest');
+
+        $remaining = $allocation - $totalReserved;
+
+        return response()->json([
+            'agency' => $agency,
+            'remaining' => $remaining
+        ]);
     }
 }

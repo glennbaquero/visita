@@ -98,6 +98,8 @@
 							:special-fees="selectedAllocation.special_fees"
 							:countries="countries"
 							:genders="genders"
+							:destination="destination"
+							:agency-code-url-checker="agencyCodeUrlChecker"
 						></FormStepTwo>
 					</div>
 					<!--  -->
@@ -303,6 +305,7 @@
 			remainingSeatUrl: String,
 			checkerUrl: String,
 			info: Object,
+			agencyCodeUrlChecker: String
 		},	
 
 		components: {
@@ -494,13 +497,25 @@
 					main: false,
 					paths: []
 				}
-				if(this.stepData.numberOfGuests < this.destination.availableSeat) {
-					var totalGuests = parseInt(this.stepData.numberOfGuests) + 1;
-					this.stepData.numberOfGuests = totalGuests;
-					this.stepData.guests.push(details);
+
+				if(this.destination.agencyAvailableSeat) {
+					if(this.stepData.numberOfGuests < this.destination.agencyAvailableSeat) {
+						var totalGuests = parseInt(this.stepData.numberOfGuests) + 1;
+						this.stepData.numberOfGuests = totalGuests;
+						this.stepData.guests.push(details);
+					} else {
+						swal.fire('Oops...', 'Capacity is full for selected date of visit!', 'error')
+					}
 				} else {
-					swal.fire('Oops...', 'Capacity is full for selected date of visit!', 'error')
+					if(this.stepData.numberOfGuests < this.destination.availableSeat) {
+						var totalGuests = parseInt(this.stepData.numberOfGuests) + 1;
+						this.stepData.numberOfGuests = totalGuests;
+						this.stepData.guests.push(details);
+					} else {
+						swal.fire('Oops...', 'Capacity is full for selected date of visit!', 'error')
+					}
 				}
+				
 				EventBus.$emit('changed');
 			},
 

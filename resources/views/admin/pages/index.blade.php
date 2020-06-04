@@ -22,12 +22,12 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="mb-4">
+     {{--    <div class="mb-4">
             <a href="{{ route('admin.pages.create') }}" class="btn btn-primary text-white">
                 <i class="fa fa-plus mr-1"></i>
                 Create
             </a>
-        </div>
+        </div> --}}
 
         <div class="card">
             <div class="card-header p-2">

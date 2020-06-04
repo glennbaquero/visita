@@ -19,10 +19,12 @@ class ReservationApproved extends Notification
      *
      * @return void
      */
-    public function __construct($next_step, $notification)
+    public function __construct($next_step, $notification, $destination = null)
     {
         $this->next_step = $next_step;
         $this->notification = $notification;
+        $this->notification->message = str_replace('[Cut Off Days]', $destination->cut_off_days, $notification->message);
+        
     }
 
     /**

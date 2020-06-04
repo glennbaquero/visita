@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Fees;
+namespace App\Http\Requests\Admin\Timeslots;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FeeStoreRequest extends FormRequest
+class TimeslotStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,7 @@ class FeeStoreRequest extends FormRequest
     {
         return [
             'allocation_id' => 'required',
-            'name' => 'required',
-            'weekend' => 'required',
-            'weekday' => 'required',
+            'time' => 'required',
         ];
     }
 

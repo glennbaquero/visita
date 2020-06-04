@@ -39,7 +39,7 @@
 				<div class="form-group col-sm-12 col-md-4">
 					<label>Firstname</label>
 					<input v-model="item.first_name" name="first_name" type="text" class="form-control">
-					<input v-model="item.id" name="id" type="text" class="form-control" v-show="hide">
+					<input v-model="item.main_id" name="main_id" type="text" class="form-control" v-show="hide">
 				</div>
 				<div class="form-group col-sm-12 col-md-4">
 					<label>Lastname</label>
@@ -66,7 +66,11 @@
 					<label>Emergency Contact #</label>
 					<input v-model="item.emergency_contact_number" name="emergency_contact_number" type="number" class="form-control">
 				</div>
-				<date-picker
+				<div class="form-group col-sm-12 col-md-4">
+					<label>Birthday</label>
+					<input name="birthdate" v-model="item.main_birthdate" type="text" id="main_birthdate" class="form-control">
+				</div>
+				<!-- <date-picker
 				v-model="item.birthdate"
 				:enableTime="false"
 				class="form-group col-sm-12 col-md-4"
@@ -74,7 +78,8 @@
 				name="birthdate"
 				placeholder="Choose a Birthday"
 				maxDate="today"
-				></date-picker>
+				date-format="Y-m-d"
+				></date-picker> -->
 
 				<selector class="col-sm-4"
 				v-model="item.gender"
@@ -98,7 +103,7 @@
 
 				<selector class="col-sm-4"
 				v-model="item.special_fee_id"
-				name="guest_special_fee_id"
+				name="special_fee_id"
 				label="Special Fees"
 				:items="special_fees"
 				item-value="id"
@@ -138,7 +143,7 @@
 			</template>
 
 			<template v-slot:footer>
-<!--                 <action-button
+                <action-button
                 v-if="item.archiveUrl && item.restoreUrl"
                 color="btn-danger"
                 alt-color="btn-warning"
@@ -158,7 +163,7 @@
                 @error="fetch"
                 ></action-button>
                 
-				<action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button> -->
+				<action-button type="submit" :disabled="loading" class="btn-primary">Save Changes</action-button>
 			</template>
 		</card>
 
@@ -188,6 +193,10 @@ export default {
 			}
 			return totalGuests  + this.total_guest.length;
 		}
+	},
+
+	mounted() {
+		flatpickr('#main_birthdate', { maxDate: new Date().fp_incr(-6570), disableMobile: 'true' });
 	},
 
 	methods: {

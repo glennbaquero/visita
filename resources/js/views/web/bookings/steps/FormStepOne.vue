@@ -136,7 +136,9 @@
 						_.each(response.data, (data)=> {
 							this.destination.dateBlock.push(data);
 						})
-						flatpickr('#visit-date', { minDate: 'today', disable: this.destination.dateBlock, disableMobile: 'true' });
+						// flatpickr('#visit-date', { minDate: 'today', disable: this.destination.dateBlock, disableMobile: 'true' });
+						var date = new Date();
+						flatpickr('#visit-date', { minDate: date.setDate(date.getDate() + this.destination.cut_off_days), disable: this.destination.dateBlock, disableMobile: 'true' });
 						this.isLoading = false;
 					})
 

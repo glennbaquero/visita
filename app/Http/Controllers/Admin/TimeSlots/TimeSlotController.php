@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\TimeSlots;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Timeslots\TimeslotStoreRequest;
 use App\Http\Controllers\Controller;
 
 use App\Models\Times\TimeSlot;
@@ -36,7 +37,7 @@ class TimeSlotController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TimeslotStoreRequest $request)
     {
         $item = TimeSlot::store($request);
 
@@ -81,7 +82,7 @@ class TimeSlotController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TimeslotStoreRequest $request, $id)
     {
         $item = TimeSlot::withTrashed()->findOrFail($id);
         $message = "You have successfully updated {$item->time}";

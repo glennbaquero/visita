@@ -10,7 +10,7 @@
 
 				<div class="form-group col col-sm-12 col-md-6">
 					<label>Slug <small class="text-danger">(Warning: editing this may cause issues)</small></label>
-					<input v-model="item.slug" name="slug" type="text" class="form-control input-sm">
+					<input v-model="item.slug" name="slug" type="text" class="form-control input-sm" disabled>
 				</div>
 			</div>
 	    </card>

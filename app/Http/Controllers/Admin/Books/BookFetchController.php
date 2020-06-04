@@ -123,7 +123,8 @@ class BookFetchController extends FetchController
         	$item = Book::withTrashed()->findOrFail($id);
             $item->total_guests = $this->getGuests($item->guests()->where('main', false)->get());
             $main = $item->guests()->where('main', true)->first();
-            $item->id = $main->id;
+            $item->main_id = $main->id;
+            $item->main_birthdate = Carbon::parse($main->birthdate)->format('Y-m-d');
             $item->first_name = $main->first_name;
             $item->last_name = $main->last_name;
             $item->birthdate = $main->birthdate;

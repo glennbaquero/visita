@@ -137,7 +137,7 @@
 					<div class="width--95">
 						<p class="frm-header bold s-margin-b clr--gray">Agency Code</p>
 						<div class="frm-inpt m-margin-b">
-							<input type="text" v-model="stepData.main.agency_code">
+							<input type="text" v-model="stepData.main.agency_code" @blur="checkIfAgencyCodeIsValid">
 						</div>
 					</div>
 				</div
@@ -156,6 +156,7 @@
 			<p class="frm-header bold clr--green">NOTE:</p>
 			<p class="frm-header clr--gray">Contact Person should be 18 years old and above.</p>
 		</div>
+		<loading :active.sync="isLoading" :is-full-page="true"></loading>
 	</div>
 </template>
 
@@ -164,6 +165,7 @@
 	import flatpickr from 'flatpickr';
 	import 'flatpickr/dist/flatpickr.css';
 	import RegexMixin from 'Mixins/regex.js';
+	import ErrorResponseHandler from 'Mixins/errorResponse.js';
 	import {EventBus} from 'Root/EventBus.js';
 
 	export default {
@@ -173,6 +175,8 @@
 			stepData: Object,
 			countries: Array,
 			genders: Array,
+			destination: Object,
+			agencyCodeUrlChecker: String
 		},
 
 		data() {
@@ -188,11 +192,16 @@
 					nationality: null,
 					visitorType: null,
 					birthdate: null,
-				}
+				},
+				isLoading: false
 			}
 		},
 
-		mixins: [ RegexMixin ],
+		mixins: [ RegexMixin, ErrorResponseHandler ],
+
+		components: {
+			Loading,
+		},
 
 		computed: {
 			showFileInput() {
@@ -240,6 +249,31 @@
 		},
 
 		methods: {
+			checkIfAgencyCodeIsValid() {
+				if(this.stepData.main.agency_code) {
+					this.isLoading = true;
+					var payload = {
+						code : this.stepData.main.agency_code,
+						destination: this.destination.id,
+						allocation: this.stepData.allocationSelected,
+						date: this.stepData.visitDate
+					}
+
+					axios.post(this.agencyCodeUrlChecker, payload)
+						.then(response => {
+							this.isLoading = false;
+							this.destination.agencyAvailableSeat = response.data.remaining;
+						}).catch(errors => {
+							this.isLoading = false;
+							this.stepData.main.agency_code = null;
+							swal.fire('Oops...', this.parseResponse(errors, 'error'), 'error')
+						})
+					} else {
+						this.destination.agencyAvailableSeat = this.destination.availableSeat;
+					}
+				
+			},
+
 			proofForSpecialFee(e) {
 	            var files = e.target.files || e.dataTransfer.files;
 

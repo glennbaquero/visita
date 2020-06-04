@@ -13,12 +13,12 @@
 				<selector class="col-sm-12 col-md-6"
 				v-model="item.allocation_id"
 				name="allocation_id"
-				label="Allocation"
+				label="Experience"
 				:items="allocations"
 				item-value="id"
 				item-text="name"
 				empty-text="None"
-				placeholder="Please select an Allocation"
+				placeholder="Please select an Experience"
 				></selector>
 
 				<div class="form-group col-sm-12 col-md-6">

@@ -42,7 +42,7 @@
         <div class="input-group">
 	        <div class="custom-file" style="overflow: hidden;">
 	            <input ref="file" :name="name" @click="clear" @change="change" :disabled="!editable" 
-	            type="file" :multiple="multiple" class="custom-file-input">
+	            type="file" :multiple="multiple" class="custom-file-input" :accept="format">
 	            <label class="custom-file-label">
 	            	<template>
 	                	<template v-if="images.length > 0" v-for="image in images">{{ image.name }} </template>
@@ -219,6 +219,11 @@ export default
 	},
 
 	props: {
+		format: {
+			default: null,
+			type: String
+		},
+
 		label: {
 			default:null,
 			type: String,

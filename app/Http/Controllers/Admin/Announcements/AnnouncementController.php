@@ -53,7 +53,7 @@ class AnnouncementController extends Controller
         DB::beginTransaction();
             $item = Announcement::store($request);
             if($request->destination_ids) {
-                $item->destinations()->attach($request->destination_ids);
+                $item->destinations()->sync($request->destination_ids);
                 foreach($item->destinations as $destination) {
                     foreach($destination->managements as $receiver) {
                         $receiver->notify(new AnnouncementNotification($request->except(['destination_ids'])));

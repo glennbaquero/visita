@@ -36,7 +36,20 @@
 			stepData: Object,
 		},
 
+		mounted() {
+			this.setupGuest();
+		},
+
 		methods: {
+			setupGuest() {
+				if(this.$parent.destination.agencyAvailableSeat) {
+					if(this.stepData.numberOfGuests > this.$parent.destination.agencyAvailableSeat) {
+						this.stepData.numberOfGuests = 0;
+						this.stepData.guests = [];
+					}
+				}
+			},
+
 			guestLabel(guest) {
 				var name = 'Register Guest';
 

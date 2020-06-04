@@ -23,13 +23,15 @@ class DestinationStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $id = $this->route('id');
+        $rules = [
             'name' => 'required',
             // 'code' => 'required',
             // 'icon' => 'required',
             'terms_conditions' => 'required',
             'visitor_policies' => 'required',
             'operating_hours' => 'required',
+            'cut_off_days' => 'required',
             'orientation_module' => 'required',
             'capacity_per_day' => 'required',
             'overview' => 'required',
@@ -37,5 +39,19 @@ class DestinationStoreRequest extends FormRequest
             'fees' => 'required',
             'how_to_get_here' => 'required',
         ];
+
+        if ($id) {
+            $image = [
+                'images' => 'image'
+            ];
+        } else {
+            $image = [
+                'images' => 'required|image'
+            ];
+        }
+
+        $rules = array_merge($rules, $image);
+
+        return $rules;
     }
 }

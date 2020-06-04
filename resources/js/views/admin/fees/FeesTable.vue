@@ -78,7 +78,7 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Allocation', value: 'allocation_id' },
+                { text: 'Experience', value: 'allocation_id' },
                 { text: 'Name', value: 'name' },
                 { text: 'Weekday', value: 'weekday' },
                 { text: 'Weekend', value: 'weekend' },

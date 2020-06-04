@@ -13,7 +13,7 @@
 
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Slug <small class="text-danger">(Warning: editing this may cause issues)</small></label>
-					<input v-model="item.slug" name="slug" type="text" class="form-control input-sm">
+					<input v-model="item.slug" name="slug" type="text" class="form-control input-sm" disabled>
 				</div>
 
 				<selector class="col-sm-12 col-md-6"
@@ -26,6 +26,7 @@
 				item-text="name"
 				empty-text="None"
 				placeholder="Please select a page"
+				:disabled="true"
 				></selector>
 
 				<selector class="col-sm-12 col-md-6"
