@@ -63,6 +63,7 @@
         :no-action="noAction"
         :disabled="disabled"
         order-by="id"
+        order-desc
         @load="load"
         >
 
@@ -134,20 +135,20 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Point Person', value: 'fullname' },
+                { text: 'Point Person', value: '' },
                 { text: 'Agency Code', value: 'agency_code' },
-                { text: 'Destination', value: 'destination' },
-                { text: 'Experience', value: 'allocation' },
+                { text: 'Destination', value: 'destination_id' },
+                { text: 'Experience', value: 'allocation_id' },
                 { text: 'Total Guest', value: 'total_guest' },
-                { text: 'Time', value: 'time' },
-                { text: 'Type', value: 'type' },
+                { text: 'Time', value: 'start_time' },
+                { text: 'Type', value: '' },
                 { text: 'Reservation Type', value: 'is_walkin' },
-                { text: 'Visit Status', value: 'status' },
+                { text: 'Visit Status', value: ' ' },
                 { text: 'Amount Settled', value: '' },
                 { text: 'Initial Payment', value: '' },
                 { text: 'Remaining Balance', value: '' },
-                { text: 'Total', value: 'grand_total' },
-                { text: 'Payment Status', value: 'payment_status' },
+                { text: 'Total', value: '' },
+                { text: 'Payment Status', value: '' },
                 // { text: 'Set Invoice As', value: '' },
             ];
 

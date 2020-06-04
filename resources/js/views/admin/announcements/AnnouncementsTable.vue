@@ -21,6 +21,7 @@
         :no-action="noAction"
         :disabled="disabled"
         order-by="id"
+        :order-desc="true"
         @load="load"
         >
 
@@ -74,7 +75,7 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Destination', value: 'destination' },
+                { text: 'Destination', value: '' },
                 { text: 'Title', value: 'title' },
             ];
 

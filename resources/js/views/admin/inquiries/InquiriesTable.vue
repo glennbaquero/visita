@@ -21,6 +21,7 @@
         :no-action="noAction"
         :disabled="disabled"
         order-by="id"
+        order-desc
         @load="load"
         >
 

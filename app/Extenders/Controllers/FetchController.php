@@ -14,7 +14,7 @@ abstract class FetchController extends Controller
     protected $request = null;
     protected $class = '';
 
-    protected $order = 'asc';
+    protected $order = 'desc';
     protected $orderBy = 'id';
 
     protected $per_page;
@@ -153,7 +153,7 @@ abstract class FetchController extends Controller
 
         switch ($this->orderBy) {
             default:
-                    $query = $query->orderBy($this->orderBy, 'desc');
+                    $query = $query->orderBy($this->orderBy, $this->order);
                 break;
         }
 

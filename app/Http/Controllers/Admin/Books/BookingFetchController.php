@@ -87,24 +87,15 @@ class BookingFetchController extends FetchController
             }
         }
 
+        switch ($this->request->orderBy) {
+            default:
+                    $query = $query->orderBy($this->request->orderBy, $this->request->order);
+                break;
+        }
         
 
         return $query;
     }
-
-    /**
-     * Custom search query
-     * 
-     * @param  string $query
-     */
-    // protected function searchQuery($query) {
-    //     if($this->request->filled('search')){
-    //         $ids = Guest::where('main', true)->where('email', 'like', '%'.$this->request->input('search').'%')->orWhere(DB::raw('CONCAT(`first_name`, " ", `last_name`)'), 'like', '%'.$this->request->input('search').'%')->pluck('book_id');
-    //         $query = $this->class::whereIn('id', $ids);
-    //     }
-
-    //     return $query;
-    // }
 
     /**
      * Custom formatting of data
@@ -127,6 +118,8 @@ class BookingFetchController extends FetchController
 
         return $result;
     }
+
+
 
     /**
      * Build array data

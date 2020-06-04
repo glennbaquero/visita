@@ -21,6 +21,7 @@
         :no-action="noAction"
         :disabled="disabled"
         order-by="id"
+        :order-desc="true"
         @load="load"
         >
 
@@ -72,6 +73,7 @@ import ActionButton from '../../../components/buttons/ActionButton.vue';
 import ViewButton from '../../../components/buttons/ViewButton.vue';
 
 export default {
+
     computed: {
         headers() {
             let array = [

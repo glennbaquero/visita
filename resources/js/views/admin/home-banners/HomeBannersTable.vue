@@ -93,7 +93,7 @@ export default {
             return [
                 { text: '#', value: 'id', },
                 { text: 'Name', value: 'name', },
-                { text: 'Image', value: 'image_path', },
+                { text: 'Image', value: '', },
                 { text: 'Created Date', value: 'created_at', },
             ];
         },

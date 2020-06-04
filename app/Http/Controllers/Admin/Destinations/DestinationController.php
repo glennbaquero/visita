@@ -100,7 +100,7 @@ class DestinationController extends Controller
             $item->addOns()->sync($request->add_ons);
         DB::commit();
 
-        $message = "You have successfully updated {$item->renderName()}";
+        $message = "You have successfully updated {$item->renderName()}. If capacity has changes please update the capacity in each experience.";
 
 
         return response()->json([

@@ -21,6 +21,7 @@
         :no-action="noAction"
         :disabled="disabled"
         order-by="id"
+        order-desc
         @load="load"
         >
 
@@ -78,12 +79,12 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Experience', value: 'allocation' },
+                { text: 'Experience', value: 'allocation_id' },
                 { text: 'Online', value: 'online' },
                 { text: 'Walk In', value: 'walk_in' },
                 { text: 'Management(LGU)', value: 'mgt_lgu' },
                 { text: 'Agency', value: 'agency' },
-                { text: 'Total', value: 'total' },
+                { text: 'Total', value: '' },
             ];
 
 

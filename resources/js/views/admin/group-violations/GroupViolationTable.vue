@@ -21,6 +21,7 @@
         :no-action="noAction"
         :disabled="disabled"
         order-by="id"
+        order-desc
         @load="load"
         >
 
@@ -52,7 +53,7 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Book Id', value: 'book_id' },
+                { text: 'Group ID', value: 'book_id' },
                 { text: 'Violation', value: 'violation' },
                 { text: 'Statement', value: 'statement' },
             ];

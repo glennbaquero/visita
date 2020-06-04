@@ -21,6 +21,7 @@
         :no-action="noAction"
         :disabled="disabled"
         order-by="id"
+        order-desc
         @load="load"
         >
 
@@ -75,9 +76,9 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Name', value: 'name' },
+                { text: 'Name', value: 'first_name' },
                 { text: 'Email', value: 'email' },
-                { text: 'Destination', value: 'destination' },
+                { text: 'Destination', value: 'destination_id' },
             ];
 
 
