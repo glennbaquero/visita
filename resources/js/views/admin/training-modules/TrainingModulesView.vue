@@ -118,7 +118,7 @@ export default {
 				type: false
 			},
 			destinations: [],
-			format: '.jpeg, .jpg, .png, .mp4, .ogg, .3gp, .wmv, .mov, .avi'
+			format: '.jpeg, .jpg, .png'
 		}
 	},
 
