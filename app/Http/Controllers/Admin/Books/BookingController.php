@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Destinations\Destination;
+use App\Models\Types\VisitorType;
 
 class BookingController extends Controller
 {
@@ -18,12 +19,14 @@ class BookingController extends Controller
     {
         $admin = auth()->guard('admin')->user();
         $destinations = Destination::with('allocations')->get();
+        $visitor_types = VisitorType::all();
         if($admin->destination_id) {
             $destinations = Destination::where('id', $admin->destination_id)->with('allocations')->get();
         }
 
         return view('admin.bookings-all.index', [
-            'destinations' => $destinations
+            'destinations' => $destinations,
+            'visitor_types' => $visitor_types,
         ]);
     }
 

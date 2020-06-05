@@ -87,6 +87,15 @@ class BookingFetchController extends FetchController
             }
         }
 
+        if($this->request->visitor_type) {
+            if($this->request->visitor_type != 0) {
+                $type = $this->request->visitor_type;
+                $query = $query->whereHas('guests', function($query) use($type) {
+                    $query->where('main', true)->where('visitor_type_id', $type);
+                });
+            }
+        }
+
         switch ($this->request->orderBy) {
             default:
                     $query = $query->orderBy($this->request->orderBy, $this->request->order);

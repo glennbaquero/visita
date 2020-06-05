@@ -45,6 +45,7 @@
                             ref="table-1"
                             fetch-url="{{ route('admin.bookings-version2.fetch') }}"
                             :destinations="{{ $destinations }}"
+                            :visitor_types="{{ $visitor_types }}"
                             ></bookings-v2-table>
                         </div>
                         <div class="tab-pane" id="tab2">

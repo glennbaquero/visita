@@ -15,10 +15,11 @@
             <selector
             class="mt-2 col-md-6"
             :items="experiences"
+            v-model="experience"
             item-text="name"
             item-value="id"
             label="Filter by experience"
-            @change="filter($event, 'experience')"
+            @change="filter($event, 'experience'); "
             placeholder="Filter by experience"
             ></selector>
 
@@ -40,6 +41,15 @@
             label="Filter by Payment Types"
             @change="filter($event, 'payment_type')"
             placeholder="Filter by Payment Types"
+            ></selector>
+            <selector
+            class="mt-2 col-md-6"
+            :items="visitor_types"
+            item-text="name"
+            item-value="id"
+            label="Filter by Visitor Types"
+            @change="filter($event, 'visitor_type')"
+            placeholder="Filter by Visitor Types"
             ></selector>
         </div>
         <filter-box @refresh="fetch">
@@ -164,8 +174,10 @@ export default {
     data() {
         return {
             destination: null,
+            experience: null,
             new_destinations: this.destinations,
             experiences: [],
+            special_fees: [],
             payment_status: [
                 {
                     label: 'All',
@@ -243,6 +255,7 @@ export default {
         },
 
         destinations: Array,
+        visitor_types: Array,
     },
 
     mixins: [ ListMixin, NumberFormat ],
@@ -278,7 +291,8 @@ export default {
                 'name': 'All'
             };
             this.experiences.push(all)
-        }
+        },
+
     }
 }
 </script>
