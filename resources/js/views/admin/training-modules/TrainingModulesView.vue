@@ -115,7 +115,7 @@ export default {
 	data() {
 		return {
 			item: {
-				type: true
+				type: false
 			},
 			destinations: [],
 			format: '.jpeg, .jpg, .png, .mp4, .ogg, .3gp, .wmv, .mov, .avi'
