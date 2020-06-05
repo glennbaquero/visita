@@ -37,8 +37,12 @@ class Book extends Model
             'id' => $this->id,
             'destination' => $this->destination ? $this->destination->name : '',
             'allocation' => $this->allocation ? $this->allocation->name : '',
-            'time' => $this->renderTime(),
-            'guest' => $guests
+            // 'time' => $this->time,
+            'total_guest' => $this->total_guest,
+            'is_walkin' => $this->is_walkin == 1 ? 'Walk-In' : 'Online',
+            'guest' => $guests,
+            'status' => $this->getStatus(),
+            'start_time' => str_replace(':','',Carbon::parse($this->start_time)->format('h:i A'))        
         ];
         
         return $searchable;

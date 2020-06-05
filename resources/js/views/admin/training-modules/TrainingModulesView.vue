@@ -114,9 +114,21 @@ export default {
 
 	data() {
 		return {
-			item: [],
+			item: {
+				type: true
+			},
 			destinations: [],
 			format: '.jpeg, .jpg, .png, .mp4, .ogg, .3gp, .wmv, .mov, .avi'
+		}
+	},
+
+	watch: {
+		'item.type'(val) {
+			if(val) {
+				this.format = '.mp4, .ogg, .3gp, .wmv, .mov, .avi';
+			} else {
+				this.format = '.jpeg, .jpg, .png';
+			}
 		}
 	},
 

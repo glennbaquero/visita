@@ -8,6 +8,25 @@ use App\Models\Guests\Guest;
 
 class VisitorType extends Model
 {
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $searchable = [
+            'id' => $this->id,
+            'name' => $this->name,
+            'weekday_fee' => $this->weekday_fee,
+            'weekend_fee' => $this->weekend_fee,
+            'daytour_fee' => $this->daytour_fee,
+            'overnight_fee' => $this->overnight_fee,
+        ];
+        
+        return $searchable;
+    }
+
 	/*
 	 * Relationship
 	 */

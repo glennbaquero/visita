@@ -29,6 +29,17 @@ class SearchableRefresh extends Command
         'App\Models\Pages\Page',
         'App\Models\Pages\PageItem',
         'App\Models\Roles\Role',
+        'App\Models\Books\Book',
+        'App\Models\Times\TimeSlot',
+        'App\Models\Surveys\Survey',
+        'App\Models\Allocations\Allocation',
+        'App\Models\Agencies\Agency',
+        'App\Models\Destinations\Destination',
+        'App\Models\Guests\Guest',
+        'App\Models\Books\Book',
+        'App\Models\Capacities\Capacity',
+        'App\Models\Fees\Fee',
+        'App\Models\Types\VisitorType'
     ];
 
     /**

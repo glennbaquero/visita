@@ -33,6 +33,7 @@ class Guest extends Model
             'nationality' => $this->nationality,
             'gender' => $this->gender,
             'special_fee' => $this->specialFee ? $this->specialFee->name : '',
+            'visitor_type' => $this->visitorType ? $this->visitorType->name : '',
         ];
         
         return $searchable;
