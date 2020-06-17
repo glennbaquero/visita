@@ -4,8 +4,6 @@ namespace App\Models\Books;
 
 use App\Extenders\Models\BaseModel as Model;
 
-use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
-
 use App\Models\Violations\GroupViolation;
 use App\Models\Remarks\GroupRemark;
 use App\Models\AddOns\AddOn;
@@ -23,7 +21,7 @@ use Carbon\Carbon;
 class Book extends Model
 {
 
-    use FileTrait, EloquentJoin;
+    use FileTrait;
 
     protected $dates = ['scheduled_at', 'ended_at', 'started_at'];
 
