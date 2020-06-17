@@ -190,7 +190,7 @@ class ResourceFetchController extends Controller
                     'created_at' => $item->created_at->format('j M Y h:i A'),
                     'is_walkin_label' => $item->is_walkin ? 'Walk-In' : 'Online',
                     'start_time' => $item->start_time,
-                    'representative' => $item->representative,
+                    'representative' => json_encode($item->representative),
                     'destination_representative_id' => $item->destination_representative_id,
                 ]);
             }
