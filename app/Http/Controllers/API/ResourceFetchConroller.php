@@ -114,7 +114,9 @@ class ResourceFetchController extends Controller
     	$user = $request->user();
 
     	// get all booking based on current destination assigned for logged-in user
-    	$bookings = Book::where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today);
+    	$bookings = Book::whereHas('invoice', function($query) {
+            $query->where('is_paid', 1);
+        })->where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today);
     	
     	// total of guest today
     	$total['guest'] = $bookings->get()->sum('total_guest');
