@@ -88,16 +88,16 @@ class BookFetchController extends FetchController
         ];
     }
 
-    protected function sortQuery($query) {
+    // protected function sortQuery($query) {
+    //     dd()
+    //     switch ($this->orderBy) {
+    //         default:
+    //                 $query = $query->orderBy($this->orderBy, 'desc');
+    //             break;
+    //     }
 
-        switch ($this->orderBy) {
-            default:
-                    $query = $query->orderBy($this->orderBy, 'desc');
-                break;
-        }
-
-        return $query;
-    }
+    //     return $query;
+    // }
 
     public function getGuest($guests)
     {

@@ -61,7 +61,7 @@ class ResourceFetchController extends Controller
         $civil_status = CivilStatus::all();
 
         $nationalities = [];
-        $countries = Countries::all();
+        $countries = Countries::orderBy('citizenship', 'asc')->get();
         foreach ($countries as $key => $country) {
             array_push($nationalities, [
                 'citizenship' => $country->citizenship

@@ -96,11 +96,25 @@ class BookingFetchController extends FetchController
             }
         }
 
-        switch ($this->request->orderBy) {
-            default:
-                    $query = $query->orderBy($this->request->orderBy, $this->request->order);
-                break;
-        }
+        // if($this->request->orderBy == 'point_person') {
+        //     $orderBy = $this->request->orderBy;
+        //     $order = $this->request->order;
+        //     $query = $query->whereHas('guests', function($query) use($orderBy, $order) {
+        //         $query->where('main', true)->orderBy('first_name', $order);
+        //     });
+        // }
+        // switch ($this->request->orderBy) {
+        //     case 'point_person':
+        //             $orderBy = $this->request->orderBy;
+        //             $order = $this->request->order;
+        //             $query = $query->whereHas('guests', function($query) use($orderBy, $order) {
+        //                 $query->where('main', true)->orderBy('first_name', $order);
+        //             });
+        //         break;
+        //     default:
+                    
+        //         break;
+        // }
         
 
         return $query;
@@ -166,17 +180,6 @@ class BookingFetchController extends FetchController
             'restoreUrl' => $item->renderRestoreUrl(),
             'deleted_at' => $item->invoice->deleted_at,
         ];
-    }
-
-    protected function sortQuery($query) {
-
-        switch ($this->orderBy) {
-            default:
-                    $query = $query->orderBy($this->orderBy, 'desc');
-                break;
-        }
-
-        return $query;
     }
 
     public function getGuest($guests)

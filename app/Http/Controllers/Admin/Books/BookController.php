@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Books;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Bookings\BookingStoreRequest;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
@@ -62,7 +63,7 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $selectedDate, $destination, $experience, $destination_name)
+    public function store(BookingStoreRequest $request, $selectedDate, $destination, $experience, $destination_name)
     {
         DB::beginTransaction();
             $item = Book::store($request, null, null, $destination);
@@ -180,7 +181,7 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id,  $selectedDate,$destination, $experience, $destination_name)
+    public function update(BookingStoreRequest $request, $id,  $selectedDate,$destination, $experience, $destination_name)
     {
         $item = Book::withTrashed()->findOrFail($id);
 

@@ -356,7 +356,9 @@ class PageController extends Controller
 		$allocation = Allocation::find($request->allocationSelected);
 		$reserveds = Book::where(['allocation_id' => $allocation->id])->get();
 		$total_reservation = $allocation->capacities->first() ? $allocation->capacities->first()->online : null;
-
+		if($total_reservation < $allocation->destination->capacity_per_day) {
+			$total_reservation = $allocation->destination->capacity_per_day;
+		}
 		$result = [];
 
 		foreach ($reserveds as $reserved) {

@@ -42,11 +42,11 @@ class DestinationStoreRequest extends FormRequest
 
         if ($id) {
             $image = [
-                'images' => 'image'
+                'images' => 'mimes:jpeg,bmp,png,jpg'
             ];
         } else {
             $image = [
-                'images' => 'required|image'
+                'images' => 'required|mimes:jpeg,bmp,png,jpg'
             ];
         }
 

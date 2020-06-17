@@ -229,14 +229,18 @@ class InvoiceController extends Controller
     {
         $destination = Destination::find($request->destination);
         $totalReservation = $destination->capacity_per_day;
-        $allocation = Allocation::find($request->allocation)->capacities->first()->online;
+        $experience = Allocation::find($request->allocation);
+        $online_capacity = Allocation::find($request->allocation)->capacities->first()->online;
+        if($online_capacity > $experience->destination->capacity_per_day) {
+            $online_capacity = $experience->destination->capacity_per_day;
+        }
 
         $totalReserved = Book::whereDate('scheduled_at', $request->date)->where('allocation_id', $request->allocation)->sum('total_guest');
 
-        $availableSeat = $allocation - $totalReserved;
+        $availableSeat = $online_capacity - $totalReserved;
 
         return response()->json([
-            'online' => $allocation,
+            'online' => $online_capacity,
             'availableSeat' => $availableSeat
         ]);
 

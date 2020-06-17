@@ -145,7 +145,7 @@ export default {
         headers() {
             let array = [
                 { text: '#', value: 'id' },
-                { text: 'Point Person', value: '' },
+                { text: 'Point Person', value: 'point_person' },
                 { text: 'Agency Code', value: 'agency_code' },
                 { text: 'Destination', value: 'destination_id' },
                 { text: 'Experience', value: 'allocation_id' },

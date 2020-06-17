@@ -14,7 +14,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.teams.index') }}">Teams</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.about-us.index') }}">Teams</a></li>
                     <li class="breadcrumb-item active"><a href="javascript:void(0)">Create</a></li>
                 </ol>
             </div>
