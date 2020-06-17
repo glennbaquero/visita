@@ -151,7 +151,7 @@ export default {
                 { text: 'Experience', value: 'allocation_id' },
                 { text: 'Total Guest', value: 'total_guest' },
                 { text: 'Time', value: 'start_time' },
-                { text: 'Type', value: '' },
+                { text: 'Type', value: 'type' },
                 { text: 'Reservation Type', value: 'is_walkin' },
                 { text: 'Visit Status', value: ' ' },
                 { text: 'Amount Settled', value: '' },

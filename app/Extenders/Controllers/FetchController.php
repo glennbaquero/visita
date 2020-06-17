@@ -150,12 +150,12 @@ abstract class FetchController extends Controller
     }
 
     protected function sortQuery($query) {
-        if($this->orderBy == 'point_person') {
-            $orderBy = $this->orderBy;
-            $order = $this->order;
-            $query = $query->whereHas('guests', function($query) use($orderBy, $order) {
-                $query->orderBy('first_name', $order);
-            });
+        if($this->orderBy == 'point_person' || $this->orderBy == 'type') {
+            // $orderBy = $this->orderBy;
+            // $order = $this->order;
+            // $query = $query->with(['guests' => function($query) use($order) {
+            //                 $query->orderBy('first_name', $order);
+            //             }]);
         } else {
             switch ($this->orderBy) {
                 default:

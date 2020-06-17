@@ -96,27 +96,6 @@ class BookingFetchController extends FetchController
             }
         }
 
-        // if($this->request->orderBy == 'point_person') {
-        //     $orderBy = $this->request->orderBy;
-        //     $order = $this->request->order;
-        //     $query = $query->whereHas('guests', function($query) use($orderBy, $order) {
-        //         $query->where('main', true)->orderBy('first_name', $order);
-        //     });
-        // }
-        // switch ($this->request->orderBy) {
-        //     case 'point_person':
-        //             $orderBy = $this->request->orderBy;
-        //             $order = $this->request->order;
-        //             $query = $query->whereHas('guests', function($query) use($orderBy, $order) {
-        //                 $query->where('main', true)->orderBy('first_name', $order);
-        //             });
-        //         break;
-        //     default:
-                    
-        //         break;
-        // }
-        
-
         return $query;
     }
 
@@ -137,6 +116,21 @@ class BookingFetchController extends FetchController
 
             $data = $this->formatItem($item);
             array_push($result, $data);
+        }
+        if($this->request->orderBy === 'point_person') {
+            if($this->request->order == 'asc') {
+                $result = collect($result)->sortBy('main_contact.fullname')->values()->all();
+            } else {
+                $result = collect($result)->sortByDesc('main_contact.fullname')->values()->all();
+            }
+        }
+
+        if($this->request->orderBy === 'type') {
+            if($this->request->order == 'asc') {
+                $result = collect($result)->sortBy('main_contact.type')->values()->all();
+            } else {
+                $result = collect($result)->sortByDesc('main_contact.type')->values()->all();
+            }
         }
 
         return $result;
