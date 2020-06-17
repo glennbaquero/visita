@@ -83,7 +83,7 @@ class SocialiteLoginController extends Controller
 		}
 
 		/* Check if user is trashed */
-		if ($user->trashed()) {
+		if ($user->deleted_at) {
 			abort(403, 'User has been deactivated by the admin.');
 		}
 

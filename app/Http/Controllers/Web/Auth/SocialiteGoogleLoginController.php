@@ -46,7 +46,7 @@ class SocialiteGoogleLoginController extends Controller
         $existingUser = User::withTrashed()->where('email', $socialite->getEmail())->first();
 
         /* Check if user is trashed */
-        if ($existingUser->trashed()) {
+        if ($existingUser->deleted_at) {
             abort(403, 'User has been deactivated by the admin.');
         }
 
