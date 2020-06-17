@@ -17,7 +17,8 @@ class BookController extends Controller
     public function fetch(Request $request)
     {
         $data = [];
-        $selected_date = Carbon::parse($request->selected_date);
+        $time = Carbon::now()->format('h:i:s');
+        $selected_date = Carbon::parse($request->selected_date.' '.$time);
 
         $items = Book::where('destination_id', $request->destination_id)->whereDate('scheduled_at', $selected_date)->get();
 
