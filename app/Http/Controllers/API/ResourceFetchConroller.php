@@ -125,14 +125,26 @@ class ResourceFetchController extends Controller
     	$total['groups'] = $bookings->get()->count();
     	
         // get total checked in for walk in guest
-        $checked_in_walkin['visitors'] = Book::where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
-        $checked_in_walkin['groups'] = Book::where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
+        $checked_in_walkin['visitors'] = Book::whereHas('invoice', function($query) {
+            $query->where('is_paid', 1);
+        })->where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+        $checked_in_walkin['groups'] = Book::whereHas('invoice', function($query) {
+            $query->where('is_paid', 1);
+        })->where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
 
         // get total checked in for online in guest
-        $total_checked_in['online_visitor'] = Book::where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', false)->whereDate('started_at', $today)->get()->sum('total_guest'); 
-        $total_checked_in['online_group'] = Book::where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', false)->whereDate('started_at', $today)->get()->count(); 
-        $total_checked_in['walk_in'] = Book::where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
-        $total_checked_in['walk_in_group'] = Book::where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
+        $total_checked_in['online_visitor'] = Book::whereHas('invoice', function($query) {
+            $query->where('is_paid', 1);
+        })->where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', false)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+        $total_checked_in['online_group'] = Book::whereHas('invoice', function($query) {
+            $query->where('is_paid', 1);
+        })->where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', false)->whereDate('started_at', $today)->get()->count(); 
+        $total_checked_in['walk_in'] = Book::whereHas('invoice', function($query) {
+            $query->where('is_paid', 1);
+        })->where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
+        $total_checked_in['walk_in_group'] = Book::whereHas('invoice', function($query) {
+            $query->where('is_paid', 1);
+        })->where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->count(); 
 
     	// get the remaining capacity left for today 
     	$capacity_per_day = $user->destination->capacity_per_day;
@@ -178,6 +190,7 @@ class ResourceFetchController extends Controller
                     'created_at' => $item->created_at->format('j M Y h:i A'),
                     'is_walkin_label' => $item->is_walkin ? 'Walk-In' : 'Online',
                     'start_time' => $item->start_time,
+                    'representative' => $item->representative,
                     'destination_representative_id' => $item->destination_representative_id,
                 ]);
             }
