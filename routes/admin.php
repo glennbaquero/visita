@@ -505,6 +505,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::get('reservations', 'BookingController@index')->name('bookings-version2.index');
             Route::post('reservations/fetch', 'BookingFetchController@fetch')->name('bookings-version2.fetch');
+            Route::post('reservations/fetch?archived=1', 'BookingFetchController@fetch')->name('bookings-version2.fetch-archive');
         });
 
         Route::namespace('Fees')->group(function() {
