@@ -228,32 +228,34 @@ class BookController extends Controller
                             'special_fee_id' => $request->guest_special_fee_id[$key],
                         ]);  
                         $upload_path = null;
-                        if($request->input('guest_special_fee_path')[$key]) {
+                        // dd() , $request->input('guest_special_fee_path')[1]);
+                        if(isset($request->guest_special_fee_path[$key])) {
                             $guest->update([
                                 'special_fee_path' => $this->uploadImage($request->guest_special_fee_path[$key])
                             ]);
                         }
-                    } else {
-                        $upload_path = null;
-                        if($request->guest_special_fee_path[$key]) {
-                            $file = $request->guest_special_fee_path[$key];
-                            $filename = $file->getClientOriginalName();
-                            $path = 'public/special_fee';
-                            $upload_path = Storage::put($path, $file, $filename);
-                        }
-
-                        $item->guests()->create([
-                            'first_name' => $request->guest_first_name[$key],
-                            'last_name' => $request->guest_last_name[$key],
-                            'birthdate' => $request->guest_birthdate[$key],
-                            'email' => $request->guest_email[$key],
-                            'gender' => $request->guest_gender[$key],
-                            'nationality' => $request->guest_nationality[$key],
-                            'visitor_type_id' => $request->guest_visitor_type[$key],
-                            'special_fee_id' => $request->guest_special_fee_id[$key],
-                            'special_fee_path' => $upload_path,
-                        ]);  
                     } 
+                    // else {
+                    //     $upload_path = null;
+                    //     if($request->guest_special_fee_path[$key]) {
+                    //         $file = $request->guest_special_fee_path[$key];
+                    //         $filename = $file->getClientOriginalName();
+                    //         $path = 'public/special_fee';
+                    //         $upload_path = Storage::put($path, $file, $filename);
+                    //     }
+
+                    //     $item->guests()->create([
+                    //         'first_name' => $request->guest_first_name[$key],
+                    //         'last_name' => $request->guest_last_name[$key],
+                    //         'birthdate' => $request->guest_birthdate[$key],
+                    //         'email' => $request->guest_email[$key],
+                    //         'gender' => $request->guest_gender[$key],
+                    //         'nationality' => $request->guest_nationality[$key],
+                    //         'visitor_type_id' => $request->guest_visitor_type[$key],
+                    //         'special_fee_id' => $request->guest_special_fee_id[$key],
+                    //         'special_fee_path' => $upload_path,
+                    //     ]);  
+                    // } 
                 }
             }
 
