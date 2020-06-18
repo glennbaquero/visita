@@ -42,8 +42,10 @@ class ExperienceFetchController extends FetchController
         $result = [];
 
         foreach($items as $item) {
-            $data = $this->formatItem($item);
-            array_push($result, $data);
+            if($item->capacities()->exists()) {
+                $data = $this->formatItem($item);
+                array_push($result, $data);
+            }
         }
 
         return $result;
