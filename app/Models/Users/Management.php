@@ -46,12 +46,12 @@ class Management extends Authenticatable implements MustVerifyEmail, JWTSubject
 
     public function role()
     {
-    	return $this->belongsTo(Role::class);
+    	return $this->belongsTo(Role::class)->withTrashed();
     }
 
     public function destination()
     {
-    	return $this->belongsTo(Destination::class);
+    	return $this->belongsTo(Destination::class)->withTrashed();
     }
 
     public function deviceTokens() {
