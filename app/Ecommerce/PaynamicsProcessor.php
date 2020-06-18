@@ -66,7 +66,8 @@ class PaynamicsProcessor
 		$_cancelurl = route('web.checkout.paynamics-cancel');		
 		$_clientip = $_SERVER['REMOTE_ADDR'];
 		$_sec3d = "try3d";
-		$_amount = number_format($this->invoice->grand_total, 2, '.', ''); // kindly set this to the total amount of the transaction. Set the amount to 2 decimal point before generating signature.
+		$grandTotal = $this->invoice->grand_total + $this->invoice->transaction_fee;
+		$_amount = number_format($grandTotal, 2, '.', ''); // kindly set this to the total amount of the transaction. Set the amount to 2 decimal point before generating signature.
 		$_currency = "PHP"; //PHP or USD
 
 		$forSign = $_mid . $_requestid . $_ipaddress . $_noturl . $_resurl . $_fname . $_lname . $_addr1 . $_city . $_state . $_country . $_zip . $_email . $_phone . $_clientip . $_amount . $_currency . $_sec3d;
