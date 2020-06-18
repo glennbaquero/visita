@@ -62,7 +62,7 @@ class InvoiceController extends Controller
 
 	    		$book->guests()->create([
 	    			'visitor_type_id' => $guest->visitor_type_id,
-	    			'special_fee_id' => $guest->special_fee_id != 0 ?? null,
+	    			'special_fee_id' => $guest->special_fee_id != 0 ? $guest->special_fee_id : null,
 	    			'main' => $guest->main,
 	    			'first_name' => $guest->first_name,
 	    			'last_name' => $guest->last_name,
