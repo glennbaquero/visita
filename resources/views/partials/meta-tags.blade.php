@@ -1,7 +1,7 @@
 <base href="/" />
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>{{ config('app.name') }} | @yield('meta:title', 'Home')</title>
+<title>{{ config('app.name') }} | @yield('meta:title', '')</title>
 <meta name="author" content="{{ config('app.name') }}">
 
 <meta name="description" content="@yield('meta:description', 'VISITA is a non-profit, sustainable tourism project working towards a responsible tourism industry through developing a range of tools on sustainable travel for both travelers and destination managers. In 2017, tourist arrivals reached a total of 1.326 billion globally.')">
