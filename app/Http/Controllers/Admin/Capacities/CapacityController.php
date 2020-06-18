@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin\Capacities;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Validation\ValidationException;
+
 use App\Models\Capacities\Capacity;
+use App\Models\Allocations\Allocation;
 
 use App\Http\Requests\Admin\Capacities\CapacityStoreRequest;
 
@@ -45,6 +48,14 @@ class CapacityController extends Controller
      */
     public function store(CapacityStoreRequest $request)
     {
+
+        $total = $request->online + $request->walk_in + $request->mgt_lgu + $request->agency;
+        $capacity_per_day = Allocation::find($request->allocation_id)->destination->capacity_per_day;
+        if($total != $capacity_per_day) {
+            throw ValidationException::withMessages([
+                'capacity_error' => ['Remaining capacity must be equal to zero.']
+            ]);    
+        }
         $item = Capacity::store($request);
 
         $message = "You have successfully created the capacity of {$item->allocation->name}";
@@ -90,7 +101,17 @@ class CapacityController extends Controller
      */
     public function update(CapacityStoreRequest $request, $id)
     {
+        $total = $request->online + $request->walk_in + $request->mgt_lgu + $request->agency;
+
+
         $item = Capacity::withTrashed()->findOrFail($id);
+        
+        if($total != $item->allocation->destination->capacity_per_day) {
+            throw ValidationException::withMessages([
+                'capacity_error' => ['Remaining capacity must be equal to zero.']
+            ]);    
+        }
+        
         $item = Capacity::store($request, $item);
 
         $message = "You have successfully updated the capacity of {$item->allocation->name}";

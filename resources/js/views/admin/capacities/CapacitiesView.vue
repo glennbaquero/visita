@@ -1,5 +1,5 @@
 <template>
-	<form-request :submit-url="submitUrl" @load="load" @success="fetch" confirm-dialog sync-on-success>
+	<form-request :submit-url="submitUrl" @load="load" @success="fetch" confirm-dialog sync-on-success >
 	
 		<card>
 			<template v-slot:header>Capacity Information</template>
@@ -55,8 +55,8 @@
                 confirm-dialog
                 title="Archive Item"
                 alt-title="Restore Item"
-                :message="'Are you sure you want to archive FAQ #' + item.id + '?'"
-                :alt-message="'Are you sure you want to restore FAQ #' + item.id + '?'"
+                :message="'Are you sure you want to archive Capacity #' + item.id + '?'"
+                :alt-message="'Are you sure you want to restore Capacity #' + item.id + '?'"
                 :disabled="loading"
                 @load="load"
                 @success="fetch"
