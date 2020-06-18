@@ -80,17 +80,20 @@
 					allocation: this.stepData.allocationSelected,
 					date: val
 				}
+
 				axios.post(this.remainingSeatUrl, data) 
 					.then(response => {
 						this.destination.availableSeat = response.data.availableSeat;
 					})
+
 			}
 		},
 
 		data() {
 			return {
 				timeslots: [],
-				isLoading: false
+				isLoading: false,
+		        now: moment().add(0, 'days').format('Y-MM-DD'),
 			}
 		},
 
@@ -103,9 +106,20 @@
 
 			timeslots() {
 				var result = [];
+				var currentTime = moment();
 				_.forEach(this.items, (value) => {
 			    	if(value.allocation_id  === this.stepData.allocationSelected){
-			      		result = value.timeslot;
+			    		_.each(value.timeslot, (timeslot) => {
+							var slot = moment(timeslot.formatted_time, 'H:mm A');
+			    			if(this.stepData.visitDate == this.now) {
+			    				if(slot.isAfter(currentTime)) {
+			    					result.push(timeslot);
+			    				}
+			    			} else {
+								result.push(timeslot);
+							}
+			    		})
+			      		// result = value.timeslot;
 			    	}
 			  	});
 
