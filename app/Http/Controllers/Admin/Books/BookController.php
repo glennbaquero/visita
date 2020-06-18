@@ -228,7 +228,7 @@ class BookController extends Controller
                             'special_fee_id' => $request->guest_special_fee_id[$key],
                         ]);  
                         $upload_path = null;
-                        if($request->guest_special_fee_path[$key]) {
+                        if($request->input('guest_special_fee_path')[$key]) {
                             $guest->update([
                                 'special_fee_path' => $this->uploadImage($request->guest_special_fee_path[$key])
                             ]);
