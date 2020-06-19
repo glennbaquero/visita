@@ -100,7 +100,7 @@ export default {
 			} else {
 				this.max = 0;
 			}
-			if(remaining <= 0) {
+			if(remaining < 0) {
 				this.showBtn = false;
 			} else {
 				this.showBtn = true;
