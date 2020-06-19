@@ -83,7 +83,7 @@ class TrainingModule extends Model
 
     public static function fetchItemAPI($destination_id)
     {
-    	$items = TrainingModule::where('destination_id', $destination_id);
+    	$items = TrainingModule::where('destination_id', $destination_id)->get();
     	$result = [];
     	foreach($items as $item) {
     	    array_push($result, [
