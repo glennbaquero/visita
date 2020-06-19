@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\API\FetchControllers\NationalityFetchController;
 use App\Http\Controllers\API\FetchControllers\ExperienceFetchController;
@@ -48,6 +49,7 @@ class ResourceFetchController extends Controller
         $visitor_types = $fetch_types->fetch($request);
         $religions = $fetch_religions->fetch($request);
         $training_modules = TrainingModule::fetchItemAPI($user->destination_id);
+        Log::info('User Logged In : '. $user->destination_id);
         $surveys = $fetch_surveys->fetch($request);
         $incomes = $fetch_incomes->fetch($request);
         $feedbacks = $fetch_feedbacks->fetch($request);
