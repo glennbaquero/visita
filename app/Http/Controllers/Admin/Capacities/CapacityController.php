@@ -51,9 +51,9 @@ class CapacityController extends Controller
 
         $total = $request->online + $request->walk_in + $request->mgt_lgu + $request->agency;
         $capacity_per_day = Allocation::find($request->allocation_id)->destination->capacity_per_day;
-        if($total != $capacity_per_day) {
+        if($total > $capacity_per_day) {
             throw ValidationException::withMessages([
-                'capacity_error' => ['Remaining capacity must be equal to zero.']
+                'capacity_error' => ['Capacity must not greater than to Total Capacity.']
             ]);    
         }
         $item = Capacity::store($request);
@@ -106,9 +106,9 @@ class CapacityController extends Controller
 
         $item = Capacity::withTrashed()->findOrFail($id);
         
-        if($total != $item->allocation->destination->capacity_per_day) {
+        if($total > $item->allocation->destination->capacity_per_day) {
             throw ValidationException::withMessages([
-                'capacity_error' => ['Remaining capacity must be equal to zero.']
+                'capacity_error' => ['Capacity must not greater than to Total Capacity.']
             ]);    
         }
         
