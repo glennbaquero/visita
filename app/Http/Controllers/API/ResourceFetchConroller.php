@@ -88,7 +88,7 @@ class ResourceFetchController extends Controller
             'experiences' => $experiences->original['items'],
             'visitor_types' => $visitor_types->original['items'],
             'religions' => $religions->original['items'],
-            'training_modules' => $training_modules->original['items'],
+            'training_modules' => $training_modules,
             'surveys' => $surveys->original['items'],
             'incomes' => $incomes->original['items'],
             'feedbacks' => $feedbacks->original['items'],
