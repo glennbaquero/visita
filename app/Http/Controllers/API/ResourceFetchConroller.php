@@ -25,6 +25,7 @@ use App\Models\BlockedDates\BlockedDate;
 use App\Models\Genders\Gender;
 use App\Models\CivilStatuses\CivilStatus;
 use Webpatser\Countries\Countries;
+use App\Models\TrainingModules\TrainingModule;
 use Carbon\Carbon;
 
 class ResourceFetchController extends Controller
