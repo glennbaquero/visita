@@ -82,7 +82,7 @@ class BookingFetchController extends FetchController
                 });
             } elseif ($this->request->payment_status == 4) {
                 $query = $query->whereHas('invoice', function($query)  {
-                    $query->whereNotNull('deleted_at')->where('is_paid', false)->where('is_approved', false);
+                    $query->whereNotNull('deleted_at');
                 });
             }
         }

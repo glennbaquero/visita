@@ -52,7 +52,7 @@
                             <bookings-v2-table
                             ref="table-2"
                             disabled
-                            fetch-url="{{ route('admin.bookings-version2.fetch-archive') }}"
+                            fetch-url="{{ route('admin.bookings-version2.fetch', ['payment_status' => 4]) }}"
                             ></bookings-v2-table>
                         </div>
                     </div>
