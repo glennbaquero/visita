@@ -68,7 +68,7 @@ class WalkinController extends Controller
         $booking['main_contact'] = $book->guests()->where('main', 1)->first();
         $booking['is_walkin'] = $book->is_walkin ? 'Walk-In' : 'Online';
         $booking['is_walkin_label'] = $book->is_walkin ? 'Walk-In' : 'Online';
-        $booking['guests'] =  $book->guests;
+        $booking['guests'] =  $book->guests()->where('main', 0)->get();
         $booking['allocation'] = $book->allocation;
         $booking['schedule'] = Carbon::parse($book->scheduled_at)->format('j M Y');
         $booking['status'] = $book->getStatus();
