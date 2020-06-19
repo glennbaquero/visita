@@ -82,7 +82,7 @@ class BookingFetchController extends FetchController
                 });
             } elseif ($this->request->payment_status == 4) {
                 $query = $query->whereHas('invoice', function($query)  {
-                    $query->whereNotNull('deleted_at');
+                    $query->whereNotNull('deleted_at')->where('is_paid', false)->where('is_approved', false);
                 });
             }
         }
@@ -94,6 +94,12 @@ class BookingFetchController extends FetchController
                     $query->where('main', true)->where('visitor_type_id', $type);
                 });
             }
+        }
+
+        if($this->request->filled('archived')) {
+            $query = $query->whereHas('invoice', function($query)  {
+                $query->whereNotNull('deleted_at')->where('is_paid', false)->where('is_approved', false);
+            });
         }
 
         return $query;
