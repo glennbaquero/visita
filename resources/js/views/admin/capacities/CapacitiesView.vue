@@ -26,19 +26,19 @@
 			<div class="row">
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Online</label>
-					<input v-model="item.online" name="online" type="number" :min="remainingCapacity" :max="remainingCapacity" class="form-control">
+					<input v-model="item.online" name="online" type="number" max="" min="0" class="form-control" @change="computingRemainingCapacity">
 				</div>
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Walk In</label>
-					<input v-model="item.walk_in" name="walk_in" type="number" :min="remainingCapacity" :max="remainingCapacity" class="form-control">
+					<input v-model="item.walk_in" name="walk_in" type="number" min="0" class="form-control" @change="computingRemainingCapacity">
 				</div>
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Management (LGU)</label>
-					<input v-model="item.mgt_lgu" name="mgt_lgu" type="number" :min="remainingCapacity" :max="remainingCapacity" class="form-control">
+					<input v-model="item.mgt_lgu" name="mgt_lgu" type="number" min="0" class="form-control" @change="computingRemainingCapacity">
 				</div>
 				<div class="form-group col-sm-12 col-md-6">
 					<label>Agency</label>
-					<input v-model="item.agency" name="agency" type="number" :min="remainingCapacity" :max="remainingCapacity" class="form-control">
+					<input v-model="item.agency" name="agency" type="number" min="0" class="form-control" @change="computingRemainingCapacity">
 				</div>
 			</div>
 
@@ -63,7 +63,7 @@
                 @error="fetch"
                 ></action-button>
                 
-				<action-button type="submit" :disabled="loading" class="btn-primary" v-if="remainingCapacity == 0">Save Changes</action-button>
+				<action-button type="submit" :disabled="loading" class="btn-primary" v-if="showBtn">Save Changes</action-button>
 			</template>
 		</card>
 
@@ -85,8 +85,8 @@ import TimePicker from '../../../components/timepickers/Timepicker.vue';
 
 export default {
 
-	computed: {
-		remainingCapacity() {
+	methods: {
+		computingRemainingCapacity() {
 			var remaining = 0;
 			var online = this.item.online ? parseInt(this.item.online) : 0;
 			var walk_in = this.item.walk_in ? parseInt(this.item.walk_in) : 0;
@@ -95,14 +95,22 @@ export default {
 
 			remaining = this.capacity_per_day - (online + walk_in + mgt_lgu + agency)
 
-			return remaining;
-		}
-	},
+			if(remaining >= 0) {
+				this.remainingCapacity = remaining;
+			} else {
+				this.max = 0;
+			}
+			if(remaining <= 0) {
+				this.showBtn = false;
+			} else {
+				this.showBtn = true;
+			}
+		},
 
-	methods: {
 		fetchSuccess(data) {
 			this.item = data.item ? data.item : this.item;
 			this.allocations = data.allocations ? data.allocations : this.allocations;
+			this.computingRemainingCapacity();
 		},
 
 		allocationChanged() {
@@ -110,11 +118,28 @@ export default {
 			var allocations = this.allocations;
 
 			_.each(allocations, (allocation) => {
-				console.log(allocation, id)
 				if(id == allocation.id) {
 					this.capacity_per_day = parseInt(allocation.destination.capacity_per_day);
 				}
 			});
+		},
+	},
+
+	watch: {
+		'item.online'(val, oldval) {
+			this.computingRemainingCapacity();
+		},
+
+		'item.walk_in'(val, oldval) {
+			this.computingRemainingCapacity();
+		},
+
+		'item.mgt_lgu'(val, oldval) {
+			this.computingRemainingCapacity();
+		},
+
+		'item.agency'(val, oldval) {
+			this.computingRemainingCapacity();
 		}
 	},
 
@@ -122,7 +147,10 @@ export default {
 		return {
 			item: [],
 			allocations: [],
-			capacity_per_day: 0
+			capacity_per_day: 0,
+			remainingCapacity: 0,
+			showBtn: false,
+			max: 0
 		}
 	},
 

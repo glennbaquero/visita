@@ -113,7 +113,7 @@
 		},
 		mounted() {
 			// $('#birthdate-flatpickr').flatpickr();
-			flatpickr('#birthdate-flatpickr'+this.guest.id, { maxDate: new Date().fp_incr(-6570), disableMobile: 'true' });
+			flatpickr('#birthdate-flatpickr'+this.guest.id, { maxDate: 'today', disableMobile: 'true' });
 		},
 
 		data() {

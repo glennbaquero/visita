@@ -340,6 +340,11 @@ class DashboardAnalyticsController extends Controller
 
         $ages = [
             [
+                "backgroundColor" => "#5892fc",
+                "data" => $this->getGuestAge($request, [0, 9]),
+                "label" => "0-9"
+            ],
+            [
                 "backgroundColor" => "#673ab7",
                 "data" => $this->getGuestAge($request, [10, 17]),
                 "label" => "10-17"
