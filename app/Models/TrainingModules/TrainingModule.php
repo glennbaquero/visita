@@ -80,4 +80,21 @@ class TrainingModule extends Model
 
         return $path;
     }
+
+    public static function fetchItemAPI($destination_id)
+    {
+    	$items = TrainingModule::where('destination_id', $destination_id);
+    	$result = [];
+    	foreach($items as $item) {
+    	    array_push($result, [
+	    		'id' => $item->id,
+	    	    'title' => $item->title,
+	    	    'description' => $item->description,
+	    	    'short_description' => str_limit($item->description, 15),
+	    	    'type' => $item->type,
+	    	    'path' => url($item->renderFilePath('path')),
+    	    ]);
+    	}
+        return $result;
+    }
 }

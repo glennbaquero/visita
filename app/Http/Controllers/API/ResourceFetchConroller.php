@@ -37,7 +37,7 @@ class ResourceFetchController extends Controller
         $fetch_experiences = new ExperienceFetchController($request);
         $fetch_types = new VisitorTypeFetchController($request);
         $fetch_religions = new ReligionFetchController($request);
-        $fetch_training_modules = new TrainingModuleFetchController($request);
+        // $fetch_training_modules = new TrainingModuleFetchController($request);
         $fetch_surveys = new SurveyFetchController($request);
         $fetch_incomes = new AnnualIncomeFetchController($request);
         $fetch_feedbacks = new FeedbackFetchController($request);
@@ -46,7 +46,7 @@ class ResourceFetchController extends Controller
         $experiences = $fetch_experiences->fetch($request);
         $visitor_types = $fetch_types->fetch($request);
         $religions = $fetch_religions->fetch($request);
-        $training_modules = $fetch_training_modules->fetch($request);
+        $training_modules = TrainingModule::fetchItemAPI($user->destination_id);
         $surveys = $fetch_surveys->fetch($request);
         $incomes = $fetch_incomes->fetch($request);
         $feedbacks = $fetch_feedbacks->fetch($request);
