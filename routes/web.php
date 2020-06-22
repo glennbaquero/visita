@@ -130,16 +130,16 @@ Route::namespace('Web')->name('web.')->group(function() {
 
 	});
 
-	/* Article Routes */
-	Route::namespace('Articles')->group(function() {
+	// /* Article Routes */
+	// Route::namespace('Articles')->group(function() {
 		
-		Route::get('articles', 'ArticleController@index')->name('articles.index');
-		Route::get('articles/show/{id}/{slug?}', 'ArticleController@show')->name('articles.show');
+	// 	Route::get('articles', 'ArticleController@index')->name('articles.index');
+	// 	Route::get('articles/show/{id}/{slug?}', 'ArticleController@show')->name('articles.show');
 
-		Route::post('articles/fetch', 'ArticleFetchController@fetch')->name('articles.fetch');
-		Route::post('articles/fetch-item/{id?}', 'ArticleFetchController@fetchView')->name('articles.fetch-item');
-		Route::post('articles/fetch-pagination/{id}', 'ArticleFetchController@fetchPagePagination')->name('articles.fetch-pagination');
-	});
+	// 	Route::post('articles/fetch', 'ArticleFetchController@fetch')->name('articles.fetch');
+	// 	Route::post('articles/fetch-item/{id?}', 'ArticleFetchController@fetchView')->name('articles.fetch-item');
+	// 	Route::post('articles/fetch-pagination/{id}', 'ArticleFetchController@fetchPagePagination')->name('articles.fetch-pagination');
+	// });
 
 
 	/* Destination Routes */

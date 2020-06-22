@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Models\Books\Book;
+use App\Models\Destinations\Destination;
+use App\Models\Allocations\Allocation;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 
@@ -107,5 +109,25 @@ class BookController extends Controller
         Book::find($request->book_id)->update(['destination_representative_id' => $request->representative_id]);
 
         return response()->json(['message' => 'Success']);
+    }
+
+    public function remainingSeat(Request $request)
+    {
+        $destination = Destination::find($request->destination);
+        $totalReservation = $destination->capacity_per_day;
+        $experience = Allocation::find($request->allocation);
+        $walk_in_capacity = Allocation::find($request->allocation)->capacities->first()->walk_in;
+        if($walk_in_capacity > $experience->destination->capacity_per_day) {
+            $walk_in_capacity = $experience->destination->capacity_per_day;
+        }
+
+        $totalReserved = Book::whereDate('scheduled_at', $request->date)->where('allocation_id', $request->allocation)->sum('total_guest');
+
+        $availableSeat = $walk_in_capacity - $totalReserved;
+
+        return response()->json([
+            'walk_in' => $walk_in_capacity,
+            'availableSeat' => $availableSeat
+        ]);
     }
 }

@@ -62,6 +62,7 @@ class ExperienceFetchController extends FetchController
         return [
         	'id' => $item->id,
             'name' => $item->name,
+            'capacity' => $item->capacities->first()->walk_in,
             'platform_fee' => $item->platform_fees,
             'special_fees' => $item->fees,
             'timeslots' => $item->getTimeSlot(),

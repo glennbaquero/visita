@@ -54,6 +54,7 @@ class ConfigFetchController extends Controller
             'api.frontliner.details.update' => route('api.frontliner.details.update'),
             'api.frontliner.start.visit' => route('api.frontliner.start.visit'),
             'api.bookings.fetch' => route('api.bookings.fetch'),
+            'api.bookings.remaining-seat' => route('api.bookings.remaining-seat'),
             'api.bookings.representative.update' => route('api.bookings.representative.update'),
 
             'api.violation.store' => route('api.violation.store'),

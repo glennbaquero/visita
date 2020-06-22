@@ -69,6 +69,7 @@ Route::name('api.')
 
         Route::namespace('Books')->group(function() {
             Route::post('/bookings', 'BookController@fetch')->name('bookings.fetch');
+            Route::post('/total/walkin', 'BookController@remainingSeat')->name('bookings.remaining-seat');
             Route::post('/scan/qr', 'BookController@scan')->name('scan.qr');
             Route::post('/bookings/representative/update', 'BookController@updateRepresentative')->name('bookings.representative.update');
         });
