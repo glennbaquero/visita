@@ -109,8 +109,8 @@
 		computed: {
 			detailsComplete() {
 				if(this.stepData.visitDate != null && this.stepData.timeSelected != null && this.stepData.allocationSelected != null && parseInt(this.stepData.numberOfGuests) >= 1 && this.stepData.numberOfGuests <= this.destination.availableSeat) {
-					return true;	
 					this.isDataComplete = true; 
+					return true;	
 				} else {
 					this.isDataComplete = false;
 				}
