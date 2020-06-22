@@ -41,7 +41,7 @@
 				><div class="width--45">
 					<div class="width--95">
 						<button 
-							v-if="isDataComplete"
+							v-if="detailsComplete"
 						  	class="frm-btn green"
 						  	@click="$emit('showStep2')"
 						>Next</button>
