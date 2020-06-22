@@ -73,47 +73,22 @@
 
 		mixins: [ RegexMixin ],
 
-		watch: {
-			'stepData.visitDate'(val) {
-				var data = {
-					destination: this.destination.id,
-					allocation: this.stepData.allocationSelected,
-					date: this.stepData.visitDate
-				}
-
-				axios.post(this.remainingSeatUrl, data) 
-					.then(response => {
-						this.destination.availableSeat = response.data.availableSeat;
-
-						if(this.stepData.visitDate != null && this.stepData.timeSelected != null && this.stepData.allocationSelected != null && parseInt(this.stepData.numberOfGuests) >= 1 && this.stepData.numberOfGuests <= this.destination.availableSeat) {
-							this.isDataComplete = true;
-						}
-
-						if(response.data.availableSeat == 0) {
-							swal.fire('Oops...', 'Capacity is full for selected date of visit!', 'error')
-						}
-					})
-
-			}
-		},
+		
 
 		data() {
 			return {
 				timeslots: [],
 				isLoading: false,
 		        now: moment().add(0, 'days').format('Y-MM-DD'),
-		        isDataComplete: false
+		        isFullyBooked: false
 			}
 		},
 
 		computed: {
 			detailsComplete() {
-				if(this.stepData.visitDate != null && this.stepData.timeSelected != null && this.stepData.allocationSelected != null && parseInt(this.stepData.numberOfGuests) >= 1 && this.stepData.numberOfGuests <= this.destination.availableSeat) {
-					this.isDataComplete = true; 
+				if(this.stepData.visitDate != null && this.stepData.timeSelected != null && this.stepData.allocationSelected != null && parseInt(this.stepData.numberOfGuests) >= 1 && parseInt(this.stepData.numberOfGuests) <= this.destination.availableSeat && !this.isFullyBooked) {
 					return true;	
-				} else {
-					this.isDataComplete = false;
-				}
+				} 
 				return false;
 			},
 
@@ -137,6 +112,28 @@
 			  	});
 
 			  	return result;
+			}
+		},
+
+		watch: {
+			'stepData.visitDate'(val) {
+				var data = {
+					destination: this.destination.id,
+					allocation: this.stepData.allocationSelected,
+					date: this.stepData.visitDate
+				}
+				this.stepData.numberOfGuests = 0;
+				axios.post(this.remainingSeatUrl, data) 
+					.then(response => {
+						this.destination.availableSeat = response.data.availableSeat;
+						this.isFullyBooked = false;
+						if(response.data.availableSeat <= 0) {
+
+							swal.fire('Oops...', 'Capacity is full for selected date of visit!', 'error')
+							this.isFullyBooked = true;
+						}
+					})
+
 			}
 		},
 

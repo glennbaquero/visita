@@ -142,6 +142,8 @@ class ResourceFetchController extends Controller
         $total_checked_in['online_group'] = Book::whereHas('invoice', function($query) {
             $query->where('is_paid', 1);
         })->where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', false)->whereDate('started_at', $today)->get()->count(); 
+
+        
         $total_checked_in['walk_in'] = Book::whereHas('invoice', function($query) {
             $query->where('is_paid', 1);
         })->where('destination_id', $user->destination->id)->whereDate('scheduled_at', $today)->where('is_walkin', true)->whereDate('started_at', $today)->get()->sum('total_guest'); 
