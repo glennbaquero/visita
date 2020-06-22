@@ -84,6 +84,9 @@
 				axios.post(this.remainingSeatUrl, data) 
 					.then(response => {
 						this.destination.availableSeat = response.data.availableSeat;
+						if(response.data.availableSeat == 0) {
+							swal.fire('Oops...', 'Capacity is full for selected date of visit!', 'error')
+						}
 					})
 
 			}
