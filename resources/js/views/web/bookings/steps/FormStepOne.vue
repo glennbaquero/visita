@@ -41,7 +41,7 @@
 				><div class="width--45">
 					<div class="width--95">
 						<button 
-							v-if="detailsComplete"
+							v-if="isDataComplete"
 						  	class="frm-btn green"
 						  	@click="$emit('showStep2')"
 						>Next</button>
@@ -84,6 +84,11 @@
 				axios.post(this.remainingSeatUrl, data) 
 					.then(response => {
 						this.destination.availableSeat = response.data.availableSeat;
+
+						if(this.stepData.visitDate != null && this.stepData.timeSelected != null && this.stepData.allocationSelected != null && parseInt(this.stepData.numberOfGuests) >= 1 && this.stepData.numberOfGuests <= this.destination.availableSeat) {
+							this.isDataComplete = true;
+						}
+						
 						if(response.data.availableSeat == 0) {
 							swal.fire('Oops...', 'Capacity is full for selected date of visit!', 'error')
 						}
@@ -97,6 +102,7 @@
 				timeslots: [],
 				isLoading: false,
 		        now: moment().add(0, 'days').format('Y-MM-DD'),
+		        isDataComplete: this.detailsComplete
 			}
 		},
 
