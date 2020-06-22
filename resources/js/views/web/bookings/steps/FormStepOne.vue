@@ -15,12 +15,12 @@
 
 					<p class="frm-header bold s-margin-b clr--gray">Visit Date</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="text" v-model="stepData.visitDate" id="visit-date">
+						<input type="text" v-model="stepData.visitDate" id="visit-date" @change="dateChanged">
 					</div>
 
 					<p class="frm-header bold s-margin-b clr--gray">Number of guest/s</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="number" v-model="stepData.numberOfGuests" min="0" :max="destination.availableSeat" @keypress="regexNumber()" @change="$emit('numberOfGuestsChanged')">
+						<input type="number" v-model="stepData.numberOfGuests" min="1" :max="destination.availableSeat" @keypress="regexNumber()" @change="$emit('numberOfGuestsChanged')">
 					</div>
 
 					<p class="frm-header bold s-margin-b clr--gray">Time</p>
@@ -74,22 +74,22 @@
 		mixins: [ RegexMixin ],
 
 		watch: {
-			'stepData.visitDate'(val) {
-				var data = {
-					destination: this.destination.id,
-					allocation: this.stepData.allocationSelected,
-					date: val
-				}
+			// 'stepData.visitDate'(val) {
+			// 	var data = {
+			// 		destination: this.destination.id,
+			// 		allocation: this.stepData.allocationSelected,
+			// 		date: this.stepData.visitDate
+			// 	}
 
-				axios.post(this.remainingSeatUrl, data) 
-					.then(response => {
-						this.destination.availableSeat = response.data.availableSeat;
-						if(response.data.availableSeat == 0) {
-							swal.fire('Oops...', 'Capacity is full for selected date of visit!', 'error')
-						}
-					})
+			// 	axios.post(this.remainingSeatUrl, data) 
+			// 		.then(response => {
+			// 			this.destination.availableSeat = response.data.availableSeat;
+			// 			if(response.data.availableSeat == 0) {
+			// 				swal.fire('Oops...', 'Capacity is full for selected date of visit!', 'error')
+			// 			}
+			// 		})
 
-			}
+			// }
 		},
 
 		data() {
@@ -140,6 +140,22 @@
 		},
 
 		methods: {
+			dateChanged() {
+				var data = {
+					destination: this.destination.id,
+					allocation: this.stepData.allocationSelected,
+					date: this.stepData.visitDate
+				}
+
+				axios.post(this.remainingSeatUrl, data) 
+					.then(response => {
+						this.destination.availableSeat = response.data.availableSeat;
+						if(response.data.availableSeat == 0) {
+							swal.fire('Oops...', 'Capacity is full for selected date of visit!', 'error')
+						}
+					})
+			},
+
 			allocationChanged() {
 				this.isLoading = true;
 				var data = {
