@@ -239,6 +239,10 @@ class InvoiceController extends Controller
 
         $availableSeat = $online_capacity - $totalReserved;
 
+        if($availableSeat < 0) {
+            $availableSeat = 0;
+        }
+
         return response()->json([
             'online' => $online_capacity,
             'availableSeat' => $availableSeat
