@@ -20,7 +20,7 @@
 
 					<p class="frm-header bold s-margin-b clr--gray">Number of guest/s</p>
 					<div class="frm-inpt m-margin-b">
-						<input type="number" v-model="stepData.numberOfGuests" min="1" :max="destination.availableSeat" @keypress="regexNumber()" @change="$emit('numberOfGuestsChanged')">
+						<input type="number" v-model="stepData.numberOfGuests" min="0" :max="destination.availableSeat" @keypress="regexNumber()" @change="$emit('numberOfGuestsChanged')">
 					</div>
 
 					<p class="frm-header bold s-margin-b clr--gray">Time</p>
