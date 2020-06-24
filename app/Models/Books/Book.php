@@ -107,11 +107,11 @@ class Book extends Model
     public static function store($request, $item = null, $columns = ['allocation_id'], $destination_id)
     {
         // $vars = $request->only($columns);
-        $vars['allocation_id'] = $request->allocation_id;
-        $vars['scheduled_at'] = $request->scheduled_at;
-        $vars['start_time'] = $request->scheduled_at;
-        $vars['re_scheduled_at'] = $request->scheduled_at;
-        $vars['destination_id'] = $destination_id;
+        // $vars['allocation_id'] = $request->allocation_id;
+        // $vars['scheduled_at'] = $request->scheduled_at;
+        // $vars['start_time'] = $request->scheduled_at;
+        // $vars['re_scheduled_at'] = $request->scheduled_at;
+        // $vars['destination_id'] = $destination_id;
         // $vars['total_guest'] = $request->total_guest;
         // $vars['is_walkin'] = true;
         
@@ -119,7 +119,7 @@ class Book extends Model
             // $item = static::create($vars);
             $item = auth()->user()->books()->create($vars);
         } else {
-            $item->update($vars);
+            // $item->update($vars);
             // $item->total_guest = $request->total_guest;
             // $item->save();
         }
