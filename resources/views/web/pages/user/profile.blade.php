@@ -1,6 +1,6 @@
 @extends('web.master')
 
-@section('meta:title', $page->renderMeta('title'))
+@section('meta:title', 'Profile')
 @section('meta:description', $page->renderMeta('description'))
 @section('meta:keywords', $page->renderMeta('keywords'))
 @section('og:image', $page->renderMetaImage())

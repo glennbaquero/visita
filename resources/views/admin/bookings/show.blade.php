@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('meta:title', $item->name)
+@section('meta:title', 'Reservation')
 
 @section('content')
     
