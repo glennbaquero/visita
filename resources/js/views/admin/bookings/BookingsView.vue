@@ -3,7 +3,7 @@
 		<card>
 			<template v-slot:header>Schedule</template>
 			<div class="row">
-				<date-picker
+				<!-- <date-picker
 				v-model="item.schedule"
 				class="form-group col-sm-12 col-md-4"
 				label="Scheduled Date"
@@ -11,7 +11,13 @@
 				placeholder="Choose dates"
 				minDate="today"
 				:disabledDates="blocked_dates"
-				></date-picker>
+				></date-picker> -->
+
+				<div class="form-group col-sm-12 col-md-4">
+					<label>Scheduled Date</label>
+					<input name="scheduled_at" v-model="item.schedule" type="text" id="scheduled_at" class="form-control">
+				</div>
+
 
 				<selector class="col-sm-4"
 				v-model="item.allocation_id"
@@ -199,7 +205,7 @@ export default {
 		var validDate = moment().add(1,'days').subtract(18,'years').format('YYYY-MM-DD');
 		var todayAndFutureDate = moment().add(1000,'years').format('YYYY-MM-DD');
 
-		// flatpickr('#main_birthdate', { maxDate: new Date().fp_incr(-6570), disableMobile: 'true' });
+		flatpickr('#scheduled_at', { disableMobile: 'true', enableTime: true });
 		flatpickr('#main_birthdate', { maxDate: new Date().fp_incr(-6570), disable: [
 					{ 
 						from: validDate,
