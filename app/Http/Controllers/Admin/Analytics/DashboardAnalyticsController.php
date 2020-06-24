@@ -441,6 +441,12 @@ class DashboardAnalyticsController extends Controller
         $bookings = Book::whereDate('scheduled_at', $today)->get()->pluck('id')->toArray();
         $guest = Guest::where('main', false)->whereIn('book_id', $bookings)->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), $arr)->count();
 
+        
+        if($request->date) {
+            $bookings = Book::whereDate('scheduled_at', $request->date)->get()->pluck('id')->toArray();
+            $guest = Guest::where('main', false)->whereIn('book_id', $bookings)->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), $arr)->count();
+        }
+
         if($request->destination) {
             $bookings = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->get()->pluck('id')->toArray();
             if($request->date) {
