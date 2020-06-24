@@ -553,7 +553,7 @@
 				data.append('conservation_fee', this.$refs.formStepFour.conservationFeeTotal);
 				data.append('platform_fee', this.$refs.formStepFour.platformFee);
 				data.append('sub_total', this.$refs.formStepFour.subTotal);
-				data.append('grand_total', this.$refs.formStepFour.grandTotal);
+				data.append('grand_total', this.$refs.formStepFour.grandTotal - this.$refs.formStepFour.transactionFee);
 				data.append('is_paypal_payment', this.$refs.formStepFour.isPaypal == true ? 1 : 0);
 				data.append('guests', JSON.stringify(this.stepData.guests));
 				data.append('start_time', this.stepData.timeSelected);
