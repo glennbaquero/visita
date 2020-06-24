@@ -265,7 +265,7 @@ export default {
          * 
          * @return integer
          */
-        addFadeTimer(timer = 5000) {
+        addFadeTimer(timer = 15000) {
             toastr.options.timeOut = timer;
         },
 
