@@ -180,7 +180,7 @@ class PageController extends Controller
 		$result = $destination->getFormattedData();
 		$visitor_types = VisitorType::all();
 		$genders = Gender::all();
-		$countries = Countries::all();
+		$countries = Countries::orderBy('citizenship', 'asc')->get();
 
 		$info['conservation_fee_info'] = PageItem::where('slug', 'conservation_fee_info')->first() ? PageItem::where('slug', 'conservation_fee_info')->first()->content : null;
 		$info['platform_fee_info'] = PageItem::where('slug', 'platform_fee_info')->first() ? PageItem::where('slug', 'platform_fee_info')->first()->content : null;
