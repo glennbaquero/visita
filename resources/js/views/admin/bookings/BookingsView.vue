@@ -4,7 +4,7 @@
 			<template v-slot:header>Schedule</template>
 			<div class="row">
 				<date-picker
-				v-model="item.scheduled_at"
+				v-model="item.schedule"
 				class="form-group col-sm-12 col-md-4"
 				label="Scheduled Date"
 				name="scheduled_at"

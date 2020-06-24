@@ -121,6 +121,9 @@ class BookFetchController extends FetchController
 
         if ($id != 0) {
         	$item = Book::withTrashed()->findOrFail($id);
+            $date = Carbon::parse($item->scheduled_at)->format('Y-m-d');
+            $time = Carbon::parse($item->start_time)->format('H:i');
+            $item->schedule = $date.' '.$time;
             $item->total_guests = $this->getGuests($item->guests()->where('main', false)->get());
             $main = $item->guests()->where('main', true)->first();
             $item->main_id = $main->id;
