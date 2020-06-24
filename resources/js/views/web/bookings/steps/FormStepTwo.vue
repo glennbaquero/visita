@@ -245,7 +245,15 @@
 		},
 
 		mounted() {
-			flatpickr('#birthdate', { maxDate: new Date().fp_incr(-6570), disableMobile: 'true' });
+			var validDate = moment().add(1,'days').subtract(18,'years').format('YYYY-MM-DD');
+			var todayAndFutureDate = moment().add(1000,'years').format('YYYY-MM-DD');
+			// flatpickr('#birthdate', { maxDate: new Date().fp_incr(-6570), disableMobile: 'true' });
+			flatpickr('#birthdate', { maxDate: new Date().fp_incr(-6570), disable: [
+					{ 
+						from: validDate,
+						to: todayAndFutureDate
+					}
+				], disableMobile: 'true' });
 		},
 
 		methods: {

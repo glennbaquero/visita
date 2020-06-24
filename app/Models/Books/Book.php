@@ -112,7 +112,7 @@ class Book extends Model
         $vars['start_time'] = $request->scheduled_at;
         $vars['re_scheduled_at'] = $request->scheduled_at;
         $vars['destination_id'] = $destination_id;
-        $vars['total_guest'] = $request->total_guest;
+        // $vars['total_guest'] = $request->total_guest;
         // $vars['is_walkin'] = true;
         
         if (!$item) {
@@ -120,8 +120,8 @@ class Book extends Model
             $item = auth()->user()->books()->create($vars);
         } else {
             $item->update($vars);
-            $item->total_guest = $request->total_guest;
-            $item->save();
+            // $item->total_guest = $request->total_guest;
+            // $item->save();
         }
 
         return $item;
