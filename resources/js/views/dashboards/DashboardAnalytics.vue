@@ -3,7 +3,7 @@
 		<!-- <div class="col-12"> -->
 		<date-picker
 		class="mt-2 form-group col-md-4"
-		label="Date"
+		label="Filter by Date"
 		placeholder="Choose a date"
 		:enableTime="false"
         @change="filter($event, 'date')"
@@ -47,8 +47,8 @@
 				<div class="col-sm-6 col-md-4 mb-2">
 					<box-widget-two
 						card-title="WALK-INS"
-						:total-groups="total_checked_in.walk_in"
-						:total-visitors="total_checked_in.walk_in_group"
+						:total-groups="total_checked_in.walk_in_group"
+						:total-visitors="total_checked_in.walk_in"
 						total-groups-label="Total Groups Check-In"
 						total-visitors-label="Total Visitors Check-In"
 					></box-widget-two>
