@@ -6,6 +6,7 @@
 		label="Filter by Date"
 		placeholder="Choose a date"
 		:enableTime="false"
+		dateFormat="Y-m-d"
         @change="filter($event, 'date')"
         ></date-picker>
 		<!-- </div> -->
