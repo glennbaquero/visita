@@ -27,7 +27,8 @@ class GuestFetchController extends FetchController
     public function filterQuery($query)
     {
     	$destination = auth()->guard('api')->user()->destination;
-    	$query = $query->where('destination_id', $destination->id);
+        $now = Carbon::now();
+    	$query = $query->where('destination_id', $destination->id)->whereDate('scheduled_at', $now);
         return $query;
     }
 
