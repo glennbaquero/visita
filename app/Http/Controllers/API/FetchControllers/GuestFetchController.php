@@ -30,7 +30,7 @@ class GuestFetchController extends FetchController
     {
     	$destination = auth()->guard('api')->user()->destination;
         $now = Carbon::now();
-    	$query = $query->where('destination_id', $destination->id)->whereDate('scheduled_at', $now);
+    	$query = $query->where('destination_id', $destination->id)->whereDate('scheduled_at', $now)->whereNotNull('ended_at');
         return $query;
     }
 
