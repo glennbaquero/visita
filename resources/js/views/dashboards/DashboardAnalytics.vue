@@ -57,8 +57,8 @@
 				<div class="col-sm-6 col-md-4  mb-2">
 					<box-widget-two
 						card-title="TOTAL CHECK-INS"
-						:total-groups="total.groups"
-						:total-visitors="parseInt(total.guest)"
+						:total-groups="parseInt(total_checked_in.online_group) + parseInt(total_checked_in.walk_in_group)"
+						:total-visitors="parseInt(total_checked_in.online_visitor) + parseInt(total_checked_in.walk_in)"
 						total-groups-label="Total Groups"
 						total-visitors-label="Total Visitors"
 					></box-widget-two>
