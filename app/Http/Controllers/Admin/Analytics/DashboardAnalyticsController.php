@@ -186,29 +186,33 @@ class DashboardAnalyticsController extends Controller
         $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->get()->sum('total_guest'); 
         $total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->get()->count();  
 
+        if($request->date) {
+            $total_checked_in['walk_in'] = $bookings->whereDate('scheduled_at', $request->date)->where('is_walkin', true)->get()->sum('total_guest'); 
+            $total_checked_in['walk_in_group'] = $bookings->whereDate('scheduled_at', $request->date)->where('is_walkin', true)->get()->count();  
+        } 
+
         if($request->destination) {
             $bookings = Book::where('destination_id', $request->destination);
-            $total_checked_in['walk_in'] = $bookings->whereDate('scheduled_at', $today)->where('is_walkin', true)->get()->sum('total_guest'); 
-            $total_checked_in['walk_in_group'] = $bookings->whereDate('scheduled_at', $today)->where('is_walkin', true)->get()->count();  
             if($request->date) {
                 $total_checked_in['walk_in_group'] = $bookings->whereDate('scheduled_at', $request->date)->where('is_walkin', true)->get()->count();  
                 $total_checked_in['walk_in'] = $bookings->whereDate('scheduled_at', $request->date)->where('is_walkin', true)->get()->sum('total_guest'); 
-            } 
+            } else {
+                $total_checked_in['walk_in'] = $bookings->whereDate('scheduled_at', $today)->where('is_walkin', true)->get()->sum('total_guest'); 
+                $total_checked_in['walk_in_group'] = $bookings->whereDate('scheduled_at', $today)->where('is_walkin', true)->get()->count();  
+            }
         } 
 
         if($request->experience) {
-            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
-            $total_checked_in['walk_in'] = $bookings->whereDate('scheduled_at', $today)->where('is_walkin', true)->get()->sum('total_guest'); 
-            $total_checked_in['walk_in_group'] = $bookings->whereDate('scheduled_at', $today)->where('is_walkin', true)->get()->count();  
+            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience); 
             if($request->date) {
                 $total_checked_in['walk_in_group'] = $bookings->whereDate('scheduled_at', $request->date)->where('is_walkin', true)->get()->count();  
                 $total_checked_in['walk_in'] = $bookings->whereDate('scheduled_at', $request->date)->where('is_walkin', true)->get()->sum('total_guest'); 
-            } 
+            } else {
+
+                $total_checked_in['walk_in'] = $bookings->whereDate('scheduled_at', $today)->where('is_walkin', true)->get()->sum('total_guest'); 
+                $total_checked_in['walk_in_group'] = $bookings->whereDate('scheduled_at', $today)->where('is_walkin', true)->get()->count(); 
+            }
         }
-        if($request->date) {
-            $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->get()->sum('total_guest'); 
-            $total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->get()->count();  
-        } 
 
         $bookings = Book::whereDate('scheduled_at', $today)->get()->pluck('id')->toArray();
         $collection = Guest::with('visitorType', 'specialFee')->whereIn('book_id', $bookings)->where('main', false)->get();
