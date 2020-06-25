@@ -254,7 +254,7 @@
 		mounted() {
 			this.conservationFeeForVisitorType();
 			this.specialFee();
-		  	this.conservationFeeTotal = this.conservationFeeTotal + this.specialFeeTotal;
+		  	this.conservationFeeTotal = this.conservationFeeTotal - this.specialFeeTotal;
 
 		    // $('.rqst-frm1__step-4-content-checkbox-container').on('click', function(){
 		    // 	$('.rqst-frm1__step-4-content-checkbox-container').removeClass('active');

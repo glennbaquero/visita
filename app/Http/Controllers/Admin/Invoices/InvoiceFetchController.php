@@ -185,7 +185,7 @@ class InvoiceFetchController extends FetchController
 
             }
 
-            $total = $type_daytourOrOvernight_fee + $type_weekdayOrWeekend_fee + $special_fee_weekdayOrWeekend + $special_fee_daytourOrOvernight;
+            $total = $type_daytourOrOvernight_fee + $type_weekdayOrWeekend_fee - ($special_fee_weekdayOrWeekend + $special_fee_daytourOrOvernight);
     		
 
     		array_push($result, [
