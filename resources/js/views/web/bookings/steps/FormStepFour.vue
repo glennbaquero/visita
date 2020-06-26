@@ -186,11 +186,11 @@
 				</div>
 
 				<div class="inlineBlock-parent align-l m-margin-b">
-					<input type="checkbox" @click="$emit('terms_conditions_click')">
+					<input type="checkbox" @click="$emit('terms_conditions_click')" v-model="isAccepted.termsAndConditions">
 					<h5 class="frm-header clr--gray">I agree to the <a href="/read/terms_and_conditions" target="_blank">Terms and Conditions, Changes, Refunds and Postponements and Policies.</a> I also agree to pay the total amount shown, which includes <strong>other fees.</strong></h5>
 				</div>
 				<div class="inlineBlock-parent align-l m-margin-b">
-					<input type="checkbox" @click="$emit('privacy_policy_click')">
+					<input type="checkbox" @click="$emit('privacy_policy_click')" v-model="isAccepted.privacyPolicy">
 					<h5 class="frm-header clr--gray">I agree to the <a href="/read/privacy_policy" target="_blank">Privacy Policy.</a></h5>
 				</div>
 
@@ -210,6 +210,7 @@
 			visitorTypes: Array,
 			allocation:Object,
 			info:Object,
+			isAccepted: Object
 		},
 
 		mixins: [ DateMixin, NumberMixin ],
