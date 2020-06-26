@@ -64,7 +64,7 @@
 							<p class="frm-header bold clr--gray">Payment Total:</p>
 						</div
 						><div class="width--50">
-							<p class="frm-header clr--gray">Php {{ withComma(item.total) }}</p>
+							<p class="frm-header clr--gray">Php {{ withComma(item.grand_total) }}</p>
 						</div>
 					</div>
 
