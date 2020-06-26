@@ -105,10 +105,20 @@
 					<p class="frm-header bold clr--gray s-margin-r">Status:</p>
 					<p class="frm-header bold clr--green">{{ item.status_label }}</p>
 				</div>
+				
+				<div class="inlineBlock-parent">
+					<p class="frm-header bold clr--gray s-margin-r">Transaction Fee:</p>
+					<p class="frm-header clr--gray">Php {{ withComma(item.transaction_fee) }}</p>
+				</div>
+
+				<div class="inlineBlock-parent">
+					<p class="frm-header bold clr--gray s-margin-r">Reservation Total:</p>
+					<p class="frm-header clr--gray">Php {{ withComma(item.total) }}</p>
+				</div>
 
 				<div class="inlineBlock-parent">
 					<p class="frm-header bold clr--gray s-margin-r">Payment Total:</p>
-					<p class="frm-header clr--gray">Php {{ withComma(item.total) }}</p>
+					<p class="frm-header clr--gray">Php {{ withComma(item.grand_total) }}</p>
 				</div>
 
 				<div class="inlineBlock-parent" v-if="item.showImgTag">

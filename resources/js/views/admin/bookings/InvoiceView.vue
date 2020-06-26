@@ -97,7 +97,7 @@
                   </tr>
                 	<tr>
                   	<th>Total</th>
-                  	<td><b>&#8369; {{ withComma(item.grand_total) }}</b></td>
+                  	<td><b>&#8369; {{ withComma(parseInt(item.grand_total) + parseInt(item.transaction_fee)) }}</b></td>
                 	</tr>
               </table>
           </div>
