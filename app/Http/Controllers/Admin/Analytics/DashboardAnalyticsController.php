@@ -265,6 +265,10 @@ class DashboardAnalyticsController extends Controller
         // get all the $source of the book/reservation
         $book = Book::whereDate('scheduled_at', $today)->get();
 
+        if($request->date) {
+            $book = Book::whereDate('scheduled_at', $request->date)->get();
+        }
+
         if($request->destination) {
             $book = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->get();
             if($request->date) {
@@ -277,10 +281,6 @@ class DashboardAnalyticsController extends Controller
             if($request->date) {
                 $book = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date)->get();
             }
-        }
-
-        if($request->date) {
-            $book = Book::whereDate('scheduled_at', $request->date)->get();
         }
 
         $grouped = $book->groupBy(function($item, $key) {
