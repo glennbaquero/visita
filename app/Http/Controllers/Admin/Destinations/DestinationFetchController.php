@@ -29,6 +29,12 @@ class DestinationFetchController extends FetchController
      */
     public function filterQuery($query)
     {
+
+        $admin = auth()->guard('admin')->user();
+        
+        if($admin->destination_id) {
+            $query = $query->where('id', $admin->destination_id);
+        }
         return $query;
     }
 

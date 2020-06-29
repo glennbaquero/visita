@@ -20,9 +20,9 @@
             </div>
         </div>
     </section>
-    
-    <page-pagination fetch-url="{{ route('admin.capacities.fetch-pagination', $item->id) }}"></page-pagination>
-
+    @if($show_pagination)
+        <page-pagination fetch-url="{{ route('admin.capacities.fetch-pagination', $item->id) }}"></page-pagination>
+    @endif
     <section class="content">
         <div class="card">
             <div class="card-header p-2">

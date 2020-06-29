@@ -128,6 +128,7 @@ class DashboardAnalyticsController extends Controller
             $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereNotNull('started_at')->get()->sum('total_guest'); 
             $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->whereNotNull('started_at')->get()->count();
             if($request->date) {
+                $bookings = Book::where('destination_id', $request->destination)->whereDate('scheduled_at', $request->date);
                 $total_checked_in['online_visitor'] = $bookings->whereDate('scheduled_at', $request->date)->whereNotNull('started_at')->where('is_walkin', false)->get()->sum('total_guest');
                 $total_checked_in['online_group'] = $bookings->whereDate('scheduled_at', $request->date)->whereNotNull('started_at')->where('is_walkin', false)->get()->count();
             } 
@@ -138,8 +139,9 @@ class DashboardAnalyticsController extends Controller
             $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereNotNull('started_at')->get()->sum('total_guest'); 
             $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->whereNotNull('started_at')->get()->count();
             if($request->date) {
-                $total_checked_in['online_visitor'] = $bookings->whereDate('scheduled_at', $request->date)->whereNotNull('started_at')->where('is_walkin', false)->get()->sum('total_guest');
-                $total_checked_in['online_group'] = $bookings->whereDate('scheduled_at', $request->date)->whereNotNull('started_at')->where('is_walkin', false)->get()->count();
+                $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date);
+                $total_checked_in['online_visitor'] = $bookings->whereNotNull('started_at')->where('is_walkin', false)->get()->sum('total_guest');
+                $total_checked_in['online_group'] = $bookings->whereNotNull('started_at')->where('is_walkin', false)->get()->count();
             } 
         }
 
@@ -276,13 +278,15 @@ class DashboardAnalyticsController extends Controller
             }
         }
 
-        
+        if($request->date) {
+            $book = Book::whereDate('scheduled_at', $request->date)->get();
+        }
 
         $grouped = $book->groupBy(function($item, $key) {
             return $item['is_walkin'] == true ? 'Walk-In' : 'Online';
         });
 
-        $source = $this->renderGraphDigits($grouped);
+        $source = $this->renderGraphDigits($grouped, true);
         
         // get all the special fee of the guests
         $grouped = $collection->groupBy(function($item, $key) {
@@ -484,13 +488,18 @@ class DashboardAnalyticsController extends Controller
         return $guest;
     }
 
-    public function renderGraphDigits($grouped) 
+    public function renderGraphDigits($grouped, $is_source = false) 
     {
         $data = [];
         $groupCount = $grouped->map(function ($item, $key) {
             return collect($item)->count();
         });
 
+        if($is_source) {
+            $groupCount = $grouped->map(function ($item, $key) {
+                return $item->sum('total_guest');
+            });
+        }
         foreach ($groupCount as $key => $value) {
             array_push($data, [
                     "backgroundColor" => '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT),

@@ -134,6 +134,12 @@
 						}
 					})
 
+			},
+
+			'stepData.numberOfGuests'(val) {
+				if(this.destination.availableSeat < val) {
+					swal.fire('Oops...', 'The guest count you provided exceeds the current available number of slots for this destination and date. Kindly change the number of guests or pick another schedule.', 'error')
+				}
 			}
 		},
 

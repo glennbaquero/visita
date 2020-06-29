@@ -26,7 +26,15 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        return view('admin.destinations.index');
+        $admin = auth()->guard('admin')->user();
+        $show_create = true;
+        if($admin->destination_id) {
+            $show_create = false;
+        }
+
+        return view('admin.destinations.index',[
+            'show_create' => $show_create
+        ]);
     }
 
     /**
@@ -69,8 +77,18 @@ class DestinationController extends Controller
     public function show($id)
     {
         $item = Destination::withTrashed()->findOrFail($id);
+
+        $admin = auth()->guard('admin')->user();
+        $show_create = true;
+        if($admin->destination_id) {
+            $show_create = false;
+            if($id != $admin->destination_id) {
+                return back();
+            }
+        }
         return view('admin.destinations.show', [
             'item' => $item,
+            'show_create' => $show_create,
         ]);
     }
 
@@ -95,9 +113,11 @@ class DestinationController extends Controller
     public function update(DestinationStoreRequest $request, $id)
     {
         $item = Destination::withTrashed()->findOrFail($id);
+        $old_capacity = $item->capacity_per_day;
         DB::beginTransaction();
             $item = Destination::store($request, $item);
             $item->addOns()->sync($request->add_ons);
+            $new_capacity = $item->capacity_per_day;
         DB::commit();
 
         $message = "You have successfully updated {$item->renderName()}. If capacity has changes please update the capacity in each experience.";
@@ -105,6 +125,9 @@ class DestinationController extends Controller
 
         return response()->json([
             'message' => $message,
+            'old' => $old_capacity,
+            'new' => $new_capacity,
+            'show_capacity_tab' => $old_capacity != $new_capacity, 
         ]);
     }
 

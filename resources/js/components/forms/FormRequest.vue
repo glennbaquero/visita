@@ -30,6 +30,7 @@ export default {
 		},
 
 		success(data, event, response) {
+			this.$emit('data', data);
 			/* Non-ajax form submit */
 			if (this.submitOnSuccess) {
 				setTimeout(() => {

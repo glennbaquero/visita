@@ -75,8 +75,17 @@ class BlockedDateController extends Controller
     public function show($id)
     {
         $item = BlockedDate::withTrashed()->findOrFail($id);
+        $admin = auth()->guard('admin')->user();
+        $show_pagination = true;
+        if($admin->destination_id) {
+            $show_pagination = false;
+            if($id != $admin->destination_id) {
+                return back();
+            }
+        }
         return view('admin.blocked-dates.show', [
             'item' => $item,
+            'show_pagination' => $show_pagination,
         ]);
     }
 

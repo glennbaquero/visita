@@ -29,6 +29,11 @@ class FeesFetchController extends FetchController
      */
     public function filterQuery($query)
     {
+        $admin = auth()->guard('admin')->user();
+        if($admin->destination_id) {
+            $experiences = $admin->destination->allocations->pluck('id');
+            $query = $query->whereIn('allocation_id', $experiences);
+        }
         return $query;
     }
 

@@ -1,5 +1,5 @@
 <template>
-	<form-request :submit-url="submitUrl" @load="load" @success="fetch" confirm-dialog sync-on-success>
+	<form-request :submit-url="submitUrl" @load="load" @success="fetch" @data="successChanges(...arguments)" confirm-dialog sync-on-success>
 	
 		<card>
 			<template v-slot:header>About Tabbing Information</template>
@@ -198,14 +198,14 @@
 
 <script type="text/javascript">
 import { EventBus }from '../../../EventBus.js';
-import CrudMixin from '../../../mixins/crud.js';
+import CrudMixin from 'Mixins/crud.js';
 
-import ActionButton from '../../../components/buttons/ActionButton.vue';
-import Select from '../../../components/inputs/Select.vue';
-import ImagePicker from '../../../components/inputs/ImagePicker.vue';
-import TextEditor from '../../../components/inputs/TextEditor.vue';
-import Datepicker from '../../../components/datepickers/Datepicker.vue';
-import TimePicker from '../../../components/timepickers/Timepicker.vue';
+import ActionButton from 'Components/buttons/ActionButton.vue';
+import Select from 'Components/inputs/Select.vue';
+import ImagePicker from 'Components/inputs/ImagePicker.vue';
+import TextEditor from 'Components/inputs/TextEditor.vue';
+import Datepicker from 'Components/datepickers/Datepicker.vue';
+import TimePicker from 'Components/timepickers/Timepicker.vue';
 
 export default {
 	methods: {
@@ -214,6 +214,17 @@ export default {
 			this.images = data.images ? data.images : this.images;
 			this.add_ons = data.add_ons ? data.add_ons : this.add_ons;
 		},
+
+		successChanges(data) {
+			if(data.show_capacity_tab) {
+				$('#tab1').toggleClass('active')
+				$('#tab1').toggleClass('show')
+				$('#tab1-li').removeClass('active')
+				$('#tab2').toggleClass('show')
+				$('#tab2').toggleClass('active')
+				$('#tab2-li').addClass('active')
+			}
+		}
 	},
 
 	data() {

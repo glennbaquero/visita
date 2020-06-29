@@ -27,12 +27,18 @@ class CapacityFetchController extends FetchController
      */
     public function filterQuery($query)
     {
-        if($this->request->filled('destination_show')) {
-            $destination = $this->request->destination_show;
-            $query = $query->whereHas('allocation', function($query) use($destination) {
-                $query->where('destination_id', $destination);
-            });
+        $admin = auth()->guard('admin')->user();
+        if($admin->destination_id) {
+            $experiences = $admin->destination->allocations->pluck('id');
+            $query = $query->whereIn('allocation_id', $experiences);
         }
+
+        // if($this->request->filled('destination_show')) {
+        //     $destination = $this->request->destination_show;
+        //     $query = $query->whereHas('allocation', function($query) use($destination) {
+        //         $query->where('destination_id', $destination);
+        //     });
+        // }
 
         return $query;
     }

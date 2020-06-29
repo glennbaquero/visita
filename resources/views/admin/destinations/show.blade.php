@@ -21,14 +21,15 @@
         </div>
     </section>
     
-    <page-pagination fetch-url="{{ route('admin.destinations.fetch-pagination', $item->id) }}"></page-pagination>
-
+    @if($show_create) 
+        <page-pagination fetch-url="{{ route('admin.destinations.fetch-pagination', $item->id) }}"></page-pagination>
+    @endif
     <section class="content">
         <div class="card">
             <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" data-target="#tab1" href="javascript:void(0)" data-toggle="tab">Information</a></li>
-                    <li class="nav-item"><a @click="initList('table-2')"  class="nav-link" data-target="#tab2" href="javascript:void(0)" data-toggle="tab">Capacity per Experience</a></li>
+                    <li class="nav-item"><a class="nav-link active" id="tab1-li" data-target="#tab1" href="javascript:void(0)" data-toggle="tab">Information</a></li>
+                    <li class="nav-item"><a @click="initList('table-2')" id="tab2-li"  class="nav-link" data-target="#tab2" href="javascript:void(0)" data-toggle="tab">Capacity per Experience</a></li>
                     <li class="nav-item"><a @click="initList('table-3')" class="nav-link" data-target="#tab3" href="javascript:void(0)" data-toggle="tab">Activity Logs</a></li>
                 </ul>
             </div><!-- /.card-header -->

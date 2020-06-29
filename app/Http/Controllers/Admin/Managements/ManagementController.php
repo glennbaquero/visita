@@ -68,8 +68,18 @@ class ManagementController extends Controller
     public function show($id)
     {
         $item = Management::withTrashed()->findOrFail($id);
+        $admin = auth()->guard('admin')->user();
+        $show_pagination = true;
+        if($admin->destination_id) {
+            $show_pagination = false;
+            if($item->destination_id != $admin->destination_id) {
+                return back();
+            }
+        }
+
         return view('admin.managements.show', [
             'item' => $item,
+            'show_pagination' => $show_pagination,
         ]);
     }
 

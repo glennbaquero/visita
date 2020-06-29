@@ -24,10 +24,12 @@
     <section class="content">
 
         <div class="mb-4">
-            <a href="{{ route('admin.destinations.create') }}" class="btn btn-primary text-white">
-                <i class="fa fa-plus"></i>
-                Create
-            </a>
+            @if($show_create) 
+                <a href="{{ route('admin.destinations.create') }}" class="btn btn-primary text-white">
+                    <i class="fa fa-plus"></i>
+                    Create
+                </a>
+            @endif
         </div>
 
         <div class="col-xs-12">

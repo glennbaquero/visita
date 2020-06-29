@@ -29,7 +29,7 @@ export default {
 
 			axios.post(this.submitUrl, params)
 			.then(response => {
-				this.$emit('success');
+				this.$emit('success', response.data);
 
 				const data = response.data;
 				

@@ -67,8 +67,17 @@ class FeesController extends Controller
     public function show($id)
     {
         $item = Fee::withTrashed()->findOrFail($id);
+        $admin = auth()->guard('admin')->user();
+        $show_pagination = true;
+        if($admin->destination_id) {
+            $show_pagination = false;
+            if($item->allocation->destination_id != $admin->destination_id) {
+                return back();
+            }
+        }
         return view('admin.fees.show', [
             'item' => $item,
+            'show_pagination' => $show_pagination,
         ]);
     }
 

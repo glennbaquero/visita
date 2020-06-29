@@ -94,13 +94,15 @@ export default {
 			var agency = this.item.agency ? parseInt(this.item.agency) : 0;
 
 			remaining = this.capacity_per_day - (online + walk_in + mgt_lgu + agency)
+			console.log()
+			this.remainingCapacity = remaining;
 
-			if(remaining >= 0) {
-				this.remainingCapacity = remaining;
-			} else {
-				this.max = 0;
-			}
-			if(remaining < 0) {
+			// if(remaining >= 0) {
+			// 	this.remainingCapacity = remaining;
+			// } else {
+			// 	this.max = 0;
+			// }
+			if(this.remainingCapacity < 0) {
 				this.showBtn = false;
 			} else {
 				this.showBtn = true;
@@ -111,6 +113,7 @@ export default {
 			this.item = data.item ? data.item : this.item;
 			this.allocations = data.allocations ? data.allocations : this.allocations;
 			this.computingRemainingCapacity();
+			this.allocationChanged();
 		},
 
 		allocationChanged() {

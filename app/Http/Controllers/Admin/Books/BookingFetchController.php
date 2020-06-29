@@ -102,6 +102,12 @@ class BookingFetchController extends FetchController
             });
         }
 
+        $admin = auth()->guard('admin')->user();
+        
+        if($admin->destination_id) {
+            $query = $query->where('destination_id', $admin->destination_id);
+        }
+
         return $query;
     }
 

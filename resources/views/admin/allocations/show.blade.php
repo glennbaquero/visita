@@ -20,9 +20,9 @@
             </div>
         </div>
     </section>
-    
-    <page-pagination fetch-url="{{ route('admin.allocations.fetch-pagination', $item->id) }}"></page-pagination>
-
+    @if($show_pagination)
+        <page-pagination fetch-url="{{ route('admin.allocations.fetch-pagination', $item->id) }}"></page-pagination>
+    @endif
     <section class="content">
       {{--   <div class="mb-4">
             <a href="{{ route('admin.time-slots.create', [$item->id, $item->name]) }}" class="btn btn-primary text-white">
