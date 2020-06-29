@@ -22,7 +22,7 @@ class BookController extends Controller
         $time = Carbon::now()->format('h:i:s');
         $selected_date = Carbon::parse($request->selected_date.' '.$time);
 
-        $items = Book::where('destination_id', $request->destination_id)->whereDate('scheduled_at', $selected_date)->get();
+        $items = Book::where('destination_id', $request->destination_id)->whereDate('scheduled_at', $request->selected_date)->get();
 
         if($request->filled('started_at')) {
             $items = Book::where('destination_id', auth()->guard('api')->user()->destination_id)->whereNotNull('started_at')->whereNull('ended_at')->get();
