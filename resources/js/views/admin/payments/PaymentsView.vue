@@ -29,7 +29,7 @@
 			<div class="row">
 				<div class="form-group col-sm-6 col-md-6" v-if="item.type != 'PERCENTAGE'">
 					<label>Fixed Amount</label>
-					<input v-model="item.fixed_amount" name="fixed_amount" type="number" min="1" step="1.00" class="form-control">
+					<input v-model="item.fixed_amount" name="fixed_amount" type="number" min="1" step="0.01" class="form-control">
 				</div>
 				<div class="form-group col-sm-6 col-md-6" v-if="item.type != 'FIXED'">
 					<label>Percentage Amount</label>
