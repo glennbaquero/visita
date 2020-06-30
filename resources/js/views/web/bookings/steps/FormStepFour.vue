@@ -45,7 +45,7 @@
 			</div>
 			<!-- END_COMMENT_ME -->
 
-			<div class="rqst-frm1__step-4-content-checkbox">
+			<div class="rqst-frm1__step-4-content-checkbox gnrl-scrll">
 				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent">
 					<div class="width--10">
 						<input type="radio" name="payment">

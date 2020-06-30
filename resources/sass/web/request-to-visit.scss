@@ -420,6 +420,12 @@
 		}
 
 		.rqst-frm1__step-4-content-checkbox {
+			width: 102%;
+			max-height: 500px;
+			padding: 1%;
+			margin: 0 -1%;
+			overflow-y: auto;
+			overflow-x: hidden;
 			
 			.rqst-frm1__step-4-content-checkbox-container {
 				display: block;
