@@ -7,6 +7,7 @@ use App\Extenders\Controllers\FetchController;
 
 use App\Models\Invoices\Invoice;
 use App\Models\Books\Book;
+use App\Models\Payments\Payment;
 use Carbon\Carbon;
 
 class InvoiceFetchController extends FetchController
@@ -129,6 +130,7 @@ class InvoiceFetchController extends FetchController
         if ($id) {
         	$item = Invoice::withTrashed()->findOrFail($id);
         	$item->guests = $this->getGuests($item->book);
+            $item->payment_method = Payment::where('code', $item->paynamics_gateway_code)->first() ? Payment::where('code', $item->paynamics_gateway_code)->first()->renderImagePath() : 'images/paynamics.png';
             $item->is_paypal_payment = $item->is_paypal_payment ? true : false;
             $item->from_masungi_reservation = $item->book->from_masungi_reservation ? true : false;
             $item->reservation_from = $item->book->from_masungi_reservation ? 'Masungi Reservation' : 'Visita Reservation';

@@ -72,7 +72,8 @@ class PaymentFetchController extends FetchController
         $item = null;
         $types = Payment::getFeeTypes();
         if ($id) {
-        	$item = Payment::withTrashed()->findOrFail($id);
+            $item = Payment::withTrashed()->findOrFail($id);
+        	$item->path = $item->renderImagePath();
             $item->archiveUrl = $item->renderArchiveUrl();
             $item->restoreUrl = $item->renderRestoreUrl();
         }
