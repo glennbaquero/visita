@@ -339,13 +339,10 @@
 		}
 
 		.slick-next {
-  			top: 0px;
-		    bottom: 0px;
 		    right: 5%;
-		    margin: auto;
-		    opacity: 1;
 
 			img {
+				display: block;
 			    position: absolute;
 			    right: -5px;
 			    top: 0px;
@@ -358,13 +355,10 @@
 		}
 
 		.slick-prev {
-  			top: 0px;
-		    bottom: 0px;
 		    left: 5%;
-		    margin: auto;
-		    opacity: 1;
 
 			img {
+				display: block;
 			    position: absolute;
 			    left: -5px;
 			    top: 0px;

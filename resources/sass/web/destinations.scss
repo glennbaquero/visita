@@ -81,6 +81,8 @@
 		bottom: 5vh;
 	}
 
+	
+
 	.dstntns-frm1__slider-thumbnail-item {
 		position: relative;
 		width: 28%;
@@ -141,6 +143,55 @@
 
 }
 
+.dstntns-frm1__slider-thumbnail {
+
+	.slick-next {
+		top: 0px;
+		bottom: 0px;
+		right: -3%;
+		margin: auto;
+		opacity: 1;
+
+		&::before {
+			content: "";
+			border-right: 5px solid $orange;
+			border-top: 5px solid $orange;
+			width: 18px;
+			height: 18px;
+			display: block;
+			transform: rotate(45deg);
+			border-radius: 5px;
+		}
+
+		img {
+			display: none;
+		}
+	}
+
+	.slick-prev {
+		top: 0px;
+		bottom: 0px;
+		left: -3%;
+		margin: auto;
+		opacity: 1;
+
+		&::before {
+			content: "";
+			border-right: 5px solid $orange;
+			border-top: 5px solid $orange;
+			width: 18px;
+			height: 18px;
+			display: block;
+			transform: rotate(-135deg);
+			border-radius: 5px;
+		}
+
+		img {
+			display: none;
+		}
+	}
+}
+
 .dstntns-inf-frm1 {
 	position: relative;
 	width: 100%;
@@ -167,8 +218,8 @@
 }
 
 .dstntns-inf-frm2 {
-    position: relative;
-    padding: 10vh 0vh;
+	position: relative;
+	padding: 10vh 0vh;
 
 	.dstntns-inf-frm2__btn-holder {
 		height: 400px;
@@ -211,37 +262,37 @@
 
 		  //   ul {
 		  //   	font-size: 1em;
-		  //       width: 100%;
-		  //       padding-left: 15px;
+		  //	   width: 100%;
+		  //	   padding-left: 15px;
 		  //   } 
 
 		  //   ol {
 		  //   	font-size: 1em;
-		  //       width: 100%;
-		  //       padding-left: 15px;
+		  //	   width: 100%;
+		  //	   padding-left: 15px;
 
-		  //       strong {
-		  //       	font-size: 1em;
-		  //       }
+		  //	   strong {
+		  //	   	font-size: 1em;
+		  //	   }
 		  //   }
 
 		  //   li {
-		  //       display: list-item;
-		  //       padding-bottom: 5px;
-		  //       list-style-position: inside;
+		  //	   display: list-item;
+		  //	   padding-bottom: 5px;
+		  //	   list-style-position: inside;
 		  //   }
 
 		  //   p {
 		  //   	a { font-size: 0.9em; }
 				// p {	font-size: 1em; }
 		  //   	strong {
-			 //    	font-family: $font-family-work-sans-bold;
-			 //    	font-size: 1em;
+			 //		font-family: $font-family-work-sans-bold;
+			 //		font-size: 1em;
 
-			 //    	u {
-				//     	font-family: $font-family-work-sans-bold;
-				//     	font-size: 1em;
-			 //    	}
+			 //		u {
+				//	 	font-family: $font-family-work-sans-bold;
+				//	 	font-size: 1em;
+			 //		}
 		  //   	}
 		  //   }
 
@@ -263,10 +314,10 @@
 		  //   	font-size: 1em;
 		  //   }
 
-		    iframe {
+			iframe {
 				width: 100%;
 				height: 60vh;
-		    }
+			}
 
 		}
 	}
