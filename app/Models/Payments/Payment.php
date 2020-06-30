@@ -3,10 +3,13 @@
 namespace App\Models\Payments;
 
 use App\Extenders\Models\BaseModel as Model;
+use App\Traits\FileTrait;
 
 class Payment extends Model
 {
 
+    use FileTrait;
+    
     const FIXED = 'FIXED';
     const PERCENTAGE = 'PERCENTAGE';
     const COMPARISON = 'COMPARISON';
@@ -41,6 +44,10 @@ class Payment extends Model
             $item = static::create($vars);
         } else {
             $item->update($vars);
+        }
+
+        if ($request->hasFile('image_path')) {
+            $item->storeImage($request->file('image_path'), 'image_path', 'payment-gateway');
         }
 
         return $item;

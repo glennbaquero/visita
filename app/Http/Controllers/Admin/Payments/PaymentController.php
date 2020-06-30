@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Payments;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Payments\PaymentStoreRequest as Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Payments\Payment;

@@ -36,6 +36,18 @@
 					<input v-model="item.percentage_amount" name="percentage_amount" type="number" min="1" step="0.01" class="form-control">
 				</div>
 			</div>
+			
+			<div class="row">
+
+				<image-picker
+				:value="item.path"
+				class="form-group col-sm-12 col-md-12 mt-2"
+                label="Image"
+                name="image_path"
+                placeholder="Choose a File"
+				></image-picker>
+
+			</div>
 
 
 			
