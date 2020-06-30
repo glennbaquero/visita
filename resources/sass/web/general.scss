@@ -20,6 +20,10 @@ body {
 	min-height: 100vh;
 }
 
+.pointer-events-none {
+	pointer-events: none;
+}
+
 /*
 * Colors for Fonts and Backgrounds
 * clr : uses for text colors

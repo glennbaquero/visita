@@ -474,7 +474,7 @@ var app = {
 		        slidesToScroll: 1,
 		        speed: 1000,
 		        autoplay: false,
-		        arrows: false,
+		        arrows: true,
 		        dots: false,
 		        focusOnSelect: true,
 		        asNavFor: '.dstntns-frm1__slider',
