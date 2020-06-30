@@ -7,6 +7,7 @@
 			</div>
 			<hr>
 
+			<!-- COMMENT_ME -->
 			<div class="rqst-frm1__step-4-content-checkbox">
 				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent" style="box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25)">
 					<div class="width--100">
@@ -29,12 +30,25 @@
 						>
 					</div> -->
 				</label>
+				<!-- <label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent" style="box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25)">
+					<div class="width--50">
+						<p class="frm-header clr--gray">Paynamics</p>
+					</div
+					><div class="width--40 align-r">
+						<img
+						  style="width: 100%; height: 100%;"
+						  class="rqst-frm1__step-4-content-checkbox-img" 
+						  src="images/paynamics.png"
+						>
+					</div>
+				</label> -->
 			</div>
+			<!-- END_COMMENT_ME -->
 
-			<!-- <div class="rqst-frm1__step-4-content-checkbox">
+			<div class="rqst-frm1__step-4-content-checkbox">
 				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent">
 					<div class="width--10">
-						<input type="radio" name="payment" v-model="isPaypal" :value="false" @change="paymentSelectionChanged()">
+						<input type="radio" name="payment">
 						<span class="checkmark"></span>
 					</div
 					><div class="width--50">
@@ -42,16 +56,28 @@
 					</div
 					><div class="width--40 align-r">
 						<img
-						  class="rqst-frm1__step-4-content-checkbox-img" 
-						  src="https://www.stickpng.com/assets/images/58482363cef1014c0b5e49c1.png"
-						>
-						<img 
+						  style="max-height: 70px;" 
 						  class="rqst-frm1__step-4-content-checkbox-img" 
 						  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_2019_logo.svg/1200px-Mastercard_2019_logo.svg.png"
 						>
 					</div>
 				</label>
-			</div> -->
+				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent">
+					<div class="width--10">
+						<input type="radio" name="payment">
+						<span class="checkmark"></span>
+					</div
+					><div class="width--50">
+						<p class="frm-header clr--gray">Paynamics</p>
+					</div
+					><div class="width--40 align-r">
+						<img
+						  class="rqst-frm1__step-4-content-checkbox-img" 
+						  src="images/paynamics.png"
+						>
+					</div>
+				</label>
+			</div>
 
 			<div class="align-l m-margin-b l-margin-t">
 				<h5 class="frm-title small clr--gray">Fees</h5>
@@ -63,7 +89,7 @@
 					<div class="rqst-frm1__step-4-content-select">
 						<div class="width--95 margin-a inlineBlock-parent">
 							<div class="width--50 inlineBlock-parent">
-								<p class="frm-header clr--gray s-margin-r">Conservation Fees</p>								
+								<p class="frm-header clr--gray s-margin-r">Conservation Fees</p>
 								<div class="rqst-frm1__step-4-content-info-holder">
 									<img 
 									  class="rqst-frm1__step-4-content-info-icon" 
@@ -177,7 +203,7 @@
 				><div class="width--50 align-r">
 					<h5 class="frm-title x-small clr--gray">Php {{ withComma(grandTotal) }}</h5>
 				</div>
-			</div>							
+			</div>
 			
 			<hr>
 
@@ -288,12 +314,12 @@
 		mounted() {
 			this.conservationFeeForVisitorType();
 			this.specialFee();
-		  	this.conservationFeeTotal = this.conservationFeeTotal - this.specialFeeTotal;
+			this.conservationFeeTotal = this.conservationFeeTotal - this.specialFeeTotal;
 
-		    // $('.rqst-frm1__step-4-content-checkbox-container').on('click', function(){
-		    // 	$('.rqst-frm1__step-4-content-checkbox-container').removeClass('active');
-		    // 	$(this).addClass('active');
-		    // });	
+			// $('.rqst-frm1__step-4-content-checkbox-container').on('click', function(){
+			// 	$('.rqst-frm1__step-4-content-checkbox-container').removeClass('active');
+			// 	$(this).addClass('active');
+			// });
 
 			var information = $('.rqst-frm1__step-4-content-info-icon');
 
@@ -303,18 +329,18 @@
 				$(this).next().fadeOut(200);
 			});
 
-			$('*').not('.rqst-frm1__step-4-content-info-icon').on('touchstart', function(){ 
-	            $(this).next().fadeOut(200);
- 			})
+			// $('*').not('.rqst-frm1__step-4-content-info-icon').on('touchstart', function(){ 
+			// 	$(this).next().fadeOut(200);
+			// })
 
 			var $window = $(window);
-		    	$window.scroll(function () {
-		        if ($window.scrollTop() > 0) {
-		          	$('.rqst-frm1__steps-header, .rqst-frm1__steps-form-cards').addClass('scroll');
-		        } else {
-		        	$('.rqst-frm1__steps-header, .rqst-frm1__steps-form-cards').removeClass('scroll');
-		        }
-		    });
+				$window.scroll(function () {
+				if ($window.scrollTop() > 0) {
+					$('.rqst-frm1__steps-header, .rqst-frm1__steps-form-cards').addClass('scroll');
+				} else {
+					$('.rqst-frm1__steps-header, .rqst-frm1__steps-form-cards').removeClass('scroll');
+				}
+			});
 
 		},
 
@@ -336,53 +362,53 @@
 
 				_.forEach(this.allocation.special_fees, (value) => {
 					if(is_daytour){
-		      			fee = parseFloat(value.daytour);
-		      		} else {
-		      			fee = parseFloat(value.overnight)
-		      		}
+						fee = parseFloat(value.daytour);
+					} else {
+						fee = parseFloat(value.overnight)
+					}
 
-		      		if(is_weekend) {
-		      			fee += parseFloat(value.weekend);
-		      		} else {
-		      			fee += parseFloat(value.weekday);
-		      		}
+					if(is_weekend) {
+						fee += parseFloat(value.weekend);
+					} else {
+						fee += parseFloat(value.weekday);
+					}
 
-		      		// if(value.id == this.stepData.main.special_fee_id){
-			      		// result += parseFloat(value.daytour);
+					// if(value.id == this.stepData.main.special_fee_id){
+						// result += parseFloat(value.daytour);
 
-			      		// var data = {
-			      		// 	name: value.name,
-			      		// 	fee: fee,
-			      		// 	count: 1
-			      		// };
+						// var data = {
+						// 	name: value.name,
+						// 	fee: fee,
+						// 	count: 1
+						// };
 
-			      		// this.specialFeeTotal += fee;
+						// this.specialFeeTotal += fee;
 
-			      		// this.specialFeeTypeList.push(data)
+						// this.specialFeeTypeList.push(data)
 
-			      		_.forEach(this.stepData.guests, (guest, guestKey) => {
+						_.forEach(this.stepData.guests, (guest, guestKey) => {
 						if(value.id == guest.special_fee_id){
-					  		result += parseFloat(value.daytour_fee);
-					  		// _.forEach(this.specialFeeTypeList, (data, key) => {
-					  			var data = {
-					  				name: value.name,
-					  				number: (guestKey + 1),
-					  				fee: fee,
-					  				count: 1
-					  			};
-						  		// if(value.name === data.name) {
-						  		// 	data.count += 1;
-							  	// 	this.specialFeeTypeList[key].count += 1;
-							  	// 	this.specialFeeTypeList[key].fee += fee;
-						    //   		this.specialFeeTotal += fee;
-						  		// } else {
-						  			this.specialFeeTypeList.push(data);
-						      		this.specialFeeTotal += fee;
-						  		// }
-					  		// })
-						}			    		
-			    	})
-			    	// }
+							result += parseFloat(value.daytour_fee);
+							// _.forEach(this.specialFeeTypeList, (data, key) => {
+								var data = {
+									name: value.name,
+									number: (guestKey + 1),
+									fee: fee,
+									count: 1
+								};
+								// if(value.name === data.name) {
+								// 	data.count += 1;
+								// 	this.specialFeeTypeList[key].count += 1;
+								// 	this.specialFeeTypeList[key].fee += fee;
+								//	this.specialFeeTotal += fee;
+								// } else {
+									this.specialFeeTypeList.push(data);
+									this.specialFeeTotal += fee;
+								// }
+							// })
+						}
+					})
+					// }
 				});
 			},
 
@@ -394,42 +420,42 @@
 				var is_weekend = (visitDate.day() === 6) || (visitDate.day() === 0);
 
 				_.forEach(this.visitorTypes, (value) => {
-			      		
-		      		if(is_daytour){
-		      			fee = parseFloat(value.daytour_fee);
-		      		} else {
-		      			fee = parseFloat(value.overnight_fee)
-		      		}
 
-		      		if(is_weekend) {
-		      			fee += parseFloat(value.weekend_fee);
-		      		} else {
-		      			fee += parseFloat(value.weekday_fee);
-		      		}
+					if(is_daytour){
+						fee = parseFloat(value.daytour_fee);
+					} else {
+						fee = parseFloat(value.overnight_fee)
+					}
 
-			    	_.forEach(this.stepData.guests, (guest, guestKey) => {
+					if(is_weekend) {
+						fee += parseFloat(value.weekend_fee);
+					} else {
+						fee += parseFloat(value.weekday_fee);
+					}
+
+					_.forEach(this.stepData.guests, (guest, guestKey) => {
 						if(value.id == guest.visitor_type_id){
-					  		result += parseFloat(value.daytour_fee);
-					  		// _.forEach(this.visitorTypeList, (data, key) => {
-					  			var data = {
-					  				name: value.name,
-					  				number: (guestKey + 1),
-					  				fee: fee,
-					  				count: 1
-					  			};
-						  		// if(value.name === data.name) {
-						  		// 	data.count += 1;
-							  	// 	this.visitorTypeList[key].count += 1;
-							  	// 	this.visitorTypeList[key].fee += fee;
-						    //   		this.conservationFeeTotal += fee;
-						  		// } else {
-						  			this.visitorTypeList.push(data);
-						      		this.conservationFeeTotal += fee;
-						  		// }
-					  		// })
-						}			    		
-			    	})
-			  	});
+							result += parseFloat(value.daytour_fee);
+							// _.forEach(this.visitorTypeList, (data, key) => {
+								var data = {
+									name: value.name,
+									number: (guestKey + 1),
+									fee: fee,
+									count: 1
+								};
+								// if(value.name === data.name) {
+								// 	data.count += 1;
+								// 	this.visitorTypeList[key].count += 1;
+								// 	this.visitorTypeList[key].fee += fee;
+								// 	this.conservationFeeTotal += fee;
+								// } else {
+									this.visitorTypeList.push(data);
+									this.conservationFeeTotal += fee;
+								// }
+							// })
+						}
+					})
+				});
 			},
 
 			paymentSelectionChanged() {

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="width--90 margin-a rqst-frm1__steps-form-cards-container gnrl-scrll">
-			<div class="width--100">
+			<div class="width--100 pointer-events-none">
 				<div class="align-l m-margin-b">
 					<h5 class="frm-title x-small clr--gray">Experience & Schedule</h5>
 					<hr>
@@ -23,7 +23,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="width--100">
+			<div class="width--100 pointer-events-none">
 				<div class="align-l m-margin-b">
 					<h5 class="frm-title x-small clr--gray">Contact Person</h5>
 					<hr>
@@ -131,7 +131,7 @@
 
 				</div>
 			</div>
-			<div class="width--100">
+			<div class="width--100 pointer-events-none">
 				<div class="align-l">
 					<h5 class="frm-title x-small clr--gray">Guest Details</h5>
 					<hr>
