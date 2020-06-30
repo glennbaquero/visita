@@ -16,13 +16,13 @@ class PermissionsTableSeeder extends Seeder
     {
         $categories = [
             [
-                'name' => 'Sample Item Management',
-                'description' => 'Manage Sample Items',
-                'icon' => 'fa fa-cubes',
+                'name' => 'Transaction Fees',
+                'description' => 'Manage Transaction Fees',
+                'icon' => 'fas fa-cash-register',
                 'items' => [
                     [
-                        'name' => 'admin.sample-items.crud',
-                        'description' => 'Manage Sample Items',
+                        'name' => 'admin.payments.crud',
+                        'description' => 'Manage Transaction Fees',
                     ],
                 ],
             ],

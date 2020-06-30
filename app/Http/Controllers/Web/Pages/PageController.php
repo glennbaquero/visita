@@ -24,6 +24,8 @@ use App\Models\Types\VisitorType;
 use App\Models\Genders\Gender;
 use Webpatser\Countries\Countries;
 
+use App\Models\Payments\Payment;
+
 use Carbon\Carbon;
 
 class PageController extends Controller
@@ -186,6 +188,8 @@ class PageController extends Controller
 		$info['platform_fee_info'] = PageItem::where('slug', 'platform_fee_info')->first() ? PageItem::where('slug', 'platform_fee_info')->first()->content : null;
 		$info['transaction_fee_info'] = PageItem::where('slug', 'transaction_fee_info')->first() ? PageItem::where('slug', 'transaction_fee_info')->first()->content : null;
 
+		$transaction_fees = Payment::all();
+
         
         return view('web.pages.destination.request-to-visit', array_merge($data, [
         	'quote' => Inspiring::quote(),
@@ -193,6 +197,7 @@ class PageController extends Controller
         	'visitor_types' => $visitor_types,
         	'genders' => $genders,
         	'countries' => $countries,
+        	'transaction_fees' => $transaction_fees,
         	'items' => json_encode($result),
         	'page_scripts'=> 'requestToVisit',
 			'info' => json_encode($info)       	

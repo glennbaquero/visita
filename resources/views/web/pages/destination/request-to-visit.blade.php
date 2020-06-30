@@ -15,6 +15,7 @@
 		:items="{{ $items }}" 
 		:genders="{{ $genders }}"
 		:countries="{{ $countries }}"
+		:transaction-fees="{{ $transaction_fees }}"
 		:visitor-types="{{ $visitor_types }}"
 		book-url="{{ route('web.book.store') }}"
 		checker-url="{{ route('web.getTimeSlot') }}"

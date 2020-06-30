@@ -30,7 +30,18 @@
                         </p>
                     </a>
                 </li>
-
+                @if ($self->hasAnyPermission(['admin.payments.crud']))
+                <li class="nav-item">
+                    <a href="{{ route('admin.payments.index') }}" class="nav-link {{ $checker->route->areOnRoutes([
+                        'admin.payments.index, admin.payments.show, admin.payments.create',
+                    ]) }}">
+                        <i class="nav-icon fas fa-cash-register"></i>
+                        <p>
+                            Transaction Fees
+                        </p>
+                    </a>
+                </li>
+                @endif
                 
                 @if ($self->hasAnyPermission(['admin.calendar.crud']))
                 <li class="nav-item">

@@ -69,6 +69,7 @@ class PaynamicsProcessor
 		$grandTotal = $this->invoice->grand_total + $this->invoice->transaction_fee;
 		$_amount = number_format($grandTotal, 2, '.', ''); // kindly set this to the total amount of the transaction. Set the amount to 2 decimal point before generating signature.
 		$_currency = "PHP"; //PHP or USD
+		$_pmethod = $this->invoice->paynamics_gateway_code;
 
 		$forSign = $_mid . $_requestid . $_ipaddress . $_noturl . $_resurl . $_fname . $_lname . $_addr1 . $_city . $_state . $_country . $_zip . $_email . $_phone . $_clientip . $_amount . $_currency . $_sec3d;
 
@@ -124,7 +125,7 @@ class PaynamicsProcessor
 		$strxml = $strxml . "<amount>" . $_amount . "</amount>";
 		$strxml = $strxml . "<currency>" . $_currency . "</currency>";
 		$strxml = $strxml . "<mlogo_url>https://visita.org.ph/images/visita-logo.png</mlogo_url>";// pls set this to the url where your logo is hosted
-		$strxml = $strxml . "<pmethod></pmethod>";
+		$strxml = $strxml . "<pmethod>".$_pmethod."</pmethod>";
 		$strxml = $strxml . "<signature>" . $_sign . "</signature>";
 		$strxml = $strxml . "</Request>";
 

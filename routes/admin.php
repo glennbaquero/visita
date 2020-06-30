@@ -316,6 +316,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
             Route::post('activity-logs/fetch?id={id?}&generated-emails=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.generated-emails');
 
+            Route::post('activity-logs/fetch?id={id?}&payments=1', 'ActivityLogFetchController@fetch')->name('activity-logs.fetch.payments');
+
         });
 
         Route::namespace('Articles')->group(function() {
@@ -605,6 +607,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
             Route::post('faqs/fetch?archived=1', 'FaqFetchController@fetch')->name('faqs.fetch-archive');
             Route::post('faqs/fetch-item/{id?}', 'FaqFetchController@fetchView')->name('faqs.fetch-item');
             Route::post('faqs/fetch-pagination/{id}', 'FaqFetchController@fetchPagePagination')->name('faqs.fetch-pagination');
+        });
+
+        Route::namespace('Payments')->group(function() {
+            Route::get('transaction-fees', 'PaymentController@index')->name('payments.index');
+            Route::get('transaction-fees/create', 'PaymentController@create')->name('payments.create');
+            Route::post('transaction-fees/store', 'PaymentController@store')->name('payments.store');
+            Route::get('transaction-fees/show/{id}', 'PaymentController@show')->name('payments.show');
+            Route::post('transaction-fees/update/{id}', 'PaymentController@update')->name('payments.update');
+            Route::post('transaction-fees/{id}/archive', 'PaymentController@archive')->name('payments.archive');
+            Route::post('transaction-fees/{id}/restore', 'PaymentController@restore')->name('payments.restore');
+        
+            Route::post('transaction-fees/fetch', 'PaymentFetchController@fetch')->name('payments.fetch');
+            Route::post('transaction-fees/fetch?archived=1', 'PaymentFetchController@fetch')->name('payments.fetch-archive');
+            Route::post('transaction-fees/fetch-item/{id?}', 'PaymentFetchController@fetchView')->name('payments.fetch-item');
+            Route::post('transaction-fees/fetch-pagination/{id}', 'PaymentFetchController@fetchPagePagination')->name('payments.fetch-pagination');
         });
 
         Route::namespace('Capacities')->group(function() {

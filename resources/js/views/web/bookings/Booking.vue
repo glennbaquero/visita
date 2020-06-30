@@ -163,6 +163,7 @@
 							:allocation="selectedAllocation"
 							:info="info"
 							:is-accepted="isAccepted"
+							:transaction-fees="transactionFees"
 							@terms_conditions_click="termsConditionClick()"
 							@privacy_policy_click="privacyPolicyClick()"
 							ref="formStepFour"
@@ -226,7 +227,7 @@
 									</div>
 								</div
 								><div class="width--45">
-									<div class="width--95" v-if="isAccepted.termsAndConditions && isAccepted.privacyPolicy">
+									<div class="width--95" v-if="isAccepted.termsAndConditions && isAccepted.privacyPolicy && hasPaymentSelected">
 										<button class="frm-btn green" data-remodal-target="confirmation-modal">Send Request</button>
 									</div>
 								</div>
@@ -299,6 +300,7 @@
 			destination: Object,
 			items: Array,
 			genders: Array,
+			transactionFees: Array,
 			countries: Array,
 			visitorTypes: Array,
 			bookUrl: String,
@@ -388,6 +390,10 @@
 			  	});
 			  	return result;
 			},
+
+			hasPaymentSelected() {
+				return !_.isEmpty(this.$refs.formStepFour.selectedPaymentGateway);
+			}
 		},
 
 		mounted() {
@@ -550,6 +556,7 @@
 				})
 
 				data.append('transaction_fee', this.$refs.formStepFour.transactionFee);
+				data.append('paynamics_gateway_code', this.$refs.formStepFour.paymentGatewayCode);
 				data.append('conservation_fee', this.$refs.formStepFour.conservationFeeTotal);
 				data.append('platform_fee', this.$refs.formStepFour.platformFee);
 				data.append('sub_total', this.$refs.formStepFour.subTotal);

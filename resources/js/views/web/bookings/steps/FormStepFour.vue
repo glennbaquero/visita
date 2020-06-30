@@ -9,11 +9,16 @@
 
 			<div class="rqst-frm1__step-4-content-checkbox">
 				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent" style="box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25)">
-					<div class="width--10">
-						<input type="radio" name="payment" v-model="isPaypal" :value="true" @change="paymentSelectionChanged()">
-						<span class="checkmark"></span>
+					<div class="width--100">
+						<div class="width--100">
+							<div class="frm-inpt">
+								<select v-model="selectedPaymentGateway">
+									<option v-for="fee in transactionFees" :value="fee"> {{ fee.name }} </option>
+								</select>
+							</div>
+						</div>
 					</div
-					><div class="width--50">
+					><!-- <div class="width--50">
 						<p class="frm-header clr--gray">Paynamics</p>
 					</div
 					><div class="width--40 align-r">
@@ -22,7 +27,7 @@
 						  class="rqst-frm1__step-4-content-checkbox-img" 
 						  src="images/paynamics.png"
 						>
-					</div>
+					</div> -->
 				</label>
 			</div>
 
@@ -208,6 +213,7 @@
 			destination: Object,
 			stepData: Object,
 			visitorTypes: Array,
+			transactionFees: Array,
 			allocation:Object,
 			info:Object,
 			isAccepted: Object
@@ -222,7 +228,9 @@
 				specialFeeTypeList: [],
 				conservationFeeTotal: 0,
 				specialFeeTotal: 0,
-				transactionFee: parseFloat(this.allocation.transaction_fee),
+				transactionFee: 0,
+				selectedPaymentGateway: null,
+				paymentGatewayCode: null,
 				isPaypal: true, // true - paypal, false - bank deposit,
 			}
 		},
@@ -249,6 +257,31 @@
 				var total = subTotal + transactionFee;
 
 				return total;
+			}
+		},
+
+		watch: {
+			selectedPaymentGateway(val) {
+				this.paymentGatewayCode = val.code;
+				var type = val.type;
+				var fixed_amount = val.fixed_amount;
+				var percentage_amount = val.percentage_amount / 100;
+				switch(type) {
+					case 'PERCENTAGE':
+						this.transactionFee = percentage_amount * this.subTotal;
+						break;
+					case 'COMPARISON':
+						var percent_amount = percentage_amount * this.subTotal;
+						if(percent_amount > fixed_amount) {
+							this.transactionFee = percent_amount;
+						} else {
+							this.transactionFee = fixed_amount;
+						}
+						break;
+					default:
+						this.transactionFee = fixed_amount;
+						break;
+				}
 			}
 		},
 
