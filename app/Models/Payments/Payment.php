@@ -14,6 +14,8 @@ class Payment extends Model
     const PERCENTAGE = 'PERCENTAGE';
     const COMPARISON = 'COMPARISON';
 
+    protected $appends = ['full_image'];
+
 	/**
 	 * Get the indexable data array for the model.
 	 *
@@ -92,5 +94,15 @@ class Payment extends Model
         $amount /= 100;
 
     	return $amount;
+    }
+
+
+    /**
+     * Appends
+     */
+    
+    public function getFullImageAttribute()
+    {
+        return $this->image_path ? $this->renderImagePath() : 'images/paynamics.png';
     }
 }

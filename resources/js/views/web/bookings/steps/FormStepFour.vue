@@ -8,7 +8,7 @@
 			<hr>
 
 			<!-- COMMENT_ME -->
-			<div class="rqst-frm1__step-4-content-checkbox">
+			<!-- <div class="rqst-frm1__step-4-content-checkbox">
 				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent" style="box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25)">
 					<div class="width--100">
 						<div class="width--100">
@@ -19,61 +19,25 @@
 							</div>
 						</div>
 					</div
-					><!-- <div class="width--50">
-						<p class="frm-header clr--gray">Paynamics</p>
-					</div
-					><div class="width--40 align-r">
-						<img
-						  style="width: 100%; height: 100%;"
-						  class="rqst-frm1__step-4-content-checkbox-img" 
-						  src="images/paynamics.png"
-						>
-					</div> -->
+					>
 				</label>
-				<!-- <label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent" style="box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25)">
-					<div class="width--50">
-						<p class="frm-header clr--gray">Paynamics</p>
-					</div
-					><div class="width--40 align-r">
-						<img
-						  style="width: 100%; height: 100%;"
-						  class="rqst-frm1__step-4-content-checkbox-img" 
-						  src="images/paynamics.png"
-						>
-					</div>
-				</label> -->
-			</div>
+			</div> -->
 			<!-- END_COMMENT_ME -->
 
 			<div class="rqst-frm1__step-4-content-checkbox gnrl-scrll">
-				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent">
+				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent" v-for="fee in transactionFees">
 					<div class="width--10">
-						<input type="radio" name="payment">
+						<input type="radio" name="payment" :value="fee" v-model="selectedPaymentGateway">
 						<span class="checkmark"></span>
 					</div
 					><div class="width--50">
-						<p class="frm-header clr--gray">Bank Deposit</p>
+						<p class="frm-header clr--gray">{{ fee.name }}</p>
 					</div
 					><div class="width--40 align-r">
 						<img
 						  style="max-height: 70px;" 
 						  class="rqst-frm1__step-4-content-checkbox-img" 
-						  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_2019_logo.svg/1200px-Mastercard_2019_logo.svg.png"
-						>
-					</div>
-				</label>
-				<label class="rqst-frm1__step-4-content-checkbox-container align-l inlineBlock-parent">
-					<div class="width--10">
-						<input type="radio" name="payment">
-						<span class="checkmark"></span>
-					</div
-					><div class="width--50">
-						<p class="frm-header clr--gray">Paynamics</p>
-					</div
-					><div class="width--40 align-r">
-						<img
-						  class="rqst-frm1__step-4-content-checkbox-img" 
-						  src="images/paynamics.png"
+						  :src="fee.full_image"
 						>
 					</div>
 				</label>
