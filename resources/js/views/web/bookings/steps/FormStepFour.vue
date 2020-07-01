@@ -219,7 +219,7 @@
 				conservationFeeTotal: 0,
 				specialFeeTotal: 0,
 				transactionFee: 0,
-				selectedPaymentGateway: null,
+				selectedPaymentGateway: this.$parent.selectedPaymentGateway,
 				paymentGatewayCode: null,
 				isPaypal: true, // true - paypal, false - bank deposit,
 			}
@@ -243,7 +243,7 @@
 
 			grandTotal() {
 				var subTotal = this.subTotal;
-				var transactionFee = parseFloat(this.transactionFee);
+				var transactionFee = parseFloat(this.transactionFee)																																																								;
 				var total = subTotal + transactionFee;
 
 				return total;

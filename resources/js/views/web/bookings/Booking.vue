@@ -377,6 +377,8 @@
              		termsAndConditions: false,
              		privacyPolicy: false,
              	},
+
+             	selectedPaymentGateway: {}
 			}
 		},
 
@@ -392,6 +394,9 @@
 			},
 
 			hasPaymentSelected() {
+				if(!_.isEmpty(this.$refs.formStepFour.selectedPaymentGateway)) {
+					this.selectedPaymentGateway = this.$refs.formStepFour.selectedPaymentGateway;
+				}
 				return !_.isEmpty(this.$refs.formStepFour.selectedPaymentGateway);
 			}
 		},
