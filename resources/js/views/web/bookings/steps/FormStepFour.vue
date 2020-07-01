@@ -252,6 +252,7 @@
 
 		watch: {
 			selectedPaymentGateway(val) {
+				this.$parent.selectedPaymentGateway = val;
 				this.paymentGatewayCode = val.code;
 				var type = val.type;
 				var fixed_amount = val.fixed_amount;
