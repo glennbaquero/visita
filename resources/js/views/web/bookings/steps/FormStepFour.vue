@@ -279,6 +279,7 @@
 		mounted() {
 			this.conservationFeeForVisitorType();
 			this.specialFee();
+			this.getTransactionFee();
 			this.conservationFeeTotal = this.conservationFeeTotal - this.specialFeeTotal;
 
 			// $('.rqst-frm1__step-4-content-checkbox-container').on('click', function(){
@@ -310,6 +311,29 @@
 		},
 
 		methods: {
+			getTransactionFee() {
+				this.paymentGatewayCode = this.selectedPaymentGateway.code;
+				var type = this.selectedPaymentGateway.type;
+				var fixed_amount = this.selectedPaymentGateway.fixed_amount;
+				var percentage_amount = this.selectedPaymentGateway.percentage_amount / 100;
+				switch(type) {
+					case 'PERCENTAGE':
+						this.transactionFee = percentage_amount * this.subTotal;
+						break;
+					case 'COMPARISON':
+						var percent_amount = percentage_amount * this.subTotal;
+						if(percent_amount > fixed_amount) {
+							this.transactionFee = percent_amount;
+						} else {
+							this.transactionFee = fixed_amount;
+						}
+						break;
+					default:
+						this.transactionFee = fixed_amount;
+						break;
+				}
+			},
+
 			showOption() {
 				if(this.showOptionStyle == 'none') {
 					this.showOptionStyle = 'block';
