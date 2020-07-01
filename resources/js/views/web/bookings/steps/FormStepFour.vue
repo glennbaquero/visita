@@ -243,7 +243,7 @@
 
 			grandTotal() {
 				var subTotal = this.subTotal;
-				var transactionFee = this.transactionFee;
+				var transactionFee = parseFloat(this.transactionFee);
 				var total = subTotal + transactionFee;
 
 				return total;
