@@ -49,9 +49,13 @@ class DashboardAnalyticsController extends Controller
             $today = $request->date;
         }
         // get all booking based on current destination assigned for logged-in user
-        $bookings = Book::whereDate('scheduled_at', $today);
+        $bookings = Book::whereHas('invoice', function($query){
+            $query->where('is_paid', true);
+        })->whereDate('scheduled_at', $today);
         if($request->date) {
-            $bookings = Book::whereDate('scheduled_at', $request->date);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $request->date);
         }
 
         if($request->destination && $request->destination != null) {
@@ -83,25 +87,37 @@ class DashboardAnalyticsController extends Controller
             $total['groups'] = $group_walk_in + $group_online;
         }
         
-        $bookings = Book::whereDate('scheduled_at', $today);
+        $bookings = Book::whereHas('invoice', function($query){
+            $query->where('is_paid', true);
+        })->whereDate('scheduled_at', $today);
         if($request->date) {
-            $bookings = Book::whereDate('scheduled_at', $request->date);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $request->date);
         }
 
         if($request->destination && $request->destination != null) {
-            $bookings = Book::where('destination_id', $request->destination);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination);
         } 
 
         if($request->experience) {
-            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination)->where('allocation_id', $request->experience);
         }
 
         if($request->destination) {
-            $bookings = Book::where('destination_id', $request->destination);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination);
         } 
 
         if($request->experience) {
-            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination)->where('allocation_id', $request->experience);
         }
         // get total checked in for walk in guest
         if($request->date) {
@@ -116,30 +132,42 @@ class DashboardAnalyticsController extends Controller
         }
         $today = Carbon::now();
         // get total checked in for online in guest
-        $bookings = Book::whereDate('scheduled_at', $today);
+        $bookings = Book::whereHas('invoice', function($query){
+            $query->where('is_paid', true);
+        })->whereDate('scheduled_at', $today);
         if($request->date) {
-            $bookings = Book::whereDate('scheduled_at', $request->date);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $request->date);
         }
         $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereNotNull('started_at')->get()->sum('total_guest'); 
         $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->whereNotNull('started_at')->get()->count();
 
         if($request->destination) {
-            $bookings = Book::where('destination_id', $request->destination)->whereDate('scheduled_at', $today);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination)->whereDate('scheduled_at', $today);
             $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereNotNull('started_at')->get()->sum('total_guest'); 
             $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->whereNotNull('started_at')->get()->count();
             if($request->date) {
-                $bookings = Book::where('destination_id', $request->destination)->whereDate('scheduled_at', $request->date);
+                $bookings = Book::whereHas('invoice', function($query){
+                    $query->where('is_paid', true);
+                })->where('destination_id', $request->destination)->whereDate('scheduled_at', $request->date);
                 $total_checked_in['online_visitor'] = $bookings->whereDate('scheduled_at', $request->date)->whereNotNull('started_at')->where('is_walkin', false)->get()->sum('total_guest');
                 $total_checked_in['online_group'] = $bookings->whereDate('scheduled_at', $request->date)->whereNotNull('started_at')->where('is_walkin', false)->get()->count();
             } 
         } 
 
         if($request->experience) {
-            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $today);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $today);
             $total_checked_in['online_visitor'] = $bookings->where('is_walkin', false)->whereNotNull('started_at')->get()->sum('total_guest'); 
             $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->whereNotNull('started_at')->get()->count();
             if($request->date) {
-                $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date);
+                $bookings = Book::whereHas('invoice', function($query){
+                    $query->where('is_paid', true);
+                })->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date);
                 $total_checked_in['online_visitor'] = $bookings->whereNotNull('started_at')->where('is_walkin', false)->get()->sum('total_guest');
                 $total_checked_in['online_group'] = $bookings->whereNotNull('started_at')->where('is_walkin', false)->get()->count();
             } 
@@ -151,17 +179,25 @@ class DashboardAnalyticsController extends Controller
             $total_checked_in['online_visitor'] = $bookings->whereDate('scheduled_at', $request->date)->whereNotNull('started_at')->where('is_walkin', false)->get()->sum('total_guest'); 
         }
 
-        // $bookings = Book::whereDate('scheduled_at', $today);
+        // $bookings = Book::whereHas('invoice', function($query){
+        $query->where('is_paid', true);
+    })->whereDate('scheduled_at', $today);
         // if($request->date) {
-        //     $bookings = Book::whereDate('scheduled_at', $request->date);
+        //     $bookings = Book::whereHas('invoice', function($query){
+    $query->where('is_paid', true);
+})->whereDate('scheduled_at', $request->date);
         // }
 
         // if($request->destination && $request->destination != null) {
-        //     $bookings = Book::where('destination_id', $request->destination);
+        //     $bookings = Book::whereHas('invoice', function($query){
+    $query->where('is_paid', true);
+})->where('destination_id', $request->destination);
         // } 
 
         // if($request->experience) {
-        //     $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
+        //     $bookings = Book::whereHas('invoice', function($query){
+    $query->where('is_paid', true);
+})->where('destination_id', $request->destination)->where('allocation_id', $request->experience);
         // }
 
         // if($request->date) {
@@ -170,32 +206,46 @@ class DashboardAnalyticsController extends Controller
         //     $total_checked_in['online_group'] = $bookings->where('is_walkin', false)->get()->count(); 
         // }
 
-        // $bookings = Book::whereDate('scheduled_at', $today);
+        // $bookings = Book::whereHas('invoice', function($query){
+    $query->where('is_paid', true);
+})->whereDate('scheduled_at', $today);
         // if($request->date) {
-        //     $bookings = Book::whereDate('scheduled_at', $request->date);
+        //     $bookings = Book::whereHas('invoice', function($query){
+    $query->where('is_paid', true);
+})->whereDate('scheduled_at', $request->date);
         // }
 
         // if($request->destination && $request->destination != null) {
-        //     $bookings = Book::where('destination_id', $request->destination);
+        //     $bookings = Book::whereHas('invoice', function($query){
+    $query->where('is_paid', true);
+})->where('destination_id', $request->destination);
         // } 
 
         // if($request->experience) {
-        //     $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience);
+        //     $bookings = Book::whereHas('invoice', function($query){
+    $query->where('is_paid', true);
+})->where('destination_id', $request->destination)->where('allocation_id', $request->experience);
         // }
 
         $today = Carbon::now();
-        $bookings = Book::whereDate('scheduled_at', $today);
+        $bookings = Book::whereHas('invoice', function($query){
+            $query->where('is_paid', true);
+        })->whereDate('scheduled_at', $today);
         $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->get()->sum('total_guest'); 
         $total_checked_in['walk_in_group'] = $bookings->where('is_walkin', true)->get()->count();  
 
         if($request->date) {
-            $bookings = Book::whereDate('scheduled_at', $request->date);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $request->date);
             $total_checked_in['walk_in'] = $bookings->where('is_walkin', true)->get()->sum('total_guest'); 
             $total_checked_in['walk_in_group'] = $bookings->whereDate('scheduled_at', $request->date)->where('is_walkin', true)->get()->count();  
         } 
 
         if($request->destination) {
-            $bookings = Book::where('destination_id', $request->destination);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination);
             if($request->date) {
                 $total_checked_in['walk_in_group'] = $bookings->whereDate('scheduled_at', $request->date)->where('is_walkin', true)->get()->count();  
                 $total_checked_in['walk_in'] = $bookings->whereDate('scheduled_at', $request->date)->where('is_walkin', true)->get()->sum('total_guest'); 
@@ -206,7 +256,9 @@ class DashboardAnalyticsController extends Controller
         } 
 
         if($request->experience) {
-            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience); 
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination)->where('allocation_id', $request->experience); 
             if($request->date) {
                 $total_checked_in['walk_in_group'] = $bookings->whereDate('scheduled_at', $request->date)->where('is_walkin', true)->get()->count();  
                 $total_checked_in['walk_in'] = $bookings->whereDate('scheduled_at', $request->date)->where('is_walkin', true)->get()->sum('total_guest'); 
@@ -217,26 +269,38 @@ class DashboardAnalyticsController extends Controller
             }
         }
 
-        $bookings = Book::whereDate('scheduled_at', $today)->get()->pluck('id')->toArray();
+        $bookings = Book::whereHas('invoice', function($query){
+            $query->where('is_paid', true);
+        })->whereDate('scheduled_at', $today)->get()->pluck('id')->toArray();
         $collection = Guest::with('visitorType', 'specialFee')->whereIn('book_id', $bookings)->where('main', false)->get();
 
         if($request->date) {
-            $bookings = Book::whereDate('scheduled_at', $request->date)->get()->pluck('id')->toArray();
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $request->date)->get()->pluck('id')->toArray();
             $collection = Guest::with('visitorType', 'specialFee')->where('main', false)->whereIn('book_id', $bookings)->get();
         }
 
         if($request->destination) {
-            $bookings = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->get()->pluck('id')->toArray();
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->get()->pluck('id')->toArray();
             if($request->date) {
-                $bookings = Book::where('destination_id', $request->destination)->whereDate('scheduled_at', $request->date)->get()->pluck('id')->toArray();
+                $bookings = Book::whereHas('invoice', function($query){
+                    $query->where('is_paid', true);
+                })->where('destination_id', $request->destination)->whereDate('scheduled_at', $request->date)->get()->pluck('id')->toArray();
             }
             $collection = Guest::with('visitorType', 'specialFee')->where('main', false)->whereIn('book_id', $bookings)->get();
         } 
 
         if($request->experience) {
-            $bookings = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
             if($request->date) {
-                $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date)->get()->pluck('id')->toArray();
+                $bookings = Book::whereHas('invoice', function($query){
+                    $query->where('is_paid', true);
+                })->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date)->get()->pluck('id')->toArray();
             }
             $collection = Guest::with('visitorType', 'specialFee')->where('main', false)->whereIn('book_id', $bookings)->get();
         }
@@ -263,23 +327,35 @@ class DashboardAnalyticsController extends Controller
         $gender = $this->renderGraphDigits($grouped);
 
         // get all the $source of the book/reservation
-        $book = Book::whereDate('scheduled_at', $today)->get();
+        $book = Book::whereHas('invoice', function($query){
+            $query->where('is_paid', true);
+        })->whereDate('scheduled_at', $today)->get();
 
         if($request->date) {
-            $book = Book::whereDate('scheduled_at', $request->date)->get();
+            $book = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $request->date)->get();
         }
 
         if($request->destination) {
-            $book = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->get();
+            $book = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->get();
             if($request->date) {
-                $book = Book::where('destination_id', $request->destination)->whereDate('scheduled_at', $request->date)->get();
+                $book = Book::whereHas('invoice', function($query){
+                    $query->where('is_paid', true);
+                })->where('destination_id', $request->destination)->whereDate('scheduled_at', $request->date)->get();
             }
         } 
 
         if($request->experience) {
-            $book = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get();
+            $book = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get();
             if($request->date) {
-                $book = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date)->get();
+                $book = Book::whereHas('invoice', function($query){
+                    $query->where('is_paid', true);
+                })->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date)->get();
             }
         }
 
@@ -394,33 +470,45 @@ class DashboardAnalyticsController extends Controller
 
         $today = Carbon::now();
 
-        $bookings = Book::whereDate('scheduled_at', $today);
+        $bookings = Book::whereHas('invoice', function($query){
+            $query->where('is_paid', true);
+        })->whereDate('scheduled_at', $today);
         $capacity['groups'] = $bookings->where('is_walkin', false)->get()->count();
         $capacity['visitors'] = $bookings->where('is_walkin', false)->sum('total_guest');
 
         if($request->date) {
-            $bookings = Book::whereDate('scheduled_at', $request->date);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $request->date);
             $capacity['groups'] = $bookings->where('is_walkin', false)->get()->count();
             $capacity['visitors'] = $bookings->where('is_walkin', false)->sum('total_guest');
         }
 
         if($request->destination && $request->destination != null) {
-            $bookings = Book::where('destination_id', $request->destination)->whereDate('scheduled_at', $today);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination)->whereDate('scheduled_at', $today);
             $capacity['groups'] = $bookings->where('is_walkin', false)->get()->count();
             $capacity['visitors'] = $bookings->where('is_walkin', false)->sum('total_guest');
             if($request->date) {
-                $bookings = Book::where('destination_id', $request->destination)->whereDate('scheduled_at', $request->date);
+                $bookings = Book::whereHas('invoice', function($query){
+                    $query->where('is_paid', true);
+                })->where('destination_id', $request->destination)->whereDate('scheduled_at', $request->date);
                 $capacity['groups'] = $bookings->where('is_walkin', false)->get()->count();
                 $capacity['visitors'] = $bookings->where('is_walkin', false)->sum('total_guest');
             }
         } 
 
         if($request->experience) {
-            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $today);
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $today);
             $capacity['groups'] = $bookings->where('is_walkin', false)->get()->count();
             $capacity['visitors'] = $bookings->where('is_walkin', false)->sum('total_guest');
             if($request->date) {
-                $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date);
+                $bookings = Book::whereHas('invoice', function($query){
+                    $query->where('is_paid', true);
+                })->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->whereDate('scheduled_at', $request->date);
                 $capacity['groups'] = $bookings->where('is_walkin', false)->get()->count();
                 $capacity['visitors'] = $bookings->where('is_walkin', false)->sum('total_guest');
             }
@@ -446,12 +534,16 @@ class DashboardAnalyticsController extends Controller
 
 
         if($request->destination) {
-            $bookings = Book::where('destination_id', $request->destination)->get()->pluck('id')->toArray();
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination)->get()->pluck('id')->toArray();
             $invoice = Invoice::whereIn('book_id', $bookings)->whereMonth('created_at', $month)->where('is_paid', true)->withTrashed()->sum('grand_total');
         } 
 
         if($request->experience) {
-            $bookings = Book::where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
             $invoice = Invoice::whereIn('book_id', $bookings)->whereMonth('created_at', $month)->where('is_paid', true)->withTrashed()->sum('grand_total');
         }
 
@@ -461,27 +553,39 @@ class DashboardAnalyticsController extends Controller
 
     public function getGuestAge($request, $arr) {
         $today = Carbon::now();
-        $bookings = Book::whereDate('scheduled_at', $today)->get()->pluck('id')->toArray();
+        $bookings = Book::whereHas('invoice', function($query){
+            $query->where('is_paid', true);
+        })->whereDate('scheduled_at', $today)->get()->pluck('id')->toArray();
         $guest = Guest::where('main', false)->whereIn('book_id', $bookings)->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), $arr)->count();
 
 
         if($request->date) {
-            $bookings = Book::whereDate('scheduled_at', $request->date)->get()->pluck('id')->toArray();
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $request->date)->get()->pluck('id')->toArray();
             $guest = Guest::where('main', false)->whereIn('book_id', $bookings)->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), $arr)->count();
         }
 
         if($request->destination) {
-            $bookings = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->get()->pluck('id')->toArray();
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->get()->pluck('id')->toArray();
             if($request->date) {
-                $bookings = Book::whereDate('scheduled_at', $request->date)->where('destination_id', $request->destination)->get()->pluck('id')->toArray();
+                $bookings = Book::whereHas('invoice', function($query){
+                    $query->where('is_paid', true);
+                })->whereDate('scheduled_at', $request->date)->where('destination_id', $request->destination)->get()->pluck('id')->toArray();
             }
             $guest = Guest::where('main', false)->whereIn('book_id', $bookings)->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), $arr)->count();
         } 
 
         if($request->experience) {
-            $bookings = Book::whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
+            $bookings = Book::whereHas('invoice', function($query){
+                $query->where('is_paid', true);
+            })->whereDate('scheduled_at', $today)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
             if($request->date) {
-                $bookings = Book::whereDate('scheduled_at', $request->date)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
+                $bookings = Book::whereHas('invoice', function($query){
+                    $query->where('is_paid', true);
+                })->whereDate('scheduled_at', $request->date)->where('destination_id', $request->destination)->where('allocation_id', $request->experience)->get()->pluck('id')->toArray();
             }
             $guest = Guest::where('main', false)->whereIn('book_id', $bookings)->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR,birthdate,CURDATE())'), $arr)->count();
         }
