@@ -67,7 +67,7 @@ class PaynamicsProcessor
 		$_clientip = $_SERVER['REMOTE_ADDR'];
 		$_sec3d = "try3d";
 		$grandTotal = $this->invoice->grand_total + $this->invoice->transaction_fee;
-		$_amount = $grandTotal; // kindly set this to the total amount of the transaction. Set the amount to 2 decimal point before generating signature.
+		$_amount = number_format($grandTotal, 2, '.', ''); // kindly set this to the total amount of the transaction. Set the amount to 2 decimal point before generating signature.
 		$_currency = "PHP"; //PHP or USD
 		$_pmethod = $this->invoice->paynamics_gateway_code;
 
@@ -87,14 +87,14 @@ class PaynamicsProcessor
 		$strxml = $strxml . "<items>";
 		
 		$strxml = $strxml . "<Items>";
-			$strxml = $strxml . "<itemname>". $this->invoice->book->destination->name ."</itemname><quantity>". 1 ."</quantity><amount>" . $this->invoice->grand_total . "</amount>";		
+			$strxml = $strxml . "<itemname>". $this->invoice->book->destination->name ."</itemname><quantity>". 1 ."</quantity><amount>" .$this->invoice->grand_total . "</amount>";		
 		$strxml = $strxml . "</Items>";
 
 		Log::info('Destination Name : ' . $this->invoice->book->destination->name);
 		Log::info('Experience Name : ' . $this->invoice->book->allocation->name);
 
 		$strxml = $strxml . "<Items>";
-			$strxml = $strxml . "<itemname> Transaction Fee </itemname><quantity>". 1 ."</quantity><amount>" . $this->invoice->transaction_fee . "</amount>";		
+			$strxml = $strxml . "<itemname> Transaction Fee </itemname><quantity>". 1 ."</quantity><amount>" .$this->invoice->transaction_fee . "</amount>";		
 		$strxml = $strxml . "</Items>";
 
 		Log::info('Transaction Fee: ' . $this->invoice->transaction_fee);
