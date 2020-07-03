@@ -49,8 +49,8 @@
                         :disabled="loading"
                         title="Archive Item"
                         alt-title="Restore Item"
-                        :message="'Are you sure you want to archive FAQ #' + item.id + '?'"
-                        :alt-message="'Are you sure you want to restore FAQ #' + item.id + '?'"
+                        :message="'Are you sure you want to archive Transaction Fee #' + item.id + '?'"
+                        :alt-message="'Are you sure you want to restore Transaction Fee #' + item.id + '?'"
                         @load="load"
                         @success="sync"
                         ></action-button>

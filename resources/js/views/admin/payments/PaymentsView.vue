@@ -2,7 +2,7 @@
 	<form-request :submit-url="submitUrl" @load="load" @success="fetch" confirm-dialog sync-on-success>
 	
 		<card>
-			<template v-slot:header>About Tabbing Information</template>
+			<template v-slot:header>Transaction Fee Details</template>
 
 			<div class="row">
 				<div class="form-group col-sm-6 col-md-6">
