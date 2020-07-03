@@ -35,7 +35,6 @@
 					</div
 					><div class="width--40 align-r">
 						<img
-						  style="max-height: 70px;" 
 						  class="rqst-frm1__step-4-content-checkbox-img" 
 						  :src="fee.full_image"
 						>
