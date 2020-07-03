@@ -53,7 +53,7 @@
           <!-- accepted payments column -->
         <div class="col-6">
           <p class="lead">Payment Method:</p>
-          <img :src="item.payment_method" alt="Paypal" v-if="item.is_paypal_payment"> 
+          <img :src="item.payment_method" alt="Paypal" v-if="item.is_paypal_payment" style="width: 50%;"> 
           	<label v-if="!item.is_paypal_payment"><b>Bank Deposit</b></label>
           	<br>
           	<template v-if="item.showImgTag">
