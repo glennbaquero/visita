@@ -489,7 +489,8 @@
 				height: 10px;
 				width: 10px;
 				border-radius: 100%;
-				background-color: $light-gray;
+				background-color: transparent;
+				transition: background-color 0.3s ease;
 			}
 
 			/* On mouse-over, add a grey background color */
