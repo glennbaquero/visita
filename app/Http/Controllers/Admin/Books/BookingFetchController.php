@@ -158,7 +158,6 @@ class BookingFetchController extends FetchController
      */
     protected function formatItem($item)
     {
-        $total = $item->invoice->grand_total + $item->invoice->transaction_fee;
         return [
             'id' => $item->id,
             'main_contact' => $this->getGuest($item->guests),
@@ -170,7 +169,8 @@ class BookingFetchController extends FetchController
             'scheduled_at' => $item->scheduled_at,
             'destination_id' => $item->destination->id,
             'allocation_id' => $item->allocation->id,
-            'grand_total' => '₱ '.$total,
+            'grand_total' => $item->invoice->grand_total,
+            'transaction_fee' => $item->invoice->transaction_fee,
             'initial_payment' => '₱ '.$item->invoice->amount_settled,
             'balance' => '₱ '.$item->invoice->balance,
             'is_fullpayment' => $item->invoice->is_fullpayment ? 'Full Payment' : 'Half Payment' ,

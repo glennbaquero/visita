@@ -92,7 +92,7 @@
                     <td>{{ item.is_fullpayment }}</td>
                     <td>{{ item.initial_payment }}</td>
                     <td>{{ item.balance }}</td>
-                    <td>{{ item.grand_total }}</td>
+                    <td>&#8369; {{ withComma(parseFloat(item.grand_total) + parseFloat(item.transaction_fee)) }}</td>
                     <td>{{ item.payment_status }}</td>
                     <!-- <td>
                         <select class="select__type" v-model="item.invoice_status">
@@ -139,6 +139,7 @@ import SearchForm from 'Components/forms/SearchForm.vue';
 import ActionButton from 'Components/buttons/ActionButton.vue';
 import ViewButton from 'Components/buttons/ViewButton.vue';
 import Select from 'Components/inputs/Select.vue';
+import NumberFormat from 'Mixins/number.js';
 
 export default {
     computed: {
@@ -258,7 +259,7 @@ export default {
         visitor_types: Array,
     },
 
-    mixins: [ ListMixin, NumberFormat ],
+    mixins: [ ListMixin, NumberFormat, NumberFormat ],
 
     components: {
         'search-form': SearchForm,
