@@ -106,7 +106,7 @@ class InvoiceFetchController extends FetchController
             }
         } else {
             if($item->paynamics_gateway_code) {
-                $pmethod = Payment::where('code', $item->paynamics_gateway_code)->first()->name;
+                $pmethod = Payment::withTrashed()->where('code', $item->paynamics_gateway_code)->first()->name;
             } else {
                 $pmethod = 'Paynamics';
             }
