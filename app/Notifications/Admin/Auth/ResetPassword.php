@@ -28,8 +28,8 @@ class ResetPassword extends Notification implements ShouldQueue
     public function __construct($token)
     {
         $this->token = $token;
-        $this->title = 'Change Password Request';
-        $this->message = 'You have requested a password reset for your account.';
+        $this->title = 'Nominate Password';
+        $this->message = 'Click the button below to nominate a password.';
     }
 
     /**
