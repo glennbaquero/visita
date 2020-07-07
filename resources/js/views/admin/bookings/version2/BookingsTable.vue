@@ -139,7 +139,6 @@ import SearchForm from 'Components/forms/SearchForm.vue';
 import ActionButton from 'Components/buttons/ActionButton.vue';
 import ViewButton from 'Components/buttons/ViewButton.vue';
 import Select from 'Components/inputs/Select.vue';
-import NumberFormat from 'Mixins/number.js';
 
 export default {
     computed: {
@@ -259,7 +258,7 @@ export default {
         visitor_types: Array,
     },
 
-    mixins: [ ListMixin, NumberFormat, NumberFormat ],
+    mixins: [ ListMixin, NumberFormat ],
 
     components: {
         'search-form': SearchForm,
