@@ -66,7 +66,9 @@ class InvoiceFetchController extends FetchController
             });
         }
 
-        $query = $query->where('created_at','>=',$this->request->start_date)->where('created_at','<=',$this->request->end_date);
+        if($this->request->filled('start_date') && $this->request->filled('end_date')) {
+            $query = $query->where('created_at','>=',$this->request->start_date)->where('created_at','<=',$this->request->end_date);
+        }
 
         return $query;
     } 
@@ -96,6 +98,20 @@ class InvoiceFetchController extends FetchController
      */
     protected function formatItem($item)
     {
+        if($item->book->from_masungi_reservation) {
+            if($item->is_paypal_payment) {
+                $pmethod = 'Paypal';
+            } else {
+                $pmethod = 'Bank Deposit';
+            }
+        } else {
+            if($item->paynamics_gateway_code) {
+                $pmethod = Payment::where('code', $item->paynamics_gateway_code)->first()->name;
+            } else {
+                $pmethod = 'Paynamics';
+            }
+        }
+
         return [
             'id' => $item->id,
             'destination' => $item->book->destination ? $item->book->destination->name : '',
@@ -105,13 +121,13 @@ class InvoiceFetchController extends FetchController
             'contact_number' => $item->book->guests->where('main', true)->first()->contact_number,
             'emergency_contact_number' => $item->book->guests->where('main', true)->first()->emergency_contact_number,
             'total_guest' => $item->book->total_guest,
-            'scheduled_at' => $item->book->scheduled_at->format('M d, Y') .' '. Carbon::createFromFormat('H:i:s', $item->book->start_time)->format('h:i A'),
+            'scheduled_at' => $item->book->scheduled_at->format('M d, Y') .' '. Carbon::parse($item->book->start_time)->format('h:i A'),
             'conservation_fee' => $item->conservation_fee,
             'platform_fee' => $item->platform_fee,
             'transaction_fee' => $item->transaction_fee,
             'sub_total' => $item->sub_total,
             'grand_total' => $item->grand_total,
-            'payment_type' => $item->book->from_masungi_reservation ? ($item->is_paypal_payment ? 'Paypal' : 'Bank Deposit') : 'Paynamics',
+            'payment_type' => $pmethod,
             'is_approved' => $item->is_approved ? 'Already Approved' : ($item->deleted_at ? 'Rejected' : 'For Confirmation'),
             'reference_code' => $item->reference_code,
             'is_paid' => $item->renderPaymentStatus(),
