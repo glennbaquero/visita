@@ -42,7 +42,7 @@ class InvoiceFetchController extends FetchController
                 $book->where(['destination_id' => $destination_id, 'is_walkin' => $this->is_walkin]);
             });
         }
-        
+
         if($this->request->filled('category') && $this->request->category != 'all' && $this->request->category != '') {
             if($this->request->category == 'paid') {
                 $query = $query->where('is_paid', true);
@@ -64,6 +64,18 @@ class InvoiceFetchController extends FetchController
         }
 
         
+        if($this->request->filled('destination_id')) {
+            $query = $query->whereHas('book', function($book) {
+                $book->where(['destination_id' => $this->request->destination_id, 'is_walkin' => $this->is_walkin]);
+            });
+        }
+        
+        if($this->request->filled('allocation_id')) {
+            $query = $query->whereHas('book', function($book){
+                $book->where(['destination_id' => $this->request->destination_id, 'allocation_id' => $this->request->allocation_id, 'is_walkin' => $this->is_walkin]);
+            });
+        }
+
 
         if($this->request->filled('booking_type') && $this->request->booking_type != 'all' && $this->request->booking_type != '') {
             $query = $query->whereHas('book', function($book) {
