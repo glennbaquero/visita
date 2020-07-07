@@ -105,7 +105,7 @@ class InvoiceFetchController extends FetchController
                 $pmethod = 'Bank Deposit';
             }
         } else {
-            if($item->paynamics_gateway_code) {
+            if($item->paynamics_gateway_code && $item->paynamics_gateway_code != 'null') {
                 $pmethod = Payment::withTrashed()->where('code', $item->paynamics_gateway_code)->first()->name;
             } else {
                 $pmethod = 'Paynamics';
