@@ -56,8 +56,8 @@ class ResetPassword extends Notification implements ShouldQueue
             ->greeting('Hello ' . $notifiable->renderName() . ',')
             ->line($this->message)
             ->action(Lang::getFromJson('Reset Password'), route('admin.password.reset', [$this->token, $notifiable->email]))
-            ->line(Lang::getFromJson('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.admins.expire')]))
-            ->line(Lang::getFromJson('If you did not request a password reset, no further action is required.'));
+            ->line(Lang::getFromJson('This link will expire in :count minutes.', ['count' => config('auth.passwords.admins.expire')]))
+            ->line(Lang::getFromJson('If you did not request this, no further action is required.'));
     }
 
     /**

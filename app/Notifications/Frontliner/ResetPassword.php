@@ -56,8 +56,8 @@ class ResetPassword extends Notification
             ->line('Please verify first your account!')
             ->line($this->message)
             ->action(Lang::getFromJson('Reset Password'), route('web.frontliner.password.reset', [$this->token, $notifiable->email]))
-            ->line(Lang::getFromJson('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.users.expire')]))
-            ->line(Lang::getFromJson('If you did not request a password reset, no further action is required.'));
+            ->line(Lang::getFromJson('This link will expire in :count minutes.', ['count' => config('auth.passwords.users.expire')]))
+            ->line(Lang::getFromJson('If you did not request this, no further action is required.'));
     }
 
     /**
