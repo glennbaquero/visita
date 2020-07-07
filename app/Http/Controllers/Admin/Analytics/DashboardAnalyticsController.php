@@ -179,8 +179,6 @@ class DashboardAnalyticsController extends Controller
 
         if($request->date) {
             $total_checked_in['online_visitor'] = $bookings->whereDate('scheduled_at', $request->date)->whereNotNull('started_at')->where('is_walkin', false)->get()->sum('total_guest');
-        } else {
-            $total_checked_in['online_visitor'] = $bookings->whereDate('scheduled_at', $request->date)->whereNotNull('started_at')->where('is_walkin', false)->get()->sum('total_guest'); 
         }
 
         $today = Carbon::now();
