@@ -169,7 +169,7 @@ class BookingFetchController extends FetchController
             'scheduled_at' => $item->scheduled_at,
             'destination_id' => $item->destination->id,
             'allocation_id' => $item->allocation->id,
-            'grand_total' => '₱ '.$item->invoice->grand_total,
+            'grand_total' => '₱ '.$item->invoice->grand_total + $item->invoice->transaction_fee,
             'initial_payment' => '₱ '.$item->invoice->amount_settled,
             'balance' => '₱ '.$item->invoice->balance,
             'is_fullpayment' => $item->invoice->is_fullpayment ? 'Full Payment' : 'Half Payment' ,
