@@ -34,9 +34,7 @@ class InvoiceFetchController extends FetchController
 
         $this->is_walkin = $this->request->booking_type == 'walkin' ? true : false;
 
-
         $admin = auth()->guard('admin')->user();
-        
         if($admin->destination_id) {
             $destination_id = $admin->destination_id;
 
@@ -44,8 +42,7 @@ class InvoiceFetchController extends FetchController
                 $book->where(['destination_id' => $destination_id, 'is_walkin' => $this->is_walkin]);
             });
         }
-
-
+        
         if($this->request->filled('category') && $this->request->category != 'all' && $this->request->category != '') {
             if($this->request->category == 'paid') {
                 $query = $query->where('is_paid', true);
@@ -80,8 +77,7 @@ class InvoiceFetchController extends FetchController
 
         if($this->request->filled('start_date') && $this->request->filled('end_date')) {
             $query = $query->where('created_at','>=',$this->request->start_date)->where('created_at','<=',$this->request->end_date);
-        
-
+        }
 
         return $query;
     } 
