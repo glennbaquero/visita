@@ -285,14 +285,14 @@ class DashboardAnalyticsController extends Controller
         $book = Book::whereHas('invoice', function ($query) { $query->where('is_paid', true); })->whereDate('scheduled_at', $today)->get();
         
         if($admin->destination_id) {
-            $bookings = Book::where('destination_id', $admin->destination_id)->whereHas('invoice', function ($query) { $query->where('is_paid', true); })->whereDate('scheduled_at', $today)->get();
+            $book = Book::where('destination_id', $admin->destination_id)->whereHas('invoice', function ($query) { $query->where('is_paid', true); })->whereDate('scheduled_at', $today)->get();
         }
 
         if($request->date) {
             $book = Book::whereHas('invoice', function ($query) { $query->where('is_paid', true); })->whereDate('scheduled_at', $request->date)->get();
 
             if($admin->destination_id) {
-                $bookings = Book::where('destination_id', $admin->destination_id)->whereHas('invoice', function ($query) { $query->where('is_paid', true); })->whereDate('scheduled_at', $request->date)->get();
+                $book = Book::where('destination_id', $admin->destination_id)->whereHas('invoice', function ($query) { $query->where('is_paid', true); })->whereDate('scheduled_at', $request->date)->get();
             }
         }
 
